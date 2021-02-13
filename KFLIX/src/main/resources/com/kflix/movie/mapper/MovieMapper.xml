@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.kflix.movie.mapper.MovieMapper">
+  
+	  <select id="getAllMovieView" resultType="com.kflix.movie.domain.Movie">
+	  	SELECT * FROM movie_view
+	  </select>  
+	  
+	  <select id="getMovieById" resultType="com.kflix.movie.domain.Movie">
+	  	SELECT * FROM movie WHERE moive_id = #{movie_id}
+	  </select>
+	  
+	  <delete id="deleteMovie">
+	  	DELETE FROM movie WHERE movie_id = #{movie_id}
+	  </delete>
+	  
+	  <insert id="addMovie">
+	  	INSERT INTO 
+	  		movie
+	  	VALUES ()
+	  </insert>
+	  
+	  <update id="updateMovie">
+	  	
+	  </update>
+
+ </mapper>
