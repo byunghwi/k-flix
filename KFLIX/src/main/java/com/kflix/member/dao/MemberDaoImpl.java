@@ -9,13 +9,14 @@ import com.kflix.member.domain.Member;
 @Repository
 public class MemberDaoImpl implements MemberDao {
 	
-	private static final String NAMESPACE = "com.flix.mapper.MemberMapper";
+	private static final String NAMESPACE = "com.kflix.mapper.MemberMapper";
 	
 	@Inject
 	SqlSession sqlSession;
 	
 	@Override
 	public void register(Member member) {
+		System.out.println("memdaoImpl까지 진입 성공");
 		sqlSession.insert(NAMESPACE + ".register", member);
 	}
 

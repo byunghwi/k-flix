@@ -9,12 +9,14 @@
 						pwd,
 						nick,
 						birth,
+						member_age,
 						gender ) 
 			VALUES (
 						#{email}, 
 						#{pwd}, 
 						#{nick}, 
-						#{birth}, 
+						#{birth},
+						#{member_age}, 
 						#{gender}
 			)
 
