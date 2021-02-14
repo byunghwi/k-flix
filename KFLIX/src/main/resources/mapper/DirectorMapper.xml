@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kflix.mapper.DirectorMapper">
+
+	<select id="getAllDirectorList" resultType="com.kflix.director.domain.Director">
+		SELECT * FROM director
+	</select>
+
+</mapper>

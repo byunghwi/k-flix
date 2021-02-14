@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>영화 관리</title>
-</head>
+<title>삭제된 목록</title>
 <style>
 	div, section{
 		max-width: 1000px;
@@ -24,34 +23,11 @@
 		text-align: center;
 	}	
 </style>
+</head>
 <body>
-
 <div>
-	<h1>영화 관리</h1>
-	<a href="./deletedList">삭제된 항목</a>
-</div>
-
-<div>
-	<span>
-		<a href="./addpage">+ 추가</a>
-	</span>
-	
-	<span style="padding-left: 200px;">
-		<select name="" id="">
-			<option value="" selected>제목</option>
-			<option value="">감독</option>
-			<option value="">배우</option>
-		</select> 
-		<select name="" id="">
-			<option value="" selected>액션</option>
-			<option value="">코미디</option>
-			<option value="">멜로</option>
-			<option value="">가족</option>
-			<option value="">스릴러</option>
-		</select> 
-		<input type="text" />
-		<button>검색</button>
-	</span>
+<h1>삭제 목록</h1>
+<a href="./management">관리 페이지</a>
 </div>
 
 <section style="padding-top: 20px;">
@@ -75,13 +51,14 @@
 				<td><fmt:formatDate value="${movie.reg_date }" pattern="yyyy-MM-dd"/></td>
 				<td>
 					<a href="./updatepage/${movie.movie_id }">수정</a>
-					<a href="./delete/${movie.movie_id }">삭제</a>
+					<a href="./recovery/${movie.movie_id }">복구</a>
 					<a href="./detail/${movie.movie_id }">상세보기</a>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
 </section>
+
 
 </body>
 </html>

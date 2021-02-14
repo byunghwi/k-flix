@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
+
 @Data
 @Component
 public class Movie {
@@ -23,8 +24,11 @@ public class Movie {
 	private int genre_id2;
 	private String country;
 	private String movie_release;
+	private String summary;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reg_date;
+	
 	private String poster_path;
 	private String teaser_path;
 	private String video_path;
@@ -32,5 +36,10 @@ public class Movie {
 	private int movie_rank;
 	private char movie_status;
 	
-	
+	public void changePath(String poster_path, String teaser_path, String video_path) {
+		this.poster_path = "/kflix/poster/" + poster_path;
+		this.teaser_path = "/kflix/teaser/" + teaser_path;
+		this.video_path = "/kflix/video/" + video_path;
+	}
+
 }
