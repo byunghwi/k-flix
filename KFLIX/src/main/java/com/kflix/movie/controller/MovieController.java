@@ -1,6 +1,8 @@
 package com.kflix.movie.controller;
 
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,16 +28,16 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/movie/*")
 public class MovieController {
 
-	@Autowired
+	@Inject
 	MovieService mv_service;
 	
-	@Autowired
+	@Inject
 	DirectorService dt_service;
 	
-	@Autowired
+	@Inject
 	ActorService at_service;
 	
-	@Autowired
+	@Inject
 	GenreService gr_service;
 	
 	// http://localhost:8080/kflix/movie/management
