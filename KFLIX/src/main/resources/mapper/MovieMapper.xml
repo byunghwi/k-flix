@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kflix.mapper.MovieMapper">
+
+	<select id="getAllMovieView"
+		resultType="com.kflix.movie.domain.Movie">
+		SELECT * FROM movie_view WHERE movie_status = #{status} ORDER BY movie_id DESC
+	</select>
+
+	<select id="getMovieById"
+		resultType="com.kflix.movie.domain.Movie">
+		SELECT * FROM movie WHERE movie_id = #{movie_id}
+	</select>
+
+	<insert id="addMovie">
+		INSERT INTO
+		movie
+		VALUES (
+		movie_id_seq.NEXTVAL,
+		#{movie_title},
+		#{rating},
+		#{play_time},
+		#{director_id},
+		#{actor_id1},
+		#{actor_id2},
+		#{actor_id3},
+		#{genre_id1},
+		#{genre_id2},
+		#{country},
+		#{movie_release},
+		#{summary},
+		SYSDATE,
+		#{poster_path},
+		#{teaser_path},
+		#{video_path},
+		0,
+		0,
+		'Y'
+		)
+	</insert>
+
+	<update id="deleteOrRecoveryMovie">
+		UPDATE movie SET movie_status = #{status} WHERE movie_id = #{movie_id}
+	</update>
+
+	<update id="updateMovie">
+		UPDATE
+		movie
+		SET
+		movie_title = #{movie_title},
+		rating = #{rating},
+		play_time = #{play_time},
+		director_id = #{director_id},
+		actor_id1 = #{actor_id1},
+		actor_id2 = #{actor_id2},
+		actor_id3 = #{actor_id3},
+		genre_id1 = #{genre_id1},
+		genre_id2 = #{genre_id2},
+		country = #{country},
+		movie_release = #{movie_release},
+		summary = #{summary},
+		poster_path = #{poster_path},
+		teaser_path = #{teaser_path},
+		video_path = #{video_path}
+		WHERE
+		movie_id = #{movie_id}
+	</update>
+	
+</mapper>

@@ -15,6 +15,22 @@
 		<level value="info" />
 	</logger>
 	
+	<logger name="com.kflix.movie">
+		<level value="info" />
+	</logger>
+	
+	<logger name="com.kflix.actor">
+		<level value="info" />
+	</logger>
+	
+	<logger name="com.kflix.director">
+		<level value="info" />
+	</logger>
+	
+	<logger name="com.kflix.genre">
+		<level value="info" />
+	</logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
