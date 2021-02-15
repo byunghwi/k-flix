@@ -20,6 +20,7 @@ import com.kflix.genre.domain.Genre;
 import com.kflix.genre.service.GenreService;
 import com.kflix.movie.domain.Movie;
 import com.kflix.movie.service.MovieService;
+import com.kflix.util.fileupload.FileUploadService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -39,6 +40,9 @@ public class MovieController {
 	
 	@Inject
 	GenreService gr_service;
+	
+	@Inject
+	FileUploadService upload;
 	
 	// http://localhost:8080/kflix/movie/management
 	
@@ -71,16 +75,21 @@ public class MovieController {
 	public String add(Model model) {
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
-		model.addAttribute("genre", gr_service.selectAllGenreList());
+		model.addAttribute("genre", gr_service.selectAllGenreList('Y'));
 		
 		return "movie/addMovie";
 	}
 
 	// 등록 입력 값 넘기기 , 등록 성공 / 실패 체크 추가하기	
 	@PostMapping("add")
-	public String addMovie(Model model, Movie movie, MultipartFile poster, MultipartFile teaser, MultipartFile video){
-		movie.changePath(poster.getOriginalFilename(), teaser.getOriginalFilename(), video.getOriginalFilename());
-	
+	public String addMovie(Model model, Movie movie, MultipartFile[] mpf){
+		// 파일 업로드
+		String[] path = upload.restore(mpf);
+		
+		// 파일 경로 Set
+		movie.changePaths(path);
+		
+		// DB 추가
 		int result = mv_service.insertNewMovie(movie);
 		
 		String msg = result > 0 ? "등록하였습니다!" : "등록에 실패하였습니다.";
@@ -101,15 +110,18 @@ public class MovieController {
 		model.addAttribute("movie", mv_service.selectMovieById(movie_id));
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
-		model.addAttribute("genre", gr_service.selectAllGenreList());
+		model.addAttribute("genre", gr_service.selectAllGenreList('Y'));
 		
 		return "movie/updateMovie";
 	}
 	
 	@PostMapping("update")
-	public String update(Model model, Movie movie, MultipartFile poster, MultipartFile teaser, MultipartFile video) {
-		movie.changePath(poster.getOriginalFilename(), teaser.getOriginalFilename(), video.getOriginalFilename());
-		log.info(movie);
+	public String update(Model model, Movie movie, MultipartFile[] mpf) {
+		// 파일 업로드
+		String[] path = upload.restore(mpf);
+				
+		// 파일 경로 Set
+		movie.changePaths(path);
 		
 		int result = mv_service.updateMovie(movie);
 		

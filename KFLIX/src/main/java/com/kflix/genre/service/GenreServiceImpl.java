@@ -15,8 +15,8 @@ public class GenreServiceImpl implements GenreService {
 	GenreMapper gr_mapper;
 	
 	@Override
-	public List<Genre> selectAllGenreList() {
-		return gr_mapper.getAllGenreList();
+	public List<Genre> selectAllGenreList(char status) {
+		return gr_mapper.getAllGenreList('Y');
 	}
 
 }

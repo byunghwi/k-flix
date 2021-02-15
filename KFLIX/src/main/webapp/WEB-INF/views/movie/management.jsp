@@ -37,17 +37,9 @@
 	</span>
 	
 	<span style="padding-left: 200px;">
-		<select name="" id="">
-			<option value="" selected>제목</option>
-			<option value="">감독</option>
-			<option value="">배우</option>
-		</select> 
-		<select name="" id="">
-			<option value="" selected>액션</option>
-			<option value="">코미디</option>
-			<option value="">멜로</option>
-			<option value="">가족</option>
-			<option value="">스릴러</option>
+		<select name="colname" id="">
+			<option value="movie_title" selected>제목</option>
+			<option value="genre_id">장르</option>
 		</select> 
 		<input type="text" />
 		<button>검색</button>

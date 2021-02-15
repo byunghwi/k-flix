@@ -50,9 +50,9 @@
 	  
 개봉일 : <input type="text" name="movie_release" placeholder="yyyy.MM.dd"/> <br />
 
-포스터 : <input type="file" name="poster"/> <br />
-티저 : <input type="file" name="teaser"/> <br />
-비디오 : <input type="file" name="video"/> <br />
+포스터 : <input type="file" name="mpf"/> <br />
+티저 : <input type="file" name="mpf"/> <br />
+비디오 : <input type="file" name="mpf"/> <br />
 <input type="submit" value="등록" />
 </form>
 

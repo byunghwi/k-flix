@@ -4,5 +4,5 @@ import com.kflix.member.domain.Member;
 
 public interface MemberMapper {
 	public Member getMemberByEmail(String email);
-	public void register(Member member);
+	public int register(Member member);
 }
