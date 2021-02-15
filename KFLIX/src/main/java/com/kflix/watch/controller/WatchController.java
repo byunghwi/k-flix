@@ -29,6 +29,7 @@ public class WatchController {
 		return "/watch/browse";
 	}
 	
+	
 	@GetMapping("/browse/watch")
 	public String getwatch(Model model, Watch watch) {
 		model.addAttribute("watch", watch);
