@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -34,12 +35,12 @@ public class Movie {
 	private String video_path;
 	private int view_cnt;
 	private int movie_rank;
-	private char movie_status;
+	private String movie_status;
 	
-	public void changePath(String poster_path, String teaser_path, String video_path) {
-		this.poster_path = "/kflix/poster/" + poster_path;
-		this.teaser_path = "/kflix/teaser/" + teaser_path;
-		this.video_path = "/kflix/video/" + video_path;
+	public void changePaths(String[] path) {
+		this.poster_path = path[0];
+		this.teaser_path = path[1];
+		this.video_path = path[2];
 	}
 
 }

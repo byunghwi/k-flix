@@ -5,7 +5,7 @@
 <mapper namespace="com.kflix.mapper.GenreMapper">
 
 	<select id="getAllGenreList" resultType="com.kflix.genre.domain.Genre">
-		SELECT * FROM genre
+		SELECT * FROM genre WHERE genre_status = #{status} ORDER BY genre_id DESC
 	</select>
 	
 </mapper>

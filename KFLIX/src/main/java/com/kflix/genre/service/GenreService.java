@@ -6,5 +6,5 @@ import com.kflix.genre.domain.Genre;
 
 public interface GenreService {
 
-	public List<Genre> selectAllGenreList();
+	public List<Genre> selectAllGenreList(char status);
 }

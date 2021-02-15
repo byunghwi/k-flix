@@ -2,6 +2,7 @@ package com.kflix.genre.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,10 @@ public class GenreServiceTest {
 	GenreService service;
 	
 	@Test
+	@Ignore
 	public void serviceTest() {
-		assertNotNull(service.selectAllGenreList());
-		log.info(service.selectAllGenreList());
+		assertNotNull(service.selectAllGenreList('Y'));
+		log.info(service.selectAllGenreList('Y'));
 	}
 
 }
