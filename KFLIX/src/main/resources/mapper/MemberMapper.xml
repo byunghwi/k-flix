@@ -3,6 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kflix.mapper.MemberMapper">
+	<insert id="register">
+		INSERT INTO member (
+						email,
+						pwd,
+						nick,
+						birth,
+						member_age,
+						gender ) 
+			VALUES (
+						#{email}, 
+						#{pwd}, 
+						#{nick}, 
+						#{birth},
+						#{member_age}, 
+						#{gender}
+			)
+
+	</insert>
 
 	<select id="getMemberByEmail"
 		resultType="com.kflix.member.domain.Member">

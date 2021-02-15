@@ -41,7 +41,7 @@ public class MovieController {
 	// http://localhost:8080/kflix/movie/management
 	
 	/*
-	 * ¿µÈ­ °ü¸® ÆäÀÌÁö
+	 * ì˜í™” ê´€ë¦¬ íŽ˜ì´ì§€
 	 */
 	@GetMapping("management")
 	public String movieMain(Model model) {
@@ -52,7 +52,7 @@ public class MovieController {
 	
 	
 	/*
-	 * »ó¼¼º¸±â ÆäÀÌÁö
+	 * ìƒì„¸ë³´ê¸° íŽ˜ì´ì§€
 	 */
 	@GetMapping("detail/{id}")
 	public String detail(Model model, @PathVariable("id") int movie_id) {
@@ -63,7 +63,7 @@ public class MovieController {
 	
 	
 	/*
-	 * ¿µÈ­ µî·Ï ÆäÀÌÁö
+	 * ì˜í™” ë“±ë¡ íŽ˜ì´ì§€
 	 */
 	@GetMapping("addpage")
 	public String add(Model model) {
@@ -74,14 +74,14 @@ public class MovieController {
 		return "movie/addMovie";
 	}
 
-	// µî·Ï ÀÔ·Â °ª ³Ñ±â±â , µî·Ï ¼º°ø / ½ÇÆÐ Ã¼Å© Ãß°¡ÇÏ±â	
+	// ë“±ë¡ ìž…ë ¥ ê°’ ë„˜ê¸°ê¸° , ë“±ë¡ ì„±ê³µ / ì‹¤íŒ¨ ì²´í¬ ì¶”ê°€í•˜ê¸°	
 	@PostMapping("add")
 	public String addMovie(Model model, Movie movie, MultipartFile poster, MultipartFile teaser, MultipartFile video){
 		movie.changePath(poster.getOriginalFilename(), teaser.getOriginalFilename(), video.getOriginalFilename());
 	
 		int result = mv_service.insertNewMovie(movie);
 		
-		String msg = result > 0 ? "µî·ÏÇÏ¿´½À´Ï´Ù!" : "µî·Ï¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.";
+		String msg = result > 0 ? "ë“±ë¡í•˜ì˜€ìŠµë‹ˆë‹¤!" : "ë“±ë¡ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 		
 		model.addAttribute("msg", msg);
 		
@@ -92,7 +92,7 @@ public class MovieController {
 	
 	
 	/*
-	 * ¼öÁ¤ ÆäÀÌÁö
+	 * ìˆ˜ì • íŽ˜ì´ì§€
 	 */
 	@GetMapping("updatepage/{id}")
 	public String updatePage(Model model, @PathVariable("id") int movie_id) {
@@ -111,7 +111,7 @@ public class MovieController {
 		
 		int result = mv_service.updateMovie(movie);
 		
-		String msg = result > 0 ? "¼öÁ¤ µÇ¾ú½À´Ï´Ù." : "¼öÁ¤¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.";
+		String msg = result > 0 ? "ìˆ˜ì • ë˜ì—ˆìŠµë‹ˆë‹¤." : "ìˆ˜ì •ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 		
 		model.addAttribute("msg", msg);
 		
@@ -120,13 +120,13 @@ public class MovieController {
 	
 	
 	/*
-	 *  »èÁ¦ ÆäÀÌÁö / status = 'N'
+	 *  ì‚­ì œ íŽ˜ì´ì§€ / status = 'N'
 	 */
 	@GetMapping("delete/{id}")
 	public String delete(Model model, @PathVariable("id") int moive_id) {
 		int result = mv_service.deleteOrRecoveryMovieById(moive_id, 'N');
 		
-		String msg = result > 0 ? "»èÁ¦ µÇ¾ú½À´Ï´Ù." : "»èÁ¦¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.";
+		String msg = result > 0 ? "ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤." : "ì‚­ì œì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 		
 		model.addAttribute("msg", msg);
 		
@@ -135,7 +135,7 @@ public class MovieController {
 	
 	
 	/*
-	 * »èÁ¦µÈ ¸ñ·Ï
+	 * ì‚­ì œëœ ëª©ë¡
 	 */
 	@GetMapping("deletedList")
 	public String deletedList(Model model) {
@@ -146,13 +146,13 @@ public class MovieController {
 	
 	
 	/*
-	 * º¹±¸
+	 * ë³µêµ¬
 	 */
 	@GetMapping("recovery/{id}")
 	public String recoveryMovie(Model model, @PathVariable("id") int moive_id) {
 		int result = mv_service.deleteOrRecoveryMovieById(moive_id, 'Y');
 		
-		String msg = result > 0 ? "º¹±¸ µÇ¾ú½À´Ï´Ù." : "º¹±¸¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.";
+		String msg = result > 0 ? "ë³µêµ¬ ë˜ì—ˆìŠµë‹ˆë‹¤." : "ë³µêµ¬ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.";
 		
 		model.addAttribute("msg", msg);
 		

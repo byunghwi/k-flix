@@ -6,19 +6,20 @@ import com.kflix.movie.domain.Movie;
 
 public interface MovieService {
 
-	// ÀüÃ¼
+	// í™œì„±í™”ëœ ëª©ë¡, ì‚­ì œëœ ëª©ë¡
 	public List<Movie> selectAllMovieVeiw(char status);
 
-	// »ó¼¼
+	// ìƒì„¸
 	public Movie selectMovieById(int movie_id);
 	
-	// µî·Ï
+	// ë“±ë¡
 	public int insertNewMovie(Movie movie);
 		
-	// ¼öÁ¤
+	// ì‚­ì œ, ë³µêµ¬
+	public int deleteOrRecoveryMovieById(int movie_id, char status);
+
+	// ìˆ˜ì •
 	public int updateMovie(Movie movie);
 
-	// »èÁ¦
-	public int deleteOrRecoveryMovieById(int movie_id, char status);
 	
 }
