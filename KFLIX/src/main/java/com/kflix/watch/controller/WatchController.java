@@ -9,8 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.kflix.watch.domain.Watch;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -24,6 +27,13 @@ public class WatchController {
 	public String getbrowse() {
 		
 		return "/watch/browse";
+	}
+	
+	@GetMapping("/browse/watch")
+	public String getwatch(Model model, Watch watch) {
+		model.addAttribute("watch", watch);
+		
+		return "/watch/video";
 	}
 	
 	

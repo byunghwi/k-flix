@@ -26,7 +26,7 @@
 		<div class="container background">
 		</div>
 		<div class="container flex-row nav-bar">
-			<img class="logo" alt="로고" src="/kflix/resources/img/kflixlogo.png">
+			<img class="logo" alt="로고" src="/kflix/resources/assets/kflixlogo.png">
 			<ul class="nav" style="margin: 0 100px 0 0;">
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="#">홈</a></li>
@@ -46,5 +46,7 @@
 			</div>
 		</div>
 	</div>
+	
+	
 </body>
 </html>
