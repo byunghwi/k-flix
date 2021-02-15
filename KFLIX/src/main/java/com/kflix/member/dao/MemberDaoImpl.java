@@ -15,9 +15,10 @@ public class MemberDaoImpl implements MemberDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public void register(Member member) {
+	public int register(Member member) {
 		System.out.println("memdaoImpl까지 진입 성공");
-		sqlSession.insert(NAMESPACE + ".register", member);
+	
+		return sqlSession.insert(NAMESPACE + ".register", member);
 	}
 
 }

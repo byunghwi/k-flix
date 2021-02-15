@@ -13,9 +13,8 @@ public class MemberServiceImpl implements MemberService {
 	MemberDao memberDao;
 	
 	@Override
-	public void register(Member member) {
-		System.out.println("memberServiceImpl까지 진입 성공 ");
-		memberDao.register(member);
+	public int register(Member member) {
+		return memberDao.register(member);
 	}
 
 }
