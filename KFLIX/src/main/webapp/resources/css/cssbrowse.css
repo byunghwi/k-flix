@@ -6,20 +6,47 @@
 	padding: 0;
 }
 
+body {
+	background-color: black;
+}
+
 .logo {
 	height: 30px;
 	padding: 0 20px
 }
 
-.background {
-	background-image: url("/member/resources/img/mainimg.jpg");
-	width: 1000px;
+#shadow1 {
+	position: relative;
+	background-color: black;
+	padding: 0.1px 0;
+	box-shadow: 0px 2px 10px black;
 }
 
+.background {
+	padding: 0px 0;
+	margin: 0;
+}
+
+#mainimg {
+	/* width: 100%; */
+	
+}
+
+/* .background::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	-moz-box-shadow: inset 0 0 20px black;
+	-webkit-box-shadow: inset 0 0 20px black;
+} */
 .flex-row {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
+	position: fixed;
 }
 
 .flex-row>* {
@@ -27,15 +54,14 @@
 }
 
 .nav-bar {
-	background-color: black;
+	background-color: rgba(0, 0, 0, 0.2);
 	width: 100%;
-	margin: 0 50px;
+	padding: 5px 50px;
 	align-items: center;
 }
 
 .test {
 	border: 1px solid black;
-	background-color: black;
 }
 
 .nav-link {
@@ -48,6 +74,30 @@
 }
 
 .nav-icon {
-		font-size: 20px;
+	font-size: 20px;
 	padding: 8px;
+}
+
+#list {
+	position: relative; 
+	background-color : black;
+	padding: 10px 0;
+	box-shadow: 100px 0px 50px black;
+}
+
+.flexnowr {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.dis {
+	float:left;
+	margin: 0 10px;
+	width: 250px;
+	border-radius: 2%;
+}
+
+.padd{
+	padding: 30px 0;
 }

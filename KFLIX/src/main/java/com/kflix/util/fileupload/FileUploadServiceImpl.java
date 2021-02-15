@@ -20,9 +20,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 	// 저장할 주소
 	private static final String[] SAVE_PATH = {
-			"C:/Users/Ahos/Desktop/local_workSpace/k-flix/KFLIX/src/main/webapp/resources/imgs/movie/poster/",
-			"C:/Users/Ahos/Desktop/local_workSpace/k-flix/KFLIX/src/main/webapp/resources/videos/teaser/",
-			"C:/Users/Ahos/Desktop/local_workSpace/k-flix/KFLIX/src/main/webapp/resources/videos/full/"
+			"C:/Users/windows/git/k-flix/KFLIX/src/main/webapp/resources/imgs/movie/poster/",
+			"C:/Users/windows/git/k-flix/KFLIX/src/main/webapp/resources/videos/teaser/",
+			"C:/Users/windows/git/k-flix/KFLIX/src/main/webapp/resources/videos/full/"
 	};
 	
 	// jsp 요청
@@ -30,7 +30,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 							"/kflix/resources/imgs/movie/poster/",
 							"/kflix/resources/videos/teaser/",
 							"/kflix/resources/videos/full/"
-	};	
+	};
 	
 	
 	@Override

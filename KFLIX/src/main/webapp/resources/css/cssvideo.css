@@ -1,0 +1,32 @@
+@charset "UTF-8";
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: black;
+	padding: 0;
+}
+
+#video {
+	width: 100%;
+	height: 650px;
+}
+
+#start {
+	background-color: rgba(255,255,255,0.2);
+	width: 100%;
+	height: 650px;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	z-index: 9999;
+}
+
+#unmuteButton{
+	background-color: white;
+	width: 100px;
+	height: 30px;
+}

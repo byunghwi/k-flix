@@ -22,7 +22,7 @@
 
 
 	<!-- <button id="unmuteButton"></button> -->
-		<div onclick="sound()" id="start"></div>
+	<div onclick="sound()" id="start"></div>
 	<video id="video" src="${watch.video_path }" muted autoplay>
 
 		<script>
