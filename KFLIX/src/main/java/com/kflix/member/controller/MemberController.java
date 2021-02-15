@@ -21,17 +21,19 @@ public class MemberController {
 
 	@RequestMapping(value = "register", method = RequestMethod.GET)
 	public String registerGET() {
-		log.info("이쪽으로 들어옴");
-		return "/member/register";
+		return "/main/index";
 	}
 
 	// 회원가입 처리
 	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String registerPOST(Member member, RedirectAttributes redirectAttributes) throws Exception {
-		log.info("member에 제대로 담겼나 > " + member);
-		memberService.register(member);
-		redirectAttributes.addFlashAttribute("msg", "REGISTERED");
-		return "/member/register";
-	}
 
+		int result = memberService.register(member);
+
+		if(result == 1) {
+			redirectAttributes.addFlashAttribute("msg", "REGISTERED");
+		}
+		
+		return "redirect:/main";
+	}
 }
