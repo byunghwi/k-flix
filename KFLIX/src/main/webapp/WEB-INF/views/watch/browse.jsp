@@ -67,7 +67,7 @@
 					<img src="/kflix/resources/imgs/watch/runon1.png" class="d-block dis" alt="...">
 					<img src="/kflix/resources/imgs/watch/test1.png" class="d-block dis" alt="...">
 					<img src="/kflix/resources/imgs/watch/test2.png" class="d-block dis" alt="...">
-					<img src="/kflix/resources/imgs/watch/test1.png" class="d-block dis" alt="...">
+					<img src="/kflix/resources/imgs/watch/test3.png" class="d-block dis" alt="...">
 				</div>
 				<div class="carousel-item">
 					<img src="/kflix/resources/imgs/watch/runon1.png" class="d-block dis" alt="...">
