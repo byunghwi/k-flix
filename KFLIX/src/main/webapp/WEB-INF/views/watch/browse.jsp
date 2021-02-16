@@ -15,7 +15,7 @@
 	integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
-	href="/kflix/resources/css/cssbrowse.css">
+	href="/kflix/resources/css/watch/cssbrowse.css">
 <script src="https://kit.fontawesome.com/6421ed9b05.js"
 	crossorigin="anonymous"></script>
 </head>

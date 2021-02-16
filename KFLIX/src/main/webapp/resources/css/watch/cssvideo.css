@@ -1,0 +1,61 @@
+@charset "UTF-8";
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: black;
+	padding: 0;
+}
+
+#videobar {
+	position: relative;
+	top: 540px;
+}
+
+#videobar > * {
+	padding: 50px;
+}
+
+.color-w {
+	color: white;
+	font-size: 30px;
+}
+
+#videodiv {
+	margin : 0;
+	padding : 0;
+	background : center center fixed no-repeat;
+}
+
+#video {
+	width: 100%;
+	height: 652px;
+	/*
+	position : fixed;
+	top : 0; 
+	left : 0;
+	min-width : 100%;
+	min-height : 100%;
+	width : auto;
+	height : auto;
+	z-index : -1;*/
+}
+
+#videocon {
+	background-color: rgba(255,255,255,0.2);
+	width: 100%;
+	height: 660px;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	z-index: 9999;
+}
+
+#unmuteButton{
+	background-color: white;
+	width: 100px;
+	height: 30px;
+}
