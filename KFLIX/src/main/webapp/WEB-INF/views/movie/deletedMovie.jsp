@@ -27,7 +27,7 @@
 <body>
 <div>
 <h1>삭제 목록</h1>
-<a href="./management">관리 페이지</a>
+<a href="./">관리 페이지</a>
 </div>
 
 <section style="padding-top: 20px;">

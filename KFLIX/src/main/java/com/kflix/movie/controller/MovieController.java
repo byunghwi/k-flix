@@ -26,7 +26,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/movie/*")
+@RequestMapping("/movie*")
 public class MovieController {
 
 	@Inject
@@ -44,23 +44,23 @@ public class MovieController {
 	@Inject
 	FileUploadService upload;
 	
-	// http://localhost:8080/kflix/movie/management
+	// http://localhost:8080/kflix/movie
 	
 	/*
 	 * 영화 관리 페이지
 	 */
-	@GetMapping("management")
+	@GetMapping
 	public String movieMain(Model model) {
 		model.addAttribute("movie", mv_service.selectAllMovieVeiw('Y'));
 		
-		return "movie/management";
+		return "movie/movieindex";
 	}
 	
 	
 	/*
 	 * 상세보기 페이지
 	 */
-	@GetMapping("detail/{id}")
+	@GetMapping("/detail/{id}")
 	public String detail(Model model, @PathVariable("id") int movie_id) {
 		model.addAttribute("movie", mv_service.selectMovieById(movie_id)); 
 		
@@ -71,7 +71,7 @@ public class MovieController {
 	/*
 	 * 영화 등록 페이지
 	 */
-	@GetMapping("addpage")
+	@GetMapping("/addpage")
 	public String add(Model model) {
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
@@ -81,7 +81,7 @@ public class MovieController {
 	}
 
 	// 등록 입력 값 넘기기 , 등록 성공 / 실패 체크 추가하기	
-	@PostMapping("add")
+	@PostMapping("/add")
 	public String addMovie(Model model, Movie movie, MultipartFile[] mpf){
 		// 파일 업로드
 		String[] path = upload.restore(mpf);
@@ -105,7 +105,7 @@ public class MovieController {
 	/*
 	 * 수정 페이지
 	 */
-	@GetMapping("updatepage/{id}")
+	@GetMapping("/updatepage/{id}")
 	public String updatePage(Model model, @PathVariable("id") int movie_id) {
 		model.addAttribute("movie", mv_service.selectMovieById(movie_id));
 		model.addAttribute("director", dt_service.selectAllDirectorList());
@@ -115,7 +115,7 @@ public class MovieController {
 		return "movie/updateMovie";
 	}
 	
-	@PostMapping("update")
+	@PostMapping("/update")
 	public String update(Model model, Movie movie, MultipartFile[] mpf) {
 		// 파일 업로드
 		String[] path = upload.restore(mpf);
@@ -136,7 +136,7 @@ public class MovieController {
 	/*
 	 *  삭제 페이지 / status = 'N'
 	 */
-	@GetMapping("delete/{id}")
+	@GetMapping("/delete/{id}")
 	public String delete(Model model, @PathVariable("id") int moive_id) {
 		int result = mv_service.deleteOrRecoveryMovieById(moive_id, 'N');
 		
@@ -151,7 +151,7 @@ public class MovieController {
 	/*
 	 * 삭제된 목록
 	 */
-	@GetMapping("deletedList")
+	@GetMapping("/deletedList")
 	public String deletedList(Model model) {
 		model.addAttribute("movie", mv_service.selectAllMovieVeiw('N'));
 		
@@ -162,7 +162,7 @@ public class MovieController {
 	/*
 	 * 복구
 	 */
-	@GetMapping("recovery/{id}")
+	@GetMapping("/recovery/{id}")
 	public String recoveryMovie(Model model, @PathVariable("id") int moive_id) {
 		int result = mv_service.deleteOrRecoveryMovieById(moive_id, 'Y');
 		

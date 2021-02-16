@@ -8,4 +8,30 @@
 		SELECT * FROM genre WHERE genre_status = #{status} ORDER BY genre_id DESC
 	</select>
 	
+	<insert id="insertGenre">
+		INSERT INTO genre VALUES(genre_id_seq.NEXTVAL, #{genre_name}, 'Y')
+	</insert>
+	
+	<update id="updateGenre">
+		UPDATE genre SET genre_name = #{genre_name} WHERE genre_id = #{genre_id}
+	</update>
+	
+	<update id="deleteOrRecoveryGenre">
+		UPDATE genre SET genre_status = #{status} WHERE genre_id = #{genre_id}
+	</update>
+	
+	<select id="getGenreByName" resultType="com.kflix.genre.domain.Genre">
+		SELECT * FROM genre WHERE genre_name = #{genre_name}
+	</select>
+	
+	<select id="getGenreName" resultType="string">
+		SELECT 
+			genre_name
+		FROM 
+			movie 
+		INNER JOIN 
+			genre ON genre_id${genre_id_num} = genre_id
+		WHERE 
+			movie_id = ${movie_id} 
+	</select>
 </mapper>

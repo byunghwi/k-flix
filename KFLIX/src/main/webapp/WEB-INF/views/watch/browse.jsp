@@ -29,8 +29,8 @@
 			<li class="nav-item"><a class="nav-link" href="#">TV프로그램</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
 			<li class="nav-item"><a class="nav-link disabled" href="#"
-				tabindex="-1"">NEW!요즘 대세 콘텐츠</a></li>
-			</li>
+				tabindex="-1">NEW!요즘 대세 콘텐츠</a></li>
+			
 			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
 		</ul>
 		<div class="">
