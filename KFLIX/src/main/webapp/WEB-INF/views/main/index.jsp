@@ -215,6 +215,7 @@
 
 					</div>
 					<div class="modal-footer">
+						자동로그인 <input type="checkbox" name="userCookie" >
 						<button type="submit" class="btn btn-primary" >로그인</button>
 					</div>
 				</form>

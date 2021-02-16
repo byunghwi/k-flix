@@ -1,5 +1,7 @@
 package com.kflix.member.service;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -21,6 +23,18 @@ public class MemberServiceImpl implements MemberService {
 	public Member login(Member member) {
 		
 		return memberDao.login(member);
+	}
+
+	@Override
+	public void keepLogin(String email, String session_id, Date next) {
+		memberDao.keepLogin(email, session_id, next);
+		
+	}
+
+	@Override
+	public Member checkLoginBefore(String value) {
+		
+		return memberDao.checkMemWithSessionKey(value);
 	}
 
 }

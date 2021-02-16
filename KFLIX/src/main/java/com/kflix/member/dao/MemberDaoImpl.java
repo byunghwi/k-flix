@@ -1,5 +1,9 @@
 package com.kflix.member.dao;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,6 +29,22 @@ public class MemberDaoImpl implements MemberDao {
 	public Member login(Member member) {
 		
 		return sqlSession.selectOne(NAMESPACE + ".login", member);
+	}
+
+	@Override
+	public void keepLogin(String email, String session_id, Date next) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("email", email);
+		paramMap.put("sessionId", session_id);
+		paramMap.put("next", next);
+		
+		sqlSession.update(NAMESPACE + ".keepLogin", paramMap);
+		
+	}
+
+	@Override
+	public Member checkMemWithSessionKey(String value) {
+		return sqlSession.selectOne(NAMESPACE + ".checkMemWithSessionKey", value);
 	}
 
 }

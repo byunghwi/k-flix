@@ -1,5 +1,6 @@
 package com.kflix.member.interceptoer;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,13 +28,21 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		if(memberVO != null) {
 			log.info("===========================new login success=============================");
 			session.setAttribute(LOGIN, memberVO);
-			log.info("session id >"+ session.getId());
 			
+			if(request.getParameter("userCookie") != null) {
+				
+				Cookie loginCookie = new Cookie("loginCookie", session.getId());
+				loginCookie.setPath("/"); // 쿠키의 path 값을 지정하면 지정해준 하위 디렉토리까지 쿠키 전송
+				loginCookie.setMaxAge(60 * 60 * 24); // 1일 동안 유지
+				
+				response.addCookie(loginCookie);
+				log.info("=========================Cookie 생성=========================");
+			}
+
 			String destination = (String) session.getAttribute("destination");
 			response.sendRedirect((destination != null) ? destination : "/kflix/browse");
-		}else {
-			log.info("로그인 에러 ");
 		}
+
 	}
 	
 	@Override
