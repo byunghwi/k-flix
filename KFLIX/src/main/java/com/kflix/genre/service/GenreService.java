@@ -2,6 +2,8 @@ package com.kflix.genre.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kflix.genre.domain.Genre;
 
 public interface GenreService {
@@ -14,7 +16,7 @@ public interface GenreService {
 	
 	public int updateGenre(int gerne_id, String genre_name);
 	
-	public List<Genre> findGenreByName(String genre_name);
+	public List<Genre> findGenreByName(String genre_name, char status);
 	
 	
 	

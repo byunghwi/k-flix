@@ -50,7 +50,6 @@
 				<td>${movie.play_time }분</td>
 				<td><fmt:formatDate value="${movie.reg_date }" pattern="yyyy-MM-dd"/></td>
 				<td>
-					<a href="./updatepage/${movie.movie_id }">수정</a>
 					<a href="./recovery/${movie.movie_id }">복구</a>
 					<a href="./detail/${movie.movie_id }">상세보기</a>
 				</td>

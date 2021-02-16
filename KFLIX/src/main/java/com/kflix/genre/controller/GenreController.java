@@ -14,52 +14,67 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/genre*")
+@RequestMapping("/genre/*")
 public class GenreController {
 
 	@Inject
 	GenreService genre_service;
 	
-	@GetMapping
+	@GetMapping("/")
 	public String genreIndex(Model model) {
 		model.addAttribute("genre", genre_service.selectAllGenreList('Y'));	
 		return "genre/genreindex";
 	}
 	
-	@GetMapping("/deletedList")
+	@GetMapping("deletedList")
 	public String deletedGenreList(Model model) {
 		model.addAttribute("genre", genre_service.selectAllGenreList('N'));
 		return "genre/deletedGenre";
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("add")
 	public String addGenre(String genre_name) {
 		genre_service.addGenre(genre_name);
-		return "redirect:/genre";
+		return "redirect:/genre/";
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("update")
 	public String updateGenre(String genre_name, int genre_id) {
-		log.info("업뎃 왔다감");
-		log.info(genre_name);
-		log.info(genre_id);
 		genre_service.updateGenre(genre_id, genre_name);
 		
-		return "redirect:/genre";
+		return "redirect:/genre/";
 	}
 	
-	@PostMapping("/delete")
+	@PostMapping("delete")
 	public String deleteGenre(int genre_id) {
-		log.info("업뎃 왔다감");
-		log.info(genre_id);
 		genre_service.deleteOrRecovertGenre(genre_id, 'N');
 		
-		return "redirect:/genre";
+		return "redirect:/genre/";
 	}
 	
-	@PostMapping("/find")
+	
+	@PostMapping("find")
 	public String findGenre(Model model, String genre_name) {
-		model.addAttribute("genre", genre_service.findGenreByName(genre_name));
-		return "redirect:/genre";
+		model.addAttribute("genre", genre_service.findGenreByName(genre_name, 'Y'));
+		return "genre/genreindex";
 	}
+	
+	
+	/*
+	 *  삭제된 항목 컨트롤러
+	 */
+	
+	@PostMapping("recovery")
+	public String recoveryGenre(int genre_id) {
+		genre_service.deleteOrRecovertGenre(genre_id, 'Y');
+		
+		return "redirect:/genre/deletedList";
+	}
+	
+	@PostMapping("deletedList/find")
+	public String findDeletedGenre(Model model, String genre_name) {
+		model.addAttribute("genre", genre_service.findGenreByName(genre_name, 'N'));
+		return "genre/deletedGenre";
+	}
+	
 }

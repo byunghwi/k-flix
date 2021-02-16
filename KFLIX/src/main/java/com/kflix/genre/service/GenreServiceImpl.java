@@ -40,8 +40,8 @@ public class GenreServiceImpl implements GenreService {
 	}
 
 	@Override
-	public List<Genre> findGenreByName(String genre_name) {
-		return gr_mapper.getGenreByName(genre_name);
+	public List<Genre> findGenreByName(String genre_name, char status) {
+		return gr_mapper.getGenreByName(genre_name, status);
 	}
 
 }

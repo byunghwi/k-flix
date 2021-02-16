@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kflix.mapper.MovieMapper;
 import com.kflix.movie.domain.Movie;
+import com.kflix.util.pagenation.domain.PageNation;
 
 
 @Service
@@ -53,6 +54,20 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public int updateMovie(Movie movie) {
 		return mv_mapper.updateMovie(movie);
+	}
+
+	
+	/*
+	 * 영화의 개수
+	 */
+	@Override
+	public int getCountMovie(char status) {
+		return mv_mapper.countMovie(status);
+	}
+
+	@Override
+	public List<Movie> selectPageMovieView(PageNation pagenation, char status) {
+		return mv_mapper.getPageMovieView(pagenation.getPage(), pagenation.getAmount(), status);
 	}
 
 }

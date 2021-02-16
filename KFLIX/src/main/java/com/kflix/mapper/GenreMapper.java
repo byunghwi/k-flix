@@ -23,7 +23,10 @@ public interface GenreMapper {
 			@Param("status") char status
 	);
 	
-	List<Genre> getGenreByName(String genre_name);
+	List<Genre> getGenreByName(
+			@Param("genre_name") String genre_name,
+			@Param("status") char status
+		);
 	
 	/*
 	 *  재검토

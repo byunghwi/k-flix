@@ -66,7 +66,7 @@ public class GenreServiceTest {
 	
 	@Test
 	public void testGerneFind() {
-		List<Genre> list = service.findGenreByName("액션");
+		List<Genre> list = service.findGenreByName("재난", 'N');
 		assertNotNull(list);
 		log.info(list.get(0));
 	}

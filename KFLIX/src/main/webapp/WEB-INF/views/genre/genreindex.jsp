@@ -18,7 +18,7 @@
 <div class="container">
 <div>
 <h1>장르관리</h1>
-	<a href="/kflix/genre/deletedList" type="button" class="btn btn-secondary text-light">삭제된 항목</a>
+	<a href="./deletedList" type="button" class="btn btn-secondary text-light">삭제된 항목</a>
 </div>
 
 <div>
@@ -28,8 +28,10 @@
 		</button>
 	</span>
 	
+	<a href="./" class="btn btn-info text-light">전체 보기</a>
+	
 	<!-- 검색 -->
-	<form action="/kflix/genre/find" method="post">
+	<form action="./find" method="post">
 	<div class="input-group mb-3 input_text">
 		<input type="text" name="genre_name" class="form-control" aria-describedby="button-addon2">
   		<button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
@@ -69,7 +71,7 @@
       </div>
       
       <div class="modal-body">
-      <form action="/kflix/genre/add" method="post">
+      <form action="./add" method="post">
 	      <div class="input-group mb-3 input_text">
 	      	<span class="input-group-text" id="inputGroup-sizing-sm">장르명</span>
 	  		<input type="text" class="form-control" name="genre_name" 
@@ -95,7 +97,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="/kflix/genre/update" method="post">
+      <form action="./update" method="post">
 	      <div class="input-group mb-3 input_text">
 	      	<span class="input-group-text" id="inputGroup-sizing-sm">장르명</span>
 	  		<input type="hidden" id="update_id" name="genre_id" value=""/>
@@ -126,7 +128,7 @@
 	        <p>정말 삭제 하시겠습니까?</p>
 	      </div>
           <div class="modal-footer">
-          <form action="/kflix/genre/delete" method="post">
+          <form action="./delete" method="post">
 	          	<input type="hidden" id="deleteid" name="genre_id" value=""/>
 		        <input type="submit" class="btn btn-danger" value="삭제"/>
 	        </form>
@@ -144,7 +146,6 @@
 		crossorigin="anonymous"></script>		
 <script>
 	var genreid="";
-	var genrename="";
 	
 	$(document).ready(function() { 
 		$('#updatemodal').on('show.bs.modal', function(event){
