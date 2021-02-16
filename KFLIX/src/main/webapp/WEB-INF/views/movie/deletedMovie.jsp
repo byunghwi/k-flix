@@ -27,7 +27,7 @@
 <body>
 <div>
 <h1>삭제 목록</h1>
-<a href="./management">관리 페이지</a>
+<a href="./">관리 페이지</a>
 </div>
 
 <section style="padding-top: 20px;">
@@ -50,7 +50,6 @@
 				<td>${movie.play_time }분</td>
 				<td><fmt:formatDate value="${movie.reg_date }" pattern="yyyy-MM-dd"/></td>
 				<td>
-					<a href="./updatepage/${movie.movie_id }">수정</a>
 					<a href="./recovery/${movie.movie_id }">복구</a>
 					<a href="./detail/${movie.movie_id }">상세보기</a>
 				</td>

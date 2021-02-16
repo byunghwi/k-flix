@@ -21,6 +21,7 @@ import com.kflix.genre.service.GenreService;
 import com.kflix.movie.domain.Movie;
 import com.kflix.movie.service.MovieService;
 import com.kflix.util.fileupload.FileUploadService;
+import com.kflix.util.pagenation.domain.PageNation;
 
 import lombok.extern.log4j.Log4j;
 
@@ -44,16 +45,22 @@ public class MovieController {
 	@Inject
 	FileUploadService upload;
 	
-	// http://localhost:8080/kflix/movie/management
+	static final char ENABLED_CODE = 'Y';
+	static final char DISABLE_CODE = 'N';
+	
+	// http://localhost:8080/kflix/movie
 	
 	/*
 	 * 영화 관리 페이지
 	 */
-	@GetMapping("management")
-	public String movieMain(Model model) {
-		model.addAttribute("movie", mv_service.selectAllMovieVeiw('Y'));
+	@GetMapping
+	public String movieMain(Model model, PageNation pagenation) {
 		
-		return "movie/management";
+		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED_CODE));
+		
+		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED_CODE)));
+		
+		return "movie/movieindex";
 	}
 	
 	
@@ -75,7 +82,7 @@ public class MovieController {
 	public String add(Model model) {
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
-		model.addAttribute("genre", gr_service.selectAllGenreList('Y'));
+		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED_CODE));
 		
 		return "movie/addMovie";
 	}
@@ -110,7 +117,7 @@ public class MovieController {
 		model.addAttribute("movie", mv_service.selectMovieById(movie_id));
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
-		model.addAttribute("genre", gr_service.selectAllGenreList('Y'));
+		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED_CODE));
 		
 		return "movie/updateMovie";
 	}
@@ -134,11 +141,11 @@ public class MovieController {
 	
 	
 	/*
-	 *  삭제 페이지 / status = 'N'
+	 *  삭제 페이지 / status = DISABLE_CODE
 	 */
-	@GetMapping("delete/{id}")
-	public String delete(Model model, @PathVariable("id") int moive_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(moive_id, 'N');
+	@PostMapping("delete")
+	public String delete(Model model, int movie_id) {
+		int result = mv_service.deleteOrRecoveryMovieById(movie_id, DISABLE_CODE);
 		
 		String msg = result > 0 ? "삭제 되었습니다." : "삭제에 실패하였습니다.";
 		
@@ -153,7 +160,7 @@ public class MovieController {
 	 */
 	@GetMapping("deletedList")
 	public String deletedList(Model model) {
-		model.addAttribute("movie", mv_service.selectAllMovieVeiw('N'));
+		model.addAttribute("movie", mv_service.selectAllMovieVeiw(DISABLE_CODE));
 		
 		return "movie/deletedMovie";
 	}
@@ -164,7 +171,7 @@ public class MovieController {
 	 */
 	@GetMapping("recovery/{id}")
 	public String recoveryMovie(Model model, @PathVariable("id") int moive_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(moive_id, 'Y');
+		int result = mv_service.deleteOrRecoveryMovieById(moive_id, ENABLED_CODE);
 		
 		String msg = result > 0 ? "복구 되었습니다." : "복구에 실패하였습니다.";
 		

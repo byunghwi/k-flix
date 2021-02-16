@@ -68,4 +68,23 @@
 		movie_id = #{movie_id}
 	</update>
 	
+	<select id="countMovie" resultType="Integer">
+		SELECT COUNT(*) FROM movie  WHERE movie_status = #{status}
+	</select>
+	
+	<select id="getPageMovieView"
+			resultType="com.kflix.movie.domain.Movie">
+		SELECT 
+			movie_id, poster_path, movie_title, director_id, genre_id1, genre_id2, play_time, reg_date
+		FROM 
+		(SELECT SEQ, movie_id, poster_path, movie_title, director_id, genre_id1, genre_id2, play_time, reg_date
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, movie_id, poster_path, movie_title, director_id, genre_id1, genre_id2, play_time, reg_date
+		    	FROM
+		        	(SELECT * FROM movie_view WHERE movie_status = #{status} ORDER BY movie_id)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}
+	</select>
 </mapper>

@@ -11,9 +11,26 @@ public interface GenreMapper {
 	// 전체 리스트
 	List<Genre> getAllGenreList(char status);
 	
+	int insertGenre(String genre_name);
+	
+	int updateGenre(
+			@Param("genre_id") int genre_id,
+			@Param("genre_name") String genre_name
+	);
+	
+	int deleteOrRecoveryGenre(
+			@Param("genre_id") int genre_id,
+			@Param("status") char status
+	);
+	
+	List<Genre> getGenreByName(
+			@Param("genre_name") String genre_name,
+			@Param("status") char status
+		);
+	
 	/*
-	 *  mapper 쿼리문 작성후 서비스 까지 쭉
+	 *  재검토
 	 */
 	String getGenreName(@Param("genre_id_num") int genre_id_num,
-						@Param("movie_id") int moive_id);
+						@Param("movie_id") int movie_id);
 }

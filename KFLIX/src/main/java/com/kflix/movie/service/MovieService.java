@@ -3,6 +3,7 @@ package com.kflix.movie.service;
 import java.util.List;
 
 import com.kflix.movie.domain.Movie;
+import com.kflix.util.pagenation.domain.PageNation;
 
 public interface MovieService {
 
@@ -21,5 +22,9 @@ public interface MovieService {
 	// 수정
 	public int updateMovie(Movie movie);
 
+	// 활성화된 영화의 개수
+	public int getCountMovie(char status);
+	
+	public List<Movie> selectPageMovieView(PageNation pagenation, char status);
 	
 }
