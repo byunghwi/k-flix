@@ -26,6 +26,7 @@
 
 	<div onclick="sound()" id="videocon">
 		<div id="videobar">
+			<div id="playtime" class="color-w"></div>
 			<i id="restart" onclick="restart()" class=" fas fa-stop color-w"></i>
 
 			<div style="display: inline-block;" id="playnpause">
@@ -35,12 +36,17 @@
 			<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
 			<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
 
-			<i onclick="openFullscreen()" class="fas fa-expand color-w"></i> 
-				<i class="fas fa-step-forward color-w"></i> 
-				<i class="fas fa-layer-group color-w"></i> 
-				<i class="fas fa-volume-up color-w"></i>
+			<i onclick="openFullscreen()" class="fas fa-expand color-w"></i> <i
+				class="fas fa-step-forward color-w"></i> <i
+				class="fas fa-layer-group color-w"></i> 
+				<div id="volume">
+				<!-- <i onclick="volshow()" id="volumeicon" class="fas fa-volume-up color-w"></i> -->
+				
+            <input type="range" class="form-range" min="0" max="1" step="0.1" id="volrange">
+             <progress id='progressbar' class="progressbar" max='100' value='5'></progress>
+            
+				</div>
 		</div>
-
 	</div>
 	<video id="video" muted autoplay loop
 		poster="/kflix/resources/imgs/watch/iu.jpg">
@@ -48,43 +54,6 @@
 	</video>
 
 
-	<script>
-		var video = document.getElementById('video');
-		var button = document.getElementById("play");
-		var playdiv = document.getElementById("playnpause");
-
-		function sound() {
-			video.muted = false;
-		}
-
-		function vidplay() {
-			if (video.paused) {
-				video.play();
-				playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
-			} else {
-				video.pause();
-				playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-play color-w"></i>`;
-			}
-		}
-
-		function restart() {
-			video.currentTime = 0;
-		}
-
-		function skip(value) {
-			video.currentTime += value;
-		}
-		
-		function openFullscreen() {
-			if (video.requestFullscreen) {
-				video.requestFullscreen();
-			  } else if (video.webkitRequestFullscreen) { /* Safari */
-				  video.webkitRequestFullscreen();
-			  } else if (video.msRequestFullscreen) { /* IE11 */
-				  video.msRequestFullscreen();
-			  }
-		}
-		   
-	</script>
+	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
 </body>
 </html>
