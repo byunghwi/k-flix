@@ -187,9 +187,9 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">로그인</h4>
+					<h4 class="modal-title" id="myModalLabel">로그인 ${pageContext.request.contextPath}</h4>
 				</div>
-				<form action="${pageContext.request.contextPath}/member/login"
+				<form action="${pageContext.request.contextPath}/member/loginPost"
 					method="post">
 					<div class="modal-body">
 

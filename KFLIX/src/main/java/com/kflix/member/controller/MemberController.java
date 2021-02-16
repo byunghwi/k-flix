@@ -1,7 +1,11 @@
 package com.kflix.member.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,10 +34,27 @@ public class MemberController {
 
 		int result = memberService.register(member);
 
-		if(result == 1) {
+		if (result == 1) {
 			redirectAttributes.addFlashAttribute("msg", "REGISTERED");
 		}
-		
+
 		return "redirect:/main";
 	}
+
+	// 로그인
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public void loginGET() {
+
+	}
+
+	// 로그인
+	@RequestMapping(value = "loginPost", method = RequestMethod.POST)
+	public void loginPOST(Member member, HttpSession session, Model model) {
+		Member memberVO = memberService.login(member);
+		if (memberVO == null) {
+			return;
+		}
+		model.addAttribute("memberVO", memberVO);
+	}
+
 }

@@ -22,9 +22,9 @@
 
 	</insert>
 
-	<select id="getMemberByEmail"
+	<select id="login"
 		resultType="com.kflix.member.domain.Member">
-		select * from member where email = #{email}
+		SELECT email, pwd FROM member WHERE email = #{email} and pwd = #{pwd}
 	</select>
 
 </mapper>

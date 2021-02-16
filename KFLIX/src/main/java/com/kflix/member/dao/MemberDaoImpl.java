@@ -21,4 +21,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.insert(NAMESPACE + ".register", member);
 	}
 
+	@Override
+	public Member login(Member member) {
+		
+		return sqlSession.selectOne(NAMESPACE + ".login", member);
+	}
+
 }
