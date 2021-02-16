@@ -24,8 +24,10 @@ public class Movie {
 	private int genre_id1;
 	private int genre_id2;
 	private String country;
-	private String movie_release;
 	private String summary;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date movie_release;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reg_date;

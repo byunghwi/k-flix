@@ -1,6 +1,10 @@
 package com.kflix.movie.controller;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,9 +84,11 @@ public class MovieController {
 	 */
 	@GetMapping("addpage")
 	public String add(Model model) {
+		LocalDate max_day = LocalDate.now();
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
 		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED_CODE));
+		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		
 		return "movie/addMovie";
 	}
@@ -90,20 +96,26 @@ public class MovieController {
 	// 등록 입력 값 넘기기 , 등록 성공 / 실패 체크 추가하기	
 	@PostMapping("add")
 	public String addMovie(Model model, Movie movie, MultipartFile[] mpf){
-		// 파일 업로드
-		String[] path = upload.restore(mpf);
-		
-		// 파일 경로 Set
-		movie.changePaths(path);
-		
-		// DB 추가
-		int result = mv_service.insertNewMovie(movie);
-		
-		String msg = result > 0 ? "등록하였습니다!" : "등록에 실패하였습니다.";
-		
-		model.addAttribute("msg", msg);
-		
-		return "movie/result";
+		if(mv_service.checkDate(movie)) {
+			log.info("날짜체크 성공!!");
+			// 파일 업로드
+			String[] path = upload.restore(mpf);
+			
+			// 파일 경로 Set
+			movie.changePaths(path);
+				
+			// DB 추가
+			int result = mv_service.insertNewMovie(movie);
+			
+			String msg = result > 0 ? "등록하였습니다!" : "등록에 실패하였습니다.";
+			
+			model.addAttribute("msg", msg);
+			
+			return "movie/result";
+			
+		}
+
+		return "movie/addMovie";
 	}
 
 	

@@ -26,5 +26,9 @@ public interface MovieService {
 	public int getCountMovie(char status);
 	
 	public List<Movie> selectPageMovieView(PageNation pagenation, char status);
-	
+
+	/*
+	 * 날짜체크
+	 */
+	boolean checkDate(Movie movie);
 }
