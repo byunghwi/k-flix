@@ -1,0 +1,93 @@
+@charset "UTF-8";
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: black;
+	padding: 0;
+}
+
+#videobar {
+	position: fixed;
+	bottom: 0;
+	width:100%;
+	background-color: rgba(255,255,255,0.2);
+	text-align: center;
+}
+
+#videobar > * {
+	padding: 15px 50px;
+	
+}
+
+.color-w {
+	color: white;
+	font-size: 20px;
+}
+
+#videodiv {
+	margin : 0;
+	padding : 0;
+	background : center center fixed no-repeat;
+}
+
+#video {
+	width: 100%;
+	height: 652px;
+	/*
+	position : fixed;
+	top : 0; 
+	left : 0;
+	min-width : 100%;
+	min-height : 100%;
+	width : auto;
+	height : auto;
+	z-index : -1;*/
+}
+
+#videocon {
+	background-color: rgba(255,255,255,0);
+	width: 100%;
+	height: 660px;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	z-index: 9999;
+}
+
+#unmuteButton{
+	background-color: white;
+	width: 100px;
+	height: 30px;
+}
+
+
+.progressbar, .bufferbar {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 100%;
+  pointer-events: none;
+  height: 1px;
+  z-index: 2;
+  /* Turns off styling - not usually needed, but good to know. */
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  /* gets rid of default border in Firefox and Opera. */
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #c0392b;
+}
+.progressbar::-moz-progress-bar, .bufferbar::-moz-progress-bar {
+  background: #c0392b;
+}
+.progressbar::-webkit-progress-bar, .bufferbar::-webkit-progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+}
+.progressbar::-webkit-progress-value, .bufferbar::-webkit-progress-value {
+  background: #c0392b;
+}
