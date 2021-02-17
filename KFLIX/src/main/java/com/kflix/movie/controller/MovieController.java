@@ -1,14 +1,13 @@
 package com.kflix.movie.controller;
 
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kflix.actor.domain.Actor;
 import com.kflix.actor.service.ActorService;
-import com.kflix.director.domain.Director;
 import com.kflix.director.service.DirectorService;
-import com.kflix.genre.domain.Genre;
 import com.kflix.genre.service.GenreService;
 import com.kflix.movie.domain.Movie;
 import com.kflix.movie.service.MovieService;
@@ -48,7 +44,7 @@ public class MovieController {
 	GenreService gr_service;
 	
 	@Inject
-	FileUploadService upload;
+	FileUploadService upload_serevice;
 	
 	@Inject
 	Movie movie;
@@ -57,8 +53,9 @@ public class MovieController {
 	static final char DISABLE_CODE = 'N';
 	
 	LocalDate max_day = LocalDate.now();
-	// http://localhost:8081/kflix/movie
 	
+	// http://localhost:8081/kflix/movie/management
+
 	/*
 	 * 영화 관리 페이지
 	 */
@@ -101,27 +98,30 @@ public class MovieController {
 	@PostMapping("add")
 	public String addMovie(Model model, Movie movie, 
 				MultipartFile poster, MultipartFile teaser, MultipartFile video) {
-	
-		if(mv_service.checkDate(movie) && upload.checkExtAll(poster, teaser, video)) {
-			
+		
+		String msg = "";
+		//날짜 체크 , 파일 유효성 체크
+		if(mv_service.checkDate(movie) && upload_serevice.checkExtAll(poster, teaser, video)) {
 
-			// 파일 업로드
-//			String[] path = upload.restore(mpf);
-//			
-//			// 파일 경로 Set
-//			movie.changePaths(path);
-//				
-//			// DB 추가
-//			int result = mv_service.insertNewMovie(movie);
-//			
-//			String msg = result > 0 ? "등록하였습니다!" : "등록에 실패하였습니다.";
-//			
-//			model.addAttribute("msg", msg);
+			upload_serevice.setPathNames(poster, teaser, video, movie);
 			
-			return "movie/result";	
+			// DB 처리
+			int result = mv_service.insertNewMovie(movie);
+
+			if (result > 0 ) {
+				// 파일 업로드
+				upload_serevice.upload(poster, teaser, video, movie);
+				msg = "등록하였습니다!";
+				
+			} else {
+				msg = "등록에 실패하였습니다.";
+				
+			}
+			
 		}
-
-		return "movie/addMovie";
+		
+		model.addAttribute("msg", msg);
+		return "movie/result";
 	}
 
 	
@@ -150,26 +150,23 @@ public class MovieController {
 	public String update(Model model, Movie movie,
 						MultipartFile poster, MultipartFile teaser, MultipartFile video) {
 		
-		if(mv_service.checkDate(movie)) {
-			log.info("날짜 체크 성공!!");
+		String msg = "";
+		// 날짜 체크
+		if (mv_service.checkDate(movie)) {
+			upload_serevice.setPathNames(poster, teaser, video, movie);
+			int result = mv_service.updateMovie(movie);
 			
-			if(upload.checkExtAll(poster, teaser, video)) {
-				log.info("확장자 체크 성공!!");
+			if (result > 0) {
+				// 파일 업로드
+				upload_serevice.upload(poster, teaser, video, movie);
+				msg = "수정 되었습니다.";
 				
+			} else {
+				msg = "수정에 실패하였습니다.";
 			}
 		}
-//		// 파일 업로드
-//		String[] path = upload.restore(mpf);
-//				
-//		// 파일 경로 Set
-//		movie.changePaths(path);
-//		
-//		int result = mv_service.updateMovie(movie);
-//		
-//		String msg = result > 0 ? "수정 되었습니다." : "수정에 실패하였습니다.";
-//		
-//		model.addAttribute("msg", msg);
-		
+		model.addAttribute("msg", msg);
+
 		return "movie/result";
 	}
 	
