@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class Watch {
+public class WatchVO {
 
 	private int movie_id;
 	private String movie_title;
