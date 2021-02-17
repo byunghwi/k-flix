@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,9 +66,9 @@
 	</script>
 	<div class="our-story-header-wrapper">
 		<button type="button"
-				class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-lg"
-				style="background-color: red" data-toggle="modal"
-				data-target="#loginModal">로그인</button>
+			class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-lg"
+			style="background-color: red" data-toggle="modal"
+			data-target="#loginModal">로그인</button>
 	</div>
 
 	<div class="img">
@@ -81,7 +85,7 @@
 		<!-- 이미지 배경 어둡게 만들기 -->
 		<div class="img-cover"></div>
 	</div>
-	
+
 	<!-- 회원가입 모달 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -176,7 +180,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 로그인 모달 -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -187,7 +191,8 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">로그인 ${pageContext.request.contextPath}</h4>
+					<h4 class="modal-title" id="myModalLabel">로그인
+						${pageContext.request.contextPath}</h4>
 				</div>
 				<form action="${pageContext.request.contextPath}/member/loginPost"
 					method="post">
@@ -215,13 +220,25 @@
 
 					</div>
 					<div class="modal-footer">
-						자동로그인 <input type="checkbox" name="userCookie" >
-						<button type="submit" class="btn btn-primary" >로그인</button>
+						자동로그인 <input type="checkbox" name="userCookie">
+						<button type="submit" class="btn btn-primary">로그인</button>
 					</div>
 				</form>
+				<%
+					String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
+					String redirectURI = URLEncoder.encode("http://localhost:8081/kflix/browse", "UTF-8");
+					SecureRandom random = new SecureRandom();
+					String state = new BigInteger(130, random).toString();
+					String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+					apiURL += "&client_id=" + clientId;
+					apiURL += "&redirect_uri=" + redirectURI;
+					apiURL += "&state=" + state;
+					session.setAttribute("state", state);
+				%>
+				<a href="<%=apiURL%>"><img height="50"
+					src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
