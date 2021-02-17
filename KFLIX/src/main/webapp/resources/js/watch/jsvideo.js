@@ -3,10 +3,20 @@ var button = document.getElementById("play");
 var playdiv = document.getElementById("playnpause");
 var volume = document.getElementById("volume");
 var volrange = document.getElementById("volrange");
+var back = document.getElementById('back');
+var videocon = document.getElementById('videocon');
+var videobar = document.getElementById('videobar');
 
-/* volume.addEventListener("mouseover", function() {
-	volume.innerHTML = `<input type="range" class="form-range" id="customRange1">`;
-}); */
+videocon.addEventListener("mouseover", function() {
+	back.style.display = 'block';
+	videobar.style.display = 'block';
+});
+
+videocon.addEventListener("mouseout", function() {
+	back.style.display = 'none';
+	videobar.style.display = 'none';
+});
+
 
 volrange.addEventListener("change", (e) => {
 	video.volume = volrange.value;
@@ -63,13 +73,47 @@ function event(e) {
 	alert("미디어 재생이 완료되었습니다.");
 }
 
+
 video.addEventListener(
-      "timeupdate",
-      function() {
-        var percent = Math.floor(100 / video.duration * video.currentTime);
-        progressbar.value = Math.floor(video.currentTime);
- progressbar.max = Math.floor(video.duration);
-        progressbar.getElementsByTagName("span")[0].innerHTML = percent;
-      },
-      false
-    );
+	"timeupdate",
+	function() {
+		/*      var percent = Math.floor(100 / video.duration * video.currentTime);
+	   progressbar.getElementsByTagName("span")[0].innerHTML = percent;*/
+		progressbar.value = Math.floor(video.currentTime);
+		progressbar.max = Math.floor(video.duration);
+
+	},
+	false
+);
+
+function savecurrentTime() {
+var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "/kflix/browse/" + video.currentTime);
+            document.body.appendChild(form);
+            form.submit();
+}
+
+/*function savecurrentTime() {
+	var data = {
+			currentTime:  Math.floor(video.currentTime)
+	}
+	
+	var xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == XMLHttpRequest.DONE) {
+			if (xhttp.status == 200) {
+				// OK
+				alert('delete ok');
+			} else {
+				// ERROR
+				alert('delete error');
+			}
+		} 
+	}
+	
+	xhttp.open('Post', '/kflix/browse', true);
+	xhttp.setRequestHeader('content-type', 'application/json');
+	xhttp.send(JSON.stringify(data));
+}*/

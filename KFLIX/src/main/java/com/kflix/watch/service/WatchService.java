@@ -1,5 +1,13 @@
 package com.kflix.watch.service;
 
-public interface WatchService {
+import java.util.List;
 
+import com.kflix.watch.domain.WatchVO;
+
+import lombok.Data;
+
+public interface WatchService {
+	
+	public List<WatchVO> getAllwatch();
+	public WatchVO getwatch(int movie_id);
 }
