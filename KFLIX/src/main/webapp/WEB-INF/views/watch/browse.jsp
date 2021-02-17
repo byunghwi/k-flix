@@ -23,7 +23,7 @@
 	<div style="max-width: 100%" class="container flex-row nav-bar">
 		<img class="logo" alt="로고"
 			src="/kflix/resources/imgs/watch/kflixlogo.png">
-		<ul class="nav" style="margin: 0 100px 0 0;">
+		<ul class="nav" style="margin: 0 300px 0 0;">
 			<li class="nav-item"><a class="nav-link active"
 				aria-current="page" href="#">홈</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">TV프로그램</a></li>
@@ -33,7 +33,7 @@
 			</li>
 			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
 		</ul>
-		<div class="">
+		<div style="float: right;" class="">
 			<i class="fas fa-search color_white nav-icon"></i> <i
 				class="fas fa-gift color_white nav-icon"></i> <i
 				class="fas fa-bell color_white nav-icon"></i> <i
@@ -63,11 +63,11 @@
 					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="/kflix/resources/imgs/watch/runon1.png" class="d-block dis" alt="...">
-					<img src="/kflix/resources/imgs/watch/test1.png" class="d-block dis" alt="...">
-					<img src="/kflix/resources/imgs/watch/test2.png" class="d-block dis" alt="...">
-					<img src="/kflix/resources/imgs/watch/test3.png" class="d-block dis" alt="...">
+				<div class="carousel-item active">div
+					<img id="img1" src="/kflix/resources/imgs/watch/runon1.png" class="d-block dis" alt="...">
+					<img id="img2" src="/kflix/resources/imgs/watch/test1.png" class="d-block dis" alt="...">
+					<img id="img3" src="/kflix/resources/imgs/watch/test2.png" class="d-block dis" alt="...">
+					<img id="img4" src="/kflix/resources/imgs/watch/test3.png" class="d-block dis" alt="...">
 				</div>
 				<div class="carousel-item">
 					<img src="/kflix/resources/imgs/watch/runon1.png" class="d-block dis" alt="...">
@@ -87,8 +87,8 @@
 				<span class="visually-hidden">Next</span>
 			</button>
 		</div>
-		
 	</div>
+	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
 </body>
 </html>
