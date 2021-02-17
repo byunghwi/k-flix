@@ -101,3 +101,8 @@ body {
 .padd{
 	padding: 30px 0;
 }
+
+.list_title{
+	color: white;
+	font-size: 15px;
+}
