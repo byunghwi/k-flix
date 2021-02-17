@@ -1,0 +1,63 @@
+/**
+ * 
+ */
+function posterCheck() {
+	var poster_div = $("#poster_div");
+	var poster_text = $("#poster_text");
+	var poster_val = poster_text.val();
+	
+	if( poster_val != "" ){
+	
+		var ext = poster_val.split('.').pop().toLowerCase();
+	
+	    if($.inArray(ext, ['png','jpg','jpeg','jfif','pjpeg','pjp']) == -1) {
+	   		poster_text.remove();
+	    	poster_div.html("");
+	    	poster_div.append('포스터 : <input type="file" name="poster" accept="image/png, image/jpeg, image/jpg" id="poster_text" onchange="posterCheck();" required/> <br />');
+	    	 
+		 	alert('잘못된 파일명 입니다.');
+	    }
+	}
+};
+
+
+function teaserCheck(){
+	var teaser_div = $("#teaser_div");
+	var teaser_text = $("#teaser_text");
+	var teaser_val = teaser_text.val();
+	
+	if( teaser_val != "" ){
+	
+		var ext = teaser_val.split('.').pop().toLowerCase();
+	
+	    if($.inArray(ext, ['mp4','avi','mkv','mov','m4v']) == -1) {
+			
+	    	teaser_text.remove();
+	    	teaser_div.html("");
+	    	teaser_div.append('티저 : <input type="file" name="teaser" accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" id="teaser_text" onchange="teaserCheck();" required/> <br />');
+	    	
+		 	alert('잘못된 파일명 입니다.');
+	    }
+	}
+}
+
+
+
+function videoCheck(){
+	var video_div = $("#video_div");
+	var video_text = $("#video_text");
+	var video_val = video_text.val();
+
+	if( video_val != "" ){
+	
+		var ext = video_val.split('.').pop().toLowerCase();
+		
+		if($.inArray(ext, ['mp4','avi','mkv','mov','m4v']) == -1) {
+			video_text.remove();
+			video_div.html("");
+			video_div.append('비디오 : <input type="file" name="video" accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" id="video_text" onchange="videoCheck();" required/> <br />');
+			
+		 	alert('잘못된 파일명 입니다.');
+	    }
+	}
+}
