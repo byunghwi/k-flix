@@ -35,6 +35,15 @@ public class WatchController {
 		return "/watch/browse";
 	}
 	
+	@PostMapping("/browse/{currentTime:.+}")
+	public String getbrowse1(Model model, @PathVariable("currentTime") double currentTime) {
+		model.addAttribute("movie", service.getAllwatch()); 
+		log.info(currentTime);
+		System.out.println(currentTime);
+		return "/watch/browse";
+	}
+	
+	
 	@GetMapping(value = "/browse/watch/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getwatch(Model model, @PathVariable("movie_id") int movie_id) {
 		model.addAttribute("watch", service.getwatch(movie_id)); 

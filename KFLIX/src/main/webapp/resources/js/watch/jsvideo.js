@@ -73,9 +73,6 @@ function event(e) {
 	alert("미디어 재생이 완료되었습니다.");
 }
 
-function savecurrentTime() {
-	console.log(video.currentTime);
-}
 
 video.addEventListener(
 	"timeupdate",
@@ -88,3 +85,35 @@ video.addEventListener(
 	},
 	false
 );
+
+function savecurrentTime() {
+var form = document.createElement("form");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "/kflix/browse/" + video.currentTime);
+            document.body.appendChild(form);
+            form.submit();
+}
+
+/*function savecurrentTime() {
+	var data = {
+			currentTime:  Math.floor(video.currentTime)
+	}
+	
+	var xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == XMLHttpRequest.DONE) {
+			if (xhttp.status == 200) {
+				// OK
+				alert('delete ok');
+			} else {
+				// ERROR
+				alert('delete error');
+			}
+		} 
+	}
+	
+	xhttp.open('Post', '/kflix/browse', true);
+	xhttp.setRequestHeader('content-type', 'application/json');
+	xhttp.send(JSON.stringify(data));
+}*/

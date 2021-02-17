@@ -23,9 +23,9 @@
 </head>
 <body>
 <div onclick="sound()" id="videocon">
-	<a onclick="savecurrentTime()" href="<%=application.getContextPath()%>/browse">
+	<button onclick="savecurrentTime()">
 	<i style="display: hidden;" id="back" class="fas fa-arrow-left color-w relative"> <span style="font-size: 15px;"> 뒤로가기 </span> </i>
-	</a>
+	</button>
 	
 		<div id="videobar" style="display: hidden;">
 			<div>
