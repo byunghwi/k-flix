@@ -9,25 +9,32 @@ import com.kflix.movie.domain.Movie;
 public interface MovieMapper {
 
 	/*
-	 * ÀüÃ¼ ¸®½ºÆ® , Y or N
+	 * ëª©ë¡ ë³´ì—¬ì£¼ê¸° í™œì„± / ë¹„í™œì„±
 	 */
 	List<Movie> getAllMovieView(char status);
 	
-	// »ó¼¼
+	// ì˜í™” ìƒì„¸
 	Movie getMovieById(int movie_id);
 	
-	// Ãß°¡
+	// ì˜í™” ë“±ë¡
 	int addMovie(Movie movie);
 	
 	/*
-	 * »èÁ¦ / º¹±¸ , Y or N
+	 * í™œì„± / ë¹„í™œì„±
 	 */
 	int deleteOrRecoveryMovie(
 						@Param("movie_id") int movie_id, 
 						@Param("status") char status);
 	
-	// ¼öÁ¤
+	// ìˆ˜ì •
 	int updateMovie(Movie movie);
 
+	// í™œì„±í™” ê°œìˆ˜
+	int countMovie(char status);
+
+	List<Movie> getPageMovieView(
+							@Param("page") int page,
+							@Param("amount") int amount,
+							@Param("status") char status);
 	
 }

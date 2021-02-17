@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.input_text{
+	width: 20em;
+}
+
+.input_select{
+	width: 5em;
+}
+
+img {
+	width: 150px;
+	height: 100px;
+	
+}

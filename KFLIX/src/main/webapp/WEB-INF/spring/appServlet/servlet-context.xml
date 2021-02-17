@@ -25,10 +25,35 @@
 	    <beans:property name="maxUploadSize" value="-1"/>
 	    <beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean>
+	
+	<!-- 로그인 체크 인터셉터 -->
+	<beans:bean id="authInterceptor" class="com.kflix.member.interceptoer.AuthInterceptor">
+	</beans:bean>
+	
+	<!-- 로그인 인터셉터 -->
+	<beans:bean id="loginInterceptor" class="com.kflix.member.interceptoer.LoginInterceptor">
+	</beans:bean>
+	 
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/browse"/>
+			<mapping path="/movie/management"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
 
 	<context:component-scan base-package="com.kflix.member" />
 	<context:component-scan base-package="com.kflix.movie" />
 	<context:component-scan base-package="com.kflix.watch" />
 	<context:component-scan base-package="com.kflix.main" />
+	<context:component-scan base-package="com.kflix.genre" />
+	<context:component-scan base-package="com.kflix.director" />
+	<context:component-scan base-package="com.kflix.actor" />
+	<context:component-scan base-package="com.kflix.util" />
 	
 </beans:beans>

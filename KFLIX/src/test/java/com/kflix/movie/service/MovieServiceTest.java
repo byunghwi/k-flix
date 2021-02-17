@@ -1,6 +1,14 @@
 package com.kflix.movie.service;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -9,8 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kflix.mapper.MovieMapper;
 import com.kflix.movie.domain.Movie;
+import com.kflix.util.pagenation.domain.PageNation;
 
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,10 +29,17 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MovieServiceTest {
 
-	@Autowired
+	@Inject
 	MovieService mv_service;
+	
+	@Inject
+	MovieMapper mapper;
+	
+	@Inject
+	Movie movie;
 
 	@Test
+	@Ignore
 	public void testView() {		
 		assertNotNull(mv_service.selectAllMovieVeiw('Y'));
 		log.info(mv_service.selectAllMovieVeiw('Y'));
@@ -35,4 +53,37 @@ public class MovieServiceTest {
 		log.info(mv_service.selectMovieById(4));
 	}
 	
+	@Test
+	@Ignore
+	public void testCountMovie() {
+		int result = mv_service.getCountMovie('Y');
+		assertTrue(result > 0);
+		log.info(result);
+	}
+	
+	
+	@Test
+	@Ignore
+	public void testPageing() {
+		List<Movie> list = mapper.getPageMovieView(1, 5, 'N');
+		assertNotNull(list);
+		for(Movie m : list) {
+			log.info(m);
+		}
+	}
+	
+	
+	@Test
+	public void testCheckDate() {
+		Date today = new Date();
+		
+		Calendar compare_date = Calendar.getInstance();
+		compare_date.setTime(today);
+		compare_date.add(Calendar.DATE, -1);
+		
+		movie.setReg_date(compare_date.getTime());
+		movie.setMovie_release(compare_date.getTime());
+		
+		assertFalse(mv_service.checkDate(movie));
+	}
 }
