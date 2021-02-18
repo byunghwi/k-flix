@@ -117,11 +117,11 @@ public class MovieServiceImpl implements MovieService {
 		// 개봉일이 오늘 날짜 이후면 false
 		boolean check_release = today.after(release_date.getTime());
 
-		log.info("오늘: " + today);
-		log.info("개봉일: " + release_date.getTime());
-		log.info("등록: " + reg_date.getTime());
-		log.info("내일: " +tomorrow.getTime());
-		log.info("어제: " +yesterday.getTime());
+//		log.info("오늘: " + today);
+//		log.info("개봉일: " + release_date.getTime());
+//		log.info("등록: " + reg_date.getTime());
+//		log.info("내일: " +tomorrow.getTime());
+//		log.info("어제: " +yesterday.getTime());
 
 		// 양쪽다 만족시 true
 		if(check_reg && check_release) {

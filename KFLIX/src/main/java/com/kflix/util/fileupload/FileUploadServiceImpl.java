@@ -64,6 +64,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 	// 확장자 유효성 검사
 	@Override
 	public boolean checkExtAll(MultipartFile poster, MultipartFile teaser, MultipartFile video) {
+		log.info("======== 확장자 오류 체크 ========");
 		if (poster == null && teaser == null && video == null) return false;
 
 		try {
@@ -220,32 +221,50 @@ public class FileUploadServiceImpl implements FileUploadService {
 	private boolean delete(MultipartFile file, int num, Movie movie) {
 		String origin_name = "";
 		File check;
-
 		if (file == null) {
+			log.info("변경되지 않아 삭제하지 않음");
+		}else {
+			
 			switch(num) {
 			case 0:
-				origin_name = movie.getPoster_path();
-				check = new File(SAVE_PATH[num] + origin_name);
-				del(check, origin_name);
+				if (file.getOriginalFilename().equals(movie.getPoster_path())) {
+					log.info("변경되지 않아 삭제하지 않음");
+				} else {
+					
+					origin_name = movie.getPoster_path();
+					check = new File(SAVE_PATH[num] + origin_name);
+					del(check, origin_name);
+				}
 				break;
 			case 1:
-				origin_name = movie.getTeaser_path();
-				check = new File(SAVE_PATH[num] + origin_name);
-				del(check, origin_name);
+				if (file.getOriginalFilename().equals(movie.getTeaser_path())) {
+					log.info("변경되지 않아 삭제하지 않음");
+				} else {
+					
+					origin_name = movie.getTeaser_path();
+					check = new File(SAVE_PATH[num] + origin_name);
+					del(check, origin_name);
+				}
 				break;
 			case 2:
-				origin_name = movie.getVideo_path();
-				check = new File(SAVE_PATH[num] + origin_name);
-				del(check, origin_name);
+				if (file.getOriginalFilename().equals(movie.getVideo_path())) {
+					log.info("변경되지 않아 삭제하지 않음");
+				} else {
+					
+					origin_name = movie.getVideo_path();
+					check = new File(SAVE_PATH[num] + origin_name);
+					del(check, origin_name);
+				}
 				break;
 			}
 			
-		} else {
-
-			origin_name = file.getOriginalFilename();
-			check = new File(SAVE_PATH[num] + origin_name);
-			del(check, origin_name);
-		}
+		} 
+//		else {
+//
+//			origin_name = file.getOriginalFilename();
+//			check = new File(SAVE_PATH[num] + origin_name);
+//			del(check, origin_name);
+//		}
 
 		return true;
 	}
@@ -261,7 +280,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 			}
 
 		} else {
-			log.warn(origin_name + " - File not Found");
+			log.warn(origin_name + " - File not Found 삭제 못함");
 		}
 	}
 	

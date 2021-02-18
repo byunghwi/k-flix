@@ -54,12 +54,12 @@ public class MovieController {
 	
 	LocalDate max_day = LocalDate.now();
 	
-	// http://localhost:8081/kflix/movie/management
+	// http://localhost:8081/kflix/movie/movieindex
 
 	/*
 	 * 영화 관리 페이지
 	 */
-	@GetMapping("management")
+	@GetMapping("movieindex")
 	public String movieMain(Model model, PageNation pagenation) {
 		
 		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED_CODE));
@@ -99,6 +99,7 @@ public class MovieController {
 	public String addMovie(Model model, Movie movie, 
 				MultipartFile poster, MultipartFile teaser, MultipartFile video) {
 		
+		log.info("======== add Controller ========");
 		String msg = "파일 업로드에 실패하였습니다. 다시 한번 확인해주세요";
 		//날짜 체크 , 파일 유효성 체크
 		if(mv_service.checkDate(movie) 
@@ -152,11 +153,13 @@ public class MovieController {
 	public String update(Model model, Movie movie,
 						MultipartFile poster, MultipartFile teaser, MultipartFile video) {
 	
+		log.info("======== update Controller ========");
 		String msg = "수정에 실패하였습니다. 다시 한번 확인해주세요";
 		// 날짜 체크
 		if (mv_service.checkDate(movie)
 				&& upload_service.checkOverLaps(poster, teaser, video, movie)) {
 			
+			// 기존 파일 삭제
 			upload_service.fileDelete(poster, teaser, video, movie);
 
 			upload_service.setPathNames(poster, teaser, video, movie);
@@ -167,7 +170,6 @@ public class MovieController {
 			int db_result = mv_service.updateMovie(movie);
 			
 			if (db_result > 0 && upload_result) {
-				// 기존 파일 삭제
 				
 				msg = "수정 되었습니다.";				
 			} else {

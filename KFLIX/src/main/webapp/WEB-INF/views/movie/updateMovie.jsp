@@ -54,17 +54,20 @@
 	  
 개봉일 : <input type="date" name="movie_release" max="${today }" value="${release_date}"/> <br />
 <input type="hidden" name="reg_date" value="${today }" />
+ <input type="hidden" name="poster_path" value="${movie.poster_path }">
+<input type="hidden" name="teaser_path" value="${movie.teaser_path }">
+<input type="hidden" name="video_path" value="${movie.video_path }"/>
 
 <div id="poster_div">
-포스터 : <input type="text" name="poster_path" value="${movie.poster_path }"><button id="poster_btn" onclick="posterBtn();">변경</button>
+포스터 : ${movie.poster_path }<button id="poster_btn" onclick="posterBtn();">변경</button>
 </div>
 
 <div id="teaser_div">
-티 저 : <input type="text" name="teaser_path" value="${movie.teaser_path }"><button id="teaser_btn" onclick="teaserBtn();">변경</button>
+티 저 : ${movie.teaser_path } <button id="teaser_btn" onclick="teaserBtn();">변경</button>
 </div>
 
 <div id="video_div">
-비디오 : <input type="text" name="video_path" value="${movie.video_path }"/><button id="video_btn" onclick="videoBtn();">변경</button>
+비디오 : ${movie.video_path } <button id="video_btn" onclick="videoBtn();">변경</button>
 </div>
 
 <input type="submit" value="등록" />
