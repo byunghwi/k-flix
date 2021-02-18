@@ -7,5 +7,7 @@ import com.kflix.actor.domain.Actor;
 public interface ActorService {
 	
 	public List<Actor> selectAllActorList();
+	
+	public String getActorName(int actor_id);
 
 }

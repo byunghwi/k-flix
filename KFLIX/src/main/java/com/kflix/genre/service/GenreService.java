@@ -18,8 +18,7 @@ public interface GenreService {
 	
 	public List<Genre> findGenreByName(String genre_name, char status);
 	
+	public String getGenreName(int genre_id);
 	
-	
-	public String selectGenereName(int genre_id_num, int movie_id);
 	
 }

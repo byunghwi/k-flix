@@ -2,6 +2,8 @@ package com.kflix.movie.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kflix.movie.domain.Movie;
 import com.kflix.util.pagenation.domain.PageNation;
 
@@ -31,4 +33,12 @@ public interface MovieService {
 	 * 날짜체크
 	 */
 	boolean checkDate(Movie movie);
+	
+	// 검색
+	public List<Movie> findMovieByTitle(String movie_title, char status);
+	
+	// 검색
+	public List<Movie> findMovieByRegDate(String reg_date, char status);
+	
+	
 }

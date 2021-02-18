@@ -8,4 +8,7 @@
 		SELECT * FROM director
 	</select>
 
+	<select id="getNameById" resultType="string">
+		SELECT director_name FROM director WHERE director_id = #{director_id}
+	</select>
 </mapper>

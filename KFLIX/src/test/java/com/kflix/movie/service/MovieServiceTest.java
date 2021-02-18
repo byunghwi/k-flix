@@ -95,10 +95,11 @@ public class MovieServiceTest {
 	
 	
 	@Test
-	public void testing() {
-
-		UUID uid = UUID.randomUUID();
-		
-		log.info(uid);
+	@Ignore
+	public void testFindMovie() {
+		assertNotNull(mv_service.findMovieByTitle("kG", 'Y'));
+		log.info(mv_service.findMovieByTitle("KG", 'Y'));
 	}
+	
+
 }

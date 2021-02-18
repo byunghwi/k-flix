@@ -28,9 +28,6 @@ public interface GenreMapper {
 			@Param("status") char status
 		);
 	
-	/*
-	 *  재검토
-	 */
-	String getGenreName(@Param("genre_id_num") int genre_id_num,
-						@Param("movie_id") int movie_id);
+	
+	String getNameById(int genre_id);
 }

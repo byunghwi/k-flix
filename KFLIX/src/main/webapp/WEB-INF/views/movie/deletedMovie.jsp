@@ -57,6 +57,7 @@
 				<td>${movie.movie_id }</td>
 				<td><img alt="사진" src="${movie.poster_path }"/></td>
 				<td>${movie.movie_title }</td>
+				<td>${movie.director_name }</td>
 				<td>${movie.genre_id1 } / ${movie.genre_id2 }</td>
 				<td>${movie.play_time }분</td>
 				<td><fmt:formatDate value="${movie.reg_date }" pattern="yyyy-MM-dd"/></td>

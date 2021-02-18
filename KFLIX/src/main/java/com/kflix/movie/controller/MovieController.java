@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -224,5 +225,24 @@ public class MovieController {
 		
 		return "redirect:/movie/deletedMovie";
 	}
+	
+	
+	@PostMapping("findBytitle")
+	public String findByTitle(Model model, String searching_index, String searching_word) {
+		List<Movie> list = mv_service.findMovieByTitle(searching_word, ENABLED);
+
+		if(searching_index.equals("director_id")) {
+		
+		} else if(searching_index.equals("genre_id")) {
+			
+		} else if(searching_index.equals("reg_date")) {
+			list = mv_service.findMovieByRegDate(searching_word, ENABLED);
+		}
+		
+		model.addAttribute("movie", list); 
+		return "movie/movieindex";
+	}
+	
+	
 }
 

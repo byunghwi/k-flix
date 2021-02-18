@@ -19,4 +19,9 @@ public class ActorServiceImpl implements ActorService{
 		return at_mapper.getAllActorList();
 	}
 
+	@Override
+	public String getActorName(int actor_id) {
+		return at_mapper.getNameById(actor_id);
+	}
+
 }

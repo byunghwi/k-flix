@@ -4,10 +4,9 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import lombok.Data;
-
 
 @Data
 @Component
@@ -44,5 +43,13 @@ public class Movie {
 		this.teaser_path = teaser_path.substring(teaser_path.lastIndexOf('/') + 1);
 		this.video_path = video_path.substring(video_path.lastIndexOf('/') + 1);
 	}
+
+	private String director_name;
+	private String actor_name1;
+	private String actor_name2;
+	private String actor_name3;
+	private String genre_name1;
+	private String genre_name2;
+
 	
 }

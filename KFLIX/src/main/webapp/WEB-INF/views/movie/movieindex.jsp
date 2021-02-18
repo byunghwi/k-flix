@@ -35,20 +35,27 @@
 </div>
 
 <div class="d-flex justify-content-end">
+<form action="./findBytitle" method="post">
 	<div class="input-group mb-3 justify-content-end search_label"> 
 	<div class="search_select">
-		<select class="form-select" id="search_cols">
+		<select class="form-select" id="search_cols" name="searching_index">
 		    <option value="movie_title" selected>제목</option>
-		    <option value="director_id">감독</option>
-		    <option value="genre_id">장르</option>
+		    <option value="director_name">감독</option>
+		    <option value="genre_name">장르</option>
 		    <option value="reg_date">등록일</option>
 		  </select>
 	</div>
-		<input type="text" name="" id="search_val" class="form-control" aria-describedby="search">
+		<input type="text" name="searching_word" id="search_val" class="form-control" aria-describedby="search">
   		<button class="btn btn-outline-secondary" type="submit" id="search"><i class="fas fa-search"></i></button>
 	</div>
+</form>
+
+<div class="ps-2">
+	<a class="btn btn-outline-secondary" href="./movieindex">ALL</a>
 </div>
 </div>
+</div>
+
 
 <section style="padding-top: 20px;">
 	<table class="table table-striped text-center align-middle">
@@ -67,10 +74,10 @@
 				<td>${movie.movie_id }</td>
 				<td><img alt="사진" src="${movie.poster_path }"/></td>
 				<td>${movie.movie_title }</td>
-				<td>${movie.director_id }</td>
-				<td>${movie.genre_id1 } / ${movie.genre_id2 }</td>
+				<td>${movie.director_name }</td>
+				<td>${movie.genre_name1 } / ${movie.genre_name2 }</td>
 				<td>${movie.play_time }분</td>
-				<td><fmt:formatDate value="${movie.reg_date }" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
 				<td>
 					<a href="./updatepage/${movie.movie_id }" class="btn btn-primary">수정</a>
 					<button type="button" class="btn btn-danger" data-bs-toggle="modal" 
@@ -133,12 +140,11 @@ $('#search').click(function(){
 
 $('#search_cols').change(function(){
 	if ($('#search_cols').val() == 'reg_date'){
-		 $('#search_val').attr("placeholder", "예) 2000-01");
+		 $('#search_val').attr("placeholder", "예) yy/mm/dd, yy/mm");
 	} else {
 		$('#search_val').removeAttr("placeholder");
 	}
 })
-
 
 </script>
 </body>

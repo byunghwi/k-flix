@@ -20,11 +20,6 @@ public class GenreServiceImpl implements GenreService {
 	}
 
 	@Override
-	public String selectGenereName(int genre_id_num, int movie_id) {
-		return gr_mapper.getGenreName(genre_id_num, movie_id);
-	}
-
-	@Override
 	public int addGenre(String genre_name) {
 		return gr_mapper.insertGenre(genre_name);
 	}
@@ -42,6 +37,11 @@ public class GenreServiceImpl implements GenreService {
 	@Override
 	public List<Genre> findGenreByName(String genre_name, char status) {
 		return gr_mapper.getGenreByName(genre_name, status);
+	}
+
+	@Override
+	public String getGenreName(int genre_id) {
+		return gr_mapper.getNameById(genre_id);
 	}
 
 }

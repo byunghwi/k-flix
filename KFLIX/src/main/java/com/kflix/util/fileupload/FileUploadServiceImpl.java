@@ -34,14 +34,13 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 	Tika tika = new Tika();
 
-	String class_path = this.getClass().getResource("/").getPath();
-	String local_path = class_path.substring(1, class_path.indexOf("SPRING/"));
+	private static final String LOCAL_PATH = "C:/Users/Ahos/Desktop/local_workSpace/";
 
 	// 저장할 주소
-	String[] SAVE_PATH = {
-			local_path + "k-flix/KFLIX/src/main/webapp/resources/imgs/movie/poster/",
-			local_path + "k-flix/KFLIX/src/main/webapp/resources/videos/teaser/",
-			local_path + "k-flix/KFLIX/src/main/webapp/resources/videos/full/"
+	private static final String[] SAVE_PATH = {
+			LOCAL_PATH + "k-flix/KFLIX/src/main/webapp/resources/imgs/movie/poster/",
+			LOCAL_PATH + "k-flix/KFLIX/src/main/webapp/resources/videos/teaser/",
+			LOCAL_PATH + "k-flix/KFLIX/src/main/webapp/resources/videos/full/"
 	};
 
 

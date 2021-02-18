@@ -8,4 +8,6 @@ public interface ActorMapper {
 
 	List<Actor> getAllActorList();
 	
+	String getNameById(int actor_id);
+	
 }
