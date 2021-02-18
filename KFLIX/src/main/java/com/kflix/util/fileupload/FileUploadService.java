@@ -8,9 +8,14 @@ public interface FileUploadService {
 
 	public boolean upload(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie);
 	
+	public void setPathNames(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie);
+	
 	public boolean checkExtAll(MultipartFile poster, MultipartFile teaser, MultipartFile video);
 	
 	public boolean checkExt(MultipartFile file);
 	
-	public void setPathNames(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie);
+	public boolean checkOverLaps(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie);
+	
+	public boolean fileDelete(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie);
+	
 }
