@@ -103,7 +103,7 @@ public class MovieController {
 		//날짜 체크 , 파일 유효성 체크
 		if(mv_service.checkDate(movie) 
 				&& upload_service.checkExtAll(poster, teaser, video)
-				&& upload_service.checkOverLaps(poster, teaser, video)) {
+				&& upload_service.checkOverLaps(poster, teaser, video, movie)) {
 
 			upload_service.setPathNames(poster, teaser, video, movie);
 			
@@ -151,47 +151,24 @@ public class MovieController {
 	@PostMapping("update")
 	public String update(Model model, Movie movie,
 						MultipartFile poster, MultipartFile teaser, MultipartFile video) {
-		
-//		String msg = "파일 업로드에 실패하였습니다. 다시 한번 확인해주세요";
-//		//날짜 체크 , 파일 유효성 체크
-//		if(mv_service.checkDate(movie) 
-//				&& upload_service.checkExtAll(poster, teaser, video)
-//				&& upload_service.checkOverLaps(poster, teaser, video)) {
-//
-//			upload_service.setPathNames(poster, teaser, video, movie);
-//			
-//			// 파일 업로드
-//			boolean upload_result = upload_service.upload(poster, teaser, video, movie);
-//
-//			// DB 처리
-//			int db_result = mv_service.insertNewMovie(movie);
-//
-//			if (db_result > 0 && upload_result) {
-//				msg = "등록하였습니다!";
-//				
-//			} else {
-//				upload_service.fileDelete(poster, teaser, video);
-//				
-//			}
-//		}
-//		
-//		model.addAttribute("msg", msg);
-//		return "movie/result";
-		
-		String msg = "파일 업로드에 실패하였습니다. 다시 한번 확인해주세요";
+	
+		String msg = "수정에 실패하였습니다. 다시 한번 확인해주세요";
 		// 날짜 체크
-		if (mv_service.checkDate(movie)) {
+		if (mv_service.checkDate(movie)
+				&& upload_service.checkOverLaps(poster, teaser, video, movie)) {
 			
 			upload_service.setPathNames(poster, teaser, video, movie);
-			int result = mv_service.updateMovie(movie);
 			
-			if (result > 0) {
-				// 파일 업로드
-				upload_service.upload(poster, teaser, video, movie);
+			// 파일 업로드
+			boolean upload_result = upload_service.upload(poster, teaser, video, movie);
+			
+			int db_result = mv_service.updateMovie(movie);
+			
+			if (db_result > 0 && upload_result) {
 				msg = "수정 되었습니다.";
 				
 			} else {
-				msg = "수정에 실패하였습니다.";
+//				upload_service.fileDelete(poster, teaser, video);
 			}
 		}
 		model.addAttribute("msg", msg);

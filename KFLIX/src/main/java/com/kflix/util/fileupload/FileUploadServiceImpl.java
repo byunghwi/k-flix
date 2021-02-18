@@ -120,8 +120,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 		return false;
 	}
 
-	
-	private boolean checkOverlap(MultipartFile file, int i) {
+
+	private boolean checkOverlap(MultipartFile file, int i, Movie movie) {
+
 		File check_file = new File(SAVE_PATH[i]);
 
 		if (!check_file.isDirectory()) {
@@ -135,20 +136,27 @@ public class FileUploadServiceImpl implements FileUploadService {
 			}
 
 		}
-		
-		String origin_name = file.getOriginalFilename();
-		
-		check_file = new File(SAVE_PATH[i] + origin_name);
-		
-		// 파일 존재 여부 중복처리
-		if (!check_file.exists()) {
-			log.info(origin_name + " - 중복 되지 않음");
+
+		if(file == null) {
+
 			return true;
+		} else {
 
-		}  else {
+			String origin_name = file.getOriginalFilename();
 
-			log.info(origin_name + " - 중복 파일");
-			
+
+			check_file = new File(SAVE_PATH[i] + origin_name);
+
+			// 파일 존재 여부 중복처리
+			if (!check_file.exists()) {
+				log.info(origin_name + " - 중복 되지 않음");
+				return true;
+
+			}  else {
+
+				log.info(origin_name + " - 중복 파일");
+
+			}
 		}
 		return false;
 	}
@@ -210,31 +218,35 @@ public class FileUploadServiceImpl implements FileUploadService {
 	}
 
 	private boolean delete(MultipartFile file, int num) {
+		if (file == null) return false;
+		// 업데이트용 원래 삭제 지우기 로직짜기
+		
+		
 		String origin_name = file.getOriginalFilename();
 		File check = new File(SAVE_PATH[num] + origin_name);
-		
+
 		if (check.exists()) {
-			
+
 			if(check.delete()) {
 				log.info(origin_name + "  - 삭제 성공");
 			} else {
 				log.info(origin_name + " - 삭제 실패");
 			}
-			
+
 		} else {
 			log.warn(origin_name + " - File not Found");
 		}
-		
-		
+
+
 		return true;
 	}
-	
+
 
 	@Override
 	public boolean upload(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie) {
 
 		try {
-
+			log.info("======== 파일 업로드 ========");
 			writeFile(poster, POSTER);
 			writeFile(teaser, TEASER);
 			writeFile(video, VIDEO);
@@ -257,11 +269,12 @@ public class FileUploadServiceImpl implements FileUploadService {
 	}
 
 	@Override
-	public boolean checkOverLaps(MultipartFile poster, MultipartFile teaser, MultipartFile video) {
-		boolean poster_ck = checkOverlap(poster, POSTER);
-		boolean teaser_ck = checkOverlap(teaser, TEASER);
-		boolean video_ck = checkOverlap(video, VIDEO);
-		
+	public boolean checkOverLaps(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie) {
+		log.info("======= 파일명 중복 체크 ========");
+		boolean poster_ck = checkOverlap(poster, POSTER, movie);
+		boolean teaser_ck = checkOverlap(teaser, TEASER, movie);
+		boolean video_ck = checkOverlap(video, VIDEO, movie);
+
 		return poster_ck && teaser_ck && video_ck;
 	}
 
@@ -272,7 +285,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 		delete(poster, POSTER);
 		delete(teaser, TEASER);
 		delete(video, VIDEO);
-		
+
 		return true;
 	}
 

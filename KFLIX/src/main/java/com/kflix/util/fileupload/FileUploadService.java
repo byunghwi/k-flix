@@ -14,7 +14,7 @@ public interface FileUploadService {
 	
 	public boolean checkExt(MultipartFile file);
 	
-	public boolean checkOverLaps(MultipartFile poster, MultipartFile teaser, MultipartFile video);
+	public boolean checkOverLaps(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie);
 	
 	public boolean fileDelete(MultipartFile poster, MultipartFile teaser, MultipartFile video);
 	
