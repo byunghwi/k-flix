@@ -49,8 +49,8 @@ public class MovieController {
 	@Inject
 	Movie movie;
 	
-	static final char ENABLED_CODE = 'Y';
-	static final char DISABLE_CODE = 'N';
+	static final char ENABLED = 'Y';
+	static final char DISABLED = 'N';
 	
 	LocalDate max_day = LocalDate.now();
 	
@@ -62,9 +62,9 @@ public class MovieController {
 	@GetMapping("movieindex")
 	public String movieMain(Model model, PageNation pagenation) {
 		
-		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED_CODE));
+		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED));
 		
-		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED_CODE)));
+		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED)));
 		
 		return "movie/movieindex";
 	}
@@ -88,7 +88,7 @@ public class MovieController {
 	public String add(Model model) {
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
-		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED_CODE));
+		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED));
 		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		
 		return "movie/addMovie";
@@ -144,7 +144,7 @@ public class MovieController {
 		model.addAttribute("release_date", sdf.format(movie.getMovie_release()));		
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
-		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED_CODE));
+		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED));
 		
 		return "movie/updateMovie";
 	}
@@ -183,26 +183,29 @@ public class MovieController {
 	
 	
 	/*
-	 *  삭제 페이지 / status = DISABLE_CODE
+	 *  삭제 페이지 / status = DISABLED
 	 */
 	@PostMapping("delete")
 	public String delete(Model model, int movie_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(movie_id, DISABLE_CODE);
+		int result = mv_service.deleteOrRecoveryMovieById(movie_id, DISABLED);
 		
 		String msg = result > 0 ? "삭제 되었습니다." : "삭제에 실패하였습니다.";
 		
 		model.addAttribute("msg", msg);
 		
-		return "movie/result";
+		return "redirect:/movie/movieindex";
 	}
 	
 	
 	/*
 	 * 삭제된 목록
 	 */
-	@GetMapping("deletedList")
-	public String deletedList(Model model) {
-		model.addAttribute("movie", mv_service.selectAllMovieVeiw(DISABLE_CODE));
+	@GetMapping("deletedMovie")
+	public String deletedList(Model model, PageNation pagenation) {
+
+		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, DISABLED));
+		
+		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(DISABLED)));
 		
 		return "movie/deletedMovie";
 	}
@@ -211,15 +214,15 @@ public class MovieController {
 	/*
 	 * 복구
 	 */
-	@GetMapping("recovery/{id}")
-	public String recoveryMovie(Model model, @PathVariable("id") int moive_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(moive_id, ENABLED_CODE);
+	@PostMapping("recovery")
+	public String recoveryMovie(Model model, int movie_id) {
+		int result = mv_service.deleteOrRecoveryMovieById(movie_id, ENABLED);
 		
 		String msg = result > 0 ? "복구 되었습니다." : "복구에 실패하였습니다.";
 		
 		model.addAttribute("msg", msg);
 		
-		return "movie/result";
+		return "redirect:/movie/deletedMovie";
 	}
 }
 

@@ -17,8 +17,8 @@
              <a class="page-link" href="${nextHref}" tabindex="-1" aria-disabled="true">&laquo;</a>
           </li>
           <c:forEach var="i" begin="${page.startPage }" end="${page.endPage }">                                
-                  <li class="page-item<c:if test="${page.currPage eq i }"> active</c:if>" aria-current="page">
-                        <a class="page-link" href=".<%=path %>?page=${i }&amount=${page.amount}">${i }</a>
+              <li class="page-item<c:if test="${page.currPage eq i }"> active</c:if>" aria-current="page">
+                 <c:if test="${i > 0}" ><a class="page-link" href=".<%=path %>?page=${i }&amount=${page.amount}">${i }</a></c:if>
               </li>                                
           </c:forEach>
           <li class="page-item<c:if test="${not page.next || page.endPage eq page.lastPage}"> disabled</c:if>">
