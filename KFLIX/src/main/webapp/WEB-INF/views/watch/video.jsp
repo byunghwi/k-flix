@@ -22,11 +22,20 @@
 
 </head>
 <body>
-<div onclick="sound()" id="videocon">
-	<button onclick="savecurrentTime()">
+	<div onclick="sound()" id="videocon">
+
+		<!-- <button onclick="savecurrentTime()">
 	<i style="display: hidden;" id="back" class="fas fa-arrow-left color-w relative"> <span style="font-size: 15px;"> 뒤로가기 </span> </i>
-	</button>
-	
+	</button> -->
+
+		<a onclick="savecurrentTime()" href="<%=application.getContextPath() %>"> <i
+			style="display: hidden;" id="back"
+			class="fas fa-arrow-left color-w relative"> <span
+				style="font-size: 15px;"> 뒤로가기 </span>
+		</i>
+		</a>
+		
+<!-- 뒤로가기 눌렸을 때 바로 디비로 수정된 값으로 메인화면이 표시 되어야하는데 에러가 발생 -->
 		<div id="videobar" style="display: hidden;">
 			<div>
 				<progress id='progressbar' class="progressbar" max='100' value='5'></progress>
@@ -41,22 +50,42 @@
 				<!-- <i onclick="volshow()" id="volumeicon" class="fas fa-volume-up color-w"></i> -->
 				<input type="range" class="form-range" min="0" max="1" step="0.1"
 					id="volrange">
-
 			</div>
+			<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
 			<i class="fas fa-step-forward color-w"></i> <i
 				class="fas fa-layer-group color-w"></i> <i
 				onclick="openFullscreen()" class="fas fa-expand color-w"></i>
 			<div style="display: inline-block;" id="playtime" class="color-w"></div>
 
 		</div>
-		
-	<video id="video" muted autoplay loop
-		poster="/kflix/resources/imgs/watch/iu.jpg">
-		<source src="${watch.video_path }" type="video/mp4">
-	</video>
+
+		<video id="video" muted autoplay loop
+			poster="/kflix/resources/imgs/watch/iu.jpg">
+			<source src="${movie.video_path }" type="video/mp4">
+		</video>
 
 	</div>
 
 	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
+
+	<script>
+		console.log("${movie.movie_id}");
+		function savecurrentTime() {
+			var data = {
+				watch_id : "${movie.movie_id}",
+				watch_type : "WATCHING",
+				movie_id : "${movie.movie_id}",
+				email : 'nn@naver.com',
+				watch_date : Date.now(),
+				view_point : video.currentTime
+			}
+
+			var xhttp = new XMLHttpRequest();
+
+			xhttp.open('Post', '/kflix/browse', true);
+			xhttp.setRequestHeader('content-type', 'application/json');
+			xhttp.send(JSON.stringify(data));
+		}
+	</script>
 </body>
 </html>

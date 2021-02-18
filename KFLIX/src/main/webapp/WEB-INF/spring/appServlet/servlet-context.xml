@@ -33,10 +33,6 @@
 	<!-- 로그인 인터셉터 -->
 	<beans:bean id="loginInterceptor" class="com.kflix.member.interceptoer.LoginInterceptor">
 	</beans:bean>
-	
-	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
-	<beans:bean id="naverLoginBO" class="com.kflix.login.NaverLoginVO" />
-
 	 
 	<interceptors>
 		<interceptor>
@@ -45,7 +41,7 @@
 		</interceptor>
 		
 		<interceptor>
-			<!-- <mapping path="/browse"/> -->
+			<mapping path="/browse"/>
 			<mapping path="/movie/management"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>

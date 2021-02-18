@@ -48,7 +48,7 @@ public class MainController {
 	}
 
 	// 네이버 로그인 성공시 callback호출 메소드
-	@RequestMapping(value = "/browse", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException, ParseException, org.json.simple.parser.ParseException {
 		

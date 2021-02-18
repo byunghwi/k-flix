@@ -6,7 +6,11 @@ var volrange = document.getElementById("volrange");
 var back = document.getElementById('back');
 var videocon = document.getElementById('videocon');
 var videobar = document.getElementById('videobar');
+/*for(a of document.getElementsByTagName('div')){
+        //     console.log(a instanceof );
+       }
 
+document.getElementsByTagName('div').length*/
 videocon.addEventListener("mouseover", function() {
 	back.style.display = 'block';
 	videobar.style.display = 'block';
@@ -64,6 +68,9 @@ video.addEventListener("timeupdate", PlayTime, false);
 video.addEventListener("ended", event, false);
 
 function PlayTime(e) {
+	if(Math.floor(video.currentTime)==1){
+		sound();
+	}
 	document.getElementById("playtime").innerHTML =
 		"재생 상태 : " + Math.floor(video.currentTime) + "/" + Math.floor(video.duration);
 }
@@ -85,35 +92,12 @@ video.addEventListener(
 	},
 	false
 );
+console.log("${movie.movie_id}");
 
-function savecurrentTime() {
+/*function savecurrentTime() {
 var form = document.createElement("form");
             form.setAttribute("method", "post");
             form.setAttribute("action", "/kflix/browse/" + video.currentTime);
             document.body.appendChild(form);
             form.submit();
-}
-
-/*function savecurrentTime() {
-	var data = {
-			currentTime:  Math.floor(video.currentTime)
-	}
-	
-	var xhttp = new XMLHttpRequest();
-	
-	xhttp.onreadystatechange = function() {
-		if (xhttp.readyState == XMLHttpRequest.DONE) {
-			if (xhttp.status == 200) {
-				// OK
-				alert('delete ok');
-			} else {
-				// ERROR
-				alert('delete error');
-			}
-		} 
-	}
-	
-	xhttp.open('Post', '/kflix/browse', true);
-	xhttp.setRequestHeader('content-type', 'application/json');
-	xhttp.send(JSON.stringify(data));
 }*/
