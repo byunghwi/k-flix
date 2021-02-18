@@ -54,15 +54,15 @@
 	<div id="list">
 		<c:if test="${not empty watch}">
 			<div class="list_title">"${email }"님의 이어보기</div>
-			<div id="carouselExampleIndicators" class="carousel slide padd"
+			<div id="carouselExample1" class="carousel slide padd"
 				data-bs-ride="carousel">
 				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carouselExampleIndicators"
+					<button type="button" data-bs-target="#carouselExample1"
 						data-bs-slide-to="0" class="active" aria-current="true"
 						aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carouselExampleIndicators"
+					<button type="button" data-bs-target="#carouselExample1"
 						data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carouselExampleIndicators"
+					<button type="button" data-bs-target="#carouselExample1"
 						data-bs-slide-to="2" aria-label="Slide 3"></button>
 				</div>
 				<div class="carousel-inner">
@@ -100,12 +100,12 @@
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button"
-					data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+					data-bs-target="#carouselExample1" data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Previous</span>
 				</button>
 				<button class="carousel-control-next" type="button"
-					data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+					data-bs-target="#carouselExample1" data-bs-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Next</span>
 				</button>
@@ -113,15 +113,15 @@
 		</c:if>
 
 		<div class="list_title">모든 영화</div>
-		<div id="carouselExampleIndicators" class="carousel slide padd"
+		<div id="carouselExample2" class="carousel slide padd"
 			data-bs-ride="carousel">
 			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#carouselExampleIndicators"
+				<button type="button" data-bs-target="#carouselExample2"
 					data-bs-slide-to="0" class="active" aria-current="true"
 					aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
+				<button type="button" data-bs-target="#carouselExample2"
 					data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#carouselExampleIndicators"
+				<button type="button" data-bs-target="#carouselExample2"
 					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
@@ -153,12 +153,12 @@
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				data-bs-target="#carouselExample2" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Previous</span>
 			</button>
 			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				data-bs-target="#carouselExample2" data-bs-slide="next">
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="visually-hidden">Next</span>
 			</button>
