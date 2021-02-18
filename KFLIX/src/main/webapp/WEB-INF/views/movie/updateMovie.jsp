@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,8 @@
 연령 : <input type="text" name="rating" value="${movie.rating }"/> <br /> 
 상영시간 : <input type="text" name="play_time" value="${movie.play_time }"/> <br />
 줄거리 
-<br /><textarea name="summary" id="" cols="30" rows="6">${movie.summary }</textarea> <br />
+<br /><textarea name="summary" id="" cols="30" rows="6">${movie.summary } 
+</textarea> <br />
 
 감독 : <select name="director_id">
 		  <c:forEach var="dt" items="${director }" varStatus="status">
@@ -50,13 +52,57 @@
 	  	<option>외국</option>
 	  </select> <br />
 	  
-개봉일 : <input type="text" name="movie_release" placeholder="yyyy.MM.dd" value="${movie.movie_release }"/> <br />
+개봉일 : <input type="date" name="movie_release" max="${today }" value="${release_date}"/> <br />
+<input type="hidden" name="reg_date" value="${today }" />
 
-포스터 : <input type="file" name="mpf" /> <br />
-티저 : <input type="file" name="mpf" /> <br />
-비디오 : <input type="file" name="mpf"  /> <br />
+<div id="poster_div">
+포스터 : <input type="text" name="poster_path" value="${movie.poster_path }"><button id="poster_btn" onclick="posterBtn();">변경</button>
+</div>
+
+<div id="teaser_div">
+티 저 : <input type="text" name="teaser_path" value="${movie.teaser_path }"><button id="teaser_btn" onclick="teaserBtn();">변경</button>
+</div>
+
+<div id="video_div">
+비디오 : <input type="text" name="video_path" value="${movie.video_path }"/><button id="video_btn" onclick="videoBtn();">변경</button>
+</div>
+
 <input type="submit" value="등록" />
 </form>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" 
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+		crossorigin="anonymous"></script>
+		
+<script src="/kflix/resources/js/movie/inputfile.js"></script>
+
+<script>
+function posterBtn() {
+	var poster_div = $("#poster_div");
+	
+	poster_div.html("");
+	poster_div.append('포스터 : <input type="file" name="poster" accept="image/png, image/jpeg, image/jpg" id="poster_text" onchange="posterCheck();" required/> <br />');
+	
+}
+
+function teaserBtn() {
+	var teaser_div = $("#teaser_div");
+	
+	teaser_div.html("");
+	teaser_div.append('티저 : <input type="file" name="teaser" accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" id="teaser_text" onchange="teaserCheck();" required/> <br />');
+	
+}
+
+function videoBtn() {
+	var video_div = $("#video_div");
+	
+	video_div.html("");
+	video_div.append('비디오 : <input type="file" name="video" accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" id="video_text" onchange="videoCheck();" required/> <br />');
+	
+}
+
+</script>
 
 </body>
 </html>

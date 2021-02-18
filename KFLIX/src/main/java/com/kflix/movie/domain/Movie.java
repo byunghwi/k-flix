@@ -38,11 +38,11 @@ public class Movie {
 	private int view_cnt;
 	private int movie_rank;
 	private String movie_status;
-	
-	public void changePaths(String[] path) {
-		this.poster_path = path[0];
-		this.teaser_path = path[1];
-		this.video_path = path[2];
-	}
 
+	public void getFileName(String poster_path, String teaser_path, String video_path) {
+		this.poster_path = poster_path.substring(poster_path.lastIndexOf('/') + 1);
+		this.teaser_path = teaser_path.substring(teaser_path.lastIndexOf('/') + 1);
+		this.video_path = video_path.substring(video_path.lastIndexOf('/') + 1);
+	}
+	
 }

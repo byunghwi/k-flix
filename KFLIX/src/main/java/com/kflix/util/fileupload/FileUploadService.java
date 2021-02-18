@@ -2,7 +2,15 @@ package com.kflix.util.fileupload;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kflix.movie.domain.Movie;
+
 public interface FileUploadService {
 
-	public String[] restore(MultipartFile[] file);
+	public boolean upload(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie);
+	
+	public boolean checkExtAll(MultipartFile poster, MultipartFile teaser, MultipartFile video);
+	
+	public boolean checkExt(MultipartFile file);
+	
+	public void setPathNames(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie);
 }
