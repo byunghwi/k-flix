@@ -13,6 +13,21 @@
 		resultType="com.kflix.watch.domain.MovieVO">
 		SELECT * FROM movie WHERE movie_id = #{movie_id }
 	</select>
+	
+	<select id="getAllwatch"
+		resultType="com.kflix.watch.domain.WatchVO">
+		SELECT * FROM watch
+	</select>
+
+	<select id="getSelectWatch"
+		resultType="com.kflix.watch.domain.WatchVO">
+		SELECT * FROM watch WHERE email = #{email }
+	</select>
+	
+	<select id="getSelectWatchUser"
+		resultType="com.kflix.watch.domain.WatchVO">
+		SELECT * FROM watch WHERE email = #{email } and movie_id = #{movie_id }
+	</select>
 
 	<insert id="createWatch">
 		INSERT INTO watch VALUES (
@@ -25,14 +40,16 @@
 		)
 	</insert>
 	
-	<select id="getAllwatch"
-		resultType="com.kflix.watch.domain.WatchVO">
-		SELECT * FROM watch
-	</select>
-
-	<select id="getSlectWatch"
-		resultType="com.kflix.watch.domain.WatchVO">
-		SELECT * FROM watch WHERE email = #{email }
-	</select>
+	<update id="updateWatch">
+      UPDATE watch
+      SET
+      view_point = #{view_point}
+      WHERE email = #{email} and movie_id = #{movie_id}
+   </update>
+   
+   <delete id="deleteWatch">
+      DELETE FROM watch 
+      WHERE email = #{email} and movie_id = #{movie_id}
+   </delete>
 
 </mapper>
