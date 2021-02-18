@@ -221,7 +221,7 @@
 					</div>
 					<div class="modal-footer">
 						<%
-							String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
+/* 						String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
 						String redirectURI = URLEncoder.encode("http://localhost:8081/kflix/browse", "UTF-8");
 						SecureRandom random = new SecureRandom();
 						String state = new BigInteger(130, random).toString();
@@ -229,11 +229,11 @@
 						apiURL += "&client_id=" + clientId;
 						apiURL += "&redirect_uri=" + redirectURI;
 						apiURL += "&state=" + state;
-						session.setAttribute("state", state);
+						session.setAttribute("state", state); */
 						%>
 						자동로그인 <input type="checkbox" name="userCookie">
 						<button type="submit" class="btn btn-primary">로그인</button>
-						<a href="<%=apiURL%>"><img height="50"
+						<a href="${url}"><img height="50"
 							src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
 					</div>
 				</form>

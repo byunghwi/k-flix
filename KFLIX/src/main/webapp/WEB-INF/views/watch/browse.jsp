@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.net.URLEncoder"%>
+<%-- <%@ page import="java.net.URLEncoder"%>
 <%@ page import="java.net.URL"%>
 <%@ page import="java.net.HttpURLConnection"%>
 <%@ page import="java.io.BufferedReader"%>
-<%@ page import="java.io.InputStreamReader"%>
+<%@ page import="java.io.InputStreamReader"%> --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
 </head>
 <body>
 	<%
-		String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
+/* 		String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
 	String clientSecret = "2sIilQ9ZED";//애플리케이션 클라이언트 시크릿값";
 	String code = request.getParameter("code");
 	String state = request.getParameter("state");
@@ -67,7 +67,7 @@
 		}
 	} catch (Exception e) {
 		System.out.println(e);
-	}
+	} */
 	%>
 	<div style="max-width: 100%" class="container flex-row nav-bar">
 		<img class="logo" alt="로고"
