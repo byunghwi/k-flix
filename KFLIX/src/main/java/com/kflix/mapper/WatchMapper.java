@@ -2,6 +2,8 @@ package com.kflix.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
 
@@ -15,6 +17,12 @@ public interface WatchMapper {
 	
 	public List<WatchVO> getAllwatch();
 	
-	public List<WatchVO> getSlectWatch(String Email);
+	public List<WatchVO> getSelectWatch(String email);
+	
+	public WatchVO getSelectWatchUser(@Param("email") String email, @Param("movie_id") int movie_id);
+	
+	public int updateWatch(WatchVO watch);
+	
+	public int deleteWatch(WatchVO watch);
 	
 }

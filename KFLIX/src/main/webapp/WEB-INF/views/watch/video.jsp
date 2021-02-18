@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +30,15 @@
 	<i style="display: hidden;" id="back" class="fas fa-arrow-left color-w relative"> <span style="font-size: 15px;"> 뒤로가기 </span> </i>
 	</button> -->
 
-		<a onclick="savecurrentTime()" href="<%=application.getContextPath() %>"> <i
+		<a onclick="savecurrentTime()"
+			href="<%=application.getContextPath()%>"> <i
 			style="display: hidden;" id="back"
 			class="fas fa-arrow-left color-w relative"> <span
 				style="font-size: 15px;"> 뒤로가기 </span>
 		</i>
 		</a>
-		
-<!-- 뒤로가기 눌렸을 때 바로 디비로 수정된 값으로 메인화면이 표시 되어야하는데 에러가 발생 -->
+
+		<!-- 뒤로가기 눌렸을 때 바로 디비로 수정된 값으로 메인화면이 표시 되어야하는데 에러가 발생 -->
 		<div id="videobar" style="display: hidden;">
 			<div>
 				<progress id='progressbar' class="progressbar" max='100' value='5'></progress>
@@ -71,13 +74,18 @@
 	<script>
 		console.log("${movie.movie_id}");
 		function savecurrentTime() {
+
+			<c:choose>
+			<c:when test="${empty watching }">
+			console.log("없음");
 			var data = {
 				watch_id : "${movie.movie_id}",
 				watch_type : "WATCHING",
 				movie_id : "${movie.movie_id}",
 				email : 'nn@naver.com',
 				watch_date : Date.now(),
-				view_point : video.currentTime
+				view_point : video.currentTime,
+				result : 'create'
 			}
 
 			var xhttp = new XMLHttpRequest();
@@ -85,6 +93,27 @@
 			xhttp.open('Post', '/kflix/browse', true);
 			xhttp.setRequestHeader('content-type', 'application/json');
 			xhttp.send(JSON.stringify(data));
+			</c:when>
+			<c:otherwise>
+			console.log("있음");
+			var data = {
+				watch_id : "${movie.movie_id}",
+				watch_type : "WATCHING",
+				movie_id : "${movie.movie_id}",
+				email : 'nn@naver.com',
+				watch_date : Date.now(),
+				view_point : video.currentTime,
+				result : 'update'
+			}
+
+			var xhttp = new XMLHttpRequest();
+
+			xhttp.open('Post', '/kflix/browse', true);
+			xhttp.setRequestHeader('content-type', 'application/json');
+			xhttp.send(JSON.stringify(data));
+			</c:otherwise>
+			</c:choose>
+
 		}
 	</script>
 </body>

@@ -37,8 +37,23 @@ public class WatchServiceImpl implements WatchService {
 	}
 
 	@Override
-	public List<WatchVO> getSlectWatch(String Email) {
-		return mapper.getSlectWatch(Email);
+	public List<WatchVO> getSelectWatch(String email) {
+		return mapper.getSelectWatch(email);
+	}
+
+	@Override
+	public int updateWatch(WatchVO watch) {
+		return mapper.updateWatch(watch);
+	}
+
+	@Override
+	public int deleteWatch(WatchVO watch) {
+		return mapper.deleteWatch(watch);
+	}
+
+	@Override
+	public WatchVO getSelectWatchUser(String email, int movie_id) {
+		return mapper.getSelectWatchUser(email, movie_id);
 	}
 
 }

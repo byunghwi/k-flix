@@ -17,4 +17,5 @@ public class WatchVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date watch_date;
 	private double view_point;
+	private String result;
 }
