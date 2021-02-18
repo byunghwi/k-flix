@@ -35,7 +35,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 	Tika tika = new Tika();
 
 	String class_path = this.getClass().getResource("/").getPath();
-	String local_path = class_path.substring(1, class_path.indexOf("SPRING/"));
+	String local_path = "";
 
 	// 저장할 주소
 	String[] SAVE_PATH = {
@@ -312,5 +312,4 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 		return true;
 	}
-
 }
