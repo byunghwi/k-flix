@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -96,6 +97,8 @@ public class MovieServiceTest {
 	@Test
 	public void testing() {
 
-
+		UUID uid = UUID.randomUUID();
+		
+		log.info(uid);
 	}
 }
