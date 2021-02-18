@@ -117,7 +117,7 @@ public class MovieController {
 				msg = "등록하였습니다!";
 				
 			} else {
-				upload_service.fileDelete(poster, teaser, video);
+				upload_service.fileDelete(poster, teaser, video, movie);
 				
 			}
 		}
@@ -157,6 +157,8 @@ public class MovieController {
 		if (mv_service.checkDate(movie)
 				&& upload_service.checkOverLaps(poster, teaser, video, movie)) {
 			
+			upload_service.fileDelete(poster, teaser, video, movie);
+
 			upload_service.setPathNames(poster, teaser, video, movie);
 			
 			// 파일 업로드
@@ -165,10 +167,11 @@ public class MovieController {
 			int db_result = mv_service.updateMovie(movie);
 			
 			if (db_result > 0 && upload_result) {
-				msg = "수정 되었습니다.";
+				// 기존 파일 삭제
 				
+				msg = "수정 되었습니다.";				
 			} else {
-//				upload_service.fileDelete(poster, teaser, video);
+
 			}
 		}
 		model.addAttribute("msg", msg);

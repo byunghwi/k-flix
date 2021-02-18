@@ -217,13 +217,40 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 	}
 
-	private boolean delete(MultipartFile file, int num) {
-		if (file == null) return false;
-		// 업데이트용 원래 삭제 지우기 로직짜기
-		
-		
-		String origin_name = file.getOriginalFilename();
-		File check = new File(SAVE_PATH[num] + origin_name);
+	private boolean delete(MultipartFile file, int num, Movie movie) {
+		String origin_name = "";
+		File check;
+
+		if (file == null) {
+			switch(num) {
+			case 0:
+				origin_name = movie.getPoster_path();
+				check = new File(SAVE_PATH[num] + origin_name);
+				del(check, origin_name);
+				break;
+			case 1:
+				origin_name = movie.getTeaser_path();
+				check = new File(SAVE_PATH[num] + origin_name);
+				del(check, origin_name);
+				break;
+			case 2:
+				origin_name = movie.getVideo_path();
+				check = new File(SAVE_PATH[num] + origin_name);
+				del(check, origin_name);
+				break;
+			}
+			
+		} else {
+
+			origin_name = file.getOriginalFilename();
+			check = new File(SAVE_PATH[num] + origin_name);
+			del(check, origin_name);
+		}
+
+		return true;
+	}
+
+	private void del(File check, String origin_name){
 
 		if (check.exists()) {
 
@@ -236,12 +263,8 @@ public class FileUploadServiceImpl implements FileUploadService {
 		} else {
 			log.warn(origin_name + " - File not Found");
 		}
-
-
-		return true;
 	}
-
-
+	
 	@Override
 	public boolean upload(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie) {
 
@@ -281,10 +304,11 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 
 	@Override
-	public boolean fileDelete(MultipartFile poster, MultipartFile teaser, MultipartFile video) {
-		delete(poster, POSTER);
-		delete(teaser, TEASER);
-		delete(video, VIDEO);
+	public boolean fileDelete(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie) {
+		log.info("======== 파일 삭제 처리 ========");
+		delete(poster, POSTER, movie);
+		delete(teaser, TEASER, movie);
+		delete(video, VIDEO, movie);
 
 		return true;
 	}
