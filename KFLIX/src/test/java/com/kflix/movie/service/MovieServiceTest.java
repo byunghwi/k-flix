@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -14,11 +15,14 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kflix.mapper.MovieMapper;
 import com.kflix.movie.domain.Movie;
+import com.kflix.util.fileupload.FileUploadServiceImpl;
 import com.kflix.util.pagenation.domain.PageNation;
 
 import lombok.Setter;
@@ -74,6 +78,7 @@ public class MovieServiceTest {
 	
 	
 	@Test
+	@Ignore
 	public void testCheckDate() {
 		Date today = new Date();
 		
@@ -85,5 +90,12 @@ public class MovieServiceTest {
 		movie.setMovie_release(compare_date.getTime());
 		
 		assertFalse(mv_service.checkDate(movie));
+	}
+	
+	
+	@Test
+	public void testing() {
+
+
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import com.kflix.mapper.MovieMapper;
@@ -23,7 +24,7 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	MovieMapper mv_mapper;
-	
+
 	/*
 	 * 활성화된 목록, 삭제된 목록
 	 */
@@ -31,7 +32,7 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> selectAllMovieVeiw(char status) {
 		return mv_mapper.getAllMovieView(status);
 	}
-	
+
 	/*
 	 * 상세
 	 */
@@ -39,15 +40,19 @@ public class MovieServiceImpl implements MovieService {
 	public Movie selectMovieById(int movie_id) {
 		return mv_mapper.getMovieById(movie_id);
 	}
-	
+
 	/*
 	 * 등록
 	 */
 	@Override
 	public int insertNewMovie(Movie movie) {
-		
-		
-		return mv_mapper.addMovie(movie);
+		try {
+			return mv_mapper.addMovie(movie);
+			
+		} catch (DuplicateKeyException dke) {
+			log.info("무결성 에러!");
+			return 0;
+		}
 	}
 
 	/*
@@ -63,10 +68,16 @@ public class MovieServiceImpl implements MovieService {
 	 */
 	@Override
 	public int updateMovie(Movie movie) {
-		return mv_mapper.updateMovie(movie);
+		try {
+			return mv_mapper.updateMovie(movie);
+
+		} catch (DuplicateKeyException dke) {
+			log.info("무결성 에러!");
+			return 0;
+		}
 	}
 
-	
+
 	/*
 	 * 영화의 개수
 	 */
@@ -79,8 +90,8 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> selectPageMovieView(PageNation pagenation, char status) {
 		return mv_mapper.getPageMovieView(pagenation.getPage(), pagenation.getAmount(), status);
 	}
-	
-	
+
+
 	@Override
 	public boolean checkDate(Movie movie) {
 		Date today= new Date();
@@ -92,17 +103,17 @@ public class MovieServiceImpl implements MovieService {
 		// 받은 날짜값
 		reg_date.setTime(movie.getReg_date());
 		release_date.setTime(movie.getMovie_release());
-		
+
 		tomorrow.setTime(today);
 		tomorrow.add(Calendar.DATE, +1);
-		
+
 		yesterday.setTime(today);
 		yesterday.add(Calendar.DATE, -1);
-		
+
 		// 등록일이 어제와 내일 사이면
 		boolean check_reg = tomorrow.getTime().after(reg_date.getTime()) 
-						&& yesterday.getTime().before(reg_date.getTime());
-		
+				&& yesterday.getTime().before(reg_date.getTime());
+
 		// 개봉일이 오늘 날짜 이후면 false
 		boolean check_release = today.after(release_date.getTime());
 
@@ -111,14 +122,14 @@ public class MovieServiceImpl implements MovieService {
 		log.info("등록: " + reg_date.getTime());
 		log.info("내일: " +tomorrow.getTime());
 		log.info("어제: " +yesterday.getTime());
-		
+
 		// 양쪽다 만족시 true
 		if(check_reg && check_release) {
-			
+
 			return true;
-			
+
 		} else {
-			
+
 			return false;
 		}
 	}

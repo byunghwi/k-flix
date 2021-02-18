@@ -50,11 +50,27 @@
 	  
 개봉일 : <input type="date" name="movie_release" max="${today }" required/> <br />
 <!-- 등록일 --><input type="hidden" name="reg_date" value="${today }" required/>
-포스터 : <input type="file" name="mpf" accept="image/*" required/> <br />
-티저 : <input type="file" name="mpf" accept="video/*" required/> <br />
-비디오 : <input type="file" name="mpf" accept="video/*" required/> <br />
+
+<div id="poster_div">
+포스터 : <input type="file" name="poster" accept="image/png, image/jpeg, image/jpg" id="poster_text" onchange="posterCheck();" required/> <br />
+</div>
+
+<div id="teaser_div">
+티저 : <input type="file" name="teaser" accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" id="teaser_text" onchange="teaserCheck();" required/> <br />
+</div>
+
+<div id="video_div">
+비디오 : <input type="file" name="video" accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" id="video_text" onchange="videoCheck();" required/> <br />
+</div>
+
 <input type="submit" value="등록" />
 </form>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" 
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+		crossorigin="anonymous"></script>	
+<script src="/kflix/resources/js/movie/inputfile.js"></script>
 
 </body>
 </html>

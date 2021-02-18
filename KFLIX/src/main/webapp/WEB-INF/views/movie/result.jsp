@@ -10,6 +10,6 @@
 
 <h1>${msg }</h1>
 
-<a href="/kflix/movie/">관리 페이지</a>
+<a href="/kflix/movie/management">관리 페이지</a>
 </body>
 </html>
