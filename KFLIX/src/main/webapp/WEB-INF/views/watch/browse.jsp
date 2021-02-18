@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- <%@ page import="java.net.URLEncoder"%>
+<%@ page import="java.net.URL"%>
+<%@ page import="java.net.HttpURLConnection"%>
+<%@ page import="java.io.BufferedReader"%>
+<%@ page import="java.io.InputStreamReader"%> --%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -22,6 +28,47 @@
 
 </head>
 <body>
+	<%
+/* 		String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
+	String clientSecret = "2sIilQ9ZED";//애플리케이션 클라이언트 시크릿값";
+	String code = request.getParameter("code");
+	String state = request.getParameter("state");
+	String redirectURI = URLEncoder.encode("http://localhost:8081/kflix/browse", "UTF-8");
+	String apiURL;
+	apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+	apiURL += "client_id=" + clientId;
+	apiURL += "&client_secret=" + clientSecret;
+	apiURL += "&redirect_uri=" + redirectURI;
+	apiURL += "&code=" + code;
+	apiURL += "&state=" + state;
+	String access_token = "";
+	String refresh_token = "";
+	System.out.println("apiURL=" + apiURL);
+	try {
+		URL url = new URL(apiURL);
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("GET");
+		int responseCode = con.getResponseCode();
+		BufferedReader br;
+		System.out.print("responseCode=" + responseCode);
+		if (responseCode == 200) { // 정상 호출
+			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		} else { // 에러 발생
+			br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		}
+		String inputLine;
+		StringBuffer res = new StringBuffer();
+		while ((inputLine = br.readLine()) != null) {
+			res.append(inputLine);
+		}
+		br.close();
+		if (responseCode == 200) {
+			out.println(res.toString());
+		}
+	} catch (Exception e) {
+		System.out.println(e);
+	} */
+	%>
 	<div style="max-width: 100%" class="container flex-row nav-bar">
 		<img class="logo" alt="로고"
 			src="/kflix/resources/imgs/watch/kflixlogo.png">
@@ -52,6 +99,7 @@
 	</div>
 
 	<div id="list">
+
 		<c:if test="${not empty watch}">
 			<div class="list_title">"${email }"님의 이어보기</div>
 			<div id="carouselExample1" class="carousel slide padd"
@@ -125,7 +173,27 @@
 					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
-				<div class="carousel-item active" data-bs-interval="999999999">
+				<div class="carousel-item active">
+					 <img id="img1" src="/kflix/resources/imgs/watch/runon1.png"
+						class="d-block dis" alt="..."> <img id="img2"
+						src="/kflix/resources/imgs/watch/test1.png" class="d-block dis"
+						alt="..."> <img id="img3"
+						src="/kflix/resources/imgs/watch/test2.png" class="d-block dis"
+						alt="..."> <img id="img4"
+						src="/kflix/resources/imgs/watch/test3.png" class="d-block dis"
+						alt="...">
+
+					<div class="carousel-item active" data-bs-interval="999999999">
+
+
+
+						<c:forEach items="${movie }" var="movie" varStatus="status">
+							<a
+								href="<%=application.getContextPath()%>/browse/watch/${movie.movie_id }">
+								<img id="img1" src="${movie.poster_path }" class="d-block dis"
+								alt="...">
+							</a>
+						</c:forEach>
 
 					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 						<a onclick="watchpoint()"
@@ -135,13 +203,19 @@
 						</a>
 					</c:forEach>
 
+
+
+						<%-- 
+=======
 					<%-- 
+>>>>>>> refs/heads/develop
 					<img id="img2" src="/kflix/resources/imgs/watch/test1.png"
 						class="d-block dis" alt="..."> <img id="img3"
 						src="/kflix/resources/imgs/watch/test2.png" class="d-block dis"
 						alt="..."> <img id="img4"
 						src="/kflix/resources/imgs/watch/test3.png" class="d-block dis"
 						alt="..."> --%>
+
 				</div>
 				<div class="carousel-item" data-bs-interval="999999999">
 					<img src="/kflix/resources/imgs/watch/runon1.png"
@@ -171,6 +245,37 @@
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
+					</div>
+
+					<div class="carousel-item">
+
+						<div class="carousel-item" data-bs-interval="999999999">
+
+							<img src="/kflix/resources/imgs/watch/runon1.png"
+								class="d-block dis" alt="...">
+						</div>
+
+						<div class="carousel-item">
+
+							<div class="carousel-item" data-bs-interval="999999999">
+
+								<img src="/kflix/resources/imgs/watch/runon1.png"
+									class="d-block dis" alt="...">
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button"
+							data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+				<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
 </body>
 </html>

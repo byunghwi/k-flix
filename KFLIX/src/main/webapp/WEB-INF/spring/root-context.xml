@@ -22,7 +22,7 @@
 		<property name="username" value="kflix"/>
 		<property name="password" value="12341234"/>
 	</bean>
-	
+		
 	<!-- Mybatis 연동 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
