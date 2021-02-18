@@ -28,12 +28,13 @@
 	<i style="display: hidden;" id="back" class="fas fa-arrow-left color-w relative"> <span style="font-size: 15px;"> 뒤로가기 </span> </i>
 	</button> -->
 
-		<button onclick="savecurrentTime()"> <i
+		<a onclick="savecurrentTime()" href="<%=application.getContextPath() %>"> <i
 			style="display: hidden;" id="back"
 			class="fas fa-arrow-left color-w relative"> <span
 				style="font-size: 15px;"> 뒤로가기 </span>
 		</i>
-		</button>
+		</a>
+		
 <!-- 뒤로가기 눌렸을 때 바로 디비로 수정된 값으로 메인화면이 표시 되어야하는데 에러가 발생 -->
 		<div id="videobar" style="display: hidden;">
 			<div>

@@ -30,7 +30,7 @@
 		SELECT * FROM watch
 	</select>
 
-	<select id="getwatch"
+	<select id="getSlectWatch"
 		resultType="com.kflix.watch.domain.WatchVO">
 		SELECT * FROM watch WHERE email = #{email }
 	</select>

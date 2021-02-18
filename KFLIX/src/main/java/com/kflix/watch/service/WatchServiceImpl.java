@@ -37,8 +37,8 @@ public class WatchServiceImpl implements WatchService {
 	}
 
 	@Override
-	public WatchVO getwatch(String Email) {
-		return mapper.getwatch(Email);
+	public List<WatchVO> getSlectWatch(String Email) {
+		return mapper.getSlectWatch(Email);
 	}
 
 }

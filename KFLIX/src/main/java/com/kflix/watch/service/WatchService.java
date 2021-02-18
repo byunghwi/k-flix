@@ -13,7 +13,7 @@ public interface WatchService {
 	public List<WatchVO> getAllwatch();
 	
 	public MovieVO getmovie(int movie_id);
-	public WatchVO getwatch(String Email);
+	public List<WatchVO> getSlectWatch(String Email);
 	
 	public int createWatch(WatchVO watch);
 	

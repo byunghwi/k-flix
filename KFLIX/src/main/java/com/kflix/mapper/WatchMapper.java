@@ -15,6 +15,6 @@ public interface WatchMapper {
 	
 	public List<WatchVO> getAllwatch();
 	
-	public WatchVO getwatch(String Email);
+	public List<WatchVO> getSlectWatch(String Email);
 	
 }

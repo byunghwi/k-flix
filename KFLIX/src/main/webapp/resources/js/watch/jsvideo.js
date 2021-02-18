@@ -6,7 +6,11 @@ var volrange = document.getElementById("volrange");
 var back = document.getElementById('back');
 var videocon = document.getElementById('videocon');
 var videobar = document.getElementById('videobar');
+/*for(a of document.getElementsByTagName('div')){
+        //     console.log(a instanceof );
+       }
 
+document.getElementsByTagName('div').length*/
 videocon.addEventListener("mouseover", function() {
 	back.style.display = 'block';
 	videobar.style.display = 'block';
