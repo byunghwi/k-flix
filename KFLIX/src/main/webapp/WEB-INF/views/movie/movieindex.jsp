@@ -100,23 +100,25 @@
 <c:url var="nextHref" value=".<%=path %>?page=${page.startPage - page.size}&amount=${page.amount}" />
 <c:url var="preHref" value=".<%=path %>?page=${page.startPage + page.size}&amount=${page.amount}" />
 
-<nav aria-label="...">
-  <ul class="pagination justify-content-center">                
-          <li class="page-item<c:if test="${not page.prev }"> disabled</c:if>">
-             <a class="page-link" id="pre" href="${nextHref}" tabindex="-1" aria-disabled="true">&laquo;</a>
-          </li>
-          <c:forEach var="i" begin="${page.startPage }" end="${page.endPage }">                                
-              <li class="page-item<c:if test="${page.currPage eq i }"> active</c:if>" aria-current="page">
-                 <c:if test="${i > 0}" >
-                 	<button class="page-link" id="pnum${i }" >${i }</button>
-                 </c:if>
-              </li>                                
-          </c:forEach>
-          <li class="page-item<c:if test="${not page.next || page.endPage eq page.lastPage}"> disabled</c:if>">
-              <a class="page-link" id="next" href="${preHref}" tabindex="-1" aria-disabled="true">&raquo;</a>
-          </li>    
-    </ul>
-</nav>
+<div id="pagenate">
+	<nav aria-label="...">
+	  <ul class="pagination justify-content-center">                
+	          <li class="page-item<c:if test="${not page.prev }"> disabled</c:if>">
+	             <a class="page-link" id="pre" href="${nextHref}" tabindex="-1" aria-disabled="true">&laquo;</a>
+	          </li>
+	          <c:forEach var="i" begin="${page.startPage }" end="${page.endPage }">                                
+	              <li class="page-item<c:if test="${page.currPage eq i }"> active</c:if>" aria-current="page">
+	                 <c:if test="${i > 0}" >
+	                 	<button class="page-link" id="pnum${i }" onclick="pageClick(${i});">${i }</button>
+	                 </c:if>
+	              </li>                                
+	          </c:forEach>
+	          <li class="page-item<c:if test="${not page.next || page.endPage eq page.lastPage}"> disabled</c:if>">
+	              <a class="page-link" id="next" href="${preHref}" tabindex="-1" aria-disabled="true">&raquo;</a>
+	          </li>    
+	    </ul>
+	</nav>
+</div>
 
 <%-- <%@include file ="/resources/include/pagecode.jsp" %> --%>
 </div>
@@ -153,38 +155,36 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <script>
-/* private int page;
-private int amount; */
-$('#pnum1').click(function(){
-	alert("페이지 1 클릭")
 
-	console.log($('#pnum1').html());
-	console.log($('#movielist tr').length - 1);
- 	$.ajax({
+function pageClick(pnum) {
+
+	$.ajax({
 		type: "POST",
-		url: "/kflix/movie/setpage",
+		url: "/kflix/movie/findindex",
 		data: JSON.stringify({
-			page: $('#page_num1').html(),
-			amount: $('#movielist tr').length - 1
+			page: pnum,
+			amount: 5,
+			searching_index: $('#search_cols').val(),
+   			searching_word: $('#search_val').val()
 		}),
 		contentType: 'application/json',
 		
  		success: function(data){
   			console.log('통신성공');
-  			
-  			for (key in data){
-  				console.log(key + ': ' + data[key]);
-  				
+ 
+  			for	(key in data) {
+  				console.log(key + ' : ' + data[key].page)
   			}
+  			makeTable(data);
+ 
  			
    		},
    		error: function(){
    			alert('불러오는데 실패하였습니다.');
    		}
 	}) 
-})
-
-
+	
+}
 
 // 검색 버튼 누를시 데이터 가져오기
 $('#search').click(function() {

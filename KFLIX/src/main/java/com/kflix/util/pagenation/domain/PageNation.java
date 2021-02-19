@@ -8,6 +8,8 @@ public class PageNation {
 	
 	private int page;
 	private int amount;
+	private String searching_index; 
+	private String searching_word;
 	
 	
 	public PageNation() {

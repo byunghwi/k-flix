@@ -65,22 +65,7 @@ public class MovieController {
 		log.info("============ movieindex Cotnroller ==========");
 		List<Movie> list = mv_service.selectPageMovieView(pagenation, ENABLED);
 		int page_num = mv_service.getCountMovie(ENABLED);
-
-//		if (searching_index == null && searching_word == null) {
-//			log.info("쌩으로들어옴");
-//		} else if (searching_index.equals("movie_title")){
-//			list = mv_service.findMovieByTitle(pagenation, searching_word, ENABLED);
-//			page_num = mv_service.getCntFindMovieTitle(searching_word, ENABLED);
-//			log.info("뭔가를 검색함");
-//		}
-		
-		
-//		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED));	
-//		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED)));
-
-//		model.addAttribute("searching_index", searching_index);
-//		model.addAttribute("searching_word", searching_word);
-		
+	
 		model.addAttribute("movie", list); 
 		model.addAttribute("page", pagenation.getPageData(10, page_num));
 		return "movie/movieindex";
