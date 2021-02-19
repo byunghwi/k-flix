@@ -92,14 +92,10 @@ public class MovieServiceTest {
 		
 		assertFalse(mv_service.checkDate(movie));
 	}
-	
-	
+
 	@Test
-	@Ignore
-	public void testFindMovie() {
-		assertNotNull(mv_service.findMovieByTitle("kG", 'Y'));
-		log.info(mv_service.findMovieByTitle("KG", 'Y'));
+	public void testFindCnt() {
+		log.info(mapper.getCntByFindMovieTitle("%%", 'Y'));
 	}
-	
 
 }

@@ -35,10 +35,12 @@ public interface MovieService {
 	boolean checkDate(Movie movie);
 	
 	// 검색
-	public List<Movie> findMovieByTitle(String movie_title, char status);
+	public List<Movie> findMovieByTitle(PageNation pagenation, String movie_title, char status);
+	
+	public int getCntFindMovieTitle(String word, char status);
 	
 	// 검색
-	public List<Movie> findMovieByRegDate(String reg_date, char status);
+	public List<Movie> findMovieByRegDate(PageNation pagenation, String reg_date, char status);
 	
 	
 }

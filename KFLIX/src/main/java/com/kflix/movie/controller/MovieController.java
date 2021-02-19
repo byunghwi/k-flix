@@ -61,14 +61,51 @@ public class MovieController {
 	 * 영화 관리 페이지
 	 */
 	@GetMapping("movieindex")
-	public String movieMain(Model model, PageNation pagenation) {
+	public String movieMain(Model model, PageNation pagenation, String searching_index, String searching_word) {
+		log.info("============ movieindex Cotnroller ==========");
+		List<Movie> list = mv_service.selectPageMovieView(pagenation, ENABLED);
+		int page_num = mv_service.getCountMovie(ENABLED);
+
+//		if (searching_index == null && searching_word == null) {
+//			log.info("쌩으로들어옴");
+//		} else if (searching_index.equals("movie_title")){
+//			list = mv_service.findMovieByTitle(pagenation, searching_word, ENABLED);
+//			page_num = mv_service.getCntFindMovieTitle(searching_word, ENABLED);
+//			log.info("뭔가를 검색함");
+//		}
 		
-		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED));
 		
-		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED)));
+//		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED));	
+//		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED)));
+
+//		model.addAttribute("searching_index", searching_index);
+//		model.addAttribute("searching_word", searching_word);
 		
+		model.addAttribute("movie", list); 
+		model.addAttribute("page", pagenation.getPageData(10, page_num));
 		return "movie/movieindex";
 	}
+	
+	
+//	@GetMapping("findindex")
+//	public String findByTitle(Model model, PageNation pagenation, String searching_index, String searching_word) {
+//		log.info("============ findindex ==========");
+//		List<Movie> list = mv_service.findMovieByTitle(pagenation, searching_word, ENABLED);
+//		int page_num = mv_service.getCntFindMovieTitle(searching_word, ENABLED);
+//		
+//		if(searching_index.equals("director_id")) {
+//		
+//		} else if(searching_index.equals("genre_id")) {
+//			
+//		} else if(searching_index.equals("reg_date")) {
+//			list = mv_service.findMovieByRegDate(pagenation, searching_word, ENABLED);
+//		}
+//		
+//		model.addAttribute("movie", list); 
+//		model.addAttribute("page", pagenation.getPageData(10, page_num));
+//		
+//		return "movie/movieindex";
+//	}
 	
 	
 	/*
@@ -225,24 +262,6 @@ public class MovieController {
 		
 		return "redirect:/movie/deletedMovie";
 	}
-	
-	
-	@PostMapping("findBytitle")
-	public String findByTitle(Model model, String searching_index, String searching_word) {
-		List<Movie> list = mv_service.findMovieByTitle(searching_word, ENABLED);
-
-		if(searching_index.equals("director_id")) {
 		
-		} else if(searching_index.equals("genre_id")) {
-			
-		} else if(searching_index.equals("reg_date")) {
-			list = mv_service.findMovieByRegDate(searching_word, ENABLED);
-		}
-		
-		model.addAttribute("movie", list); 
-		return "movie/movieindex";
-	}
-	
-	
 }
 

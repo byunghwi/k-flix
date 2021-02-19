@@ -73,8 +73,14 @@
 
 	<script>
 		console.log("${movie.movie_id}");
-		function savecurrentTime() {
 
+		<c:forEach items="${watch }" var="watch" varStatus="status">
+		<c:if test="${watch.movie_id eq movie.movie_id }">
+		video.currentTime = "${watch.view_point}";
+		</c:if>
+		</c:forEach>
+
+		function savecurrentTime() {
 			<c:choose>
 			<c:when test="${empty watching }">
 			console.log("없음");
