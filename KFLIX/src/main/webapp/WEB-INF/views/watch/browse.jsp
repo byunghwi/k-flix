@@ -119,7 +119,7 @@
 						<c:forEach items="${watch }" var="watch" varStatus="status">
 							<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 								<c:if test="${watch.movie_id eq Allmovie.movie_id }">
-									<a onclick="getcurrentTime()"
+									<a
 										href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
 										<img id="img1" src="${Allmovie.poster_path }"
 										class="d-block dis" alt="...">
@@ -175,9 +175,9 @@
 				<div class="carousel-item active" data-bs-interval="999999999">
 
 					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-						<a id="geturl" onclick="getcurrentTime()"
+						<a
 							href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
-							<img id="img1" name="${Allmovie.movie_id }"
+							<img
 							src="${Allmovie.poster_path }" class="d-block dis" alt="...">
 						</a>
 					</c:forEach>
@@ -223,52 +223,5 @@
 
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
-	<script>
-		var img1 = document.getElementById('img1');
-		var geturl = document.getElementById('geturl');
-		function getcurrentTime() {
-			console.log(geturl.namespaceURI);
-			console.log(img1.namespaceURI);
-			/* <c:choose>
-			<c:when test="${empty watching }">
-			console.log("없음");
-			var data = {
-				watch_id : "${movie.movie_id}",
-				watch_type : "WATCHING",
-				movie_id : "${movie.movie_id}",
-				email : 'nn@naver.com',
-				watch_date : Date.now(),
-				view_point : video.currentTime,
-				result : 'create'
-			}
-
-			var xhttp = new XMLHttpRequest();
-
-			xhttp.open('Post', '/kflix/browse', true);
-			xhttp.setRequestHeader('content-type', 'application/json');
-			xhttp.send(JSON.stringify(data));
-			</c:when>
-			<c:otherwise>
-			console.log("있음");
-			var data = {
-				watch_id : "${movie.movie_id}",
-				watch_type : "WATCHING",
-				movie_id : "${movie.movie_id}",
-				email : 'nn@naver.com',
-				watch_date : Date.now(),
-				view_point : video.currentTime,
-				result : 'update'
-			}
-
-			var xhttp = new XMLHttpRequest();
-
-			xhttp.open('Post', '/kflix/browse', true);
-			xhttp.setRequestHeader('content-type', 'application/json');
-			xhttp.send(JSON.stringify(data));
-			</c:otherwise>
-			</c:choose>
-			 */
-		}
-	</script>
 </body>
 </html>
