@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${movie.movie_title }</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -24,14 +24,14 @@
 
 </head>
 <body>
-	<div onclick="sound()" id="videocon">
+	<div onclick="vidplay()" id="videocon">
 
 		<!-- <button onclick="savecurrentTime()">
 	<i style="display: hidden;" id="back" class="fas fa-arrow-left color-w relative"> <span style="font-size: 15px;"> 뒤로가기 </span> </i>
 	</button> -->
 
 		<a onclick="savecurrentTime()"
-			href="<%=application.getContextPath()%>"> <i
+			href="<%=application.getContextPath()%>/browse/${movie.movie_id }"> <i
 			style="display: hidden;" id="back"
 			class="fas fa-arrow-left color-w relative"> <span
 				style="font-size: 15px;"> 뒤로가기 </span>
@@ -63,7 +63,7 @@
 		</div>
 
 		<video id="video" muted autoplay loop
-			poster="/kflix/resources/imgs/watch/iu.jpg">
+			poster="${movie.poster_path }">
 			<source src="${movie.video_path }" type="video/mp4">
 		</video>
 
@@ -73,7 +73,7 @@
 
 	<script>
 		console.log("${movie.movie_id}");
-
+		sound();
 		<c:forEach items="${watch }" var="watch" varStatus="status">
 		<c:if test="${watch.movie_id eq movie.movie_id }">
 		video.currentTime = "${watch.view_point}";
@@ -96,7 +96,7 @@
 
 			var xhttp = new XMLHttpRequest();
 
-			xhttp.open('Post', '/kflix/browse', true);
+			xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
 			xhttp.setRequestHeader('content-type', 'application/json');
 			xhttp.send(JSON.stringify(data));
 			</c:when>
@@ -114,7 +114,7 @@
 
 			var xhttp = new XMLHttpRequest();
 
-			xhttp.open('Post', '/kflix/browse', true);
+			xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
 			xhttp.setRequestHeader('content-type', 'application/json');
 			xhttp.send(JSON.stringify(data));
 			</c:otherwise>

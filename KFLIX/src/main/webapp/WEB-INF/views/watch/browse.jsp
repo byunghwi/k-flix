@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>KFLIX</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -98,7 +98,9 @@
 		<!-- <img alt="" src="/kflix/resources/imgs/watch/nav-shadow.png"> -->
 	</div>
 
+
 	<div id="list">
+
 		<c:if test="${not empty watch}">
 			<div class="list_title">"${email }"님의 이어보기</div>
 			<div id="carouselExample1" class="carousel slide padd"
@@ -120,22 +122,15 @@
 							<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 								<c:if test="${watch.movie_id eq Allmovie.movie_id }">
 									<a
-										href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
+										href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 										<img id="img1" src="${Allmovie.poster_path }"
 										class="d-block dis" alt="...">
 									</a>
+
 								</c:if>
 							</c:forEach>
 						</c:forEach>
-						<%-- 
-					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-						<a
-							href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
-							<img id="img1" src="${Allmovie.poster_path }" class="d-block dis"
-							alt="...">
-						</a>
-					</c:forEach> --%>
-
+					
 					</div>
 					<div class="carousel-item" data-bs-interval="999999999">
 						<img src="/kflix/resources/imgs/watch/runon1.png"
@@ -173,12 +168,10 @@
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active" data-bs-interval="999999999">
-
 					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 						<a
-							href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
-							<img
-							src="${Allmovie.poster_path }" class="d-block dis" alt="...">
+							href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+							<img src="${Allmovie.poster_path }" class="d-block dis" alt="...">
 						</a>
 					</c:forEach>
 
@@ -213,15 +206,12 @@
 
 	</div>
 
-
-
-
-
-
-
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
-
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
+	<script>
+	</script>
+
+
 </body>
 </html>

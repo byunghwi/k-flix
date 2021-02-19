@@ -55,5 +55,9 @@ public class WatchServiceImpl implements WatchService {
 	public WatchVO getSelectWatchUser(String email, int movie_id) {
 		return mapper.getSelectWatchUser(email, movie_id);
 	}
+	/*
+	 * @Override public MovieVO getmovieGenre(int movie_id) { return
+	 * mapper.getmovieGenre(movie_id); }
+	 */
 
 }

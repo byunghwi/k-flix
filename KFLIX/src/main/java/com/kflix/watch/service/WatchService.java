@@ -26,5 +26,8 @@ public interface WatchService {
 	public int updateWatch(WatchVO watch);
 	
 	public int deleteWatch(WatchVO watch);
+	/*
+	 * public MovieVO getmovieGenre(int movie_id);
+	 */
 	
 }

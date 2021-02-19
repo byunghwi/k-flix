@@ -28,6 +28,11 @@
 		resultType="com.kflix.watch.domain.WatchVO">
 		SELECT * FROM watch WHERE email = #{email } and movie_id = #{movie_id }
 	</select>
+	
+	<!-- <select id="getmovieGenre"
+		resultType="com.kflix.watch.domain.MovieVO">
+		SELECT * FROM watch WHERE movie_id = #{movie_id }
+	</select> -->
 
 	<insert id="createWatch">
 		INSERT INTO watch VALUES (

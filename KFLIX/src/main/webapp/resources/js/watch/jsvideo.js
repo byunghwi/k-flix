@@ -11,6 +11,8 @@ var videobar = document.getElementById('videobar');
        }
 
 document.getElementsByTagName('div').length*/
+
+
 videocon.addEventListener("mouseover", function() {
 	back.style.display = 'block';
 	videobar.style.display = 'block';
@@ -20,7 +22,6 @@ videocon.addEventListener("mouseout", function() {
 	back.style.display = 'none';
 	videobar.style.display = 'none';
 });
-
 
 volrange.addEventListener("change", (e) => {
 	video.volume = volrange.value;
@@ -79,7 +80,6 @@ function event(e) {
 	//이벤트가 발생하였을 경우에 대한 처리
 	alert("미디어 재생이 완료되었습니다.");
 }
-
 
 video.addEventListener(
 	"timeupdate",
