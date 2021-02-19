@@ -6,34 +6,40 @@
 
 	<insert id="register">
 		INSERT INTO member (
-						email,
-						pwd,
-						nick,
-						birth,
-						member_age,
-						gender ) 
-			VALUES (
-						#{email}, 
-						#{pwd}, 
-						#{nick}, 
-						#{birth},
-						#{member_age}, 
-						#{gender}
-			)
+		email,
+		pwd,
+		nick,
+		birth,
+		member_age,
+		gender )
+		VALUES (
+		#{email},
+		#{pwd},
+		#{nick},
+		#{birth},
+		#{member_age},
+		#{gender}
+		)
 
 	</insert>
 
-	<select id="login"
-		resultType="com.kflix.member.domain.Member">
-		SELECT email, pwd FROM member WHERE email = #{email} AND pwd = #{pwd}
+	<select id="login" resultType="com.kflix.member.domain.Member">
+		SELECT email, pwd FROM member WHERE email = #{email} 
+		<if test="naver == null">
+			AND pwd = #{pwd}
+		</if>
+
 	</select>
-	
+
 	<update id="keepLogin">
-		UPDATE member SET sessionkey = #{sessionId}, sessionlimit = #{next} WHERE email = #{email}
+		UPDATE member SET sessionkey = #{sessionId},
+		sessionlimit = #{next} WHERE email = #{email}
 	</update>
-	
-	<select id="checkMemWithSessionKey" resultType="com.kflix.member.domain.Member">
-		SELECT * FROM member WHERE sessionkey = #{value} AND sessionlimit > SYSDATE
+
+	<select id="checkMemWithSessionKey"
+		resultType="com.kflix.member.domain.Member">
+		SELECT * FROM member WHERE sessionkey = #{value} AND
+		sessionlimit > SYSDATE
 	</select>
 
 </mapper>
