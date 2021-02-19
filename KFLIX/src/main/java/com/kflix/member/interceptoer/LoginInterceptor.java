@@ -20,7 +20,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-
+		System.out.println("login인터셉터 posthandle 접근");
 		HttpSession session = request.getSession();
 		ModelMap modelMap = modelAndView.getModelMap();
 		Member memberVO = (Member)modelMap.get("memberVO");
@@ -48,7 +48,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+		System.out.println("login인터셉터 prehandle 접근");
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute(LOGIN) != null) {

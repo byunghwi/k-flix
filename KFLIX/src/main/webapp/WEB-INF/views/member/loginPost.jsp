@@ -9,6 +9,7 @@
 <body>
 <!--일로보내자 /browse -->
 <script type="text/javascript">
+	alert('loginPost.jsp페이지');
 	self.location = "/kflix/browse";
 </script>
 </body>

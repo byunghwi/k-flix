@@ -21,11 +21,11 @@
 <style>
 .img {
 	position: relative;
-	background-image: url("resources/imgs/netflix_main.jpg");
+	background-image: url("resources/imgs/main/netflix_main.jpg");
 	height: 100vh;
 	background-size: cover;
 }
-
+ 
 .img-cover {
 	position: absolute;
 	height: 100%;
@@ -55,6 +55,16 @@
 	z-index: 2;
 	text-align: center;
 }
+
+/* .authLinks.redButton {
+    background-color: #e50914;
+    line-height: normal;
+    padding: 7px 17px;
+    font-weight: 400;
+    font-size: 1rem;
+    float: right;
+} */
+
 </style>
 <body>
 	<script>
@@ -65,10 +75,8 @@
 		}
 	</script>
 	<div class="our-story-header-wrapper">
-		<button type="button"
-			class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-lg"
-			style="background-color: red" data-toggle="modal"
-			data-target="#loginModal">로그인</button>
+		<a href="./login" class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-lg"
+				style="background-color: red">로그인</a>
 	</div>
 
 	<div class="img">
@@ -86,7 +94,7 @@
 		<div class="img-cover"></div>
 	</div>
 
-	<!-- 회원가입 모달 -->
+  	<!-- 회원가입 모달 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -171,7 +179,7 @@
 							</div>
 						</div>
 
-					</div>
+					</div> 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 						<button type="submit" class="btn btn-primary">회원가입</button>
