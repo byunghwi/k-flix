@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 
 <div class="container">
 	<div class="d-flex justify-content-end">
-		<a href="./deletedList" class="btn btn-secondary btn-sm">삭제된 항목</a>
+		<a href="./deletedMovie" class="btn btn-secondary btn-sm">삭제된 항목</a>
 	</div>
 	
 	<div class="d-flex justify-content-center">
@@ -34,18 +35,27 @@
 </div>
 
 <div class="d-flex justify-content-end">
-	<div class="input-group mb-3 input_text justify-content-end"> 
-	<div class="input_select">
-		<select class="form-select" id="search">
-		    <option selected>제목</option>
-		    <option value="1">장르</option>
+<form action="./findBytitle" method="post">
+	<div class="input-group mb-3 justify-content-end search_label"> 
+	<div class="search_select">
+		<select class="form-select" id="search_cols" name="searching_index">
+		    <option value="movie_title" selected>제목</option>
+		    <option value="director_name">감독</option>
+		    <option value="genre_name">장르</option>
+		    <option value="reg_date">등록일</option>
 		  </select>
 	</div>
-		<input type="text" name="" class="form-control" aria-describedby="search">
+		<input type="text" name="searching_word" id="search_val" class="form-control" aria-describedby="search">
   		<button class="btn btn-outline-secondary" type="submit" id="search"><i class="fas fa-search"></i></button>
 	</div>
+</form>
+
+<div class="ps-2">
+	<a class="btn btn-outline-secondary" href="./movieindex">ALL</a>
 </div>
 </div>
+</div>
+
 
 <section style="padding-top: 20px;">
 	<table class="table table-striped text-center align-middle">
@@ -53,6 +63,7 @@
 			<th>ID</th>
 			<th>포스터</th>
 			<th>제목</th>
+			<th>감독</th>
 			<th>장르</th>
 			<th>상영시간</th>
 			<th>등록일</th>
@@ -63,9 +74,10 @@
 				<td>${movie.movie_id }</td>
 				<td><img alt="사진" src="${movie.poster_path }"/></td>
 				<td>${movie.movie_title }</td>
-				<td>${movie.genre_id1 } / ${movie.genre_id2 }</td>
+				<td>${movie.director_name }</td>
+				<td>${movie.genre_name1 } / ${movie.genre_name2 }</td>
 				<td>${movie.play_time }분</td>
-				<td><fmt:formatDate value="${movie.reg_date }" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
 				<td>
 					<a href="./updatepage/${movie.movie_id }" class="btn btn-primary">수정</a>
 					<button type="button" class="btn btn-danger" data-bs-toggle="modal" 
@@ -78,27 +90,7 @@
 </section>
 
 <%@include file ="/resources/include/pagecode.jsp" %>
-<%-- <c:url var="nextHref" value="./index?page=${page.startPage - page.size}&amount=${page.amount}" />
-<c:url var="preHref" value="./index?page=${page.startPage + page.size}&amount=${page.amount}" />
-
-<nav aria-label="...">
-  <ul class="pagination justify-content-center">                
-          <li class="page-item<c:if test="${not page.prev }"> disabled</c:if>">
-             <a class="page-link" href="${nextHref}" tabindex="-1" aria-disabled="true">&laquo;</a>
-          </li>
-          <c:forEach var="i" begin="${page.startPage }" end="${page.endPage }">                                
-                  <li class="page-item<c:if test="${page.currPage eq i }"> active</c:if>" aria-current="page">
-                        <a class="page-link" href="./index?page=${i }&amount=${page.amount}">${i }</a>
-              </li>                                
-          </c:forEach>
-          <li class="page-item<c:if test="${not page.next || page.endPage eq page.lastPage}"> disabled</c:if>">
-              <a class="page-link" href="${preHref}" tabindex="-1" aria-disabled="true">&raquo;</a>
-          </li>    
-    </ul>
-</nav> --%>
 </div>
-
-
 
 <!-- 삭제 모달 -->
 <div class="modal" tabindex="-1" id="deletemodal">
@@ -113,7 +105,7 @@
 	      </div>
           <div class="modal-footer">
           <form action="./delete" method="post">
-	          	<input type="hidden" id="deleteid" name="movie_id" value=""/>
+	          	<input type="hidden" id="deleteid" name="movie_id"/>
 		        <input type="submit" class="btn btn-danger" value="삭제"/>
 	        </form>
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
@@ -139,6 +131,21 @@ $(document).ready(function() {
 		$('#deleteid').val(movieid);
 	});
 })
+
+$('#search').click(function(){
+	console.log('search_cols : ' + $('#search_cols').val())
+	console.log('search_val : ' + $('#search_val').val())
+
+})
+
+$('#search_cols').change(function(){
+	if ($('#search_cols').val() == 'reg_date'){
+		 $('#search_val').attr("placeholder", "예) yy/mm/dd, yy/mm");
+	} else {
+		$('#search_val').removeAttr("placeholder");
+	}
+})
+
 </script>
 </body>
 </html>

@@ -8,4 +8,8 @@
 		SELECT * FROM actor
 	</select>
 	
+	<select id="getNameById" resultType="string">
+		SELECT actor_name FROM actor WHERE actor_id = #{actor_id}
+	</select>
+	
 </mapper>

@@ -13,8 +13,6 @@
 
 <h3>${movie }</h3>
 
-<a href="../updatepage/${movie.movie_id }">수정</a><br />
-
 <c:choose>
 	<c:when test="${movie.movie_status eq 'Y'}">
 		<a href="../delete/${movie.movie_id }">삭제</a>

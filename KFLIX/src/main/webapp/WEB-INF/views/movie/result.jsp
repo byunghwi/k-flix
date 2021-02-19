@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -10,6 +13,6 @@
 
 <h1>${msg }</h1>
 
-<a href="/kflix/movie/management">관리 페이지</a>
+<a href="/kflix/movie/movieindex">관리 페이지</a>
 </body>
 </html>

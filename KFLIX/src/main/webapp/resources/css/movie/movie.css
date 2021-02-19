@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-.input_text{
-	width: 20em;
+.search_label {
+	width: 25em;
 }
 
-.input_select{
-	width: 5em;
+.search_select {
+	width: 6em;
 }
 
 img {

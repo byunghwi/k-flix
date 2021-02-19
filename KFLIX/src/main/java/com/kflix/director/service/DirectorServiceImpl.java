@@ -19,4 +19,9 @@ public class DirectorServiceImpl implements DirectorService {
 		return dt_mapper.getAllDirectorList();
 	}
 
+	@Override
+	public String getDirectorName(int director_id) {
+		return dt_mapper.getNameById(director_id);
+	}
+
 }

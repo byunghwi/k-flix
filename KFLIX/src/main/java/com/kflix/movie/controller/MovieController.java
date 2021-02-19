@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -49,22 +50,22 @@ public class MovieController {
 	@Inject
 	Movie movie;
 	
-	static final char ENABLED_CODE = 'Y';
-	static final char DISABLE_CODE = 'N';
+	static final char ENABLED = 'Y';
+	static final char DISABLED = 'N';
 	
 	LocalDate max_day = LocalDate.now();
 	
-	// http://localhost:8081/kflix/movie/management
+	// http://localhost:8081/kflix/movie/movieindex
 
 	/*
 	 * 영화 관리 페이지
 	 */
-	@GetMapping("management")
+	@GetMapping("movieindex")
 	public String movieMain(Model model, PageNation pagenation) {
 		
-		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED_CODE));
+		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED));
 		
-		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED_CODE)));
+		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED)));
 		
 		return "movie/movieindex";
 	}
@@ -88,7 +89,7 @@ public class MovieController {
 	public String add(Model model) {
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
-		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED_CODE));
+		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED));
 		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		
 		return "movie/addMovie";
@@ -99,6 +100,7 @@ public class MovieController {
 	public String addMovie(Model model, Movie movie, 
 				MultipartFile poster, MultipartFile teaser, MultipartFile video) {
 		
+		log.info("======== add Controller ========");
 		String msg = "파일 업로드에 실패하였습니다. 다시 한번 확인해주세요";
 		//날짜 체크 , 파일 유효성 체크
 		if(mv_service.checkDate(movie) 
@@ -143,7 +145,7 @@ public class MovieController {
 		model.addAttribute("release_date", sdf.format(movie.getMovie_release()));		
 		model.addAttribute("director", dt_service.selectAllDirectorList());
 		model.addAttribute("actor", at_service.selectAllActorList());
-		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED_CODE));
+		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED));
 		
 		return "movie/updateMovie";
 	}
@@ -152,11 +154,13 @@ public class MovieController {
 	public String update(Model model, Movie movie,
 						MultipartFile poster, MultipartFile teaser, MultipartFile video) {
 	
+		log.info("======== update Controller ========");
 		String msg = "수정에 실패하였습니다. 다시 한번 확인해주세요";
 		// 날짜 체크
 		if (mv_service.checkDate(movie)
 				&& upload_service.checkOverLaps(poster, teaser, video, movie)) {
 			
+			// 기존 파일 삭제
 			upload_service.fileDelete(poster, teaser, video, movie);
 
 			upload_service.setPathNames(poster, teaser, video, movie);
@@ -167,7 +171,6 @@ public class MovieController {
 			int db_result = mv_service.updateMovie(movie);
 			
 			if (db_result > 0 && upload_result) {
-				// 기존 파일 삭제
 				
 				msg = "수정 되었습니다.";				
 			} else {
@@ -181,26 +184,29 @@ public class MovieController {
 	
 	
 	/*
-	 *  삭제 페이지 / status = DISABLE_CODE
+	 *  삭제 페이지 / status = DISABLED
 	 */
 	@PostMapping("delete")
 	public String delete(Model model, int movie_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(movie_id, DISABLE_CODE);
+		int result = mv_service.deleteOrRecoveryMovieById(movie_id, DISABLED);
 		
 		String msg = result > 0 ? "삭제 되었습니다." : "삭제에 실패하였습니다.";
 		
 		model.addAttribute("msg", msg);
 		
-		return "movie/result";
+		return "redirect:/movie/movieindex";
 	}
 	
 	
 	/*
 	 * 삭제된 목록
 	 */
-	@GetMapping("deletedList")
-	public String deletedList(Model model) {
-		model.addAttribute("movie", mv_service.selectAllMovieVeiw(DISABLE_CODE));
+	@GetMapping("deletedMovie")
+	public String deletedList(Model model, PageNation pagenation) {
+
+		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, DISABLED));
+		
+		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(DISABLED)));
 		
 		return "movie/deletedMovie";
 	}
@@ -209,15 +215,34 @@ public class MovieController {
 	/*
 	 * 복구
 	 */
-	@GetMapping("recovery/{id}")
-	public String recoveryMovie(Model model, @PathVariable("id") int moive_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(moive_id, ENABLED_CODE);
+	@PostMapping("recovery")
+	public String recoveryMovie(Model model, int movie_id) {
+		int result = mv_service.deleteOrRecoveryMovieById(movie_id, ENABLED);
 		
 		String msg = result > 0 ? "복구 되었습니다." : "복구에 실패하였습니다.";
 		
 		model.addAttribute("msg", msg);
 		
-		return "movie/result";
+		return "redirect:/movie/deletedMovie";
 	}
+	
+	
+	@PostMapping("findBytitle")
+	public String findByTitle(Model model, String searching_index, String searching_word) {
+		List<Movie> list = mv_service.findMovieByTitle(searching_word, ENABLED);
+
+		if(searching_index.equals("director_id")) {
+		
+		} else if(searching_index.equals("genre_id")) {
+			
+		} else if(searching_index.equals("reg_date")) {
+			list = mv_service.findMovieByRegDate(searching_word, ENABLED);
+		}
+		
+		model.addAttribute("movie", list); 
+		return "movie/movieindex";
+	}
+	
+	
 }
 

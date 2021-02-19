@@ -23,15 +23,9 @@
 	<select id="getGenreByName" resultType="com.kflix.genre.domain.Genre">
 		SELECT * FROM genre WHERE genre_name = #{genre_name} AND genre_status = #{status}
 	</select>
+
 	
-	<select id="getGenreName" resultType="string">
-		SELECT 
-			genre_name
-		FROM 
-			movie 
-		INNER JOIN 
-			genre ON genre_id${genre_id_num} = genre_id
-		WHERE 
-			movie_id = ${movie_id} 
+	<select id="getNameById" resultType="string">
+		SELECT genre_name FROM genre WHERE genre_id = #{genre_id}
 	</select>
 </mapper>

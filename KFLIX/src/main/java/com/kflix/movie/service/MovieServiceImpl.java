@@ -1,8 +1,5 @@
 package com.kflix.movie.service;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import com.kflix.actor.service.ActorService;
+import com.kflix.director.service.DirectorService;
+import com.kflix.genre.service.GenreService;
 import com.kflix.mapper.MovieMapper;
 import com.kflix.movie.domain.Movie;
 import com.kflix.util.pagenation.domain.PageNation;
@@ -24,7 +24,16 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	MovieMapper mv_mapper;
+	
+	@Autowired
+	GenreService gr_service;
 
+	@Autowired
+	ActorService at_service;
+	
+	@Autowired
+	DirectorService dt_service;
+	
 	/*
 	 * 활성화된 목록, 삭제된 목록
 	 */
@@ -117,11 +126,11 @@ public class MovieServiceImpl implements MovieService {
 		// 개봉일이 오늘 날짜 이후면 false
 		boolean check_release = today.after(release_date.getTime());
 
-		log.info("오늘: " + today);
-		log.info("개봉일: " + release_date.getTime());
-		log.info("등록: " + reg_date.getTime());
-		log.info("내일: " +tomorrow.getTime());
-		log.info("어제: " +yesterday.getTime());
+//		log.info("오늘: " + today);
+//		log.info("개봉일: " + release_date.getTime());
+//		log.info("등록: " + reg_date.getTime());
+//		log.info("내일: " +tomorrow.getTime());
+//		log.info("어제: " +yesterday.getTime());
 
 		// 양쪽다 만족시 true
 		if(check_reg && check_release) {
@@ -133,5 +142,18 @@ public class MovieServiceImpl implements MovieService {
 			return false;
 		}
 	}
+
+	@Override
+	public List<Movie> findMovieByTitle(String movie_title, char status) {
+		movie_title = "%" + movie_title + "%";
+		return mv_mapper.getMovieByTitle(movie_title, status);
+	}
+
+	@Override
+	public List<Movie> findMovieByRegDate(String reg_date, char status) {
+		reg_date = "%" + reg_date + "%";
+		return mv_mapper.getMovieByRegDate(reg_date, status);
+	}
+
 
 }

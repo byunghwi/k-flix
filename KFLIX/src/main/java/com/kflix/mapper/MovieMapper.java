@@ -37,4 +37,9 @@ public interface MovieMapper {
 							@Param("amount") int amount,
 							@Param("status") char status);
 	
+	// 제목 검색
+	List<Movie> getMovieByTitle(@Param("movie_title") String movie_title, @Param("status") char status);
+	
+	// 등록일 검색
+	List<Movie> getMovieByRegDate(@Param("reg_date") String  reg_date, @Param("status") char status);
 }

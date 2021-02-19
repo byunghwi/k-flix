@@ -33,15 +33,6 @@ public class GenreServiceTest {
 	
 	@Test
 	@Ignore
-	public void genreNameTest() {
-		String name = service.selectGenereName(2, 16);
-		assertNotNull(name);
-		log.info(name);
-		
-	}
-	
-	@Test
-	@Ignore
 	public void genreAddTest() {
 		int result = service.addGenre("");
 		assertEquals(1, result);
