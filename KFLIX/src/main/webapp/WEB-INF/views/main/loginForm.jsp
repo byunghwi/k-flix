@@ -22,6 +22,7 @@
 
 .login-form {
 	display: flex;
+	border-radius: 4px;
 	background-color: rgba(0, 0, 0, .75);
 	border-radius: 4px;
 	box-sizing: border-box;
@@ -72,11 +73,10 @@
 		<div class="login-form">
 			<div class="logform-content">
 				<h1 id="" class="our-story-card-title" data-uia="hero-title">로그인</h1>
-				<form action="${pageContext.request.contextPath}/member/loginPost" method="post">
+				<form action="${pageContext.request.contextPath}/loginPost" method="post">
 					<input type="text" name="email" placeholder="이메일 주소를 입력하세요"><br>
 					<input type="password" name="pwd" placeholder="비밀번호를 입력하세요">
-					<button class="btn login-button btn-submit btn-small" type="submit"
-						autocomplete="off" tabindex="0" data-uia="login-submit-button">로그인</button>
+					<button class="btn login-button btn-submit btn-small" type="submit">로그인</button>
 						<a href="${url}"><img height="50"
 							src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
 						
@@ -85,6 +85,7 @@
 		</div>
 		<div class="img-cover"></div>
 	</div>
+	
 
 
 </body>

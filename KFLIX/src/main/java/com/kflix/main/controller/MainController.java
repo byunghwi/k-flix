@@ -2,8 +2,11 @@ package com.kflix.main.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Date;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -15,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kflix.login.NaverLoginVO;
 import com.kflix.member.domain.Member;
+import com.kflix.member.service.MemberService;
 
 import jdk.internal.org.jline.utils.Log;
 import lombok.extern.log4j.Log4j;
@@ -37,6 +42,9 @@ public class MainController {
 	
 	@Inject
 	Member memberVO;
+	
+	@Inject
+	MemberService memberService;
 
 	// 로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
@@ -92,26 +100,77 @@ public class MainController {
 		
 		model.addAttribute("result", apiResult);
 
-		System.out.println("오류잡기1");
 		rttr.addFlashAttribute("naverMem", memberVO);
-		System.out.println("오류잡기2");
 		
 		//return "login";
-		return "redirect:/member/loginPost";
+		return "redirect:/loginPost";
 	}
 	
 	// 로그인 폼 보여주기
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET(Model model, HttpSession session) {
-		System.out.println("로그인 폼 보여주기");
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginVO.getAuthorizationUrl(session);
 		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
 		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		System.out.println("네이버:" + naverAuthUrl);
+		System.out.println("[MainController] 네이버:" + naverAuthUrl);
 		// 네이버
 		model.addAttribute("url", naverAuthUrl);
-		return "/main/loginForm";
+		return "/main/loginForm_test";
+	}
+	
+	// 로그인
+	@RequestMapping(value = "/loginPost", method = { RequestMethod.POST, RequestMethod.GET })
+	public void loginPOST(Member member, HttpSession session, Model model,
+			@RequestParam(value = "userCookie", required = false) String userCookie, HttpServletRequest request) {
+
+		Member memberVO;
+
+		System.out.println("[MainController] loginPost member > " + member);
+		// 1. addFlashAttribute > redirect 후 소멸 (세션기반)
+
+		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
+
+		if (redirectMap != null) {
+			for (String key : redirectMap.keySet()) {
+				System.out.println(String.format("[MainController] 키 : %s, 값 : %s", key, redirectMap.get(key)));
+			}
+
+			memberVO = memberService.login((Member) redirectMap.get("naverMem")); // 오브젝트 타입이라 캐스팅해줌
+			System.out.println("[MainController]네이버로 로그인시 member객체 > "+ memberVO);
+		} else {
+
+			memberVO = memberService.login(member);
+			System.out.println("[MainController] 일반 로그인시 member객체 > "+ memberVO);
+			if (memberVO == null) {
+				log.info("[MainController] login failed....");
+				return;
+			}
+
+			log.info("[MainController] 자동로그인 체크 확인해보기 > " + userCookie);
+			if (userCookie != null) {
+
+				int amount = 60 * 60 * 24; // 쿠키 유지 1일
+				Date sesionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
+
+				// loginCookie 값이 유지되는 시간 정보 DB저장.
+				memberService.keepLogin(member.getEmail(), session.getId(), sesionLimit);
+			}
+		}
+		
+		
+		model.addAttribute("memberVO", memberVO);// 멤버객체를 가지고 loginInterceptor로 이동
+		
+		System.out.println("[MainController] 어디부터 실행되는가 / 멤버컨트롤러");
+	}
+
+	
+	// 로그아웃
+	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	public String logout(HttpSession session) throws IOException {
+		System.out.println("여기는 logout");
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 

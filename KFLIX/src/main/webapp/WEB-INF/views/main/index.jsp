@@ -202,7 +202,7 @@
 					<h4 class="modal-title" id="myModalLabel">로그인
 						${pageContext.request.contextPath}</h4>
 				</div>
-				<form action="${pageContext.request.contextPath}/member/loginPost"
+				<form action="${pageContext.request.contextPath}/loginPost"
 					method="post">
 					<div class="modal-body">
 

@@ -7,10 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!--일로보내자 /browse -->
-<script type="text/javascript">
-	alert('loginPost.jsp페이지');
-	self.location = "/kflix/browse";
+<script>
+	alert('가입되지 않은 회원이거나 회원정보를 정확히 입력해주세요.');
+	self.location = "/kflix";
 </script>
 </body>
 </html>
