@@ -37,13 +37,16 @@ public interface MovieMapper {
 							@Param("amount") int amount,
 							@Param("status") char status);
 	
-	// 제목 검색
-	List<Movie> findPageMovieByTitle(
+	// 제목 검색 + 페이징
+	List<Movie> findPageMovieViewByTitle(
 			@Param("page") int page, @Param("amount") int amount, 
 			@Param("movie_title") String movie_title, @Param("status") char status);
 	
 	int getCntByFindMovieTitle(@Param("word") String word, @Param("status") char status);
 	
+	// 제목 검색 레스트
+	List<Movie> findMovieByTitle(@Param("search_word") String search_word, 
+									@Param("status") char status);
 	// 등록일 검색
 	List<Movie> findPageMovieByRegDate(
 			@Param("page") int page, @Param("amount") int amount,

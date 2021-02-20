@@ -97,6 +97,7 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public List<Movie> selectPageMovieView(PageNation pagenation, char status) {
+		
 		return mv_mapper.getPageMovieView(pagenation.getPage(), pagenation.getAmount(), status);
 	}
 
@@ -144,9 +145,9 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public List<Movie> findMovieByTitle(PageNation pagenation, String movie_title, char status) {
+	public List<Movie> findPageMovieByTitle(PageNation pagenation, String movie_title, char status) {
 		movie_title = "%" + movie_title + "%";
-		return mv_mapper.findPageMovieByTitle(pagenation.getPage(), pagenation.getAmount(), movie_title, status);
+		return mv_mapper.findPageMovieViewByTitle(pagenation.getPage(), pagenation.getAmount(), movie_title, status);
 	}
 	
 	@Override
@@ -160,6 +161,12 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> findMovieByRegDate(PageNation pagenation, String reg_date, char status) {
 		reg_date = "%" + reg_date + "%";
 		return mv_mapper.findPageMovieByRegDate(pagenation.getPage(), pagenation.getAmount(), reg_date, status);
+	}
+
+	@Override
+	public List<Movie> findMovieByTitle(String word, char status) {
+		word = "%" + word + "%";
+		return mv_mapper.findMovieByTitle(word, status);
 	}
 
 

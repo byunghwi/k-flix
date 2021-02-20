@@ -5,12 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kflix.movie.domain.Movie;
+import com.kflix.movie.domain.Search;
 import com.kflix.movie.service.MovieService;
 import com.kflix.util.pagenation.domain.PageNation;
 import com.kflix.util.pagenation.domain.PageNation.PageDTO;
@@ -34,37 +36,38 @@ public class MovieRestController {
 	@PostMapping(value = "findindex",
 				consumes = "application/json",
 				produces = "application/json; charset=UTF-8")
-	public List<Movie> findMovieByTitle(@RequestBody PageNation pagenation,  Model model) {
-		log.info("=========== findMovieByTitle ============");
+	public List<Movie> movieRestCon(@RequestBody Search search) {
+		log.info("=========== movieRestCon ============");
 
-		String word = pagenation.getSearching_word();
-	
-		mv_service.getCountMovie(ENABLED);
+		String index = search.getSearching_index();
+		String word = search.getSearching_word();
+		log.info(index);
 		
 		if (word == null || word.equals("")) {
-			return mv_service.selectPageMovieView(pagenation, ENABLED);
+			log.info("전체보기");
+			return mv_service.selectAllMovieVeiw(ENABLED);
+			
+		} else if(index.equals("movie_title")) {
+			log.info("제목 검색");
+			log.info(word);
+			return mv_service.findMovieByTitle(word, ENABLED);	
+			
+		} else if(index.equals("reg_date")) {
+			log.info("등록일 검색");
+			log.info(word);
+			return mv_service.findMovieByTitle(word, ENABLED);
+			
+		} else if(index.equals("director_name")) {
+			log.info("감독 이름");
+			log.info(word);
+			return mv_service.findMovieByTitle(word, ENABLED);
 			
 		} else {
-			return mv_service.findMovieByTitle(pagenation, word, ENABLED);			
+			log.info("장르 이름");
+			log.info(word);
+			return mv_service.findMovieByTitle(word, ENABLED);
 		}
 	}
-	
-	@PostMapping(value = "setpage",
-				consumes = "application/json",
-				produces = "application/json; charset=UTF-8")
-	public List<Movie> setPage(@RequestBody PageNation pagenation, Model model) {
-		
-		log.info("=========== setPage ============");
 
-		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCntFindMovieTitle(pagenation.getSearching_word(), ENABLED)));
-		String word = pagenation.getSearching_word();
-		if (word == null || word.equals("")) {
-			return mv_service.selectPageMovieView(pagenation, ENABLED);
-			
-		} else {
-			return mv_service.findMovieByTitle(pagenation, word, ENABLED);			
-		}
-	}
-	
 	
 }

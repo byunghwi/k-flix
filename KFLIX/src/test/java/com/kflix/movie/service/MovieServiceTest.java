@@ -95,7 +95,7 @@ public class MovieServiceTest {
 
 	@Test
 	public void testFindCnt() {
-		log.info(mapper.getCntByFindMovieTitle("%%", 'Y'));
+		log.info(mv_service.findMovieByTitle("KG", 'Y').size());
 	}
 
 }

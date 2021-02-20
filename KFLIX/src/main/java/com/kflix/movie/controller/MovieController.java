@@ -71,28 +71,6 @@ public class MovieController {
 		return "movie/movieindex";
 	}
 	
-	
-//	@GetMapping("findindex")
-//	public String findByTitle(Model model, PageNation pagenation, String searching_index, String searching_word) {
-//		log.info("============ findindex ==========");
-//		List<Movie> list = mv_service.findMovieByTitle(pagenation, searching_word, ENABLED);
-//		int page_num = mv_service.getCntFindMovieTitle(searching_word, ENABLED);
-//		
-//		if(searching_index.equals("director_id")) {
-//		
-//		} else if(searching_index.equals("genre_id")) {
-//			
-//		} else if(searching_index.equals("reg_date")) {
-//			list = mv_service.findMovieByRegDate(pagenation, searching_word, ENABLED);
-//		}
-//		
-//		model.addAttribute("movie", list); 
-//		model.addAttribute("page", pagenation.getPageData(10, page_num));
-//		
-//		return "movie/movieindex";
-//	}
-	
-	
 	/*
 	 * 상세보기 페이지
 	 */

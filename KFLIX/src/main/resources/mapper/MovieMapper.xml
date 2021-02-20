@@ -88,7 +88,7 @@
 		WHERE ROWNUM &lt;= #{amount}
 	</select>
 	
-	<select id="findPageMovieByTitle"
+	<select id="findPageMovieViewByTitle"
 			resultType="com.kflix.movie.domain.Movie">
 		SELECT 
 			movie_id, poster_path, movie_title, director_name, genre_name1, genre_name2, play_time, reg_date
@@ -103,6 +103,11 @@
 		)
 		WHERE ROWNUM &lt;= #{amount}
 			
+	</select>
+	
+	<select id="findMovieByTitle"
+			resultType="com.kflix.movie.domain.Movie">
+		SELECT * FROM movie_view WHERE movie_status = #{status} AND movie_title LIKE #{search_word}
 	</select>
 	
 	<select id="findPageMovieByRegDate"
