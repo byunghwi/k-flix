@@ -33,12 +33,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 	private static int VIDEO = 2;
 
 	Tika tika = new Tika();
+
+	private static final String LOCAL_PATH = "C:/Users/Ahos/Desktop/local_workSpace/";
 	
-	private static final String LOCAL_PATH = "";
-	/*
-	 * private static final String LOCAL_PATH =
-	 * "C:/Users/Ahos/Desktop/local_workSpace/";
-	 */
 	// 저장할 주소
 	private static final String[] SAVE_PATH = {
 			LOCAL_PATH + "k-flix/KFLIX/src/main/webapp/resources/imgs/movie/poster/",

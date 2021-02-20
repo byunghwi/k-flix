@@ -65,13 +65,13 @@ public class MemberController {
 				System.out.println(String.format("키 : %s, 값 : %s", key, redirectMap.get(key)));
 			}
 
-			System.out.println("네이버 아이디로 로그인 오류- 1");
 			memberVO = memberService.login((Member) redirectMap.get("naverMem")); // 오브젝트 타입이라 캐스팅해줌
-			System.out.println("네이버 아이디로 로그인 오류 - 2");
+			System.out.println("네이버로 로그인시 member객체 > "+ memberVO);
 		} else {
 
-			System.out.println("일반로그인");
+
 			memberVO = memberService.login(member);
+			System.out.println("일반 로그인시 member객체 > "+ memberVO);
 			if (memberVO == null) {
 				log.info("memberController login failed....");
 				return;
@@ -87,9 +87,11 @@ public class MemberController {
 				memberService.keepLogin(member.getEmail(), session.getId(), sesionLimit);
 			}
 		}
-
+		
+		
 		model.addAttribute("memberVO", memberVO);
-
+		
+		System.out.println("어디부터 실행되는가 / 멤버컨트롤러");
 	}
 
 	// 로그아웃

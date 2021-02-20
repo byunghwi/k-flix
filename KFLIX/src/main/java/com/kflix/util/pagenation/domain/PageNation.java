@@ -9,7 +9,6 @@ public class PageNation {
 	private int page;
 	private int amount;
 	
-	
 	public PageNation() {
 		this(1, 5);
 	}

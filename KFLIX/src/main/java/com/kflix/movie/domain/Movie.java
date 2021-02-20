@@ -50,6 +50,5 @@ public class Movie {
 	private String actor_name3;
 	private String genre_name1;
 	private String genre_name2;
-
 	
 }

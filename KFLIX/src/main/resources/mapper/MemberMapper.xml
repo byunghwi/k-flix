@@ -24,7 +24,7 @@
 	</insert>
 
 	<select id="login" resultType="com.kflix.member.domain.Member">
-		SELECT email, pwd FROM member WHERE email = #{email} 
+		SELECT * FROM member WHERE email = #{email} 
 		<if test="naver == null">
 			AND pwd = #{pwd}
 		</if>

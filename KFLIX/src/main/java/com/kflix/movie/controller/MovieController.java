@@ -61,15 +61,15 @@ public class MovieController {
 	 * 영화 관리 페이지
 	 */
 	@GetMapping("movieindex")
-	public String movieMain(Model model, PageNation pagenation) {
-		
-		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, ENABLED));
-		
-		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(ENABLED)));
-		
+	public String movieMain(Model model, PageNation pagenation, String searching_index, String searching_word) {
+		log.info("============ movieindex Cotnroller ==========");
+		List<Movie> list = mv_service.selectPageMovieView(pagenation, ENABLED);
+		int page_num = mv_service.getCountMovie(ENABLED);
+	
+		model.addAttribute("movie", list); 
+		model.addAttribute("page", pagenation.getPageData(10, page_num));
 		return "movie/movieindex";
 	}
-	
 	
 	/*
 	 * 상세보기 페이지
@@ -225,24 +225,6 @@ public class MovieController {
 		
 		return "redirect:/movie/deletedMovie";
 	}
-	
-	
-	@PostMapping("findBytitle")
-	public String findByTitle(Model model, String searching_index, String searching_word) {
-		List<Movie> list = mv_service.findMovieByTitle(searching_word, ENABLED);
-
-		if(searching_index.equals("director_id")) {
 		
-		} else if(searching_index.equals("genre_id")) {
-			
-		} else if(searching_index.equals("reg_date")) {
-			list = mv_service.findMovieByRegDate(searching_word, ENABLED);
-		}
-		
-		model.addAttribute("movie", list); 
-		return "movie/movieindex";
-	}
-	
-	
 }
 

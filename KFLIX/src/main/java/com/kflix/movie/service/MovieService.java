@@ -27,6 +27,7 @@ public interface MovieService {
 	// 활성화된 영화의 개수
 	public int getCountMovie(char status);
 	
+	// 페이징 무비
 	public List<Movie> selectPageMovieView(PageNation pagenation, char status);
 
 	/*
@@ -35,10 +36,14 @@ public interface MovieService {
 	boolean checkDate(Movie movie);
 	
 	// 검색
-	public List<Movie> findMovieByTitle(String movie_title, char status);
+	public List<Movie> findPageMovieByTitle(PageNation pagenation, String movie_title, char status);
+	
+	public List<Movie> findMovieByTitle(String word, char status);
+	
+	public int getCntFindMovieTitle(String word, char status);
 	
 	// 검색
-	public List<Movie> findMovieByRegDate(String reg_date, char status);
+	public List<Movie> findMovieByRegDate(PageNation pagenation, String reg_date, char status);
 	
 	
 }
