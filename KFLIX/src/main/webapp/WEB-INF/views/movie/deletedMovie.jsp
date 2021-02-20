@@ -48,6 +48,7 @@
 			<th>포스터</th>
 			<th>제목</th>
 			<th>장르</th>
+			<th>감독</th>
 			<th>상영시간</th>
 			<th>등록일</th>
 			<th>관리</th>
@@ -58,7 +59,7 @@
 				<td><img alt="사진" src="${movie.poster_path }"/></td>
 				<td>${movie.movie_title }</td>
 				<td>${movie.director_name }</td>
-				<td>${movie.genre_id1 } / ${movie.genre_id2 }</td>
+				<td>${movie.genre_name1 } / ${movie.genre_name2 }</td>
 				<td>${movie.play_time }분</td>
 				<td><fmt:formatDate value="${movie.reg_date }" pattern="yyyy-MM-dd"/></td>
 				<td>

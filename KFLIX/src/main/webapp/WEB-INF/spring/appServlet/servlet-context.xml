@@ -55,5 +55,6 @@
 	<context:component-scan base-package="com.kflix.director" />
 	<context:component-scan base-package="com.kflix.actor" />
 	<context:component-scan base-package="com.kflix.util" />
+	<context:component-scan base-package="com.kflix.util" />
 	
 </beans:beans>

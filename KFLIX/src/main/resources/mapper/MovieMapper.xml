@@ -88,14 +88,35 @@
 		WHERE ROWNUM &lt;= #{amount}
 	</select>
 	
-	<select id="getMovieByTitle"
+	<select id="findPageMovieViewByTitle"
 			resultType="com.kflix.movie.domain.Movie">
-		SELECT * FROM movie_view WHERE movie_status = #{status} AND movie_title LIKE #{movie_title}	
+		SELECT 
+			movie_id, poster_path, movie_title, director_name, genre_name1, genre_name2, play_time, reg_date
+		FROM 
+		(SELECT SEQ, movie_id, poster_path, movie_title, director_name, genre_name1, genre_name2, play_time, reg_date
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, movie_id, poster_path, movie_title, director_name, genre_name1, genre_name2, play_time, reg_date
+		    	FROM
+		        	(SELECT * FROM movie_view WHERE movie_status = #{status} AND movie_title LIKE #{movie_title} ORDER BY movie_id DESC)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}
+			
 	</select>
 	
-	<select id="getMovieByRegDate"
+	<select id="findMovieByTitle"
+			resultType="com.kflix.movie.domain.Movie">
+		SELECT * FROM movie_view WHERE movie_status = #{status} AND movie_title LIKE #{search_word}
+	</select>
+	
+	<select id="findPageMovieByRegDate"
 			resultType="com.kflix.movie.domain.Movie">
 		SELECT * FROM movie_view WHERE movie_status = #{status} AND reg_date LIKE #{reg_date}
+	</select>
+	
+	<select id="getCntByFindMovieTitle" resultType="Integer">
+		SELECT count(*) FROM movie_view WHERE movie_status = #{status} AND movie_title LIKE #{word} ORDER BY movie_id DESC
 	</select>
 	
 </mapper>
