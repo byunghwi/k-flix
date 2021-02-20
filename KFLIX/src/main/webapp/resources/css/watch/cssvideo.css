@@ -18,6 +18,26 @@ body {
 	z-index: 2;
 }
 
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+a:active {
+	color: black;
+	text-decoration: none;
+}
+
 #videobar {
 	position: fixed;
 	bottom: 0;
@@ -134,10 +154,11 @@ body {
 }
 
 .show {
-	position: relative; width: 250px;
-	display: inline-block; margin: 10px;
+	position: relative;
+	width: 250px;
+	display: inline-block;
+	margin: 10px;
 }
-
 
 .color-w {
 	color: white;
@@ -157,7 +178,7 @@ body {
 	margin: 3px;
 }
 
-.ru:hover  {
+.ru:hover {
 	border: 2.5px solid white;
 	background-color: rgba(87, 87, 87, 0.8);
 	color: black;
