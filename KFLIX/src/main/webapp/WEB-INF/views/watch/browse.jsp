@@ -29,7 +29,7 @@
 </head>
 <body>
 
-<%@include file ="../main/header.jsp" %>
+	<%@include file="../main/header.jsp"%>
 	<%
 	/* 		String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
 		String clientSecret = "2sIilQ9ZED";//애플리케이션 클라이언트 시크릿값";
@@ -104,123 +104,77 @@
 	<div id="list">
 
 		<c:if test="${not empty watch}">
-			<div class="list_title">"${email }"님의 이어보기</div>
-			<div id="carouselExample1" class="carousel slide padd"
-				data-bs-ride="carousel">
-				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carouselExample1"
-						data-bs-slide-to="0" class="active" aria-current="true"
-						aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carouselExample1"
-						data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carouselExample1"
-						data-bs-slide-to="2" aria-label="Slide 3"></button>
-				</div>
-				<div class="carousel-inner">
-					<div class="carousel-item active" data-bs-interval="999999999">
+			<div class="list_title">"${login.email }"님의 이어보기</div>
+			<div class="slide_wrapper_Watching">
 
-						<!-- 비디오 선택 시 이메일 watch 검사 후 있으며 있는 video_point로 이동하기 -->
-						<c:forEach items="${watch }" var="watch" varStatus="status">
-							<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-								<c:if test="${watch.movie_id eq Allmovie.movie_id }">
-									<a
-=
-										href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+				<ul class="slides_Watching">
+					<c:forEach items="${watch }" var="watch" varStatus="status">
+						<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
+							<c:if test="${watch.movie_id eq Allmovie.movie_id }">
+								<li><a class="atag"
+									href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+										<div class="atagdiv">
+											<img style="margin: 0;" src="${Allmovie.poster_path }"
+												class="d-block dis img1" alt="...">
+											<div class="videohover">
+												<video class="video" muted autoplay loop
+													poster="${Allmovie.poster_path}">
+													<source src="${Allmovie.teaser_path}" type="video/mp4">
+												</video>
+											</div>
+										</div>
+								</a></li>
 
-										<img id="img1" src="${Allmovie.poster_path }"
-										class="d-block dis" alt="...">
-									</a>
 
-								</c:if>
-							</c:forEach>
+							</c:if>
 						</c:forEach>
-					
-					</div>
-					<div class="carousel-item" data-bs-interval="999999999">
-						<img src="/kflix/resources/imgs/watch/runon1.png"
-							class="d-block dis" alt="...">
-					</div>
-					<div class="carousel-item" data-bs-interval="999999999">
-						<img src="/kflix/resources/imgs/watch/runon1.png"
-							class="d-block dis" alt="...">
-					</div>
-				</div>
-				<button class="carousel-control-prev" type="button"
-					data-bs-target="#carouselExample1" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next" type="button"
-					data-bs-target="#carouselExample1" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
-				</button>
+					</c:forEach>
+				</ul>
+
 			</div>
+			<p class="controls_Watching">
+				<span class="prev_Watching">prev</span> <span class="next_Watching">next</span>
+			</p>
+
 		</c:if>
 
 		<div class="list_title">모든 영화</div>
-		<div id="carouselExample2" class="carousel slide padd"
-			data-bs-ride="carousel">
-			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#carouselExample2"
-					data-bs-slide-to="0" class="active" aria-current="true"
-					aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#carouselExample2"
-					data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#carouselExample2"
-					data-bs-slide-to="2" aria-label="Slide 3"></button>
-			</div>
-			<div class="carousel-inner">
-				<div class="carousel-item active" data-bs-interval="999999999">
-					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-						<a
+		<div class="slide_wrapper_All">
 
-							href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
-							<img src="${Allmovie.poster_path }" class="d-block dis" alt="...">
+			<ul class="slides_All">
+				<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
+					<li><a class="atag"
+						href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+							<div class="atagdiv">
+								<img style="margin: 0;" src="${Allmovie.poster_path }"
+									class="d-block dis img1" alt="...">
+								<div class="videohover">
+									<video class="video" muted autoplay loop
+										poster="${Allmovie.poster_path}">
+										<source src="${Allmovie.teaser_path}" type="video/mp4">
+									</video>
+								</div>
+							</div>
 
-						</a>
-					</c:forEach>
+					</a></li>
+				</c:forEach>
 
-					<%-- 
-					<img id="img2" src="/kflix/resources/imgs/watch/test1.png"
-						class="d-block dis" alt="..."> <img id="img3"
-						src="/kflix/resources/imgs/watch/test2.png" class="d-block dis"
-						alt="..."> <img id="img4"
-						src="/kflix/resources/imgs/watch/test3.png" class="d-block dis"
-						alt="..."> --%>
-				</div>
-				<div class="carousel-item" data-bs-interval="999999999">
-					<img src="/kflix/resources/imgs/watch/runon1.png"
-						class="d-block dis" alt="...">
-				</div>
-				<div class="carousel-item" data-bs-interval="999999999">
-					<img src="/kflix/resources/imgs/watch/runon1.png"
-						class="d-block dis" alt="...">
-				</div>
-			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#carouselExample2" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#carouselExample2" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+
+			</ul>
+
 		</div>
+		<p class="controls_All">
+			<span class="prev_All">prev</span> <span class="next_All">next</span>
+		</p>
 
 	</div>
 
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
-<<<<<<< HEAD
 	<script>
+		
 	</script>
 
-
-=======
->>>>>>> refs/heads/develop_youngho
 </body>
 </html>

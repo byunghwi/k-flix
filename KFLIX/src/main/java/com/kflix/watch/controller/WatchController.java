@@ -39,6 +39,7 @@ public class WatchController {
 	DirectorService directorservice;
 	GenreService genreservice;
 	
+	
 	/*
 	 * 계정 url로 들고올 경우
 	 * 
@@ -57,6 +58,17 @@ public class WatchController {
 		model.addAttribute("watch", watchservice.getSelectWatch("nn@naver.com"));
 		model.addAttribute("email", "nn@naver.com");
 		return "/watch/browse";
+	}
+	
+	@GetMapping("/btest")
+	public String btest(Model model) {
+		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		model.addAttribute("AllActor", actorservice.selectAllActorList());
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
+		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
+		model.addAttribute("watch", watchservice.getSelectWatch("nn@naver.com"));
+		model.addAttribute("email", "nn@naver.com");
+		return "/watch/NewFile";
 	}
 	
 	/*

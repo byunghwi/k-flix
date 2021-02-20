@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Acme&family=Oswald:wght@500&display=swap')
+	;
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #e9e9e9;
+}
+
+#frame {
+	position: absolute;
+	background-color: #e9e9e9;
+	top: 27%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 74%;
+	height: 300px;
+	background: #fff;
+	z-index: 2;
+	border-radius: 3rem 3rem 0 0;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
+	/* transition:all 1s; */
+}
+
+#postiondiv {
+	position: relative;
+	border: 1px solid black;
+	width: 100%;
+	min-width: 400px;
+	top: 0;
+	left: 0;
+	background-color: #181818;
+	border-radius: 3rem 3rem 0 0;
+	padding: 0;
+}
+
+#menubar {
+	position: absolute;
+	top: 360px;
+	left: 50px;
+	right: 10px;
+	z-index: 10;
+}
+
+#btn {
+	border: 2.5px solid #a6a6a6;
+	font-size: 17px;
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px 35px;
+	border-radius: 5%;
+	background-color: white;
+	margin: 0 3px;
+}
+
+#btn:hover {
+	font-size: 17px;
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px 35px;
+	border-radius: 5%;
+	background-color: white;
+	margin: 0 3px;
+}
+
+#movieinfo {
+	width: 100%;
+	height: 220px;
+	border-radius: 3%;
+}
+
+#boxsha {
+	position: relative;
+}
+
+#video {
+	height: 470px;
+	width: 100%;
+	border-radius: 3rem 3rem 0 0;
+}
+
+.color-w {
+	color: white;
+	font-size: 20px;
+}
+
+.disin {
+	display: inline-block;
+}
+
+.ru {
+	border: 2.5px solid #a6a6a6;
+	background-color: rgba(87, 87, 87, 0.4);
+	color: black;
+	padding: 12px 14px;
+	border-radius: 50%;
+	margin: 3px;
+}
+
+.ru:hover {
+	border: 2.5px solid white;
+	background-color: rgba(87, 87, 87, 0.8);
+	color: black;
+	padding: 12px 14px;
+	border-radius: 50%;
+	margin: 3px;
+}
+
+.imghover .hoverru {
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.5s;
+}
+
+#atag:hover .imghover .hoverru {
+	opacity: 1;
+	visibility: visible;
+}
+
+.c-gay {
+	color: gray;
+}
+
+.back {
+	position: absolute;
+	right: 25px;
+	top: 20px;
+	z-index: 10;
+	font-size: 20px;
+	color: white;
+	background-color: rgba(87, 87, 87, 0.8);
+	border-radius: 50%;
+	padding: 15px;
+	font-size: 20px;
+}
+
+.disnone {
+	display: none;
+}
+
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+a:active {
+	color: black;
+	text-decoration: none;
+}
+
+#maincon {
+	position: relative;
+	padding: 0 50px;
+	color: white;
+}
+
+.movie_contents {
+	margin: 10px;
+	width: 220px;
+	display: inline-block;
+}
+
+#atag {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	width: 100%;
+	height: 100%;
+}
+
+#context {
+	/* box-shadow: 0px -5px 10px -3px #454545; */
+	background-color: #454545;
+	color: white;
+	padding: 10px 15px;
+	margin: 0;
+	min-height: 290px;
+	border-radius: 0 0 2% 2%;
+}
+
+#context>* {
+	margin: 15px 0;
+}
+
+#previewModal-info>* {
+	padding: 20px 10px;
+}
+
+.ratingsty {
+	box-sizing: border-box;
+	padding: 7px;
+	width: 44px;
+	border-radius: 10%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 23px;
+	font-family: 'Acme', ' Oswald ', sans-serif;
+	display: inline-block;
+	text-align: center;
+}
+
+#movieinfo>* {
+	margin: 10px 0;
+}
+
+#boxshamin {
+	position: absolute;
+	border-radius: 3rem 3rem 0 0;
+	box-shadow: inset 0px -95px 30px -20px #181818;
+	width: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+}
+
+#infotable1 {
+	float: right;
+}

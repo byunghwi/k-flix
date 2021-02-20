@@ -13,249 +13,8 @@
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
-<style type="text/css">
-@import
-	url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap')
-	;
-
-@import
-	url('https://fonts.googleapis.com/css2?family=Acme&family=Oswald:wght@500&display=swap')
-	;
-
-* {
-	box-sizing: border-box;
-}
-
-body {
-	background-color: ;
-}
-
-#frame {
-	position: absolute;
-	background-color: #e9e9e9;
-	top: 27%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 74%;
-	height: 300px;
-	background: #fff;
-	z-index: 2;
-	border-radius: 3rem 3rem 0 0;
-	opacity: 0;
-	visibility: hidden;
-	transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1);
-	/* transition:all 1s; */
-}
-
-#postiondiv {
-	position: relative;
-	border: 1px solid black;
-	width: 100%;
-	min-width: 400px;
-	top: 0;
-	left: 0;
-	background-color: #181818;
-	border-radius: 3rem 3rem 0 0;
-	padding: 0;
-}
-
-#menubar {
-	position: absolute;
-	top: 360px;
-	left: 50px;
-	right: 10px;
-	z-index: 10;
-}
-
-#btn {
-	border: 2.5px solid #a6a6a6;
-	font-size: 17px;
-	background-color: white;
-	color: black;
-	font-weight: bold;
-	text-align: center;
-	padding: 10px 35px;
-	border-radius: 5%;
-	background-color: white;
-	margin: 0 3px;
-}
-
-#btn:hover {
-	font-size: 17px;
-	background-color: white;
-	color: black;
-	font-weight: bold;
-	text-align: center;
-	padding: 10px 35px;
-	border-radius: 5%;
-	background-color: white;
-	margin: 0 3px;
-}
-
-#movieinfo {
-	width: 100%;
-	height: 220px;
-	border-radius: 3%;
-}
-
-#boxsha {
-	position: relative;
-}
-
-#video {
-	height: 470px;
-	width: 100%;
-	border-radius: 3rem 3rem 0 0;
-}
-
-.color-w {
-	color: white;
-	font-size: 20px;
-}
-
-.disin {
-	display: inline-block;
-}
-
-.ru {
-	border: 2.5px solid #a6a6a6;
-	background-color: rgba(87, 87, 87, 0.4);
-	color: black;
-	padding: 12px 14px;
-	border-radius: 50%;
-	margin: 3px;
-}
-
-.ru:hover {
-	border: 2.5px solid white;
-	background-color: rgba(87, 87, 87, 0.8);
-	color: black;
-	padding: 12px 14px;
-	border-radius: 50%;
-	margin: 3px;
-}
-
-.imghover .hoverru {
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.5s;
-}
-
-#atag:hover .imghover .hoverru {
-	opacity: 1;
-	visibility: visible;
-}
-
-.c-gay {
-	color: gray;
-}
-
-.back {
-	position: absolute;
-	right: 25px;
-	top: 20px;
-	z-index: 10;
-	font-size: 20px;
-	color: white;
-	background-color: rgba(87, 87, 87, 0.8);
-	border-radius: 50%;
-	padding: 15px;
-	font-size: 20px;
-}
-
-.disnone {
-	display: none;
-}
-
-a:link {
-	color: black;
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-
-a:hover {
-	color: black;
-	text-decoration: none;
-}
-
-a:active {
-	color: black;
-	s text-decoration: none;
-}
-
-#maincon {
-	position: relative;
-	padding: 0 50px;
-	color: white;
-}
-
-.movie_contents {
-	margin: 10px;
-	width: 220px;
-	display: inline-block;
-}
-
-#atag {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	width: 100%;
-	height: 100%;
-}
-
-#context {
-	/* box-shadow: 0px -5px 10px -3px #454545; */
-	background-color: #454545;
-	color: white;
-	padding: 10px 15px;
-	margin: 0;
-	min-height: 290px;
-	border-radius: 0 0 2% 2%;
-}
-
-#context>* {
-	margin: 15px 0;
-}
-
-#previewModal-info>* {
-	padding: 20px 10px;
-}
-
-.ratingsty {
-	box-sizing: border-box;
-	padding: 7px;
-	width: 44px;
-	border-radius: 10%;
-	text-align: center;
-	font-weight: bold;
-	font-size: 23px;
-	font-family: 'Acme', ' Oswald ', sans-serif;
-	display: inline-block;
-	text-align: center;
-}
-
-#movieinfo>* {
-	margin: 10px 0;
-}
-
-#boxshamin {
-	position: absolute;
-	border-radius: 3rem 3rem 0 0;
-	box-shadow: inset 0px -95px 30px -20px #181818;
-	width: 100%;
-	top: 0;
-	left: 0;
-	bottom: 0;
-}
-
-#infotable1 {
-	float: right;
-}
-</style>
+<link rel="stylesheet" type="text/css"
+	href="/kflix/resources/css/watch/cssinfo.css">
 <script src="https://kit.fontawesome.com/6421ed9b05.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -307,79 +66,79 @@ a:active {
 
 				<div id="previewModal-info">
 					<div id="movieinfo">
-							<h1 style="display: inline-block;">${movie.movie_title }</h1>
-							<span
-								style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
-								<fmt:formatDate value="${movie.reg_date }" pattern="yyyy.MM" />
-							</span>
-							<c:choose>
-								<c:when test="${movie.rating eq 'all' }">
-									<p class="ratingsty"
-										style="background-color: green; font-size: 20px;">ALL</p>
-								</c:when>
-								<c:when test="${movie.rating eq '12' }">
-									<p class="ratingsty"
-										style="background-color: #dfb039; color: black;">${movie.rating }</p>
-								</c:when>
-								<c:when test="${movie.rating eq '15' }">
-									<p class="ratingsty" style="background-color: #cd6d34">${movie.rating }</p>
-								</c:when>
-								<c:when test="${movie.rating eq '19' }">
-									<p class="ratingsty" style="background-color: #c52e37">${movie.rating }</p>
-								</c:when>
-								<c:otherwise>
-									<p class="ratingsty" style="background-color: #c52e37">${movie.rating }</p>
-								</c:otherwise>
-							</c:choose>
-							<div>
-						<div style="float: left;">
-							<div style="width: 500px">
-								<h6>${movie.summary}</h6>
+						<h1 style="display: inline-block;">${movie.movie_title }</h1>
+						<span
+							style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
+							<fmt:formatDate value="${movie.reg_date }" pattern="yyyy.MM" />
+						</span>
+						<c:choose>
+							<c:when test="${movie.rating eq 'all' }">
+								<p class="ratingsty"
+									style="background-color: green; font-size: 20px;">ALL</p>
+							</c:when>
+							<c:when test="${movie.rating eq '12' }">
+								<p class="ratingsty"
+									style="background-color: #dfb039; color: black;">${movie.rating }</p>
+							</c:when>
+							<c:when test="${movie.rating eq '15' }">
+								<p class="ratingsty" style="background-color: #cd6d34">${movie.rating }</p>
+							</c:when>
+							<c:when test="${movie.rating eq '19' }">
+								<p class="ratingsty" style="background-color: #c52e37">${movie.rating }</p>
+							</c:when>
+							<c:otherwise>
+								<p class="ratingsty" style="background-color: #c52e37">${movie.rating }</p>
+							</c:otherwise>
+						</c:choose>
+						<div>
+							<div style="float: left;">
+								<div style="width: 500px">
+									<h6>${movie.summary}</h6>
+								</div>
 							</div>
-						</div>
-						<table id="infotable1" style="font-size: 16px;">
-							<tr align="left">
-								<td colspan="1"><span class="c-gay">감독: </span> <c:forEach
-										items="${AllDirector }" var="AllDirector" varStatus="status">
-										<c:if test="${movie.director_id eq AllDirector.director_id }">
+							<table id="infotable1" style="font-size: 16px;">
+								<tr align="left">
+									<td colspan="1"><span class="c-gay">감독: </span> <c:forEach
+											items="${AllDirector }" var="AllDirector" varStatus="status">
+											<c:if test="${movie.director_id eq AllDirector.director_id }">
 									${AllDirector.director_name }
 								</c:if>
-									</c:forEach></td>
-							</tr>
-							<tr align="left">
-								<td><span class="c-gay">출연: </span> <c:forEach
-										items="${AllActor }" var="AllActor" varStatus="status">
-										<c:if test="${movie.actor_id1 eq AllActor.actor_id }">
+										</c:forEach></td>
+								</tr>
+								<tr align="left">
+									<td><span class="c-gay">출연: </span> <c:forEach
+											items="${AllActor }" var="AllActor" varStatus="status">
+											<c:if test="${movie.actor_id1 eq AllActor.actor_id }">
 									${AllActor.actor_name }<c:if
-												test="${movie.actor_id2 eq AllActor.actor_id }">, 
+													test="${movie.actor_id2 eq AllActor.actor_id }">, 
 									</c:if>
-										</c:if>
-										<c:if test="${movie.actor_id2 eq AllActor.actor_id }">
+											</c:if>
+											<c:if test="${movie.actor_id2 eq AllActor.actor_id }">
 									${AllActor.actor_name }<c:if
-												test="${movie.actor_id3 eq AllActor.actor_id }">, 
+													test="${movie.actor_id3 eq AllActor.actor_id }">, 
 									</c:if>
-										</c:if>
+											</c:if>
 
-										<c:if test="${movie.actor_id3 eq AllActor.actor_id }">
+											<c:if test="${movie.actor_id3 eq AllActor.actor_id }">
 									${AllActor.actor_name }
 									</c:if>
-									</c:forEach></td>
-							</tr>
+										</c:forEach></td>
+								</tr>
 
-							<tr align="left">
-								<td><span class="c-gay">개요: </span>${movie.country }영화, <c:forEach
-										items="${AllGenre }" var="AllGenre" varStatus="status">
-										<c:if test="${movie.genre_id1 eq AllGenre.genre_id }">
+								<tr align="left">
+									<td><span class="c-gay">개요: </span>${movie.country }영화, <c:forEach
+											items="${AllGenre }" var="AllGenre" varStatus="status">
+											<c:if test="${movie.genre_id1 eq AllGenre.genre_id }">
 									${AllGenre.genre_name}<c:if
-												test="${movie.genre_id2 eq AllGenre.genre_id }">, 
+													test="${movie.genre_id2 eq AllGenre.genre_id }">, 
 									</c:if>
-										</c:if>
-										<c:if test="${movie.genre_id2 eq AllGenre.genre_id }">
+											</c:if>
+											<c:if test="${movie.genre_id2 eq AllGenre.genre_id }">
 									${AllGenre.genre_name }
 									</c:if>
-									</c:forEach></td>
-							</tr>
-						</table>
+										</c:forEach></td>
+								</tr>
+							</table>
 						</div>
 					</div>
 
@@ -561,8 +320,6 @@ a:active {
 			console.log("window onload ");
 			frame.style.opacity = '1';
 			frame.style.visibility = 'visible';
-			$('.frame').addClass('postiondiv-open');
-
 		}
 	</script>
 </body>

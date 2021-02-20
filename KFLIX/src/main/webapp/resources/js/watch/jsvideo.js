@@ -6,16 +6,19 @@ var volrange = document.getElementById("volrange");
 var back = document.getElementById('back');
 var videocon = document.getElementById('videocon');
 var videobar = document.getElementById('videobar');
-/*for(a of document.getElementsByTagName('div')){
-        //     console.log(a instanceof );
-       }
+var movieinfo = document.getElementById('movieinfo');
+var recommend = document.getElementById('recommend');
 
-document.getElementsByTagName('div').length*/
+
+recommend.addEventListener("click", (e) => {
+	recommend.style.display = 'none';
+});
 
 
 videocon.addEventListener("mouseover", function() {
 	back.style.display = 'block';
 	videobar.style.display = 'block';
+	movieinfo.style.display = 'none';
 });
 
 videocon.addEventListener("mouseout", function() {
@@ -34,14 +37,29 @@ function sound() {
 function vidplay() {
 	if (video.paused) {
 		video.play();
-		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
+		movieinfo.style.display = 'none';
+		playnpause.innerHTML = `<i id="play" class="fas fa-pause color-w"></i>`;
 	} else {
 		video.pause();
-		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-play color-w"></i>`;
+		setTimeout(function() {
+			if (video.paused) {
+				if (recommend.style.display == 'none') {
+					movieinfo.style.display = 'block';
+					movieinfo.style.opacity = '1';
+				}
+			} else {
+				movieinfo.style.display = 'none';
+			}
+		}, 3000);
+		playnpause.innerHTML = `<i id="play" class="fas fa-play color-w"></i>`;
 	}
 }
 
 function restart() {
+	if (video.paused) {
+		video.play();
+		playnpause.innerHTML = `<i id="play" class="fas fa-pause color-w"></i>`;
+		}
 	video.currentTime = 0;
 }
 
@@ -50,6 +68,7 @@ function volshow() {
 }
 
 function skip(value) {
+	
 	video.currentTime += value;
 }
 
@@ -69,15 +88,13 @@ video.addEventListener("timeupdate", PlayTime, false);
 video.addEventListener("ended", event, false);
 
 function PlayTime(e) {
-	if(Math.floor(video.currentTime)==1){
-		sound();
-	}
+	
 	document.getElementById("playtime").innerHTML =
 		"재생 상태 : " + Math.floor(video.currentTime) + "/" + Math.floor(video.duration);
 }
 
 function event(e) {
-	//이벤트가 발생하였을 경우에 대한 처리
+	recommend.style.display = 'block';
 	alert("미디어 재생이 완료되었습니다.");
 }
 
@@ -88,7 +105,6 @@ video.addEventListener(
 	   progressbar.getElementsByTagName("span")[0].innerHTML = percent;*/
 		progressbar.value = Math.floor(video.currentTime);
 		progressbar.max = Math.floor(video.duration);
-
 	},
 	false
 );

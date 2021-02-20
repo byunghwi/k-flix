@@ -24,29 +24,30 @@
 
 </head>
 <body>
-	<div onclick="vidplay()" id="videocon">
+	<div id="videocon">
 
 		<!-- <button onclick="savecurrentTime()">
 	<i style="display: hidden;" id="back" class="fas fa-arrow-left color-w relative"> <span style="font-size: 15px;"> 뒤로가기 </span> </i>
 	</button> -->
 
 		<a onclick="savecurrentTime()"
-			href="<%=application.getContextPath()%>/browse/${movie.movie_id }"> <i
-			style="display: hidden;" id="back"
+			href="<%=application.getContextPath()%>/browse/${movie.movie_id }">
+			<i style="display: hidden;" id="back"
 			class="fas fa-arrow-left color-w relative"> <span
 				style="font-size: 15px;"> 뒤로가기 </span>
 		</i>
 		</a>
 
-		<!-- 뒤로가기 눌렸을 때 바로 디비로 수정된 값으로 메인화면이 표시 되어야하는데 에러가 발생 -->
 		<div id="videobar" style="display: hidden;">
 			<div>
-				<progress id='progressbar' class="progressbar" max='100' value='5'></progress>
+				<progress id='progressbar' class="progressbar" value='5'></progress>
 			</div>
 			<i id="restart" onclick="restart()" class=" fas fa-stop color-w"></i>
-			<div style="display: inline-block;" id="playnpause">
-				<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>
+			<div style="display: inline-block;" onclick="vidplay()"
+				id="playnpause">
+				<i id="play" class="fas fa-pause color-w"></i>
 			</div>
+
 			<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
 			<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
 			<div style="display: inline-block;" id="volume">
@@ -55,25 +56,65 @@
 					id="volrange">
 			</div>
 			<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
-			<i class="fas fa-step-forward color-w"></i> <i
-				class="fas fa-layer-group color-w"></i> <i
-				onclick="openFullscreen()" class="fas fa-expand color-w"></i>
+			<i onclick="openFullscreen()" class="fas fa-expand color-w"></i>
 			<div style="display: inline-block;" id="playtime" class="color-w"></div>
-
 		</div>
-
-		<video id="video" muted autoplay loop
+		<video id="video" onclick="vidplay()" muted autoplay
 			poster="${movie.poster_path }">
 			<source src="${movie.video_path }" type="video/mp4">
 		</video>
+
+
+		<div id="movieinfo" onclick="vidplay()">
+			<h5 style="color: white;">시청 중인 콘텐츠</h5>
+			<h3 style="color: white;">${movie.movie_title }</h3>
+			<br>
+			<h5 style="width: 500px; color: white;">${movie.summary }</h5>
+		</div>
+
+		<div id="recommend" style="display: none;">
+			<h5>추천 영상</h5>
+			<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
+				<c:if
+					test="${movie.genre_id1 eq Allmovie.genre_id1 or movie.genre_id2 eq Allmovie.genre_id1 or 
+									movie.genre_id1 eq Allmovie.genre_id2 or movie.genre_id2 eq Allmovie.genre_id2 }">
+
+					<c:if test="${movie.movie_id != Allmovie.movie_id }">
+					<c:set var="sum"  value="${sum+1}" />
+					<c:if test="${sum < 4}">
+							<a id="atag" class="atagname" href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
+								<div class="show">
+									<img
+										style="width: 100%; height: 150px; border-radius: 2% 2% 0 0;"
+										src="${Allmovie.poster_path }" class="d-block dis hoverimg"
+										alt="...">
+									<div class="imghover"
+										style="position: resize; width: 100%; top: 0; left: 0; bottom: 0; z-index: 10; background-color: rgba(255, 255, 255, 0);">
+										<div
+											style="position: absolute; top: 23%; left: 33%; z-index: 20; width: 30%; height: 50%;"
+											class="ru disin hoverru">
+											<i
+												style="position: absolute; font-size: 30px; top: 27%; left: 34%; bottom: 0; z-index: 10;"
+												class="fas fa-play color-w hoverru"></i>
+										</div>
+									</div>
+								</div>
+							</a>
+							</c:if>
+						</c:if>
+					</c:if>
+			</c:forEach>
+		</div>
 
 	</div>
 
 	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
 
 	<script>
+	
 		console.log("${movie.movie_id}");
 		sound();
+		var video = document.getElementById('video');
 		<c:forEach items="${watch }" var="watch" varStatus="status">
 		<c:if test="${watch.movie_id eq movie.movie_id }">
 		video.currentTime = "${watch.view_point}";
