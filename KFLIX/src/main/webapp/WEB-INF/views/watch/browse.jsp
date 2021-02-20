@@ -122,7 +122,9 @@
 							<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 								<c:if test="${watch.movie_id eq Allmovie.movie_id }">
 									<a
+=
 										href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+
 										<img id="img1" src="${Allmovie.poster_path }"
 										class="d-block dis" alt="...">
 									</a>
@@ -170,8 +172,10 @@
 				<div class="carousel-item active" data-bs-interval="999999999">
 					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 						<a
+
 							href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 							<img src="${Allmovie.poster_path }" class="d-block dis" alt="...">
+
 						</a>
 					</c:forEach>
 
@@ -209,9 +213,12 @@
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
+<<<<<<< HEAD
 	<script>
 	</script>
 
 
+=======
+>>>>>>> refs/heads/develop_youngho
 </body>
 </html>
