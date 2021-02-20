@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>${login} 님 환영합니다.</h1>
-<a href="logout">로그아웃</a>
+<h1>400에러</h1>
 </body>
 </html>
