@@ -42,7 +42,7 @@
 		
 		<interceptor>
 			<mapping path="/browse"/>
-			<mapping path="/movie/management"/>
+			<mapping path="/movie/movieindex"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

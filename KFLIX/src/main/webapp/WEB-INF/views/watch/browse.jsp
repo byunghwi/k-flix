@@ -28,6 +28,8 @@
 
 </head>
 <body>
+
+<%@include file ="../main/header.jsp" %>
 	<%
 	/* 		String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
 		String clientSecret = "2sIilQ9ZED";//애플리케이션 클라이언트 시크릿값";

@@ -41,8 +41,9 @@ public class MainController {
 	// 로그인 첫 화면 요청 메소드
 	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
-		// return "login";
-		return "/main/index";
+		//session에 로그인 정보가 있으면 바로 메인페이지, 로그인 안돼있으면 로그인페이지
+		return (session.getAttribute("login") != null) ? "redirect:/browse": "/main/index";  
+			
 	}
 
 	// 네이버 로그인 성공시 callback호출 메소드

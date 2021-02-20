@@ -20,10 +20,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("login인터셉터 posthandle 접근");
+
 		HttpSession session = request.getSession();
 		ModelMap modelMap = modelAndView.getModelMap();
 		Member memberVO = (Member)modelMap.get("memberVO");
+		
+		System.out.println("login인터셉터 posthandle member객체 > " + memberVO);
 		
 		if(memberVO != null) {
 			log.info("===========================new login success=============================");
