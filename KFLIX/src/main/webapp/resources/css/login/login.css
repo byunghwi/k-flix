@@ -1,0 +1,200 @@
+@charset "UTF-8";
+
+@import
+	url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+
+.login-img {
+	position: relative;
+	background-image: url("/kflix/resources/imgs/main/loginForm.jpg");
+	height: 100vh;
+	background-size: cover;
+}
+
+.img-cover {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 1;
+}
+
+.login-form-wrap {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 12px;
+	width: 500px;
+	height: 700px;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, .75);
+}
+
+.logform-content {
+	position: relative;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 2rem;
+	z-index: 3;
+	text-align: center;
+}
+
+.logform-content div {
+	width: 100%;
+	align-content: center;
+}
+
+body {
+	background: #111;
+	font-family: "Montserrat";
+	text-align: center;
+}
+
+.logo>img {
+	width: 250px;
+	height: auto;
+	position: absolute;
+	top: 80%;
+	right: 0;
+	left: 0;
+	margin: -80px auto;
+	-webkit-animation: animate 20s ease;
+	animation: animate 20s ease;
+}
+
+@
+-webkit-keyframes animate { 0%{
+	opacity: 0;
+	-webkit-transform: scale3d(0.3, 0.3, 0.3);
+	transform: scale3d(0.3, 0.3, 0.3);
+}
+
+60%{
+opacity
+:
+ 
+1;
+-webkit-transform
+:
+ 
+scale3d
+(1
+,
+1,1);
+transform
+:
+ 
+scale3d
+(1
+,
+1,1);
+}
+}
+.card {
+	perspective: 1000;
+	width: 350px;
+	height: 300px;
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	margin: auto;
+	transform: translate(-50%, -50%);
+}
+
+.card .flip {
+	transition: 0.9s;
+	transform-style: preserve-3d;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin: -25px auto;
+}
+
+.card .flip .front {
+	z-index: 2;
+}
+
+.card .flip .front, .card .flip .back {
+	backface-visibility: hidden;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.card .flip .front:before, .card .flip .back:before {
+	transition: all 0.3s ease;
+	border-color: transparent;
+	content: "";
+	display: inline-block;
+	position: absolute;
+	bottom: -24px;
+}
+
+#vertical-flip:hover .flip, #vertical-flip.hover .flip {
+	transform: rotateX(180deg);
+	transition: all 1s ease;
+}
+
+#vertical-flip .front {
+	background: transparent;
+	filter: saturate(2);
+	z-index: 1;
+}
+
+#vertical-flip .back {
+	transform: rotateX(180deg);
+	background: transparent;
+	color: #eee;
+}
+
+.box-input {
+	position: relative;
+	top: 90px;
+}
+
+input {
+	outline: 0 !important;
+	border-width: 0 0 1px 0 !important;
+	border-color: #eee !important;
+	margin: 0 auto;
+}
+
+input, button {
+	padding: 10px 3%;
+	background: transparent;
+	font-size: 15px;
+	width: 300px;
+	height: 25px;
+	font-family: "FontAwesome";
+	border: 1px solid #eee;
+	position: relative;
+	color: #eee;
+	margin-bottom: 15px;
+	border-radius: 3px;
+}
+
+::-webkit-input-placeholder {
+	color: #ddd !important;
+	font-family: "Font Awesome 5 Free";
+	font-size: 16px;
+}
+
+button {
+	width: 325px;
+	height: 40px;
+	margin-top: 10px;
+	background: transparent;
+	text-align: center;
+	cursor: pointer;
+	color: #eee;
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: all 1s ease;
+}
+
+button:hover {
+	background: #D50000;
+	border: none;
+	transition: all 1.5s ease;
+}

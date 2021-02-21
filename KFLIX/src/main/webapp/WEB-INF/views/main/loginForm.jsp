@@ -78,8 +78,8 @@
 					<input type="password" name="pwd" placeholder="비밀번호를 입력하세요">
 					<button class="btn login-button btn-submit btn-small" type="submit">로그인</button>
 						<a href="${url}"><img height="50"
-							src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
-						
+							src="resources/imgs/login/네이버 아이디로 로그인_완성형_Green.PNG" /></a>
+
 				</form>
 			</div>
 		</div>

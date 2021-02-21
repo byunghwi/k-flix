@@ -11,22 +11,30 @@
 		nick,
 		birth,
 		member_age,
-		gender )
+		gender,
+		naver,
+		kakao
+		)
 		VALUES (
 		#{email},
 		#{pwd},
 		#{nick},
 		#{birth},
 		#{member_age},
-		#{gender}
+		#{gender},
+		#{naver},
+		#{kakao}
 		)
 
 	</insert>
 
 	<select id="login" resultType="com.kflix.member.domain.Member">
-		SELECT * FROM member WHERE email = #{email} 
+		SELECT * FROM member WHERE
+		<if test="naver != null">
+			 naver = #{naver}
+		</if>
 		<if test="naver == null">
-			AND pwd = #{pwd}
+			email = #{email} AND pwd = #{pwd}
 		</if>
 
 	</select>
