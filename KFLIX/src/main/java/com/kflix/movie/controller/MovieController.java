@@ -191,28 +191,6 @@ public class MovieController {
 
 		return "movie/result";
 	}
-	
-	
-	/*
-	 *  삭제 페이지 / status = DISABLED
-	 */
-	@PostMapping("delete")
-	public String delete(Model model, int movie_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(movie_id, DISABLED);
-		
-		String msg = result > 0 ? "삭제 되었습니다." : "삭제에 실패하였습니다.";
-		
-		model.addAttribute("msg", msg);
-		
-		return "redirect:/movie/movieindex";
-	}
 
-
-		
-	@GetMapping("testnav")
-	public String testNav() {
-		return "movie/nav";
-	}
-	
 }
 
