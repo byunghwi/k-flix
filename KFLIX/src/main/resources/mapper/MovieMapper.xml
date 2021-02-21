@@ -11,7 +11,7 @@
 
 	<select id="getMovieById"
 		resultType="com.kflix.movie.domain.Movie">
-		SELECT * FROM movie WHERE movie_id = #{movie_id}
+		SELECT * FROM movie_view WHERE movie_id = #{movie_id}
 	</select>
 
 	<insert id="addMovie">

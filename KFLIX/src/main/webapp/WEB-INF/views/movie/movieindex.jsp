@@ -16,14 +16,17 @@
 <meta charset="UTF-8">
 <title>영화 관리</title>
 </head>
-
+<!-- <style>
+ * {
+ 	border: 1px solid;
+ }
+</style> -->
 <body>
-<div class="container-fluid">
-<div class="row">
+
 <%@include file ="/resources/include/movie/nav.jsp" %>
 
 <!-- 게시판 -->
-<div class="col-xxl-9 px-3 pt-5">
+<div class="container pt-5" id="board">
 	<div class="d-flex justify-content-end">
 		<a href="./deletedMovie" class="btn btn-secondary btn-sm">삭제된 항목</a>
 	</div>
@@ -80,8 +83,8 @@
 
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
 </div>
-</div>
-</div>
+
+
 <!-- 삭제 모달 -->
 <div class="modal" tabindex="-1" id="deletemodal">
   <div class="modal-dialog">

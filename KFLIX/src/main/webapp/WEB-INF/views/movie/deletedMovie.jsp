@@ -15,8 +15,8 @@
 
 </head>
 <body>
-
-<div class="container">
+<%@include file ="/resources/include/movie/nav.jsp" %>
+<div class="container pt-5">
 	<div class="d-flex justify-content-end">
 		<a href="./movieindex" class="btn btn-secondary btn-sm">관리 페이지</a>
 	</div>

@@ -15,30 +15,35 @@
 </head>
 <body>
 
-<div class="container">
-<div>
-<h1>장르관리</h1>
-	<a href="./deletedList" type="button" class="btn btn-secondary text-light">삭제된 항목</a>
-</div>
+<%@include file ="/resources/include/movie/nav.jsp" %>
 
-<div>
-	<span>
-		<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addmodal">
-		  + 추가
-		</button>
-	</span>
+<div class="container pt-5">
+	<div class="d-flex justify-content-end">
+		<a href="./deletedList" type="button" class="btn btn-secondary text-light btn-sm">삭제된 항목</a>
+	</div>
 	
-	<a href="./" class="btn btn-info text-light">전체 보기</a>
-	
-	<!-- 검색 -->
-	<form action="./find" method="post">
-	<div class="input-group mb-3 input_text">
-		<input type="text" name="genre_name" class="form-control" aria-describedby="button-addon2">
-  		<button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
-  	</div>
-  	</form>
-</div>
+	<div class="d-flex justify-content-center">
+		<h1>장르관리</h1>
+	</div>
 
+<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-start">
+		<span>
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addmodal">
+			  + 추가
+			</button>
+		</span>
+</div>	
+<div class="d-flex justify-content-end">
+		<div class="input-group mb-3 input_text">
+			<input type="text" name="genre_name" class="form-control" aria-describedby="button-addon2" placeholder="이름">
+	  		<button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+	  	</div>
+		<div class="ps-2">
+			<a href="./genreindex" class="btn btn-outline-secondary">All</a>
+		</div>
+	</div>
+</div>
 <section>
 	<table class="table table-striped text-center">
 		<tr>

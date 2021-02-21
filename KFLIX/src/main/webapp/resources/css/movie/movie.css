@@ -14,8 +14,18 @@ img {
 	
 }
 
-nav{
-	background-color: black;
-	height: 100%;
+
+#nav_bar{
+	background-color: rgb(48,53,55);	
 }
 
+#navlist a{
+	color: white;
+	letter-spacing: 1em;
+}
+
+#header{
+	color: red;
+	letter-spacing: 0.5em;
+	padding-left: 40px;
+}
