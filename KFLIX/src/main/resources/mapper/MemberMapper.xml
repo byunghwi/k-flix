@@ -49,5 +49,10 @@
 		SELECT * FROM member WHERE sessionkey = #{value} AND
 		sessionlimit > SYSDATE
 	</select>
+	
+	<select id="checkEmail"
+		resultType="_int" parameterType="String">
+		SELECT count(email) FROM member WHERE email = #{email}
+	</select>
 
 </mapper>

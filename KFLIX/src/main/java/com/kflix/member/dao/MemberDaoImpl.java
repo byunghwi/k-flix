@@ -47,4 +47,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + ".checkMemWithSessionKey", value);
 	}
 
+	@Override
+	public int checkEmail(String email) {
+		return sqlSession.selectOne(NAMESPACE+ ".checkEmail", email);
+	}
+
 }
