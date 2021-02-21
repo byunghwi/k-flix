@@ -31,6 +31,9 @@
 									type="hidden" name="nick" value="${naver.nick }" /> <input
 									type="hidden" id="member_age" name="member_age" />
 								<div class="box-input">
+									<div class="text-first">잠깐,</div>
+									<div class="text-second">아직 KFLIX 회원이 아니시군요</div>
+									<div class="text-third">네이버 아이디로 빠르고 간편하게 가입해보세요</div>
 									<input type="email" name="email"
 										placeholder="&#xf007;  E-mail을 입력하세요" required />
 									<button type="submit">네이버 아이디로 가입</button>

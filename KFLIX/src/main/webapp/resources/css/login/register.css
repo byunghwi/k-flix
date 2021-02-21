@@ -45,6 +45,30 @@
 	align-content: center;
 }
 
+.logform-content div .text-first{
+	font-weight: bold;
+	font-family: "Montserrat";
+	color: #eee;
+	font-size: 32px;
+	margin-bottom: 10px;
+}
+.logform-content div .text-second{
+	font-weight: normal;
+	font-family: "Montserrat";
+	color: #c0c0c0;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.logform-content div .text-third{
+
+	font-weight: normal;
+	font-family: "Montserrat";
+	color: #c0c0c0;
+	font-size: 20px;
+	margin-bottom: 30px;
+}
+
+
 body {
 	background: #111;
 	font-family: "Montserrat";
@@ -161,7 +185,7 @@ input, button {
 	font-size: 15px;
 	width: 300px;
 	height: 25px;
-	font-family: "FontAwesome";
+	font-family: "Montserrat";
 	border: 1px solid #eee;
 	position: relative;
 	color: #eee;
