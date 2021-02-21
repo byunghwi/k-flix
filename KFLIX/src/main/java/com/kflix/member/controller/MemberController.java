@@ -38,13 +38,14 @@ public class MemberController {
 	// 회원가입 처리
 	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String registerPOST(Member member, RedirectAttributes redirectAttributes) throws Exception {
-
+		System.out.println("[MemberController] member 객체 > " + member);
 		int result = memberService.register(member);
 
 		if (result == 1) {
 			redirectAttributes.addFlashAttribute("msg", "REGISTERED");
 		}
 
-		return "redirect:/main";
+		//return "redirect:/";
+		return "redirect:/login";
 	}
 }
