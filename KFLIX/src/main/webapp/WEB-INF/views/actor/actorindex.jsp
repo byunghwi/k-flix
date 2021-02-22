@@ -11,17 +11,17 @@
 <link rel="stylesheet" href="/kflix/resources/css/genre/genre.css" />
 
 <meta charset="UTF-8">
-<title>장르</title>
+<title>배우</title>
 </head>
 <body>
 
 <div class="container pt-5">
 	<div class="d-flex justify-content-end">
-		<a href="./deletedList" type="button" class="btn btn-secondary text-light btn-sm">삭제된 항목</a>
+		<a href="./deletedActor" type="button" class="btn btn-secondary text-light btn-sm">삭제된 항목</a>
 	</div>
 	
 	<div class="d-flex justify-content-center">
-		<h1>장르관리</h1>
+		<h1>배우관리</h1>
 	</div>
 
 <div class="d-flex justify-content-between">
@@ -42,8 +42,8 @@
 		</div>
 	</div>
 </div>
-<section id="genrelist">
-	<table class="table table-striped text-center align-middle" id="genretable">
+<section id="actorlist">
+	<table class="table table-striped text-center align-middle" id="actortable">
 		 <thead>
 			<tr>
 				<th>#</th>
@@ -52,15 +52,15 @@
 			</tr>
 		 </thead>
 		 <tbody>
-			<c:forEach items="${genre }" var="genre" varStatus="status">
+			<c:forEach items="${actor }" var="actor" varStatus="status">
 				<tr id="contents">
-					<td>${genre.genre_id }</td>
-					<td>${genre.genre_name }</td>
+					<td>${actor.actor_id }</td>
+					<td>${actor.actor_name }</td>
 					<td>
 						<button type="button" class="btn btn-primary" data-bs-toggle="modal" 
-								data-genreid="${genre.genre_id }" data-bs-target="#updatemodal">수정</button>
+								data-actorid="${actor.actor_id }" data-bs-target="#updatemodal">수정</button>
 						<button type="button" class="btn btn-danger" data-bs-toggle="modal" 
-								data-genreid="${genre.genre_id }" data-bs-target="#deletemodal">삭제</button>
+								data-actorid="${actor.actor_id }" data-bs-target="#deletemodal">삭제</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -70,7 +70,7 @@
 </div>
 
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
-<%@include file ="/resources/include/genre/enabledModal.jsp" %>
+<%@include file ="/resources/include/actor/enabledModal.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
@@ -81,6 +81,6 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/genre/enabled.js?ver=1"></script>
+<script src="/kflix/resources/js/actor/enableActor.js?ver=1"></script>
 </body>
 </html>

@@ -52,7 +52,7 @@ public class WatchController {
 	@GetMapping("/browse")
 	public String getbrowse(Model model) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
-		model.addAttribute("AllActor", actorservice.selectAllActorList());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("watch", watchservice.getSelectWatch("nn@naver.com"));
@@ -63,7 +63,7 @@ public class WatchController {
 	@GetMapping("/btest")
 	public String btest(Model model) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
-		model.addAttribute("AllActor", actorservice.selectAllActorList());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("watch", watchservice.getSelectWatch("nn@naver.com"));
@@ -94,7 +94,7 @@ public class WatchController {
 	@GetMapping(value = "/browse/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getmovie(Model model, @PathVariable("movie_id") int movie_id) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
-		model.addAttribute("AllActor", actorservice.selectAllActorList());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("movie", watchservice.getmovie(movie_id));
@@ -111,7 +111,7 @@ public class WatchController {
 	@GetMapping(value = "/browse/watch/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getwatch(Model model, @PathVariable("movie_id") int movie_id) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
-		model.addAttribute("AllActor", actorservice.selectAllActorList());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("movie", watchservice.getmovie(movie_id)); 

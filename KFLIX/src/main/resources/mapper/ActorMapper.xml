@@ -5,8 +5,43 @@
 <mapper namespace="com.kflix.mapper.ActorMapper">
 
 	<select id="getAllActorList" resultType="com.kflix.actor.domain.Actor">
-		SELECT * FROM actor
+		SELECT * FROM actor where actor_status = #{status} ORDER BY actor_id DESC
 	</select>
+	
+	<select id="getAllPageActorList" resultType="com.kflix.actor.domain.Actor">
+		SELECT 
+			 actor_id, actor_name, actor_status
+		FROM 
+		(SELECT SEQ,  actor_id, actor_name, actor_status
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, actor_id, actor_name, actor_status
+		    	FROM
+		        	(SELECT * FROM actor WHERE actor_status = #{status} ORDER BY actor_id DESC)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}
+	</select>
+	
+	<select id="getActorCnt" resultType="integer">
+		select count(*) from actor where actor_status = #{status}
+	</select>
+	
+	<select id="getFindActorList" resultType="com.kflix.actor.domain.Actor">
+		select * from actor where actor_status = #{status} AND actor_name LIKE #{actor_name} ORDER BY actor_id DESC
+	</select>
+	
+	<insert id="insertActor">
+		INSERT INTO actor VALUES(actor_id_seq.NEXTVAL, #{actor_name}, 'Y')
+	</insert>
+	
+	<update id="updateActor">
+		UPDATE actor SET actor_name = #{actor_name} WHERE actor_id = #{actor_id}
+	</update>
+	
+	<update id="deleteOrRecoveryActor">
+		UPDATE actor SET actor_status = #{status} WHERE actor_id = #{actor_id}
+	</update>
 	
 	<select id="getNameById" resultType="string">
 		SELECT actor_name FROM actor WHERE actor_id = #{actor_id}
