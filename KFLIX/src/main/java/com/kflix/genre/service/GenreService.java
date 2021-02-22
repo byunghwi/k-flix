@@ -5,10 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.kflix.genre.domain.Genre;
+import com.kflix.util.pagenation.domain.PageNation;
 
 public interface GenreService {
 
 	public List<Genre> selectAllGenreList(char status);
+	
+	public List<Genre> selectPageGenreList(PageNation pagenation, char status);
+	
+	public int getCountGenre(char status);
+	
+	public List<Genre> getFindGenreList(String genre_name, char status);
 	
 	public int deleteOrRecovertGenre(int gerne_id, char status);
 	

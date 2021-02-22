@@ -50,9 +50,6 @@
 </style>
 <body>
 
-<%@include file ="/resources/include/movie/nav.jsp" %>
-
-
 <div class="" id="img-back">
 <div id="detail">
 	<h1>${movie.movie_title }</h1>

@@ -16,6 +16,8 @@ public interface MovieMapper {
 	// 영화 상세
 	Movie getMovieById(int movie_id);
 	
+	Movie getMovieViewById(int movie_id);
+	
 	// 영화 등록
 	int addMovie(Movie movie);
 	

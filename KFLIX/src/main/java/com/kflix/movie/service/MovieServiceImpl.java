@@ -50,6 +50,11 @@ public class MovieServiceImpl implements MovieService {
 		return mv_mapper.getMovieById(movie_id);
 	}
 
+	@Override
+	public Movie selectMovieViewById(int movie_id) {
+		return mv_mapper.getMovieViewById(movie_id);
+	}
+	
 	/*
 	 * 등록
 	 */
@@ -180,6 +185,7 @@ public class MovieServiceImpl implements MovieService {
 		director_name = "%" + director_name + "%";
 		return mv_mapper.findMovieByDirectName(director_name, status);
 	}
+
 
 
 

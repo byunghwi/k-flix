@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kflix.genre.service.GenreService;
+import com.kflix.util.pagenation.domain.PageNation;
+import com.kflix.util.pagenation.domain.PageNation.PageDTO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -20,61 +22,25 @@ public class GenreController {
 	@Inject
 	GenreService genre_service;
 	
+	static final char ENABLED = 'Y';
+	static final char DISABLED = 'N';
+	
 	@GetMapping("genreindex")
-	public String genreIndex(Model model) {
-		model.addAttribute("genre", genre_service.selectAllGenreList('Y'));	
+	public String genreIndex(Model model, PageNation pagenation) {
+		pagenation.setAmount(10);
+		model.addAttribute("genre", genre_service.selectPageGenreList(pagenation, ENABLED));
+		model.addAttribute("page", pagenation.getPageData(10, genre_service.getCountGenre(ENABLED)));
 		return "genre/genreindex";
 	}
+	
 	
 	@GetMapping("deletedList")
-	public String deletedGenreList(Model model) {
-		model.addAttribute("genre", genre_service.selectAllGenreList('N'));
+	public String deletedGenreList(Model model, PageNation pagenation) {
+		pagenation.setAmount(10);
+		model.addAttribute("genre", genre_service.selectPageGenreList(pagenation, DISABLED));
+		model.addAttribute("page", pagenation.getPageData(10, genre_service.getCountGenre(DISABLED)));
 		return "genre/deletedGenre";
 	}
-	
-	@PostMapping("add")
-	public String addGenre(String genre_name) {
-		genre_service.addGenre(genre_name);
-		return "redirect:/genre/";
-	}
-	
-	@PostMapping("update")
-	public String updateGenre(String genre_name, int genre_id) {
-		genre_service.updateGenre(genre_id, genre_name);
-		
-		return "redirect:/genre/";
-	}
-	
-	@PostMapping("delete")
-	public String deleteGenre(int genre_id) {
-		genre_service.deleteOrRecovertGenre(genre_id, 'N');
-		
-		return "redirect:/genre/";
-	}
-	
-	
-	@PostMapping("find")
-	public String findGenre(Model model, String genre_name) {
-		model.addAttribute("genre", genre_service.findGenreByName(genre_name, 'Y'));
-		return "genre/genreindex";
-	}
-	
-	
-	/*
-	 *  삭제된 항목 컨트롤러
-	 */
-	
-	@PostMapping("recovery")
-	public String recoveryGenre(int genre_id) {
-		genre_service.deleteOrRecovertGenre(genre_id, 'Y');
-		
-		return "redirect:/genre/deletedList";
-	}
-	
-	@PostMapping("deletedList/find")
-	public String findDeletedGenre(Model model, String genre_name) {
-		model.addAttribute("genre", genre_service.findGenreByName(genre_name, 'N'));
-		return "genre/deletedGenre";
-	}
+
 	
 }

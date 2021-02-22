@@ -136,7 +136,7 @@ public class MovieController {
 	 */
 	@GetMapping("detail/{id}")
 	public String detail(Model model, @PathVariable("id") int movie_id) {
-		model.addAttribute("movie", mv_service.selectMovieById(movie_id)); 
+		model.addAttribute("movie", mv_service.selectMovieViewById(movie_id)); 
 		
 		return "movie/detail";
 	}

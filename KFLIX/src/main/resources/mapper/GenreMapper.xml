@@ -8,6 +8,31 @@
 		SELECT * FROM genre WHERE genre_status = #{status} ORDER BY genre_id DESC
 	</select>
 	
+	
+	<select id="getAllPageGenreList" resultType="com.kflix.genre.domain.Genre">
+		SELECT 
+			 genre_id, genre_name, genre_status
+		FROM 
+		(SELECT SEQ,  genre_id, genre_name, genre_status
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, genre_id, genre_name, genre_status
+		    	FROM
+		        	(SELECT * FROM genre WHERE genre_status = #{status} ORDER BY genre_id DESC)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}
+	
+	</select>
+	
+	<select id="getGerneCnt" resultType="integer">
+		select count(*) from genre where genre_status = #{status}
+	</select>
+	
+	<select id="getFindGenreList" resultType="com.kflix.genre.domain.Genre">
+		select * from genre where genre_status = #{status} AND genre_name LIKE #{genre_name} ORDER BY genre_id DESC
+	</select>
+	
 	<insert id="insertGenre">
 		INSERT INTO genre VALUES(genre_id_seq.NEXTVAL, #{genre_name}, 'Y')
 	</insert>
