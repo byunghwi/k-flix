@@ -44,10 +44,9 @@ public class MovieServiceTest {
 	Movie movie;
 
 	@Test
-	@Ignore
 	public void testView() {		
-		assertNotNull(mv_service.selectAllMovieVeiw('Y'));
-		log.info(mv_service.selectAllMovieVeiw('Y'));
+		assertNotNull(mv_service.selectAllMovieVeiw('N'));
+		log.info(mv_service.selectAllMovieVeiw('N'));
 
 	}
 	
@@ -94,8 +93,36 @@ public class MovieServiceTest {
 	}
 
 	@Test
+	@Ignore
 	public void testFindCnt() {
 		log.info(mv_service.findMovieByTitle("KG", 'Y').size());
+	}
+	
+	@Test
+	@Ignore
+	public void testfind() {
+		List<Movie> reg = mv_service.findMovieByRegDate("21/", 'Y');
+		List<Movie> genre = mv_service.findMovieByGenreName("코", 'Y');
+		List<Movie> direc = mv_service.findMovieByDirectName("봉", 'Y');
+		
+		assertNotNull(direc);
+		assertNotNull(reg);
+		assertNotNull(genre);
+		
+		log.info("reg_date - 21/");
+		for(Movie mv : reg) {
+			log.info(mv);
+		}
+		
+		log.info("genre - 코");
+		for(Movie mv : genre) {
+			log.info(mv);
+		}
+		
+		log.info("direc - 봉");
+		for(Movie mv : direc) {
+			log.info(mv);
+		}
 	}
 
 }

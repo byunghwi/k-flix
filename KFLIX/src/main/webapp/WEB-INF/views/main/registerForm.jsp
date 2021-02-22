@@ -1,106 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>네이버로 회원가입</title>
+<script src="/kflix/resources/js/common/common.js"></script>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+	rel="stylesheet">
+
+<link href="/kflix/resources/css/login/register.css" rel="stylesheet">
+
 </head>
 <body>
-	<!-- 회원가입 모달 -->
-	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">회원가입</h4>
+	<div class="login-img">
+		<div class="img-cover"></div>
+		<div class="login-form-wrap">
+			<div class="logform-content">
+				<div id="vertical-flip" class="card">
+					<div class="flip">
+						<div class="front">
+							<form action="${pageContext.request.contextPath}/member/register"
+								method="post">
+								<input type="hidden" name="naver" value="${naver.naver }" /> <input
+									type="hidden" name="gender" value="${naver.gender }" /> <input
+									type="hidden" name="nick" value="${naver.nick }" /> <input
+									type="hidden" id="member_age" name="member_age" />
+								<div class="box-input">
+									<div class="text-first">잠깐,</div>
+									<div class="text-second">아직 KFLIX 회원이 아니시군요</div>
+									<div class="text-third">네이버 아이디로 빠르고 간편하게 가입해보세요</div>
+									<input type="email" name="email" id="email"
+										placeholder="&#xf007;  E-mail을 입력하세요" required />
+									<div class="email-check" id = "email-check"></div>
+									<button type="button"
+										onclick="checkEmail();">중복확인</button>
+									<button type="submit" id="regist">네이버 아이디로 가입</button>
+								</div>
+							</form>
+						</div>
+					</div>
 				</div>
-				<form action="${pageContext.request.contextPath}/member/register"
-					method="post">
-					<div class="modal-body">
-
-						<div class="input-group mb-2">
-							<input type="email" name="email" class="form-control"
-								placeholder="이메일 주소">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-exclamation"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-2">
-							<input type="text" name="nick" class="form-control"
-								placeholder="닉네임">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-user"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-3">
-							<input type="text" name="birth" class="form-control"
-								placeholder="생년월일">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-3">
-							<input type="text" name="member_age" value="39"
-								class="form-control" placeholder="나이">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-3">
-							<input type="password" name="pwd" class="form-control"
-								placeholder="비밀번호">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-3">
-							<input type="password" class="form-control" placeholder="비밀번호 확인">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-1">
-							성별<input type="radio" name="gender" value="N"
-								class="form-control" title="남성">남성<br> <input
-								type="radio" title="여성" name="gender" value="F"
-								class="form-control">여성
-						</div>
-						<div class="row">
-							<div class="col-8">
-								<div class="icheck-primary">
-									<input type="checkbox" id="agreeTerms" name="terms"
-										value="agree"> <label for="agreeTerms">전체 약관
-										동의 </label>
-								</div>
-							</div>
-						</div>
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-primary">회원가입</button>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		var age = calcAge('${naver.birth }'); //만나이 계산
+		document.getElementById('member_age').value = age;
 
+		function checkEmail() {
+
+			var email = document.getElementById('email').value;
+
+			$.ajax({
+				type : 'POST',
+				url : "${pageContext.request.contextPath}/member/emailCheck",
+				dataType : "json",
+				contentType: "application/json; charset=UTF-8",
+				data : email,
+				success : function(result) {
+					if (result > 0) {
+						$("#email-check").text("사용중인 이메일입니다 :(");
+						$("#email-check").css("color", "red");
+						$("#email-check").css("font-family", "Montserrat");
+						$("#email-check").css("font-size", "13px");
+						$("#regist").attr("disabled", true);
+					} else {
+						$("#email-check").text("사용 가능한 이메일 입니다 :D");
+						$("#email-check").css("color", "green");
+						$("#email-check").css("font-family", "Montserrat");
+						$("#email-check").css("font-size", "13px");
+						$("#regist").removeAttr("disabled");
+					}
+				},
+				error : function(error) {
+					alert("이메일를 입력해주세요.");
+				}
+			});
+		};
+	</script>
 </body>
 </html>

@@ -80,16 +80,29 @@ public class MainController {
 		
 		// response의 nickname값 파싱
 		System.out.println("callback 시 넘어오는 데이터 > " + response_obj);
+
+		//네이버 아이디마다 고유하게 발급되는 유니크한 일련번호값. 이 유니크한 일련번호값으로 자체적으로 회원정보를 구성해야함.
+		String unique_id = (String) response_obj.get("id"); 
+	
 		String nickname = (String) response_obj.get("nickname");
 		String email = (String) response_obj.get("email");
-		String birth = (String) response_obj.get("birth");
-		//int age = (int) response_obj.get("age");
+		String birth = ((String) response_obj.get("birthyear") + (String) response_obj.get("birthday"));
+		System.out.println("[MainController] birth 가공 > " + birth);
+		String gender = (String) response_obj.get("gender");
 		
 		memberVO.setEmail(email);
-		memberVO.setNaver(email);
+		memberVO.setNaver(unique_id);
 		memberVO.setBirth(birth);
-		//memberVO.setMember_age(age);
-		System.out.println("네이버 로그인 멤버객체 > " + memberVO);
+		memberVO.setGender(gender);
+		memberVO.setNick(nickname);
+		
+		//네이버 고유 id로 로그인 체크시 없으면 회원가입페이지로 바로 이동.
+		if(memberService.login(memberVO) == null) {
+			System.out.println("[MainController] 네이버 로그인 시 가입된 naver 필드 없으므로 회원가입창으로 바로 이동");
+			session.setAttribute("naver", memberVO);
+			return "/main/registerForm"; //테스트
+		}
+
 		// 4.파싱 닉네임 세션으로 저장
 		session.setAttribute("sessionId", session.getId()); // 세션 생성
 		System.out.println("세션 아이디 sessionId > "+ session.getAttribute("sessionId"));
@@ -126,6 +139,7 @@ public class MainController {
 
 		Member memberVO;
 
+
 		System.out.println("[MainController] loginPost member > " + member);
 		// 1. addFlashAttribute > redirect 후 소멸 (세션기반)
 
@@ -138,6 +152,7 @@ public class MainController {
 
 			memberVO = memberService.login((Member) redirectMap.get("naverMem")); // 오브젝트 타입이라 캐스팅해줌
 			System.out.println("[MainController]네이버로 로그인시 member객체 > "+ memberVO);
+			
 		} else {
 
 			memberVO = memberService.login(member);

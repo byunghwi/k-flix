@@ -37,4 +37,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.checkMemWithSessionKey(value);
 	}
 
+	@Override
+	public int checkEmail(String email) {
+		return memberDao.checkEmail(email);
+	}
+
 }

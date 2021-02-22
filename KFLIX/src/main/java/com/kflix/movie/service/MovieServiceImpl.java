@@ -158,15 +158,27 @@ public class MovieServiceImpl implements MovieService {
 
 	
 	@Override
-	public List<Movie> findMovieByRegDate(PageNation pagenation, String reg_date, char status) {
+	public List<Movie> findMovieByRegDate(String reg_date, char status) {
 		reg_date = "%" + reg_date + "%";
-		return mv_mapper.findPageMovieByRegDate(pagenation.getPage(), pagenation.getAmount(), reg_date, status);
+		return mv_mapper.findMovieByRegDate(reg_date, status);
 	}
 
 	@Override
 	public List<Movie> findMovieByTitle(String word, char status) {
 		word = "%" + word + "%";
 		return mv_mapper.findMovieByTitle(word, status);
+	}
+
+	@Override
+	public List<Movie> findMovieByGenreName(String genre_name, char status) {
+		genre_name = "%" + genre_name + "%";
+		return mv_mapper.findMovieByGenreName(genre_name, status);
+	}
+
+	@Override
+	public List<Movie> findMovieByDirectName(String director_name, char status) {
+		director_name = "%" + director_name + "%";
+		return mv_mapper.findMovieByDirectName(director_name, status);
 	}
 
 

@@ -44,11 +44,17 @@ public interface MovieMapper {
 	
 	int getCntByFindMovieTitle(@Param("word") String word, @Param("status") char status);
 	
-	// 제목 검색 레스트
-	List<Movie> findMovieByTitle(@Param("search_word") String search_word, 
-									@Param("status") char status);
+	
+	/*
+	 * 레스트
+	 */
+	
+	// 제목 검색
+	List<Movie> findMovieByTitle(@Param("search_word") String search_word, @Param("status") char status);
 	// 등록일 검색
-	List<Movie> findPageMovieByRegDate(
-			@Param("page") int page, @Param("amount") int amount,
-			@Param("reg_date") String  reg_date, @Param("status") char status);
+	List<Movie> findMovieByRegDate( @Param("reg_date") String  reg_date, @Param("status") char status);
+	// 장르 검색
+	List<Movie> findMovieByGenreName( @Param("genre_name") String  genre_name, @Param("status") char status);
+	// 감독 검색
+	List<Movie> findMovieByDirectName( @Param("direc_name") String  direc_name, @Param("status") char status);
 }

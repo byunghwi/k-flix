@@ -15,8 +15,8 @@
 
 </head>
 <body>
-
-<div class="container">
+<%@include file ="/resources/include/movie/nav.jsp" %>
+<div class="container pt-5">
 	<div class="d-flex justify-content-end">
 		<a href="./movieindex" class="btn btn-secondary btn-sm">관리 페이지</a>
 	</div>
@@ -25,24 +25,15 @@
 		<h1>삭제 목록</h1>
 	</div>
 	
-<div class="d-flex justify-content-between">
-
 <div class="d-flex justify-content-end">
-	<div class="input-group mb-3 input_text justify-content-end"> 
-	<div class="input_select">
-		<select class="form-select" id="search">
-		    <option selected>제목</option>
-		    <option value="1">장르</option>
-		  </select>
-	</div>
-		<input type="text" name="" class="form-control" aria-describedby="search">
-  		<button class="btn btn-outline-secondary" type="submit" id="search"><i class="fas fa-search"></i></button>
-	</div>
-</div>
+
+<%@include file ="/resources/include/movie/searching.jsp" %>
+
 </div>
 
-<section style="padding-top: 20px;">
-	<table class="table table-striped table-danger text-center align-middle">
+<section style="padding-top: 20px;" id="movielist">
+	<table class="table table-striped table-danger text-center align-middle" id="movietable">
+		<thead>
 		<tr>
 			<th>ID</th>
 			<th>포스터</th>
@@ -53,6 +44,8 @@
 			<th>등록일</th>
 			<th>관리</th>
 		</tr>
+		</thead>
+  		<tbody>
 		<c:forEach items="${movie }" var="movie" varStatus="status">
 			<tr>
 				<td>${movie.movie_id }</td>
@@ -61,7 +54,7 @@
 				<td>${movie.director_name }</td>
 				<td>${movie.genre_name1 } / ${movie.genre_name2 }</td>
 				<td>${movie.play_time }분</td>
-				<td><fmt:formatDate value="${movie.reg_date }" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
 				<td>
 				<button type="button" class="btn btn-warning" data-bs-toggle="modal" 
 							data-movieid="${movie.movie_id }" data-bs-target="#recoverymodal">복구</button>
@@ -69,12 +62,14 @@
 				</td>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 </section>
 
-<%@include file ="/resources/include/pagecode.jsp" %>
+<%@include file ="/resources/include/movie/pagecode.jsp" %>
 </div>
 
+<!-- 복구모달 -->
 <div class="modal" tabindex="-1" id="recoverymodal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -86,10 +81,8 @@
 	        <p>정말 복구 하시겠습니까?</p>
 	      </div>
           <div class="modal-footer">
-          <form action="./recovery" method="post">
-	          	<input type="hidden" id="recoveryid" name="movie_id"/>
-		        <input type="submit" class="btn btn-warning" value="복구"/>
-	        </form>
+          	<input type="hidden" id="recoveryid" name="movie_id"/>
+	        <button onclick="recoveryBtn(1);" class="btn btn-warning">복구</button>
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 	     </div>
       </div>
@@ -100,20 +93,9 @@
 		crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
-		crossorigin="anonymous"></script>	
-<script>
+		crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/kflix/resources/js/movie/deletedrest.js"></script>
 
-var movieid="";
-
-$(document).ready(function() { 
-	$('#recoverymodal').on('show.bs.modal', function(event){
-		movieid = $(event.relatedTarget).data('movieid');
-
-		$('#recoveryid').val(movieid);
-		
-		console.log
-	});
-})
-</script>
 </body>
 </html>

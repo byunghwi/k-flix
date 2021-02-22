@@ -61,7 +61,7 @@ public class MovieController {
 	 * 영화 관리 페이지
 	 */
 	@GetMapping("movieindex")
-	public String movieMain(Model model, PageNation pagenation, String searching_index, String searching_word) {
+	public String movieMain(Model model, PageNation pagenation) {
 		log.info("============ movieindex Cotnroller ==========");
 		List<Movie> list = mv_service.selectPageMovieView(pagenation, ENABLED);
 		int page_num = mv_service.getCountMovie(ENABLED);
@@ -72,15 +72,16 @@ public class MovieController {
 	}
 	
 	/*
-	 * 상세보기 페이지
+	 * 삭제된 목록
 	 */
-	@GetMapping("detail/{id}")
-	public String detail(Model model, @PathVariable("id") int movie_id) {
-		model.addAttribute("movie", mv_service.selectMovieById(movie_id)); 
+	@GetMapping("deletedMovie")
+	public String deletedList(Model model, PageNation pagenation) {
+
+		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, DISABLED));	
+		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(DISABLED)));
 		
-		return "movie/detail";
+		return "movie/deletedMovie";
 	}
-	
 	
 	/*
 	 * 영화 등록 페이지
@@ -130,6 +131,15 @@ public class MovieController {
 
 	
 	
+	/*
+	 * 상세보기 페이지
+	 */
+	@GetMapping("detail/{id}")
+	public String detail(Model model, @PathVariable("id") int movie_id) {
+		model.addAttribute("movie", mv_service.selectMovieById(movie_id)); 
+		
+		return "movie/detail";
+	}
 	
 	/*
 	 * 수정 페이지
@@ -181,50 +191,6 @@ public class MovieController {
 
 		return "movie/result";
 	}
-	
-	
-	/*
-	 *  삭제 페이지 / status = DISABLED
-	 */
-	@PostMapping("delete")
-	public String delete(Model model, int movie_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(movie_id, DISABLED);
-		
-		String msg = result > 0 ? "삭제 되었습니다." : "삭제에 실패하였습니다.";
-		
-		model.addAttribute("msg", msg);
-		
-		return "redirect:/movie/movieindex";
-	}
-	
-	
-	/*
-	 * 삭제된 목록
-	 */
-	@GetMapping("deletedMovie")
-	public String deletedList(Model model, PageNation pagenation) {
 
-		model.addAttribute("movie", mv_service.selectPageMovieView(pagenation, DISABLED));
-		
-		model.addAttribute("page", pagenation.getPageData(10, mv_service.getCountMovie(DISABLED)));
-		
-		return "movie/deletedMovie";
-	}
-	
-	
-	/*
-	 * 복구
-	 */
-	@PostMapping("recovery")
-	public String recoveryMovie(Model model, int movie_id) {
-		int result = mv_service.deleteOrRecoveryMovieById(movie_id, ENABLED);
-		
-		String msg = result > 0 ? "복구 되었습니다." : "복구에 실패하였습니다.";
-		
-		model.addAttribute("msg", msg);
-		
-		return "redirect:/movie/deletedMovie";
-	}
-		
 }
 

@@ -20,7 +20,7 @@ public class GenreController {
 	@Inject
 	GenreService genre_service;
 	
-	@GetMapping("/")
+	@GetMapping("genreindex")
 	public String genreIndex(Model model) {
 		model.addAttribute("genre", genre_service.selectAllGenreList('Y'));	
 		return "genre/genreindex";
