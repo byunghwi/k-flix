@@ -11,6 +11,15 @@ public interface GenreMapper {
 	// 전체 리스트
 	List<Genre> getAllGenreList(char status);
 	
+	List<Genre> getAllPageGenreList(
+			@Param("page") int page,
+			@Param("amount") int amount,
+			@Param("status") char status);
+	
+	int getGerneCnt(char status);
+	
+	List<Genre> getFindGenreList(@Param("genre_name") String genre_name, @Param("status") char status);
+	
 	int insertGenre(String genre_name);
 	
 	int updateGenre(

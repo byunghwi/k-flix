@@ -14,6 +14,7 @@ public interface MovieService {
 
 	// 상세
 	public Movie selectMovieById(int movie_id);
+	public Movie selectMovieViewById(int movie_id);
 	
 	// 등록
 	public int insertNewMovie(Movie movie);

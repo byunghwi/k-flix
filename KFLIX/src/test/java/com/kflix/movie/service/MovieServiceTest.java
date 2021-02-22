@@ -94,12 +94,6 @@ public class MovieServiceTest {
 
 	@Test
 	@Ignore
-	public void testFindCnt() {
-		log.info(mv_service.findMovieByTitle("KG", 'Y').size());
-	}
-	
-	@Test
-	@Ignore
 	public void testfind() {
 		List<Movie> reg = mv_service.findMovieByRegDate("21/", 'Y');
 		List<Movie> genre = mv_service.findMovieByGenreName("코", 'Y');

@@ -89,7 +89,7 @@ public class MovieController {
 	@GetMapping("addpage")
 	public String add(Model model) {
 		model.addAttribute("director", dt_service.selectAllDirectorList());
-		model.addAttribute("actor", at_service.selectAllActorList());
+		model.addAttribute("actor", at_service.selectAllActorList(ENABLED));
 		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED));
 		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		
@@ -136,7 +136,7 @@ public class MovieController {
 	 */
 	@GetMapping("detail/{id}")
 	public String detail(Model model, @PathVariable("id") int movie_id) {
-		model.addAttribute("movie", mv_service.selectMovieById(movie_id)); 
+		model.addAttribute("movie", mv_service.selectMovieViewById(movie_id)); 
 		
 		return "movie/detail";
 	}
@@ -147,6 +147,7 @@ public class MovieController {
 	@GetMapping("updatepage/{id}")
 	public String updatePage(Model model, @PathVariable("id") int movie_id) {
 		movie = mv_service.selectMovieById(movie_id);
+		model.addAttribute("realpath", movie.getPoster_path());
 		movie.getFileName(movie.getPoster_path(), movie.getTeaser_path(), movie.getVideo_path());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -154,7 +155,7 @@ public class MovieController {
 		model.addAttribute("movie", movie);
 		model.addAttribute("release_date", sdf.format(movie.getMovie_release()));		
 		model.addAttribute("director", dt_service.selectAllDirectorList());
-		model.addAttribute("actor", at_service.selectAllActorList());
+		model.addAttribute("actor", at_service.selectAllActorList(ENABLED));
 		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED));
 		
 		return "movie/updateMovie";

@@ -11,34 +11,39 @@
 <link rel="stylesheet" href="/kflix/resources/css/genre/genre.css" />
 
 <meta charset="UTF-8">
-<title>삭제된 항목</title>
+<title>배우</title>
 </head>
 <body>
 
-
 <div class="container pt-5">
-<div>
 	<div class="d-flex justify-content-end">
-		<a href="./genreindex" type="button" class="btn btn-secondary text-light btn-sm">관리페이지</a>
+		<a href="./deletedActor" type="button" class="btn btn-secondary text-light btn-sm">삭제된 항목</a>
 	</div>
 	
 	<div class="d-flex justify-content-center">
-		<h1>삭제된 항목</h1>
+		<h1>배우관리</h1>
 	</div>
-</div>
+
+<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-start">
+		<span>
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addmodal">
+			  + 추가
+			</button>
+		</span>
+</div>	
 <div class="d-flex justify-content-end">
 		<div class="input-group mb-3 input_text">
-			<input type="text" name="genre_name"  id="search_val" class="form-control" aria-describedby="button-addon2" placeholder="이름">
+			<input type="text" id="search_val" class="form-control" aria-describedby="button-addon2" placeholder="이름">
 	  		<button class="btn btn-outline-secondary" onclick="searching(1);"><i class="fas fa-search"></i></button>
 	  	</div>
 		<div class="ps-2">
 			<button class="btn btn-outline-secondary" onclick="allView(1);">ALL</button>
 		</div>
 	</div>
-
-
-<section id="genrelist">
-	<table class="table table-striped table-danger text-center align-middle" id="genretable">
+</div>
+<section id="actorlist">
+	<table class="table table-striped text-center align-middle" id="actortable">
 		 <thead>
 			<tr>
 				<th>#</th>
@@ -47,32 +52,35 @@
 			</tr>
 		 </thead>
 		 <tbody>
-			<c:forEach items="${genre }" var="genre" varStatus="status">
+			<c:forEach items="${actor }" var="actor" varStatus="status">
 				<tr id="contents">
-					<td>${genre.genre_id }</td>
-					<td>${genre.genre_name }</td>
+					<td>${actor.actor_id }</td>
+					<td>${actor.actor_name }</td>
 					<td>
-						<button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" 
-								data-genreid="${genre.genre_id }" data-bs-target="#recoverymodal">복구</button>
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+								data-actorid="${actor.actor_id }" data-bs-target="#updatemodal">수정</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" 
+								data-actorid="${actor.actor_id }" data-bs-target="#deletemodal">삭제</button>
 					</td>
 				</tr>
 			</c:forEach>
-		 </tbody>
+		</tbody>
 	</table>
 </section>
 </div>
 
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
-<%@include file ="/resources/include/genre/disabledModal.jsp" %>
+<%@include file ="/resources/include/actor/enabledModal.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
-		crossorigin="anonymous"></script>	
+		crossorigin="anonymous"></script>
+		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/genre/disabled.js?ver=1"></script>	
+<script src="/kflix/resources/js/actor/enableActor.js?ver=1"></script>
 </body>
 </html>

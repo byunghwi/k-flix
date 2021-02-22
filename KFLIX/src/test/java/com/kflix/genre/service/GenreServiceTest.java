@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kflix.genre.domain.Genre;
+import com.kflix.util.pagenation.domain.PageNation;
 
 import lombok.extern.log4j.Log4j;
 
@@ -57,9 +58,14 @@ public class GenreServiceTest {
 	
 	@Test
 	public void testGerneFind() {
-		List<Genre> list = service.findGenreByName("재난", 'N');
+		PageNation pagenation = new PageNation();
+		pagenation.setPage(1);
+		pagenation.setAmount(10);
+		
+		List<Genre> list = service.selectPageGenreList(pagenation, 'N');
 		assertNotNull(list);
 		log.info(list.get(0));
 	}
 
+	
 }

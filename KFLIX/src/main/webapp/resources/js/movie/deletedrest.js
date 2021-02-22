@@ -1,6 +1,14 @@
 /**
  * 
  */
+ var infomodal = function() {$('#infoconfrim').modal("show")}
+
+function infoMsg(msg){
+	$('#confirmMsg').html(msg);
+	infomodal();
+}
+ 
+ 
 function allView(pnum) {
 	searchReset();
 	ajaxCon(pnum);
@@ -18,16 +26,16 @@ function searching(pnum) {
 	var regexp = /^[0-9]{2}[\/](0[1-9]|1[0-2])$/; 
 	
 	if (select_word == '' || select_word == null){
-		alert("검색할 단어를 입력 해주세요")
+		infoMsg("검색할 단어를 입력 해주세요")
 		
 	} else if (select_index == '' || select_index == null){
-		alert("검색할 목록을 선택해 주세요")
+		infoMsg("검색할 목록을 선택해 주세요")
 		
 	} else if (select_index == 'reg_date' && regexp.test(select_word)){
 		ajaxCon(pnum);	
 		
 	} else if (select_index == 'reg_date' && !regexp.test(select_word)) {
-		alert('날짜 형식이 맞지 않습니다. (' + select_word + ') \n예시) 21/02');	
+		infoMsg('날짜 형식이 맞지 않습니다. (' + select_word + ') \n예시) 21/02');	
 	} else {
 		ajaxCon(pnum);
 	}
@@ -55,7 +63,7 @@ function ajaxCon(pnum){
  
    		},
    		error: function(){
-   			alert('불러오는데 실패하였습니다.');
+   			infoMsg('불러오는데 실패하였습니다.');
    		}
 	}) 
 }
@@ -81,7 +89,7 @@ function makeTable(data, pnum, amount) {
 						+'<td>' + moment(data[i].reg_date).format("YY/MM/DD") + '</td>'
 						+'<td><button type="button" class="btn btn-warning" data-bs-toggle="modal"'
 						+'data-movieid="'+data[i].movie_id+'" data-bs-target="#recoverymodal">복구</button> '
-						+'<a href="./detail/'+data[i].movie_id+'" class="btn btn-info text-light">상세보기</a></td>'
+						//+'<a href="./detail/'+data[i].movie_id+'" class="btn btn-info text-light">상세보기</a></td>'
 						+'</tr>'
 				);
 			}
@@ -191,10 +199,11 @@ function recoveryBtn(pnum) {
   			// 데이터, page - 클릭페이지, amount - 보여줄 수 
   			makeTable(data, pnum, amount);
  			
-			alert(movieId +'번이 복구 되었습니다!')
+ 			$('#recoveryMsg').html(movieId + '번이 복구되었습니다.');
+			$('#recoveryconfirm').modal("show");
    		},
    		error: function(){
-   			alert('불러오는데 실패하였습니다.');
+   			infoMsg('불러오는데 실패하였습니다.');
    		}
 	}) 
 	

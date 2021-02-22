@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kflix.genre.domain.Genre;
 import com.kflix.mapper.GenreMapper;
+import com.kflix.util.pagenation.domain.PageNation;
 
 @Service
 public class GenreServiceImpl implements GenreService {
@@ -42,6 +43,22 @@ public class GenreServiceImpl implements GenreService {
 	@Override
 	public String getGenreName(int genre_id) {
 		return gr_mapper.getNameById(genre_id);
+	}
+
+	@Override
+	public List<Genre> selectPageGenreList(PageNation pagenation, char status) {
+		return gr_mapper.getAllPageGenreList(pagenation.getPage(), pagenation.getAmount(), status);
+	}
+
+	@Override
+	public int getCountGenre(char status) {
+		return gr_mapper.getGerneCnt(status);
+	}
+
+	@Override
+	public List<Genre> getFindGenreList(String genre_name, char status) {
+		genre_name = "%" + genre_name + "%";
+		return gr_mapper.getFindGenreList(genre_name, status);
 	}
 
 }
