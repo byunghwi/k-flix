@@ -28,8 +28,7 @@ body {
 }
 
 #mainimg {
-	/* width: 100%; */
-	
+	width: 1214px;
 }
 
 /* .background::before {
@@ -48,7 +47,7 @@ body {
 	flex-wrap: nowrap;
 	position: fixed;
 	z-index: 100;
-	top:0;
+	top: 0;
 }
 
 .flex-row>* {
@@ -109,6 +108,7 @@ body {
 .list_title {
 	color: white;
 	font-size: 15px;
+	margin: 20px;
 }
 
 .raba {
@@ -130,6 +130,25 @@ body {
 	z-index: 10;
 	background-color: white;
 	border-radius: 0.5rem;
+}
+
+[id^='pagenum'] {
+	float: right;
+	position: absolute;
+	top: -31px;
+	right: 0;
+	visibility: hidden;
+	transition: all 0.3s;
+}
+
+.pagehoveroff {
+	padding: 1px;
+	color: #939393;
+}
+
+.pagehoveron {
+	color: white;
+	padding: 1px;
 }
 
 .atag:hover .videohover {
@@ -169,6 +188,12 @@ a:active {
 	height: 145px;
 	position: relative;
 	border-radius: 0.5rem;
+	border: 1px solid #333;
+}
+
+.atag {
+	width: 250px;
+	height: 145px;
 }
 
 /* 
@@ -220,65 +245,93 @@ a:active {
    z-index: 99;
 }
  */
- 
- /* 슬라이드 */
- *{margin: 0; padding: 0;}
- 
-li{list-style: none;}
-ul{padding: 0;}
 
-.slide_wrapper_All{
+/* 슬라이드 */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+ul {
+	padding: 0;
+}
+
+.slide_wrapper_All {
 	position: relative;
 	margin: 0 auto;
 	height: 145px;
-/* 	overflow: hidden; */
+	/* 	overflow: hidden; */
 }
+
 .slides_All {
 	position: absolute;
-	left: 0; top: 0;
-	transition:left 0.5s ease-out;
+	left: 0;
+	top: 0;
+	transition: left 0.5s ease-out;
 	/* width
 		가로 길이 * 갯수 
 	+	여백 길이 * (갯수-1) 
 	*/
 }
 
-.slides_All li:not(:last-child){
+.slides_All li:not(:last-child) {
 	float: left;
-	margin-right: 15px;
+	margin-right: 10px;
 }
 
 .controls_All {
-	position:absolute;
-	width:100%;
-	top:0;
+	position: absolute;
+	width: 100%;
+	top: 0;
 	text-align: center;
 	margin: 0;
 }
 
-*{margin: 0; padding: 0;}
+.backop {
+	position: absolute;
+	background: #333333cf;
+	height: 150.5px;
+	width: 135px;
+	color: #939393;
+	font-size: 35px;
+	padding-top: 45px;
+	border-radius: 0.5rem;
+}
 
-li{list-style: none;}
+* {
+	margin: 0;
+	padding: 0;
+}
 
-.slide_wrapper_Watching{
+li {
+	list-style: none;
+}
+
+.slide_wrapper_Watching {
 	position: relative;
 	margin: 0 auto;
 	height: 145px;
 	overflow: hidden;
 }
+
 .slides_Watching {
 	position: absolute;
-	left: 0; top: 0;
-	transition:left 0.5s ease-out;
+	left: 0;
+	top: 0;
+	transition: left 0.5s ease-out;
 	/* width
 		가로 길이 * 갯수 
 	+	여백 길이 * (갯수-1) 
 	*/
 }
-.slides_Watching li:not(:last-child){
+
+.slides_Watching li:not(:last-child) {
 	float: left;
 	margin-right: 10px;
-	
 }
 
 .controls_Watching {
@@ -286,13 +339,59 @@ li{list-style: none;}
 	margin-top: 50px;
 }
 
-[class*='prev'], [class*='next'] {
+[class^='prev'], [class^='next'] {
 	position: absolute;
-	background: #333;
-	height:145px;
-	width:154px;
-	color: #fff;
+	background: #333333cf;
+	height: 150.5px;
+	width: 135px;
+	color: #939393;
+	font-size: 35px;
+	padding-top: 45px;
+	border-radius: 0.5rem;
+	visibility: hidden;
+	transition: all 0.5s;
 }
 
-[class*='prev']{top: 0; left: -139px;}
-[class*='next']{top: 0; right:  -139px;}
+[class^='prev']:hover, [class^='next']:hover {
+	color: white;
+	font-size: 50px;
+	padding-top: 31px;
+}
+
+[class^='prev'] {
+	top: 0;
+	left: -143px;
+	padding-left: 40px;
+}
+
+[class^='next'] {
+	top: 0;
+	right: -143px;
+	padding-right: 40px;
+}
+
+
+.backopprev_All, .backopnext_All {
+	position: absolute;
+	background: #333333cf;
+	height: 150.5px;
+	width: 133px;
+	color: #939393;
+	font-size: 35px;
+	padding-top: 45px;
+	border-radius: 0.5rem;
+	visibility: hidden;
+	transition: all 0.5s;
+}
+
+.backopprev_All {
+	top: 0;
+	left: -143px;
+	padding-left: 40px;
+}
+
+.backopnext_All {
+	top: 0;
+	right: -143px;
+	padding-right: 40px;
+}

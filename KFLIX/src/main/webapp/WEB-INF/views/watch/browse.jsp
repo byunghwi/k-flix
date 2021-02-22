@@ -137,35 +137,41 @@
 			</p>
 
 		</c:if>
-<div style="width: 100%; height: 167.5px;overflow: hidden;">
-		<div class="list_title">모든 영화</div>
-		<div class="slide_wrapper_All">
-			<ul class="slides_All">
-				<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-					<li><a class="atag"
-						href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
-							<div class="atagdiv">
-								<img style="margin: 0;" src="${Allmovie.poster_path }"
-									class="d-block dis img1" alt="...">
-								<div class="videohover">
-									<video class="video" muted autoplay loop
-										poster="${Allmovie.poster_path}">
-										<source src="${Allmovie.teaser_path}" type="video/mp4">
-									</video>
+		<div id="All" style="width: 100%; height: 207.5px; overflow: hidden;">
+			<div class="list_title">모든 영화</div>
+			<div class="slide_wrapper_All">
+				<div id="pagenum_All"></div>
+				<ul class="slides_All">
+					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
+						<li><a class="atag"
+							href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+								<div class="atagdiv">
+									<img style="margin: 0;" src="${Allmovie.poster_path }"
+										class="d-block dis img1" alt="...">
+									<div class="videohover">
+										<video class="video" muted autoplay loop
+											poster="${Allmovie.poster_path}">
+											<source src="${Allmovie.teaser_path}" type="video/mp4">
+										</video>
+									</div>
 								</div>
-							</div>
 
-					</a></li>
-				</c:forEach>
+						</a></li>
+					</c:forEach>
 
 
-			</ul>
-<p class="controls_All">
-			<span class="prev_All">prev</span> <span class="next_All">next</span>
-		</p>
+				</ul>
+				<p class="controls_All">
+					<span class="backopprev_All"></span> <span class="backopnext_All"></span>
+				</p>
+				<p class="controls_All">
+					<span class="prev_All"><i class="fas fa-chevron-left"></i></span> <span
+						class="next_All"><i class="fas fa-chevron-right"></i></span>
+				</p>
+
+			</div>
 		</div>
-		</div>
-		
+
 
 	</div>
 
@@ -173,7 +179,7 @@
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 	<script>
-		
+	
 	</script>
 
 </body>
