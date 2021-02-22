@@ -45,11 +45,13 @@ public class MemberController {
 		System.out.println("[MemberController] member 객체 > " + member);
 		int result = memberService.register(member);
 
+		//회원가입 성공
 		if (result == 1) {
 			redirectAttributes.addFlashAttribute("msg", "REGISTERED");
-		}
 
-		//return "redirect:/";
+			return "/main/registerSuccess";
+		}
+		
 		return "redirect:/login";
 	}
 	

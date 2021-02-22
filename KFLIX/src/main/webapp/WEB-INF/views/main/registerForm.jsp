@@ -73,20 +73,18 @@
 				success : function(result) {
 					if (result > 0) {
 						$("#email-check").text("사용중인 이메일입니다 :(");
-						$("#email-check").css("color", "red");
-						$("#email-check").css("font-family", "Montserrat");
-						$("#email-check").css("font-size", "13px");
+						$("#email-check").css("color", "red").css("font-family", "Montserrat").css("font-size", "13px");
 						$("#regist").attr("disabled", true);
 					} else {
 						$("#email-check").text("사용 가능한 이메일 입니다 :D");
-						$("#email-check").css("color", "green");
-						$("#email-check").css("font-family", "Montserrat");
-						$("#email-check").css("font-size", "13px");
+						$("#email-check").css("color", "green").css("font-family", "Montserrat").css("font-size", "13px");
 						$("#regist").removeAttr("disabled");
 					}
 				},
 				error : function(error) {
-					alert("이메일를 입력해주세요.");
+					$("#email-check").text("올바른 이메일을 입력해주세요 ");
+					$("#email-check").css("color", "red").css("font-family", "Montserrat").css("font-size", "13px");
+					$("#regist").attr("disabled", true);
 				}
 			});
 		};
