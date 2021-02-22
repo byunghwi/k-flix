@@ -1,11 +1,17 @@
 package com.kflix.watch.controller;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kflix.actor.service.ActorService;
 import com.kflix.director.service.DirectorService;
 import com.kflix.genre.service.GenreService;
+import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.service.WatchService;
@@ -31,43 +38,44 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@AllArgsConstructor
 public class WatchController {
-
+	
+	@Autowired
 	WatchService watchservice;
+	
+	@Autowired
 	ActorService actorservice;
+	@Autowired
 	DirectorService directorservice;
+	@Autowired
 	GenreService genreservice;
 	
-	
-	/*
-	 * 계정 url로 들고올 경우
-	 * 
-	 * @GetMapping("/browse") public String getbrowse(Model model, Member member) {
-	 * model.addAttribute("Allmovie", service.getAllmovie());
-	 * model.addAttribute("Allwatch", service.getAllwatch(member.email)); return
-	 * "/watch/browse"; }
-	 */
+	LocalDate max_day = LocalDate.now();
 
 	@GetMapping("/browse")
-	public String getbrowse(Model model) {
+	public String getbrowse(Model model, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList());
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
-		model.addAttribute("watch", watchservice.getSelectWatch("nn@naver.com"));
-		model.addAttribute("email", "nn@naver.com");
+		
+		Member member = (Member) session.getAttribute("login");
+		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
+		model.addAttribute("email", member.getEmail());
+		System.out.println("이메일 받아오기 : " + member.getEmail());
 		return "/watch/browse";
 	}
 	
 	@GetMapping("/btest")
-	public String btest(Model model) {
+	public String btest(Model model, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList());
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
-		model.addAttribute("watch", watchservice.getSelectWatch("nn@naver.com"));
-		model.addAttribute("email", "nn@naver.com");
+		Member member = (Member) session.getAttribute("login");
+		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
+		model.addAttribute("email", member.getEmail());
+		
 		return "/watch/NewFile";
 	}
 	
@@ -81,7 +89,9 @@ public class WatchController {
 
 	@PostMapping(value = "/browse/{movie_id}", consumes = "application/json", produces = "text/html; charset=UTF-8")
 	public String createEmployee(@RequestBody WatchVO watch) {
+		System.out.println("왔나");
 		if (watch.getResult().equals("update")) {
+			
 			int result1 = watchservice.updateWatch(watch);
 		} else {
 			int result1 = watchservice.createWatch(watch);
@@ -92,36 +102,35 @@ public class WatchController {
 	
 	
 	@GetMapping(value = "/browse/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String getmovie(Model model, @PathVariable("movie_id") int movie_id) {
+	public String getmovie(Model model, @PathVariable("movie_id") int movie_id, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList());
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("movie", watchservice.getmovie(movie_id));
-		model.addAttribute("watch", watchservice.getSelectWatch("nn@naver.com"));
-		model.addAttribute("email", "nn@naver.com");
-		model.addAttribute("watching", watchservice.getSelectWatchUser("nn@naver.com", movie_id));
-		/*
-		 * System.out.println("나와ㅗ나얼" + service.getSelectWatchUser("nn@naver.com",
-		 * movie_id));
-		 */
+		
+		Member member = (Member) session.getAttribute("login");
+		System.out.println("여기는 상세페이지 이동");
+		System.out.println("[상세페이지]이메일 받아오기 : " + member.getEmail());
+		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
+		model.addAttribute("email", member.getEmail());
+		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
 		return "/watch/movieInfo";
 	}
 	
 	@GetMapping(value = "/browse/watch/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String getwatch(Model model, @PathVariable("movie_id") int movie_id) {
+	public String getwatch(Model model, @PathVariable("movie_id") int movie_id, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList());
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("movie", watchservice.getmovie(movie_id)); 
-		model.addAttribute("watch", watchservice.getSelectWatch("nn@naver.com"));
-		model.addAttribute("email", "nn@naver.com");
-		model.addAttribute("watching", watchservice.getSelectWatchUser("nn@naver.com", movie_id));
-		/*
-		 * System.out.println("나와ㅗ나얼" + service.getSelectWatchUser("nn@naver.com",
-		 * movie_id));
-		 */
+		
+		Member member = (Member) session.getAttribute("login");
+		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
+		model.addAttribute("email", member.getEmail());
+		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
+		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		return "/watch/video";
 	}
 

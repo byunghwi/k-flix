@@ -1,38 +1,55 @@
-var slides = document.querySelector('.slides_All'),
-	slide_wrapper = document.querySelector('.slide_wrapper_All'),
-	slide = document.querySelectorAll('.slides_All li'),
+var slides_All = document.querySelector('.slides_All'),
+	slide_wrapper_All = document.querySelector('.slide_wrapper_All'),
+	slide_All = document.querySelectorAll('.slides_All li'),
 	currentIdx = 0,
-	slideCount = slide.length,
-	prevBtn = document.querySelector('.prev_All'),
+	slideCount_All = slide_All.length,
+	prevBtn_All = document.querySelector('.prev_All'),
 	slideWidth = 250,
-	slideMargin = 10,
+	slideMargin = 15,
 	slideShow = 4,
-	nextBtn = document.querySelector('.next_All');
+	Pagenum_All = Math.ceil(slideCount_All / slideShow),
+	nextBtn_All = document.querySelector('.next_All'),
+	currentPagenum_All = Pagenum_All;
 
-slides.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + 'px';
-slide_wrapper.style.width = (slideWidth + slideMargin) * slideShow - slideMargin + 'px';
+slides_All.style.width = (slideWidth + slideMargin) * slideCount_All - slideMargin + 'px';
+slide_wrapper_All.style.width = (slideWidth + slideMargin) * slideShow + 'px';
 
 function moveSlide(num) {
-	slides.style.left = -num * (slideWidth + slideMargin) + 'px';
+	slides_All.style.left = -num * (slideWidth + slideMargin) + 'px';
 	currentIdx = num;
+	currentPagenum_All = currentIdx == 0 ? Pagenum_All : Math.floor(slideCount_All / currentIdx);
 }
 
-nextBtn.addEventListener('click', function() {
-	if (currentIdx < slideCount - slideShow) {
-		moveSlide(currentIdx + 1);
+nextBtn_All.addEventListener('click', function() {
+	if (currentPagenum_All > 0) {
+		moveSlide(currentIdx + slideShow);
+		prevBtn_All.style.visibility = 'visible';
+		if (currentPagenum_All == 1) {
+			nextBtn_All.style.visibility = 'hidden';
+		}
 	} else {
-		moveSlide(0);
+		/*moveSlide(0);*/
+		nextBtn_All.style.visibility = 'hidden';
 	}
 });
 
 
-prevBtn.addEventListener('click', function() {
-	if (currentIdx > 0) {
-		moveSlide(currentIdx - 1);
-	} else {
-		moveSlide(slideCount - slideShow);
-	}
+if (currentPagenum_All == Pagenum_All) {
+	prevBtn_All.style.visibility = 'hidden';
+}
 
+prevBtn_All.addEventListener('click', function() {
+
+	if (currentPagenum_All < Pagenum_All) {
+		moveSlide(currentIdx - slideShow);
+		nextBtn_All.style.visibility = 'visible';
+		if (currentPagenum_All == Pagenum_All) {
+			prevBtn_All.style.visibility = 'hidden';
+		}
+	} else {
+		/*moveSlide(slideCount - slideShow);*/
+		prevBtn_All.style.visibility = 'hidden';
+	}
 });
 
 

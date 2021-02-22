@@ -126,11 +126,10 @@
 			<c:when test="${empty watching }">
 			console.log("없음");
 			var data = {
-				watch_id : "${movie.movie_id}",
 				watch_type : "WATCHING",
 				movie_id : "${movie.movie_id}",
-				email : 'nn@naver.com',
-				watch_date : Date.now(),
+				email : "${email}",
+				watch_date : "${today }",
 				view_point : video.currentTime,
 				result : 'create'
 			}
@@ -144,11 +143,10 @@
 			<c:otherwise>
 			console.log("있음");
 			var data = {
-				watch_id : "${movie.movie_id}",
 				watch_type : "WATCHING",
 				movie_id : "${movie.movie_id}",
-				email : 'nn@naver.com',
-				watch_date : Date.now(),
+				email : "${email}",
+				watch_date : "${today }",
 				view_point : video.currentTime,
 				result : 'update'
 			}

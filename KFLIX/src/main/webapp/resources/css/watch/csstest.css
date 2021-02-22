@@ -281,15 +281,15 @@ li{list-style: none;}
 	margin-top: 50px;
 }
 
-.controls_Watching span {
-	/* position: absolute;
+.prev_All, .next_All  {
+	position: absolute;
 	top: 50%;
-	transform:translateY(-50%); */
+	transform:translateY(-50%);
 	background: #333;
 	color: #fff;
 	padding: 10px 20px;
 	margin: 0 10px;
 }
-/* 
+
 .controls span.prev_Watching{right: calc(100% + 50px);}
-.controls span.next_Watching{} */
+.controls span.next_Watching{}

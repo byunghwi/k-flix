@@ -137,10 +137,9 @@
 			</p>
 
 		</c:if>
-
+<div style="width: 100%; height: 167.5px;overflow: hidden;">
 		<div class="list_title">모든 영화</div>
 		<div class="slide_wrapper_All">
-
 			<ul class="slides_All">
 				<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 					<li><a class="atag"
@@ -161,11 +160,12 @@
 
 
 			</ul>
-
-		</div>
-		<p class="controls_All">
+<p class="controls_All">
 			<span class="prev_All">prev</span> <span class="next_All">next</span>
 		</p>
+		</div>
+		</div>
+		
 
 	</div>
 

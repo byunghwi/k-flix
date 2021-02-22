@@ -36,11 +36,11 @@
 
 	<insert id="createWatch">
 		INSERT INTO watch VALUES (
-		#{watch_id},
+		watchid_seq.nextval,
 		'WATCHING',
 		#{movie_id},
 		#{email},
-		sysdate,
+		#{watch_date},
 		#{view_point}
 		)
 	</insert>
