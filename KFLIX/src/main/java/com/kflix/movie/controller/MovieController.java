@@ -147,6 +147,7 @@ public class MovieController {
 	@GetMapping("updatepage/{id}")
 	public String updatePage(Model model, @PathVariable("id") int movie_id) {
 		movie = mv_service.selectMovieById(movie_id);
+		model.addAttribute("realpath", movie.getPoster_path());
 		movie.getFileName(movie.getPoster_path(), movie.getTeaser_path(), movie.getVideo_path());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		

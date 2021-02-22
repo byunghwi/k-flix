@@ -14,8 +14,6 @@
 </head>
 <body>
 
-<%@include file ="/resources/include/movie/nav.jsp" %>
-
 <div class="container pt-5">
 <h1>영화 등록 페이지</h1>
 
@@ -38,19 +36,6 @@
 	  </select>
 	</div>
 	
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="iG01_03">상영시간</span>
-	  <input type="number" name="play_time" min="15" max="300"
-	  		class="form-control" aria-label="Sizing example input" aria-describedby="iG01_03" required>
-	</div>
-	
-	<div class="input-group">
-	  <span class="input-group-text">줄거리</span>
-	  <textarea name="summary" rows="10" required class="form-control" aria-label="With textarea"></textarea>
-	</div>
-</div>
-
-<div class="container">
 	<div class="input-group mb-3">
 		<label class="input-group-text" for="dateform">개봉일</label>
 		<input type="date" class="form-control" name="movie_release" max="${today }" id="dateform" required/> <br />
@@ -95,18 +80,22 @@
 	  	<option>미국</option>
 	  	<option>외국</option>
 	  </select>
-	</div>
+
 </div>
+
+	<div class="input-group">
+	  <span class="input-group-text">줄거리</span>
+	  <textarea name="summary" rows="10" required class="form-control" aria-label="With textarea"></textarea>
+	</div>
+	
+	</div>
+
 
 
 <div class="container">
-	<div id="poster_div" class="input-group mb-3">
-		<label class="input-group-text" for="poster_text">포스터</label>
-		<input type="file" name="poster" class="form-control" id="poster_text"
-				accept="image/png, image/jpeg, image/jpg" onchange="posterCheck();" required/>
-	</div>
-	
-	<div id="teaser_div" class="input-group mb-3">
+
+
+	<div id="teaser_div" class="input-group mb-3 pt-5">
 		<label class="input-group-text" for="teaser_text">티저</label>
 		<input type="file" name="teaser" class="form-control"  id="teaser_text" 
 				accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="teaserCheck();" required/>
@@ -118,7 +107,21 @@
 				accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="videoCheck();" required/>
 	</div>
 	
-	<div class="d-flex justify-content-end mt-5">
+	<div class="input-group mb-3">
+	  <span class="input-group-text" id="iG01_03">상영시간</span>
+	  <input type="text" name="play_time" min="15" max="300"
+	  		class="form-control" aria-label="Sizing example input" aria-describedby="iG01_03" required>
+	</div>
+	
+	<div id="poster_div" class="input-group mb-3">
+		<label class="input-group-text" for="poster_text">포스터</label>
+		<input type="file" name="poster" class="form-control" id="poster_text"
+				accept="image/png, image/jpeg, image/jpg" onchange="posterCheck(this);" required/>
+	</div>
+	
+	<div id="thumbnail" style="width: 150px; height: 70px; float: left" class="pb-5"></div>
+	
+	<div class="d-flex justify-content-end pt-5">
 		<div>
 			<input type="submit" class="btn btn-primary px-2" value="등록" />
 		</div>
@@ -136,7 +139,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
-<script src="/kflix/resources/js/movie/inputfile.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>		
+<script src="/kflix/resources/js/movie/inputfile.js?ver=9"></script>
 
 </body>
 </html>

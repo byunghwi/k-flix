@@ -1,17 +1,32 @@
-function posterCheck() {
+function posterCheck(e) {
 	var poster_div = $("#poster_div");
 	var poster_text = $("#poster_text");
 	var poster_val = poster_text.val();
 	
-	if( poster_val != "" ){
+		var reader = new FileReader();
+		
+		reader.onload = function (e) {
+			var thum = $("div#thumbnail");
+			var img = document.createElement("img"); 
+			img.setAttribute("src", e.target.result); 
+			img.setAttribute("width", '150px');
+			img.setAttribute("height", '70px');
+			
+			thum.html('');
+			thum.append(img);
+		}
+		reader.readAsDataURL(poster_text[0].files[0]);
 	
+	
+	if( poster_val != "" ){
+		
 		var ext = poster_val.split('.').pop().toLowerCase();
 	
 	    if($.inArray(ext, ['png','jpg','jpeg','jfif','pjpeg','pjp']) == -1) {
 	   		poster_text.remove();
 	    	poster_div.html("");
 	    	poster_div.append('<label class="input-group-text" for="poster_text">포스터</label>');
-	    	poster_div.append('<input type="file" name="poster" class="form-control" id="poster_text" accept="image/png, image/jpeg, image/jpg" onchange="posterCheck();" required/>');
+	    	poster_div.append('<input type="file" name="poster" class="form-control" id="poster_text" accept="image/png, image/jpeg, image/jpg" onchange="posterCheck(this);" required/>');
 	    	 
 		 	alert('잘못된 파일명 입니다.');
 	    }
@@ -42,10 +57,27 @@ function teaserCheck(){
 
 
 
-function videoCheck(){
+function videoCheck(){ 
 	var video_div = $("#video_div");
 	var video_text = $("#video_text");
 	var video_val = video_text.val();
+
+	var files = video_text[0].files;
+	console.log(files);
+	var video = document.createElement('video');
+     video.preload = 'metadata';
+    
+    video.src = URL.createObjectURL(files[0]);
+     
+     video.onloadedmetadata = function() {
+		window.URL.revokeObjectURL(video.src);
+		var duration = video.duration;
+		
+		var getMin = Math.ceil(duration / 60);
+		
+		$('input[name="play_time"]').val(getMin);
+	  }
+
 
 	if( video_val != "" ){
 	

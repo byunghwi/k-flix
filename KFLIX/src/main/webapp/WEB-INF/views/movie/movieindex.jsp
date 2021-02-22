@@ -23,8 +23,6 @@
 </style> -->
 <body>
 
-<%@include file ="/resources/include/movie/nav.jsp" %>
-
 <!-- 게시판 -->
 <div class="container pt-5" id="board">
 	<div class="d-flex justify-content-end">
@@ -83,7 +81,6 @@
 
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
 </div>
-
 
 <!-- 삭제 모달 -->
 <div class="modal" tabindex="-1" id="deletemodal">

@@ -15,8 +15,6 @@
 </head>
 <body>
 
-<%@include file ="/resources/include/movie/nav.jsp" %>
-
 <div class="container pt-5">
 
 <h1>수정 페이지</h1>
@@ -41,20 +39,7 @@
 	    <option>19</option>
 	  </select>
 	</div>
-	
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="iG01_03">상영시간</span>
-	  <input type="number" name="play_time" min="15" max="300" value="${movie.play_time }"
-	  		class="form-control" aria-label="Sizing example input" aria-describedby="iG01_03" required>
-	</div>
 
-	<div class="input-group">
-	  <span class="input-group-text">줄거리</span>
-	  <textarea name="summary" rows="10" required class="form-control" aria-label="With textarea">${movie.summary }</textarea>
-	</div>
-</div>
-
-<div class="container">
 	<div class="input-group mb-3">
 		<label class="input-group-text" for="dateform">개봉일</label>
 		<input type="date" class="form-control" name="movie_release" max="${today }" value="${release_date}" id="dateform" required/> <br />
@@ -103,19 +88,21 @@
 	</div>
 
 </div>
+
+<div class="container">
+	
+	<div class="input-group">
+	  <span class="input-group-text">줄거리</span>
+	  <textarea name="summary" rows="14" required class="form-control" aria-label="With textarea">${movie.summary }</textarea>
+	</div>
+
+</div>
 		<input type="hidden" name="reg_date" value="${today }" />
 		<input type="hidden" name="poster_path" value="${movie.poster_path }">
 		<input type="hidden" name="teaser_path" value="${movie.teaser_path }">
 		<input type="hidden" name="video_path" value="${movie.video_path }"/>
 
 <div class="container">
-	<div id="poster_div" class="input-group mb-3">
-		<label class="input-group-text" for="poster_text">포스터</label>
-	    <button class="btn btn-secondary" type="button" id="poster_btn" onclick="posterBtn();">변경 하기</button>
-	    <input type="text" class="form-control" value="${movie.poster_path }" 
-	    			readonly aria-label="Example text with two button addons">
-	</div>
-
 	<div id="teaser_div" class="input-group mb-3">
 		<label class="input-group-text" for="poster_text">티저</label>
 	    <button class="btn btn-secondary" type="button" id="teaser_btn" onclick="teaserBtn();">변경 하기</button>
@@ -130,12 +117,30 @@
 	    			readonly aria-label="Example text with two button addons">
 	</div>
 	
+		
+	<div class="input-group mb-3">
+	  <span class="input-group-text" id="iG01_03">상영시간</span>
+	  <input type="number" name="play_time" min="15" max="300" value="${movie.play_time }"
+	  		class="form-control" aria-label="Sizing example input" aria-describedby="iG01_03" required>
+	</div>
+	
+	<div id="poster_div" class="input-group mb-3">
+		<label class="input-group-text" for="poster_text">포스터</label>
+	    <button class="btn btn-secondary" type="button" id="poster_btn" onclick="posterBtn();">변경 하기</button>
+	    <input type="text" class="form-control" value="${movie.poster_path }" 
+	    			readonly aria-label="Example text with two button addons">
+	</div>
+	
+	<div id="thumbnail" style="width: 150px; height: 70px; float: left" class="pb-5">
+		<img src="${realpath }" alt="" />
+	</div>
+	
 	<div class="d-flex justify-content-end mt-5">
 		<div>
 			<input type="submit" class="btn btn-primary px-2" value="등록" />
 		</div>
 		<div class="pe-3 ps-3">
-			<a href="./movieindex" class="btn btn-danger px-2">취소</a>
+			<a href="/kflix/movie/movieindex" class="btn btn-danger px-2">취소</a>
 		</div>
 	</div>
 </div>
@@ -150,12 +155,13 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
-<script src="/kflix/resources/js/movie/inputfile.js"></script>
+<script src="/kflix/resources/js/movie/inputfile.js?ver=1"></script>
 
 <script>
 function posterBtn() {
 	var poster_div = $("#poster_div");
-	
+	var thum = $("div#thumbnail");
+	thum.html('');
 	poster_div.html("");
 	poster_div.append('<label class="input-group-text" for="poster_text">포스터</label>');
 	poster_div.append('<input type="file" name="poster" class="form-control" id="poster_text" accept="image/png, image/jpeg, image/jpg" onchange="posterCheck();" required/>')
