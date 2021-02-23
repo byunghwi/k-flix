@@ -11,4 +11,5 @@ public class Genre {
 	private int genre_id;
 	private String genre_name;
 	private String genre_status;
+	private String searching_word;
 }

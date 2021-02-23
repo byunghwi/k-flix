@@ -176,14 +176,16 @@ $(document).ready(function() {
 
 
 function recoveryBtn(pnum) {
-	searchReset();
+
 	var movieId = $('#recoveryid').val();
 	
 	$.ajax({
 		type: "PATCH",
 		url: "/kflix/movie/recovery",
 		data: JSON.stringify({
-			movie_id: movieId
+			movie_id: movieId,
+			searching_index: $('#search_cols').val(),
+   			searching_word: $('#search_val').val()
 		}),
 		contentType: 'application/json',
 		
@@ -194,6 +196,8 @@ function recoveryBtn(pnum) {
   			var len = data.length;
   			var amount = 5;
   	
+  			pnum = Math.ceil(len / 5);
+  			
  			makePageNate(len, pnum, amount);
   
   			// 데이터, page - 클릭페이지, amount - 보여줄 수 

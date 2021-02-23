@@ -86,6 +86,6 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/director/enableDirector.js?ver=4"></script>
+<script src="/kflix/resources/js/director/enableDirector.js?ver=6"></script>
 </body>
 </html>

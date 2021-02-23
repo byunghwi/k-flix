@@ -51,4 +51,7 @@ public class Movie {
 	private String genre_name1;
 	private String genre_name2;
 	
+	private String searching_word;
+	private String searching_index; 
+	
 }

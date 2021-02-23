@@ -71,10 +71,17 @@ public class GenreRestController {
 			produces = "application/json; charset=UTF-8")
 	public List<Genre> addGenre(@RequestBody Genre genre){
 		log.info("========= addGenre ===========");
-		log.info(genre.getGenre_name());
+		
+		String word = genre.getSearching_word();
 		
 		genre_service.addGenre(genre.getGenre_name());
-		return genre_service.selectAllGenreList(ENABLED);
+		
+		if (word == null || word.equals("")) {
+			return genre_service.selectAllGenreList(ENABLED);
+			
+		} else {
+			return  genre_service.getFindGenreList(word, ENABLED);
+		}		
 	}
 	
 	
@@ -83,11 +90,17 @@ public class GenreRestController {
 			produces = "application/json; charset=UTF-8")
 	public List<Genre> updateGenre(@RequestBody Genre genre){
 		log.info("========= updateGenre ===========");
-		log.info(genre.getGenre_id());
-		log.info(genre.getGenre_name());
+		
+		String word = genre.getSearching_word();
 		
 		genre_service.updateGenre(genre.getGenre_id(), genre.getGenre_name());
-		return genre_service.selectAllGenreList(ENABLED);
+		
+		if (word == null || word.equals("")) {
+			return genre_service.selectAllGenreList(ENABLED);
+			
+		} else {
+			return  genre_service.getFindGenreList(word, ENABLED);
+		}
 	}
 	
 	
@@ -96,10 +109,16 @@ public class GenreRestController {
 			produces = "application/json; charset=UTF-8")
 	public List<Genre> deleteGenre(@RequestBody Genre genre){
 		log.info("========= deleteGenre ===========");
-		log.info(genre.getGenre_id());
+		String word = genre.getSearching_word();
 		
 		genre_service.deleteOrRecovertGenre(genre.getGenre_id(), DISABLED);
-		return genre_service.selectAllGenreList(ENABLED);
+		
+		if (word == null || word.equals("")) {
+			return genre_service.selectAllGenreList(ENABLED);
+			
+		} else {
+			return  genre_service.getFindGenreList(word, ENABLED);
+		}
 	}
 	
 	
@@ -108,9 +127,16 @@ public class GenreRestController {
 			produces = "application/json; charset=UTF-8")
 	public List<Genre> recoveryGenre(@RequestBody Genre genre){
 		log.info("========= recoveryGenre ===========");
-		log.info(genre.getGenre_id());
+		
+		String word = genre.getSearching_word();
 		
 		genre_service.deleteOrRecovertGenre(genre.getGenre_id(), ENABLED);
-		return genre_service.selectAllGenreList(DISABLED);
+		
+		if (word == null || word.equals("")) {
+			return genre_service.selectAllGenreList(DISABLED);
+			
+		} else {
+			return  genre_service.getFindGenreList(word, DISABLED);
+		}
 	}
 }

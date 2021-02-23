@@ -40,21 +40,23 @@ function ajaxCon(pnum){
 }
 
 function ajaxModalCon(pnum, id, path, name, modal){
-	searchReset();
 	
 	$.ajax({
 		type: "PATCH",
 		url: path,
 		data: JSON.stringify({
    			director_id: id,
-   			director_name: name
+   			director_name: name,
+   			searching_word: $('#search_val').val()
 		}),
 		contentType: 'application/json',
 		
  		success: function(data){
   			var len = data.length;
   			var amount = 10;
-  	
+  			
+  			pnum = Math.ceil(len / amount);
+  			
  			makePageNate(len, pnum, amount);
   
   			// 데이터, page - 클릭페이지, amount - 보여줄 수 

@@ -67,16 +67,33 @@ public class ActorRestController {
 				consumes = "application/json",
 				produces = "application/json; charset=UTF-8")
 	public List<Actor> addActor(@RequestBody Actor actor) {
+		String word = actor.getSearching_word();
+
 		ac_service.addActor(actor.getActor_name());
-		return ac_service.selectAllActorList(ENABLED);
+		
+		if (word == null || word.equals("")) {
+			return ac_service.selectAllActorList(ENABLED);
+			
+		} else {
+			return ac_service.getFindActorList(word, ENABLED);
+		}
+		
 	}
 	
 	@PatchMapping(value = "update", 
 				consumes = "application/json",
 				produces = "application/json; charset=UTF-8")
 	public List<Actor> updateActor(@RequestBody Actor actor) {
+		String word = actor.getSearching_word();
+
 		ac_service.updateActor(actor.getActor_id(), actor.getActor_name());
-		return ac_service.selectAllActorList(ENABLED);
+		
+		if (word == null || word.equals("")) {
+			return ac_service.selectAllActorList(ENABLED);
+			
+		} else {
+			return ac_service.getFindActorList(word, ENABLED);
+		}
 	}
 	
 	
@@ -85,8 +102,16 @@ public class ActorRestController {
 				consumes = "application/json",
 				produces = "application/json; charset=UTF-8")
 	public List<Actor> deleteActor(@RequestBody Actor actor) {
+		String word = actor.getSearching_word();
+
 		ac_service.deleteOrRecovertActor(actor.getActor_id(), DISABLED);
-		return ac_service.selectAllActorList(ENABLED);
+		
+		if (word == null || word.equals("")) {
+			return ac_service.selectAllActorList(ENABLED);
+			
+		} else {
+			return ac_service.getFindActorList(word, ENABLED);
+		}
 	}
 	
 	
@@ -94,8 +119,16 @@ public class ActorRestController {
 				consumes = "application/json",
 				produces = "application/json; charset=UTF-8")
 	public List<Actor> recoveryActor(@RequestBody Actor actor) {
+		String word = actor.getSearching_word();
+
 		ac_service.deleteOrRecovertActor(actor.getActor_id(), ENABLED);
-		return ac_service.selectAllActorList(DISABLED);
+		
+		if (word == null || word.equals("")) {
+			return ac_service.selectAllActorList(DISABLED);
+			
+		} else {
+			return ac_service.getFindActorList(word, DISABLED);
+		}
 	}
 	
 }
