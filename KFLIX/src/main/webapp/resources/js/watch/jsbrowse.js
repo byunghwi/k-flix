@@ -12,12 +12,12 @@ var slides_All = document.querySelector('.slides_All'),
 	Pagenum_All = Math.ceil(slideCount_All / slideShow),
 	nextBtn_All = document.querySelector('.next_All'),
 	currentPagenum_All = 1,
-	All = document.getElementById('All'),
-	pagenum_Alldiv = document.getElementById('pagenum_All');
+	All = document.querySelector('.All'),
+	pagenum_Alldiv = document.querySelector('.pagenum_All');
 	
 
 // 슬라이드 마우스오버 시 버튼 나타내기
-slides_All.addEventListener("mouseover", function() {
+All.addEventListener("mouseover", function() {
 	prevBtn_All.style.visibility = 'visible';
 	nextBtn_All.style.visibility = 'visible';
 	pagenum_Alldiv.style.visibility = 'visible';
@@ -30,7 +30,8 @@ slides_All.addEventListener("mouseover", function() {
 });
 
 // 슬라이드 마우스아웃 시 버튼 숨기기
-slides_All.addEventListener("mouseout", function() {
+All
+.addEventListener("mouseout", function() {
 	prevBtn_All.style.visibility = 'hidden';
 	nextBtn_All.style.visibility = 'hidden';
 	pagenum_Alldiv.style.visibility = 'hidden';
@@ -39,9 +40,9 @@ slides_All.addEventListener("mouseout", function() {
 // 슬라이드 페이지 view 시 버튼 나타내기
 for (i = 1; i <= Pagenum_All; i++) {
 	if (i == 1) {
-		document.getElementById('pagenum_All').innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+		pagenum_Alldiv.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
 	} else {
-		document.getElementById('pagenum_All').innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+		pagenum_Alldiv.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
 	}
 }
 
@@ -58,12 +59,12 @@ function moveSlide(num) {
 nextBtn_All.addEventListener('click', function() {
 	if (currentPagenum_All > 0) {
 		moveSlide(currentIdx + slideShow);
-		document.getElementById('pagenum_All').innerHTML = ``;
+		pagenum_Alldiv.innerHTML = ``;
 		for (i = 1; i <= Pagenum_All; i++) {
 			if (i == currentPagenum_All) {
-				document.getElementById('pagenum_All').innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+				pagenum_Alldiv.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
 			} else {
-				document.getElementById('pagenum_All').innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+				pagenum_Alldiv.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
 			}
 		}
 		prevBtn_All.style.visibility = 'visible';
@@ -88,12 +89,12 @@ if (currentPagenum_All == 1) {
 prevBtn_All.addEventListener('click', function() {
 	if (currentPagenum_All <= Pagenum_All) {
 		moveSlide(currentIdx - slideShow);
-		document.getElementById('pagenum_All').innerHTML = ``;
+		pagenum_Alldiv.innerHTML = ``;
 		for (i = 1; i <= Pagenum_All; i++) {
 			if (i == currentPagenum_All) {
-				document.getElementById('pagenum_All').innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+				pagenum_Alldiv.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
 			} else {
-				document.getElementById('pagenum_All').innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+				pagenum_Alldiv.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
 			}
 		}
 		nextBtn_All.style.visibility = 'visible';
@@ -119,7 +120,6 @@ var slides_Watching = document.querySelector('.slides_Watching'),
 	prev_Watching = document.querySelector('.prev_Watching'),
 	slideWidth = 250,
 	slideMargin = 10,
-	slideShow = 4,
 	next_Watching = document.querySelector('.next_Watching');
 
 slides_Watching.style.width = (slideWidth + slideMargin) * slideCount_Watching - slideMargin + 'px';
@@ -149,3 +149,18 @@ prev_Watching.addEventListener('click', function() {
 });
 
 location.reload
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

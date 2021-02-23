@@ -71,20 +71,22 @@
 			System.out.println(e);
 		} */
 	%>
-	<div style="max-width: 100%" class="container flex-row nav-bar">
+	<div class="container flex-row nav-bar ">
+
 		<img class="logo" alt="로고"
 			src="/kflix/resources/imgs/watch/kflixlogo.png">
+
 		<ul class="nav" style="margin: 0 300px 0 0;">
 			<li class="nav-item"><a class="nav-link active"
 				aria-current="page" href="#">홈</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">TV프로그램</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-			<li class="nav-item"><a class="nav-link disabled" href="#"
-				tabindex="-1">NEW!요즘 대세 콘텐츠</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" tabindex="-1">NEW!요즘
+					대세 콘텐츠</a></li>
 
 			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
 		</ul>
-		<div style="float: right;" class="">
+		<div class="profile">
 			<i class="fas fa-search color_white nav-icon"></i> <i
 				class="fas fa-gift color_white nav-icon"></i> <i
 				class="fas fa-bell color_white nav-icon"></i> <i
@@ -94,19 +96,16 @@
 	</div>
 
 	<div id="shadow1"></div>
-	<div style="margin: 0" class="container background">
+	<div>
 		<img id="mainimg" alt="메인사진"
 			src="/kflix/resources/imgs/watch/runon1.png">
-		<!-- <img alt="" src="/kflix/resources/imgs/watch/nav-shadow.png"> -->
 	</div>
 
-
-	<div id="list">
+	<div id="list" class="container">
 
 		<c:if test="${not empty watch}">
-			<div class="list_title">"${login.email }"님의 이어보기</div>
+			<div class="list_title">"${login.email }"님이 시청 중인 콘텐츠</div>
 			<div class="slide_wrapper_Watching">
-
 				<ul class="slides_Watching">
 					<c:forEach items="${watch }" var="watch" varStatus="status">
 						<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
@@ -124,8 +123,6 @@
 											</div>
 										</div>
 								</a></li>
-
-
 							</c:if>
 						</c:forEach>
 					</c:forEach>
@@ -137,17 +134,16 @@
 			</p>
 
 		</c:if>
-		<div id="All" style="width: 100%; height: 207.5px; overflow: hidden;">
+		<div class="All">
 			<div class="list_title">모든 영화</div>
 			<div class="slide_wrapper_All">
-				<div id="pagenum_All"></div>
 				<ul class="slides_All">
 					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 						<li><a class="atag"
 							href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 								<div class="atagdiv">
-									<img style="margin: 0;" src="${Allmovie.poster_path }"
-										class="d-block dis img1" alt="...">
+									<img src="${Allmovie.poster_path }" class=" dis img1"
+										alt="...">
 									<div class="videohover">
 										<video class="video" muted autoplay loop
 											poster="${Allmovie.poster_path}">
@@ -158,18 +154,17 @@
 
 						</a></li>
 					</c:forEach>
-
-
 				</ul>
-				<p class="controls_All">
-					<span class="backopprev_All"></span> <span class="backopnext_All"></span>
-				</p>
-				<p class="controls_All">
-					<span class="prev_All"><i class="fas fa-chevron-left"></i></span> <span
-						class="next_All"><i class="fas fa-chevron-right"></i></span>
-				</p>
 
 			</div>
+			<div class="pagenum_All"></div>
+			<p class="controls_All">
+				<span class="backopprev_All"></span> <span class="backopnext_All"></span>
+			</p>
+			<p class="controls_All">
+				<span class="prev_All"><i class="fas fa-chevron-left"></i></span> <span
+					class="next_All"><i class="fas fa-chevron-right"></i></span>
+			</p>
 		</div>
 
 
@@ -179,7 +174,7 @@
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 	<script>
-	
+		
 	</script>
 
 </body>

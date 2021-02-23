@@ -19,7 +19,6 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div id="frame" class="frame">
 		<div id="postiondiv" class="container postiondiv">
 
 			<a href="<%=application.getContextPath()%>/browse"><i
@@ -310,16 +309,15 @@
 		${movie.reg_date} ${movie.view_cnt}
 			${movie.movie_rank} ${movie.movie_status}  --%>
 		</div>
-	</div>
 
 	<script src="/kflix/resources/js/watch/jsinfo.js"></script>
 	<script type="text/javascript">
-		const frame = document.getElementById('frame');
+		const postiondiv = document.getElementById('postiondiv');
 
 		window.onload = function() {
 			console.log("window onload ");
-			frame.style.opacity = '1';
-			frame.style.visibility = 'visible';
+			postiondiv.style.opacity = '1';
+			postiondiv.style.visibility = 'visible';
 		}
 	</script>
 </body>

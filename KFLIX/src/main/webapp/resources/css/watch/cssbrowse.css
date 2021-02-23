@@ -22,13 +22,13 @@ body {
 	box-shadow: 0px 2px 10px black;
 }
 
-.background {
-	padding: 0px 0;
-	margin: 0;
+.profile {
+	position: absolute;
+	right: 4%;
 }
 
 #mainimg {
-	width: 1214px;
+	width: 100%;
 }
 
 /* .background::before {
@@ -56,9 +56,11 @@ body {
 
 .nav-bar {
 	background-color: rgba(0, 0, 0, 0.2);
-	width: 100%;
+	max-width: 100%;
 	padding: 5px 50px;
 	align-items: center;
+	position: relative;
+	margin: 0;
 }
 
 .test {
@@ -84,6 +86,8 @@ body {
 	background-color: black;
 	padding: 10px 0;
 	box-shadow: 100px 0px 50px black;
+	max-width: 100%;
+	margin: 0;
 }
 
 .flexnowr {
@@ -132,13 +136,12 @@ body {
 	border-radius: 0.5rem;
 }
 
-[id^='pagenum'] {
+.pagenum_All {
 	float: right;
 	position: absolute;
-	top: -31px;
-	right: 0;
+	top: 28px;
+	right: 64px;
 	visibility: hidden;
-	transition: all 0.3s;
 }
 
 .pagehoveroff {
@@ -252,6 +255,18 @@ a:active {
 	padding: 0;
 }
 
+.img1 {
+	margin: 0;
+}
+
+.All {
+	width: 100%;
+	height: 207.5px;
+	overflow: hidden;
+	position: absolute;
+	max-width: 100%;
+}
+
 li {
 	list-style: none;
 }
@@ -261,10 +276,11 @@ ul {
 }
 
 .slide_wrapper_All {
-	position: relative;
+	position: absolute;
 	margin: 0 auto;
 	height: 145px;
-	/* 	overflow: hidden; */
+	height: 145px;
+	left: 100px;
 }
 
 .slides_All {
@@ -286,9 +302,10 @@ ul {
 .controls_All {
 	position: absolute;
 	width: 100%;
-	top: 0;
+	top: 62.5px;
 	text-align: center;
 	margin: 0;
+	left: 0;
 }
 
 .backop {
@@ -339,59 +356,55 @@ li {
 	margin-top: 50px;
 }
 
-[class^='prev'], [class^='next'] {
+.prev_All, .next_All {
 	position: absolute;
-	background: #333333cf;
 	height: 150.5px;
-	width: 135px;
+	width: 65px;
 	color: #939393;
 	font-size: 35px;
 	padding-top: 45px;
-	border-radius: 0.5rem;
 	visibility: hidden;
-	transition: all 0.5s;
+	z-index: 10;
 }
 
-[class^='prev']:hover, [class^='next']:hover {
+.prev_All:hover, .next_All:hover {
 	color: white;
 	font-size: 50px;
 	padding-top: 31px;
 }
 
-[class^='prev'] {
+.prev_All {
 	top: 0;
-	left: -143px;
+	left: 0;
 	padding-left: 40px;
 }
 
-[class^='next'] {
+.next_All {
 	top: 0;
-	right: -143px;
+	right: 0;
 	padding-right: 40px;
 }
-
 
 .backopprev_All, .backopnext_All {
 	position: absolute;
 	background: #333333cf;
 	height: 150.5px;
-	width: 133px;
+	width: 92px;
 	color: #939393;
 	font-size: 35px;
 	padding-top: 45px;
-	border-radius: 0.5rem;
 	visibility: hidden;
-	transition: all 0.5s;
+	z-index: 10;
 }
 
 .backopprev_All {
 	top: 0;
-	left: -143px;
+	left: 0;
 	padding-left: 40px;
 }
 
 .backopnext_All {
 	top: 0;
-	right: -143px;
+	right: 0;
 	padding-right: 40px;
 }
