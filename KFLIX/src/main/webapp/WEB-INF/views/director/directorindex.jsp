@@ -17,8 +17,8 @@
 
 <a href="/kflix/movie/movieindex">영화</a>
 <a href="/kflix/genre/genreindex">장르</a>
-<a href="/kflix/actor/actorindex">영화</a>
-<a href="/kflix/director/direcotrindex">감독</a>
+<a href="/kflix/actor/actorindex">배우</a>
+<a href="/kflix/director/directorindex">감독</a>
 
 <div class="container pt-5">
 	<div class="d-flex justify-content-end">
@@ -58,7 +58,7 @@
 		 </thead>
 		 <tbody>
 			<c:forEach items="${director }" var="director" varStatus="status">
-				<tr id="contents">
+				<tr>
 					<td>${director.director_id }</td>
 					<td>${director.director_name }</td>
 					<td>
@@ -86,6 +86,6 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/director/enableDirector.js?ver=1"></script>
+<script src="/kflix/resources/js/director/enableDirector.js?ver=4"></script>
 </body>
 </html>

@@ -13,6 +13,7 @@ function addBtn(pnum) {
 	var modal = addmodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#addmodal').modal("hide");
+	$('#addActor').val('');
 
 }
 
@@ -23,6 +24,7 @@ function updateBtn(pnum) {
 	var modal = updatemodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#updatemodal').modal("hide");
+	$('#updateActor').val('');
 }
 
 function deleteBtn(pnum) {

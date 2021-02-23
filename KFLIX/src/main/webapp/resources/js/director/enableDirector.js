@@ -13,7 +13,8 @@ function addBtn(pnum) {
 	var modal = addmodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#addmodal').modal("hide");
-
+	$('#addDirector').val('');
+	
 }
 
 function updateBtn(pnum) {
@@ -23,6 +24,7 @@ function updateBtn(pnum) {
 	var modal = updatemodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#updatemodal').modal("hide");
+	$('#updateDirector').val('');
 }
 
 function deleteBtn(pnum) {
@@ -123,7 +125,8 @@ function makeTable(data, pnum, amount) {
 				table.append('<tr>'
 						+'<td>' + data[i].director_id + '</td>'
 						+'<td>' + data[i].director_name + '</td>'
-						+'<td><button type="button" class="btn btn-primary" data-bs-toggle="modal"'
+						+'<td>'
+						+'<button type="button" class="btn btn-primary" data-bs-toggle="modal"'
 						+'data-directorid="' + data[i].director_id + '" data-bs-target="#updatemodal">수정</button> '
 						+'<button type="button" class="btn btn-danger" data-bs-toggle="modal"'
 						+'data-directorid="' + data[i].director_id + '" data-bs-target="#deletemodal">삭제</button></td>'

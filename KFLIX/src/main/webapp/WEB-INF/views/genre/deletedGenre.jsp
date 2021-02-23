@@ -48,7 +48,7 @@
 		 </thead>
 		 <tbody>
 			<c:forEach items="${genre }" var="genre" varStatus="status">
-				<tr id="contents">
+				<tr>
 					<td>${genre.genre_id }</td>
 					<td>${genre.genre_name }</td>
 					<td>

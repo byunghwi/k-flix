@@ -62,7 +62,7 @@
 	      <div class="input-group mb-3 input_text d-flex justify-content-end">
 	      	<span class="input-group-text" id="inputGroup-sizing-sm">감독이름</span>
 	  		<input type="hidden" id="update_id" name="director_id" value=""/>
-	  		<input type="text" class="form-control" name="director_name" id='updateActor'
+	  		<input type="text" class="form-control" name="director_name" id='updateDirector'
 	  				aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 	      </div>
         	

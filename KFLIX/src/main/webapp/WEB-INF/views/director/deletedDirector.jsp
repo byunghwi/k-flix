@@ -47,11 +47,11 @@
 		 </thead>
 		 <tbody>
 			<c:forEach items="${director }" var="director" varStatus="status">
-				<tr id="contents">
+				<tr>
 					<td>${director.director_id }</td>
 					<td>${director.director_name }</td>
 					<td>
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+						<button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" 
 								data-directorid="${director.director_id }" data-bs-target="#recoverymodal">복구</button>
 					</td>
 				</tr>
@@ -73,6 +73,6 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/director/disableDirector.js?ver=1"></script>
+<script src="/kflix/resources/js/director/disableDirector.js?ver=2"></script>
 </body>
 </html>

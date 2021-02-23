@@ -8,7 +8,7 @@ import com.kflix.director.domain.Director;
 
 public interface DirectorMapper {
 	
-	List<Director> getAllDirectorList();
+	List<Director> getAllDirectorList(char status);
 
 	// 페이지
 	List<Director> getAllPageDirectorList(
