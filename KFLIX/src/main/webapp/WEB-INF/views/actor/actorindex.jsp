@@ -15,6 +15,11 @@
 </head>
 <body>
 
+<a href="/kflix/movie/movieindex">영화</a>
+<a href="/kflix/genre/genreindex">장르</a>
+<a href="/kflix/actor/actorindex">영화</a>
+<a href="/kflix/director/direcotrindex">감독</a>
+
 <div class="container pt-5">
 	<div class="d-flex justify-content-end">
 		<a href="./deletedActor" type="button" class="btn btn-secondary text-light btn-sm">삭제된 항목</a>

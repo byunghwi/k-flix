@@ -12,7 +12,7 @@
 	        <p>복구 하시겠습니까?</p>
 	      </div>
           <div class="modal-footer">
-	          	<input type="hidden" id="recoveryid" name="genre_id"/>
+	          	<input type="hidden" id="recoveryid" name="director_id"/>
 		        <button onclick="recoveryBtn(1);" class="btn btn-warning" >복구</button>
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 	     </div>
@@ -57,4 +57,4 @@
        </div>    
     </div>
   </div>
-</div>
+</div>>

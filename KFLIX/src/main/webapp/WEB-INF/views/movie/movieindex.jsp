@@ -18,6 +18,11 @@
 </head>
 <body>
 
+<a href="/kflix/movie/movieindex">영화</a>
+<a href="/kflix/genre/genreindex">장르</a>
+<a href="/kflix/actor/actorindex">영화</a>
+<a href="/kflix/director/direcotrindex">감독</a>
+
 <!-- 게시판 -->
 <div class="container pt-5" id="board">
 	<div class="d-flex justify-content-end">
