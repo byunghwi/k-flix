@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.kflix.genre.domain.Genre;
+
 import lombok.Data;
 
 @Data
@@ -13,12 +15,7 @@ public class test {
 
 	List<MovieVO> movie;
 	List<WatchVO> watch;
-	/* List<WishVO> wish; 
-	 * List<GenreVO> genre;
-	 * */
+	List<WishVO> wish; 
+	List<Genre> genre;
 	
-
-	public static void main(String[] args) {
-		test test1 = new test();
-	}
 }

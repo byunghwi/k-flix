@@ -82,7 +82,7 @@
 	border-radius: 0.5rem;
 }
 
-[class^='pagenum'] {
+.pagenum {
 	float: right;
 	position: absolute;
 	top: 28px;
@@ -178,7 +178,7 @@
 						<div class="slide_wrapper">
 							<ul class="slides">
 								<c:forEach items="${test.watch }" var="watch" varStatus="status">
-									<c:if test="${watch.movie_id eq Allmovie.movie_id }">
+									<c:if test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
 										<li><a class="atag"
 											href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 												<div class="atagdiv">

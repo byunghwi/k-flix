@@ -45,7 +45,6 @@
 			<i id="restart" onclick="restart()" class=" fas fa-stop color-w"></i>
 			<div style="display: inline-block;" onclick="vidplay()"
 				id="playnpause">
-				<i id="play" class="fas fa-pause color-w"></i>
 			</div>
 
 			<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
@@ -80,9 +79,10 @@
 									movie.genre_id1 eq Allmovie.genre_id2 or movie.genre_id2 eq Allmovie.genre_id2 }">
 
 					<c:if test="${movie.movie_id != Allmovie.movie_id }">
-					<c:set var="sum"  value="${sum+1}" />
-					<c:if test="${sum < 4}">
-							<a id="atag" class="atagname" href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
+						<c:set var="sum" value="${sum+1}" />
+						<c:if test="${sum < 4}">
+							<a id="atag" class="atagname"
+								href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
 								<div class="show">
 									<img
 										style="width: 100%; height: 150px; border-radius: 2% 2% 0 0;"
@@ -100,9 +100,9 @@
 									</div>
 								</div>
 							</a>
-							</c:if>
 						</c:if>
 					</c:if>
+				</c:if>
 			</c:forEach>
 		</div>
 
@@ -111,15 +111,24 @@
 	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
 
 	<script>
-	
 		console.log("${movie.movie_id}");
+		console.log("${watching.watch_type}");
 		sound();
 		var video = document.getElementById('video');
-		<c:forEach items="${watch }" var="watch" varStatus="status">
-		<c:if test="${watch.movie_id eq movie.movie_id }">
-		video.currentTime = "${watch.view_point}";
+		
+		<c:if test="${not empty watching }">
+		<c:choose>
+		<c:when test="${watching.watch_type eq 'WATCHING'}">
+		video.currentTime = "${watching.view_point}";
+		</c:when>
+		<c:otherwise>
+		alert("시청이 완료되어, 처음부터 실행됩니다.");
+		video.currentTime = 0.00001;
+		video.muted = false;
+		video.play();
+		</c:otherwise>
+		</c:choose>
 		</c:if>
-		</c:forEach>
 
 		function savecurrentTime() {
 			<c:choose>
@@ -133,17 +142,47 @@
 				view_point : video.currentTime,
 				result : 'create'
 			}
+			</c:when>
+			<c:otherwise>
+			console.log("있음");
+			if (video.currentTime == video.duration) {
+				console.log("종료가 맞음");
+				var data = {
+					watch_type : "WATCHED",
+					movie_id : "${movie.movie_id}",
+					email : "${email}",
+					watch_date : "${today }",
+					view_point : video.currentTime,
+					result : 'update'
+				}
+			}
+			var data = {
+				watch_type : "WATCHING",
+				movie_id : "${movie.movie_id}",
+				email : "${email}",
+				watch_date : "${today }",
+				view_point : video.currentTime,
+				result : 'update'
+			}
+			</c:otherwise>
+			</c:choose>
 
 			var xhttp = new XMLHttpRequest();
 
 			xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
 			xhttp.setRequestHeader('content-type', 'application/json');
 			xhttp.send(JSON.stringify(data));
-			</c:when>
-			<c:otherwise>
-			console.log("있음");
+
+		}
+
+		//미디어 재생이 종료되었을때 발생하는 이벤트 처리
+		video.addEventListener("ended", event, false);
+
+		function event(e) {
+			recommend.style.display = 'block';
+			result = alert("미디어 재생이 완료되었습니다.");
 			var data = {
-				watch_type : "WATCHING",
+				watch_type : "WATCHED",
 				movie_id : "${movie.movie_id}",
 				email : "${email}",
 				watch_date : "${today }",
@@ -156,9 +195,6 @@
 			xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
 			xhttp.setRequestHeader('content-type', 'application/json');
 			xhttp.send(JSON.stringify(data));
-			</c:otherwise>
-			</c:choose>
-
 		}
 	</script>
 </body>

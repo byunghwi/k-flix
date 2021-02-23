@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
+import com.kflix.watch.domain.WishVO;
 
 import lombok.Data;
 
@@ -26,4 +27,12 @@ public interface WatchService {
 	public int updateWatch(WatchVO watch);
 	
 	public int deleteWatch(WatchVO watch);
+	
+	public int createWish(WishVO wish);
+	
+	public List<WishVO> getSelectWish(String email);
+	
+	public int deleteWish(WishVO wish);
+	
+	public WishVO getSelectWishUser(String email, int movie_id);
 }

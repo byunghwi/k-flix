@@ -9,11 +9,15 @@ var videobar = document.getElementById('videobar');
 var movieinfo = document.getElementById('movieinfo');
 var recommend = document.getElementById('recommend');
 
+if (video.paused) {
+		playnpause.innerHTML = `<i id="play" class="fas fa-pause color-w"></i>`;
+	} else {
+		playnpause.innerHTML = `<i id="play" class="fas fa-play color-w"></i>`;
+	}
 
 recommend.addEventListener("click", (e) => {
 	recommend.style.display = 'none';
 });
-
 
 videocon.addEventListener("mouseover", function() {
 	back.style.display = 'block';
@@ -84,18 +88,11 @@ function openFullscreen() {
 
 // timeupdate : 재생중에 지속적으로 발생
 video.addEventListener("timeupdate", PlayTime, false);
-//미디어 재생이 종료되었을때 발생하는 이벤트 처리
-video.addEventListener("ended", event, false);
 
 function PlayTime(e) {
 	
 	document.getElementById("playtime").innerHTML =
 		"재생 상태 : " + Math.floor(video.currentTime) + "/" + Math.floor(video.duration);
-}
-
-function event(e) {
-	recommend.style.display = 'block';
-	alert("미디어 재생이 완료되었습니다.");
 }
 
 video.addEventListener(
