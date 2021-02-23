@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kflix.movie.domain.Movie;
-import com.kflix.movie.domain.Search;
 import com.kflix.movie.service.MovieService;
 import com.kflix.util.pagenation.domain.PageNation;
 import com.kflix.util.pagenation.domain.PageNation.PageDTO;

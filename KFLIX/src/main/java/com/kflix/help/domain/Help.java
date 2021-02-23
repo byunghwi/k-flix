@@ -15,6 +15,7 @@ public class Help {
 	private String help_type;
 	private String help_title;
 	private String help_content;
+	private char help_status;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date help_date;

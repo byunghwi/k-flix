@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kflix.mapper.HelpMapper">
+
+	<select id="selectPageHelp" resultType="com.kflix.help.domain.Help">
+		SELECT 
+			  help_id, help_type, help_title, help_content, help_date, help_status
+		FROM 
+		(SELECT SEQ,  help_id, help_type, help_title, help_content, help_date, help_status
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, help_id, help_type, help_title, help_content, help_date, help_status
+		    	FROM
+		        	(SELECT * FROM help WHERE help_status = #{status} ORDER BY help_id DESC)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}
+	</select>
+
+	<select id="selectCntHelp" resultType="integer">
+		SELECT COUNT(*) FROM help WHERE help_status = #{status}
+	</select>
+
+	<select id="selectAllHelp" resultType="com.kflix.help.domain.Help">
+		SELECT * FROM help WHERE help_status = #{status} ORDER BY help_id DESC
+	</select>
+
+	<select id="selectAllHelpByType" resultType="com.kflix.help.domain.Help">
+		SELECT * FROM help WHERE help_type = #{type} AND help_status = #{status} ORDER BY help_id DESC
+	</select>
+	
+	<insert id="insertHelp">
+		INSERT INTO help VALUES (help_id_seq.NEXTVAL, 
+									#{help_type}, 
+									#{help_title}, 
+									#{help_content}, 
+									sysdate, 
+									'Y'
+								)
+	</insert>
+	
+	<update id="updateHelp">
+		UPDATE help SET 
+			    help_type = #{help_type}, 
+			    help_title = #{help_title}, 
+			    help_content = #{help_content} 
+		WHERE 
+				help_id = #{help_id}
+	</update>
+	
+	<update id="delOrReHelp">
+		UPDATE help SET help_status = #{status} WHERE help_id = #{help_id}
+	</update>
+
+</mapper>
