@@ -32,7 +32,7 @@
 
 .logform-content {
 	position: relative;
-	top: 20%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	font-size: 2rem;
@@ -55,7 +55,7 @@ body {
 	width: 250px;
 	height: auto;
 	position: absolute;
-	top: 80%;
+	top: 50%;
 	right: 0;
 	left: 0;
 	margin: -80px auto;

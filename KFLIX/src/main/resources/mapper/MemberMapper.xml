@@ -54,5 +54,13 @@
 		resultType="_int" parameterType="String">
 		SELECT count(email) FROM member WHERE email = #{email}
 	</select>
+	
+	<update id="emailAuth" parameterType="String">
+		UPDATE member SET cert = 'Y' WHERE email = #{email}
+	</update>
+	
+	<select id= "getMemberByEmail" parameterType="String" resultType="com.kflix.member.domain.Member">
+		SELECT * FROM member WHERE email = #{email}
+	</select>
 
 </mapper>

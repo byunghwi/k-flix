@@ -1,6 +1,7 @@
 package com.kflix.member.service;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -40,6 +41,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int checkEmail(String email) {
 		return memberDao.checkEmail(email);
+	}
+
+	@Override
+	public int updateAuthStatus(String email) {
+		return memberDao.emailAuth(email);
+	}
+
+	@Override
+	public Member getMemberByEmail(String email) {
+		return memberDao.getMemberByEmail(email);
 	}
 
 }

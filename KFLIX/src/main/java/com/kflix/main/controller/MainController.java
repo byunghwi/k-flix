@@ -103,8 +103,8 @@ public class MainController {
 		session.setAttribute("sessionId", session.getId()); // 세션 생성
 		System.out.println("[MainController] 세션 아이디 sessionId > " + session.getAttribute("sessionId"));
 
-		session.setAttribute("login", memberVO); // 세션 생성
-		System.out.println("[MainController] 세션 아이디 memberVO> " + session.getAttribute("login"));
+//		session.setAttribute("login", memberVO); // 세션 생성
+//		System.out.println("[MainController] 세션 아이디 memberVO> " + session.getAttribute("login"));
 
 		model.addAttribute("result", apiResult);
 

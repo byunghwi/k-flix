@@ -52,4 +52,15 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE+ ".checkEmail", email);
 	}
 
+	@Override
+	public int emailAuth(String email) {
+		return sqlSession.update(NAMESPACE + ".emailAuth", email);
+		
+	}
+
+	@Override
+	public Member getMemberByEmail(String email) {
+		return sqlSession.selectOne(NAMESPACE + ".getMemberByEmail", email);
+	}
+
 }

@@ -7,8 +7,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
-<link href="/kflix/resources/css/login/login.css" rel="stylesheet">
-
+<link href="/kflix/resources/css/login/login.css?ver=2" rel="stylesheet">
 
 <meta charset="UTF-8">
 <title>로그인</title>
