@@ -13,10 +13,39 @@
 <meta charset="UTF-8">
 <title>FAQ</title>
 </head>
+<style>
+	#alertImg {
+		width: 70px;
+		height: 30px;
+	}
+	
+	#alertBody {
+		text-align: center;
+	}
+	
+	#alertClose {
+		background-color: red;
+	}
+</style>
 <body>
 
 <!-- 본체 영역 -->
 <div class="container">
+
+	<!-- 검색 영역 -->
+	<div id="searchArea">
+		<select name="help_type" id="searchType">
+			<option value="all" selected>모든 카테고리</option>
+			<option>이용안내</option>
+			<option>결제</option>
+			<option>환불</option>
+			<option>이용권</option>
+			<option>계정</option>
+			<option>컨텐츠</option>
+			<option>재생</option>
+			<option>서비스</option>
+		</select>	
+	</div>
 
 	<!-- 테이블 영역 -->
 	<div id="helpMain">
@@ -57,6 +86,27 @@
 </div>
 
 
+<!-- 정보모달 -->
+<div class="modal" tabindex="-1" id="infoconfrim">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+      	<img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+        <button type="button" id="alertClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body" id="alertBody">
+	     <span id="alertMsg"></span>
+	  </div>     
+	   
+      <div class="modal-footer">
+       	<button type="button" class="btn btn-danger" data-bs-dismiss="modal">확인</button>
+       </div>    
+    </div>
+  </div>
+</div>
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
@@ -72,6 +122,78 @@ $(document).ready(function() {
 	var amount = 10;
 	makePageNate(len, pnum, amount);
 });
+
+// alert 창
+var infomodal = function() {$('#infoconfrim').modal("show")}
+
+function infoMsg(msg){
+	$('#alertMsg').html(msg);
+	infomodal();
+}
+
+$('#searchType').change(function() {
+	ajaxCon(1);
+});
+
+function pageClick(pnum) {
+	ajaxCon(pnum);	
+}
+
+function makeTable(data, pnum, amount) {
+	var table = $('#helpTable>tbody');
+	
+	$('#helpTable>tbody').html('');
+
+	var first_li = (pnum - 1) * amount;
+	var last_li = first_li + amount;
+	
+	try{
+		for	(var i = first_li; i < last_li; i++) {
+			table.append(
+					'<tr>'
+					+'<td>' + data[i].help_id + '</td>'
+					+'<td>' + data[i].help_type + '</td>'
+					+'<td>' + data[i].help_title + '</td>'
+					+'<td>' + moment(data[i].help_date).format("YY/MM/DD") + '</td>'
+					+'<td>'
+					+'<button id="" class="btn btn-primary">수정</button> '
+					+'<button id="" class="btn btn-danger">삭제</button>'
+					+'</td>'
+					+'</tr>'
+			);
+		}
+		
+	} catch(err){
+		console.log("마지막 데이터 입니다.")
+	}
+};
+
+
+
+function ajaxCon(pnum){
+	
+	$.ajax({
+		type: "POST",
+		url: "/kflix/FQARest/index",
+		data: JSON.stringify({
+			help_type: $('#searchType').val()
+		}),
+		contentType: 'application/json',
+		
+ 		success: function(data){
+  			var len = data.length;
+  			var amount = 10;
+  	
+ 			makePageNate(len, pnum, amount);
+  			 
+  			makeTable(data, pnum, amount);
+ 
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		}
+	}) 
+}
 
 
 </script>

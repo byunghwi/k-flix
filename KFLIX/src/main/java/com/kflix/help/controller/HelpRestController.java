@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kflix.help.domain.Help;
 import com.kflix.help.service.HelpService;
-import com.kflix.util.pagenation.domain.PageNation;
 
 import lombok.extern.log4j.Log4j;
 
@@ -31,7 +30,16 @@ public class HelpRestController {
 			produces = "application/json; charset=UTF-8")
 	public List<Help> indexHelp(@RequestBody Help help) {
 		log.info("============ indexHelp ============");
+		String type = help.getHelp_type();
 		
-		return h_service.getAllHelpList(ENABLED);
+		if(type.equals("all")) {
+			log.info(type);
+			return h_service.getAllHelpList(ENABLED);
+			
+		} else {
+			log.info(type);
+			return h_service.getAllHelpListByType(type, ENABLED);
+		}
+		
 	}
 }
