@@ -81,7 +81,7 @@ function posterCheck(e) {
 			}
 			reader.readAsDataURL(poster_text[0].files[0]);
 			
-	    	$('#pName').val('변경 됨!!');
+	    	$('#pName').val(poster_text[0].files[0].name);
 	    }
 	}
 };
@@ -107,7 +107,7 @@ function teaserCheck(){
 		 	
 		 	$('#tName').val(teaserName);
 	    } else {
-	    	$('#tName').val('변경 됨!!');
+	    	$('#tName').val(teaser_text[0].files[0].name);
 	    }
 	}
 }
@@ -152,7 +152,7 @@ function videoCheck(){
 		 	$('#vName').val(videoName);
 
 	    } else {
-	    	$('#vName').val('변경 됨!!');
+	    	$('#vName').val(video_text[0].files[0].name);
 	    }
 	}
 }

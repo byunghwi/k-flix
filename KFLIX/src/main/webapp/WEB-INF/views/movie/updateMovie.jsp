@@ -191,7 +191,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
-<script src="/kflix/resources/js/movie/update.js?ver=36"></script>
+<script src="/kflix/resources/js/movie/update.js?ver=40"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=30"></script>
 </body>
 </html>

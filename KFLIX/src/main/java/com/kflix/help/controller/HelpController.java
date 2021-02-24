@@ -36,6 +36,8 @@ public class HelpController {
 	public String faqIndex(Model model, Help help) {
 		log.info("============ faqIndexCon ============");
 
+		model.addAttribute("page", PAGENATION.getPage());
+		model.addAttribute("amount", PAGENATION.getAmount());
 		model.addAttribute("total", h_service.getCntHelpList(ENABLED));
 		model.addAttribute("help", h_service.getPageHelp(PAGENATION, ENABLED));
 		return "help/helpindex";

@@ -29,4 +29,6 @@ public interface HelpMapper {
 	// 삭제,복구 id, status -> int
 	int delOrReHelp(@Param("help_id") int help_id, 
 					@Param("status") char status);
+	
+	List<String> getAllHelpType();
 }

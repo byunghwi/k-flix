@@ -27,4 +27,5 @@ public interface HelpService {
 	// 삭제,복구 id, status -> int
 	int delOrReHelp(int help_id, char status);
 	
+	List<String> getAllHelpType();
 }

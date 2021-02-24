@@ -54,4 +54,8 @@
 		UPDATE help SET help_status = #{status} WHERE help_id = #{help_id}
 	</update>
 
+	<select id="getAllHelpType" resultType="string">
+		SELECT help_type FROM help 
+	</select>
+
 </mapper>
