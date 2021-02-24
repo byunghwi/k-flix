@@ -155,18 +155,20 @@
 					view_point : video.currentTime,
 					result : 'update'
 				}
-			}
-			var data = {
-				watch_type : "WATCHING",
-				movie_id : "${movie.movie_id}",
-				email : "${email}",
-				watch_date : "${today }",
-				view_point : video.currentTime,
-				result : 'update'
-			}
-			</c:otherwise>
-			</c:choose>
+			}else{
+				var data = {
+						watch_type : "WATCHING",
+						movie_id : "${movie.movie_id}",
+						email : "${email}",
+						watch_date : "${today }",
+						view_point : video.currentTime,
+						result : 'update'
+					}
+					</c:otherwise>
+					</c:choose>
 
+			}
+			
 			var xhttp = new XMLHttpRequest();
 
 			xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
