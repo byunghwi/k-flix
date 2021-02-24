@@ -31,6 +31,8 @@ import com.kflix.genre.service.GenreService;
 import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
+import com.kflix.watch.domain.WishVO;
+import com.kflix.watch.domain.test;
 import com.kflix.watch.service.WatchService;
 
 import lombok.AllArgsConstructor;
@@ -39,17 +41,17 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class WatchController {
-	
+
 	@Autowired
 	WatchService watchservice;
-	
+
 	@Autowired
 	ActorService actorservice;
 	@Autowired
 	DirectorService directorservice;
 	@Autowired
 	GenreService genreservice;
-	
+
 	LocalDate max_day = LocalDate.now();
 
 	@GetMapping("/browse")
@@ -58,27 +60,31 @@ public class WatchController {
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
-		
+
 		Member member = (Member) session.getAttribute("login");
 		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
 		model.addAttribute("email", member.getEmail());
 		System.out.println("이메일 받아오기 : " + member.getEmail());
 		return "/watch/browse";
 	}
-	
+
 	@GetMapping("/btest")
 	public String btest(Model model, HttpSession session) {
-		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		
+		Member member = (Member) session.getAttribute("login");
+		test test = new test();
+		test.setMovie(watchservice.getAllmovie());
+		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
+		test.setWish(watchservice.getSelectWish(member.getEmail()));
+		test.setGenre(genreservice.selectAllGenreList('Y'));
+		model.addAttribute("test", test);
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
-		Member member = (Member) session.getAttribute("login");
-		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
 		model.addAttribute("email", member.getEmail());
-		
+
 		return "/watch/NewFile";
 	}
-	
+
 	/*
 	 * js에서 form으로 보낼 경우
 	 * 
@@ -88,19 +94,19 @@ public class WatchController {
 	 */
 
 	@PostMapping(value = "/browse/{movie_id}", consumes = "application/json", produces = "text/html; charset=UTF-8")
-	public String createEmployee(@RequestBody WatchVO watch) {
-		System.out.println("왔나");
-		if (watch.getResult().equals("update")) {
-			
+	public String setwatch(@RequestBody WatchVO watch) {
+
+		if (watch.getResult().equals("update")
+				&& watchservice.getSelectWatchUser(watch.getEmail(), watch.getMovie_id()) != null) {
 			int result1 = watchservice.updateWatch(watch);
-		} else {
+		} else if (watch.getResult().equals("create")
+				&& watchservice.getSelectWatchUser(watch.getEmail(), watch.getMovie_id()) == null) {
 			int result1 = watchservice.createWatch(watch);
 		}
 		System.out.println("결과 : " + watch.getView_point() + " 과연 : " + watch.getResult());
 		return "/watch/browse";
 	}
-	
-	
+
 	@GetMapping(value = "/browse/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getmovie(Model model, @PathVariable("movie_id") int movie_id, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
@@ -108,24 +114,23 @@ public class WatchController {
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("movie", watchservice.getmovie(movie_id));
-		
+
 		Member member = (Member) session.getAttribute("login");
-		System.out.println("여기는 상세페이지 이동");
-		System.out.println("[상세페이지]이메일 받아오기 : " + member.getEmail());
 		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
 		model.addAttribute("email", member.getEmail());
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
+		model.addAttribute("getwish", watchservice.getSelectWishUser(member.getEmail(), movie_id));
 		return "/watch/movieInfo";
 	}
-	
+
 	@GetMapping(value = "/browse/watch/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getwatch(Model model, @PathVariable("movie_id") int movie_id, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
-		model.addAttribute("movie", watchservice.getmovie(movie_id)); 
-		
+		model.addAttribute("movie", watchservice.getmovie(movie_id));
+
 		Member member = (Member) session.getAttribute("login");
 		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
 		model.addAttribute("email", member.getEmail());
@@ -134,18 +139,18 @@ public class WatchController {
 		return "/watch/video";
 	}
 
-	/*
-	 * @GetMapping(value = "/browse/watch/{movie_id}", produces =
-	 * MediaType.APPLICATION_JSON_VALUE) public String getvideo(Model
-	 * model, @PathVariable("movie_id") int movie_id) { model.addAttribute("movie",
-	 * service.getmovie(movie_id)); model.addAttribute("watch",
-	 * service.getSelectWatch("nn@naver.com")); model.addAttribute("email",
-	 * "nn@naver.com"); model.addAttribute("watching",
-	 * service.getSelectWatchUser("nn@naver.com", movie_id));
-	 * 
-	 * System.out.println("나와ㅗ나얼" + service.getSelectWatchUser("nn@naver.com",
-	 * movie_id));
-	 * 
-	 * return "/watch/video"; }
-	 */
+	@PostMapping(value = "/wish", consumes = "application/json", produces = "text/html; charset=UTF-8")
+	public String setwish(@RequestBody WishVO wish) {
+		System.out.println("wish왔나");
+		if (wish.getResult().equals("create")
+				&& watchservice.getSelectWishUser(wish.getEmail(), wish.getMovie_id()) == null) {
+			int result1 = watchservice.createWish(wish);
+			System.out.println("wish생성");
+		} else if (wish.getResult().equals("delete")
+				&& watchservice.getSelectWishUser(wish.getEmail(), wish.getMovie_id()) != null) {
+			int result1 = watchservice.deleteWish(wish);
+			System.out.println("wish삭제");
+		}
+		return "/watch/wish";
+	}
 }

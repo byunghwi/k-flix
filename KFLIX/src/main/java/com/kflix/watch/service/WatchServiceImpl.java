@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.kflix.mapper.WatchMapper;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
+import com.kflix.watch.domain.WishVO;
 
 import lombok.AllArgsConstructor;
 
@@ -54,5 +55,26 @@ public class WatchServiceImpl implements WatchService {
 	@Override
 	public WatchVO getSelectWatchUser(String email, int movie_id) {
 		return mapper.getSelectWatchUser(email, movie_id);
+	}
+
+	@Override
+	public int createWish(WishVO wish) {
+		return mapper.createWish(wish);
+	}
+
+	@Override
+	public int deleteWish(WishVO wish) {
+		return mapper.deleteWish(wish);
+	}
+	
+	@Override
+	public List<WishVO> getSelectWish(String email) {
+		return mapper.getSelectWish(email);
+	}
+	
+
+	@Override
+	public WishVO getSelectWishUser(String email, int movie_id) {
+		return mapper.getSelectWishUser(email, movie_id);
 	}
 }

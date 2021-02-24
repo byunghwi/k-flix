@@ -22,14 +22,13 @@ body {
 	box-shadow: 0px 2px 10px black;
 }
 
-.background {
-	padding: 0px 0;
-	margin: 0;
+.profile {
+	position: absolute;
+	right: 4%;
 }
 
 #mainimg {
-	/* width: 100%; */
-	
+	width: 100%;
 }
 
 /* .background::before {
@@ -48,7 +47,7 @@ body {
 	flex-wrap: nowrap;
 	position: fixed;
 	z-index: 100;
-	top:0;
+	top: 0;
 }
 
 .flex-row>* {
@@ -57,9 +56,11 @@ body {
 
 .nav-bar {
 	background-color: rgba(0, 0, 0, 0.2);
-	width: 100%;
+	max-width: 100%;
 	padding: 5px 50px;
 	align-items: center;
+	position: relative;
+	margin: 0;
 }
 
 .test {
@@ -85,6 +86,8 @@ body {
 	background-color: black;
 	padding: 10px 0;
 	box-shadow: 100px 0px 50px black;
+	max-width: 100%;
+	margin: 0;
 }
 
 .flexnowr {
@@ -109,6 +112,7 @@ body {
 .list_title {
 	color: white;
 	font-size: 15px;
+	margin: 20px;
 }
 
 .raba {
@@ -130,6 +134,24 @@ body {
 	z-index: 10;
 	background-color: white;
 	border-radius: 0.5rem;
+}
+
+.pagenum_All {
+	float: right;
+	position: absolute;
+	top: 28px;
+	right: 64px;
+	visibility: hidden;
+}
+
+.pagehoveroff {
+	padding: 1px;
+	color: #939393;
+}
+
+.pagehoveron {
+	color: white;
+	padding: 1px;
 }
 
 .atag:hover .videohover {
@@ -169,6 +191,12 @@ a:active {
 	height: 145px;
 	position: relative;
 	border-radius: 0.5rem;
+	border: 1px solid #333;
+}
+
+.atag {
+	width: 250px;
+	height: 145px;
 }
 
 /* 
@@ -220,65 +248,107 @@ a:active {
    z-index: 99;
 }
  */
- 
- /* 슬라이드 */
- *{margin: 0; padding: 0;}
- 
-li{list-style: none;}
-ul{padding: 0;}
 
-.slide_wrapper_All{
-	position: relative;
+/* 슬라이드 */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.img1 {
+	margin: 0;
+}
+
+.All {
+	width: 100%;
+	height: 207.5px;
+	overflow: hidden;
+	position: absolute;
+	max-width: 100%;
+}
+
+li {
+	list-style: none;
+}
+
+ul {
+	padding: 0;
+}
+
+.slide_wrapper_All {
+	position: absolute;
 	margin: 0 auto;
 	height: 145px;
-/* 	overflow: hidden; */
+	height: 145px;
+	left: 100px;
 }
+
 .slides_All {
 	position: absolute;
-	left: 0; top: 0;
-	transition:left 0.5s ease-out;
+	left: 0;
+	top: 0;
+	transition: left 0.5s ease-out;
 	/* width
 		가로 길이 * 갯수 
 	+	여백 길이 * (갯수-1) 
 	*/
 }
 
-.slides_All li:not(:last-child){
+.slides_All li:not(:last-child) {
 	float: left;
-	margin-right: 15px;
+	margin-right: 10px;
 }
 
 .controls_All {
-	position:absolute;
-	width:100%;
-	top:0;
+	position: absolute;
+	width: 100%;
+	top: 62.5px;
 	text-align: center;
 	margin: 0;
+	left: 0;
 }
 
-*{margin: 0; padding: 0;}
+.backop {
+	position: absolute;
+	background: #333333cf;
+	height: 150.5px;
+	width: 135px;
+	color: #939393;
+	font-size: 35px;
+	padding-top: 45px;
+	border-radius: 0.5rem;
+}
 
-li{list-style: none;}
+* {
+	margin: 0;
+	padding: 0;
+}
 
-.slide_wrapper_Watching{
+li {
+	list-style: none;
+}
+
+.slide_wrapper_Watching {
 	position: relative;
 	margin: 0 auto;
 	height: 145px;
 	overflow: hidden;
 }
+
 .slides_Watching {
 	position: absolute;
-	left: 0; top: 0;
-	transition:left 0.5s ease-out;
+	left: 0;
+	top: 0;
+	transition: left 0.5s ease-out;
 	/* width
 		가로 길이 * 갯수 
 	+	여백 길이 * (갯수-1) 
 	*/
 }
-.slides_Watching li:not(:last-child){
+
+.slides_Watching li:not(:last-child) {
 	float: left;
 	margin-right: 10px;
-	
 }
 
 .controls_Watching {
@@ -286,13 +356,55 @@ li{list-style: none;}
 	margin-top: 50px;
 }
 
-[class*='prev'], [class*='next'] {
+.prev_All, .next_All {
 	position: absolute;
-	background: #333;
-	height:145px;
-	width:154px;
-	color: #fff;
+	height: 150.5px;
+	width: 65px;
+	color: #939393;
+	font-size: 35px;
+	padding-top: 45px;
+	visibility: hidden;
+	z-index: 10;
 }
 
-[class*='prev']{top: 0; left: -139px;}
-[class*='next']{top: 0; right:  -139px;}
+.prev_All:hover, .next_All:hover {
+	color: white;
+	font-size: 50px;
+	padding-top: 31px;
+}
+
+.prev_All {
+	top: 0;
+	left: 0;
+	padding-left: 40px;
+}
+
+.next_All {
+	top: 0;
+	right: 0;
+	padding-right: 40px;
+}
+
+.backopprev_All, .backopnext_All {
+	position: absolute;
+	background: #333333cf;
+	height: 150.5px;
+	width: 92px;
+	color: #939393;
+	font-size: 35px;
+	padding-top: 45px;
+	visibility: hidden;
+	z-index: 10;
+}
+
+.backopprev_All {
+	top: 0;
+	left: 0;
+	padding-left: 40px;
+}
+
+.backopnext_All {
+	top: 0;
+	right: 0;
+	padding-right: 40px;
+}

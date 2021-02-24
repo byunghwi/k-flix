@@ -21,5 +21,5 @@ public class Member {
 	int ticket_id;
 	String kakao;
 	String naver;
-	String save_status; 
+	String save_status;
 }
