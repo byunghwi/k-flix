@@ -208,8 +208,7 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-<<<<<<< HEAD
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -221,8 +220,6 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
-=======
->>>>>>> branch 'develop' of https://github.com/byunghwi/k-flix.git
 
 	</dependencies>
 	<build>
