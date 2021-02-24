@@ -107,15 +107,14 @@
 			</div>
 		</c:if>
 
+	
 
 		<c:if test="${not empty test.genre}">
 			<c:forEach items="${test.genre }" var="genre" varStatus="status">
 				<c:forEach items="${test.movie }" var="Allmovie" varStatus="status">
-					<c:if
-						test="${(genre.genre_id eq Allmovie.genre_id1 or genre.genre_id eq Allmovie.genre_id2) and Allmovie.genre_id2 != Allmovie.genre_id1 }">
+					<c:if test="${genre.genre_id eq Allmovie.genre_id1}">
 						<c:set var="sum" value="${sum+1}" />
 						<div class="sliderow" style="top: ${210+210*sum}px">
-
 							<h2 class="rowHeader">${genre.genre_name }</h2>
 							<div class="slide_wrapper">
 								<ul class="slides">
@@ -154,6 +153,12 @@
 			</c:forEach>
 		</c:if>
 	</div>
+	<script type="text/javascript">
+		// 배열 생성 (초기 값 할당)
+
+		var arr = new Array('zero', 'one', 'tow');
+		
+	</script>
 	<script src="/kflix/resources/js/watch/jstest.js"></script>
 </body>
 </html>
