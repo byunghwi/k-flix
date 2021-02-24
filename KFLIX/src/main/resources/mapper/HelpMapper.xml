@@ -58,4 +58,8 @@
 		SELECT help_type FROM help 
 	</select>
 
+	<select id="getHelpWithRownum" resultType="string">
+		SELECT help_title FROM help WHERE help_type = #{type} AND ROWNUM &lt;= 4 AND help_status ='Y' ORDER BY help_id DESC
+	</select>
+
 </mapper>

@@ -31,4 +31,6 @@ public interface HelpMapper {
 					@Param("status") char status);
 	
 	List<String> getAllHelpType();
+	
+	List<String> getHelpWithRownum(String type);
 }

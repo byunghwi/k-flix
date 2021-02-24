@@ -28,4 +28,6 @@ public interface HelpService {
 	int delOrReHelp(int help_id, char status);
 	
 	List<String> getAllHelpType();
+	
+	List<String> getHelpWithRownum(String type);
 }
