@@ -39,6 +39,7 @@ function sound() {
 }
 
 function vidplay() {
+	
 	if (video.paused) {
 		video.play();
 		movieinfo.style.display = 'none';
@@ -72,7 +73,6 @@ function volshow() {
 }
 
 function skip(value) {
-	
 	video.currentTime += value;
 }
 
@@ -90,9 +90,8 @@ function openFullscreen() {
 video.addEventListener("timeupdate", PlayTime, false);
 
 function PlayTime(e) {
-	
-	document.getElementById("playtime").innerHTML =
-		"재생 상태 : " + Math.floor(video.currentTime) + "/" + Math.floor(video.duration);
+	document.getElementById("current").innerHTML = Math.floor(video.currentTime);
+	document.getElementById("duration").innerHTML = Math.floor(video.duration);
 }
 
 video.addEventListener(
