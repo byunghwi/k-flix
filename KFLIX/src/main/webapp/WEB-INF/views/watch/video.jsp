@@ -167,7 +167,6 @@
 					</c:otherwise>
 					</c:choose>
 
-			}
 			
 			var xhttp = new XMLHttpRequest();
 

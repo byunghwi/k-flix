@@ -59,7 +59,7 @@ public class WatchController {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
+		model.addAttribute("AllGenre", watchservice.getAllGenre());
 
 		Member member = (Member) session.getAttribute("login");
 		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
@@ -76,7 +76,7 @@ public class WatchController {
 		test.setMovie(watchservice.getAllmovie());
 		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
 		test.setWish(watchservice.getSelectWish(member.getEmail()));
-		test.setGenre(genreservice.selectAllGenreList('Y'));
+		test.setGenre(watchservice.getAllGenre());
 		model.addAttribute("test", test);
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
@@ -112,7 +112,7 @@ public class WatchController {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
+		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("movie", watchservice.getmovie(movie_id));
 
 		Member member = (Member) session.getAttribute("login");
@@ -128,7 +128,7 @@ public class WatchController {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
+		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("movie", watchservice.getmovie(movie_id));
 
 		Member member = (Member) session.getAttribute("login");

@@ -109,7 +109,7 @@
 				<ul class="slides_Watching">
 					<c:forEach items="${watch }" var="watch" varStatus="status">
 						<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-							<c:if test="${watch.movie_id eq Allmovie.movie_id }">
+							<c:if test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
 								<li><a class="atag"
 									href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 										<div class="atagdiv">

@@ -39,6 +39,7 @@ ul {
 	left: 0;
 	top: 0;
 	transition: left 0.5s ease-out;
+	/* width: 12990px; */
 }
 
 .atag {
