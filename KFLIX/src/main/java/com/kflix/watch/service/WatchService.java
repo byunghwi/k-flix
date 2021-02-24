@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.kflix.genre.domain.Genre;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
@@ -35,4 +36,6 @@ public interface WatchService {
 	public int deleteWish(WishVO wish);
 	
 	public WishVO getSelectWishUser(String email, int movie_id);
+	
+	public List<Genre> getAllGenre();
 }

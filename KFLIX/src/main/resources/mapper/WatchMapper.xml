@@ -30,8 +30,11 @@
 		#{movie_id }
 	</select>
 
-	<!-- <select id="getmovieGenre" resultType="com.kflix.watch.domain.MovieVO"> 
-		SELECT * FROM watch WHERE movie_id = #{movie_id } </select> -->
+	<select id="getAllGenre"
+		resultType="com.kflix.genre.domain.Genre">
+		SELECT * FROM genre
+	</select>
+
 
 	<insert id="createWatch">
 		INSERT INTO watch VALUES (
@@ -48,13 +51,15 @@
 		UPDATE watch
 		SET
 		watch_type = #{watch_type},
-		view_point = #{view_point}
+		view_point
+		= #{view_point}
 		WHERE email = #{email} and movie_id = #{movie_id}
 	</update>
 
 	<delete id="deleteWatch">
 		DELETE FROM watch
-		WHERE email = #{email} and movie_id = #{movie_id}
+		WHERE email = #{email} and movie_id
+		= #{movie_id}
 	</delete>
 
 	<select id="getSelectWish"
@@ -78,7 +83,8 @@
 
 	<delete id="deleteWish">
 		DELETE FROM wish
-		WHERE email = #{email} and movie_id = #{movie_id}
+		WHERE email = #{email} and movie_id =
+		#{movie_id}
 	</delete>
 
 </mapper>
