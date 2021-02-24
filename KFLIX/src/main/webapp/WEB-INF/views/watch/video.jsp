@@ -21,7 +21,8 @@
 <script src="https://kit.fontawesome.com/6421ed9b05.js"
 	crossorigin="anonymous"></script>
 
-
+<style type="text/css">
+</style>
 </head>
 <body>
 	<div id="videocon">
@@ -34,34 +35,45 @@
 			href="<%=application.getContextPath()%>/browse/${movie.movie_id }">
 			<i style="display: hidden;" id="back"
 			class="fas fa-arrow-left color-w relative"> <span
-				style="font-size: 15px;"> 뒤로가기 </span>
+				style="font-size: 18px; vertical-align: middle;"> 뒤로가기 </span>
 		</i>
 		</a>
 
-		<div id="videobar" style="display: hidden;">
-			<div>
-				<progress id='progressbar' class="progressbar" value='5'></progress>
-			</div>
-			<i id="restart" onclick="restart()" class=" fas fa-stop color-w"></i>
-			<div style="display: inline-block;" onclick="vidplay()"
-				id="playnpause">
-			</div>
 
-			<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
-			<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
-			<div style="display: inline-block;" id="volume">
-				<!-- <i onclick="volshow()" id="volumeicon" class="fas fa-volume-up color-w"></i> -->
-				<input type="range" class="form-range" min="0" max="1" step="0.1"
-					id="volrange">
+
+		<div class="player">
+			<video id="video" class="viewer" muted autoplay
+				controlslist="nodownload" poster="${movie.poster_path }">
+				<source src="${movie.video_path }" type="video/mp4">
+			</video>
+
+			<div id="videobar" style="display: hidden;">
+				<div class="progress">
+					<div class="progress__filled"></div>
+				</div>
+
+				<i id="restart" onclick="restart()" class=" fas fa-stop color-w"></i>
+				<div style="display: inline-block;" onclick="vidplay()"
+					id="playnpause" class="toggle"></div>
+
+				<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
+				<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
+				<div style="display: inline-block;" id="volume">
+					<!-- 	<i onclick="volshow()" id="volumeicon" class="fas fa-volume-up color-w"></i> -->
+					<input type="range" class="form-range" min="0" max="1" step="0.1"
+						id="volrange">
+				</div>
+				<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
+				<i onclick="openFullscreen()" class="fas fa-expand color-w"></i>
+				
+				<div style="display: inline-block;" id="playtime" class="color-w font-s">
+				<div id="current"></div>
+				<div id="duration"></div>
+				<div></div>
+				</div>
 			</div>
-			<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
-			<i onclick="openFullscreen()" class="fas fa-expand color-w"></i>
-			<div style="display: inline-block;" id="playtime" class="color-w"></div>
 		</div>
-		<video id="video" onclick="vidplay()" muted autoplay
-			poster="${movie.poster_path }">
-			<source src="${movie.video_path }" type="video/mp4">
-		</video>
+
 
 
 		<div id="movieinfo" onclick="vidplay()">
@@ -83,7 +95,7 @@
 						<c:if test="${sum < 4}">
 							<a id="atag" class="atagname"
 								href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
-								<div class="show">
+								<div class="showimg">
 									<img
 										style="width: 100%; height: 150px; border-radius: 2% 2% 0 0;"
 										src="${Allmovie.poster_path }" class="d-block dis hoverimg"
@@ -111,52 +123,90 @@
 	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
 
 	<script>
-		console.log("${movie.movie_id}");
-		console.log("${watching.watch_type}");
-		sound();
-		var video = document.getElementById('video');
-		
-		<c:if test="${not empty watching }">
-		<c:choose>
-		<c:when test="${watching.watch_type eq 'WATCHING'}">
-		video.currentTime = "${watching.view_point}";
-		</c:when>
-		<c:otherwise>
-		alert("시청이 완료되어, 처음부터 실행됩니다.");
-		video.currentTime = 0.00001;
-		video.muted = false;
-		video.play();
-		</c:otherwise>
-		</c:choose>
-		</c:if>
+			console.log("${movie.movie_id}");
+			console.log("${watching.watch_type}");
+			sound();
+			var video = document.getElementById('video');
 
-		function savecurrentTime() {
+			const player = document.querySelector('.player'); 
+			const progress = player.querySelector('.progress'); 
+			const progressBar = player.querySelector('.progress__filled');
+			const skipButtons = player.querySelectorAll('[data-skip]'); 
+			const ranges = player.querySelectorAll('.player__slider');
+
+			
+			function togglePlay() { 
+				const method = video.paused ? 'play' : 'pause';
+				video[method](); 
+			} 
+			
+			video.addEventListener('click', togglePlay);
+
+			
+					function handleProgress() {
+						const percent = (video.currentTime / video.duration) * 100;
+						progressBar.style.flexBasis = percent+"%";
+						} 
+					
+					video.addEventListener('timeupdate', handleProgress);
+
+						
+					function scrub(e) {
+						const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+						video.currentTime = scrubTime; 
+						} 
+					
+					let mousedown = false;
+					progress.addEventListener('click', scrub); 
+					progress.addEventListener('mousemove', (e) => mousedown && scrub(e)
+							);
+					progress.addEventListener('mousedown', () => mousedown = true); 
+					progress.addEventListener('mouseup', () => mousedown = false);
+
+			
+			video.addEventListener('click', togglePlay);
+			
+			<c:if test="${not empty watching }">
 			<c:choose>
-			<c:when test="${empty watching }">
-			console.log("없음");
-			var data = {
-				watch_type : "WATCHING",
-				movie_id : "${movie.movie_id}",
-				email : "${email}",
-				watch_date : "${today }",
-				view_point : video.currentTime,
-				result : 'create'
-			}
+			<c:when test="${watching.watch_type eq 'WATCHING'}">
+			video.currentTime = "${watching.view_point}";
 			</c:when>
 			<c:otherwise>
-			console.log("있음");
-			if (video.currentTime == video.duration) {
-				console.log("종료가 맞음");
+			alert("시청이 완료되어, 처음부터 실행됩니다.");
+			video.currentTime = 0.00001;
+			video.muted = false;
+			video.play();
+			</c:otherwise>
+			</c:choose>
+			</c:if>
+
+			function savecurrentTime() {
+				<c:choose>
+				<c:when test="${empty watching }">
+				console.log("없음");
 				var data = {
-					watch_type : "WATCHED",
+					watch_type : "WATCHING",
 					movie_id : "${movie.movie_id}",
 					email : "${email}",
 					watch_date : "${today }",
 					view_point : video.currentTime,
-					result : 'update'
+					result : 'create'
 				}
-			}else{
-				var data = {
+				</c:when>
+				<c:otherwise>
+				console.log("있음");
+				if (video.currentTime == video.duration) {
+					console.log("종료가 맞음");
+					var data = {
+						watch_type : "WATCHED",
+						movie_id : "${movie.movie_id}",
+						email : "${email}",
+						watch_date : "${today }",
+						view_point : video.currentTime,
+						result : 'update'
+					}
+				} else {
+					var data = {
 						watch_type : "WATCHING",
 						movie_id : "${movie.movie_id}",
 						email : "${email}",
@@ -166,37 +216,37 @@
 					}
 					</c:otherwise>
 					</c:choose>
+				}
 
-			
-			var xhttp = new XMLHttpRequest();
+				var xhttp = new XMLHttpRequest();
 
-			xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
-			xhttp.setRequestHeader('content-type', 'application/json');
-			xhttp.send(JSON.stringify(data));
+				xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
+				xhttp.setRequestHeader('content-type', 'application/json');
+				xhttp.send(JSON.stringify(data));
 
-		}
-
-		//미디어 재생이 종료되었을때 발생하는 이벤트 처리
-		video.addEventListener("ended", event, false);
-
-		function event(e) {
-			recommend.style.display = 'block';
-			result = alert("미디어 재생이 완료되었습니다.");
-			var data = {
-				watch_type : "WATCHED",
-				movie_id : "${movie.movie_id}",
-				email : "${email}",
-				watch_date : "${today }",
-				view_point : video.currentTime,
-				result : 'update'
 			}
 
-			var xhttp = new XMLHttpRequest();
+			//미디어 재생이 종료되었을때 발생하는 이벤트 처리
+			video.addEventListener("ended", event, false);
 
-			xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
-			xhttp.setRequestHeader('content-type', 'application/json');
-			xhttp.send(JSON.stringify(data));
-		}
-	</script>
+			function event(e) {
+				recommend.style.display = 'block';
+				result = alert("미디어 재생이 완료되었습니다.");
+				var data = {
+					watch_type : "WATCHED",
+					movie_id : "${movie.movie_id}",
+					email : "${email}",
+					watch_date : "${today }",
+					view_point : video.currentTime,
+					result : 'update'
+				}
+
+				var xhttp = new XMLHttpRequest();
+
+				xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
+				xhttp.setRequestHeader('content-type', 'application/json');
+				xhttp.send(JSON.stringify(data));
+			}
+		</script>
 </body>
 </html>

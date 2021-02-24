@@ -23,12 +23,26 @@
 
 <link rel="stylesheet" type="text/css"
 	href="/kflix/resources/css/watch/csstest.css">
+<style type="text/css">
+body {
+	background-color: white;
+}
 
+.progress {
+	color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.progress__filled {
+	background: #6AB6D8;
+	padding: 10px;
+}
+</style>
 </head>
 <body>
 
 	<div class="list container">
-
+		<%-- 
 		<c:if test="${not empty test.watch }">
 			<div class="sliderow" style="top: 0px">
 				<h2 class="rowHeader">"${login.email }"님이 시청 중인 콘텐츠</h2>
@@ -107,7 +121,7 @@
 			</div>
 		</c:if>
 
-	
+
 
 		<c:if test="${not empty test.genre}">
 			<c:forEach items="${test.genre }" var="genre" varStatus="status">
@@ -152,13 +166,115 @@
 				</c:forEach>
 			</c:forEach>
 		</c:if>
+		 --%>
+		<div>
+			<div class="player">
+				<video class=" viewer"
+					src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></video>
+				<div class="player__controls">
+					<div class="progress">
+						<div class="progress__filled"></div>
+					</div>
+					<button class="player__button toggle" title="Toggle Play">►</button>
+					<input type="range" name="volume" class="player__slider" min="0"
+						max="1" step="0.05" value="1"> <input type="range"
+						name="playbackRate" class="player__slider" min="0.5" max="2"
+						step="0.1" value="1">
+					<button data-skip="-10" class="player__button">« 10s</button>
+					<button data-skip="25" class="player__button">25s »</button>
+				</div>
+			</div>
+
+
+		</div>
 	</div>
 	<script type="text/javascript">
-		// 배열 생성 (초기 값 할당)
+	/* Get Our Elements */ 
+	const player = document.querySelector('.player'); 
+	const video = player.querySelector('.viewer'); 
+	const progress = player.querySelector('.progress'); 
+	const progressBar = player.querySelector('.progress__filled'); 
+	const toggle = player.querySelector('.toggle'); 
+	const skipButtons = player.querySelectorAll('[data-skip]'); 
+	const ranges = player.querySelectorAll('.player__slider');
 
-		var arr = new Array('zero', 'one', 'tow');
+	
+	function togglePlay() { 
+		const method = video.paused ? 'play' : 'pause';
+		video[method](); 
+	} 
+	
+	video.addEventListener('click', togglePlay);
+
+	
+	
+	function updateButton() { 
+		const icon = this.paused ? '►' : '❚ ❚'; 
+		console.log(icon); 
+		toggle.textContent = icon; 
+		}
+	
+	video.addEventListener('play', updateButton); 
+	video.addEventListener('pause', updateButton); 
+
+	
+	
+		function skip() { 
+			video.currentTime += parseFloat(this.dataset.skip); 
+			}
 		
+		skipButtons.forEach(button => 
+		button.addEventListener('click', skip)
+		);
+
+			function handleRangeUpdate() {
+				video[this.name] = this.value;
+				} 
+			
+			ranges.forEach(range => 
+			range.addEventListener('click', handleRangeUpdate)); 
+			
+			ranges.forEach(
+				range => range.addEventListener('change', handleRangeUpdate));
+
+			
+			function handleProgress() {
+				const percent = (video.currentTime / video.duration) * 100;
+				progressBar.style.flexBasis = percent+"%";
+				} 
+			
+			video.addEventListener('timeupdate', handleProgress);
+
+				
+			function scrub(e) {
+				const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+				video.currentTime = scrubTime; 
+				} 
+			
+			let mousedown = false;
+			progress.addEventListener('click', scrub); 
+			progress.addEventListener('mousemove', (e) => mousedown && scrub(e)
+					);
+			progress.addEventListener('mousedown', () => mousedown = true); 
+			progress.addEventListener('mouseup', () => mousedown = false);
+
+				
+					
+
+		/* 	// 배열 생성 (초기 값 할당)
+			i = 0;
+			<c:forEach items="${test.movie }" var="Allmovie" varStatus="status">
+			arr[i] = "${Allmovie.genre_id1 }";
+			i++;
+			arr[i] = "${Allmovie.genre_id2 }";
+			i++;s
+			</c:forEach>
+			console.log(arr.length);
+			console.log(arr);
+			const set = new Set(arr);
+			console.log(set);
+		 */
 	</script>
-	<script src="/kflix/resources/js/watch/jstest.js"></script>
+	<script src="/kflix/resources/js/watch/jstest.js?var=2"></script>
 </body>
 </html>
