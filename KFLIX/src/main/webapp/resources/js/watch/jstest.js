@@ -26,10 +26,14 @@ var slides = document.querySelector('.slides'),
 	
 	pagenumdiv = document.querySelector('.pagenum');
 
-console.log(slideCount);
+	console.log(slideCount);
+	console.log(allpagenum);
 
-slides.style.width = (slideWidth + slideMargin) * slideCount
-	- slideMargin + 'px';
+
+/*신장르 안나옴*/
+
+/*slides.style.width = (slideWidth + slideMargin) * slideCount_All - slideMargin + 'px';  안되서 지정 함*/
+slides.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + 'px';
 slide_wrapper.style.width = (slideWidth + slideMargin) * slideShow
 	- slideMargin + 'px';
 
@@ -41,10 +45,6 @@ for (i = 1; i <= allpagenum; i++) {
 		pagenumdiv.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
 	}
 }
-
-
-sliderow.style.top = 210*i + 'px';
-
 
 //슬라이드 마우스오버 시 버튼 나타내기
 sliderow

@@ -30,7 +30,7 @@
 	<div class="list container">
 
 		<c:if test="${not empty test.watch }">
-			<div class="sliderow" style="top: 0">
+			<div class="sliderow" style="top: 0px">
 				<h2 class="rowHeader">"${login.email }"님이 시청 중인 콘텐츠</h2>
 				<div class="slide_wrapper">
 					<ul class="slides">
@@ -112,77 +112,47 @@
 			<c:forEach items="${test.genre }" var="genre" varStatus="status">
 				<c:forEach items="${test.movie }" var="Allmovie" varStatus="status">
 					<c:if
-						test="${genre.genre_id eq Allmovie.genre_id1 or genre.genre_id eq Allmovie.genre_id2 }">
+						test="${(genre.genre_id eq Allmovie.genre_id1 or genre.genre_id eq Allmovie.genre_id2) and Allmovie.genre_id2 != Allmovie.genre_id1 }">
 						<c:set var="sum" value="${sum+1}" />
 						<div class="sliderow" style="top: ${210+210*sum}px">
-								<c:if test="${Allmovie.genre_id1 eq Allmovie.genre_id2 }">
-									<h2 class="rowHeader">${genre.genre_name }</h2>
-									<div class="slide_wrapper">
-										<ul class="slides">
-											<c:forEach items="${test.movie }" var="limovie"
-												varStatus="status">
-												<li><a class="atag"
-													href="<%=application.getContextPath()%>/browse/${limovie.movie_id }">
-														<div class="atagdiv">
-															<img style="margin: 0;" src="${limovie.poster_path }"
-																class="d-block dis img1" alt="...">
-															<div class="videohover">
-																<video class="video" muted autoplay loop
-																	poster="${limovie.poster_path}">
-																	<source src="${limovie.teaser_path}" type="video/mp4">
-																</video>
-															</div>
+
+							<h2 class="rowHeader">${genre.genre_name }</h2>
+							<div class="slide_wrapper">
+								<ul class="slides">
+									<c:forEach items="${test.movie }" var="limovie"
+										varStatus="status">
+										<c:if
+											test="${genre.genre_id eq limovie.genre_id1 or genre.genre_id eq limovie.genre_id2 }">
+											<li><a class="atag"
+												href="<%=application.getContextPath()%>/browse/${limovie.movie_id }">
+													<div class="atagdiv">
+														<img style="margin: 0;" src="${limovie.poster_path }"
+															class="d-block dis img1" alt="...">
+														<div class="videohover">
+															<video class="video" muted autoplay loop
+																poster="${limovie.poster_path}">
+																<source src="${limovie.teaser_path}" type="video/mp4">
+															</video>
 														</div>
-												</a></li>
-											</c:forEach>
-										</ul>
-									</div>
-									<div id="pagenum"></div>
-									<p class="controls">
-										<span class="backopprev"></span> <span class="backopnext"></span>
-									</p>
-									<p class="controls">
-										<span class="prev"><i class="fas fa-chevron-left"></i></span>
-										<span class="next"><i class="fas fa-chevron-right"></i></span>
-									</p>
-								</c:if>
-								<c:if test="${Allmovie.genre_id1 not eq Allmovie.genre_id2 }">
-									<h2 class="rowHeader">${genre.genre_name }</h2>
-									<div class="slide_wrapper">
-										<ul class="slides">
-											<c:forEach items="${test.movie }" var="limovie"
-												varStatus="status">
-												<li><a class="atag"
-													href="<%=application.getContextPath()%>/browse/${limovie.movie_id }">
-														<div class="atagdiv">
-															<img style="margin: 0;" src="${limovie.poster_path }"
-																class="d-block dis img1" alt="...">
-															<div class="videohover">
-																<video class="video" muted autoplay loop
-																	poster="${limovie.poster_path}">
-																	<source src="${limovie.teaser_path}" type="video/mp4">
-																</video>
-															</div>
-														</div>
-												</a></li>
-											</c:forEach>
-										</ul>
-									</div>
-									<div id="pagenum"></div>
-									<p class="controls">
-										<span class="backopprev"></span> <span class="backopnext"></span>
-									</p>
-									<p class="controls">
-										<span class="prev"><i class="fas fa-chevron-left"></i></span>
-										<span class="next"><i class="fas fa-chevron-right"></i></span>
-									</p>
-								</c:if>
+													</div>
+											</a></li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</div>
+							<div id="pagenum"></div>
+							<p class="controls">
+								<span class="backopprev"></span> <span class="backopnext"></span>
+							</p>
+							<p class="controls">
+								<span class="prev"><i class="fas fa-chevron-left"></i></span> <span
+									class="next"><i class="fas fa-chevron-right"></i></span>
+							</p>
 						</div>
 					</c:if>
 				</c:forEach>
 			</c:forEach>
 		</c:if>
-
 	</div>
 	<script src="/kflix/resources/js/watch/jstest.js"></script>
 </body>
