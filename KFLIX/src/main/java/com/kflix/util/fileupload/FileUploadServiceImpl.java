@@ -35,7 +35,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 	Tika tika = new Tika();
 
 	private static final String LOCAL_PATH = "C:/Users/Ahos/Desktop/local_workSpace/";
-	
+
 	// 저장할 주소
 	private static final String[] SAVE_PATH = {
 			LOCAL_PATH + "k-flix/KFLIX/src/main/webapp/resources/imgs/movie/poster/",
@@ -122,7 +122,20 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 
 	private boolean checkOverlap(MultipartFile file, int i, Movie movie) {
-
+		// 멀티파일 널체크
+		if(file == null) {
+			log.info("파일 변경하지 않음(multifiel - null)");
+			return true;
+		}
+		
+		String origin_name = file.getOriginalFilename();
+		
+		// 변경인지 아닌지 체크
+		if(origin_name.equals("")) {
+			log.info("파일 변경하지 않음(파일 변경을 시도 하지 않음)");
+			return true;
+		}
+		
 		File check_file = new File(SAVE_PATH[i]);
 
 		if (!check_file.isDirectory()) {
@@ -137,27 +150,20 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 		}
 
-		if(file == null) {
 
+		check_file = new File(SAVE_PATH[i] + origin_name);
+
+		// 파일 존재 여부 중복처리
+		if (!check_file.exists()) {
+			log.info(origin_name + " - 중복 되지 않음");
 			return true;
-		} else {
 
-			String origin_name = file.getOriginalFilename();
+		}  else {
 
+			log.info(origin_name + " - 중복 파일");
 
-			check_file = new File(SAVE_PATH[i] + origin_name);
-
-			// 파일 존재 여부 중복처리
-			if (!check_file.exists()) {
-				log.info(origin_name + " - 중복 되지 않음");
-				return true;
-
-			}  else {
-
-				log.info(origin_name + " - 중복 파일");
-
-			}
 		}
+
 		return false;
 	}
 
@@ -186,6 +192,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 		String originFile_name = "";
 		if (file == null) {
+			log.info("변경되지 않아 pathName 안건듬(multifile - null)");
+			
+		} else if ( file.getOriginalFilename().equals("")) {
 			switch(num) {
 			case 0:
 				movie.setPoster_path(PREFIX_URI[num] + movie.getPoster_path());
@@ -221,15 +230,17 @@ public class FileUploadServiceImpl implements FileUploadService {
 		String origin_name = "";
 		File check;
 		if (file == null) {
-			log.info("변경되지 않아 삭제하지 않음");
-		}else {
-			
+			log.info("변경되지 않아 삭제하지 않음(multifile - null)");
+		} else if (file.getOriginalFilename().equals("")) {
+			log.info("변경되지 않아 삭제하지 않음(파일 변경을 시도 하지 않음)");
+		} else {
+
 			switch(num) {
 			case 0:
 				if (file.getOriginalFilename().equals(movie.getPoster_path())) {
 					log.info("변경되지 않아 삭제하지 않음");
 				} else {
-					
+
 					origin_name = movie.getPoster_path();
 					check = new File(SAVE_PATH[num] + origin_name);
 					del(check, origin_name);
@@ -239,7 +250,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 				if (file.getOriginalFilename().equals(movie.getTeaser_path())) {
 					log.info("변경되지 않아 삭제하지 않음");
 				} else {
-					
+
 					origin_name = movie.getTeaser_path();
 					check = new File(SAVE_PATH[num] + origin_name);
 					del(check, origin_name);
@@ -249,21 +260,21 @@ public class FileUploadServiceImpl implements FileUploadService {
 				if (file.getOriginalFilename().equals(movie.getVideo_path())) {
 					log.info("변경되지 않아 삭제하지 않음");
 				} else {
-					
+
 					origin_name = movie.getVideo_path();
 					check = new File(SAVE_PATH[num] + origin_name);
 					del(check, origin_name);
 				}
 				break;
 			}
-			
+
 		} 
-//		else {
-//
-//			origin_name = file.getOriginalFilename();
-//			check = new File(SAVE_PATH[num] + origin_name);
-//			del(check, origin_name);
-//		}
+		//		else {
+		//
+		//			origin_name = file.getOriginalFilename();
+		//			check = new File(SAVE_PATH[num] + origin_name);
+		//			del(check, origin_name);
+		//		}
 
 		return true;
 	}
@@ -282,7 +293,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 			log.warn(origin_name + " - File not Found 삭제 못함");
 		}
 	}
-	
+
 	@Override
 	public boolean upload(MultipartFile poster, MultipartFile teaser, MultipartFile video, Movie movie) {
 

@@ -10,23 +10,10 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
+<<link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <title>FAQ</title>
 </head>
-<style>
-	#alertImg {
-		width: 70px;
-		height: 30px;
-	}
-	
-	#alertBody {
-		text-align: center;
-	}
-	
-	#alertClose {
-		background-color: red;
-	}
-</style>
 <body>
 
 <!-- 본체 영역 -->
