@@ -17,7 +17,7 @@
 <style>
 	
 	#img-back{
-	    width: 85%;
+	    width: 86%;
 	    height: 100%;	
 	    float: right;
 	    position: relative;	
@@ -43,17 +43,14 @@
 	    padding-top: 50px;
 	    padding-left: 0;
     }
-    
+
 	b {
 		color: gray;
 	}
 </style>
 <body>
 
-<%@include file ="/resources/include/movie/nav.jsp" %>
-
 <div class="" id="img-back">
-
 <div id="detail">
 	<h1>${movie.movie_title }</h1>
 	<br />

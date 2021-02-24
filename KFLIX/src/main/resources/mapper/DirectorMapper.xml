@@ -5,8 +5,43 @@
 <mapper namespace="com.kflix.mapper.DirectorMapper">
 
 	<select id="getAllDirectorList" resultType="com.kflix.director.domain.Director">
-		SELECT * FROM director
+		SELECT * FROM director WHERE director_status = #{status} ORDER BY director_id DESC
 	</select>
+	
+	<select id="getAllPageDirectorList" resultType="com.kflix.director.domain.Director">
+		SELECT 
+			 director_id, director_name, director_status
+		FROM 
+		(SELECT SEQ,  director_id, director_name, director_status
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, director_id, director_name, director_status
+		    	FROM
+		        	(SELECT * FROM director WHERE director_status = #{status} ORDER BY director_id DESC)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}
+	</select>
+	
+	<select id="getDirectorCnt" resultType="integer">
+		select count(*) from director where director_status = #{status}
+	</select>
+	
+	<select id="getFindDirectorList" resultType="com.kflix.director.domain.Director">
+		select * from director where director_status = #{status} AND director_name LIKE #{director_name} ORDER BY director_id DESC
+	</select>
+	
+	<insert id="insertDirector">
+		INSERT INTO director VALUES(director_id_seq.NEXTVAL, #{director_name}, 'Y')
+	</insert>
+	
+	<update id="updateDirector">
+		UPDATE director SET director_name = #{director_name} WHERE director_id = #{director_id}
+	</update>
+	
+	<update id="deleteOrRecoveryDirector">
+		UPDATE director SET director_status = #{status} WHERE director_id = #{director_id}
+	</update>
 
 	<select id="getNameById" resultType="string">
 		SELECT director_name FROM director WHERE director_id = #{director_id}

@@ -27,7 +27,7 @@
 	width: 500px;
 	height: 700px;
 	z-index: 2;
-	background-color: rgba(0, 0, 0, .75);
+	background-color: rgba(0, 0, 0, 0.86);
 }
 
 .logform-content {

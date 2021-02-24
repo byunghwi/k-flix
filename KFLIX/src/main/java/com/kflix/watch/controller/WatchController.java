@@ -57,8 +57,8 @@ public class WatchController {
 	@GetMapping("/browse")
 	public String getbrowse(Model model, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
-		model.addAttribute("AllActor", actorservice.selectAllActorList());
-		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 
 		Member member = (Member) session.getAttribute("login");
@@ -78,8 +78,8 @@ public class WatchController {
 		test.setWish(watchservice.getSelectWish(member.getEmail()));
 		test.setGenre(genreservice.selectAllGenreList('Y'));
 		model.addAttribute("test", test);
-		model.addAttribute("AllActor", actorservice.selectAllActorList());
-		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("email", member.getEmail());
 
 		return "/watch/NewFile";
@@ -110,8 +110,8 @@ public class WatchController {
 	@GetMapping(value = "/browse/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getmovie(Model model, @PathVariable("movie_id") int movie_id, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
-		model.addAttribute("AllActor", actorservice.selectAllActorList());
-		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("movie", watchservice.getmovie(movie_id));
 
@@ -126,8 +126,8 @@ public class WatchController {
 	@GetMapping(value = "/browse/watch/{movie_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getwatch(Model model, @PathVariable("movie_id") int movie_id, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
-		model.addAttribute("AllActor", actorservice.selectAllActorList());
-		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
 		model.addAttribute("movie", watchservice.getmovie(movie_id));
 

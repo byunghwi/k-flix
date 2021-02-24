@@ -54,16 +54,16 @@
 	
 	<error-page><!--400 에러 -->
 		<error-code>500</error-code>
-		<location>/WEB-INF/views//error/error_400.jsp</location>
+		<location>/WEB-INF/views/error/error_400.jsp</location>
 	</error-page>
 	<error-page><!--404 에러 -->
 		<error-code>404</error-code>
-		<location>/WEB-INF/views//error/error_404.jsp</location>
+		<location>/WEB-INF/views/error/error_404.jsp</location>
 	</error-page>
 
 	<error-page><!--500 에러 -->
 		<error-code>500</error-code>
-		<location>/WEB-INF/views//error/error_500.jsp</location>
+		<location>/WEB-INF/views/error/error_500.jsp</location>
 	</error-page>
 
 </web-app>

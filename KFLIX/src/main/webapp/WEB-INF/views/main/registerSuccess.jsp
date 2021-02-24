@@ -31,7 +31,10 @@
 					<div class="flip">
 						<div class="front">
 							<div class="box-input">
-								<button type="button" onclick="location.href='kflix/login">로그인 하러 가기</button>
+								<div class="text-first">환영해요!</div>
+								<div class="text-second">KFLIX 회원이 되셨군요,</div>
+								<div class="text-third">로그인 하고 다양한 영화 컨텐츠를 감상해보세요.</div>
+								<button type="button" onclick="document.location.href = '${pageContext.request.contextPath}/login';">로그인 하러 가기</button>
 							</div>
 						</div>
 					</div>

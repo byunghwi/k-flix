@@ -14,7 +14,7 @@
 <style type="text/css">
 .img {
 	position: relative;
-	background-image: url("resources/imgs/error/black.jpg");
+	background-image: url("/kflix/resources/imgs/error/black.jpg");
 	height: 100vh;
 	background-size: cover;
 }
@@ -40,7 +40,7 @@
 	<div class="img">
 		<div class="content">
 			<h6>
-				<img class="img-error" src="resources/imgs/error/둘리.png">
+				<img class="img-error" src="/kflix/resources/imgs/error/둘리.png">
 			</h6>
 			<div id="" class="our-story-card-title" data-uia="hero-title">404</div>
 			<h2>😢 이 URL은 존재하지 않습니다. 😢</h2>

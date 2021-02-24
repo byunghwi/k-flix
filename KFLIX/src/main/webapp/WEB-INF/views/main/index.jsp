@@ -11,32 +11,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Watch in KFLIX</title>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="/kflix/resources/js/common/common.js"></script>
 <script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+<link href="/kflix/resources/css/login/register.css" rel="stylesheet">
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <style>
-a:link {text-decoration: none; color: white;}
-a:visited {text-decoration: none; color: white;}
-a:active {text-decoration: none; color: white;}
-a:hover {text-decoration: none; color: white;}
+a:link {
+	text-decoration: none;
+	color: white;
+}
+
+a:visited {
+	text-decoration: none;
+	color: white;
+}
+
+a:active {
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	text-decoration: none;
+	color: white;
+}
 
 .img {
 	position: relative;
-	background-image: url("resources/imgs/main/netflix_main.jpg");
+	background-image: url("/kflix/resources/imgs/main/netflix_main.jpg");
 	height: 100vh;
 	background-size: cover;
-}
- 
-.img-cover {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
-	z-index: 1;
 }
 
 .img .content {
@@ -61,15 +76,6 @@ a:hover {text-decoration: none; color: white;}
 	text-align: center;
 }
 
-/* .authLinks.redButton {
-    background-color: #e50914;
-    line-height: normal;
-    padding: 7px 17px;
-    font-weight: 400;
-    font-size: 1rem;
-    float: right;
-} */
-
 </style>
 <body>
 	<script>
@@ -80,8 +86,9 @@ a:hover {text-decoration: none; color: white;}
 		}
 	</script>
 	<div class="our-story-header-wrapper">
-		<a href="./login" class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-lg"
-				style="background-color: red">로그인</a>
+		<a href="./login"
+			class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-lg"
+			style="background-color: red">로그인</a>
 	</div>
 
 	<div class="img">
@@ -99,161 +106,69 @@ a:hover {text-decoration: none; color: white;}
 		<div class="img-cover"></div>
 	</div>
 
-  	<!-- 회원가입 모달 -->
+	<!-- 회원가입 모달 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">회원가입</h4>
-				</div>
-				<form action="${pageContext.request.contextPath}/member/register"
-					method="post">
-					<div class="modal-body">
+		<div class="login-form-wrap">
+			<div class="logform-content">
+				<div id="vertical-flip" class="card">
+					<div class="flip">
+						<div class="front">
+							<form id = "form" action="${pageContext.request.contextPath}/member/register"
+								method="post"> 
+								<input type="hidden" id="member_age" name="member_age" />
+								<div class="box-input">
+									<div class="text-first">잠깐,</div>
+									<div class="text-second">아직 KFLIX 회원이 아니시군요</div>
+									<div class="text-third">지금 바로 가입하고 다양한 영화 컨텐츠를 즐겨보세요</div>
+									<input type="email" name="email" id="email" placeholder="&#xf007;   Email을 입력하세요" required />
+									<input type="text" placeholder="&#xf133;   생년월일을 입력하세요" name="birth" id="birth" required />
+<!-- 								            <label>남성<input type="radio" name="gender" value="M"></label>
+								            <label>여성<input type="radio" name="gender" value="F"></label>
+ -->
+									<input type="password" name="pwd" id="password"
+										placeholder="&#xf11c;   비밀번호를 입력하세요" required onchange="checkSamePwd();"/>
+										<input type="password" id="password2"
+										placeholder="&#xf11c;   비밀번호를 한 번 더 입력하세요" required onchange="checkSamePwd();"/>
+									<div class="password-check" id = "password-check"></div>
+									
+									<button type="button" onclick="register();">Regist</button>
 
-						<div class="input-group mb-2">
-							<input type="email" name="email" class="form-control"
-								placeholder="이메일 주소">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-exclamation"></span>
 								</div>
-							</div>
+							</form>
 						</div>
-						<div class="input-group mb-2">
-							<input type="text" name="nick" class="form-control"
-								placeholder="닉네임">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-user"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-3">
-							<input type="text" name="birth" class="form-control"
-								placeholder="생년월일">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-3">
-							<input type="text" name="member_age" value="39"
-								class="form-control" placeholder="나이">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-3">
-							<input type="password" name="pwd" class="form-control"
-								placeholder="비밀번호">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-3">
-							<input type="password" class="form-control" placeholder="비밀번호 확인">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-						<div class="input-group mb-1">
-							성별<input type="radio" name="gender" value="N"
-								class="form-control" title="남성">남성<br> <input
-								type="radio" title="여성" name="gender" value="F"
-								class="form-control">여성
-						</div>
-						<div class="row">
-							<div class="col-8">
-								<div class="icheck-primary">
-									<input type="checkbox" id="agreeTerms" name="terms"
-										value="agree"> <label for="agreeTerms">전체 약관
-										동의 </label>
-								</div>
-							</div>
-						</div>
-
-					</div> 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-primary">회원가입</button>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
+<script>
+function register(){
+	var birth = document.getElementById('birth').value;
+	var email = document.getElementById('email').value;
+	//나이계산
+	var age = calcAge(document.getElementById('birth').value);
+	document.getElementById('member_age').value = age;
 
-	<!-- 로그인 모달 -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">로그인
-						${pageContext.request.contextPath}</h4>
-				</div>
-				<form action="${pageContext.request.contextPath}/loginPost"
-					method="post">
-					<div class="modal-body">
+	num = birth.toString();
+	numDigit = num.length;
+	console.log(numDigit);
 
-						<div class="input-group mb-2">
-							<input type="email" name="email" class="form-control"
-								placeholder="이메일 주소">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-exclamation"></span>
-								</div>
-							</div>
-						</div>
+	if(email == null){
+		alert('이메일을 입력해주세요.');
+		return;
+	}
+	if(numDigit != 8){
+		alert('올바른 생년월일을 입력해주세요.');
+		return;
+	}
+	else{
+		document.getElementById('form').submit();
+	}
+	
+	
+}
 
-						<div class="input-group mb-3">
-							<input type="password" name="pwd" class="form-control"
-								placeholder="비밀번호">
-							<div class="input-group-append">
-								<div class="input-group-text">
-									<span class="fas fa-lock"></span>
-								</div>
-							</div>
-						</div>
-
-					</div>
-					<div class="modal-footer">
-						<%
-/* 						String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
-						String redirectURI = URLEncoder.encode("http://localhost:8081/kflix/browse", "UTF-8");
-						SecureRandom random = new SecureRandom();
-						String state = new BigInteger(130, random).toString();
-						String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-						apiURL += "&client_id=" + clientId;
-						apiURL += "&redirect_uri=" + redirectURI;
-						apiURL += "&state=" + state;
-						session.setAttribute("state", state); */
-						%>
-						자동로그인 <input type="checkbox" name="userCookie">
-						<button type="submit" class="btn btn-primary">로그인</button>
-						<a href="${url}"><img height="50"
-							src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
-					</div>
-				</form>
-
-
-			</div>
-		</div>
-	</div>
+</script>
 </body>
 </html>

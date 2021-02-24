@@ -15,7 +15,8 @@
 
 </head>
 <body>
-<%@include file ="/resources/include/movie/nav.jsp" %>
+
+
 <div class="container pt-5">
 	<div class="d-flex justify-content-end">
 		<a href="./movieindex" class="btn btn-secondary btn-sm">관리 페이지</a>
@@ -58,7 +59,7 @@
 				<td>
 				<button type="button" class="btn btn-warning" data-bs-toggle="modal" 
 							data-movieid="${movie.movie_id }" data-bs-target="#recoverymodal">복구</button>
-					<a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a>
+					<%-- <a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a> --%>
 				</td>
 			</tr>
 		</c:forEach>
@@ -67,27 +68,12 @@
 </section>
 
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
+
 </div>
 
-<!-- 복구모달 -->
-<div class="modal" tabindex="-1" id="recoverymodal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-warning">
-        <h5 class="modal-title text-light">복구</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-	       <div class="modal-body">
-	        <p>정말 복구 하시겠습니까?</p>
-	      </div>
-          <div class="modal-footer">
-          	<input type="hidden" id="recoveryid" name="movie_id"/>
-	        <button onclick="recoveryBtn(1);" class="btn btn-warning">복구</button>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	     </div>
-      </div>
-    </div>
-  </div>
+<%@include file ="/resources/include/movie/disModal.jsp" %>
+
+  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
@@ -95,7 +81,7 @@
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/deletedrest.js"></script>
+<script src="/kflix/resources/js/movie/deletedrest.js?ver=6"></script>
 
 </body>
 </html>

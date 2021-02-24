@@ -16,14 +16,12 @@
 <meta charset="UTF-8">
 <title>영화 관리</title>
 </head>
-<!-- <style>
- * {
- 	border: 1px solid;
- }
-</style> -->
 <body>
 
-<%@include file ="/resources/include/movie/nav.jsp" %>
+<a href="/kflix/movie/movieindex">영화</a>
+<a href="/kflix/genre/genreindex">장르</a>
+<a href="/kflix/actor/actorindex">배우</a>
+<a href="/kflix/director/directorindex">감독</a>
 
 <!-- 게시판 -->
 <div class="container pt-5" id="board">
@@ -73,38 +71,19 @@
 				<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
 				<td><a href="./updatepage/${movie.movie_id }" class="btn btn-primary">수정</a>
 					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-movieid="${movie.movie_id }" data-bs-target="#deletemodal">삭제</button>
-					<a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a>
+					<%-- <a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a> --%>
 				</td>
 			</tr>
 		</c:forEach>
-  </tbody>	
+  </tbody>
 </table>
 </section>
 
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
+
 </div>
 
-
-<!-- 삭제 모달 -->
-<div class="modal" tabindex="-1" id="deletemodal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger">
-        <h5 class="modal-title text-light">삭제</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-	       <div class="modal-body">
-	        <p>정말 삭제 하시겠습니까?</p>
-	      </div>
-          <div class="modal-footer">
-          	<input type="hidden" id="deleteid" name="movie_id"/>
-	        <button onclick="deleteBtn(1);" class="btn btn-danger">삭제</button>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	     </div>
-      </div>
-    </div>
-  </div>
-
+<%@include file ="/resources/include/movie/enModal.jsp" %>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
@@ -113,6 +92,6 @@
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/movierest.js"></script>
+<script src="/kflix/resources/js/movie/movierest.js?ver=8"></script>
 </body>
 </html>

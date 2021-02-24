@@ -14,7 +14,7 @@
 <style type="text/css">
 .img {
 	position: relative;
-	background-image: url("resources/imgs/error/black.jpg");
+	background-image: url("/kflix/resources/imgs/error/black.jpg");
 	height: 100vh;
 	background-size: cover;
 }
