@@ -32,6 +32,7 @@ import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
+import com.kflix.watch.domain.test;
 import com.kflix.watch.service.WatchService;
 
 import lombok.AllArgsConstructor;
@@ -69,12 +70,16 @@ public class WatchController {
 
 	@GetMapping("/btest")
 	public String btest(Model model, HttpSession session) {
-		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		
+		Member member = (Member) session.getAttribute("login");
+		test test = new test();
+		test.setMovie(watchservice.getAllmovie());
+		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
+		test.setWish(watchservice.getSelectWish(member.getEmail()));
+		test.setGenre(genreservice.selectAllGenreList('Y'));
+		model.addAttribute("test", test);
 		model.addAttribute("AllActor", actorservice.selectAllActorList());
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList());
-		model.addAttribute("AllGenre", genreservice.selectAllGenreList('Y'));
-		Member member = (Member) session.getAttribute("login");
-		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
 		model.addAttribute("email", member.getEmail());
 
 		return "/watch/NewFile";

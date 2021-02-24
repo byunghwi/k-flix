@@ -110,7 +110,7 @@ prevBtn_All.addEventListener('click', function() {
 	}
 });
 
-
+/*
 
 var slides_Watching = document.querySelector('.slides_Watching'),
 	slide_wrapper_Watching = document.querySelector('.slide_wrapper_Watching'),
@@ -149,7 +149,7 @@ prev_Watching.addEventListener('click', function() {
 });
 
 location.reload
-
+*/
 
 
 
