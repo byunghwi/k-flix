@@ -5,7 +5,7 @@
 <mapper namespace="com.kflix.mapper.DirectorMapper">
 
 	<select id="getAllDirectorList" resultType="com.kflix.director.domain.Director">
-		SELECT * FROM director
+		SELECT * FROM director WHERE director_status = #{status} ORDER BY director_id DESC
 	</select>
 	
 	<select id="getAllPageDirectorList" resultType="com.kflix.director.domain.Director">

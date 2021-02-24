@@ -18,6 +18,11 @@
 </head>
 <body>
 
+<a href="/kflix/movie/movieindex">영화</a>
+<a href="/kflix/genre/genreindex">장르</a>
+<a href="/kflix/actor/actorindex">배우</a>
+<a href="/kflix/director/directorindex">감독</a>
+
 <!-- 게시판 -->
 <div class="container pt-5" id="board">
 	<div class="d-flex justify-content-end">
@@ -87,6 +92,6 @@
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/movierest.js?ver=6"></script>
+<script src="/kflix/resources/js/movie/movierest.js?ver=8"></script>
 </body>
 </html>

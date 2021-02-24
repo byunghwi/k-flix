@@ -7,7 +7,7 @@ import com.kflix.util.pagenation.domain.PageNation;
 
 public interface DirectorService {
 
-	public List<Director> selectAllDirectorList();
+	public List<Director> selectAllDirectorList(char status);
 	
 	public String getDirectorName(int director_id);
 

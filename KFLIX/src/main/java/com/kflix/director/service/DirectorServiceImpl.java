@@ -16,8 +16,8 @@ public class DirectorServiceImpl implements DirectorService {
 	DirectorMapper dt_mapper;
 	
 	@Override
-	public List<Director> selectAllDirectorList() {
-		return dt_mapper.getAllDirectorList();
+	public List<Director> selectAllDirectorList(char status) {
+		return dt_mapper.getAllDirectorList(status);
 	}
 
 	@Override

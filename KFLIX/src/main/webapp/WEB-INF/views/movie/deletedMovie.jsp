@@ -81,7 +81,7 @@
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/deletedrest.js?ver=4"></script>
+<script src="/kflix/resources/js/movie/deletedrest.js?ver=6"></script>
 
 </body>
 </html>

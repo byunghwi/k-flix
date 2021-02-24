@@ -1,11 +1,12 @@
 /**
  * 
  */
+
 var remodal = function() {$('#recoveryconfrim').modal("show")};
 
 function recoveryBtn(pnum) {
 	var id = $('#recoveryid').val();
-	var path = "/kflix/actor/recovery";
+	var path = "/kflix/director/recovery";
 	var name = "none";
 	var modal = remodal;
 	ajaxModalCon(pnum, id, path, name, modal);
@@ -16,9 +17,9 @@ function ajaxCon(pnum){
 	
 	$.ajax({
 		type: "POST",
-		url: "/kflix/actor/findDeletedindex",
+		url: "/kflix/director/findDeletedindex",
 		data: JSON.stringify({
-   			actor_name: $('#search_val').val()
+   			director_name: $('#search_val').val()
 		}),
 		contentType: 'application/json',
 		
@@ -39,13 +40,13 @@ function ajaxCon(pnum){
 }
 
 function ajaxModalCon(pnum, id, path, name, modal){
-
+	
 	$.ajax({
 		type: "PATCH",
 		url: path,
 		data: JSON.stringify({
-   			actor_id: id,
-   			actor_name: name,
+   			director_id: id,
+   			director_name: name,
    			searching_word: $('#search_val').val()
 		}),
 		contentType: 'application/json',
@@ -69,21 +70,21 @@ function ajaxModalCon(pnum, id, path, name, modal){
 }
 
 // 모달
-var actorid="";
+var directorid="";
 
 $(document).ready(function() { 
 	$('#recoverymodal').on('show.bs.modal', function(event){
-		actorid = $(event.relatedTarget).data('actorid');
+		directorid = $(event.relatedTarget).data('directorid');
 
-		$('#recoveryid').val(actorid);
+		$('#recoveryid').val(directorid);
 	});
 })
 
 
 // 테이블 만들기
 function makeTable(data, pnum, amount) {
-		var section = $('#actorlist');
-		var table = $('#actortable>tbody');
+		var section = $('#directorlist');
+		var table = $('#directortable>tbody');
 			
 		$('table>tbody>*').remove();
 	
@@ -93,10 +94,10 @@ function makeTable(data, pnum, amount) {
 		try{
 			for	(var i = first_li; i < last_li; i++) {
 				table.append('<tr>'
-						+'<td>' + data[i].actor_id + '</td>'
-						+'<td>' + data[i].actor_name + '</td>'
+						+'<td>' + data[i].director_id + '</td>'
+						+'<td>' + data[i].director_name + '</td>'
 						+'<td><button type="button" class="btn btn-warning text-light" data-bs-toggle="modal"'
-						+'data-actorid="' + data[i].actor_id + '" data-bs-target="#recoverymodal">복구</button></td>'
+						+'data-directorid="' + data[i].director_id + '" data-bs-target="#recoverymodal">복구</button></td>'
 						+'</tr>'
 				);
 			}

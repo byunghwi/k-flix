@@ -27,13 +27,13 @@ public class DirectorServiceTest {
 	DirectorService service;
 	
 	@Test
-	@Ignore
 	public void serviceTest() {
-		assertNotNull(service.selectAllDirectorList());
-		log.info(service.selectAllDirectorList());
+		assertNotNull(service.selectAllDirectorList('N'));
+		log.info(service.selectAllDirectorList('N'));
 	}
 	
 	@Test
+	@Ignore
 	public void testPageList() {
 		PageNation pagenation = new PageNation();
 		pagenation.setPage(1);
@@ -49,6 +49,7 @@ public class DirectorServiceTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testGetCnt() {
 		int result = service.getCountDirector('Y');
 		assertTrue(result > 0);
@@ -56,6 +57,7 @@ public class DirectorServiceTest {
 	}
 	
 	@Test 
+	@Ignore
 	public void testFindList() {
 		List<Director> list = service.getFindDirectorList("븐", 'Y');
 		assertNotNull(list);
@@ -64,18 +66,21 @@ public class DirectorServiceTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testAddActor() {
 		int result = service.addDirector("데이빗 베니오프");
 		assertEquals(result, 1);
 	}
 	
 	@Test
+	@Ignore
 	public void testUpdateActor() {
 		int result = service.updateDirector(5, "브라이언 커크");
 		assertEquals(result, 1);
 	}
 	
 	@Test
+	@Ignore
 	public void testDRActor() {
 		int result = service.deleteOrRecovertDirector(6, 'N');
 		assertEquals(result, 1);

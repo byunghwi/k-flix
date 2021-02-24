@@ -88,7 +88,7 @@ public class MovieController {
 	 */
 	@GetMapping("addpage")
 	public String add(Model model) {
-		model.addAttribute("director", dt_service.selectAllDirectorList());
+		model.addAttribute("director", dt_service.selectAllDirectorList(ENABLED));
 		model.addAttribute("actor", at_service.selectAllActorList(ENABLED));
 		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED));
 		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -154,7 +154,7 @@ public class MovieController {
 		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		model.addAttribute("movie", movie);
 		model.addAttribute("release_date", sdf.format(movie.getMovie_release()));		
-		model.addAttribute("director", dt_service.selectAllDirectorList());
+		model.addAttribute("director", dt_service.selectAllDirectorList(ENABLED));
 		model.addAttribute("actor", at_service.selectAllActorList(ENABLED));
 		model.addAttribute("genre", gr_service.selectAllGenreList(ENABLED));
 		

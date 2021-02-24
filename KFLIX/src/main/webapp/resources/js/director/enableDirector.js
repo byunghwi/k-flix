@@ -8,28 +8,28 @@ var deletemodal = function() {$('#deleteconfrim').modal("show")};
 
 function addBtn(pnum) {
 	var id = 0;
-	var path = "/kflix/genre/add";
-	var name = $('#addGenre').val();
+	var path = "/kflix/director/add";
+	var name = $('#addDirector').val();
 	var modal = addmodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#addmodal').modal("hide");
-	$('#addGenre').val('');
-
+	$('#addDirector').val('');
+	
 }
 
 function updateBtn(pnum) {
 	var id = $('#update_id').val();
-	var path = "/kflix/genre/update";
-	var name = $('#updateGenre').val();
+	var path = "/kflix/director/update";
+	var name = $('#updateDirector').val();
 	var modal = updatemodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#updatemodal').modal("hide");
-	$('#updateGenre').val('');
+	$('#updateDirector').val('');
 }
 
 function deleteBtn(pnum) {
 	var id = $('#deleteid').val();
-	var path = "/kflix/genre/delete";
+	var path = "/kflix/director/delete";
 	var name = "none";
 	var modal = deletemodal;
 	ajaxModalCon(pnum, id, path, name, modal);
@@ -40,9 +40,9 @@ function ajaxCon(pnum){
 	
 	$.ajax({
 		type: "POST",
-		url: "/kflix/genre/findindex",
+		url: "/kflix/director/findindex",
 		data: JSON.stringify({
-   			genre_name: $('#search_val').val()
+   			director_name: $('#search_val').val()
 		}),
 		contentType: 'application/json',
 		
@@ -68,8 +68,8 @@ function ajaxModalCon(pnum, id, path, name, modal){
 		type: "PATCH",
 		url: path,
 		data: JSON.stringify({
-   			genre_id: id,
-   			genre_name: name,
+   			director_id: id,
+   			director_name: name,
    			searching_word: $('#search_val').val()
 		}),
 		contentType: 'application/json',
@@ -95,27 +95,27 @@ function ajaxModalCon(pnum, id, path, name, modal){
 }
 
 // 모달
-var genreid="";	
+var directorid="";	
 $(document).ready(function() { 
 	$('#updatemodal').on('show.bs.modal', function(event){
-		genreid = $(event.relatedTarget).data('genreid');
+		directorid = $(event.relatedTarget).data('directorid');
 
-		$('#update_id').val(genreid);
+		$('#update_id').val(directorid);
 	});
 })
 
 $(document).ready(function() { 
 	$('#deletemodal').on('show.bs.modal', function(event){
-		genreid = $(event.relatedTarget).data('genreid');
+		directorid = $(event.relatedTarget).data('directorid');
 
-		$('#deleteid').val(genreid);
+		$('#deleteid').val(directorid);
 	});
 })
 
 // 테이블 만들기
 function makeTable(data, pnum, amount) {
-		var section = $('#genrelist');
-		var table = $('#genretable>tbody');
+		var section = $('#directorlist');
+		var table = $('#directortable>tbody');
 			
 		$('table>tbody>*').remove();
 	
@@ -125,12 +125,13 @@ function makeTable(data, pnum, amount) {
 		try{
 			for	(var i = first_li; i < last_li; i++) {
 				table.append('<tr>'
-						+'<td>' + data[i].genre_id + '</td>'
-						+'<td>' + data[i].genre_name + '</td>'
-						+'<td><button type="button" class="btn btn-primary" data-bs-toggle="modal"'
-						+'data-genreid="' + data[i].genre_id + '" data-bs-target="#updatemodal">수정</button> '
+						+'<td>' + data[i].director_id + '</td>'
+						+'<td>' + data[i].director_name + '</td>'
+						+'<td>'
+						+'<button type="button" class="btn btn-primary" data-bs-toggle="modal"'
+						+'data-directorid="' + data[i].director_id + '" data-bs-target="#updatemodal">수정</button> '
 						+'<button type="button" class="btn btn-danger" data-bs-toggle="modal"'
-						+'data-genreid="' + data[i].genre_id + '" data-bs-target="#deletemodal">삭제</button></td>'
+						+'data-directorid="' + data[i].director_id + '" data-bs-target="#deletemodal">삭제</button></td>'
 						+'</tr>'
 				);
 			}
