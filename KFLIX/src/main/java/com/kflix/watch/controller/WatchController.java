@@ -71,18 +71,28 @@ public class WatchController {
 	@GetMapping("/btest")
 	public String btest(Model model, HttpSession session) {
 		
+		
 		Member member = (Member) session.getAttribute("login");
 		test test = new test();
 		test.setMovie(watchservice.getAllmovie());
 		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
 		test.setWish(watchservice.getSelectWish(member.getEmail()));
 		test.setGenre(watchservice.getAllGenre());
+		
 		model.addAttribute("test", test);
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("email", member.getEmail());
 
-		return "/watch/NewFile";
+		System.out.println("[WatchController] test 객체 > " + test);
+		System.out.println("===============================================================");
+		System.out.println("[WatchController] AllActor 객체 > " + test);
+		System.out.println("===============================================================");
+		System.out.println("[WatchController] AllDirector 객체 > " + test);
+		System.out.println("===============================================================");
+
+		return (member.getEmail().equals("wmffff@naver.com")) ? "/watch/NewFile_kbh" : "/watch/NewFile";
+		//return "/watch/NewFile";
 	}
 
 	/*
