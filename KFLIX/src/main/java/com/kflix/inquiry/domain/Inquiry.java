@@ -26,4 +26,5 @@ public class Inquiry {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reply_date;
 	
+	private String reply_status;
 }

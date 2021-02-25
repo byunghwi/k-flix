@@ -15,6 +15,8 @@
 	#inquirtForm{
 		width: 50%;
 	}
+	
+
 </style>
 <title>문의하기</title>
 </head>

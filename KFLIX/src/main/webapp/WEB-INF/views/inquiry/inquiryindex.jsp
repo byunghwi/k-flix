@@ -1,0 +1,364 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" 
+		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
+		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
+<link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
+<meta charset="UTF-8">
+<style>
+	#contentTip{
+		color: gray;
+		font-size: 12px;
+	}
+</style>
+<title>Insert title here</title>
+</head>
+<body>
+<a href="/kflix/movie/movieindex">영화</a>
+<a href="/kflix/genre/genreindex">장르</a>
+<a href="/kflix/actor/actorindex">배우</a>
+<a href="/kflix/director/directorindex">감독</a>
+<a href="/kflix/FAQ/index">FAQ</a>
+<a href="/kflix/inquiry/index">문의</a>
+
+
+<div class="container">
+	<h1>문의 관리</h1>
+	<input id="helpData" type="hidden" value="${total }"/>
+	<input id="helpPage" type="hidden" value="${page }"/>
+	
+	<!-- 컨텐츠 개수 -->
+	<div>
+		<select class="form-select" id="helpAmount">
+			<option value="5">5개 씩 보기</option>
+			<option value="${amount }" selected>${amount }개 씩 보기</option>
+			<option value="20">20개 씩 보기</option>
+		</select>
+	</div>
+	
+	<!-- 검색 영역 -->
+	<div id="searchArea">
+	  <select class="form-select" id="searchType" required>
+	  	<option value="all">모든 카테고리</option>
+		<c:forEach items="${category }" var="i" begin="0" end="${category.size()}" varStatus="status">
+			 <option>${i }</option>
+		</c:forEach>
+	  </select>
+	</div>
+	
+	<!-- 답변 미답변 -->
+	<div>
+	 <select class="form-select" id="isreply" required>
+	  	<option value="all">전체보기</option>
+		 <option>미답변</option>
+		 <option>답변</option>
+	  </select>
+	</div>
+
+	<!-- 테이블 영역 -->
+	<div id="inqMain">
+		
+		<table id="inqTable" class="table talbe table-striped text-center align-middle">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>카테고리</th>
+				<th>회원 이메일</th>
+				<th>제목</th>
+				<th>접수일</th>
+				<th>답변일자</th>
+			</tr>
+		</thead>	
+		<tbody>
+			<c:forEach items="${inq }" var="inq" varStatus="status">
+			<tr>
+				<td>${inq.inquiry_id }</td>
+				<td>${inq.inquiry_type }</td>
+				<td>${inq.email }</td>
+				<td>${inq.inquiry_title }</td>
+				<td><fmt:formatDate value="${inq.inquiry_date }" pattern="yyyy-MM-dd"/></td>
+				<td>
+					<c:choose>
+						<c:when test="${empty inq.reply_date}">
+							<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replyModal"
+								data-replyid="${inq.inquiry_id }" data-replycont="${inq.inquiry_content }"
+								data-memail="${inq.email }">답변하기</button>
+						</c:when>
+						<c:otherwise>
+							<button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#detailModal"
+								data-type="${inq.inquiry_type }" data-rcont="${inq.reply_content }" data-rtitle="${inq.reply_title }">
+								<fmt:formatDate value="${inq.reply_date }" pattern="yyyy-MM-dd"/>
+							</button>
+						</c:otherwise>
+					</c:choose>
+				</td>
+			</tr>
+			</c:forEach>
+		</tbody>	
+		</table>
+	</div>
+	
+	<!-- 페이지 네이트 영역 -->
+	<div id="pagenate">
+		<ul  class="pagination justify-content-center">	
+		</ul>
+	</div>
+	
+</div>
+
+<%@ include file="/resources/include/movie/alertModal.jsp" %>
+
+<div class="modal" tabindex="-1" id="replyModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <input type="hidden" id="memail"/>
+      <input type="hidden" id="reply_id"/>
+       	<div class="mb-3">
+		  <h6>관리자 이메일</h6>
+		  <input type="text" class="form-control" id="manager_email" value="belfort91919@gmail.com" required readonly>
+		</div>
+		
+		<div class="mb-3">
+		  <h6>제목</h6>
+		  <input type="text" class="form-control" id="reply_title" value="[KFLIX] 문의 주신 내용에 대한 답변입니다." required>
+		</div>
+		
+		<div class="mb-3">
+		  <h6>답변 &nbsp;&nbsp;<span id="contentTip">"/" 로 개행</span></h6>
+		  <textarea class="form-control" id="reply_content" rows="15" style="resize: none;" required></textarea>
+		</div>
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="replyBtn">답변</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" tabindex="-1" id="detailModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       	<div class="mb-3">
+		  <h6>카테고리</h6>
+		  <input type="text" class="form-control" id="detail_type" required readonly>
+		</div>
+		
+		<div class="mb-3">
+		  <h6>제목</h6>
+		  <input type="text" class="form-control" id="detail_title" required readonly>
+		</div>
+		
+		<div class="mb-3">
+		  <h6>답변</h6>
+		  <textarea class="form-control" id="detail_content" rows="15" style="resize: none;" required readonly></textarea>
+		</div>
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" 
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+		crossorigin="anonymous"></script>	
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
+		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
+		crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/kflix/resources/js/movie/pagenate.js?ver=10"></script>
+<script>
+//로딩시 페이징
+$(document).ready(function() { 
+	var len = $('#helpData').val();
+	var pnum = $('#helpPage').val();
+	var amount = $('#helpAmount').val();
+	makePageNate(len, pnum, amount);
+});
+
+// alert
+var infomodal = function() {$('#infoconfrim').modal("show")}
+
+function infoMsg(msg){
+	$('#alertMsg').html(msg);
+	infomodal();
+}
+
+// 상세보기 모달
+var detailModal = document.getElementById('detailModal')
+detailModal.addEventListener('show.bs.modal', function (event) {
+	type = $(event.relatedTarget).data('type');
+	rtitle = $(event.relatedTarget).data('rtitle');
+	rcont = $(event.relatedTarget).data('rcont');
+
+	$('#detail_type').val(type);
+	$('#detail_title').val(rtitle);
+	$('#detail_content').html(rcont.replaceAll('/', ''));
+})
+
+// 답변 모달
+var memail = '';
+var replyid = '';
+var replyModal = document.getElementById('replyModal')
+replyModal.addEventListener('show.bs.modal', function (event) {
+	replyid = $(event.relatedTarget).data('replyid');
+	memail = $(event.relatedTarget).data('memail');
+	replycont = $(event.relatedTarget).data('replycont');
+	
+	content = replycont + '/\n======================================/\nre>>/\n'
+	
+	$('#reply_content').html(content);
+})
+
+// 답변 모달 버튼
+$('#replyBtn').click(function(){
+	var type = "PATCH";
+	var url = "/kflix/inquiry/reply";
+	var data = JSON.stringify({
+		inquiry_id: replyid,
+		email: memail,
+		manager_email: $('#manager_email').val(),
+		reply_title: $('#reply_title').val(),
+		reply_content: $('#reply_content').val()
+	});
+	
+	ajax(type, url, data, parseInt($('.active').text()));
+})
+
+
+$('#isreply').change(function(){
+	var type = "POST";
+	var url = "/kflix/inquiry/index";
+	var data = JSON.stringify({
+		inquiry_type: $('#searchType').val(),
+		reply_status: $('#isreply').val()
+	});
+	
+	ajax(type, url, data, parseInt($('.active').text()));
+})
+
+
+$('#searchType').change(function(){
+	var type = "POST";
+	var url = "/kflix/inquiry/index";
+	var data = JSON.stringify({
+		inquiry_type: $('#searchType').val(),
+		reply_status: $('#isreply').val()
+	});
+	
+	ajax(type, url, data, parseInt($('.active').text()));
+})
+
+
+$('#helpAmount').change(function(){
+	var type = "POST";
+	var url = "/kflix/inquiry/index";
+	var data = JSON.stringify({
+		inquiry_type: $('#searchType').val(),
+		reply_status: $('#isreply').val()
+	});
+	
+	ajax(type, url, data, 1);
+})
+
+
+function ajax(type, url, data, pnum) {
+	$.ajax({
+		type: type,
+		url: url,
+		data: data,
+		contentType: 'application/json',
+ 		success: function(data){
+  			var len = data.length;
+  			var amount =  parseInt($('#helpAmount').val())
+
+  			if ($('.active').text() == ''){
+  				pnum = 1;
+  			} 
+  			
+  			amount = parseInt(amount);
+  			
+  			console.log(pnum)
+  			console.log(amount);
+  			
+ 			makePageNate(len, pnum, amount);
+  			 
+ 			makeTable(data, pnum, amount);
+ 
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		},
+   		complete: function(){
+   			$('#replyModal').modal('hide');
+   		}
+	}) 
+}
+
+function makeTable(data, pnum, amount) {
+	var table = $('#inqTable>tbody');
+	
+	$('#inqTable>tbody').html('');
+	
+	
+	var first_li = (pnum - 1) * amount;
+	var last_li = first_li + amount;
+
+	
+	try{
+		
+		
+		for	(var i = first_li; i < last_li; i++) {
+			console.log(data[i].reply_date)
+			var make = '';
+			if (data[i].reply_date == null) {
+				make = '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replyModal"'
+						+'data-replyid="' + data[i].inquiry_id + '" data-replycont="' + data[i].inquiry_content + '"'
+						+'data-memail="' + data[i].email + '">답변하기</button>'
+	
+			} else {
+				make = '<button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#detailModal"'
+						+'data-type="' + data[i].inquiry_type + '" data-rcont="' + data[i].reply_content + '" data-rtitle="' + data[i].reply_title + '">'
+						+moment(data[i].reply_date).format("YYYY-MM-DD") + '</button>'
+			}
+			
+			table.append('<tr>'
+					+'<td>' + data[i].inquiry_id + '</td>'
+					+'<td>' + data[i].inquiry_type + '</td>'
+					+'<td>' + data[i].email + '</td>'
+					+'<td>' + data[i].inquiry_title + '</td>'
+					+'<td>' + moment(data[i].inquiry_date).format("YYYY-MM-DD") + '</td>'
+					+'<td>' + make
+					+'</td></tr>');
+			
+		}
+		
+	} catch(err){
+		console.log("마지막 데이터 입니다.")
+	}
+};
+</script>
+</body>
+</html>
