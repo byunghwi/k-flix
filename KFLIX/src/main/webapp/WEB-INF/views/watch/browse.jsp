@@ -96,44 +96,58 @@
 	</div>
 
 	<div id="shadow1"></div>
-	<div>
-		<img id="mainimg" alt="메인사진"
-			src="/kflix/resources/imgs/watch/runon1.png">
-	</div>
-
-	<div id="list" class="container">
-
-		<c:if test="${not empty watch}">
-			<div class="list_title">"${login.email }"님이 시청 중인 콘텐츠</div>
-			<div class="slide_wrapper_Watching">
-				<ul class="slides_Watching">
-					<c:forEach items="${watch }" var="watch" varStatus="status">
-						<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-							<c:if test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
-								<li><a class="atag"
-									href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
-										<div class="atagdiv">
-											<img style="margin: 0;" src="${Allmovie.poster_path }"
-												class="d-block dis img1" alt="...">
-											<div class="videohover">
-												<video class="video" muted autoplay loop
-													poster="${Allmovie.poster_path}">
-													<source src="${Allmovie.teaser_path}" type="video/mp4">
-												</video>
-											</div>
-										</div>
-								</a></li>
-							</c:if>
-						</c:forEach>
-					</c:forEach>
-				</ul>
-
+	<div id="carouselExampleInterval" class="carousel slide"
+		style="height: 56.25vw; text-align: center;" data-bs-ride="carousel">
+		<div class="carousel-inner" style="height: 56.25vw;">
+			<div class="carousel-item active" data-bs-interval="1000">
+				<img class="mainimg" alt="메인사진"
+					src="/kflix/resources/imgs/watch/runon1.png">
 			</div>
-			<p class="controls_Watching">
-				<span class="prev_Watching">prev</span> <span class="next_Watching">next</span>
-			</p>
+			<div class="carousel-item" data-bs-interval="100">
+				<img class="mainimg" alt="로고"
+					src="/kflix/resources/imgs/watch/po.png">
+			</div>
+			<div class="carousel-item">
+				<img class="mainimg" alt="로고"
+					src="/kflix/resources/imgs/movie/poster/패치.png">
+			</div>
+		</div>
+	</div>
+	<div id="list" class="container">
+		<div style="position: relative; top: -327px; left: 58px;">
+			<c:if test="${not empty watch}">
+				<div class="list_title">"${login.email }"님이 시청 중인 콘텐츠</div>
+				<div class="slide_wrapper_Watching">
+					<ul class="slides_Watching">
+						<c:forEach items="${watch }" var="watch" varStatus="status">
+							<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
+								<c:if
+									test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
+									<li><a class="atag"
+										href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+											<div class="atagdiv">
+												<img style="margin: 0;" src="${Allmovie.poster_path }"
+													class="d-block dis img1" alt="...">
+												<div class="videohover">
+													<video class="video" muted autoplay loop
+														poster="${Allmovie.poster_path}">
+														<source src="${Allmovie.teaser_path}" type="video/mp4">
+													</video>
+												</div>
+											</div>
+									</a></li>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+					</ul>
 
-		</c:if>
+				</div>
+				<p class="controls_Watching">
+					<span class="prev_Watching">prev</span> <span class="next_Watching">next</span>
+				</p>
+
+			</c:if>
+		</div>
 		<div class="All">
 			<div class="list_title">모든 영화</div>
 			<div class="slide_wrapper_All">
@@ -142,8 +156,7 @@
 						<li><a class="atag"
 							href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 								<div class="atagdiv">
-									<img src="${Allmovie.poster_path }" class=" dis img1"
-										alt="...">
+									<img src="${Allmovie.poster_path }" class=" dis img1" alt="...">
 									<div class="videohover">
 										<video class="video" muted autoplay loop
 											poster="${Allmovie.poster_path}">
@@ -176,6 +189,5 @@
 	<script>
 		
 	</script>
-
 </body>
 </html>

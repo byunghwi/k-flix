@@ -16,6 +16,10 @@ body {
 	top: 40px;
 	left: 30px;
 	z-index: 2;
+	display: block;
+	background-color: rgba(0, 0, 0, 0.4);
+	padding: 14px 15px;
+	border-radius: 1.2rem;
 }
 
 a:link {
@@ -42,17 +46,45 @@ a:active {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0, 0, 0, 0.4);
 	text-align: center;
 	z-index: 10;
+	height: 119px;
 }
 
-#videobar>* {
-	padding: 15px 30px;
+#videobar>*:not(:first-child) {
+	padding: 34px 43px;
+	font-size: 27px;
+}
+
+.progress {
+	height: 10px;
+	color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 0;
+}
+
+.progress__filled {
+	background: rgba(237, 42, 40, 1);
+	transition: right 0.5s ease-out;
 }
 
 .color-w {
 	color: white;
+	font-size: 25px;
+}
+
+#current {
+	position: absolute;
+	top: 10px;
+	left: 11px;
+	font-size: 20px;
+}
+
+#duration {
+	position: absolute;
+	top: 10px;
+	right: 11px;
 	font-size: 20px;
 }
 
@@ -64,16 +96,12 @@ a:active {
 
 #video {
 	width: 100%;
-	height: 652px;
-	/*
-	position : fixed;
-	top : 0; 
-	left : 0;
-	min-width : 100%;
-	min-height : 100%;
-	width : auto;
-	height : auto;
-	z-index : -1;*/
+	height: 100%;
+	-webkit-writing-mode: vertical-rl;
+}
+
+.show {
+	width: 22.5;
 }
 
 #videocon {
@@ -92,39 +120,10 @@ a:active {
 	height: 30px;
 }
 
-.progressbar, .bufferbar {
-	position: absolute;
-	left: 0;
-	top: 8px;
-	width: 100%;
-	pointer-events: none;
-	height: 4px;
-	z-index: 2;
-	/* Turns off styling - not usually needed, but good to know. */
-	appearance: none;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	/* gets rid of default border in Firefox and Opera. */
-	border: none;
-	background: rgba(255, 255, 255, 0.1);
-	color: #c0392b;
-}
-
-.progressbar::-moz-progress-bar, .bufferbar::-moz-progress-bar {
-	background: #c0392b;
-}
-
-.progressbar::-webkit-progress-bar, .bufferbar::-webkit-progress-bar {
-	background: rgba(255, 255, 255, 0.1);
-}
-
-.progressbar::-webkit-progress-value, .bufferbar::-webkit-progress-value
-	{
-	background: #c0392b;
-}
-
 #volrange {
+	position: relative;
 	width: 100px;
+	top: 4px;
 }
 
 #movieinfo {
@@ -153,16 +152,21 @@ a:active {
 	display: none;
 }
 
-.show {
+input[type=range]::-webkit-slider-thumb {
+	background: rgba(237, 42, 40, 1);
+	width: 18px;
+	height: 15px;
+}
+
+.showimg {
 	position: relative;
 	width: 250px;
 	display: inline-block;
 	margin: 10px;
 }
 
-.color-w {
-	color: white;
-	font-size: 20px;
+.dropdown-menu {
+	min-width: 0;
 }
 
 .disin {
@@ -191,6 +195,10 @@ a:active {
 	opacity: 0;
 	visibility: hidden;
 	transition: all 0.5s;
+}
+
+#atag {
+	margin: 10px;
 }
 
 #atag:hover .imghover .hoverru {
