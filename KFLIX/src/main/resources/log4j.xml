@@ -39,7 +39,7 @@
 		<level value="info" />
 	</logger>
 	
-	<logger name="com.kflix.service">
+	<logger name="com.kflix.servicecenter">
 		<level value="info" />
 	</logger>
 	

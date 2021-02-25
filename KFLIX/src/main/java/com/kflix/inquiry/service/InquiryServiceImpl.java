@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kflix.inquiry.domain.Inquiry;
 import com.kflix.mapper.InquiryMapper;
 
 @Service
@@ -22,6 +23,11 @@ public class InquiryServiceImpl implements InquiryService {
 		List<String> constraints = new ArrayList<>();
 		Collections.addAll(constraints, data);
 		return constraints;
+	}
+
+	@Override
+	public int receiptInquiry(Inquiry inquiry) {
+		return in_mapper.insertInquiry(inquiry);
 	}
 
 }
