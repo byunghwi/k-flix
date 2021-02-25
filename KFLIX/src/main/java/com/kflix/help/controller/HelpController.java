@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kflix.help.domain.Help;
 import com.kflix.help.service.HelpService;
@@ -17,7 +17,6 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
-@RequestMapping("/FAQ/*")
 public class HelpController {
 
 	@Inject
@@ -32,13 +31,20 @@ public class HelpController {
 	}
 	
 	// http://localhost:8081/kflix/FAQ/index
-	@GetMapping("index")
+	
+	// 관리자가 볼 페이지
+	@RequestMapping(value = "/FAQ/index",  method = RequestMethod.GET)
 	public String faqIndex(Model model, Help help) {
 		log.info("============ faqIndexCon ============");
 
+		model.addAttribute("page", PAGENATION.getPage());
+		model.addAttribute("amount", PAGENATION.getAmount());
 		model.addAttribute("total", h_service.getCntHelpList(ENABLED));
 		model.addAttribute("help", h_service.getPageHelp(PAGENATION, ENABLED));
 		return "help/helpindex";
 	}
+	
+	// 사용자가 볼 전체 페이지
+	
 	
 }

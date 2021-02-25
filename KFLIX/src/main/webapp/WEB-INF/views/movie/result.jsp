@@ -8,8 +8,6 @@
 </head>
 <body>
 
-<%@include file ="/resources/include/movie/nav.jsp" %>
-
 <div class="container pt-5">
 <h1>${msg }</h1>
 

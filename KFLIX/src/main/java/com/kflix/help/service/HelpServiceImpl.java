@@ -52,6 +52,16 @@ public class HelpServiceImpl implements HelpService {
 		return hMapper.delOrReHelp(help_id, status);
 	}
 
+	@Override
+	public List<String> getAllHelpType() {
+		return hMapper.getAllHelpType();
+	}
+
+	@Override
+	public List<String> getHelpWithRownum(String type) {
+		return hMapper.getHelpWithRownum(type);
+	}
+
 
 	
 }

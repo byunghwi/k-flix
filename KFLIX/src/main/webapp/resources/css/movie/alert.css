@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#alertImg {
+	width: 70px;
+	height: 30px;
+}
+
+#alertBody {
+	text-align: center;
+}
+
+#alertClose {
+	background-color: red;
+}
