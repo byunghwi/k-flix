@@ -4,7 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -75,21 +77,22 @@ public class WatchController {
 		Member member = (Member) session.getAttribute("login");
 		test test = new test();
 		List<MovieVO> movies = watchservice.getAllmovie();
-
+		ArrayList<Integer> arr = new ArrayList<>();
 		for (MovieVO movie : movies) {
-
-			List<Integer> movie_genre = null;
-			movie_genre.add(movie.getGenre_id1());
-
+			arr.add(movie.getGenre_id1());
+			arr.add(movie.getGenre_id2());
 		}
-		List<Genre> genre = watchservice.getAllGenre();
+		HashSet<Integer> arr2 = new HashSet<Integer>(arr);
+		ArrayList<Integer> movie_genre = new ArrayList<>(arr2);
+		System.err.println(movie_genre);
+		
 		/* WatchController 에서 컬렉션sort로 중복 제거한 영화의 장르를 model에 담아서 */
-
+		test.setMovie(watchservice.getAllmovie());
 		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
 		test.setWish(watchservice.getSelectWish(member.getEmail()));
-
 		test.setGenre(watchservice.getAllGenre());
-
+		test.setGenre(watchservice.getAllGenre());
+		model.addAttribute("movie_genre", movie_genre);
 		model.addAttribute("test", test);
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));

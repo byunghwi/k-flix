@@ -11,6 +11,18 @@ body {
 	padding: 0;
 }
 
+.modal-backdrop{
+	z-index: 0;
+}
+
+.modal-content{
+	    text-align-last: center;
+    width: 70%;
+}
+.modal-footer {
+	padding:-0.25rem;
+}
+
 #back {
 	position: absolute;
 	top: 40px;

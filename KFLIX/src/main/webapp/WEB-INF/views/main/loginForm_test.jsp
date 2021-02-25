@@ -33,8 +33,12 @@
 									<input type="password" name="pwd" placeholder="&#xf11c;" required />
 									<button type="submit">Login</button>
 									<div>
-										<a href="${url}"><img height="50"
+										<a href="${naver_url}"><img width= "250px;" height="45px;" style="margin-bottom: 10px;"
 											src="resources/imgs/login/네이버 아이디로 로그인_완성형_Green.PNG" /></a>
+									</div>
+									<div>
+										<a href="${kakao_url}"><img width= "250px;" height="45px;"
+											src="resources/imgs/login/kakao_login_medium_wide.png" /></a>
 									</div>
 								</div>
 							</form>

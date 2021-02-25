@@ -20,7 +20,12 @@
 		#{pwd},
 		#{nick},
 		#{birth},
-		#{member_age},
+		<if test="member_age == 0">
+			null,
+		</if>
+		<if test="member_age != 0">
+			#{member_age},
+		</if>
 		#{gender},
 		#{naver},
 		#{kakao}
@@ -30,12 +35,22 @@
 
 	<select id="login" resultType="com.kflix.member.domain.Member">
 		SELECT * FROM member WHERE
-		<if test="naver != null">
-			 naver = #{naver}
-		</if>
-		<if test="naver == null">
-			email = #{email} AND pwd = #{pwd}
-		</if>
+
+		<choose>
+			
+			<when test ="naver != null">			
+				naver = #{naver}
+			</when>
+			
+			<when test ="kakao != null">			
+				kakao = #{kakao}
+			</when>
+			
+			<otherwise>
+				email = #{email} AND pwd = #{pwd}
+			</otherwise>
+
+		</choose>
 
 	</select>
 
