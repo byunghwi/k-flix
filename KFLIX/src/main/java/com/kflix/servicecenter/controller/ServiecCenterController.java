@@ -22,6 +22,7 @@ public class ServiecCenterController {
 	
 	@RequestMapping("/service")
 	public String serviecCenter(Model model) {
+		log.info("============= serviceCenter ==========");
 		
 		model.addAttribute("help_play", help_service.getHelpWithRownum("재생")); 
 		model.addAttribute("info", help_service.getHelpWithRownum("이용안내"));
