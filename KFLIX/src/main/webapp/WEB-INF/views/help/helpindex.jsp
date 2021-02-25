@@ -20,6 +20,7 @@
 <a href="/kflix/actor/actorindex">배우</a>
 <a href="/kflix/director/directorindex">감독</a>
 <a href="/kflix/FAQ/index">FAQ</a>
+<a href="/kflix/inquiry/index">문의</a>
 <!-- 본체 영역 -->
 <div class="container">
 
@@ -196,7 +197,29 @@ $(document).ready(function() {
 
 //페이지보기
 function amountChange() {
-	ajaxCon(parseInt($('.active').text()), $('#helpAmount').val());
+	$.ajax({
+		type: "POST",
+		url: "/kflix/FQARest/index",
+		data: JSON.stringify({
+			searching_word: $('#searchType').val()
+		}),
+		contentType: 'application/json',
+		
+ 		success: function(data){
+  			var len = data.length;
+  			var amount =  parseInt($('#helpAmount').val())
+  			var pnum = 1;
+  			amount = parseInt(amount);
+  			
+ 			makePageNate(len, pnum, amount);
+  			 
+  			makeTable(data, pnum, amount);
+ 
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		}
+	}) 
 }
 
 // 검색
@@ -206,7 +229,30 @@ function searchChange() {
 
 // 페이지넘버 클릭
 function pageClick(pnum) {
-	ajaxCon(pnum, $('#helpAmount').val());	
+	
+	$.ajax({
+		type: "POST",
+		url: "/kflix/FQARest/index",
+		data: JSON.stringify({
+			searching_word: $('#searchType').val()
+		}),
+		contentType: 'application/json',
+		
+ 		success: function(data){
+  			var len = data.length;
+  			var amount =  parseInt($('#helpAmount').val())
+  			
+  			amount = parseInt(amount);
+  			
+ 			makePageNate(len, pnum, amount);
+  			 
+  			makeTable(data, pnum, amount);
+ 
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		}
+	}) 
 }
 
 //alert 모달
@@ -307,7 +353,12 @@ function modalBtn() {
 	 		success: function(data){
 	  			var len = data.length;
 	  			var amount =  parseInt($('#helpAmount').val())
-	  			var pnum =  parseInt($('.active').text())
+	  			var pnum = 0;
+	  			if ($('.active').text() == ''){
+	  				pnum = 1;
+	  			} else {
+	  				pnum = parseInt($('.active').text());
+	  			}
 	  			
 	 			makePageNate(len, pnum, amount);
 	  			 
@@ -337,7 +388,12 @@ function deleteModalBtn() {
  		success: function(data){
   			var len = data.length;
   			var amount =  parseInt($('#helpAmount').val())
-  			var pnum =  parseInt($('.active').text())
+  			var pnum = 0;
+  			if ($('.active').text() == ''){
+  				pnum = 1;
+  			} else {
+  				pnum = parseInt($('.active').text());
+  			}
   			
   			amount = parseInt(amount);
   			
@@ -366,6 +422,12 @@ function ajaxCon(pnum, amount){
 		
  		success: function(data){
   			var len = data.length;
+  			var pnum = 0;
+  			if ($('.active').text() == ''){
+  				pnum = 1;
+  			} else {
+  				pnum = parseInt($('.active').text());
+  			}
   			
   			amount = parseInt(amount);
   			

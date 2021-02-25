@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kflix.mapper.InquiryMapper">
+
+	<insert id="insertInquiry">
+		INSERT INTO 
+			inquiry (inquiry_id, email, inquiry_type, inquiry_title, inquiry_content, inquiry_date)
+		VALUES 
+			(inquiry_id_seq.nextval, #{email}, #{inquiry_type}, #{inquiry_title}, #{inquiry_content}, sysdate)
+	</insert>
+	
+	<select id="selectAllInqCnt" resultType="integer">
+		SELECT COUNT(*) FROM inquiry
+	</select>
+	
+	<select id="selectPageInq" resultType="com.kflix.inquiry.domain.Inquiry">
+		SELECT 
+			 inquiry_id, email, manager_email, inquiry_type, inquiry_title, inquiry_content, inquiry_date, reply_title, reply_content, reply_date
+		FROM 
+		(SELECT SEQ,  inquiry_id, email, manager_email, inquiry_type, inquiry_title, inquiry_content, inquiry_date, reply_title, reply_content, reply_date
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, inquiry_id, email, manager_email, inquiry_type, inquiry_title, inquiry_content, inquiry_date, reply_title, reply_content, reply_date
+		    	FROM
+		        	(SELECT * FROM inquiry ORDER BY inquiry_id DESC)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}
+	</select>
+	
+	<update id="updateInq">
+		UPDATE inquiry SET
+			manager_email = #{manager_email}, 
+			reply_title = #{reply_title}, 
+			reply_content = #{reply_content}, 
+			reply_date = sysdate
+		WHERE 
+			inquiry_id = #{inquiry_id}
+	</update>
+	
+	<select id="selectAllInq" resultType="com.kflix.inquiry.domain.Inquiry">
+		SELECT * FROM inquiry ORDER BY inquiry_id DESC
+	</select>
+	
+	<select id="selectAllInqByTypeAndDate" resultType="com.kflix.inquiry.domain.Inquiry">
+		select * from inquiry
+		<choose> 
+		<when test='type == "all"'>
+			<if test='reply_status == "답변"'>
+				 where reply_date IS NOT NULL
+			</if>
+			<if test='reply_status == "미답변"'>
+				 where reply_date IS NULL
+			</if>
+		</when>
+		<otherwise>
+			<if test='reply_status == "답변"'>
+				 where inquiry_type = #{type} AND reply_date IS NOT NULL
+			</if>
+			<if test='reply_status == "미답변"'>
+				 where inquiry_type = #{type} AND reply_date IS NULL
+			</if>
+			<if test='reply_status == "all"'>
+				 where inquiry_type = #{type}
+			</if>
+		</otherwise>
+		</choose>
+		ORDER BY inquiry_id DESC
+	</select>
+</mapper>
