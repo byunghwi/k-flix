@@ -30,9 +30,9 @@ function makePageNate(len, pnum, amount)	{
 		// 페이지 버튼
 		for (var i = start_page; i < end_page+1; i++) {
 			if (i == pnum){
-				pagebtn += '<li class="page-item active" aria-current="page">';
+				pagebtn += '<li id="pageli" class="page-item active" aria-current="page">';
 			} else {
-				pagebtn += '<li class="page-item" aria-current="page">';
+				pagebtn += '<li id="pageli" class="page-item" aria-current="page">';
 			}
 			
 			pagebtn += '<button class="page-link" id="pnum'+ (i) +'" onclick="pageClick('+ (i) +');">'+ (i) +'</button>'
