@@ -71,21 +71,20 @@ public class WatchController {
 
 	@GetMapping("/btest")
 	public String btest(Model model, HttpSession session) {
-		
+
 		Member member = (Member) session.getAttribute("login");
 		test test = new test();
 		List<MovieVO> movies = watchservice.getAllmovie();
-		
+
 		for (MovieVO movie : movies) {
-			
+
 			List<Integer> movie_genre = null;
-					movie_genre.add(movie.getGenre_id1());
-			
-			
+			movie_genre.add(movie.getGenre_id1());
+
 		}
 		List<Genre> genre = watchservice.getAllGenre();
 		/* WatchController 에서 컬렉션sort로 중복 제거한 영화의 장르를 model에 담아서 */
-		
+
 		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
 		test.setWish(watchservice.getSelectWish(member.getEmail()));
 		model.addAttribute("test", test);
@@ -106,7 +105,7 @@ public class WatchController {
 
 	@PostMapping(value = "/browse/{movie_id}", consumes = "application/json", produces = "text/html; charset=UTF-8")
 	public String setwatch(@RequestBody WatchVO watch) {
-		
+
 		if (watch.getResult().equals("update")
 				&& watchservice.getSelectWatchUser(watch.getEmail(), watch.getMovie_id()) != null) {
 			int result1 = watchservice.updateWatch(watch);
@@ -164,4 +163,11 @@ public class WatchController {
 		}
 		return "/watch/wish";
 	}
+
+	@GetMapping(value = "/bttest")
+	public String testdsf() {
+		return "/watch/NewFile1";
+		
+	}
+	
 }
