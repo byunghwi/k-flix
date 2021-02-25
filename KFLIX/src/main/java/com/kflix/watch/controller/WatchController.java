@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kflix.actor.service.ActorService;
 import com.kflix.director.service.DirectorService;
+import com.kflix.genre.domain.Genre;
 import com.kflix.genre.service.GenreService;
 import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.MovieVO;
@@ -73,10 +74,20 @@ public class WatchController {
 		
 		Member member = (Member) session.getAttribute("login");
 		test test = new test();
-		test.setMovie(watchservice.getAllmovie());
+		List<MovieVO> movies = watchservice.getAllmovie();
+		
+		for (MovieVO movie : movies) {
+			
+			List<Integer> movie_genre = null;
+					movie_genre.add(movie.getGenre_id1());
+			
+			
+		}
+		List<Genre> genre = watchservice.getAllGenre();
+		/* WatchController 에서 컬렉션sort로 중복 제거한 영화의 장르를 model에 담아서 */
+		
 		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
 		test.setWish(watchservice.getSelectWish(member.getEmail()));
-		test.setGenre(watchservice.getAllGenre());
 		model.addAttribute("test", test);
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
@@ -95,7 +106,7 @@ public class WatchController {
 
 	@PostMapping(value = "/browse/{movie_id}", consumes = "application/json", produces = "text/html; charset=UTF-8")
 	public String setwatch(@RequestBody WatchVO watch) {
-
+		
 		if (watch.getResult().equals("update")
 				&& watchservice.getSelectWatchUser(watch.getEmail(), watch.getMovie_id()) != null) {
 			int result1 = watchservice.updateWatch(watch);

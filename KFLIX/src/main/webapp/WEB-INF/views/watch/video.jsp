@@ -58,12 +58,14 @@
 
 				<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
 				<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
-				<div style="display: inline-block;" id="volume">
+				
+				<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
+				<div style="display: inline-block; margin-left: 368px" id="volume">
 					<!-- 	<i onclick="volshow()" id="volumeicon" class="fas fa-volume-up color-w"></i> -->
 					<input type="range" class="form-range" min="0" max="1" step="0.1"
 						id="volrange">
 				</div>
-				<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
+				
 				<i onclick="openFullscreen()" class="fas fa-expand color-w"></i>
 				
 				<div style="display: inline-block;" id="playtime" class="color-w font-s">
