@@ -114,7 +114,7 @@
 		</div>
 	</div>
 	<div id="list" class="container">
-		<div style="position: relative; top: -327px; left: 58px;">
+		<div style="position: relative; top: -327px; left: -60px;">
 			<c:if test="${not empty watch}">
 				<div class="list_title">"${login.email }"님이 시청 중인 콘텐츠</div>
 				<div class="slide_wrapper_Watching">
@@ -147,39 +147,40 @@
 				</p>
 
 			</c:if>
-		</div>
-		<div class="All">
-			<div class="list_title">모든 영화</div>
-			<div class="slide_wrapper_All">
-				<ul class="slides_All">
-					<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-						<li><a class="atag"
-							href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
-								<div class="atagdiv">
-									<img src="${Allmovie.poster_path }" class=" dis img1" alt="...">
-									<div class="videohover">
-										<video class="video" muted autoplay loop
-											poster="${Allmovie.poster_path}">
-											<source src="${Allmovie.teaser_path}" type="video/mp4">
-										</video>
+
+			<div class="All">
+				<div class="list_title">모든 영화</div>
+				<div class="slide_wrapper_All">
+					<ul class="slides_All">
+						<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
+							<li><a class="atag"
+								href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+									<div class="atagdiv">
+										<img src="${Allmovie.poster_path }" class=" dis img1"
+											alt="...">
+										<div class="videohover">
+											<video class="video" muted autoplay loop
+												poster="${Allmovie.poster_path}">
+												<source src="${Allmovie.teaser_path}" type="video/mp4">
+											</video>
+										</div>
 									</div>
-								</div>
 
-						</a></li>
-					</c:forEach>
-				</ul>
+							</a></li>
+						</c:forEach>
+					</ul>
 
+				</div>
+				<div class="pagenum_All"></div>
+				<p class="controls_All">
+					<span class="backopprev_All"></span> <span class="backopnext_All"></span>
+				</p>
+				<p class="controls_All">
+					<span class="prev_All"><i class="fas fa-chevron-left"></i></span> <span
+						class="next_All"><i class="fas fa-chevron-right"></i></span>
+				</p>
 			</div>
-			<div class="pagenum_All"></div>
-			<p class="controls_All">
-				<span class="backopprev_All"></span> <span class="backopnext_All"></span>
-			</p>
-			<p class="controls_All">
-				<span class="prev_All"><i class="fas fa-chevron-left"></i></span> <span
-					class="next_All"><i class="fas fa-chevron-right"></i></span>
-			</p>
 		</div>
-
 
 	</div>
 

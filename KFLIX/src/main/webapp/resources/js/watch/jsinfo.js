@@ -16,3 +16,4 @@ wish_check.addEventListener("change", function() {
 });
 
 	
+wish_check.click();

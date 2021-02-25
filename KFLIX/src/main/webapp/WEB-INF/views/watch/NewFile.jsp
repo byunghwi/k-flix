@@ -25,35 +25,25 @@
 	href="/kflix/resources/css/watch/csstest.css">
 <style type="text/css">
 body {
-	background-color: white;
-}
-
-.progress {
-	color: rgba(255, 255, 255, 0.5);
-	background-color: rgba(255, 255, 255, 0.5);
-}
-
-.progress__filled {
-	background: #6AB6D8;
-	padding: 10px;
+	
 }
 </style>
 </head>
 <body>
-
+	<%-- 
 	<div class="list container">
-		<%-- 
+
 		<c:if test="${not empty test.watch }">
-			<div class="sliderow" style="top: 0px">
-				<h2 class="rowHeader">"${login.email }"님이 시청 중인 콘텐츠</h2>
-				<div class="slide_wrapper">
-					<ul class="slides">
+			<div class="sliderow0" style="top: 0px">
+				<h2 class="rowHeader0">"${login.email }"님이 시청 중인 콘텐츠</h2>
+				<div class="slide_wrapper0">
+					<ul class="slides0">
 						<c:forEach items="${test.watch }" var="watch" varStatus="status">
 							<c:forEach items="${test.movie }" var="Allmovie"
 								varStatus="status">
 								<c:if
 									test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
-									<li><a class="atag"
+									<li class="slideli0"><a class="atag"
 										href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 											<div class="atagdiv">
 												<img style="margin: 0;" src="${Allmovie.poster_path }"
@@ -81,17 +71,17 @@ body {
 				</p>
 			</div>
 		</c:if>
-
+	
 		<c:if test="${not empty test.wish}">
-			<div class="sliderow" style="top: 210px">
-				<h2 class="rowHeader">내가 찜한 콘텐츠</h2>
-				<div class="slide_wrapper">
-					<ul class="slides">
+			<div class="sliderow1" style="top: 210px">
+				<h2 class="rowHeader1">내가 찜한 콘텐츠</h2>
+				<div class="slide_wrapper1">
+					<ul class="slides1">
 						<c:forEach items="${test.wish }" var="wish" varStatus="status">
 							<c:forEach items="${test.movie }" var="Allmovie"
 								varStatus="status">
 								<c:if test="${wish.movie_id eq Allmovie.movie_id }">
-									<li><a class="atag"
+									<li class="slideli1"><a class="atag"
 										href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 											<div class="atagdiv">
 												<img style="margin: 0;" src="${Allmovie.poster_path }"
@@ -120,161 +110,215 @@ body {
 				</p>
 			</div>
 		</c:if>
+ --%>
 
 
-
-		<c:if test="${not empty test.genre}">
+	<c:if test="${not empty movie_genre}">
+		<c:forEach items="${movie_genre }" var="movie_genre"
+			varStatus="status">
+			<c:set var="i" value="${i+1}" />
 			<c:forEach items="${test.genre }" var="genre" varStatus="status">
-				<c:forEach items="${test.movie }" var="Allmovie" varStatus="status">
-					<c:if test="${genre.genre_id eq Allmovie.genre_id1}">
-						<c:set var="sum" value="${sum+1}" />
-						<div class="sliderow" style="top: ${210+210*sum}px">
-							<h2 class="rowHeader">${genre.genre_name }</h2>
-							<div class="slide_wrapper">
-								<ul class="slides">
-									<c:forEach items="${test.movie }" var="limovie"
-										varStatus="status">
-										<c:if
-											test="${genre.genre_id eq limovie.genre_id1 or genre.genre_id eq limovie.genre_id2 }">
-											<li><a class="atag"
-												href="<%=application.getContextPath()%>/browse/${limovie.movie_id }">
-													<div class="atagdiv">
-														<img style="margin: 0;" src="${limovie.poster_path }"
-															class="d-block dis img1" alt="...">
-														<div class="videohover">
-															<video class="video" muted autoplay loop
-																poster="${limovie.poster_path}">
-																<source src="${limovie.teaser_path}" type="video/mp4">
-															</video>
-														</div>
+				<c:if test="${movie_genre eq genre.genre_id}">
+					<c:set var="sum" value="${sum+1}" />
+					<div class="sliderow${i}" style="top: ${210+210*sum}px">
+						<h2 class="rowHeader${i}">${genre.genre_name }</h2>
+						<div class="slide_wrapper${i}">
+							<ul class="slides${i}">
+								<c:forEach items="${test.movie }" var="Allmovie"
+									varStatus="status">
+									<c:if
+										test="${Allmovie.genre_id1 eq genre.genre_id or Allmovie.genre_id2 eq genre.genre_id }">
+										<li class="slideli${i}"><a class="atag"
+											href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+												<div class="atagdiv">
+													<img src="${Allmovie.poster_path }" class=" dis img1"
+														alt="...">
+													<div class="videohover">
+														<video class="video" muted autoplay loop
+															poster="${Allmovie.poster_path}">
+															<source src="${Allmovie.teaser_path}" type="video/mp4">
+														</video>
 													</div>
-											</a></li>
-										</c:if>
-									</c:forEach>
-								</ul>
-							</div>
-							<div id="pagenum"></div>
-							<p class="controls">
-								<span class="backopprev"></span> <span class="backopnext"></span>
-							</p>
-							<p class="controls">
-								<span class="prev"><i class="fas fa-chevron-left"></i></span> <span
-									class="next"><i class="fas fa-chevron-right"></i></span>
-							</p>
+												</div>
+
+										</a></li>
+									</c:if>
+								</c:forEach>
+							</ul>
 						</div>
-					</c:if>
-				</c:forEach>
-			</c:forEach>
-		</c:if>
-		 --%>
-		<div>
-			<div class="player">
-				<video class=" viewer"
-					src="https://player.vimeo.com/external/194837908.sd.mp4?s=c350076905b78c67f74d7ee39fdb4fef01d12420&profile_id=164"></video>
-				<div class="player__controls">
-					<div class="progress">
-						<div class="progress__filled"></div>
+						<div class="pagenum${i}"></div>
+						<p class="controls${i}">
+							<span class="backopprev${i}"></span> <span class="backopnext${i}"></span>
+						</p>
+						<p class="controls${i}">
+							<span class="prev${i}"><i class="fas fa-chevron-left"></i></span>
+							<span class="next${i}"><i class="fas fa-chevron-right"></i></span>
+						</p>
 					</div>
-					<button class="player__button toggle" title="Toggle Play">►</button>
-					<input type="range" name="volume" class="player__slider" min="0"
-						max="1" step="0.05" value="1"> <input type="range"
-						name="playbackRate" class="player__slider" min="0.5" max="2"
-						step="0.1" value="1">
-					<button data-skip="-10" class="player__button">« 10s</button>
-					<button data-skip="25" class="player__button">25s »</button>
-				</div>
-			</div>
-
-
-		</div>
-	</div>
-	<script type="text/javascript">
-	/* Get Our Elements */ 
-	const player = document.querySelector('.player'); 
-	const video = player.querySelector('.viewer'); 
-	const progress = player.querySelector('.progress'); 
-	const progressBar = player.querySelector('.progress__filled'); 
-	const toggle = player.querySelector('.toggle'); 
-	const skipButtons = player.querySelectorAll('[data-skip]'); 
-	const ranges = player.querySelectorAll('.player__slider');
-
-	
-	function togglePlay() { 
-		const method = video.paused ? 'play' : 'pause';
-		video[method](); 
-	} 
-	
-	video.addEventListener('click', togglePlay);
-
-	
-	
-	function updateButton() { 
-		const icon = this.paused ? '►' : '❚ ❚'; 
-		console.log(icon); 
-		toggle.textContent = icon; 
-		}
-	
-	video.addEventListener('play', updateButton); 
-	video.addEventListener('pause', updateButton); 
-
-	
-	
-		function skip() { 
-			video.currentTime += parseFloat(this.dataset.skip); 
-			}
-		
-		skipButtons.forEach(button => 
-		button.addEventListener('click', skip)
-		);
-
-			function handleRangeUpdate() {
-				video[this.name] = this.value;
-				} 
-			
-			ranges.forEach(range => 
-			range.addEventListener('click', handleRangeUpdate)); 
-			
-			ranges.forEach(
-				range => range.addEventListener('change', handleRangeUpdate));
-
-			
-			function handleProgress() {
-				const percent = (video.currentTime / video.duration) * 100;
-				progressBar.style.flexBasis = percent+"%";
-				} 
-			
-			video.addEventListener('timeupdate', handleProgress);
-
-				
-			function scrub(e) {
-				const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
-				video.currentTime = scrubTime; 
-				} 
-			
-			let mousedown = false;
-			progress.addEventListener('click', scrub); 
-			progress.addEventListener('mousemove', (e) => mousedown && scrub(e)
-					);
-			progress.addEventListener('mousedown', () => mousedown = true); 
-			progress.addEventListener('mouseup', () => mousedown = false);
-
-				
-					
-
-		/* 	// 배열 생성 (초기 값 할당)
-			i = 0;
-			<c:forEach items="${test.movie }" var="Allmovie" varStatus="status">
-			arr[i] = "${Allmovie.genre_id1 }";
-			i++;
-			arr[i] = "${Allmovie.genre_id2 }";
-			i++;s
+				</c:if>
 			</c:forEach>
-			console.log(arr.length);
-			console.log(arr);
-			const set = new Set(arr);
-			console.log(set);
-		 */
+		</c:forEach>
+	</c:if>
+
+	<script type="text/javascript">
+		console.log("sdfs");
+
+		<c:forEach items="${movie_genre }" var="movie_genre"
+		varStatus="status">
+		<c:set var="j" value="${j+1}" />
+			console.log(${j});
+			
+		var 
+				slides = document.querySelector('.slides${j}'), 
+				
+				slide_wrapper = document.querySelector('.slide_wrapper${j}'), 
+				
+				slide = document.querySelectorAll('.slides${j} li'),
+				
+				currentIdx = 0, 
+				
+				slideCount = slide.length, 
+				
+				prevBtn = document.querySelector('.prev${j}'), 
+				
+				backopprev = document.querySelector('.backopprev${j}'),
+				
+				backopnext = document.querySelector('.backopnext${j}'), 
+				
+				slideWidth = 250, 
+				slideMargin = 10, 
+				slideShow = 4, 
+				allpagenum = Math.ceil(slideCount / slideShow), 
+				
+				nextBtn = document.querySelector('.next${j}'), 
+				
+				currentPagenum = 1, 
+				
+				sliderow = document.querySelector('.sliderow${j}'), 
+				
+				pagenumdiv = document.querySelector('.pagenum${j}');
+
+		
+		slides.style.width = (slideWidth + slideMargin) * slideCount
+				- slideMargin + 'px';
+		slide_wrapper.style.width = (slideWidth + slideMargin) * slideShow
+				- slideMargin + 'px';
+
+		
+		//슬라이드 페이지 view 시 버튼 나타내기
+		for (i = 1; i <= allpagenum; i++) {
+			if (i == 1) {
+				pagenumdiv.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+			} else {
+				pagenumdiv.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+			}
+		}
+
+		//슬라이드 마우스오버 시 버튼 나타내기
+		sliderow.addEventListener("mouseover", function() {
+			pagenumdiv.style.visibility = 'visible';
+
+			if (allpagenum > slideShow) {
+				prevBtn.style.visibility = 'visible';
+				nextBtn.style.visibility = 'visible';
+			}
+
+			if (currentPagenum == allpagenum) {
+				nextBtn.style.visibility = 'hidden';
+			}
+			if (currentPagenum == 1) {
+				prevBtn.style.visibility = 'hidden';
+			}
+
+		});
+		
+		//슬라이드 마우스아웃 시 버튼 숨기기
+		sliderow.addEventListener("mouseout", function() {
+			prevBtn.style.visibility = 'hidden';
+			nextBtn.style.visibility = 'hidden';
+			pagenumdiv.style.visibility = 'hidden';
+		});
+
+		function moveSlide(num) {
+			slides.style.left = -num * (slideWidth + slideMargin) + 'px';
+			currentIdx = num;
+			currentPagenum = currentIdx == 0 ? 1 : Math.floor(currentIdx
+					/ slideShow) + 1;
+		}
+
+		nextBtn
+				.addEventListener(
+						'click',
+						function() {
+							if (currentPagenum > 0) {
+								moveSlide(currentIdx + slideShow);
+								pagenumdiv.innerHTML = ``;
+								for (i = 1; i <= allpagenum; i++) {
+									if (i == currentPagenum) {
+										pagenumdiv.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+									} else {
+										pagenumdiv.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+									}
+								}
+								prevBtn.style.visibility = 'visible';
+								backopprev.style.visibility = 'visible';
+								if (currentPagenum == allpagenum) {
+									nextBtn.style.visibility = 'hidden';
+									backopnext.style.visibility = 'hidden';
+								}
+							} else {
+								/*moveSlide(0); 첫페이지*/
+								nextBtn.style.visibility = 'hidden';
+								backopnext.style.visibility = 'hidden';
+							}
+						});
+
+		if (currentPagenum == 1) {
+			if (slideCount <= slideShow) {
+				nextBtn.style.visibility = 'hidden';
+				backopnext.style.visibility = 'hidden';
+				pagenumdiv.style.visibility = 'visible';
+			} else {
+				backopnext.style.visibility = 'visible';
+			}
+
+			pagenumdiv.style.visibility = 'visible';
+			prevBtn.style.visibility = 'hidden';
+			backopprev.style.visibility = 'hidden';
+		}
+
+		prevBtn
+				.addEventListener(
+						'click',
+						function() {
+							if (currentPagenum <= allpagenum) {
+								moveSlide(currentIdx - slideShow);
+								pagenumdiv.innerHTML = ``;
+								for (i = 1; i <= allpagenum; i++) {
+									if (i == currentPagenum) {
+										pagenumdiv.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+									} else {
+										pagenumdiv.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+									}
+								}
+								nextBtn.style.visibility = 'visible';
+								backopnext.style.visibility = 'visible';
+								if (currentPagenum == 1) {
+									prevBtn.style.visibility = 'hidden';
+									backopprev.style.visibility = 'hidden';
+								}
+							} else {
+								/*moveSlide(slideCount - slideShow);*/
+								prevBtn.style.visibility = 'hidden';
+								prevBtn.style.visibility = 'hidden';
+							}
+						});
+		</c:forEach>
 	</script>
-	<script src="/kflix/resources/js/watch/jstest.js?var=2"></script>
+
+
+	<script src="/kflix/resources/js/watch/jstest.js?var=2">
+		
+	</script>
 </body>
 </html>

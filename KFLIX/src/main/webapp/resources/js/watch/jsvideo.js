@@ -14,9 +14,11 @@ if (video.paused) {
 	} else {
 		playnpause.innerHTML = `<i id="play" class="fas fa-play color-w"></i>`;
 	}
+	
 
 recommend.addEventListener("click", (e) => {
 	recommend.style.display = 'none';
+	
 });
 
 videocon.addEventListener("mouseover", function() {

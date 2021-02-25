@@ -58,20 +58,21 @@
 
 				<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
 				<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
-				
+
 				<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
 				<div style="display: inline-block; margin-left: 189px" id="volume">
 					<!-- 	<i onclick="volshow()" id="volumeicon" class="fas fa-volume-up color-w"></i> -->
 					<input type="range" class="form-range" min="0" max="1" step="0.1"
 						id="volrange">
 				</div>
-				
+
 				<i onclick="openFullscreen()" class="fas fa-expand color-w"></i>
-				
-				<div style="display: inline-block;" id="playtime" class="color-w font-s">
-				<div id="current"></div>
-				<div id="duration"></div>
-				<div></div>
+
+				<div style="display: inline-block;" id="playtime"
+					class="color-w font-s">
+					<div id="current"></div>
+					<div id="duration"></div>
+					<div></div>
 				</div>
 			</div>
 		</div>
@@ -86,51 +87,94 @@
 		</div>
 
 		<div id="recommend" style="display: none;">
-		<div  class="container" style="text-align: center;">
-			<h5 style="text-align: left;margin-bottom: 25px;">추천 영상</h5>
-			<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-				<c:if
-					test="${movie.genre_id1 eq Allmovie.genre_id1 or movie.genre_id2 eq Allmovie.genre_id1 or 
+			<div class="container" style="text-align: center;">
+				<h5 style="text-align: left; margin-bottom: 25px;">추천 영상</h5>
+				<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
+					<c:if
+						test="${movie.genre_id1 eq Allmovie.genre_id1 or movie.genre_id2 eq Allmovie.genre_id1 or 
 									movie.genre_id1 eq Allmovie.genre_id2 or movie.genre_id2 eq Allmovie.genre_id2 }">
 
-					<c:if test="${movie.movie_id != Allmovie.movie_id }">
-						<c:set var="sum" value="${sum+1}" />
-						<c:if test="${sum < 4}">
-							<a id="atag" class="atagname"
-								href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
-								<div class="showimg">
-									<img
-										style="width: 100%; height: 150px; border-radius: 2% 2% 0 0;"
-										src="${Allmovie.poster_path }" class="d-block dis hoverimg"
-										alt="...">
-									<div class="imghover"
-										style="position: resize; width: 100%; top: 0; left: 0; bottom: 0; z-index: 10; background-color: rgba(255, 255, 255, 0);">
-										<div
-											style="position: absolute; top: 23%; left: 33%; z-index: 20; width: 30%; height: 50%;"
-											class="ru disin hoverru">
-											<i
-												style="position: absolute; font-size: 30px; top: 27%; left: 34%; bottom: 0; z-index: 10;"
-												class="fas fa-play color-w hoverru"></i>
+						<c:if test="${movie.movie_id != Allmovie.movie_id }">
+							<c:set var="sum" value="${sum+1}" />
+							<c:if test="${sum < 4}">
+								<a id="atag" class="atagname"
+									href="<%=application.getContextPath()%>/browse/watch/${Allmovie.movie_id }">
+									<div class="showimg">
+										<img
+											style="width: 100%; height: 150px; border-radius: 2% 2% 0 0;"
+											src="${Allmovie.poster_path }" class="d-block dis hoverimg"
+											alt="...">
+										<div class="imghover"
+											style="position: resize; width: 100%; top: 0; left: 0; bottom: 0; z-index: 10; background-color: rgba(255, 255, 255, 0);">
+											<div
+												style="position: absolute; top: 23%; left: 33%; z-index: 20; width: 30%; height: 50%;"
+												class="ru disin hoverru">
+												<i
+													style="position: absolute; font-size: 30px; top: 27%; left: 34%; bottom: 0; z-index: 10;"
+													class="fas fa-play color-w hoverru"></i>
+											</div>
 										</div>
 									</div>
-								</div>
-							</a>
+								</a>
+							</c:if>
 						</c:if>
 					</c:if>
-				</c:if>
-			</c:forEach>
+				</c:forEach>
 			</div>
 		</div>
+		<!-- Button trigger modal -->
+		<button id="start" type="button" class="btn btn-primary" data-bs-toggle="modal"
+			data-bs-target="#exampleModal" style="display: none;"></button>
 
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">시청이 완료되어, 처음부터 실행됩니다.</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+		<button id="end" type="button" class="btn btn-primary" data-bs-toggle="modal"
+			data-bs-target="#exampleModal" style="display: none;"></button>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">미디어 재생이 완료되었습니다.</div>
+					<div class="modal-footer">
+						 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
 
 	<script>
+	
 			console.log("${movie.movie_id}");
 			console.log("${watching.watch_type}");
 			sound();
 			var video = document.getElementById('video');
+			var start = document.getElementById('start');
+			var end = document.getElementById('end');
 
 			const player = document.querySelector('.player'); 
 			const progress = player.querySelector('.progress'); 
@@ -176,7 +220,7 @@
 			video.currentTime = "${watching.view_point}";
 			</c:when>
 			<c:otherwise>
-			alert("시청이 완료되어, 처음부터 실행됩니다.");
+			start.click();
 			video.currentTime = 0.00001;
 			video.muted = false;
 			video.play();
@@ -235,7 +279,7 @@
 
 			function event(e) {
 				recommend.style.display = 'block';
-				result = alert("미디어 재생이 완료되었습니다.");
+				end.click();
 				var data = {
 					watch_type : "WATCHED",
 					movie_id : "${movie.movie_id}",

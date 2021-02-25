@@ -74,7 +74,7 @@ body {
 	position: relative;
 	background-color: #141414;
 	padding: 10px 0;
-	box-shadow: 0px -70px 30px 75px #141414;
+	box-shadow:0px 74px 48px 250px #141414
 }
 
 .flexnowr {
@@ -266,8 +266,6 @@ ul {
 	position: absolute;
 	margin: 0 auto;
 	height: 145px;
-	height: 145px;
-	left: 100px;
 }
 
 .slides_All {

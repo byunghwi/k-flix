@@ -1,38 +1,26 @@
+/*
 var slides = document.querySelector('.slides'),
-
 	slide_wrapper = document.querySelector('.slide_wrapper'),
-
 	slide = document.querySelectorAll('.slides li'),
-
 	currentIdx = 0,
-
 	slideCount = slide.length,
-
 	prevBtn = document.querySelector('.prev'),
-
 	backopprev = document.querySelector('.backopprev'),
-
 	backopnext = document.querySelector('.backopnext'),
-
 	slideWidth = 250, slideMargin = 10, slideShow = 4,
-
 	allpagenum = Math.ceil(slideCount / slideShow),
-
 	nextBtn = document.querySelector('.next'),
-
 	currentPagenum = 1,
-
 	sliderow = document.querySelector('.sliderow'),
-	
 	pagenumdiv = document.querySelector('.pagenum');
 
 	console.log(slideCount);
 	console.log(allpagenum);
 
 
-/*신장르 안나옴*/
+//신장르 안나옴
 
-/*slides.style.width = (slideWidth + slideMargin) * slideCount_All - slideMargin + 'px';  안되서 지정 함*/
+//slides.style.width = (slideWidth + slideMargin) * slideCount_All - slideMargin + 'px';  안되서 지정 함
 slides.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + 'px';
 slide_wrapper.style.width = (slideWidth + slideMargin) * slideShow
 	- slideMargin + 'px';
@@ -103,7 +91,7 @@ nextBtn
 					backopnext.style.visibility = 'hidden';
 				}
 			} else {
-				/*moveSlide(0); 첫페이지*/
+				//moveSlide(0); 첫페이지
 				nextBtn.style.visibility = 'hidden';
 				backopnext.style.visibility = 'hidden';
 			}
@@ -141,8 +129,8 @@ prevBtn
 					backopprev.style.visibility = 'hidden';
 				}
 			} else {
-				/*moveSlide(slideCount - slideShow);*/
+				//moveSlide(slideCount - slideShow);
 				prevBtn.style.visibility = 'hidden';
 				prevBtn.style.visibility = 'hidden';
 			}
-		});
+		});*/
