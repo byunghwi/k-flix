@@ -1,23 +1,11 @@
+var thumb = $("div#thumbnail");
+
 function posterCheck(e) {
 	var poster_div = $("#poster_div");
 	var poster_text = $("#poster_text");
 	var poster_val = poster_text.val();
-	
-		var reader = new FileReader();
-		
-		reader.onload = function (e) {
-			var thum = $("div#thumbnail");
-			var img = document.createElement("img"); 
-			img.setAttribute("src", e.target.result); 
-			img.setAttribute("width", '150px');
-			img.setAttribute("height", '70px');
-			
-			thum.html('');
-			thum.append(img);
-		}
-		reader.readAsDataURL(poster_text[0].files[0]);
-	
-	
+	var reader = new FileReader();
+
 	if( poster_val != "" ){
 		
 		var ext = poster_val.split('.').pop().toLowerCase();
@@ -28,9 +16,23 @@ function posterCheck(e) {
 	    	poster_div.append('<label class="input-group-text" for="poster_text">포스터</label>');
 	    	poster_div.append('<input type="file" name="poster" class="form-control" id="poster_text" accept="image/png, image/jpeg, image/jpg" onchange="posterCheck(this);" required/>');
 	    	 
-		 	alert('잘못된 파일명 입니다.');
-	    }
-	}
+		 	infoMsg('잘못된 파일명 입니다.');
+		 	thumb.html('');
+	    } else {
+	
+			reader.onload = function (e) {
+				var thum = $("div#thumbnail");
+				var img = document.createElement("img"); 
+				img.setAttribute("src", e.target.result); 
+				img.setAttribute("width", '150px');
+				img.setAttribute("height", '70px');
+				
+				thum.html('');
+				thum.append(img);
+			}
+			reader.readAsDataURL(poster_text[0].files[0]);
+		}
+	} 
 };
 
 
@@ -50,7 +52,7 @@ function teaserCheck(){
 	    	teaser_div.append('<label class="input-group-text" for="teaser_text">티저</label>')
 	    	teaser_div.append('<input type="file" name="teaser" class="form-control"  id="teaser_text" accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="teaserCheck();" required/>');
 	    	
-		 	alert('잘못된 파일명 입니다.');
+		 	infoMsg('잘못된 파일명 입니다.');
 	    }
 	}
 }
@@ -69,14 +71,7 @@ function videoCheck(){
     
     video.src = URL.createObjectURL(files[0]);
      
-     video.onloadedmetadata = function() {
-		window.URL.revokeObjectURL(video.src);
-		var duration = video.duration;
-		
-		var getMin = Math.ceil(duration / 60);
-		
-		$('input[name="play_time"]').val(getMin);
-	  }
+
 
 
 	if( video_val != "" ){
@@ -89,7 +84,20 @@ function videoCheck(){
 			video_div.append('<label class="input-group-text" for="video_text">영화</label>');
 			video_div.append('<input type="file" name="video"  class="form-control" id="poster_text" accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="videoCheck();" required/>');
 			
-		 	alert('잘못된 파일명 입니다.');
+		 	infoMsg('잘못된 파일명 입니다.');
+		 	
+		 	$('input[name="play_time"]').val('');
+		 	
+	    } else{
+	    
+   		    video.onloadedmetadata = function() {
+				window.URL.revokeObjectURL(video.src);
+				var duration = video.duration;
+				
+				var getMin = Math.ceil(duration / 60);
+				
+				$('input[name="play_time"]').val(getMin);
+		  	}
 	    }
 	}
 }

@@ -20,5 +20,5 @@ public class Help {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date help_date;
 	
-	
+	private String searching_word;
 }

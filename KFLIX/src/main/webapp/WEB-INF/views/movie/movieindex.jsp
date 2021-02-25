@@ -22,6 +22,7 @@
 <a href="/kflix/genre/genreindex">장르</a>
 <a href="/kflix/actor/actorindex">배우</a>
 <a href="/kflix/director/directorindex">감독</a>
+<a href="/kflix/FAQ/index">FAQ</a>
 
 <!-- 게시판 -->
 <div class="container pt-5" id="board">

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,16 +32,77 @@ public class HelpRestController {
 			produces = "application/json; charset=UTF-8")
 	public List<Help> indexHelp(@RequestBody Help help) {
 		log.info("============ indexHelp ============");
-		String type = help.getHelp_type();
+		String word = help.getSearching_word();
 		
-		if(type.equals("all")) {
-			log.info(type);
+		if(word.equals("all")) {
+			log.info(word);
 			return h_service.getAllHelpList(ENABLED);
 			
 		} else {
-			log.info(type);
-			return h_service.getAllHelpListByType(type, ENABLED);
+			log.info(word);
+			return h_service.getAllHelpListByType(word, ENABLED);
 		}
 		
 	}
+	
+	@PostMapping(value = "add",
+			consumes = "application/json",
+			produces = "application/json; charset=UTF-8")
+	public List<Help> addHelp(@RequestBody Help help){
+		log.info("========== add =========");
+		
+		h_service.addHelp(help);
+		String word = help.getSearching_word();
+		
+		if(word.equals("all")) {
+			log.info(word);
+			return h_service.getAllHelpList(ENABLED);
+			
+		} else {
+			log.info(word);
+			return h_service.getAllHelpListByType(word, ENABLED);
+		}
+	}
+	
+	
+	@PatchMapping(value = "update",
+			consumes = "application/json",
+			produces = "application/json; charset=UTF-8")
+	public List<Help> updateHelp(@RequestBody Help help){
+		log.info("========== update =========");
+		
+		h_service.updateHelp(help);
+		
+		String word = help.getSearching_word();
+		
+		if(word.equals("all")) {
+			log.info(word);
+			return h_service.getAllHelpList(ENABLED);
+			
+		} else {
+			log.info(word);
+			return h_service.getAllHelpListByType(word, ENABLED);
+		}
+	}
+	
+	@PatchMapping(value = "delete",
+			consumes = "application/json",
+			produces = "application/json; charset=UTF-8")
+	public List<Help> deleteHelp(@RequestBody Help help){
+		log.info("========== delete =========");
+		
+		h_service.delOrReHelp(help.getHelp_id(), DISABLED);
+		
+		String word = help.getSearching_word();
+		
+		if(word.equals("all")) {
+			log.info(word);
+			return h_service.getAllHelpList(ENABLED);
+			
+		} else {
+			log.info(word);
+			return h_service.getAllHelpListByType(word, ENABLED);
+		}
+	}
+	
 }

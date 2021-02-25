@@ -9,9 +9,16 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" href="/kflix/resources/css/movie/movie.css" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/alert.css?ver=1" />
 <meta charset="UTF-8">
 <title>영화 등록</title>
 </head>
+<style>
+	#thumbImg{
+		width: 150px; 
+		height: 70px;
+	}
+</style>
 <body>
 
 <div class="container pt-5">
@@ -119,7 +126,9 @@
 				accept="image/png, image/jpeg, image/jpg" onchange="posterCheck(this);" required/>
 	</div>
 	
-	<div id="thumbnail" style="width: 150px; height: 70px; float: left" class="pb-5"></div>
+	<div id="thumbnail"  class="pb-5">
+		
+	</div>
 	
 	<div class="d-flex justify-content-end pt-5">
 		<div>
@@ -133,6 +142,9 @@
 </div>
 </form>
 </div>
+
+<%@include file="/resources/include/movie/alertModal.jsp"%>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
@@ -140,7 +152,8 @@
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>		
-<script src="/kflix/resources/js/movie/inputfile.js?ver=9"></script>
+<script src="/kflix/resources/js/movie/inputfile.js?ver=20"></script>
+<script src="/kflix/resources/js/movie/alertCustom.js?ver=30"></script>
 
 </body>
 </html>

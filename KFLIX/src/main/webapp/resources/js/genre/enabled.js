@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 var addmodal = function() {$('#addconfrim').modal("show")};
 var updatemodal = function() {$('#updateconfrim').modal("show")};
 var deletemodal = function() {$('#deleteconfrim').modal("show")};
