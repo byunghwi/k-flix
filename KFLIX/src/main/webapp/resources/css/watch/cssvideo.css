@@ -53,7 +53,7 @@ a:active {
 }
 
 #videobar>*:not(:first-child) {
-	padding: 38px 30px;
+	padding: 34px 43px;
 	font-size: 27px;
 }
 
@@ -97,7 +97,7 @@ a:active {
 #video {
 	width: 100%;
 	height: 100%;
-	    -webkit-writing-mode: vertical-rl;
+	-webkit-writing-mode: vertical-rl;
 }
 
 .show {
@@ -123,7 +123,7 @@ a:active {
 #volrange {
 	position: relative;
 	width: 100px;
-	top: 5px;
+	top: 4px;
 }
 
 #movieinfo {
@@ -195,6 +195,10 @@ input[type=range]::-webkit-slider-thumb {
 	opacity: 0;
 	visibility: hidden;
 	transition: all 0.5s;
+}
+
+#atag {
+	margin: 10px;
 }
 
 #atag:hover .imghover .hoverru {

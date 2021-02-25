@@ -113,6 +113,66 @@ public class MainController {
 		// return "login";
 		return "redirect:/loginPost";
 	}
+	
+	// 카카오 로그인 성공시 callback호출 메소드
+	@RequestMapping(value = "/kakao/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	public String kakaoCallback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,
+			RedirectAttributes rttr) throws IOException, ParseException, org.json.simple.parser.ParseException {
+
+		OAuth2AccessToken oauthToken;
+		oauthToken = naverLoginVO.getAccessToken(session, code, state);
+		// 1. 로그인 사용자 정보를 읽어온다.
+		apiResult = naverLoginVO.getUserProfile(oauthToken); // String형식의 json데이터
+		/**
+		 * apiResult json 구조 {"resultcode":"00", "message":"success",
+		 * "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
+		 **/
+		// 2. String형식인 apiResult를 json형태로 바꿈
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(apiResult);
+		JSONObject jsonObj = (JSONObject) obj;
+		// 3. 데이터 파싱
+		// Top레벨 단계 _response 파싱
+		JSONObject response_obj = (JSONObject) jsonObj.get("response");
+
+		// response의 nickname값 파싱
+		System.out.println("callback 시 넘어오는 데이터 > " + response_obj);
+
+		// 네이버 아이디마다 고유하게 발급되는 유니크한 일련번호값. 이 유니크한 일련번호값으로 자체적으로 회원정보를 구성해야함.
+		String unique_id = (String) response_obj.get("id");
+
+		String nickname = (String) response_obj.get("nickname");
+		String email = (String) response_obj.get("email");
+		String birth = ((String) response_obj.get("birthyear") + (String) response_obj.get("birthday"));
+		String gender = (String) response_obj.get("gender");
+
+		memberVO.setEmail(email);
+		memberVO.setNaver(unique_id);
+		memberVO.setBirth(birth);
+		memberVO.setGender(gender);
+		memberVO.setNick(nickname);
+
+		// 네이버 고유 id로 로그인 체크시 없으면 회원가입페이지로 바로 이동.
+		if (memberService.login(memberVO) == null) {
+			System.out.println("[MainController] 네이버 로그인 시 가입된 naver 필드 없으므로 회원가입창으로 바로 이동");
+			session.setAttribute("naver", memberVO);
+			return "/main/registerForm"; // 테스트
+		}
+
+		// 4.파싱 닉네임 세션으로 저장
+		session.setAttribute("sessionId", session.getId()); // 세션 생성
+		System.out.println("[MainController] 세션 아이디 sessionId > " + session.getAttribute("sessionId"));
+
+//		session.setAttribute("login", memberVO); // 세션 생성
+//		System.out.println("[MainController] 세션 아이디 memberVO> " + session.getAttribute("login"));
+
+		model.addAttribute("result", apiResult);
+
+		rttr.addFlashAttribute("naverMem", memberVO);
+
+		// return "login";
+		return "redirect:/loginPost";
+	}
 
 	// 로그인 폼 보여주기
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
