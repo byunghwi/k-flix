@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -49,6 +50,7 @@ public class HelpServiceTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testGetAllHelp() {
 		list = service.getAllHelpList('Y');
 		assertNotNull(list);
@@ -109,4 +111,19 @@ public class HelpServiceTest {
 		log.info("삭제 됨 : "+result);
 		
 	}
+	
+	@Test
+	public void testString() {
+		String str = "inquiry_type IN('결제문의', '환불문의', '이용권문의', '계정문의', '컨텐츠문의', '영상문의', '서비스문의')";
+		String re = str.replaceAll("[^,가-힣]", "");
+		log.info(re);
+		String[] sp = re.split(",");
+		
+		
+		for (int i = 0; i<sp.length; i++) {
+			log.info(sp[i]);
+			
+		}
+	}
+	
 }
