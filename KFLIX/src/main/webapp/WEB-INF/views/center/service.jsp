@@ -87,11 +87,12 @@
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
 $('document').ready(function(){
-	
 	var check = '${inqCheck}';
 	if (check != null && check != ''){
 		infoMsg(check);
-
+		$('#infoconfrim').on('hidden.bs.modal', function(){
+			location.reload();		
+		})
 	}
 })
 

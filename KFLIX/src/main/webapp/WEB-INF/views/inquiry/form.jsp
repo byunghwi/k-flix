@@ -91,7 +91,7 @@ var content = $('#inquiry_content');
 $('document').ready(function(){
 	document.getElementById('titleByteInfo').innerText = '0 / 100';
 	document.getElementById('contentByteInfo').innerText = '0 / 4000';
-	
+	window.history.forward();
 })
 
 $('#sendForm').submit(function(){

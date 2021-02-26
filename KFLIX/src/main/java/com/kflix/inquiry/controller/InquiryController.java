@@ -61,7 +61,7 @@ public class InquiryController {
 		}
 		
 		rttr.addFlashAttribute("inqCheck", msg);
-		
+	
 		return "redirect:/service";
 	}
 	
