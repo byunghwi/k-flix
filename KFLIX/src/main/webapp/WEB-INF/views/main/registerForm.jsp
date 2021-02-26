@@ -34,20 +34,34 @@
 						<div class="front">
 							<form action="${pageContext.request.contextPath}/member/register"
 								method="post">
-								<input type="hidden" name="naver" value="${naver.naver }" /> <input
-									type="hidden" name="gender" value="${naver.gender }" /> <input
-									type="hidden" name="nick" value="${naver.nick }" /> <input
-									type="hidden" id="member_age" name="member_age" />
+								<c:if test="${not empty naver}">
+									<input type="hidden" name="naver" value="${naver.naver }" /> <input
+										type="hidden" name="gender" value="${naver.gender }" /> <input
+										type="hidden" name="nick" value="${naver.nick }" /> 
+										<c:if test="${not empty naver.birth}">
+											<input type="hidden" id = "member_age" name="member_age" /> 
+										</c:if>
+												
+								</c:if>
+								<c:if test="${not empty kakao}">
+									<input type="hidden" name="kakao" value="${kakao.kakao }" /> <input
+										type="hidden" name="gender" value="${kakao.gender }" /> <input
+										type="hidden" name="nick" value="${kakao.nick }" />
+										<c:if test="${not empty kakao.birth}">
+											<input type="hidden" id = "member_age" name="member_age" /> 
+										</c:if>
+								</c:if>
+								
 								<div class="box-input">
 									<div class="text-first">잠깐,</div>
 									<div class="text-second">아직 KFLIX 회원이 아니시군요</div>
-									<div class="text-third">네이버 아이디로 빠르고 간편하게 가입해보세요</div>
+									<div class="text-third">소셜 아이디로 빠르고 간편하게 가입해보세요</div>
 									<input type="email" name="email" id="email"
 										placeholder="&#xf007;  E-mail을 입력하세요" required />
 									<div class="email-check" id = "email-check"></div>
 									<button type="button"
 										onclick="checkEmail();">중복확인</button>
-									<button type="submit" id="regist">네이버 아이디로 가입</button>
+									<button type="submit" id="regist">소셜 아이디로 가입</button>
 								</div>
 							</form>
 						</div>
@@ -57,9 +71,18 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var age = calcAge('${naver.birth }'); //만나이 계산
-		document.getElementById('member_age').value = age;
-
+		var age;
+		
+ 		if('${naver.birth }' != "" || '${naver.birth }' != null){
+ 			age = calcAge('${naver.birth }');
+ 			document.getElementById('member_age').value = age;
+		}
+		if('${kakao.birth }' != "" || '${kakao.birth }' != null){
+			age = calcAge('${kakao.birth }');
+			document.getElementById('member_age').value = age;
+		}
+		
+		//이메일 중복 확인
 		function checkEmail() {
 
 			var email = document.getElementById('email').value;

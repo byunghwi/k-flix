@@ -16,16 +16,31 @@ function calcAge(birth) {
 	return age;
 }
 
+//널 체크
+var isEmpty = function(value) {
+	if (value == ""
+			|| value == null
+			|| value == undefined
+			|| (value != null && typeof value == "object" && !Object
+					.keys(value).length)) {
+		return true
+	} else {
+		return false
+	}
+};
+
 // 비밀번호 일치 확인
 function checkSamePwd() {
 	var password = document.getElementById("password").value;
 	var passwordCheck = document.getElementById("password2").value;
 
 	if (password == passwordCheck) {
-		$("#password-check").text('비밀번호가 일치합니다.').css("color", "aqua").css("font-family", "Montserrat").css("font-size", "13px");
+		$("#password-check").text('비밀번호가 일치합니다.').css("color", "aqua").css(
+				"font-family", "Montserrat").css("font-size", "13px");
 	} else {
-		$("#password-check").text('비밀번호가 불일치합니다.').css('color', 'red').css("font-family", "Montserrat").css("font-size", "13px");;
+		$("#password-check").text('비밀번호가 불일치합니다.').css('color', 'red').css(
+				"font-family", "Montserrat").css("font-size", "13px");
+		;
 	}
-	
-}
 
+}

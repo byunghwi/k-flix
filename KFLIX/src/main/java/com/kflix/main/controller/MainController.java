@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -14,13 +15,17 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.JsonObject;
+import com.kflix.login.KakaoLoginVO;
 import com.kflix.login.NaverLoginVO;
 import com.kflix.member.domain.Member;
 import com.kflix.member.service.MemberService;
@@ -31,17 +36,23 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class MainController {
-	/* NaverLoginBO */
+	/* NaverLoginVO */
 	private NaverLoginVO naverLoginVO;
 	private String apiResult = null;
+	
+	// KakaoLoginVO
+	private KakaoLoginVO kakaoLoginVO;
+	
+	@Autowired
+	private void setKakoLoginVO(KakaoLoginVO kakaoLoginVO) {
+		this.kakaoLoginVO = kakaoLoginVO;
+	}
 
 	@Autowired
 	private void setNaverLoginVO(NaverLoginVO naverLoginVO) {
 		this.naverLoginVO = naverLoginVO;
 	}
 
-	@Inject
-	Member memberVO;
 
 	@Inject
 	MemberService memberService;
@@ -55,10 +66,12 @@ public class MainController {
 	}
 
 	// 네이버 로그인 성공시 callback호출 메소드
-	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/naver/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,
 			RedirectAttributes rttr) throws IOException, ParseException, org.json.simple.parser.ParseException {
-
+		
+		Member memberVO = new Member();
+		
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginVO.getAccessToken(session, code, state);
 		// 1. 로그인 사용자 정보를 읽어온다.
@@ -95,7 +108,7 @@ public class MainController {
 		// 네이버 고유 id로 로그인 체크시 없으면 회원가입페이지로 바로 이동.
 		if (memberService.login(memberVO) == null) {
 			System.out.println("[MainController] 네이버 로그인 시 가입된 naver 필드 없으므로 회원가입창으로 바로 이동");
-			session.setAttribute("naver", memberVO);
+			model.addAttribute("naver", memberVO);
 			return "/main/registerForm"; // 테스트
 		}
 
@@ -113,17 +126,76 @@ public class MainController {
 		// return "login";
 		return "redirect:/loginPost";
 	}
+	
+	// 카카오 로그인 성공시 callback호출 메소드
+	@RequestMapping(value = "/kakao/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	public String kakaoCallback(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "code") String code, HttpSession session, RedirectAttributes rttr) throws Exception {
+		
+		Member memberVO = new Member();
+		
+		System.out.println("[MainController] 카카오 콜백 접근");
+		
+		System.out.println("[MainController] 리퀘스트 안에 code > " + request.getParameter("code"));
+		System.out.println("[MainController] 요청 결과의 code > " + code);
+		
+		String accessToken = kakaoLoginVO.getAccessToken(code);
+		System.out.println("[MainController] 요청 결과의 accessToken > " + accessToken);
+		
+		JSONObject kakaoprofile = kakaoLoginVO.getKakaoUserInfo(accessToken);
+		System.out.println("[MainController] 요청 결과의 kakaoprofile > " + kakaoprofile);
+		
+		
+		String id = kakaoprofile.get("id").toString();
+		JSONObject kakao_account = (JSONObject)kakaoprofile.get("kakao_account");
+		String email = kakao_account.get("email").toString();
+		String gender = kakao_account.get("gender").toString();
+	
+		if(gender.equals("male")) {
+			gender = "M";
+		}else if(gender.equals("female")) {
+			gender = "F";
+		}
+
+		System.out.println("[MainController] 요청 결과의 id > " + id);
+		System.out.println("[MainController] 요청 결과의 email > " + email);
+		System.out.println("[MainController] 요청 결과의 gender > " + gender);
+	
+		memberVO.setKakao(id);
+		memberVO.setEmail(email);
+		memberVO.setGender(gender);
+		System.out.println("[MainController] 만든 member객체  > " + memberVO);
+		
+		// 카카오 고유 id로 로그인 체크시 없으면 회원가입페이지로 바로 이동.
+		if (memberService.login(memberVO) == null) {
+			System.out.println("[MainController] 카카오 로그인 시 가입된 kakao 필드 없으므로 회원가입창으로 바로 이동");
+					model.addAttribute("kakao", memberVO);
+					return "/main/registerForm"; // 테스트
+		}
+		
+		rttr.addFlashAttribute("kakaoMem", memberVO);
+
+		return "redirect:/loginPost";
+
+	}
 
 	// 로그인 폼 보여주기
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET(Model model, HttpSession session) {
 		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginVO.getAuthorizationUrl(session);
+		
+		// 카카오아이디로 인증 url가져오기
+		String kakaoUrl = kakaoLoginVO.getAuthorizationUrl();
 		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
 		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+
 		System.out.println("[MainController] 네이버:" + naverAuthUrl);
-		// 네이버
-		model.addAttribute("url", naverAuthUrl);
+		System.out.println("[MainController] 카카오:" + kakaoUrl);
+		
+		// 네이버, 카카오 인증 url
+		model.addAttribute("naver_url", naverAuthUrl);
+		model.addAttribute("kakao_url", kakaoUrl);
+		
 		return "/main/loginForm_test";
 	}
 
@@ -132,7 +204,7 @@ public class MainController {
 	public void loginPOST(Member member, HttpSession session, Model model,
 			@RequestParam(value = "userCookie", required = false) String userCookie, HttpServletRequest request) {
 
-		Member memberVO;
+		Member memberVO = null;
 
 		System.out.println("[MainController] loginPost member > " + member);
 		// 1. addFlashAttribute > redirect 후 소멸 (세션기반)
@@ -142,10 +214,17 @@ public class MainController {
 		if (redirectMap != null) {
 			for (String key : redirectMap.keySet()) {
 				System.out.println(String.format("[MainController] 키 : %s, 값 : %s", key, redirectMap.get(key)));
+				
+				if((Member) redirectMap.get("naverMem") != null) {
+					memberVO = memberService.login((Member) redirectMap.get("naverMem")); // 오브젝트 타입이라 캐스팅해줌
+					System.out.println("[MainController]네이버로 로그인시 member객체 > " + memberVO);
+					break;
+				}else if((Member) redirectMap.get("kakaoMem") != null){
+					memberVO = memberService.login((Member) redirectMap.get("kakaoMem")); // 오브젝트 타입이라 캐스팅해줌
+					System.out.println("[MainController]카카오로 로그인시 member객체 > " + memberVO);
+					break;
+				}
 			}
-
-			memberVO = memberService.login((Member) redirectMap.get("naverMem")); // 오브젝트 타입이라 캐스팅해줌
-			System.out.println("[MainController]네이버로 로그인시 member객체 > " + memberVO);
 
 		} else {
 

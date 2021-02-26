@@ -52,7 +52,7 @@ public class MemberController {
 
 			return "/main/registerSuccess";
 		}
-
+		
 		return "redirect:/login";
 	}
 
