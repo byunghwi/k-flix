@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -94,4 +95,68 @@ public class InquiryServiceImpl implements InquiryService {
 		return in_mapper.selectAllInqByTypeAndDate(type, reply_status);
 	}
 
+	@Override
+	public boolean formRegExp(Inquiry inquiry) {
+		String mail_reg_exp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,6}";
+		
+		List<String> type_list = new ArrayList<>();
+		type_list.add("결제문의");
+		type_list.add("환불문의");
+		type_list.add("이용권문의");
+		type_list.add("계정문의");
+		type_list.add("컨텐츠문의");
+		type_list.add("영상문의");
+		type_list.add("서비스문의");
+		
+		int max_title_len = 100;
+		int max_content_len = 4000;
+		
+		boolean mail_ck = Pattern.matches(mail_reg_exp, inquiry.getEmail());
+		boolean type_ck = type_list.contains(inquiry.getInquiry_type());
+		boolean title_ck = getByteLength(inquiry.getInquiry_title()) <= max_title_len;
+		boolean content_ck = getByteLength(inquiry.getInquiry_content()) <= max_content_len;
+		
+		log.info("고객 이메일: " + inquiry.getEmail());
+		log.info("이메일 정규식 ? "+ mail_ck);
+		log.info("문의 종류: " + inquiry.getInquiry_type());
+		log.info("문의 종류 존재 ? " + type_ck);
+		log.info("문의 제목: " + inquiry.getInquiry_title());
+		log.info("문의 제목 제한 ? " + title_ck);
+		log.info("문의 내용: " + inquiry.getInquiry_content());
+		log.info("문의 내용 제한 ? " + content_ck);
+		
+		if (mail_ck && type_ck && title_ck && content_ck) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private int getByteLength(String str) {
+
+		int strLength = 0;
+
+		char tempChar[] = new char[str.length()];
+
+		for (int i = 0; i < tempChar.length; i++) {
+
+			tempChar[i] = str.charAt(i);
+
+			if (tempChar[i] < 128) {
+
+				strLength++;
+
+			} else {
+
+				strLength += 2;
+
+			}
+
+		}
+
+		return strLength;
+
+	}
+	
 }
+

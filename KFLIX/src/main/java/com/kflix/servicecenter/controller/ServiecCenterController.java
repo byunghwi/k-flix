@@ -27,6 +27,7 @@ public class ServiecCenterController {
 		log.info("============= serviceCenter ==========");
 		
 		Member member = (Member) session.getAttribute("login");
+		
 		log.info("로그인 된 이메일 : " + member.getEmail());
 		
 		model.addAttribute("help_play", help_service.getHelpWithRownum("재생")); 
