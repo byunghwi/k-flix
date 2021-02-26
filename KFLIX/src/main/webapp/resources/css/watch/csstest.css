@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 * {
 	margin: 0;
 	padding: 0;
@@ -16,13 +17,14 @@ ul {
 	width: 100%;
 	height: 207.5px;
 	overflow: hidden;
-	position: absolute;
+	position: relative;
 	max-width: 100%;
 }
 
 [class^="rowHeader"] {
 	color: white;
 	font-size: 15px;
+	height: 22.5px;
 	margin: 20px;
 }
 
@@ -36,7 +38,9 @@ ul {
 	position: absolute;
 	left: 0;
 	top: 0;
+	height: 145px;
 	transition: left 0.5s ease-out;
+	z-index: 10;
 }
 
 .atag {
@@ -109,7 +113,7 @@ ul {
 	padding: 1px;
 }
 
-[class^="slideli"] {
+[class^="slideli"]:not(:last-child) {
 	float: left;
 	margin-right: 10px;
 }
@@ -155,7 +159,7 @@ a:active {
 [class^="controls"] {
 	position: absolute;
 	width: 100%;
-/* 	top: 62.5px; */
+	height: 145px;
 	text-align: center;
 	margin: 0;
 	left: 0;
@@ -164,7 +168,7 @@ a:active {
 [class^="backopprev"], [class^="backopnext"] {
 	position: absolute;
 	background: #333333cf;
-	height: 150.5px;
+	height:145px;
 	width: 92px;
 	color: #939393;
 	font-size: 35px;
@@ -186,6 +190,7 @@ a:active {
 }
 
 [class^="prev"], [class^="next"] {
+	height:145px;
 	position: absolute;
 	height: 150.5px;
 	width: 65px;
@@ -206,11 +211,10 @@ a:active {
 	position: absolute;
 	background: #333333cf;
 	height: 150.5px;
-	width: 135px;
+	width: 93px;
 	color: #939393;
 	font-size: 35px;
 	padding-top: 45px;
-	border-radius: 0.5rem;
 }
 
 [class^="prev"] {
