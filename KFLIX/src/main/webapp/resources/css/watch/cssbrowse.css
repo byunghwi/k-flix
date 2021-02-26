@@ -19,7 +19,7 @@ body {
 	position: relative;
 	background-color: #141414;
 	padding: 0.1px 0;
-	box-shadow: 0px 2px 10px #141414;
+/* 	box-shadow: 0px 2px 10px #141414; */
 }
 
 .profile {
@@ -74,7 +74,9 @@ body {
 	position: relative;
 	background-color: #141414;
 	padding: 10px 0;
-	box-shadow:0px 74px 48px 250px #141414
+	left:0;
+	box-shadow:0px 74px 48px 250px #141414;
+    max-width: 100%;
 }
 
 .flexnowr {
@@ -83,29 +85,85 @@ body {
 	flex-wrap: nowrap;
 }
 
-.dis {
-	float: left;
-	margin: 0 10px;
-	width: 250px;
-	border-radius: 0.5rem;
-	height: 145px;
-}
-
 .padd {
 	padding: 30px 0;
 	background-color: rgba(255, 255, 255, 0.2);
-}
-
-.list_title {
-	color: white;
-	font-size: 15px;
-	margin: 20px;
 }
 
 .raba {
 	background-color: rgba(255, 255, 255, 0);
 	padding: 0;
 	margin: 0;
+}
+
+.img1 {
+	margin: 0;
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+ul {
+	padding: 0;
+}
+
+[class^="sliderow"] {
+	width: 100%;
+	height: 207.5px;
+	overflow: hidden;
+	position: relative;
+	max-width: 100%;
+	padding-left: 80px;
+}
+
+[class^="rowHeader"] {
+	    color: white;
+    font-size: 26px;
+    height: 22.5px;
+    margin: 15px 0 25px 0;
+}
+
+[class^="slide_wrapper"] {
+	position: absolute;
+	margin: 0 auto;
+	height: 145px;
+}
+
+[class^="slides"] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 145px;
+	transition: left 0.5s ease-out;
+	z-index: 10;
+}
+
+.atag {
+	width: 250px;
+	height: 145px;
+}
+
+.atagdiv {
+	display: inline-block;
+	position: relative;
+	width: 250px;
+	height: 145px;
+	position: relative;
+	border-radius: 0.5rem;
+}
+
+.dis {
+	float: left;
+	width: 250px;
+	border-radius: 0.5rem;
+	height: 145px;
 }
 
 .videohover {
@@ -123,7 +181,22 @@ body {
 	border-radius: 0.5rem;
 }
 
-.pagenum_All {
+.videohover {
+	opacity: 0;
+	visibility: hidden;
+	transition: all 1s;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 10;
+	background-color: white;
+	border-radius: 0.5rem;
+}
+
+[class^="pagenum"] {
 	float: right;
 	position: absolute;
 	top: 28px;
@@ -139,6 +212,11 @@ body {
 .pagehoveron {
 	color: white;
 	padding: 1px;
+}
+
+[class^="slideli"]:not(:last-child) {
+	float: left;
+	margin-right: 10px;
 }
 
 .atag:hover .videohover {
@@ -171,177 +249,49 @@ a:active {
 	height: 100%;
 }
 
-.atagdiv {
-	display: inline-block;
-	position: relative;
-	width: 250px;
-	height: 145px;
-	position: relative;
-	border-radius: 0.5rem;
-	/* border: 1px solid #333; */
-}
-
-.atag {
-	width: 250px;
-	height: 145px;
-}
-
-/* 
-
-* {
-   padding: 0;
-   margin: 0;
-   line-height: 1;
-} 기본 브라우저 리셋 스타일
-
-#modal {
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   z-index: 100;
-}
-
-#movieInfoModal {
-   position: fixed;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   width: 500px;
-   height: 300px;
-   background: #fff;
-   z-index: 100;
-}
-
-#popupexit {
-   position: absolute;
-   top: 0%;
-   right: 0%;
-   transform: translate(40%, -40%);
-   padding: 20px;
-   background: #dd5347;
-   border-radius: 100%;
-   z-index: 100;
-}
-
-#popupback {
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background: rgba(0, 0, 0, .9);
-   z-index: 99;
-}
- */
-
-/* 슬라이드 */
-* {
-	margin: 0;
-	padding: 0;
-}
-
-.img1 {
-	margin: 0;
-}
-
-.All {
-	width: 100%;
-	height: 207.5px;
-	overflow: hidden;
+[class^="pagenum"] {
+	float: right;
 	position: absolute;
-	max-width: 100%;
+	top: 28px;
+	right: 64px;
+	visibility: hidden;
 }
 
-li {
-	list-style: none;
-}
-
-ul {
-	padding: 0;
-}
-
-.slide_wrapper_All {
-	position: absolute;
-	margin: 0 auto;
-	height: 145px;
-}
-
-.slides_All {
-	position: absolute;
-	left: 0;
-	top: 0;
-	transition: left 0.5s ease-out;
-	/* width
-		가로 길이 * 갯수 
-	+	여백 길이 * (갯수-1) 
-	*/
-}
-
-.slides_All li:not(:last-child) {
-	float: left;
-	margin-right: 10px;
-}
-
-.controls_All {
+[class^="controls"] {
 	position: absolute;
 	width: 100%;
-	top: 62.5px;
+	height: 145px;
 	text-align: center;
 	margin: 0;
 	left: 0;
 }
 
-.backop {
+[class^="backopprev"], [class^="backopnext"] {
 	position: absolute;
 	background: #333333cf;
-	height: 150.5px;
-	width: 135px;
+	height:145px;
+	width: 92px;
 	color: #939393;
 	font-size: 35px;
 	padding-top: 45px;
-	border-radius: 0.5rem;
+	visibility: hidden;
+	z-index: 10;
 }
 
-* {
-	margin: 0;
-	padding: 0;
-}
-
-li {
-	list-style: none;
-}
-
-.slide_wrapper_Watching {
-	position: relative;
-	margin: 0 auto;
-	height: 145px;
-	overflow: hidden;
-}
-
-.slides_Watching {
-	position: absolute;
-	left: 0;
+[class^="backopprev"] {
 	top: 0;
-	transition: left 0.5s ease-out;
-	/* width
-		가로 길이 * 갯수 
-	+	여백 길이 * (갯수-1) 
-	*/
+	left: 0;
+	padding-left: 40px;
 }
 
-.slides_Watching li:not(:last-child) {
-	float: left;
-	margin-right: 10px;
+[class^="backopnext"] {
+	top: 0;
+	right: 0;
+	padding-right: 40px;
 }
 
-.controls_Watching {
-	text-align: center;
-	margin-top: 50px;
-}
-
-.prev_All, .next_All {
+[class^="prev"], [class^="next"] {
+	height:145px;
 	position: absolute;
 	height: 150.5px;
 	width: 65px;
@@ -352,44 +302,41 @@ li {
 	z-index: 10;
 }
 
-.prev_All:hover, .next_All:hover {
+[class^="prev"]:hover, [class^="next"]:hover {
 	color: white;
 	font-size: 50px;
 	padding-top: 31px;
 }
 
-.prev_All {
-	top: 0;
-	left: 0;
-	padding-left: 40px;
-}
-
-.next_All {
-	top: 0;
-	right: 0;
-	padding-right: 40px;
-}
-
-.backopprev_All, .backopnext_All {
+[class^="backop"] {
 	position: absolute;
 	background: #333333cf;
 	height: 150.5px;
-	width: 92px;
+	width: 93px;
 	color: #939393;
 	font-size: 35px;
 	padding-top: 45px;
-	visibility: hidden;
-	z-index: 10;
 }
 
-.backopprev_All {
+[class^="prev"] {
 	top: 0;
 	left: 0;
 	padding-left: 40px;
 }
 
-.backopnext_All {
+[class^="next"] {
 	top: 0;
 	right: 0;
 	padding-right: 40px;
+}
+
+body {
+	background-color: black;
+}
+
+.list {
+	position: relative;
+	padding: 10px 0;
+	max-width: 100%;
+	margin: 0;
 }
