@@ -118,7 +118,7 @@ public class KakaoLoginVO {
 		// add header
 		post.addHeader("Authorization", "Bearer " + accessToken);
 
-		JsonNode returnNode = null;
+		//JsonNode returnNode = null;
 		JSONParser jsonParser = new JSONParser();
 		JSONObject myObject = null;
 		
@@ -126,21 +126,17 @@ public class KakaoLoginVO {
 		try {
 			final HttpResponse response = client.execute(post);
 			org.apache.http.HttpEntity entity = response.getEntity();
-			//myObject = (JSONObject) jsonParser.parse(response.getEntity().getContent().toString());
-			 // A Simple JSON Response Read
+
             InputStream instream = entity.getContent();
             result = convertStreamToString(instream);
-            // now you have the string representation of the HTML request
+           
             Object obj = jsonParser.parse( result );
             myObject = (JSONObject) obj;
 
             System.out.println("RESPONSE: " + myObject);
+            
             instream.close();
-			
-			
-			// JSON 형태 반환값 처리
-//			ObjectMapper mapper = new ObjectMapper();
-//			returnNode = mapper.readTree(response.getEntity().getContent());
+
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

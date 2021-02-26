@@ -53,7 +53,7 @@
 								</c:if>
 								
 								<div class="box-input">
-									<div class="text-first">잠깐,${kakao } ${naver } ${pageContext.request.contextPath}</div>
+									<div class="text-first">잠깐,</div>
 									<div class="text-second">아직 KFLIX 회원이 아니시군요</div>
 									<div class="text-third">소셜 아이디로 빠르고 간편하게 가입해보세요</div>
 									<input type="email" name="email" id="email"
@@ -73,11 +73,11 @@
 	<script type="text/javascript">
 		var age;
 		
- 		if('${naver.birth }' != ""){
+ 		if('${naver.birth }' != "" || '${naver.birth }' != null){
  			age = calcAge('${naver.birth }');
  			document.getElementById('member_age').value = age;
 		}
-		if('${kakao.birth }' != ""){
+		if('${kakao.birth }' != "" || '${kakao.birth }' != null){
 			age = calcAge('${kakao.birth }');
 			document.getElementById('member_age').value = age;
 		}

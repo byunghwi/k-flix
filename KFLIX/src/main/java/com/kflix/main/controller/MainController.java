@@ -108,7 +108,7 @@ public class MainController {
 		// 네이버 고유 id로 로그인 체크시 없으면 회원가입페이지로 바로 이동.
 		if (memberService.login(memberVO) == null) {
 			System.out.println("[MainController] 네이버 로그인 시 가입된 naver 필드 없으므로 회원가입창으로 바로 이동");
-			session.setAttribute("naver", memberVO);
+			model.addAttribute("naver", memberVO);
 			return "/main/registerForm"; // 테스트
 		}
 
@@ -135,7 +135,7 @@ public class MainController {
 		
 		System.out.println("[MainController] 카카오 콜백 접근");
 		
-		System.out.println("[MainController] 리퀘스트 안에 code > " + request.getAttribute("code"));
+		System.out.println("[MainController] 리퀘스트 안에 code > " + request.getParameter("code"));
 		System.out.println("[MainController] 요청 결과의 code > " + code);
 		
 		String accessToken = kakaoLoginVO.getAccessToken(code);
@@ -151,10 +151,8 @@ public class MainController {
 		String gender = kakao_account.get("gender").toString();
 	
 		if(gender.equals("male")) {
-			System.out.println("일로 들어와야됨 male");
 			gender = "M";
 		}else if(gender.equals("female")) {
-			System.out.println("female일 경우");
 			gender = "F";
 		}
 
