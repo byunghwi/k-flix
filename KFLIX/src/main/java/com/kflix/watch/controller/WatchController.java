@@ -77,6 +77,10 @@ public class WatchController {
 		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
 		test.setWish(watchservice.getSelectWish(member.getEmail()));
 		test.setGenre(watchservice.getAllGenre());
+
+		model.addAttribute("AllGenre", watchservice.getAllGenre());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("test", test);
 		model.addAttribute("movie_genre", movie_genre);
 		model.addAttribute("email", member.getEmail());
