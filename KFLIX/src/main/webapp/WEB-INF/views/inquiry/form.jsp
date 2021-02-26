@@ -12,12 +12,25 @@
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <style>
+	body {
+		background-color: black;
+	}
+	
 	#inquirtForm{
 		width: 50%;
+		background-color: white;
 	}
 	
 	#byteInfo{
 		font-weight: bolder;
+	}
+	
+	h1 {
+		text-align: center;
+	}
+	
+	h5 class="px-2" {
+		
 	}
 </style>
 <title>문의하기</title>
@@ -27,44 +40,54 @@
 <!-- 문의하기 폼  -->
 <div id="inquirtForm">
 	<form action="./inquiry" method="post" id="sendForm">
-	<h1>1:1문의하기</h1>
-	
-	<h4>보내시는 분</h4>
-	<div class="input-group mb-3">
-	  <input type="text" class="form-control" name="email" id="email" value="${loginEmail }" required readonly aria-label="Username" aria-describedby="form_eamil">
+	<div class="py-3">
+		<h1>1:1문의하기</h1>
 	</div>
 	
-	<h4>카테고리</h4>
-	<div class="input-group mb-3">
-	  <select class="form-select" id="inquiry_type" name="inquiry_type" required>
-			<c:forEach items="${constraint }" var="i" begin="0" end="${constraint.size()}" varStatus="status">
-				 <option>${i }</option>
-			</c:forEach>
-	  </select>
+	<div>
+		<h5 class="px-2">보내시는 분</h5>
+		<div class="px-4">
+			<input type="text" class="form-control" name="email" id="email" value="${loginEmail }" required readonly aria-label="Username" aria-describedby="form_eamil">
+		</div>			
 	</div>
 	
-	<h4>제목</h4>
-	<div class="input-group">
-	  <input type="text" class="form-control" onKeyUp="titleByteChk(this);" placeholder="100Byte 이내" 
-	  		id="inquiry_title"	name="inquiry_title" aria-label="Username" aria-describedby="form_title">
-	</div>
-	<div class="d-flex justify-content-end mb-3">
-	  <span id="titleByteInfo"></span>
-	</div>
-	
-  	<h4>문의 내용</h4>
-	<div class="input-group mb-2">
-	  <textarea class="form-control" id="inquiry_content" name="inquiry_content" onKeyUp="contByteChk(this);" rows="10" 
-	  			placeholder="4000Byte 이내" style="resize: none;" aria-label="With textarea"></textarea>
-	</div>
-	<div class="d-flex justify-content-end">
-	  <span id="contentByteInfo"></span>
+	<div>
+		<h5 class="px-2">카테고리</h5>
+		<div class="px-4">
+		  	<select class="form-select" id="inquiry_type" name="inquiry_type" required>
+				<c:forEach items="${constraint }" var="i" begin="0" end="${constraint.size()}" varStatus="status">
+					 <option>${i }</option>
+				</c:forEach>
+		  	</select>
+		</div>
 	</div>
 	
-	<div class="d-flex justify-content-end">
+	<div>
+		<h5 class="px-2">제목</h5>
+		<div class="px-4">
+		  	<input type="text" class="form-control" onKeyUp="titleByteChk(this);" placeholder="100Byte 이내" 
+		  		id="inquiry_title"	name="inquiry_title" aria-label="Username" aria-describedby="form_title">
+			<div class="d-flex justify-content-end mb-3">
+			  <span id="titleByteInfo"></span>
+			</div>
+		</div>
+	</div>
+	
+	<div>
+		<h5 class="px-2">문의 내용</h5>
+		<div class="px-4">
+		  	<textarea class="form-control" id="inquiry_content" name="inquiry_content" onKeyUp="contByteChk(this);" rows="10" 
+		  			placeholder="4000Byte 이내" style="resize: none;" aria-label="With textarea"></textarea>
+			<div class="d-flex justify-content-end">
+			  <span id="contentByteInfo"></span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="d-flex justify-content-end px-4 py-3">
 		<div>
 			<input type="submit" value="보내기" class="btn btn-secondary"/>
-			<a href="" class="btn btn-danger">취소</a>
+			<a href="/kflix/service" class="btn btn-danger">취소</a>
 		</div>
 	</div>
 	</form>
