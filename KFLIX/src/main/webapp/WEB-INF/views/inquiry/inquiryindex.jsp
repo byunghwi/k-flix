@@ -17,6 +17,25 @@
 		color: gray;
 		font-size: 12px;
 	}
+	body {
+		
+		padding-left: 15%;
+	}
+	#inquirydiv{
+		width: 1200px;
+		height: 900px;
+		border: 3px solid;
+	}
+	h1 {
+		text-align: center;
+	}
+	#inqMain {
+		overflow: auto;
+		height: 620px;
+	}
+	.amount {
+		width: 150px;
+	}
 </style>
 <title>Insert title here</title>
 </head>
@@ -24,45 +43,51 @@
 
 <%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
 
+<input id="helpData" type="hidden" value="${total }"/>
+<input id="helpPage" type="hidden" value="${page }"/>
+<div id="inquirydiv">
 
-<div class="container">
-	<h1>문의 관리</h1>
-	<input id="helpData" type="hidden" value="${total }"/>
-	<input id="helpPage" type="hidden" value="${page }"/>
-	
 	<!-- 컨텐츠 개수 -->
-	<div>
-		<select class="form-select" id="helpAmount">
-			<option value="5">5개 씩 보기</option>
-			<option value="${amount }" selected>${amount }개 씩 보기</option>
-			<option value="20">20개 씩 보기</option>
-		</select>
+	<div class="d-flex justify-content-end">
+		<div class="amount">
+			<select class="form-select form-select-sm" id="helpAmount">
+				<option value="5">5개 씩 보기</option>
+				<option value="${amount }" selected>${amount }개 씩 보기</option>
+				<option value="20">20개 씩 보기</option>
+			</select>
+		</div>
 	</div>
 	
-	<!-- 검색 영역 -->
-	<div id="searchArea">
-	  <select class="form-select" id="searchType" required>
-	  	<option value="all">모든 카테고리</option>
-		<c:forEach items="${category }" var="i" begin="0" end="${category.size()}" varStatus="status">
-			 <option>${i }</option>
-		</c:forEach>
-	  </select>
-	</div>
-	
-	<!-- 답변 미답변 -->
 	<div>
-	 <select class="form-select" id="isreply" required>
-	  	<option value="all">전체보기</option>
-		 <option>미답변</option>
-		 <option>답변</option>
-	  </select>
+		<h1>문의 관리</h1>
+	</div>
+
+	<div class="d-flex justify-content-between pb-1">
+		<!-- 검색 영역 -->
+		<div id="searchArea">
+		  <select class="form-select" id="searchType" required>
+		  	<option value="all">모든 카테고리</option>
+			<c:forEach items="${category }" var="i" begin="0" end="${category.size()}" varStatus="status">
+				 <option>${i }</option>
+			</c:forEach>
+		  </select>
+		</div>
+		
+		<!-- 답변 미답변 -->
+		<div>
+		 <select class="form-select" id="isreply" required>
+		  	<option value="all">전체보기</option>
+			 <option>미답변</option>
+			 <option>답변</option>
+		  </select>
+		</div>
 	</div>
 
 	<!-- 테이블 영역 -->
 	<div id="inqMain">
 		
-		<table id="inqTable" class="table talbe table-striped text-center align-middle">
-		<thead>
+		<table id="inqTable" class="table talbe table-striped text-center align-middle border-dark">
+		<thead class="bg-dark text-light">
 			<tr>
 				<th>#</th>
 				<th>카테고리</th>
@@ -100,7 +125,7 @@
 		</tbody>	
 		</table>
 	</div>
-	
+	<br />
 	<!-- 페이지 네이트 영역 -->
 	<div id="pagenate">
 		<ul  class="pagination justify-content-center">	
@@ -184,7 +209,7 @@
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/pagenate.js?ver=10"></script>
+<script src="/kflix/resources/js/movie/pagenate.js?ver=11"></script>
 <script>
 //로딩시 페이징
 $(document).ready(function() { 
@@ -244,6 +269,7 @@ $('#replyBtn').click(function(){
 })
 
 
+// 답변 미답변
 $('#isreply').change(function(){
 	var type = "POST";
 	var url = "/kflix/inquiry/index";
@@ -255,7 +281,7 @@ $('#isreply').change(function(){
 	ajax(type, url, data, parseInt($('.active').text()));
 })
 
-
+// 검색
 $('#searchType').change(function(){
 	var type = "POST";
 	var url = "/kflix/inquiry/index";
@@ -267,7 +293,7 @@ $('#searchType').change(function(){
 	ajax(type, url, data, parseInt($('.active').text()));
 })
 
-
+// 개수보기 
 $('#helpAmount').change(function(){
 	var type = "POST";
 	var url = "/kflix/inquiry/index";
@@ -279,6 +305,16 @@ $('#helpAmount').change(function(){
 	ajax(type, url, data, 1);
 })
 
+// 페이지
+function pageClick(pnum) {
+	var type = "POST";
+	var url = "/kflix/inquiry/index";
+	var data = JSON.stringify({
+		inquiry_type: $('#searchType').val(),
+		reply_status: $('#isreply').val()
+	});
+	ajax(type, url, data, pnum);
+}
 
 function ajax(type, url, data, pnum) {
 	$.ajax({
@@ -289,12 +325,15 @@ function ajax(type, url, data, pnum) {
  		success: function(data){
   			var len = data.length;
   			var amount =  parseInt($('#helpAmount').val())
-
-  			if ($('.active').text() == ''){
+	
+  			var anotherPnum = Math.ceil(len / amount);
+  			if ($('.active').text() == '' 
+  					|| $('.active').text() == 0){
   				pnum = 1;
-  			} 
-  			
-  			amount = parseInt(amount);
+  				
+  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+  				pnum = anotherPnum;
+  			}
   			
   			console.log(pnum)
   			console.log(amount);
@@ -325,9 +364,7 @@ function makeTable(data, pnum, amount) {
 	
 	try{
 		
-		
 		for	(var i = first_li; i < last_li; i++) {
-			console.log(data[i].reply_date)
 			var make = '';
 			if (data[i].reply_date == null) {
 				make = '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replyModal"'
@@ -351,9 +388,7 @@ function makeTable(data, pnum, amount) {
 			
 		}
 		
-	} catch(err){
-		console.log("마지막 데이터 입니다.")
-	}
+	} catch(err){}
 };
 </script>
 </body>

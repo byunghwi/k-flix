@@ -21,14 +21,8 @@ function posterCheck(e) {
 	    } else {
 	
 			reader.onload = function (e) {
-				var thum = $("div#thumbnail");
-				var img = document.createElement("img"); 
-				img.setAttribute("src", e.target.result); 
-				img.setAttribute("width", '150px');
-				img.setAttribute("height", '70px');
-				
-				thum.html('');
-				thum.append(img);
+				thumb.removeAttr('style');
+			 	thumb.attr('style', 'background-image: url("' + e.target.result + '");');
 			}
 			reader.readAsDataURL(poster_text[0].files[0]);
 		}
