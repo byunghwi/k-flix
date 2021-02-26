@@ -15,11 +15,7 @@
 </head>
 <body>
 
-<a href="/kflix/movie/movieindex">영화</a>
-<a href="/kflix/genre/genreindex">장르</a>
-<a href="/kflix/actor/actorindex">배우</a>
-<a href="/kflix/director/directorindex">감독</a>
-<a href="/kflix/FAQ/index">FAQ</a>
+<%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
 
 <div class="container pt-5">
 	<div class="d-flex justify-content-end">
