@@ -14,3 +14,10 @@ wish_check.addEventListener("change", function() {
 
 	}
 });
+
+function iframeclose() {
+	location.href = "/kflix/browse";
+}
+
+document.getElementById("frame").addEventListener("click", iframeclose);
+document.querySelector(".back").addEventListener("click", iframeclose);

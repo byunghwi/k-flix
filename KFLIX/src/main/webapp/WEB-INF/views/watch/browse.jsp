@@ -26,10 +26,25 @@
 	href="/kflix/resources/css/watch/cssbrowse.css">
 <script src="https://kit.fontawesome.com/6421ed9b05.js"
 	crossorigin="anonymous"></script>
+<style type="text/css">
+.popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+}
 
+.handle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 20px;
+}
+</style>
 </head>
 <body>
-	<div></div>
+	<div id="modalbackground"></div>
 	<div class="container flex-row nav-bar ">
 
 		<img class="logo" alt="로고"
@@ -73,6 +88,8 @@
 		</div>
 	</div>
 
+
+
 	<div id="list" class="container">
 		<div
 			style="position: relative; top: -476px; padding: 100px 0; overflow: hidden;">
@@ -90,8 +107,8 @@
 										varStatus="status">
 										<c:if
 											test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
-											<li class="slideli1"><a class="atag"
-												href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+											<li class="slideli1"><a
+												onclick="framshow(${watch.movie_id})" class="atag">
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="dis img1" alt="...">
@@ -476,10 +493,99 @@
 																<img src="${Allmovie.poster_path }" class="dis img1"
 																	alt="...">
 																<div class="videohover">
-																	<video class="video" muted autoplay loop
-																		poster="${Allmovie.poster_path}">
-																		<source src="${Allmovie.teaser_path}" type="video/mp4">
-																	</video>
+																	<img style="margin: 0;" src="${Allmovie.poster_path }"
+																		class="modalimg" alt="...">
+																	<div class="hovervideo">
+																		<video class="video" muted autoplay loop
+																			poster="${Allmovie.poster_path}">
+																			<source src="${Allmovie.teaser_path}"
+																				type="video/mp4">
+																		</video>
+																	</div>
+																	<div class="comment">
+																		<div style="font-size: 18px;">
+																			<c:choose>
+																				<c:when test="${Allmovie.rating eq 'all' }">
+																					<p class="ratingsty"
+																						style="background-color: green; font-size: 20px;">ALL</p>
+																				</c:when>
+																				<c:when test="${Allmovie.rating eq '12' }">
+																					<p class="ratingsty"
+																						style="background-color: #dfb039; color: black;">${Allmovie.rating }</p>
+																				</c:when>
+																				<c:when test="${Allmovie.rating eq '15' }">
+																					<p class="ratingsty"
+																						style="background-color: #cd6d34">${Allmovie.rating }</p>
+																				</c:when>
+																				<c:when test="${Allmovie.rating eq '19' }">
+																					<p class="ratingsty"
+																						style="background-color: #c52e37">${Allmovie.rating }</p>
+																				</c:when>
+																				<c:otherwise>
+																					<p class="ratingsty"
+																						style="background-color: #c52e37">${Allmovie.rating }</p>
+																				</c:otherwise>
+																			</c:choose>
+																			${Allmovie.movie_title }
+																		</div>
+																		<div
+																			style="position: absolute; top: 21px; right: 30px;">
+																			<span
+																				style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
+																				<fmt:formatDate value="${Allmovie.reg_date }"
+																					pattern="yyyy.MM" />
+																			</span> • ${Allmovie.play_time }분
+																		</div>
+																		<div class="infotable1">
+																			<table>
+																				<tr align="left">
+																					<td colspan="1"><span class="c-gay">감독:
+																					</span> <c:forEach items="${AllDirector }"
+																							var="AllDirector" varStatus="status">
+																							<c:if
+																								test="${Allmovie.director_id eq AllDirector.director_id }">
+									${AllDirector.director_name }
+								</c:if>
+																						</c:forEach></td>
+																				</tr>
+																				<tr align="left">
+																					<td><span class="c-gay">출연: </span> <c:forEach
+																							items="${AllActor }" var="AllActor"
+																							varStatus="status">
+																							<c:if
+																								test="${Allmovie.actor_id1 eq AllActor.actor_id }">
+									${AllActor.actor_name }<c:if
+																									test="${Allmovie.actor_id2 eq AllActor.actor_id }">, 
+									</c:if>
+																							</c:if>
+																							<c:if
+																								test="${Allmovie.actor_id2 eq AllActor.actor_id  }">
+									${AllActor.actor_name }<c:if
+																									test="${Allmovie.actor_id3 eq AllActor.actor_id }">, 
+									</c:if>
+																							</c:if>
+
+																							<c:if
+																								test="${Allmovie.actor_id3 eq AllActor.actor_id }">
+									${AllActor.actor_name }
+									</c:if>
+																						</c:forEach></td>
+																				</tr>
+																				<tr align="left">
+																					<td><span class="c-gay">개요: </span>${Allmovie.country }영화
+																						• <c:forEach items="${AllGenre }" var="AllGenre"
+																							varStatus="status">
+																							<c:if
+																								test="${Allmovie.genre_id1 eq AllGenre.genre_id }">
+																			${AllGenre.genre_name}</c:if>
+																							<c:if
+																								test="${Allmovie.genre_id2 eq AllGenre.genre_id }">
+																				${AllGenre.genre_name } </c:if>
+																						</c:forEach></td>
+																				</tr>
+																			</table>
+																		</div>
+																	</div>
 																</div>
 															</div>
 
@@ -507,17 +613,18 @@
 			</div>
 
 		</div>
+			<iframe id="infoframe" src="" width="400px" height="300px"  allowTransparency="true" style="filter: chroma(color=#999999)"></iframe>
+
 	</div>
+
 
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 	<script type="text/javascript">
 		console.log(${i});
-		
-		
-		
-		
+
+
 		
 		<c:forEach var="j" begin="1" end="${i}">
 			console.log(${j});
@@ -666,18 +773,6 @@
 						});
 		</c:forEach>
 		
-img2 = document.querySelectorAll('.img2');
-		
-		
-		img2.forEaech.addEventListener("mouseover", function() {
-			img2.style.opacity = '0';
-		});
-		
-		//슬라이드 마우스아웃 시 버튼 숨기기
-		img2.addEventListener("mouseout", function() {
-			img2.style.opacity = '1';
-			
-		});
 	</script>
 </body>
 </html>
