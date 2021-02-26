@@ -59,15 +59,29 @@ public class WatchController {
 
 	@GetMapping("/browse")
 	public String getbrowse(Model model, HttpSession session) {
-		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		
+		Member member = (Member) session.getAttribute("login");
+		test test = new test();
+		List<MovieVO> movies = watchservice.getAllmovie();
+		ArrayList<Integer> arr = new ArrayList<>();
+		for (MovieVO movie : movies) {
+			arr.add(movie.getGenre_id1());
+			arr.add(movie.getGenre_id2());
+		}
+		HashSet<Integer> arr2 = new HashSet<Integer>(arr);
+		ArrayList<Integer> movie_genre = new ArrayList<>(arr2);
+		System.err.println(movie_genre);
+		
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("AllGenre", watchservice.getAllGenre());
-
-		Member member = (Member) session.getAttribute("login");
-		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
+		
+		test.setMovie(watchservice.getAllmovie());
+		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
+		test.setWish(watchservice.getSelectWish(member.getEmail()));
+		test.setGenre(watchservice.getAllGenre());
+		model.addAttribute("movie_genre", movie_genre);
+		model.addAttribute("test", test);
 		model.addAttribute("email", member.getEmail());
-		System.out.println("이메일 받아오기 : " + member.getEmail());
 		return "/watch/browse";
 	}
 
@@ -175,7 +189,7 @@ public class WatchController {
 			int result1 = watchservice.deleteWish(wish);
 			System.out.println("wish삭제");
 		}
-		return "/watch/wish";
+		return "";
 	}
 
 	@GetMapping(value = "/bttest")

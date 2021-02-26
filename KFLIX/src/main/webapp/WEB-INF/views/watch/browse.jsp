@@ -29,48 +29,6 @@
 </head>
 <body>
 
-	<%@include file="../main/header.jsp"%>
-	<%
-	/* 		String clientId = "poB4pMnJyL08tPNvHTwO";//애플리케이션 클라이언트 아이디값";
-		String clientSecret = "2sIilQ9ZED";//애플리케이션 클라이언트 시크릿값";
-		String code = request.getParameter("code");
-		String state = request.getParameter("state");
-		String redirectURI = URLEncoder.encode("http://localhost:8081/kflix/browse", "UTF-8");
-		String apiURL;
-		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-		apiURL += "client_id=" + clientId;
-		apiURL += "&client_secret=" + clientSecret;
-		apiURL += "&redirect_uri=" + redirectURI;
-		apiURL += "&code=" + code;
-		apiURL += "&state=" + state;
-		String access_token = "";
-		String refresh_token = "";
-		System.out.println("apiURL=" + apiURL);
-		try {
-			URL url = new URL(apiURL);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setRequestMethod("GET");
-			int responseCode = con.getResponseCode();
-			BufferedReader br;
-			System.out.print("responseCode=" + responseCode);
-			if (responseCode == 200) { // 정상 호출
-		br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			} else { // 에러 발생
-		br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-			}
-			String inputLine;
-			StringBuffer res = new StringBuffer();
-			while ((inputLine = br.readLine()) != null) {
-		res.append(inputLine);
-			}
-			br.close();
-			if (responseCode == 200) {
-		out.println(res.toString());
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		} */
-	%>
 	<div class="container flex-row nav-bar ">
 
 		<img class="logo" alt="로고"
@@ -114,81 +72,296 @@
 		</div>
 	</div>
 	<div id="list" class="container">
-		<div style="position: relative; top: -327px; left: -60px;">
-			<c:if test="${not empty watch}">
-				<div class="list_title">"${login.email }"님이 시청 중인 콘텐츠</div>
-				<div class="slide_wrapper_Watching">
-					<ul class="slides_Watching">
-						<c:forEach items="${watch }" var="watch" varStatus="status">
-							<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-								<c:if
-									test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
-									<li><a class="atag"
-										href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
-											<div class="atagdiv">
-												<img style="margin: 0;" src="${Allmovie.poster_path }"
-													class="d-block dis img1" alt="...">
-												<div class="videohover">
-													<video class="video" muted autoplay loop
-														poster="${Allmovie.poster_path}">
-														<source src="${Allmovie.teaser_path}" type="video/mp4">
-													</video>
-												</div>
-											</div>
-									</a></li>
-								</c:if>
-							</c:forEach>
-						</c:forEach>
-					</ul>
+		<div style="position: relative; top: -327px;">
 
-				</div>
-				<p class="controls_Watching">
-					<span class="prev_Watching">prev</span> <span class="next_Watching">next</span>
-				</p>
 
-			</c:if>
+			<div class="list container">
 
-			<div class="All">
-				<div class="list_title">모든 영화</div>
-				<div class="slide_wrapper_All">
-					<ul class="slides_All">
-						<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
-							<li><a class="atag"
-								href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
-									<div class="atagdiv">
-										<img src="${Allmovie.poster_path }" class=" dis img1"
-											alt="...">
-										<div class="videohover">
-											<video class="video" muted autoplay loop
-												poster="${Allmovie.poster_path}">
-												<source src="${Allmovie.teaser_path}" type="video/mp4">
-											</video>
-										</div>
+				<c:if test="${not empty test.watch }">
+					<div class="sliderow1" style="top: 0px">
+						<h2 class="rowHeader1">"${login.email }"님이 시청 중인 콘텐츠</h2>
+						<div class="slide_wrapper1">
+							<ul class="slides1">
+								<c:forEach items="${test.watch }" var="watch" varStatus="status">
+									<c:forEach items="${test.movie }" var="Allmovie"
+										varStatus="status">
+										<c:if
+											test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
+											<li class="slideli1"><a class="atag"
+												href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+													<div class="atagdiv">
+														<img style="margin: 0;" src="${Allmovie.poster_path }"
+															class="dis img1" alt="...">
+														<div class="videohover">
+															<video class="video" muted autoplay loop
+																poster="${Allmovie.poster_path}">
+																<source src="${Allmovie.teaser_path}" type="video/mp4">
+															</video>
+														</div>
+													</div>
+											</a></li>
+										</c:if>
+									</c:forEach>
+								</c:forEach>
+							</ul>
+						</div>
+						<div class="pagenum1"></div>
+						<p class="controls1">
+							<span class="backopprev1"></span> <span class="backopnext1"></span>
+						</p>
+						<p class="controls1">
+							<span class="prev1"><i class="fas fa-chevron-left"></i></span> <span
+								class="next1"><i class="fas fa-chevron-right"></i></span>
+						</p>
+					</div>
+				</c:if>
+
+				<c:if test="${not empty test.wish}">
+					<div class="sliderow2" style="top: 38px">
+						<h2 class="rowHeader2">내가 찜한 콘텐츠</h2>
+						<div class="slide_wrapper2">
+							<ul class="slides2">
+								<c:forEach items="${test.wish }" var="wish" varStatus="status">
+									<c:forEach items="${test.movie }" var="Allmovie"
+										varStatus="status">
+										<c:if test="${wish.movie_id eq Allmovie.movie_id }">
+											<li class="slideli2"><a class="atag"
+												href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+													<div class="atagdiv">
+														<img style="margin: 0;" src="${Allmovie.poster_path }"
+															class="d-block dis img1" alt="...">
+														<div class="videohover">
+															<video class="video" muted autoplay loop
+																poster="${Allmovie.poster_path}">
+																<source src="${Allmovie.teaser_path}" type="video/mp4">
+															</video>
+														</div>
+													</div>
+											</a></li>
+										</c:if>
+									</c:forEach>
+								</c:forEach>
+
+							</ul>
+						</div>
+						<div class="pagenum2"></div>
+						<p class="controls2">
+							<span class="backopprev2"></span> <span class="backopnext2"></span>
+						</p>
+						<p class="controls2">
+							<span class="prev2"><i class="fas fa-chevron-left"></i></span> <span
+								class="next2"><i class="fas fa-chevron-right"></i></span>
+						</p>
+					</div>
+				</c:if>
+
+
+				<c:set var="i" value="2" />
+				<c:if test="${not empty movie_genre}">
+					<c:forEach items="${movie_genre }" var="movie_genre"
+						varStatus="status">
+						<c:set var="i" value="${i+1}" />
+						<c:forEach items="${test.genre }" var="genre" varStatus="status">
+							<c:if test="${movie_genre eq genre.genre_id}">
+								<c:set var="sum" value="${sum+1}" />
+								<div class="sliderow${i}" style="top: ${38+38*sum}px">
+									<h2 class="rowHeader${i}">${genre.genre_name }</h2>
+									<div class="slide_wrapper${i}">
+										<ul class="slides${i}">
+											<c:forEach items="${test.movie }" var="Allmovie"
+												varStatus="status">
+												<c:if
+													test="${Allmovie.genre_id1 eq genre.genre_id or Allmovie.genre_id2 eq genre.genre_id }">
+													<li class="slideli${i}"><a class="atag"
+														href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+															<div class="atagdiv">
+																<img src="${Allmovie.poster_path }" class=" dis img1"
+																	alt="...">
+																<div class="videohover">
+																	<video class="video" muted autoplay loop
+																		poster="${Allmovie.poster_path}">
+																		<source src="${Allmovie.teaser_path}" type="video/mp4">
+																	</video>
+																</div>
+															</div>
+
+													</a></li>
+												</c:if>
+											</c:forEach>
+										</ul>
 									</div>
-
-							</a></li>
+									<div class="pagenum${i}"></div>
+									<p class="controls${i}">
+										<span class="backopprev${i}"></span> <span
+											class="backopnext${i}"></span>
+									</p>
+									<p class="controls${i}">
+										<span class="prev${i}"><i class="fas fa-chevron-left"></i></span>
+										<span class="next${i}"><i class="fas fa-chevron-right"></i></span>
+									</p>
+								</div>
+							</c:if>
 						</c:forEach>
-					</ul>
+					</c:forEach>
+				</c:if>
 
-				</div>
-				<div class="pagenum_All"></div>
-				<p class="controls_All">
-					<span class="backopprev_All"></span> <span class="backopnext_All"></span>
-				</p>
-				<p class="controls_All">
-					<span class="prev_All"><i class="fas fa-chevron-left"></i></span> <span
-						class="next_All"><i class="fas fa-chevron-right"></i></span>
-				</p>
+
 			</div>
+
 		</div>
 
-	</div>
+		<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
-	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
-
-	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
-	<script>
+		<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
+		<script type="text/javascript">
+		console.log(${i});
 		
+		<c:forEach var="j" begin="1" end="${i}">
+			console.log(${j});
+			
+		var 
+				slides${j} = document.querySelector('.slides${j}'), 
+				
+				slide_wrapper${j} = document.querySelector('.slide_wrapper${j}'), 
+				
+				slide${j} = document.querySelectorAll('.slides${j} .slideli${j}'),
+				
+				currentIdx${j} = 0, 
+				
+				slideCount${j} = slide${j}.length, 
+				
+				prevBtn${j} = document.querySelector('.prev${j}'), 
+				
+				backopprev${j} = document.querySelector('.backopprev${j}'),
+				
+				backopnext${j} = document.querySelector('.backopnext${j}'), 
+				
+				slideWidth${j} = 250, 
+				slideMargin${j} = 10, 
+				slideShow${j} = 5, 
+				allpagenum${j} = Math.ceil(slideCount${j} / slideShow${j}), 
+				
+				nextBtn${j} = document.querySelector('.next${j}'), 
+				
+				currentPagenum${j} = 1, 
+				
+				sliderow${j} = document.querySelector('.sliderow${j}'), 
+				
+				pagenumdiv${j} = document.querySelector('.pagenum${j}');
+
+				console.log(slideCount${j});
+		slides${j}.style.width = (slideWidth${j} + slideMargin${j}) * slideCount${j}
+				- slideMargin${j} + 'px';
+		slide_wrapper${j}.style.width = (slideWidth${j} + slideMargin${j}) * slideShow${j}
+				- slideMargin${j} + 'px';
+
+		
+		//슬라이드 페이지 view 시 버튼 나타내기
+		for (i = 1; i <= allpagenum${j}; i++) {
+			if (i == 1) {
+				pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+			} else {
+				pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+			}
+		}
+
+		//슬라이드 마우스오버 시 버튼 나타내기
+		sliderow${j}.addEventListener("mouseover", function() {
+			pagenumdiv${j}.style.visibility = 'visible';
+
+			if (slideCount${j} > slideShow${j}) {
+				prevBtn${j}.style.visibility = 'visible';
+				nextBtn${j}.style.visibility = 'visible';
+			}
+
+			if (currentPagenum${j} == allpagenum${j}) {
+				nextBtn${j}.style.visibility = 'hidden';
+			}
+			if (currentPagenum${j} == 1) {
+				prevBtn${j}.style.visibility = 'hidden';
+			}
+
+		});
+		
+		//슬라이드 마우스아웃 시 버튼 숨기기
+		sliderow${j}.addEventListener("mouseout", function() {
+			prevBtn${j}.style.visibility = 'hidden';
+			nextBtn${j}.style.visibility = 'hidden';
+			pagenumdiv${j}.style.visibility = 'hidden';
+		});
+
+		function moveSlide${j}(num) {
+			slides${j}.style.left = -num * (slideWidth${j} + slideMargin${j}) + 'px';
+			currentIdx${j} = num;
+			currentPagenum${j} = currentIdx${j} == 0 ? 1 : Math.floor(currentIdx${j}
+					/ slideShow${j}) + 1;
+		}
+
+		nextBtn${j}.addEventListener(
+						'click',
+						function() {
+							if (currentPagenum${j} > 0) {
+								moveSlide${j}(currentIdx${j} + slideShow${j});
+								pagenumdiv${j}.innerHTML = ``;
+								for (i = 1; i <= allpagenum${j}; i++) {
+									if (i == currentPagenum${j}) {
+										pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+									} else {
+										pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+									}
+								}
+								prevBtn${j}.style.visibility = 'visible';
+								backopprev${j}.style.visibility = 'visible';
+								if (currentPagenum${j} == allpagenum${j}) {
+									nextBtn${j}.style.visibility = 'hidden';
+									backopnext${j}.style.visibility = 'hidden';
+								}
+							} else {
+								/*moveSlide(0); 첫페이지*/
+								nextBtn${j}.style.visibility = 'hidden';
+								backopnext${j}.style.visibility = 'hidden';
+							}
+						});
+
+		if (currentPagenum${j} == 1) {
+			if (slideCount${j} <= slideShow${j}) {
+				nextBtn${j}.style.visibility = 'hidden';
+				backopnext${j}.style.visibility = 'hidden';
+			}else{
+			backopnext${j}.style.visibility = 'visible';
+				
+			}
+
+			prevBtn${j}.style.visibility = 'hidden';
+			backopprev${j}.style.visibility = 'hidden';
+		}
+
+		prevBtn${j}.addEventListener(
+						'click',
+						function() {
+							if (currentPagenum${j} <= allpagenum${j}) {
+								moveSlide${j}(currentIdx${j} - slideShow${j});
+								pagenumdiv${j}.innerHTML = ``;
+								for (i = 1; i <= allpagenum${j}; i++) {
+									if (i == currentPagenum${j}) {
+										pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+									} else {
+										pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+									}
+								}
+								nextBtn${j}.style.visibility = 'visible';
+								backopnext${j}.style.visibility = 'visible';
+								if (currentPagenum${j} == 1) {
+									prevBtn${j}.style.visibility = 'hidden';
+									backopprev${j}.style.visibility = 'hidden';
+								}
+							} else {
+								/*moveSlide(slideCount - slideShow);*/
+								prevBtn${j}.style.visibility = 'hidden';
+								prevBtn${j}.style.visibility = 'hidden';
+							}
+						});
+		</c:forEach>
 	</script>
 </body>
 </html>
