@@ -3,6 +3,7 @@ var button = document.getElementById("play");
 var playdiv = document.getElementById("playnpause");
 var volume = document.getElementById("volume");
 var volrange = document.getElementById("volrange");
+
 var back = document.getElementById('back');
 var videocon = document.getElementById('videocon');
 var videobar = document.getElementById('videobar');
@@ -10,21 +11,33 @@ var movieinfo = document.getElementById('movieinfo');
 var recommend = document.getElementById('recommend');
 
 if (video.paused) {
-		playnpause.innerHTML = `<i id="play" class="fas fa-pause color-w"></i>`;
-	} else {
-		playnpause.innerHTML = `<i id="play" class="fas fa-play color-w"></i>`;
-	}
-	
+	playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
+} else {
+	playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-play color-w"></i>`;
+}
+
 
 recommend.addEventListener("click", (e) => {
 	recommend.style.display = 'none';
-	
+
 });
 
-videocon.addEventListener("mouseover", function() {
+videocon.addEventListener("mousemove", function(e) {
 	back.style.display = 'block';
 	videobar.style.display = 'block';
-	movieinfo.style.display = 'none';
+	movieinfo.style.opacity = '0';
+	ybefore = e.clientY;
+	xbefore = e.clientX;
+	setTimeout(function() {
+		if (xbefore == e.clientX && ybefore == e.clientY) {
+			back.style.display = 'none';
+			videobar.style.display = 'none';
+			if (video.paused && movieinfo.style.opacity == '0' && recommend.style.display != 'block') {
+				movieinfo.style.opacity = '1';
+			}
+		}
+	}, 3000);
+
 });
 
 videocon.addEventListener("mouseout", function() {
@@ -41,37 +54,36 @@ function sound() {
 }
 
 function vidplay() {
-	
+
 	if (video.paused) {
 		video.play();
-		movieinfo.style.display = 'none';
-		playnpause.innerHTML = `<i id="play" class="fas fa-pause color-w"></i>`;
+		movieinfo.style.opacity = '0';
+		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
 	} else {
 		video.pause();
 		setTimeout(function() {
 			if (video.paused) {
-				if (recommend.style.display == 'none') {
-					movieinfo.style.display = 'block';
+				if (recommend.style.display != 'block') {
 					movieinfo.style.opacity = '1';
 				}
 			} else {
-				movieinfo.style.display = 'none';
+				movieinfo.style.opacity = '0';
 			}
 		}, 3000);
-		playnpause.innerHTML = `<i id="play" class="fas fa-play color-w"></i>`;
+		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-play color-w"></i>`;
 	}
 }
 
 function restart() {
 	if (video.paused) {
 		video.play();
-		playnpause.innerHTML = `<i id="play" class="fas fa-pause color-w"></i>`;
-		}
+		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
+	}
 	video.currentTime = 0;
 }
 
 function volshow() {
-	volume.innerHTML += `<input type="range" class="form-range" id="customRange1">`;
+	volume.innerHTML += `<input type="range" onclick="vidplay()" class="form-range" id="customRange1">`;
 }
 
 function skip(value) {
@@ -96,22 +108,4 @@ function PlayTime(e) {
 	document.getElementById("duration").innerHTML = Math.floor(video.duration);
 }
 
-video.addEventListener(
-	"timeupdate",
-	function() {
-		/*      var percent = Math.floor(100 / video.duration * video.currentTime);
-	   progressbar.getElementsByTagName("span")[0].innerHTML = percent;*/
-		progressbar.value = Math.floor(video.currentTime);
-		progressbar.max = Math.floor(video.duration);
-	},
-	false
-);
 console.log("${movie.movie_id}");
-
-/*function savecurrentTime() {
-var form = document.createElement("form");
-            form.setAttribute("method", "post");
-            form.setAttribute("action", "/kflix/browse/" + video.currentTime);
-            document.body.appendChild(form);
-            form.submit();
-}*/

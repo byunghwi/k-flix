@@ -13,11 +13,16 @@ import lombok.Data;
 
 public interface WatchService {
 	
+	// 뮤비 관련 쿼리 서비스
 	public List<MovieVO> getAllmovie();
 	
-	public List<WatchVO> getAllwatch();
+	public List<MovieVO> getmovieRanking();
 	
 	public MovieVO getmovie(int movie_id);
+	
+	
+	// 와치 관련 쿼리 서비스
+	public List<WatchVO> getAllwatch();
 	
 	public List<WatchVO> getSelectWatch(String email);
 	
@@ -29,6 +34,7 @@ public interface WatchService {
 	
 	public int deleteWatch(WatchVO watch);
 	
+	// 위시 관련 쿼리 서비스
 	public int createWish(WishVO wish);
 	
 	public List<WishVO> getSelectWish(String email);
@@ -36,6 +42,8 @@ public interface WatchService {
 	public int deleteWish(WishVO wish);
 	
 	public WishVO getSelectWishUser(String email, int movie_id);
+	
+	// 장르 관련 쿼리 서비스
 	
 	public List<Genre> getAllGenre();
 }

@@ -41,38 +41,42 @@
 
 
 
-		<div class="player">
+		<div class="player" onclick="vidplay()">
 			<video id="video" class="viewer" muted autoplay
 				controlslist="nodownload" poster="${movie.poster_path }">
 				<source src="${movie.video_path }" type="video/mp4">
 			</video>
+
 
 			<div id="videobar" style="display: hidden;">
 				<div class="progress">
 					<div class="progress__filled"></div>
 				</div>
 
-				<i id="restart" onclick="restart()" class=" fas fa-stop color-w"></i>
-				<div style="display: inline-block;" onclick="vidplay()"
-					id="playnpause" class="toggle"></div>
+				<div id="btns">
+					<i id="restart" onclick="restart()" class=" fas fa-stop color-w"></i>
+					<div style="display: inline-block;" onclick="vidplay()"
+						id="playnpause" class="toggle"></div>
 
-				<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
-				<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
+					<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
+					<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
 
-				<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
-				<div style="display: inline-block; margin-left: 189px" id="volume">
-					<!-- 	<i onclick="volshow()" id="volumeicon" class="fas fa-volume-up color-w"></i> -->
-					<input type="range" class="form-range" min="0" max="1" step="0.1"
-						id="volrange">
-				</div>
+					<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
+					<div style="display: inline-block; width: 1px;"></div>
+					<div style="display: inline-block;" id="volume">
+						<!-- 	<i onclick="volshow()" id="volumeicon" class="fas fa-volume-up color-w"></i> -->
+						<input type="range" class="form-range" min="0" max="1" step="0.1"
+							id="volrange">
+					</div>
 
-				<i onclick="openFullscreen()" class="fas fa-expand color-w"></i>
+					<i onclick="openFullscreen()" class="fas fa-expand color-w"></i>
 
-				<div style="display: inline-block;" id="playtime"
-					class="color-w font-s">
-					<div id="current"></div>
-					<div id="duration"></div>
-					<div></div>
+					<div style="display: inline-block;" id="playtime"
+						class="color-w font-s">
+						<div id="current"></div>
+						<div id="duration"></div>
+						<div></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -83,12 +87,12 @@
 			<h5 style="color: white;">시청 중인 콘텐츠</h5>
 			<h3 style="color: white;">${movie.movie_title }</h3>
 			<br>
-			<h5 style="width: 500px; color: white;">${movie.summary }</h5>
+			<h5 style="color: white;">${movie.summary }</h5>
 		</div>
 
 		<div id="recommend" style="display: none;">
-			<div class="container" style="text-align: center;">
-				<h5 style="text-align: left; margin-bottom: 25px;">추천 영상</h5>
+			<div class="container sizerecom" style="text-align: center;">
+				<h5 id="recomtittle" style="margin-bottom: 25px;">추천 영상</h5>
 				<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
 					<c:if
 						test="${movie.genre_id1 eq Allmovie.genre_id1 or movie.genre_id2 eq Allmovie.genre_id1 or 
@@ -122,59 +126,36 @@
 				</c:forEach>
 			</div>
 		</div>
-		<!-- Button trigger modal -->
-		<button id="start" type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#exampleModal" style="display: none;"></button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">시청이 완료되어, 처음부터 실행됩니다.</div>
-					<div class="modal-footer">
-						 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-		<button id="end" type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#exampleModal" style="display: none;"></button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">미디어 재생이 완료되었습니다.</div>
-					<div class="modal-footer">
-						 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
 
 	<script>
 	
+	
 			console.log("${movie.movie_id}");
 			console.log("${watching.watch_type}");
+			if (window.performance.navigation.type == 1) {
+				location.href = "/kflix/browse";
+			}else if (window.performance.navigation.type == 2) {
+				location.href = "/kflix/browse";
+			}else{
+				<c:if test="${not empty watching }">
+				<c:choose>
+				<c:when test="${watching.watch_type eq 'WATCHING'}">
+				video.currentTime = "${watching.view_point}";
+				</c:when>
+				<c:otherwise>
+				alert('시청이 완료되어, 처음부터 실행됩니다.');
+				video.currentTime = 0.00001;
+				video.muted = false;
+				video.play();
+				</c:otherwise>
+				</c:choose>
+				</c:if>
+			}
 			sound();
 			var video = document.getElementById('video');
-			var start = document.getElementById('start');
-			var end = document.getElementById('end');
 
 			const player = document.querySelector('.player'); 
 			const progress = player.querySelector('.progress'); 
@@ -214,20 +195,6 @@
 			
 			video.addEventListener('click', togglePlay);
 			
-			<c:if test="${not empty watching }">
-			<c:choose>
-			<c:when test="${watching.watch_type eq 'WATCHING'}">
-			video.currentTime = "${watching.view_point}";
-			</c:when>
-			<c:otherwise>
-			start.click();
-			video.currentTime = 0.00001;
-			video.muted = false;
-			video.play();
-			</c:otherwise>
-			</c:choose>
-			</c:if>
-
 			function savecurrentTime() {
 				<c:choose>
 				<c:when test="${empty watching }">
@@ -279,7 +246,7 @@
 
 			function event(e) {
 				recommend.style.display = 'block';
-				end.click();
+				alert('미디어 재생이 완료되었습니다.');
 				var data = {
 					watch_type : "WATCHED",
 					movie_id : "${movie.movie_id}",

@@ -13,6 +13,9 @@ public interface WatchMapper {
 
 	// 영화 전체 들고오기
 	public List<MovieVO> getAllmovie();
+	
+	// 영화 top10 들고오기
+	public List<MovieVO> getmovieRanking();
 
 	// 영화아이디 영화 검색
 	public MovieVO getmovie(int movie_id);

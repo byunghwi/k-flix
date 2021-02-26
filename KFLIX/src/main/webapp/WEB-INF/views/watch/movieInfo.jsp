@@ -303,6 +303,8 @@
 
 	<script src="/kflix/resources/js/watch/jsinfo.js"></script>
 	<script type="text/javascript">
+	
+
 		const postiondiv = document.getElementById('postiondiv');
 
 		window.onload = function() {
@@ -318,7 +320,11 @@
 		wish_lab.innerHTML = `<i class="fas fa-check color-w"></i>`;
 		</c:when>
 		<c:otherwise>
+
 		console.log("wish 없음");
+		wish_lab.innerHTML = `<i
+			class="fas fa-plus color-w"></i>`;
+
 		</c:otherwise>
 		</c:choose>
 

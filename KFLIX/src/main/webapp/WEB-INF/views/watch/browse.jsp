@@ -57,26 +57,25 @@
 	<div id="carouselExampleInterval" class="carousel slide"
 		style="height: 56.25vw; text-align: center;" data-bs-ride="carousel">
 		<div class="carousel-inner" style="height: 56.25vw;">
-			<div class="carousel-item active" data-bs-interval="1000">
+			<div class="carousel-item active" data-bs-interval="10000">
 				<img class="mainimg" alt="메인사진"
 					src="/kflix/resources/imgs/watch/runon1.png">
 			</div>
-			<div class="carousel-item" data-bs-interval="100">
+			<div class="carousel-item" data-bs-interval="10000">
 				<img class="mainimg" alt="로고"
 					src="/kflix/resources/imgs/watch/po.png">
 			</div>
 			<div class="carousel-item">
 				<img class="mainimg" alt="로고"
-					src="/kflix/resources/imgs/movie/poster/패치.png">
+					src="/kflix/resources/imgs/watch/po2.png">
 			</div>
 		</div>
 	</div>
 	<div id="list" class="container">
-		<div style="position: relative; top: -327px;">
+		<div style="position: relative; top: -360px;">
 
 
 			<div class="list container">
-
 				<c:if test="${not empty test.watch }">
 					<div class="sliderow1" style="top: 0px">
 						<h2 class="rowHeader1">"${login.email }"님이 시청 중인 콘텐츠</h2>
@@ -93,6 +92,7 @@
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="dis img1" alt="...">
 														<div class="videohover">
+															<div ></div>
 															<video class="video" muted autoplay loop
 																poster="${Allmovie.poster_path}">
 																<source src="${Allmovie.teaser_path}" type="video/mp4">
@@ -155,8 +155,39 @@
 					</div>
 				</c:if>
 
+				<div class="sliderow3" style="top: 76px">
+					<h2 class="rowHeader3">KFLIX의 TOP 10 콘텐츠</h2>
+					<div class="slide_wrapper3">
+						<ul class="slides3">
+							<c:forEach items="${Ranking }" var="Ranking" varStatus="status">
+								<li class="slideli3"><a class="atag"
+									href="<%=application.getContextPath()%>/browse/${Ranking.movie_id }">
+										<div class="atagdiv">
+											<img style="margin: 0;" src="${Ranking.poster_path }"
+												class="d-block dis img1" alt="...">
+											<div class="videohover">
 
-				<c:set var="i" value="2" />
+												<video class="video" muted autoplay loop
+													poster="${Ranking.poster_path}">
+													<source src="${Ranking.teaser_path}" type="video/mp4">
+												</video>
+											</div>
+										</div>
+								</a></li>
+							</c:forEach>
+						</ul>
+					</div>
+					<div class="pagenum3"></div>
+					<p class="controls3">
+						<span class="backopprev3"></span> <span class="backopnext3"></span>
+					</p>
+					<p class="controls3">
+						<span class="prev3"><i class="fas fa-chevron-left"></i></span> <span
+							class="next3"><i class="fas fa-chevron-right"></i></span>
+					</p>
+				</div>
+
+				<c:set var="i" value="3" />
 				<c:if test="${not empty movie_genre}">
 					<c:forEach items="${movie_genre }" var="movie_genre"
 						varStatus="status">
@@ -164,7 +195,7 @@
 						<c:forEach items="${test.genre }" var="genre" varStatus="status">
 							<c:if test="${movie_genre eq genre.genre_id}">
 								<c:set var="sum" value="${sum+1}" />
-								<div class="sliderow${i}" style="top: ${38+38*sum}px">
+								<div class="sliderow${i}" style="top: ${76+38*sum}px">
 									<h2 class="rowHeader${i}">${genre.genre_name }</h2>
 									<div class="slide_wrapper${i}">
 										<ul class="slides${i}">
@@ -175,7 +206,7 @@
 													<li class="slideli${i}"><a class="atag"
 														href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
 															<div class="atagdiv">
-																<img src="${Allmovie.poster_path }" class=" dis img1"
+																<img src="${Allmovie.poster_path }" class="dis img1"
 																	alt="...">
 																<div class="videohover">
 																	<video class="video" muted autoplay loop
@@ -209,11 +240,12 @@
 			</div>
 
 		</div>
+	</div>
 
-		<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
+	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
-		<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
-		<script type="text/javascript">
+	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
+	<script type="text/javascript">
 		console.log(${i});
 		
 		<c:forEach var="j" begin="1" end="${i}">
