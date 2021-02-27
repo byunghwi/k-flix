@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div class="d-flex justify-content-end">
-	<div class="input-group mb-3 justify-content-end search_label"> 
+	<div class="input-group mb-1 justify-content-end search_label"> 
 	<div class="search_select">
 		<select class="form-select" id="search_cols" name="searching_index">
 			<option value="" selected>선택</option>

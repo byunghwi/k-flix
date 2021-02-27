@@ -14,7 +14,7 @@
 	  </div>     
 	   
       <div class="modal-footer">
-       	<button type="button" class="btn btn-danger" data-bs-dismiss="modal">확인</button>
+       	<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="alertBtn">확인</button>
        </div>    
     </div>
   </div>

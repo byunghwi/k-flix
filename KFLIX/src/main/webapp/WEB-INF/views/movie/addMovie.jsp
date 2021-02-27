@@ -8,140 +8,169 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=2" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css?ver=1" />
 <meta charset="UTF-8">
 <title>영화 등록</title>
 </head>
 <style>
-	#thumbImg{
-		width: 150px; 
-		height: 70px;
+	#imgdiv{
+		width: 100%; 
+		height: 410px;
+	}
+	
+	#form01{
+		width: 35%;
+	}
+	
+	#form02{
+		width: 65%;
+	}
+	#thumbnail{
+		width: 100%; 
+		height: 100%;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	#addform{
+		width: 1200px;
+		background-color: white;
+		min-width: 1200px;
+	}
+	h1{
+		color: black;
 	}
 </style>
 <body>
 
-<div class="container pt-5">
-<h1>영화 등록 페이지</h1>
-
-<form action="./add" method="post" enctype="multipart/form-data">
-
-<div class="d-flex justify-content-center">
-<div class="container">
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="iG01_01">제목</span>
-	  <input type="text" name="movie_title" class="form-control" aria-label="Sizing example input" aria-describedby="iG01_01" required>
-	</div>
-	
-	<div class="input-group mb-3">
-	  <label class="input-group-text" for="iG01_02">연령</label>
-	  <select class="form-select" id="iG01_02" name="rating" required>
-	    <option selected>all</option>
-	    <option>12</option>
-	    <option>15</option>
-	    <option>19</option>
-	  </select>
-	</div>
-	
-	<div class="input-group mb-3">
-		<label class="input-group-text" for="dateform">개봉일</label>
-		<input type="date" class="form-control" name="movie_release" max="${today }" id="dateform" required/> <br />
-		<input type="hidden" name="reg_date" value="${today }" required/>
-	</div>
-
-	<div class="input-group mb-3">
-	  <label class="input-group-text" for="inputGroupSelect01">감독</label>
-	  <select name="director_id" class="form-select" id="inputGroupSelect01" required>
-	   <c:forEach var="dt" items="${director }" varStatus="status" >
-	  	 <option value="${dt.director_id }" >${dt.director_name }</option>
-	   </c:forEach>
-	  </select>
-	</div>
-	
-	<div class="input-group mb-3">
-	  <label class="input-group-text" for="inputGroupSelect01">배우</label>
-	  <c:forEach var="i" begin="1" end="3">
-		  <select name="actor_id${i }" required class="form-select" id="inputGroupSelect01" required>
-		   <c:forEach var="at" items="${actor }" varStatus="status">
-		    <option value="${at.actor_id }" >${at.actor_name }</option>
-		   </c:forEach>
-		  </select>
-	   </c:forEach>
-	</div>
-	
-	<div class="input-group mb-3">
-	  <label class="input-group-text" for="inputGroupSelect01">장르</label>
-	  <c:forEach var="i" begin="1" end="2">
-		  <select name="genre_id${i }" required class="form-select" id="inputGroupSelect01" required>
-		   <c:forEach var="gr" items="${genre }" varStatus="status">
-				<option value="${gr.genre_id }" >${gr.genre_name }</option>
-			</c:forEach>
-		  </select>
-	   </c:forEach>
-	</div>
-	
-	<div class="input-group mb-3">
-	  <label class="input-group-text" for="iG01_02">국가</label>
-	  <select class="form-select" id="iG01_02" name="country" required>
-	  	<option>한국</option>
-	  	<option>미국</option>
-	  	<option>외국</option>
-	  </select>
-
-</div>
-
-	<div class="input-group">
-	  <span class="input-group-text">줄거리</span>
-	  <textarea name="summary" rows="10" required class="form-control" aria-label="With textarea"></textarea>
-	</div>
-	
+	<form action="./add" method="post" enctype="multipart/form-data">
+<div class="container" id="addform">	
+	<div class="container pt-2">	
+		<div class="d-flex justify-content-between">
+			<div>
+				<h1>영화 등록 페이지</h1>
+			</div>
+			
+			<div class="d-flex justify-content-end">
+				<div>
+					<input type="submit" class="btn btn-primary" value="등록" />
+				</div>
+				<div class="ps-2">
+					<a href="./movieindex" class="btn btn-danger">취소</a>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
-
-<div class="container">
-
-
-	<div id="teaser_div" class="input-group mb-3 pt-5">
-		<label class="input-group-text" for="teaser_text">티저</label>
-		<input type="file" name="teaser" class="form-control"  id="teaser_text" 
-				accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="teaserCheck();" required/>
-	</div>
-	
-	<div id="video_div" class="input-group mb-3">
-		<label class="input-group-text" for="video_text">영화</label>
-		<input type="file" name="video"  class="form-control" id="video_text" 
-				accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="videoCheck();" required/>
-	</div>
-	
-	<div class="input-group mb-3">
-	  <span class="input-group-text" id="iG01_03">상영시간</span>
-	  <input type="text" name="play_time" min="15" max="300"
-	  		class="form-control" aria-label="Sizing example input" aria-describedby="iG01_03" required>
-	</div>
-	
-	<div id="poster_div" class="input-group mb-3">
-		<label class="input-group-text" for="poster_text">포스터</label>
-		<input type="file" name="poster" class="form-control" id="poster_text"
-				accept="image/png, image/jpeg, image/jpg" onchange="posterCheck(this);" required/>
-	</div>
-	
-	<div id="thumbnail"  class="pb-5">
+	<div class="d-flex justify-content-start">
+		<div class="container" id="form01">
+			<div class="input-group mb-3">
+			  <span class="input-group-text" id="iG01_01">제목</span>
+			  <input type="text" name="movie_title" class="form-control" aria-label="Sizing example input" aria-describedby="iG01_01" required>
+			</div>
+			
+			<div class="input-group mb-3">
+			  <label class="input-group-text" for="iG01_02">연령</label>
+			  <select class="form-select" id="iG01_02" name="rating" required>
+			    <option selected>all</option>
+			    <option>12</option>
+			    <option>15</option>
+			    <option>19</option>
+			  </select>
+			</div>
+			
+			<div class="input-group mb-3">
+				<label class="input-group-text" for="dateform">개봉일</label>
+				<input type="date" class="form-control" name="movie_release" max="${today }" id="dateform" required/> <br />
+				<input type="hidden" name="reg_date" value="${today }" required/>
+			</div>
 		
-	</div>
+			<div class="input-group mb-3">
+			  <label class="input-group-text" for="inputGroupSelect01">감독</label>
+			  <select name="director_id" class="form-select" id="inputGroupSelect01" required>
+			   <c:forEach var="dt" items="${director }" varStatus="status" >
+			  	 <option value="${dt.director_id }" >${dt.director_name }</option>
+			   </c:forEach>
+			  </select>
+			</div>
+			
+			<div class="input-group mb-3">
+			  <label class="input-group-text" for="inputGroupSelect01">배우</label>
+			  <c:forEach var="i" begin="1" end="3">
+				  <select name="actor_id${i }" required class="form-select" id="inputGroupSelect01" required>
+				   <c:forEach var="at" items="${actor }" varStatus="status">
+				    <option value="${at.actor_id }" >${at.actor_name }</option>
+				   </c:forEach>
+				  </select>
+			   </c:forEach>
+			</div>
+			
+			<div class="input-group mb-3">
+			  <label class="input-group-text" for="inputGroupSelect01">장르</label>
+			  <c:forEach var="i" begin="1" end="2">
+				  <select name="genre_id${i }" required class="form-select" id="inputGroupSelect01" required>
+				   <c:forEach var="gr" items="${genre }" varStatus="status">
+						<option value="${gr.genre_id }" >${gr.genre_name }</option>
+					</c:forEach>
+				  </select>
+			   </c:forEach>
+			</div>
+			
+			<div class="input-group mb-3">
+			  <label class="input-group-text" for="iG01_02">국가</label>
+			  <select class="form-select" id="iG01_02" name="country" required>
+			  	<option>한국</option>
+			  	<option>미국</option>
+			  	<option>외국</option>
+			  </select>
+		
+			<div id="poster_div" class="input-group mb-3 pt-3">
+				<label class="input-group-text" for="poster_text">포스터</label>
+				<input type="file" name="poster" class="form-control" id="poster_text"
+						accept="image/png, image/jpeg, image/jpg" onchange="posterCheck(this);" required/>
+			</div>
+		
+		
+			<div id="teaser_div" class="input-group mb-3 pt-2">
+				<label class="input-group-text" for="teaser_text">티저</label>
+				<input type="file" name="teaser" class="form-control"  id="teaser_text" 
+						accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="teaserCheck();" required/>
+			</div>
+			
+			<div id="video_div" class="input-group">
+				<label class="input-group-text" for="video_text">영화</label>
+				<input type="file" name="video"  class="form-control" id="video_text" 
+						accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="videoCheck();" required/>
+			</div>	
+			<div class="input-group mb-3">
+			  <span class="input-group-text" id="iG01_03">상영시간</span>
+			  <input type="text" name="play_time" min="15" max="300"
+			  		class="form-control" aria-label="Sizing example input" aria-describedby="iG01_03" required>
+			</div>
+			
 	
-	<div class="d-flex justify-content-end pt-5">
-		<div>
-			<input type="submit" class="btn btn-primary px-2" value="등록" />
 		</div>
-		<div class="pe-3 ps-3">
-			<a href="./movieindex" class="btn btn-danger px-2">취소</a>
+		</div>	
+
+		<div class="container" id="form02">
+			<div class="container">
+			
+				<div class="input-group">
+				  <span class="input-group-text">줄거리</span>
+				  <textarea name="summary" rows="10" required class="form-control" style="resize: none;" aria-label="With textarea"></textarea>
+				</div>
+	
+				<div id="imgdiv" class="my-2">
+					<div id="thumbnail" class="container" style="background-image: url('${realpath}');">
+					</div>	
+				</div>
+				
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 </form>
-</div>
 
 <%@include file="/resources/include/movie/alertModal.jsp"%>
 
@@ -152,7 +181,7 @@
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>		
-<script src="/kflix/resources/js/movie/inputfile.js?ver=20"></script>
+<script src="/kflix/resources/js/movie/inputfile.js?ver=22"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=30"></script>
 
 </body>

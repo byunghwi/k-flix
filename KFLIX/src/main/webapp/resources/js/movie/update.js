@@ -11,7 +11,7 @@ var thumb = $("div#thumbnail");
 var teaserName = $('#tName').val();
 var videoName = $('#vName').val();
 var posterName = $('#pName').val();
-var thumbimg = $('#thumbImg').attr("src");
+var thumbimg = $('#thumbImg').val();
 
 var playTime = $('input[name=play_time]').val();
 
@@ -36,11 +36,11 @@ function videoRes() {
 
 
 function posterRes() {
-	thumb.html('');
 	poster_div.html("");
 	poster_div.append('<label class="input-group-text" for="poster_text">포스터</label>');
 	poster_div.append('<input type="file" name="poster" class="form-control" id="poster_text" accept="image/png, image/jpeg, image/jpg" onchange="posterCheck();"/>');
-	thumb.append('<img id="thumbImg" src="' + thumbimg + '" alt="" />');
+	thumb.removeAttr('style');
+ 	thumb.attr('style', 'background-image: url("' + thumbimg + '");');
 	$('#pName').val(posterName);
 }
 
@@ -65,19 +65,14 @@ function posterCheck(e) {
 		 	
 			$('#pName').val(posterName);
 		 	 
-		 	thumb.html('');
-		 	thumb.append('<img id="thumbImg" src="' + thumbimg + '" alt="" />');
+				thumb.removeAttr('style');
+			 	thumb.attr('style', 'background-image: url("' + e.target.result + '");');
 		 	
 	    } else {
 	    	reader.onload = function (e) {
-				var thum = $("div#thumbnail");
-				var img = document.createElement("img"); 
-				img.setAttribute("src", e.target.result); 
-				img.setAttribute("width", '150px');
-				img.setAttribute("height", '70px');
 				
-				thum.html('');
-				thum.append(img);
+				thumb.removeAttr('style');
+			 	thumb.attr('style', 'background-image: url("' + e.target.result + '");');
 			}
 			reader.readAsDataURL(poster_text[0].files[0]);
 			

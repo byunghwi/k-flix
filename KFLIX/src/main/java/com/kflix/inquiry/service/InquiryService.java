@@ -23,4 +23,6 @@ public interface InquiryService {
 	public List<Inquiry> getAllInq();
 	
 	public List<Inquiry> getFindInq(String type, String reply_status);
+	
+	public boolean formRegExp(Inquiry inquiry);
 }

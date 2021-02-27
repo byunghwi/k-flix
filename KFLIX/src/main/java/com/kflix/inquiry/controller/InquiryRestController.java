@@ -41,13 +41,13 @@ public class InquiryRestController {
 		// inq 객체 보내서 메일보내기
 		boolean send = in_service.sendReplyMail(inquiry);
 		// inq 객체 보내서 db업데이트
-//		int result = in_service.updateReplyInq(inquiry);
-//		
-//		if(send && result == 1) {
-//			log.info("메일 저장 둘다 성공");
-//		} else if(result < 0) {
-//			log.info("DB 저장실패");
-//		}
+		int result = in_service.updateReplyInq(inquiry);
+		
+		if(send && result == 1) {
+			log.info("메일 저장 둘다 성공");
+		} else if(result < 0) {
+			log.info("DB 저장실패");
+		}
 		
 		// 통과하면 업데이트된 List<Inq>객체 반환
 		return in_service.getAllInq();

@@ -4,7 +4,7 @@
 //페이지 네이트
 function makePageNate(len, pnum, amount)	{
 		var page_size = 10;
-		var end_page = pnum % page_size == 0 ? parseInt(pnum / page_size) * size : parseInt(pnum / page_size + 1) * page_size; 
+		var end_page = pnum % page_size == 0 ? parseInt(pnum / page_size) * page_size : parseInt(pnum / page_size + 1) * page_size; 
 		var start_page = end_page - (page_size - 1);
 		var last_page = len % amount == 0 ? parseInt(len / amount) : parseInt(len / amount) + 1;
 		end_page = end_page > last_page ? last_page : end_page;

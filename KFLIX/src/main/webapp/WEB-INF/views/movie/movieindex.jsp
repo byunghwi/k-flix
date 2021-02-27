@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=2" />
 <meta charset="UTF-8">
 <title>영화 관리</title>
 </head>
@@ -20,64 +20,68 @@
 
 <%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
 <!-- 게시판 -->
-<div class="container pt-5" id="board">
-	<div class="d-flex justify-content-end">
-		<a href="./deletedMovie" class="btn btn-secondary btn-sm">삭제된 항목</a>
+
+
+<section id="movielist">
+	<div class="container pt-2" id="board">
+		<div class="d-flex justify-content-end">
+			<a href="./deletedMovie" class="btn btn-secondary btn-sm">삭제된 항목</a>
+		</div>
+		
+		<div class="d-flex justify-content-center text-dark">
+			<h1>영화 관리</h1>
+		</div>
+			
+		<div class="d-flex justify-content-between">
+			<div class="d-flex justify-content-start">
+				<span>
+					<a href="./addpage" class="btn btn-success">+ 추가</a>
+				</span>
+			
+			</div>
 	</div>
 	
-	<div class="d-flex justify-content-center">
-		<h1>영화 관리</h1>
-	</div>
+	<%@include file ="/resources/include/movie/searching.jsp" %>
 	
-<div class="d-flex justify-content-between">
-<div class="d-flex justify-content-start">
-	<span>
-		<a href="./addpage" class="btn btn-success">+ 추가</a>
-	</span>
+	</div> 
 
-</div>
-
-<%@include file ="/resources/include/movie/searching.jsp" %>
-
-</div> 
-
-<section style="padding-top: 20px;" id="movielist">
-<table class="table table-striped text-center align-middle" id="movietable">
-    <thead>
-	    <tr>
-		   	<th>ID</th>
-			<th>포스터</th>
-			<th>제목</th>
-			<th>감독</th>
-			<th>장르</th>
-			<th>상영시간</th>
-			<th>등록일</th>
-			<th>관리</th>
-	    </tr>
-  </thead>
-  <tbody>
-  	   <c:forEach items="${movie }" var="movie" varStatus="status">
-			<tr>
-				<td>${movie.movie_id }</td>
-				<td><img alt="사진" src="${movie.poster_path }"/></td>
-				<td>${movie.movie_title }</td>
-				<td>${movie.director_name }</td>
-				<td>${movie.genre_name1 } / ${movie.genre_name2 }</td>
-				<td>${movie.play_time }분</td>
-				<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
-				<td><a href="./updatepage/${movie.movie_id }" class="btn btn-primary">수정</a>
-					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-movieid="${movie.movie_id }" data-bs-target="#deletemodal">삭제</button>
-					<%-- <a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a> --%>
-				</td>
-			</tr>
-		</c:forEach>
-  </tbody>
-</table>
+	<table class="table table-striped text-center align-middle border-dark" id="movietable">
+	    <thead class="bg-dark text-light">
+		    <tr>
+			   	<th>#</th>
+				<th>포스터</th>
+				<th>제목</th>
+				<th>감독</th>
+				<th>장르</th>
+				<th>상영시간</th>
+				<th>등록일</th>
+				<th>관리</th>
+		    </tr>
+	  </thead>
+	  <tbody>
+	  	   <c:forEach items="${movie }" var="movie" varStatus="status">
+				<tr>
+					<td>${movie.movie_id }</td>
+					<td><img alt="사진" src="${movie.poster_path }"/></td>
+					<td>${movie.movie_title }</td>
+					<td>${movie.director_name }</td>
+					<td>${movie.genre_name1 } / ${movie.genre_name2 }</td>
+					<td>${movie.play_time }분</td>
+					<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
+					<td><a href="./updatepage/${movie.movie_id }" class="btn btn-primary">수정</a>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-movieid="${movie.movie_id }" data-bs-target="#deletemodal">삭제</button>
+						<%-- <a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a> --%>
+					</td>
+				</tr>
+			</c:forEach>
+	  </tbody>
+	</table>
+	
+	<%@include file ="/resources/include/movie/pagecode.jsp" %>
+	
 </section>
 
-<%@include file ="/resources/include/movie/pagecode.jsp" %>
 
-</div>
 
 <%@include file ="/resources/include/movie/enModal.jsp" %>
 
