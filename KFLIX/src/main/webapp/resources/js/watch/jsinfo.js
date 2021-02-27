@@ -15,10 +15,9 @@ wish_check.addEventListener("change", function() {
 	}
 });
 
-function iframeclose() {
-	console.log("왜이래");
+function parentiframeclose() {
 	parent.frameclose();
 }
 
-document.getElementById("frame").addEventListener("click", iframeclose);
-document.querySelector(".back").addEventListener("click", iframeclose);
+document.getElementById("frame").addEventListener("click", parentiframeclose);
+document.querySelector(".back").addEventListener("click", parentiframeclose);
