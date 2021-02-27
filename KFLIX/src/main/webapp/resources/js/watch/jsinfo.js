@@ -16,7 +16,8 @@ wish_check.addEventListener("change", function() {
 });
 
 function iframeclose() {
-	location.href = "/kflix/browse";
+	console.log("왜이래");
+	parent.frameclose();
 }
 
 document.getElementById("frame").addEventListener("click", iframeclose);

@@ -8,3 +8,9 @@ function framshow(movieId) {
 	infoframe.style.display = 'block';
 	body.style.overflow = 'hidden';
 }
+
+function frameclose(){
+	console.log("tlftof");
+	infoframe.style.display = 'none';
+	body.style.overflow = 'auto';
+}

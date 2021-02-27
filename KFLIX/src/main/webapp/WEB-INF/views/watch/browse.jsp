@@ -78,12 +78,16 @@
 					src="/kflix/resources/imgs/watch/runon1.png">
 			</div>
 			<div class="carousel-item" data-bs-interval="10000">
-				<img class="mainimg" alt="로고"
+				<img class="mainimg" alt="메인사진"
 					src="/kflix/resources/imgs/watch/po.png">
 			</div>
 			<div class="carousel-item">
-				<img class="mainimg" alt="로고"
+				<img class="mainimg" alt="메인사진"
 					src="/kflix/resources/imgs/watch/po2.png">
+			</div>
+			<div class="carousel-item">
+				<img class="mainimg" alt="메인사진"
+					src="/kflix/resources/imgs/watch/po3.png">
 			</div>
 		</div>
 	</div>
@@ -646,7 +650,7 @@
 				
 				backopnext${j} = document.querySelector('.backopnext${j}'), 
 				
-				slideWidth${j} = 250, 
+				slideWidth${j} = 300, 
 				slideMargin${j} = 10, 
 				slideShow${j} = 5, 
 				allpagenum${j} = Math.ceil(slideCount${j} / slideShow${j}), 
