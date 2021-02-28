@@ -30,7 +30,7 @@
 <body>
 
 	<div class="container flex-row nav-bar ">
-
+<%@include file="/WEB-INF/views/main/header.jsp" %>
 		<img class="logo" alt="로고"
 			src="/kflix/resources/imgs/watch/kflixlogo.png">
 

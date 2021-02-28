@@ -69,7 +69,7 @@ public class MemberController {
 
 	// 이메일 인증
 	@RequestMapping(value= "signUpConfirm", method = RequestMethod.GET)
-	 public ModelAndView signUpConfirm(@RequestParam String email, ModelAndView mav){
+	 public String signUpConfirm(@RequestParam String email, ModelAndView mav){
 	    
 		//email가 일치할경우 Member테이블 cert = 'Y' 업데이트
 	    System.out.println("[memberController] 이메일 인증 리턴 > " + email);
@@ -78,13 +78,10 @@ public class MemberController {
 		//업데이트 성공 시 
 		if(result != 0) {
 			System.out.println("[memberController] 이메일 인증 성공, db cert 업데이트");
-		    mav.addObject("display", "/view/member/signUp_confirm.jsp"); // key와 value를 담아 보낼 수 있다.
-		    mav.setViewName("/ticket/emailAuthSuccess"); // 어떤 페이지를 보여줄 것인지
-		}else {
-			System.out.println("[memberController] 이메일 인증 실패  db cert 업데이트 실패 ");
-			mav.setViewName("/ticket/emailAuthFail"); // 어떤 페이지를 보여줄 것인지
+		    return "redirect:/ticket/info"; // 어떤 페이지를 보여줄 것인지
 		}
 		
-		return mav;
+		System.out.println("[memberController] 이메일 인증 실패  db cert 업데이트 실패 ");
+		return "/ticket/emailAuthFail";
 	}
 }
