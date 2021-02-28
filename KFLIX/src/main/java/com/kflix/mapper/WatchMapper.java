@@ -25,6 +25,9 @@ public interface WatchMapper {
 
 	// 이메일별 이어보기 전체 들고오기
 	public List<WatchVO> getSelectWatch(String email);
+	
+	// 이메일별 이어보기 중 인거 전체 들고오기
+	public List<WatchVO> getSelectWatching(String email);
 
 	// 이메일의 영화 이어보기 들고오기
 	public WatchVO getSelectWatchUser(@Param("email") String email, @Param("movie_id") int movie_id);

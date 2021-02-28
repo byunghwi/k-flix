@@ -22,7 +22,6 @@
 	</select>
 	
 	<!-- 와치 -->
-
 	<select id="getAllwatch"
 		resultType="com.kflix.watch.domain.WatchVO">
 		SELECT * FROM watch
@@ -31,6 +30,11 @@
 	<select id="getSelectWatch"
 		resultType="com.kflix.watch.domain.WatchVO">
 		SELECT * FROM watch WHERE email = #{email }
+	</select>
+	
+	<select id="getSelectWatching"
+		resultType="com.kflix.watch.domain.WatchVO">
+		SELECT * FROM watch WHERE email = #{email } and watch_type = 'WATCHING'
 	</select>
 
 	<select id="getSelectWatchUser"

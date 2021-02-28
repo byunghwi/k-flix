@@ -35,7 +35,7 @@ import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
-import com.kflix.watch.domain.test;
+import com.kflix.watch.domain.Basket;
 import com.kflix.watch.service.WatchService;
 
 import lombok.AllArgsConstructor;
@@ -60,27 +60,28 @@ public class WatchController {
 	public String getbrowse(Model model, HttpSession session) {
 		
 		Member member = (Member) session.getAttribute("login");
-		test test = new test();
+		Basket basket = new Basket();
 		List<MovieVO> movies = watchservice.getAllmovie();
 		ArrayList<Integer> arr = new ArrayList<>();
 		for (MovieVO movie : movies) {
 			arr.add(movie.getGenre_id1());
 			arr.add(movie.getGenre_id2());
 		}
-		HashSet<Integer> arr2 = new HashSet<Integer>(arr);
-		ArrayList<Integer> movie_genre = new ArrayList<>(arr2);
+		HashSet<Integer> arr2 = new HashSet<Integer>(arr); //중복제거
+		ArrayList<Integer> movie_genre = new ArrayList<>(arr2); // 배열로 다시 넣기
 		
 		model.addAttribute("Ranking", watchservice.getmovieRanking());
 		
-		test.setMovie(watchservice.getAllmovie());
-		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
-		test.setWish(watchservice.getSelectWish(member.getEmail()));
-		test.setGenre(watchservice.getAllGenre());
+		basket.setMovie(watchservice.getAllmovie());
+		basket.setWatch(watchservice.getSelectWatch(member.getEmail()));
+		basket.setWatching(watchservice.getSelectWatching(member.getEmail()));
+		basket.setWish(watchservice.getSelectWish(member.getEmail()));
+		basket.setGenre(watchservice.getAllGenre());
 
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("test", test);
+		model.addAttribute("test", basket);
 		model.addAttribute("movie_genre", movie_genre);
 		model.addAttribute("email", member.getEmail());
 		return "/watch/browse";
@@ -90,7 +91,7 @@ public class WatchController {
 	public String btest(Model model, HttpSession session) {
 
 		Member member = (Member) session.getAttribute("login");
-		test test = new test();
+		Basket basket = new Basket();
 		List<MovieVO> movies = watchservice.getAllmovie();
 		ArrayList<Integer> arr = new ArrayList<>();
 		for (MovieVO movie : movies) {
@@ -101,22 +102,22 @@ public class WatchController {
 		ArrayList<Integer> movie_genre = new ArrayList<>(arr2);
 		
 		/* WatchController 에서 컬렉션sort로 중복 제거한 영화의 장르를 model에 담아서 */
-		test.setMovie(watchservice.getAllmovie());
-		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
-		test.setWish(watchservice.getSelectWish(member.getEmail()));
-		test.setGenre(watchservice.getAllGenre());
-		test.setGenre(watchservice.getAllGenre());
+		basket.setMovie(watchservice.getAllmovie());
+		basket.setWatch(watchservice.getSelectWatch(member.getEmail()));
+		basket.setWish(watchservice.getSelectWish(member.getEmail()));
+		basket.setGenre(watchservice.getAllGenre());
+		basket.setGenre(watchservice.getAllGenre());
 		model.addAttribute("movie_genre", movie_genre);
-		model.addAttribute("test", test);
+		model.addAttribute("test", basket);
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("email", member.getEmail());
 
-		System.out.println("[WatchController] test 객체 > " + test);
+		System.out.println("[WatchController] basket 객체 > " + basket);
 		System.out.println("===============================================================");
-		System.out.println("[WatchController] AllActor 객체 > " + test);
+		System.out.println("[WatchController] AllActor 객체 > " + basket);
 		System.out.println("===============================================================");
-		System.out.println("[WatchController] AllDirector 객체 > " + test);
+		System.out.println("[WatchController] AllDirector 객체 > " + basket);
 		System.out.println("===============================================================");
 
 		return (member.getEmail().equals("wmffff@naver.com")) ? "/watch/NewFile_kbh" : "/watch/NewFile";

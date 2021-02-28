@@ -18,7 +18,7 @@ function frameclose() {
 	infoframe.src = "";
 	infoframe.style.display = 'none';
 	body.style.overflow = 'auto';
-
+	location.href = "/kflix/browse";
 }
 
 function videoshow(movieId) {

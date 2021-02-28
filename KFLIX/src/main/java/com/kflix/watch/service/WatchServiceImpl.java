@@ -47,6 +47,11 @@ public class WatchServiceImpl implements WatchService {
 	}
 
 	@Override
+	public List<WatchVO> getSelectWatching(String email) {
+		return mapper.getSelectWatching(email);
+	}
+
+	@Override
 	public int createWatch(WatchVO watch) {
 		return mapper.createWatch(watch);
 	}

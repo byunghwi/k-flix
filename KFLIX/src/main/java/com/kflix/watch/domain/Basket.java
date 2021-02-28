@@ -11,10 +11,11 @@ import lombok.Data;
 
 @Data
 @Component
-public class test {
+public class Basket {
 
 	List<MovieVO> movie;
 	List<WatchVO> watch;
+	List<WatchVO> watching;
 	List<WishVO> wish; 
 	List<Genre> genre;
 	
