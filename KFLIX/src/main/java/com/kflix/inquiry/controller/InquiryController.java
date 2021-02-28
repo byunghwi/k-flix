@@ -31,18 +31,7 @@ public class InquiryController {
 	static {
 		PAGENATION = new PageNation(1, 10);
 	}
-	
-	@RequestMapping(value = "/inquiry",  method = RequestMethod.GET)
-	public String inqure(Model model, HttpSession session) {
-		log.info("============ 문의 페이지 ============");
-		
-		Member member = (Member) session.getAttribute("login");
-		log.info("로그인 된 이메일 : " + member.getEmail());
 
-		model.addAttribute("loginEmail", member.getEmail());
-		model.addAttribute("constraint", in_service.getInquiryCosntraint());
-		return "inquiry/form";
-	}
 	
 	@RequestMapping(value = "/inquiry",  method = RequestMethod.POST)
 	public String sendInquiry(Inquiry inquiry, RedirectAttributes rttr) {
