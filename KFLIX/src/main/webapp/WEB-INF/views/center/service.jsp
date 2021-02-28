@@ -29,11 +29,7 @@
 	.accordion-body{
 		background-color: rgb(231,241,255);
 	}
-	
-	.accordion-button{
-		font-weight: bolder;
-	}
-	
+
 	#headArea{
 		background-image: url('/kflix/resources/imgs/service/servicehead.jpg');
 		height: 200px;
@@ -61,6 +57,7 @@
 		color: gray;
 		text-decoration: none;
 	}
+	
 	#inqBtn, #titleArea{
 		background-color: lightgray;
 	}
@@ -94,7 +91,7 @@
 	  <h5 class="contentfont">재생 관련</h5>
 	  <c:forEach items="${help_play }" var="i" begin="0" end="${help_play.size()}" varStatus="status">
 	  <div class="accordion-item ps-3">
-		    <h6 class="accordion-header" id="play-head${status.index}">
+		    <h6 class="accordion-header contentfont" id="play-head${status.index}">
 		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
 		      		data-bs-target="#playcoll-${status.index}" aria-expanded="false" aria-controls="playcoll-${status.index}">
 		        ${i.help_title }
@@ -114,7 +111,7 @@
 	 	<h5 class="contentfont">이용 안내</h5>
  		<c:forEach items="${info }" var="i" begin="0" end="${info.size()}" varStatus="status">
 	  	<div class="accordion-item ps-3">
-		    <h6 class="accordion-header" id="info-head${status.index}">
+		    <h6 class="accordion-header contentfont" id="info-head${status.index}">
 		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
 		      		data-bs-target="#infocoll-${status.index}" aria-expanded="false" aria-controls="infocoll-${status.index}">
 		         ${i.help_title }
@@ -134,7 +131,7 @@
 	 	<h5 class="contentfont">결제 관련</h5>
  		<c:forEach items="${payment }" var="i" begin="0" end="${info.size()}" varStatus="status">
 	  	<div class="accordion-item ps-3">
-		    <h6 class="accordion-header" id="payment-head${status.index}">
+		    <h6 class="accordion-header contentfont" id="payment-head${status.index}">
 		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
 		      		data-bs-target="#paymentcoll-${status.index}" aria-expanded="false" aria-controls="paymentcoll-${status.index}">
 		         ${i.help_title }
@@ -154,7 +151,7 @@
 </div>
 	
 <div class="d-flex justify-content-end pb-5 pe-5 pt-3">
-	<a href="./FAQ" id="allhelp">전체보기&gt;&gt;</a>
+	<a href="./FAQ" id="allhelp"  class="contentfont">전체보기&gt;&gt;</a>
 </div>
 	
 	

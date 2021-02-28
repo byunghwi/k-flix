@@ -87,7 +87,7 @@
 	<div class="d-flex justify-content-end px-4 py-3">
 		<div>
 			<input type="submit" value="보내기" class="btn btn-secondary"/>
-			<a href="/kflix/service" class="btn btn-danger">취소</a>
+			<button onclick="cancleBtn();" class="btn btn-danger">취소</button>
 		</div>
 	</div>
 	</form>
@@ -110,6 +110,10 @@ var mail = $('#email');
 var type = $('#inquiry_type');
 var title = $('#inquiry_title');
 var content = $('#inquiry_content');
+
+function cancleBtn() {
+	window.history.back();
+}
 
 $('document').ready(function(){
 	document.getElementById('titleByteInfo').innerText = '0 / 100';

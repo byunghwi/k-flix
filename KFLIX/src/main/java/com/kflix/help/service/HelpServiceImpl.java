@@ -1,5 +1,7 @@
 package com.kflix.help.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -54,7 +56,11 @@ public class HelpServiceImpl implements HelpService {
 
 	@Override
 	public List<String> getAllHelpType() {
-		return hMapper.getAllHelpType();
+		String[] data = {"이용안내", "결제", "환불", "이용권", "계정", "컨텐츠", "재생", "서비스"};
+		List<String> constraints = new ArrayList<>();
+		Collections.addAll(constraints, data);
+		Collections.sort(constraints);
+		return constraints;
 	}
 
 	@Override
