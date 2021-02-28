@@ -26,6 +26,8 @@ public interface WatchService {
 	
 	public List<WatchVO> getSelectWatch(String email);
 	
+	public List<WatchVO> getSelectWatching(String email);
+	
 	public WatchVO getSelectWatchUser(String email, int movie_id);
 	
 	public int createWatch(WatchVO watch);

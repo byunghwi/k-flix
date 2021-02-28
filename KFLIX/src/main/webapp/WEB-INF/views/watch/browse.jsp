@@ -100,18 +100,19 @@
 
 
 			<div class="list container">
-				<c:if test="${not empty test.watch }">
-					<div class="sliderow1">
+				<c:if test="${not empty test.watching }">
+					<c:set var="i" value="${i+1}" />
+					<div class="sliderow${i} }">
 						<!--  style="top: 0px" -->
-						<h2 class="rowHeader1">"${login.email }"님이 시청 중인 콘텐츠</h2>
-						<div class="slide_wrapper1">
-							<ul class="slides1">
+						<h2 class="rowHeader${i}">"${login.email }"님이 시청 중인 콘텐츠</h2>
+						<div class="slide_wrapper${i}">
+							<ul class="slides${i}">
 								<c:forEach items="${test.watch }" var="watch" varStatus="status">
 									<c:forEach items="${test.movie }" var="Allmovie"
 										varStatus="status">
 										<c:if
 											test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
-											<li class="slideli1"><a
+											<li class="slideli${i}"><a
 												onclick="framshow(${watch.movie_id})" class="atag">
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
@@ -218,28 +219,29 @@
 								</c:forEach>
 							</ul>
 						</div>
-						<div class="pagenum1"></div>
-						<p class="controls1">
-							<span class="backopprev1"></span> <span class="backopnext1"></span>
+						<div class="pagenum${i}"></div>
+						<p class="controls${i}">
+							<span class="backopprev${i}"></span> <span class="backopnext${i}"></span>
 						</p>
-						<p class="controls1">
-							<span class="prev1"><i class="fas fa-chevron-left"></i></span> <span
-								class="next1"><i class="fas fa-chevron-right"></i></span>
+						<p class="controls${i}">
+							<span class="prev${i}"><i class="fas fa-chevron-left"></i></span>
+							<span class="next${i}"><i class="fas fa-chevron-right"></i></span>
 						</p>
 					</div>
 				</c:if>
 
 				<c:if test="${not empty test.wish}">
-					<div class="sliderow2">
+					<c:set var="i" value="${i+1}" />
+					<div class="sliderow${i} }">
 						<!--  style="top: 38px" -->
-						<h2 class="rowHeader2">내가 찜한 콘텐츠</h2>
-						<div class="slide_wrapper2">
-							<ul class="slides2">
+						<h2 class="rowHeader${i}">내가 찜한 콘텐츠</h2>
+						<div class="slide_wrapper${i}">
+							<ul class="slides${i}">
 								<c:forEach items="${test.wish }" var="wish" varStatus="status">
 									<c:forEach items="${test.movie }" var="Allmovie"
 										varStatus="status">
 										<c:if test="${wish.movie_id eq Allmovie.movie_id }">
-											<li class="slideli2"><a
+											<li class="slideli${i}"><a
 												onclick="framshow(${Allmovie.movie_id})" class="atag">
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
@@ -345,25 +347,26 @@
 
 							</ul>
 						</div>
-						<div class="pagenum2"></div>
-						<p class="controls2">
-							<span class="backopprev2"></span> <span class="backopnext2"></span>
+						<div class="pagenum${i}"></div>
+						<p class="controls${i}">
+							<span class="backopprev${i}"></span> <span class="backopnext${i}"></span>
 						</p>
-						<p class="controls2">
-							<span class="prev2"><i class="fas fa-chevron-left"></i></span> <span
-								class="next2"><i class="fas fa-chevron-right"></i></span>
+						<p class="controls${i}">
+							<span class="prev${i}"><i class="fas fa-chevron-left"></i></span>
+							<span class="next${i}"><i class="fas fa-chevron-right"></i></span>
 						</p>
 					</div>
 				</c:if>
 
-				<div class="sliderow3">
+				<c:set var="i" value="${i+1}" />
+				<div class="sliderow${i} }">
 					<!--  style="top: 76px" -->
-					<h2 class="rowHeader3">KFLIX의 TOP 10 콘텐츠</h2>
-					<div class="slide_wrapper3">
-						<ul class="slides3">
+					<h2 class="rowHeader${i}">KFLIX의 TOP 10 콘텐츠</h2>
+					<div class="slide_wrapper${i}">
+						<ul class="slides${i}">
 							<c:forEach items="${Ranking }" var="Ranking" varStatus="status">
-								<li class="slideli3"><a
-												onclick="framshow(${Ranking.movie_id})" class="atag">
+								<li class="slideli${i}"><a
+									onclick="framshow(${Ranking.movie_id})" class="atag">
 										<div class="atagdiv">
 											<img style="margin: 0;" src="${Ranking.poster_path }"
 												class="d-block dis img1" alt="...">
@@ -464,17 +467,16 @@
 							</c:forEach>
 						</ul>
 					</div>
-					<div class="pagenum3"></div>
-					<p class="controls3">
-						<span class="backopprev3"></span> <span class="backopnext3"></span>
+					<div class="pagenum${i}"></div>
+					<p class="controls${i}">
+						<span class="backopprev${i}"></span> <span class="backopnext${i}"></span>
 					</p>
-					<p class="controls3">
-						<span class="prev3"><i class="fas fa-chevron-left"></i></span> <span
-							class="next3"><i class="fas fa-chevron-right"></i></span>
+					<p class="controls${i}">
+						<span class="prev${i}"><i class="fas fa-chevron-left"></i></span>
+						<span class="next${i}"><i class="fas fa-chevron-right"></i></span>
 					</p>
 				</div>
 
-				<c:set var="i" value="3" />
 				<c:if test="${not empty movie_genre}">
 					<c:forEach items="${movie_genre }" var="movie_genre"
 						varStatus="status">
@@ -492,7 +494,7 @@
 												<c:if
 													test="${Allmovie.genre_id1 eq genre.genre_id or Allmovie.genre_id2 eq genre.genre_id }">
 													<li class="slideli${i}"><a
-												onclick="framshow(${Allmovie.movie_id})" class="atag">
+														onclick="framshow(${Allmovie.movie_id})" class="atag">
 															<div class="atagdiv">
 																<img src="${Allmovie.poster_path }" class="dis img1"
 																	alt="...">
@@ -619,7 +621,9 @@
 		</div>
 
 	</div>
-			<iframe id="infoframe" name="browse" src="" width="400px" height="300px"  allowTransparency="true" style="filter: chroma(color=#999999)"></iframe>
+	<iframe id="infoframe" name="browse" src="" width="400px"
+		height="300px" allowTransparency="true"
+		style="filter: chroma(color = #999999)"></iframe>
 
 
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
@@ -628,8 +632,6 @@
 	<script type="text/javascript">
 		console.log(${i});
 
-
-		
 		<c:forEach var="j" begin="1" end="${i}">
 			console.log(${j});
 			
@@ -648,7 +650,7 @@
 				
 				backopprev${j} = document.querySelector('.backopprev${j}'),
 				
-				backopnext${j} = document.querySelector('.backopnext${j}'), 
+				backopnext${j} = document.querySelector('.backopnext${j}'),
 				
 				slideWidth${j} = 300, 
 				slideMargin${j} = 10, 

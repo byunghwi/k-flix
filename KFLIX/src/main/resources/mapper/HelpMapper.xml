@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="selectAllHelp" resultType="com.kflix.help.domain.Help">
-		SELECT * FROM help WHERE help_status = #{status} ORDER BY help_id DESC
+		SELECT * FROM help WHERE help_status = #{status} ORDER BY help_type
 	</select>
 
 	<select id="selectAllHelpByType" resultType="com.kflix.help.domain.Help">

@@ -35,6 +35,7 @@ public class InquiryServiceImpl implements InquiryService {
 		String[] data = {"결제문의", "환불문의", "이용권문의", "계정문의", "컨텐츠문의", "영상문의", "서비스문의"};
 		List<String> constraints = new ArrayList<>();
 		Collections.addAll(constraints, data);
+		Collections.sort(constraints);
 		return constraints;
 	}
 
