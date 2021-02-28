@@ -143,7 +143,7 @@
           </div>
           <div class="mb-3">
             <label for="hcontent" class="col-form-label">내용</label>
-            <textarea class="form-control" name="help_content" id="hcontent" rows="10" style="resize: none;" required></textarea>
+            <textarea class="form-control" name="help_content" id="hcontent" rows="10"  placeholder="A.XXX" style="resize: none;" required></textarea>
           </div>
         </form>
       </div>
@@ -318,6 +318,11 @@ function modalBtn() {
 			infoMsg("카테고리를 설정 해주세요");
 			return;
 			
+		} else if(data.help_title == ''){
+			$('#processModal').modal("hide");
+			infoMsg("제목을 채워주세요");
+			return;
+			
 		} else if (data.help_title.substring(0, 2) != 'Q.') {
 			$('#processModal').modal("hide");
 			infoMsg("제목의 양식을 지켜주세요. <br> ex) Q.XXX XXX");
@@ -328,7 +333,11 @@ function modalBtn() {
 			infoMsg("내용을 채워주세요");
 			return;
 			
-		} 
+		} else if(data.help_content.substring(0, 2) != 'A.'){
+			$('#processModal').modal("hide");
+			infoMsg("내용의 양식을 지켜주세요. <br> ex) A.XXXXXXX");
+			return;
+		}
 		
 		if (btnVal == '추가'){
 			type = "POST"
