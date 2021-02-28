@@ -80,7 +80,7 @@
 						<div>
 							<div style="float: left;">
 								<div style="width: 500px;">
-									<h6 style="line-height: 145%;">${movie.summary}</h6>
+									<h6 style="line-height: 145%; width: 460px;">${movie.summary}</h6>
 								</div>
 							</div>
 							<table id="infotable1" style="font-size: 16px;">
