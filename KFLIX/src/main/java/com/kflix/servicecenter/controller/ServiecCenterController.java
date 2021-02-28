@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kflix.help.service.HelpService;
 import com.kflix.inquiry.service.InquiryService;
 import com.kflix.member.domain.Member;
+import com.kflix.util.pagenation.domain.PageNation;
 
 import lombok.extern.log4j.Log4j;
 
@@ -26,6 +27,12 @@ public class ServiecCenterController {
 
 	static final char ENABLED = 'Y';
 	static final char DISABLED = 'N';
+	
+	static final PageNation PAGENATION;
+	static {
+		PAGENATION = new PageNation(1, 10);
+	}
+
 	
 	@RequestMapping("/service")
 	public String serviecCenter(Model model, HttpSession session) {
@@ -56,8 +63,18 @@ public class ServiecCenterController {
 	
 	
 	@RequestMapping(value="/FAQ", method = RequestMethod.GET)
-	public String inqureUserView() {
+	public String inqureUserView(Model model, HttpSession session) {
+		log.info("============= inqureUserView ==========");
 		
+		Member member = (Member) session.getAttribute("login");
+		
+		log.info("로그인 된 이메일 : " + member.getEmail());
+		
+		model.addAttribute("page", PAGENATION.getPage());
+		model.addAttribute("amount", PAGENATION.getAmount());
+		model.addAttribute("total", help_service.getCntHelpList(ENABLED));
+		model.addAttribute("inq", help_service.getPageHelp(PAGENATION, ENABLED));
+		model.addAttribute("category", help_service.getAllHelpType());
 		return "help/userview";
 	}
 }
