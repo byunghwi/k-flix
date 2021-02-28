@@ -9,14 +9,22 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" href="/kflix/resources/css/genre/genre.css" />
-
+<style>
+	#actorlist{
+		width: 1200px;
+		max-width: 1200px;
+		min-width: 1200px;
+	
+	}
+	
+</style>
 <meta charset="UTF-8">
 <title>배우</title>
 </head>
 <body>
 
 <%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
-
+<section id="actorlist">
 <div class="container pt-5">
 	<div class="d-flex justify-content-end">
 		<a href="./deletedActor" type="button" class="btn btn-secondary text-light btn-sm">삭제된 항목</a>
@@ -44,9 +52,9 @@
 		</div>
 	</div>
 </div>
-<section id="actorlist">
-	<table class="table table-striped text-center align-middle" id="actortable">
-		 <thead>
+
+	<table class="table table-striped text-center align-middle border-dark" id="actortable">
+		 <thead class="bg-dark text-light">
 			<tr>
 				<th>#</th>
 				<th>이름</th>
@@ -68,10 +76,12 @@
 			</c:forEach>
 		</tbody>
 	</table>
-</section>
 </div>
 
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
+
+</section>
+
 <%@include file ="/resources/include/actor/enabledModal.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
