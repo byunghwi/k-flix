@@ -156,7 +156,6 @@ ul {
 
 body { width:100%; position: fixed; }
  */
-
 .atagdiv {
 	display: inline-block;
 	position: relative;
@@ -178,12 +177,15 @@ body { width:100%; position: fixed; }
 	position: fixed;
 	top: 0;
 	z-index: 100;
-	height: -webkit-fill-available;
+	height: 100%;
 	display: none;
-	border: 1px solid white; 
+	border: 1px solid white;
 }
 
-#infoframe::-webkit-scrollbar { display:none; }
+#infoframe::-webkit-scrollbar {
+	display: none;
+}
+
 #modalbackground {
 	position: absolute;
 	display: none;
@@ -210,6 +212,7 @@ body { width:100%; position: fixed; }
 	z-index: 100;
 	overflow: hidden;
 	box-shadow: 0 0 11px black;
+	cursor: pointer;
 }
 
 .modalimg {
@@ -225,6 +228,7 @@ body { width:100%; position: fixed; }
 .modalimg:hover {
 	opacity: 0;
 	visibility: hidden;
+	cursor: pointer;
 }
 
 .video {
@@ -246,6 +250,7 @@ body { width:100%; position: fixed; }
 	top: 0;
 	left: 0;
 	background-color: #141414;
+	cursor: pointer;
 }
 
 th, td {
@@ -293,6 +298,7 @@ th, td {
 .pagehoveron {
 	color: white;
 	padding: 1px;
+	cursor: pointer;
 }
 
 [class^="slideli"]:not(:last-child) {
@@ -303,6 +309,7 @@ th, td {
 .atag:hover .videohover {
 	opacity: 1;
 	visibility: visible;
+	cursor: pointer;
 }
 
 a:link {
@@ -318,6 +325,7 @@ a:visited {
 a:hover {
 	color: white;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 a:active {
@@ -367,6 +375,7 @@ a:active {
 	color: white;
 	font-size: 50px;
 	padding-top: 50px;
+	cursor: pointer;
 }
 
 [class^="backop"] {

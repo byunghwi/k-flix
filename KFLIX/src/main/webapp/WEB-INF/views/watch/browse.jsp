@@ -239,8 +239,8 @@
 									<c:forEach items="${test.movie }" var="Allmovie"
 										varStatus="status">
 										<c:if test="${wish.movie_id eq Allmovie.movie_id }">
-											<li class="slideli2"><a class="atag"
-												href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+											<li class="slideli2"><a
+												onclick="framshow(${Allmovie.movie_id})" class="atag">
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="d-block dis img1" alt="...">
@@ -362,8 +362,8 @@
 					<div class="slide_wrapper3">
 						<ul class="slides3">
 							<c:forEach items="${Ranking }" var="Ranking" varStatus="status">
-								<li class="slideli3"><a class="atag"
-									href="<%=application.getContextPath()%>/browse/${Ranking.movie_id }">
+								<li class="slideli3"><a
+												onclick="framshow(${Ranking.movie_id})" class="atag">
 										<div class="atagdiv">
 											<img style="margin: 0;" src="${Ranking.poster_path }"
 												class="d-block dis img1" alt="...">
@@ -491,8 +491,8 @@
 												varStatus="status">
 												<c:if
 													test="${Allmovie.genre_id1 eq genre.genre_id or Allmovie.genre_id2 eq genre.genre_id }">
-													<li class="slideli${i}"><a class="atag"
-														href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+													<li class="slideli${i}"><a
+												onclick="framshow(${Allmovie.movie_id})" class="atag">
 															<div class="atagdiv">
 																<img src="${Allmovie.poster_path }" class="dis img1"
 																	alt="...">
@@ -617,9 +617,9 @@
 			</div>
 
 		</div>
-			<iframe id="infoframe" src="" width="400px" height="300px"  allowTransparency="true" style="filter: chroma(color=#999999)"></iframe>
 
 	</div>
+			<iframe id="infoframe" name="browse" src="" width="400px" height="300px"  allowTransparency="true" style="filter: chroma(color=#999999)"></iframe>
 
 
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->

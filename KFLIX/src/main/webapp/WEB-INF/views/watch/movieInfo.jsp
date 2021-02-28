@@ -22,8 +22,8 @@
 	<div id="frame">
 		<div id="postiondiv" class="container postiondiv">
 
-				<a href="<%=application.getContextPath()%>/browse"><i
-			class="fas fa-arrow-left back"></i></a>
+			<a href="<%=application.getContextPath()%>/browse"><i
+				class="fas fa-arrow-left back"></i></a>
 			<div id="boxsha">
 
 				<video id="video" muted autoplay loop poster="${movie.poster_path}">
@@ -34,15 +34,11 @@
 
 
 			<div id="menubar" class="container" style="width: auto;">
-				<a
-					href="<%=application.getContextPath()%>/browse/watch/${movie.movie_id }">
-					<div id="btn" class="disin">
 
-						<i class="fas fa-play"></i> 재생
-
-
-					</div>
-				</a>
+				<div id="btn" onclick="parentvideoshow(${movie.movie_id})"
+					class="disin">
+					<i class="fas fa-play"></i> 재생
+				</div>
 				<div class="container" style="display: inline-block; width: auto">
 					<input id="wish_check" class="disnone" type="checkbox"> <label
 						for="wish_check" id="wish" class="ru disin"> <label
@@ -83,8 +79,8 @@
 						</c:choose>
 						<div>
 							<div style="float: left;">
-								<div style="width: 500px">
-									<h6>${movie.summary}</h6>
+								<div style="width: 500px;">
+									<h6 style="line-height: 145%;">${movie.summary}</h6>
 								</div>
 							</div>
 							<table id="infotable1" style="font-size: 16px;">
@@ -147,10 +143,10 @@
 									movie.genre_id1 eq Allmovie.genre_id2 or movie.genre_id2 eq Allmovie.genre_id2 }">
 
 									<c:if test="${movie.movie_id != Allmovie.movie_id}">
+										<!-- 비슷한 콘텐츠 누르면 다른 frame띄우기 -->
 										<div class="movie_contents">
-
 											<a id="atag"
-												href="<%=application.getContextPath()%>/browse/${Allmovie.movie_id }">
+												onclick="parentframechange(${Allmovie.movie_id })">
 												<div style="position: relative;">
 													<img
 														style="width: 100%; height: 130px; border-radius: 2% 2% 0 0;"
@@ -307,11 +303,11 @@
 	<script type="text/javascript">
 		const postiondiv = document.getElementById('postiondiv');
 
-		window.onload = function() {
+		/* window.onload = function() {
 			console.log("window onload ");
 			postiondiv.style.opacity = '1';
 			postiondiv.style.visibility = 'visible';
-		}
+		} */
 
 		<c:choose>
 		<c:when test="${not empty getwish }">

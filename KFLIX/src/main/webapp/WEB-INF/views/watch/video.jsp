@@ -32,20 +32,20 @@
 	</button> -->
 
 		<a onclick="savecurrentTime()"
-			href="<%=application.getContextPath()%>/browse/${movie.movie_id }">
-			<i style="display: hidden;" id="back"
+			href="<%=application.getContextPath()%>/browse"> <i
+			style="display: hidden;" id="back"
 			class="fas fa-arrow-left color-w relative"> <span
 				style="font-size: 18px; vertical-align: middle;"> 뒤로가기 </span>
 		</i>
 		</a>
 
+		<video id="video" class="viewer" muted autoplay
+			controlslist="nodownload" poster="${movie.poster_path }">
+			<source src="${movie.video_path }" type="video/mp4">
+		</video>
 
 
 		<div class="player" onclick="vidplay()">
-			<video id="video" class="viewer" muted autoplay
-				controlslist="nodownload" poster="${movie.poster_path }">
-				<source src="${movie.video_path }" type="video/mp4">
-			</video>
 
 
 			<div id="videobar" style="display: hidden;">
@@ -136,7 +136,7 @@
 			console.log("${movie.movie_id}");
 			console.log("${watching.watch_type}");
 			if (window.performance.navigation.type == 1) {
-				location.href = "/kflix/browse";
+				//새로고침
 			}else if (window.performance.navigation.type == 2) {
 				location.href = "/kflix/browse";
 			}else{
@@ -156,7 +156,6 @@
 			}
 			sound();
 			var video = document.getElementById('video');
-
 			const player = document.querySelector('.player'); 
 			const progress = player.querySelector('.progress'); 
 			const progressBar = player.querySelector('.progress__filled');

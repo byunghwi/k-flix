@@ -144,7 +144,7 @@ a:active {
 	width: 100%;
 	height: 100%;
 	color: white;
-	background-color: rgba(87, 87, 87, 0.6);
+	background-color: rgba(0, 0, 0, 0.5);
 	padding: 12em;
 	opacity: 0;
 }
@@ -157,7 +157,7 @@ a:active {
 	width: 100%;
 	height: 100%;
 	color: white;
-	background-color: rgba(87, 87, 87, 0.6);
+	background-color: rgba(0, 0, 0, 0.5);
 	display: none;
 	padding: 0;
 }
@@ -289,7 +289,7 @@ input[type=range]::-webkit-slider-thumb {
 @media only screen and (min-width:1380px) {
 	#btns>*:not(:last-child) {
 		font-size: 27px;
-		padding: 0 60px;
+		padding:0 54px;
 	}
 	.fa-pause, .fa-pause {
 		font-size: 27px;
