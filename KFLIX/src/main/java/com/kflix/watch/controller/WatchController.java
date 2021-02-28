@@ -69,7 +69,6 @@ public class WatchController {
 		}
 		HashSet<Integer> arr2 = new HashSet<Integer>(arr);
 		ArrayList<Integer> movie_genre = new ArrayList<>(arr2);
-		System.err.println(movie_genre);
 		
 		model.addAttribute("Ranking", watchservice.getmovieRanking());
 		
@@ -100,7 +99,6 @@ public class WatchController {
 		}
 		HashSet<Integer> arr2 = new HashSet<Integer>(arr);
 		ArrayList<Integer> movie_genre = new ArrayList<>(arr2);
-		System.err.println(movie_genre);
 		
 		/* WatchController 에서 컬렉션sort로 중복 제거한 영화의 장르를 model에 담아서 */
 		test.setMovie(watchservice.getAllmovie());

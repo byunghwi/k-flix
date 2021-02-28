@@ -15,7 +15,7 @@ if (video.paused) {
 } else {
 	playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-play color-w"></i>`;
 }
-
+video.volume = '0.5';
 
 recommend.addEventListener("click", (e) => {
 	recommend.style.display = 'none';
@@ -36,7 +36,7 @@ videocon.addEventListener("mousemove", function(e) {
 				movieinfo.style.opacity = '1';
 			}
 		}
-	}, 3000);
+	}, 5000);
 
 });
 
@@ -69,9 +69,10 @@ function vidplay() {
 			} else {
 				movieinfo.style.opacity = '0';
 			}
-		}, 3000);
+		}, 5000);
 		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-play color-w"></i>`;
 	}
+	recommend.style.display = 'none';
 }
 
 function restart() {

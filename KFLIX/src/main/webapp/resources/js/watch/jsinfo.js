@@ -15,9 +15,39 @@ wish_check.addEventListener("change", function() {
 	}
 });
 
-function parentiframeclose() {
-	parent.frameclose();
+window.onload = function() {
+	parent.bodyoverflow();
 }
 
-document.getElementById("frame").addEventListener("click", parentiframeclose);
-document.querySelector(".back").addEventListener("click", parentiframeclose);
+function parentvideoshow(movieId) {
+	parent.videoshow(movieId);
+}
+
+function parentframechange(movieId) {
+	parent.framechange(movieId);
+}
+
+
+document.querySelector("body").addEventListener("click", function() {
+	console.log("바디");
+});
+
+document.getElementById("frame").addEventListener("click", function parentiframeclose(e) {
+	console.log(parent);
+	parent.frameclose();
+	/*	document.getElementById('postiondiv').style.opacity = '0';
+		document.getElementById('postiondiv').style.visibility = 'hidden';*/
+	e.stopPropagation();
+}, false);
+
+document.getElementById("postiondiv").addEventListener("click", function parentiframeclose(e) {
+	e.stopPropagation();
+}, false);
+
+document.querySelector(".back").addEventListener("click", function parentiframeclose(e) {
+	console.log(parent);
+	parent.frameclose();
+	/*	document.getElementById('postiondiv').style.opacity = '0';
+		document.getElementById('postiondiv').style.visibility = 'hidden';*/
+	e.stopPropagation();
+}, false);
