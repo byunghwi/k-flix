@@ -18,29 +18,37 @@ public class WatchServiceImpl implements WatchService {
 
 	WatchMapper mapper;
 	
+	// 뮤비
 	@Override
 	public List<MovieVO> getAllmovie() {
 		return mapper.getAllmovie();
+	}
+
+	@Override
+	public List<MovieVO> getmovieRanking() {
+		return mapper.getmovieRanking();
 	}
 	
 	@Override
 	public MovieVO getmovie(int movie_id) {
 		return mapper.getmovie(movie_id);
 	}
-
-	@Override
-	public int createWatch(WatchVO watch) {
-		return mapper.createWatch(watch);
-	}
-
+	
+	// 와치
+	
 	@Override
 	public List<WatchVO> getAllwatch() {
 		return mapper.getAllwatch();
 	}
-
+	
 	@Override
 	public List<WatchVO> getSelectWatch(String email) {
 		return mapper.getSelectWatch(email);
+	}
+
+	@Override
+	public int createWatch(WatchVO watch) {
+		return mapper.createWatch(watch);
 	}
 
 	@Override
@@ -57,7 +65,14 @@ public class WatchServiceImpl implements WatchService {
 	public WatchVO getSelectWatchUser(String email, int movie_id) {
 		return mapper.getSelectWatchUser(email, movie_id);
 	}
-
+	
+	// 위시
+	
+	@Override
+	public List<WishVO> getSelectWish(String email) {
+		return mapper.getSelectWish(email);
+	}
+	
 	@Override
 	public int createWish(WishVO wish) {
 		return mapper.createWish(wish);
@@ -67,20 +82,17 @@ public class WatchServiceImpl implements WatchService {
 	public int deleteWish(WishVO wish) {
 		return mapper.deleteWish(wish);
 	}
-	
-	@Override
-	public List<WishVO> getSelectWish(String email) {
-		return mapper.getSelectWish(email);
-	}
-	
 
 	@Override
 	public WishVO getSelectWishUser(String email, int movie_id) {
 		return mapper.getSelectWishUser(email, movie_id);
 	}
+	
+	// 장르
 
 	@Override
 	public List<Genre> getAllGenre() {
 		return mapper.getAllGenre();
 	}
+
 }

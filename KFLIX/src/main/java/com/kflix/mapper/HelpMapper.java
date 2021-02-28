@@ -32,5 +32,5 @@ public interface HelpMapper {
 	
 	List<String> getAllHelpType();
 	
-	List<String> getHelpWithRownum(String type);
+	List<Help> getHelpWithRownum(String type);
 }

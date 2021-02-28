@@ -58,7 +58,7 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 	@Override
-	public List<String> getHelpWithRownum(String type) {
+	public List<Help> getHelpWithRownum(String type) {
 		return hMapper.getHelpWithRownum(type);
 	}
 

@@ -4,15 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kflix.mapper.WatchMapper">
 
+
+	<!-- 뮤비 -->
 	<select id="getAllmovie"
 		resultType="com.kflix.watch.domain.MovieVO">
 		SELECT * FROM movie
+	</select>
+	
+	<select id="getmovieRanking"
+		resultType="com.kflix.watch.domain.MovieVO">
+		<![CDATA[SELECT * FROM movie WHERE ROWNUM <= 10 ORDER BY MOVIE_RANK DESC]]>
 	</select>
 
 	<select id="getmovie"
 		resultType="com.kflix.watch.domain.MovieVO">
 		SELECT * FROM movie WHERE movie_id = #{movie_id }
 	</select>
+	
+	<!-- 와치 -->
 
 	<select id="getAllwatch"
 		resultType="com.kflix.watch.domain.WatchVO">
@@ -29,12 +38,6 @@
 		SELECT * FROM watch WHERE email = #{email } and movie_id =
 		#{movie_id }
 	</select>
-
-	<select id="getAllGenre"
-		resultType="com.kflix.genre.domain.Genre">
-		SELECT * FROM genre
-	</select>
-
 
 	<insert id="createWatch">
 		INSERT INTO watch VALUES (
@@ -62,6 +65,7 @@
 		= #{movie_id}
 	</delete>
 
+	<!-- 위시 -->
 	<select id="getSelectWish"
 		resultType="com.kflix.watch.domain.WishVO">
 		SELECT * FROM wish WHERE email = #{email }
@@ -86,5 +90,12 @@
 		WHERE email = #{email} and movie_id =
 		#{movie_id}
 	</delete>
+
+	<!-- 장르 -->
+
+	<select id="getAllGenre"
+		resultType="com.kflix.genre.domain.Genre">
+		SELECT * FROM genre
+	</select>
 
 </mapper>

@@ -47,7 +47,6 @@ public class WatchController {
 
 	@Autowired
 	WatchService watchservice;
-
 	@Autowired
 	ActorService actorservice;
 	@Autowired
@@ -72,15 +71,18 @@ public class WatchController {
 		ArrayList<Integer> movie_genre = new ArrayList<>(arr2);
 		System.err.println(movie_genre);
 		
-		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
-		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
+		model.addAttribute("Ranking", watchservice.getmovieRanking());
 		
 		test.setMovie(watchservice.getAllmovie());
 		test.setWatch(watchservice.getSelectWatch(member.getEmail()));
 		test.setWish(watchservice.getSelectWish(member.getEmail()));
 		test.setGenre(watchservice.getAllGenre());
-		model.addAttribute("movie_genre", movie_genre);
+
+		model.addAttribute("AllGenre", watchservice.getAllGenre());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("test", test);
+		model.addAttribute("movie_genre", movie_genre);
 		model.addAttribute("email", member.getEmail());
 		return "/watch/browse";
 	}

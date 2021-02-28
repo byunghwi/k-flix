@@ -15,5 +15,9 @@ wish_check.addEventListener("change", function() {
 	}
 });
 
-	
-wish_check.click();
+function parentiframeclose() {
+	parent.frameclose();
+}
+
+document.getElementById("frame").addEventListener("click", parentiframeclose);
+document.querySelector(".back").addEventListener("click", parentiframeclose);

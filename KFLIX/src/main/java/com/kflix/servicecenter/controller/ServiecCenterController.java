@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kflix.help.service.HelpService;
+import com.kflix.inquiry.service.InquiryService;
 import com.kflix.member.domain.Member;
 
 import lombok.extern.log4j.Log4j;
@@ -18,6 +20,9 @@ public class ServiecCenterController {
 
 	@Inject
 	HelpService help_service;
+	
+	@Inject
+	InquiryService in_service;
 
 	static final char ENABLED = 'Y';
 	static final char DISABLED = 'N';
@@ -34,5 +39,25 @@ public class ServiecCenterController {
 		model.addAttribute("info", help_service.getHelpWithRownum("이용안내"));
 		model.addAttribute("payment", help_service.getHelpWithRownum("결제"));
 		return "center/service";
+	}
+	
+	
+	@RequestMapping(value = "/inquiry",  method = RequestMethod.GET)
+	public String inqure(Model model, HttpSession session) {
+		log.info("============ 문의 페이지 ============");
+		
+		Member member = (Member) session.getAttribute("login");
+		log.info("로그인 된 이메일 : " + member.getEmail());
+
+		model.addAttribute("loginEmail", member.getEmail());
+		model.addAttribute("constraint", in_service.getInquiryCosntraint());
+		return "inquiry/form";
+	}
+	
+	
+	@RequestMapping(value="/FAQ", method = RequestMethod.GET)
+	public String inqureUserView() {
+		
+		return "help/userview";
 	}
 }
