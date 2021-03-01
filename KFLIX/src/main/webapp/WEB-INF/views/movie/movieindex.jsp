@@ -70,7 +70,6 @@
 					<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
 					<td><a href="./updatepage/${movie.movie_id }" class="btn btn-primary">수정</a>
 						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-movieid="${movie.movie_id }" data-bs-target="#deletemodal">삭제</button>
-						<%-- <a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a> --%>
 					</td>
 				</tr>
 			</c:forEach>
