@@ -68,6 +68,9 @@ body, html {
 								<input type="hidden" id="member_age" name="member_age" />
 								<div class="box-input">
 									<div class="text-first">이용권을 선택해주세요.</div>
+									
+									<input type="hidden" name = "item_name" value = "테스트용이용권명">
+									<input type="hidden" name = "total_amount" value = 7700>
 									<!-- <div class="text-second">아직 KFLIX 회원이 아니시군요</div>
 									<div class="text-third">지금 바로 가입하고 다양한 영화 컨텐츠를 즐겨보세요</div>
 									<input type="email" name="email" id="email" placeholder="&#xf007;   Email을 입력하세요" required />

@@ -114,14 +114,14 @@ public class TickectController {
 	public void kakaoSuccess(@RequestParam("pg_token") String pg_token, Model model) {
 		log.info("kakaoPaySuccess get...............");
 		log.info("kakaoPaySuccess pg_tocken : " + pg_token);
-
+		
+		model.addAttribute("kakaoPayInfo", kakaoPayService.kakaoPayInfo(pg_token));
 	}
-	
 	
 	//카카오페이 버튼 클릭시 이동페이지
 	@RequestMapping(value = "/kakaoPay", method = RequestMethod.POST)
-	public String kakaoPayPost(HttpSession session, Model model) {
-		
-		return "redirect:" + kakaoPayService.kakaoPayReady();
+	public String kakaoPayPost(HttpSession session, Model model, String item_name, int total_amount) {
+
+		return "redirect:" + kakaoPayService.kakaoPayReady(item_name, total_amount);
 	}
 }
