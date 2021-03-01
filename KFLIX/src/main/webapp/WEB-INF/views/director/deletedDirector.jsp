@@ -9,36 +9,56 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" href="/kflix/resources/css/genre/genre.css" />
-
+<style>
+	#directorlist{
+		width: 1200px;
+		max-width: 1200px;
+		min-width: 1200px;
+	
+	}
+	#direMain{
+		overflow: auto;
+		height: 620px;
+	}
+</style>
 <meta charset="UTF-8">
 <title>삭제된 항목</title>
 </head>
 <body>
 
-<div class="container pt-5">
-<div>
-	<div class="d-flex justify-content-end">
-		<a href="./directorindex" type="button" class="btn btn-secondary text-light btn-sm">관리페이지</a>
-	</div>
-	
-	<div class="d-flex justify-content-center">
-		<h1>삭제된 항목</h1>
-	</div>
-</div>
-
-<div class="d-flex justify-content-end">
-		<div class="input-group mb-3 input_text">
-			<input type="text" name="director_name" id="search_val" class="form-control" aria-describedby="button-addon2" placeholder="이름">
-	  		<button class="btn btn-outline-secondary" onclick="searching(1);"><i class="fas fa-search"></i></button>
-	  	</div>
-		<div class="ps-2">
-			<button class="btn btn-outline-secondary" onclick="allView(1);">ALL</button>
+<section id="directorlist">
+	<div class="container pt-5">
+	<div>
+		<div class="d-flex justify-content-end">
+			<a href="./directorindex" type="button" class="btn btn-outline-secondary btn-sm">관리페이지</a>
+		</div>
+		
+		<div class="d-flex justify-content-center">
+			<h1>삭제된 항목</h1>
 		</div>
 	</div>
-
-<section id="directorlist">
-	<table class="table table-striped table-danger text-center align-middle" id="directortable">
-		 <thead>
+	
+	<div class="d-flex justify-content-end">
+			<!-- 컨텐츠 개수 -->
+			<div class="amount pe-2">
+				<select class="form-select form-select-sm" id="helpAmount">
+					<option value="5">5개 씩 보기</option>
+					<option value="10" selected>10개 씩 보기</option>
+					<option value="20">20개 씩 보기</option>
+				</select>
+			</div>
+			
+			<div class="input-group input-group-sm mb-3 input_text">
+				<input type="text" name="director_name" id="search_val" class="form-control" aria-describedby="button-addon2" placeholder="이름">
+		  		<button class="btn btn-outline-secondary" onclick="searching(1);"><i class="fas fa-search"></i></button>
+		  	</div>
+			<div class="ps-2">
+				<button class="btn btn-outline-secondary btn-sm" onclick="allView(1);">ALL</button>
+			</div>
+		</div>
+	<div id="direMain">
+	<table class="table table-striped text-center align-middle border-danger" id="directortable">
+		 <thead class="bg-danger text-light">
 			<tr>
 				<th>#</th>
 				<th>이름</th>
@@ -58,10 +78,12 @@
 			</c:forEach>
 		</tbody>
 	</table>
-</section>
 </div>
-
+</div>
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
+
+</section>
+
 <%@include file ="/resources/include/director/disabledModal.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
@@ -73,6 +95,6 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/director/disableDirector.js?ver=3"></script>
+<script src="/kflix/resources/js/director/disableDirector.js?ver=4"></script>
 </body>
 </html>

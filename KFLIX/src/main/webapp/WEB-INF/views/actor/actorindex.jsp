@@ -9,12 +9,17 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" href="/kflix/resources/css/genre/genre.css" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <style>
 	#actorlist{
 		width: 1200px;
 		max-width: 1200px;
 		min-width: 1200px;
 	
+	}
+	#actorMain {
+		overflow: auto;
+		height: 620px;
 	}
 	
 </style>
@@ -27,7 +32,7 @@
 <section id="actorlist">
 <div class="container pt-5">
 	<div class="d-flex justify-content-end">
-		<a href="./deletedActor" type="button" class="btn btn-secondary text-light btn-sm">삭제된 항목</a>
+		<a href="./deletedActor" type="button" class="btn btn-outline-secondary btn-sm">삭제된 항목</a>
 	</div>
 	
 	<div class="d-flex justify-content-center">
@@ -37,22 +42,30 @@
 <div class="d-flex justify-content-between">
 <div class="d-flex justify-content-start">
 		<span>
-			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addmodal">
+			<button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#addmodal">
 			  + 추가
 			</button>
 		</span>
 </div>	
 <div class="d-flex justify-content-end">
-		<div class="input-group mb-3 input_text">
+	<!-- 컨텐츠 개수 -->
+	<div class="amount pe-3">
+		<select class="form-select form-select-sm" id="helpAmount">
+			<option value="5">5개 씩 보기</option>
+			<option value="10" selected>10개 씩 보기</option>
+			<option value="20">20개 씩 보기</option>
+		</select>
+	</div>
+		<div class="input-group input-group-sm mb-3 input_text">
 			<input type="text" id="search_val" class="form-control" aria-describedby="button-addon2" placeholder="이름">
 	  		<button class="btn btn-outline-secondary" onclick="searching(1);"><i class="fas fa-search"></i></button>
 	  	</div>
 		<div class="ps-2">
-			<button class="btn btn-outline-secondary" onclick="allView(1);">ALL</button>
+			<button class="btn btn-outline-secondary btn-sm" onclick="allView(1);">ALL</button>
 		</div>
 	</div>
 </div>
-
+	<div id="actorMain">
 	<table class="table table-striped text-center align-middle border-dark" id="actortable">
 		 <thead class="bg-dark text-light">
 			<tr>
@@ -77,12 +90,13 @@
 		</tbody>
 	</table>
 </div>
-
+</div>
+<br />
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
 
 </section>
 
-<%@include file ="/resources/include/actor/enabledModal.jsp" %>
+<%@ include file="/resources/include/movie/alertModal.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
@@ -92,7 +106,7 @@
 		crossorigin="anonymous"></script>
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
-<script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/actor/enableActor.js?ver=4"></script>
+<script src="/kflix/resources/js/genre/genre.js?ver=1"></script>
+<script src="/kflix/resources/js/actor/enableActor.js?ver=5"></script>
 </body>
 </html>
