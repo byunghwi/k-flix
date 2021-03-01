@@ -5,7 +5,7 @@
 var infomodal = function() {$('#infoconfrim').modal("show")}
 
 function infoMsg(msg){
-	$('#confirmMsg').html(msg);
+	$('#alertMsg').html(msg);
 	infomodal();
 }
 

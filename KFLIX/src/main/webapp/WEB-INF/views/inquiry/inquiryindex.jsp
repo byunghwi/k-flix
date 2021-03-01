@@ -329,8 +329,8 @@ function ajax(type, url, data, pnum) {
   				pnum = anotherPnum;
   			}
   			
-  			console.log(pnum)
-  			console.log(amount);
+  			// console.log(pnum)
+  			// console.log(amount);
   			
  			makePageNate(len, pnum, amount);
   			 

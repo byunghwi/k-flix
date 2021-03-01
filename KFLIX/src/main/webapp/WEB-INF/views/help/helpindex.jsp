@@ -18,7 +18,10 @@
 		min-width: 1200px;
 	
 	}
-	
+	#helpMain {
+		overflow: auto;
+		height: 620px;
+	}
 </style>
 <meta charset="UTF-8">
 <title>FAQ</title>
@@ -66,6 +69,10 @@
 						<option>서비스</option>
 				</select>	
 			</div>
+			
+			<div class="ps-2">
+				<button class="btn btn-outline-secondary btn-sm" onclick="allView(1);">ALL</button>
+			</div>
 		</div>
 	</div>
 	
@@ -102,7 +109,7 @@
 		</tbody>	
 		</table>
 	</div>
-	
+	<br />
 	<!-- 페이지 네이트 영역 -->
 	<div id="pagenate">
 		<ul  class="pagination justify-content-center">	
@@ -210,6 +217,33 @@ $(document).ready(function() {
 	var amount = $('#helpAmount').val();
 	makePageNate(len, pnum, amount);
 });
+
+function allView(pnum) {
+	$('#helpAmount').val(10)
+	$('#searchType').val('all')
+	
+	$.ajax({
+		type: "POST",
+		url: "/kflix/FQARest/index",
+		data: JSON.stringify({
+			searching_word: 'all'
+		}),
+		contentType: 'application/json',
+		
+ 		success: function(data){
+  			var len = data.length;
+  		  	var amount = 10;
+  			
+ 			makePageNate(len, pnum, amount);
+  			 
+  			makeTable(data, pnum, amount);
+ 
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		}
+	}) 
+}
 
 //페이지보기
 function amountChange() {
