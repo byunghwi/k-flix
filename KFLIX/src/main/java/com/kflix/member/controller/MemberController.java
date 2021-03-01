@@ -69,11 +69,16 @@ public class MemberController {
 
 	// 이메일 인증
 	@RequestMapping(value= "signUpConfirm", method = RequestMethod.GET)
-	 public String signUpConfirm(@RequestParam String email, ModelAndView mav){
+	 public String signUpConfirm(@RequestParam String email, RedirectAttributes redirectAttributes){
 	    
 		//email가 일치할경우 Member테이블 cert = 'Y' 업데이트
 	    System.out.println("[memberController] 이메일 인증 리턴 > " + email);
 		int result = memberService.updateAuthStatus(email);
+		
+		//이메일 인증 후 업데이트 된 회원정보 담아주자.
+		//redirect 시 객체를 POST방식으로 전달할 때 RedirectAttribute를 사용한다
+		redirectAttributes.addFlashAttribute("member", (Member) memberService.getMemberByEmail(email));
+		//System.out.println("[signUpConfirm] 회원정보 가져오기 > " + (Member) memberService.getMemberByEmail(email));
 		
 		//업데이트 성공 시 
 		if(result != 0) {

@@ -37,8 +37,8 @@ body, html {
 </style>
 </head>
 <body>
-<h1>${member}</h1>
-
+<h1> ${member}</h1>
+<h1>=========================</h1>
 <c:choose>
 		<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
 			<h3>이메일을 전송했습니다.</h3>
@@ -63,7 +63,7 @@ body, html {
 				<div id="vertical-flip" class="card">
 					<div class="flip">
 						<div class="front">
-							<form id = "form" action="${pageContext.request.contextPath}/member/register"
+							<form id = "form" action="${pageContext.request.contextPath}/ticket/kakaoPay"
 								method="post"> 
 								<input type="hidden" id="member_age" name="member_age" />
 								<div class="box-input">
@@ -81,7 +81,7 @@ body, html {
 										placeholder="&#xf11c;   비밀번호를 한 번 더 입력하세요" required onchange="checkSamePwd();"/>
 									<div class="password-check" id = "password-check"></div> -->
 									
-									<button type="button" onclick="register();">Regist</button>
+									<button type="button" onclick="kakaopay();">구매</button>
 
 								</div>
 							</form>
@@ -97,6 +97,11 @@ function sendEmail(){
 	
 	document.getElementById('sendEmail').disabled = true;
 	window.location.href ="/kflix/ticket/sendEmail";
+}
+
+function kakaopay(){
+	var form = document.getElementById('form');
+	form.submit();
 }
 
 </script>
