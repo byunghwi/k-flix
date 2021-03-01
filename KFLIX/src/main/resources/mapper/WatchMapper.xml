@@ -4,13 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kflix.mapper.WatchMapper">
 
-
 	<!-- 뮤비 -->
 	<select id="getAllmovie"
 		resultType="com.kflix.watch.domain.MovieVO">
 		SELECT * FROM movie
 	</select>
-	
+
 	<select id="getmovieRanking"
 		resultType="com.kflix.watch.domain.MovieVO">
 		<![CDATA[SELECT * FROM movie WHERE ROWNUM <= 10 ORDER BY MOVIE_RANK DESC]]>
@@ -20,7 +19,20 @@
 		resultType="com.kflix.watch.domain.MovieVO">
 		SELECT * FROM movie WHERE movie_id = #{movie_id }
 	</select>
-	
+
+
+	<!-- 좋아요 -->
+	<update id="likePlus">
+		UPDATE movie SET movie_rank = movie_rank + 1 WHERE
+		movie_id = #{movie_id}
+	</update>
+
+	<update id="likeMinus">
+		UPDATE movie SET movie_rank = movie_rank - 1 WHERE
+		movie_id = #{movie_id}
+	</update>
+
+
 	<!-- 와치 -->
 	<select id="getAllwatch"
 		resultType="com.kflix.watch.domain.WatchVO">
@@ -31,10 +43,11 @@
 		resultType="com.kflix.watch.domain.WatchVO">
 		SELECT * FROM watch WHERE email = #{email }
 	</select>
-	
+
 	<select id="getSelectWatching"
 		resultType="com.kflix.watch.domain.WatchVO">
-		SELECT * FROM watch WHERE email = #{email } and watch_type = 'WATCHING'
+		SELECT * FROM watch WHERE email = #{email } and watch_type
+		= 'WATCHING'
 	</select>
 
 	<select id="getSelectWatchUser"
@@ -69,6 +82,7 @@
 		= #{movie_id}
 	</delete>
 
+
 	<!-- 위시 -->
 	<select id="getSelectWish"
 		resultType="com.kflix.watch.domain.WishVO">
@@ -94,6 +108,29 @@
 		WHERE email = #{email} and movie_id =
 		#{movie_id}
 	</delete>
+
+
+	<!-- 라이크 -->
+	<select id="getSelectLikeUser"
+		resultType="com.kflix.watch.domain.LikeVO">
+		SELECT movie_id, email FROM movielike WHERE email = #{email } and 
+		movie_id = #{movie_id }
+	</select>
+
+	<insert id="createLike">
+		INSERT INTO movielike VALUES (
+		like_id_seq.nextval,
+		#{movie_id},
+		#{email}
+		)
+	</insert>
+
+	<delete id="deleteLike">
+		DELETE FROM movielike
+		WHERE email = #{email} and 
+		movie_id = #{movie_id}
+	</delete>
+
 
 	<!-- 장르 -->
 

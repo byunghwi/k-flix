@@ -73,11 +73,16 @@
 	<div id="carouselExampleInterval" class="carousel slide"
 		style="height: 56.25vw; text-align: center;" data-bs-ride="carousel">
 		<div class="carousel-inner" style="height: 56.25vw;">
-			<div class="carousel-item active" data-bs-interval="10000">
+			<div class="carousel-item active">
+				<!-- data-bs-interval="10000" -->
+				<img class="mainimg" alt="메인사진"
+					src="/kflix/resources/imgs/watch/po4.png">
+			</div>
+			<div class="carousel-item">
 				<img class="mainimg" alt="메인사진"
 					src="/kflix/resources/imgs/watch/runon1.png">
 			</div>
-			<div class="carousel-item" data-bs-interval="10000">
+			<div class="carousel-item">
 				<img class="mainimg" alt="메인사진"
 					src="/kflix/resources/imgs/watch/po.png">
 			</div>
@@ -89,6 +94,7 @@
 				<img class="mainimg" alt="메인사진"
 					src="/kflix/resources/imgs/watch/po3.png">
 			</div>
+
 		</div>
 	</div>
 
@@ -117,6 +123,9 @@
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="dis img1" alt="...">
+
+														<div class="progress" style="flex-basis: ((${watch.view_point} / ${Allmovie.play_time}) * 100)%;"></div>
+
 														<div class="videohover">
 															<img style="margin: 0;" src="${Allmovie.poster_path }"
 																class="modalimg" alt="...">
@@ -635,6 +644,7 @@
 		<c:forEach var="j" begin="1" end="${i}">
 			console.log(${j});
 			
+			
 		var 
 				slides${j} = document.querySelector('.slides${j}'), 
 				
@@ -659,13 +669,14 @@
 				
 				nextBtn${j} = document.querySelector('.next${j}'), 
 				
-				currentPagenum${j} = 1, 
+				currentPagenum${j} = 1,
 				
 				sliderow${j} = document.querySelector('.sliderow${j}'), 
 				
 				pagenumdiv${j} = document.querySelector('.pagenum${j}');
 
 				console.log(slideCount${j});
+				
 		slides${j}.style.width = (slideWidth${j} + slideMargin${j}) * slideCount${j}
 				- slideMargin${j} + 'px';
 		slide_wrapper${j}.style.width = (slideWidth${j} + slideMargin${j}) * slideShow${j}
@@ -690,9 +701,6 @@
 				nextBtn${j}.style.visibility = 'visible';
 			}
 
-			if (currentPagenum${j} == allpagenum${j}) {
-				nextBtn${j}.style.visibility = 'hidden';
-			}
 			if (currentPagenum${j} == 1) {
 				prevBtn${j}.style.visibility = 'hidden';
 			}
@@ -728,9 +736,18 @@
 								}
 								prevBtn${j}.style.visibility = 'visible';
 								backopprev${j}.style.visibility = 'visible';
-								if (currentPagenum${j} == allpagenum${j}) {
-									nextBtn${j}.style.visibility = 'hidden';
-									backopnext${j}.style.visibility = 'hidden';
+								if (currentPagenum${j} > allpagenum${j}) {
+									moveSlide${j}(0);
+									prevBtn${j}.style.visibility = 'hidden';
+									backopprev${j}.style.visibility = 'hidden';
+									pagenumdiv${j}.innerHTML = ``;
+									for (i = 1; i <= allpagenum${j}; i++) {
+										if (i == currentPagenum${j}) {
+											pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+										} else {
+											pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+										}
+									}
 								}
 							} else {
 								/*moveSlide(0); 첫페이지*/

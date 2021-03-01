@@ -44,7 +44,13 @@
 						for="wish_check" id="wish" class="ru disin"> <label
 						id="wish_lab" for="wish_check"><i
 							class="fas fa-plus color-w"></i></label>
-
+					</label>
+				</div>
+				<div class="container" style="display: inline-block; width: auto">
+					<input id="like_check" class="disnone" type="checkbox"> <label
+						for="like_check" id="like" class="ru disin"> <label
+						id="like_lab" for="like_check"> <i
+							class="far fa-thumbs-up color-w"></i></label>
 					</label>
 				</div>
 			</div>
@@ -143,60 +149,63 @@
 									movie.genre_id1 eq Allmovie.genre_id2 or movie.genre_id2 eq Allmovie.genre_id2 }">
 
 									<c:if test="${movie.movie_id != Allmovie.movie_id}">
-										<!-- 비슷한 콘텐츠 누르면 다른 frame띄우기 -->
-										<div class="movie_contents">
-											<a id="atag"
-												onclick="parentframechange(${Allmovie.movie_id })">
-												<div style="position: relative;">
-													<img
-														style="width: 100%; height: 130px; border-radius: 2% 2% 0 0;"
-														src="${Allmovie.poster_path }"
-														class="d-block dis hoverimg" alt="...">
-													<div class="imghover"
-														style="position: resize; width: 100%; top: 0; left: 0; bottom: 0; z-index: 10; background-color: rgba(255, 255, 255, 0);">
-														<div
-															style="position: absolute; top: 23%; left: 33%; z-index: 20; width: 30%; height: 50%;"
-															class="ru disin hoverru">
-															<i
-																style="position: absolute; font-size: 30px; top: 27%; left: 34%; bottom: 0; z-index: 10;"
-																class="fas fa-play color-w hoverru"></i>
+										<c:set var="sum" value="${sum+1}" />
+										<c:if test="${sum < 10}">
+											<!-- 비슷한 콘텐츠 누르면 다른 frame띄우기 -->
+											<div class="movie_contents">
+												<a id="atag"
+													onclick="parentframechange(${Allmovie.movie_id })">
+													<div style="position: relative;">
+														<img
+															style="width: 100%; height: 130px; border-radius: 2% 2% 0 0;"
+															src="${Allmovie.poster_path }"
+															class="d-block dis hoverimg" alt="...">
+														<div class="imghover"
+															style="position: resize; width: 100%; top: 0; left: 0; bottom: 0; z-index: 10; background-color: rgba(255, 255, 255, 0);">
+															<div
+																style="position: absolute; top: 23%; left: 33%; z-index: 20; width: 30%; height: 50%;"
+																class="ru disin hoverru">
+																<i
+																	style="position: absolute; font-size: 30px; top: 27%; left: 34%; bottom: 0; z-index: 10;"
+																	class="fas fa-play color-w hoverru"></i>
+															</div>
 														</div>
 													</div>
-												</div>
-												<div id="context">
-													${Allmovie.movie_title } <br>
-													<div id="ratingndate">
-														<c:choose>
-															<c:when test="${Allmovie.rating eq 'all' }">
-																<p class="ratingsty"
-																	style="background-color: green; font-size: 20px;">ALL</p>
-															</c:when>
-															<c:when test="${Allmovie.rating eq '12' }">
-																<p class="ratingsty"
-																	style="background-color: #dfb039; color: black;">${Allmovie.rating }</p>
-															</c:when>
-															<c:when test="${Allmovie.rating eq '15' }">
-																<p class="ratingsty" style="background-color: #cd6d34">${Allmovie.rating }</p>
-															</c:when>
-															<c:when test="${Allmovie.rating eq '19' }">
-																<p class="ratingsty" style="background-color: #c52e37">${Allmovie.rating }</p>
-															</c:when>
-															<c:otherwise>
-																<p class="ratingsty" style="background-color: green">${Allmovie.rating }</p>
-															</c:otherwise>
-														</c:choose>
-														<span style="font-family: 'Acme', ' Oswald ', sans-serif;">
-															<fmt:formatDate value="${Allmovie.reg_date }"
-																pattern="yyyy.MM" />
-														</span> <br>
+													<div id="context">
+														${Allmovie.movie_title } <br>
+														<div id="ratingndate">
+															<c:choose>
+																<c:when test="${Allmovie.rating eq 'all' }">
+																	<p class="ratingsty"
+																		style="background-color: green; font-size: 20px;">ALL</p>
+																</c:when>
+																<c:when test="${Allmovie.rating eq '12' }">
+																	<p class="ratingsty"
+																		style="background-color: #dfb039; color: black;">${Allmovie.rating }</p>
+																</c:when>
+																<c:when test="${Allmovie.rating eq '15' }">
+																	<p class="ratingsty" style="background-color: #cd6d34">${Allmovie.rating }</p>
+																</c:when>
+																<c:when test="${Allmovie.rating eq '19' }">
+																	<p class="ratingsty" style="background-color: #c52e37">${Allmovie.rating }</p>
+																</c:when>
+																<c:otherwise>
+																	<p class="ratingsty" style="background-color: green">${Allmovie.rating }</p>
+																</c:otherwise>
+															</c:choose>
+															<span
+																style="font-family: 'Acme', ' Oswald ', sans-serif;">
+																<fmt:formatDate value="${Allmovie.reg_date }"
+																	pattern="yyyy.MM" />
+															</span> <br>
+														</div>
+														<p
+															style="margin: 10px 0; line-height: 1.4; font-size: 13px; color: #d2d2d2;">
+															${Allmovie.summary }</p>
 													</div>
-													<p
-														style="margin: 10px 0; line-height: 1.4; font-size: 13px; color: #d2d2d2;">
-														${Allmovie.summary }</p>
-												</div>
-											</a>
-										</div>
-
+												</a>
+											</div>
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:forEach>
@@ -316,20 +325,37 @@
 		wish_lab.innerHTML = `<i class="fas fa-check color-w"></i>`;
 		</c:when>
 		<c:otherwise>
-
 		console.log("wish 없음");
-		wish_lab.innerHTML = `<i
-			class="fas fa-plus color-w"></i>`;
-
+		wish_check.checked = false;
+		wish_lab.innerHTML = `<i class="fas fa-plus color-w"></i>`;
+		</c:otherwise>
+		</c:choose>
+		
+		if (wish_check.checked) {
+			console.log("wish체크됨");
+		} else {
+			console.log("wish체크안됨");
+		}
+		
+		<c:choose>
+		<c:when test="${not empty getlike }">
+		console.log("like 있음");
+		like_check.checked = true;
+		like_lab.innerHTML = `<i class="fas fa-thumbs-up color-w"></i>`;
+		</c:when>
+		<c:otherwise>
+		console.log("like 없음");
+		like_check.checked = false;
+		like_lab.innerHTML = `<i class="far fa-thumbs-up color-w"></i>`;
 		</c:otherwise>
 		</c:choose>
 
-		if (wish_check.checked) {
-			console.log("체크됨");
+		if (like_check.checked) {
+			console.log("like체크됨");
 		} else {
-			console.log("체크안됨");
+			console.log("like체크안됨");
 		}
-
+		
 		function setwish(wishresult) {
 			console.log("wishresult 값" + wishresult);
 			var data = {
@@ -341,10 +367,28 @@
 
 			var xhttp = new XMLHttpRequest();
 
-			xhttp.open('Post', '/kflix/wish', true);
+			xhttp.open('Post', '/kflix/rest/wish', true);
 			xhttp.setRequestHeader('content-type', 'application/json');
 			xhttp.send(JSON.stringify(data));
 		}
+		
+		
+		function setlike(likeresult) {
+			console.log("likeresult 값" + likeresult);
+			var data = {
+				/* like: 시퀀스, */
+				movie_id : "${movie.movie_id}",
+				email : "${email}",
+				result : likeresult
+			}
+
+			var xhttp = new XMLHttpRequest();
+
+			xhttp.open('PATCH', '/kflix/rest/like', true);
+			xhttp.setRequestHeader('content-type', 'application/json');
+			xhttp.send(JSON.stringify(data));
+		}
+		
 	</script>
 </body>
 </html>

@@ -144,10 +144,6 @@ body {
 	cursor: pointer;
 }
 
-#wish_lab, #wish_check {
-	cursor: pointer;
-}
-
 .disnone {
 	display: none;
 }
@@ -236,6 +232,19 @@ a:active {
 	top: 0;
 	left: 0;
 	bottom: 0;
+}
+
+#wish_lab, #wish_check {
+	cursor: pointer;
+}
+
+#like_lab, #like_check {
+	cursor: pointer;
+}
+
+#menubar > .container {
+	padding: 0;
+	padding-left: 10px;
 }
 
 @media only screen and (min-width:994px) {

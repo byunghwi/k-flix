@@ -25,6 +25,7 @@ public class MovieVO {
 	private String country;
 	private String movie_release;
 	private String summary;
+	private String result;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reg_date;
