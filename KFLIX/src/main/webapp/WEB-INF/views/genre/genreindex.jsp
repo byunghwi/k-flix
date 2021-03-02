@@ -15,31 +15,27 @@
 		width: 1200px;
 		max-width: 1200px;
 		min-width: 1200px;
-		margin-left: 25%;
 	}
 	#geMain {
 		overflow: auto;
 		height: 620px;
 	}
-
 </style>
 <meta charset="UTF-8">
 <title>장르</title>
 </head>
 <body>
 
-<%@include file="../manage/navbar.jsp"%>
-
+<%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
 <section id="genrelist">
 <div class="container pt-5">
-	<div class="d-flex justify-content-start">
-		<h1>장르관리</h1>
-	</div>
-	
-	<div class="d-flex justify-content-end pb-3">
+	<div class="d-flex justify-content-end">
 		<a href="./deletedList" type="button" class="btn btn-outline-secondary btn-sm">삭제된 항목</a>
 	</div>
 	
+	<div class="d-flex justify-content-center">
+		<h1>장르관리</h1>
+	</div>
 
 <div class="d-flex justify-content-between">
 <div class="d-flex justify-content-start">
@@ -112,11 +108,5 @@
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js?ver=1"></script>
 <script src="/kflix/resources/js/genre/enabled.js?ver=10"></script>
-<script>
-$(document).ready(function() { 
-	$('#genre').prepend('<span class="nav-clicked"></span>');
-});
-
-</script>
 </body>
 </html>
