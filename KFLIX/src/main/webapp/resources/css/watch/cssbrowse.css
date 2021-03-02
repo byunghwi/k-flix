@@ -206,12 +206,13 @@ body { width:100%; position: fixed; }
 	border-radius: 0.5rem;
 	width: 360px;
 	height: 360px;
-	top: -107.5px;
-	left: -55px;
+	top: -90px;
+	left: -30px;
 	z-index: 100;
 	overflow: hidden;
 	box-shadow: 0 0 11px black;
 	cursor: pointer;
+	left: -30px;
 }
 
 .modalimg {
