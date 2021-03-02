@@ -63,4 +63,15 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne(NAMESPACE + ".getMemberByEmail", email);
 	}
 
+	@Override
+	public int updatePayMember(Member member) {
+		return sqlSession.update(NAMESPACE + ".updatePayMember", member);
+	}
+
+	@Override
+	public int removePayMember(String email) {
+		
+		return sqlSession.update(NAMESPACE + ".removePayMember", email);
+	}
+
 }

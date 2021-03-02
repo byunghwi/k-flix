@@ -77,5 +77,27 @@
 	<select id= "getMemberByEmail" parameterType="String" resultType="com.kflix.member.domain.Member">
 		SELECT * FROM member WHERE email = #{email}
 	</select>
+	
+	<update id="updatePayMember">
+		UPDATE 
+			member 
+		SET 
+			pay_sid = #{pay_sid}, 
+			pay_exp_date = to_char(add_months(sysdate,+1),'yyyy-mm-dd'),
+			pay_remove_dt = null
+		WHERE
+			email = #{email}
+	</update>
+	
+	<update id="removePayMember">
+		UPDATE 
+			member 
+		SET 
+			pay_sid = null, 
+			pay_exp_date = null,
+			pay_remove_dt = sysdate
+		WHERE
+			email = #{email}
+	</update>
 
 </mapper>

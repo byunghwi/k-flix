@@ -75,38 +75,28 @@ body, html {
 							<form id="form"
 								action="${pageContext.request.contextPath}/ticket/kakaoPay"
 								method="post">
-								<input type="hidden" id="member_age" name="member_age" />
 								<div class="box-input">
 									<div class="text-first">이용권을 선택해주세요.</div>
-
-									<input type="hidden" name="item_name" value="테스트용이용권명">
-									<input type="hidden" name="total_amount" value=7700>
 
 									<div class="text-second">원하는 멤버쉽 요금제를 선택하고 KFLIX의 모든 컨텐츠를
 										즐겨보세요</div>
 									<div>
-										<table border="1" style="width: 80%">
+
+									<c:if test="${not empty tickets }">
+										<table border="1" style="width: 80%; margin-top: 30px; margin-bottom: 30px;" align="center" >
+										<c:forEach items="${tickets }" var = "ticket">
 											<tr style="height: 50px; border: 5px; border-color: white;">
-												<td colspan="2">추천</td>
-												<td colspan="2">일반</td>
-											</tr>
+												<td colspan="2">${ticket.ticket_name }</td>
+												<td colspan="2">${ticket.ticket_price }</td>
+											</tr>						
+										</c:forEach>
 
-											<tr style="height: 50px; border: 1px;">
-												<td>정기권</td>
-												<td>7,500원</td>
-
-											</tr>
-											<tr style="height: 50px; border: 1px;">
-												<td>365일권</td>
-												<td>69,000원</td>
-											</tr>
-
-										</table>
+										</table>			
+									</c:if>
+										
 									</div>
-
-									
 									<button type="button" onclick="kakaopay();">구매</button>
-
+									<button type="button" onclick="removePay();">정기결제해제</button>
 								</div>
 							</form>
 						</div>
@@ -125,6 +115,18 @@ body, html {
 
 		function kakaopay() {
 			var form = document.getElementById('form');
+
+/* 			if(!$(':radio[name="ticket_class"]:checked').val()){
+				alert('요금제를 선택해주세요');
+				return;
+			} */
+			
+			form.submit();
+		}
+
+		function removePay(){
+			var form = document.getElementById('form');
+			form.action = "${pageContext.request.contextPath}/ticket/removeKakaoPay"
 			form.submit();
 		}
 	</script>

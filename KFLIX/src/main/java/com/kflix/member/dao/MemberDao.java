@@ -23,4 +23,8 @@ public interface MemberDao {
 	
 	void keepLogin(String email, String session_id, Date next);
 	Member checkMemWithSessionKey(String value);
+	
+	int updatePayMember(Member member);
+	
+	int removePayMember(String email);
 }

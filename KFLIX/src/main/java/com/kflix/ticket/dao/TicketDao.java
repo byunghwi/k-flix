@@ -1,5 +1,9 @@
 package com.kflix.ticket.dao;
 
-public interface TicketDao {
+import java.util.List;
 
+import com.kflix.ticket.domain.Ticket;
+
+public interface TicketDao {
+	List<Ticket> getAllTickets();
 }
