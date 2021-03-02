@@ -16,6 +16,7 @@
 		width: 1200px;
 		max-width: 1200px;
 		min-width: 1200px;
+		margin-left: 25%;
 	
 	}
 	#helpMain {
@@ -28,12 +29,12 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
+<%@include file="../manage/navbar.jsp"%>
 
 <section id="helplist">
 <!-- 본체 영역 -->
-<div class="container">
-	<div class="d-flex justify-content-center">
+<div class="container pt-5">
+	<div class="d-flex justify-content-start pb-5">
 		<h1>FAQ 관리</h1>
 	</div>
 	
@@ -215,6 +216,7 @@ $(document).ready(function() {
 	var len = $('#helpData').val();
 	var pnum = $('#helpPage').val();
 	var amount = $('#helpAmount').val();
+	$('#FAQ').prepend('<span class="nav-clicked"></span>');
 	makePageNate(len, pnum, amount);
 });
 

@@ -15,6 +15,7 @@
 		width: 1200px;
 		max-width: 1200px;
 		min-width: 1200px;
+		margin-left: 25%;
 	
 	}
 	#actorMain {
@@ -28,16 +29,18 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
+<%@include file="../manage/navbar.jsp"%>
+
 <section id="actorlist">
 <div class="container pt-5">
-	<div class="d-flex justify-content-end">
+	<div class="d-flex justify-content-start">
+		<h1>배우관리</h1>
+	</div>
+
+	<div class="d-flex justify-content-end pb-3">
 		<a href="./deletedActor" type="button" class="btn btn-outline-secondary btn-sm">삭제된 항목</a>
 	</div>
 	
-	<div class="d-flex justify-content-center">
-		<h1>배우관리</h1>
-	</div>
 
 <div class="d-flex justify-content-between">
 <div class="d-flex justify-content-start">
@@ -108,5 +111,11 @@
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js?ver=1"></script>
 <script src="/kflix/resources/js/actor/enableActor.js?ver=5"></script>
+<script>
+$(document).ready(function() { 
+	$('#actor').prepend('<span class="nav-clicked"></span>');
+});
+
+</script>
 </body>
 </html>

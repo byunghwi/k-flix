@@ -16,7 +16,3 @@ public class LikeVO {
 	private String result;
 }
 	
-	
-
-	
-

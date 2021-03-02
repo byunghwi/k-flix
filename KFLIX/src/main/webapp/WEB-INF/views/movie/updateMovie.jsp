@@ -88,31 +88,85 @@
 		  <label class="input-group-text" for="inputGroupSelect01">감독</label>
 		  <select name="director_id" class="form-select" id="inputGroupSelect01" required>
 		   <c:forEach var="dt" items="${director }" varStatus="status" >
-		  	 <option value="${dt.director_id }" >${dt.director_name }</option>
+		   	<c:choose>
+			   	<c:when test="${movie.director_id eq dt.director_id}">
+			   		<option value="${dt.director_id }" selected>${dt.director_name }</option>	
+			   	</c:when>
+			   	<c:otherwise>
+			  	 	<option value="${dt.director_id }" >${dt.director_name }</option>
+			  	 </c:otherwise>
+		   	</c:choose>
 		   </c:forEach>
 		  </select>
 		</div>
 	
 		<div class="input-group input-group-sm mb-3">
 		  <label class="input-group-text" for="inputGroupSelect01">배우</label>
-		  <c:forEach var="i" begin="1" end="3">
-			  <select name="actor_id${i }" required class="form-select" id="inputGroupSelect01" required>
+			  <select name="actor_id1" required class="form-select" id="inputGroupSelect01" required>
 			   <c:forEach var="at" items="${actor }" varStatus="status">
-			    <option value="${at.actor_id }" >${at.actor_name }</option>
+		   	   	<c:choose>
+				   	<c:when test="${movie.actor_id1 eq at.actor_id}">
+				   		<option value="${at.actor_id }" selected>${at.actor_name }</option>	
+				   	</c:when>
+				   	<c:otherwise>
+				  	 	<option value="${at.actor_id }">${at.actor_name }</option>
+				  	 </c:otherwise>
+		   		</c:choose>
 			   </c:forEach>
 			  </select>
-		   </c:forEach>
+  			  <select name="actor_id2" required class="form-select" id="inputGroupSelect01" required>
+			   <c:forEach var="at" items="${actor }" varStatus="status">
+		   	   	<c:choose>
+				   	<c:when test="${movie.actor_id2 eq at.actor_id}">
+				   		<option value="${at.actor_id }" selected>${at.actor_name }</option>	
+				   	</c:when>
+				   	<c:otherwise>
+				  	 	<option value="${at.actor_id }">${at.actor_name }</option>
+				  	 </c:otherwise>
+		   		</c:choose>
+			   </c:forEach>
+			  </select>
+  			  <select name="actor_id3" required class="form-select" id="inputGroupSelect01" required>
+			   <c:forEach var="at" items="${actor }" varStatus="status">
+		   	   	<c:choose>
+				   	<c:when test="${movie.actor_id3 eq at.actor_id}">
+				   		<option value="${at.actor_id }" selected>${at.actor_name }</option>	
+				   	</c:when>
+				   	<c:otherwise>
+				  	 	<option value="${at.actor_id }">${at.actor_name }</option>
+				  	 </c:otherwise>
+		   		</c:choose>
+			   </c:forEach>
+			  </select>
 		</div>
 		
 		<div class="input-group input-group-sm mb-3">
 		  <label class="input-group-text" for="inputGroupSelect01">장르</label>
-		  <c:forEach var="i" begin="1" end="2">
-			  <select name="genre_id${i }" required class="form-select" id="inputGroupSelect01" required>
+			  <select name="genre_id1" required class="form-select" id="inputGroupSelect01" required>
 			   <c:forEach var="gr" items="${genre }" varStatus="status">
-					<option value="${gr.genre_id }" >${gr.genre_name }</option>
+		    	<c:choose>
+				   	<c:when test="${movie.genre_id1 eq gr.genre_id}">
+				   		<option value="${gr.genre_id }" selected>${gr.genre_name }</option>	
+				   	</c:when>
+				   	<c:otherwise>
+				  	 	<option value="${gr.genre_id }" >${gr.genre_name }</option>
+				  	 </c:otherwise>
+		   		</c:choose>
 				</c:forEach>
 			  </select>
-		   </c:forEach>
+			  
+  			  <select name="genre_id2" required class="form-select" id="inputGroupSelect01" required>
+			   <c:forEach var="gr" items="${genre }" varStatus="status">
+		    	<c:choose>
+				   	<c:when test="${movie.genre_id2 eq gr.genre_id}">
+				   		<option value="${gr.genre_id }" selected>${gr.genre_name }</option>	
+				   	</c:when>
+				   	<c:otherwise>
+				  	 	<option value="${gr.genre_id }" >${gr.genre_name }</option>
+				  	 </c:otherwise>
+		   		</c:choose>
+				</c:forEach>
+			  </select>
 		</div>
 		
 		<div class="input-group input-group-sm mb-3">
