@@ -12,44 +12,26 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=4" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=17" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
-<style>
-	#sidebar{
-		width: 300px;
-		height: 100%;
-		background-color: black;
-		position: fixed;
-		/* float: left; */
-		padding: 0;
-		margin: 0;
-	}
-</style>
+
 <title>영화 관리</title>
 </head>
 <body>
 
-<div id="sidebar">
-<ul>
-	<li>dq</li>
-	<li>dq</li>
-	<li>dqd</li>
-	<li>dq</li>
-</ul>
-</div>
-
-
-<!-- 게시판 -->
+<%@include file="../manage/navbar.jsp"%>
 <section id="movielist">
-	<div class="container pt-2" id="board">
-		<div class="d-flex justify-content-end">
+<!-- 게시판 -->
+	<div class="container pt-5" id="board">
+		<div class="d-flex justify-content-start text-dark">
+			<h1>영화 관리</h1>
+		</div>
+		
+		<div class="d-flex justify-content-end pb-3">
 			<a href="./deletedMovie" class="btn btn-outline-secondary btn-sm">삭제된 항목</a>
 		</div>
 		
-		<div class="d-flex justify-content-center text-dark">
-			<h1>영화 관리</h1>
-		</div>
 			
 		<div class="d-flex justify-content-between">
 			<div class="d-flex justify-content-start">
@@ -131,7 +113,6 @@
 	</div>
 	
 </section>
-
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
@@ -142,6 +123,11 @@
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="/kflix/resources/js/movie/movierest.js?ver=18"></script>
+<script>
+$(document).ready(function() { 
+	$('#movie').prepend('<span class="nav-clicked"></span>');
+});
 
+</script>
 </body>
 </html>

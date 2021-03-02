@@ -20,7 +20,9 @@
 
 	#inquirydiv{
 		width: 1200px;
-		height: 900px;
+		max-width: 1200px;
+		min-width: 1200px;
+		margin-left: 25%;
 	}
 	h1 {
 		text-align: center;
@@ -37,17 +39,17 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
+<%@include file="../manage/navbar.jsp"%>
 
 <input id="helpData" type="hidden" value="${total }"/>
 <input id="helpPage" type="hidden" value="${page }"/>
-<div id="inquirydiv">
+<section id="inquirydiv">
 	
-	<div>
+	<div class="d-flex justify-content-start pt-5">
 		<h1>문의 관리</h1>
 	</div>
 
-	<div class="d-flex justify-content-end pb-1">
+	<div class="d-flex justify-content-end pb-2">
 		<!-- 컨텐츠 개수 -->
 		<div class="amount">
 			<select class="form-select form-select-sm" id="helpAmount">
@@ -126,7 +128,7 @@
 		</ul>
 	</div>
 	
-</div>
+</section>
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
 
@@ -210,6 +212,7 @@ $(document).ready(function() {
 	var len = $('#helpData').val();
 	var pnum = $('#helpPage').val();
 	var amount = $('#helpAmount').val();
+	$('#inq').prepend('<span class="nav-clicked"></span>');
 	makePageNate(len, pnum, amount);
 });
 
