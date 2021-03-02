@@ -2,23 +2,21 @@
 infoframe = document.getElementById('infoframe');
 body = document.querySelector('body');
 
-function bodyoverflow() {
-	body.style.overflow = 'hidden';
+function mianreload() {
+	document.location.reload(true);
 }
 
 function framshow(movieId) {
 	infoframe.src = "";
-	infoframe.src = "/kflix/browse/" + movieId;
-	console.log("/kflix/browse/" + movieId);
 	infoframe.style.display = 'block';
-
+	infoframe.src = "/kflix/browse/" + movieId;
+	body.style.overflow = 'hidden';
 }
 
 function frameclose() {
 	infoframe.src = "";
 	infoframe.style.display = 'none';
 	body.style.overflow = 'auto';
-	location.href = "/kflix/browse";
 }
 
 function videoshow(movieId) {
@@ -48,5 +46,6 @@ if (string.includes("http://localhost:8081/kflix/browse/watch/")) {
 
 } else {
 	console.log("없음");
+	body.style.overflow = 'auto';
 }
 

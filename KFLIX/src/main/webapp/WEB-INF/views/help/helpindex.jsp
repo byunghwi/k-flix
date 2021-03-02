@@ -16,8 +16,7 @@
 		width: 1200px;
 		max-width: 1200px;
 		min-width: 1200px;
-		float: right;
-		margin-right: 300px;
+		margin-left: 25%;
 	
 	}
 	#helpMain {
