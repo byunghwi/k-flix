@@ -113,7 +113,8 @@
 	<!-- 라이크 -->
 	<select id="getSelectLikeUser"
 		resultType="com.kflix.watch.domain.LikeVO">
-		SELECT movie_id, email FROM movielike WHERE email = #{email } and 
+		SELECT movie_id, email FROM movielike WHERE email = #{email
+		} and
 		movie_id = #{movie_id }
 	</select>
 
@@ -127,13 +128,30 @@
 
 	<delete id="deleteLike">
 		DELETE FROM movielike
-		WHERE email = #{email} and 
+		WHERE email = #{email} and
 		movie_id = #{movie_id}
 	</delete>
 
+	<!-- 검색 -->
+	<select id="getSearch"
+		resultType="com.kflix.watch.domain.SearchVO">
+		SELECT MOVIE_ID FROM (SELECT MOVIE_ID, ROW_NUMBER() OVER(PARTITION BY
+		MOVIE_TITLE ORDER BY REG_DATE DESC )as title, MOVIE_TITLE,
+		DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME, COUNTRY, RATING, SUMMARY,
+		REG_DATE FROM
+		(SELECT MOVIE_ID, MOVIE_TITLE, DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME,
+		COUNTRY, RATING, SUMMARY, REG_DATE
+		FROM movie m, director d, actor a, genre g
+		WHERE m.director_id = d.director_id and
+		(a.actor_id = m.actor_id1 or a.actor_id = m.actor_id1 or a.actor_id =
+		m.actor_id1) and
+		(g.genre_id = m.genre_id1 or g.genre_id = m.genre_id2))
+		WHERE (MOVIE_TITLE || DIRECTOR_NAME || ACTOR_NAME || GENRE_NAME || COUNTRY
+		|| RATING || SUMMARY || REG_DATE) like '%신%')
+		WHERE title = 1
+	</select>
 
 	<!-- 장르 -->
-
 	<select id="getAllGenre"
 		resultType="com.kflix.genre.domain.Genre">
 		SELECT * FROM genre

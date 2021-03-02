@@ -69,7 +69,7 @@ public class WatchController {
 			arr.add(movie.getGenre_id1());
 			arr.add(movie.getGenre_id2());
 		}
-		HashSet<Integer> arr2 = new HashSet<Integer>(arr); //중복제거
+		HashSet<Integer> arr2 = new HashSet<Integer>(arr); // 등록된 영화 장르 중복제거
 		ArrayList<Integer> movie_genre = new ArrayList<>(arr2); // 배열로 다시 넣기
 		
 		model.addAttribute("Ranking", watchservice.getmovieRanking());
@@ -79,11 +79,11 @@ public class WatchController {
 		basket.setWatching(watchservice.getSelectWatching(member.getEmail()));
 		basket.setWish(watchservice.getSelectWish(member.getEmail()));
 		basket.setGenre(watchservice.getAllGenre());
+		model.addAttribute("test", basket);
 
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("test", basket);
 		model.addAttribute("movie_genre", movie_genre);
 		model.addAttribute("email", member.getEmail());
 		return "/watch/browse";
@@ -181,10 +181,13 @@ public class WatchController {
 		return "/watch/video";
 	}
 
-	@GetMapping(value = "/bttest")
-	public String testdsf() {
-		return "/watch/NewFile1";
+	@GetMapping(value = "/browse/search")
+	public String search(Model model, String searchValue) {
 		
+		/* model.addAttribute("Searchlist", watchservice.getSearch(searchValue)); */
+		 System.out.println(watchservice.getSearch(searchValue)); 
+		
+		return "/watch/search";
 	}
 	
 }

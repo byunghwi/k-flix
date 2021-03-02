@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.kflix.genre.domain.Genre;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
+import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
 
@@ -57,6 +58,9 @@ public interface WatchService {
 
 	public LikeVO getSelectLikeUser(String email, int movie_id);
 
+	// 검색 서비스
+	public List<SearchVO> getSearch(String searchValue);
+	
 	// 장르 관련 쿼리 서비스
 	public List<Genre> getAllGenre();
 }

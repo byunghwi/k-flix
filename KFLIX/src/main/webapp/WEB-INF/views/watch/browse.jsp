@@ -61,8 +61,9 @@
 			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
 		</ul>
 		<div class="profile">
-		
-		<input id="search" type="checkbox">
+		<form id="searchform" action="/kflix/browse/search"></form>
+		<input id="search" type="checkbox" style="display: none;">
+		<input id="searchinput" form="searchform" name="searchValue" type="text" style="display: none;">
 		<label for="search"><i class="fas fa-search color_white nav-icon"></i></label>
 			 <i
 				class="fas fa-gift color_white nav-icon"></i> <i
