@@ -228,9 +228,10 @@
 						view_point : video.currentTime,
 						result : 'update'
 					}
-					</c:otherwise>
-					</c:choose>
+					
 				}
+				</c:otherwise>
+				</c:choose>
 
 				var xhttp = new XMLHttpRequest();
 
