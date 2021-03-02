@@ -59,5 +59,6 @@
 	<context:component-scan base-package="com.kflix.help" />
 	<context:component-scan base-package="com.kflix.inquiry" />
 	<context:component-scan base-package="com.kflix.servicecenter" />
+	<context:component-scan base-package="com.kflix.kakaoPay" />
 	
 </beans:beans>

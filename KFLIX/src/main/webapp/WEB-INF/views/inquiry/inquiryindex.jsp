@@ -17,14 +17,10 @@
 		color: gray;
 		font-size: 12px;
 	}
-	body {
-		
-		padding-left: 15%;
-	}
+
 	#inquirydiv{
 		width: 1200px;
 		height: 900px;
-		border: 3px solid;
 	}
 	h1 {
 		text-align: center;
@@ -46,9 +42,13 @@
 <input id="helpData" type="hidden" value="${total }"/>
 <input id="helpPage" type="hidden" value="${page }"/>
 <div id="inquirydiv">
+	
+	<div>
+		<h1>문의 관리</h1>
+	</div>
 
-	<!-- 컨텐츠 개수 -->
-	<div class="d-flex justify-content-end">
+	<div class="d-flex justify-content-end pb-1">
+		<!-- 컨텐츠 개수 -->
 		<div class="amount">
 			<select class="form-select form-select-sm" id="helpAmount">
 				<option value="5">5개 씩 보기</option>
@@ -56,16 +56,10 @@
 				<option value="20">20개 씩 보기</option>
 			</select>
 		</div>
-	</div>
-	
-	<div>
-		<h1>문의 관리</h1>
-	</div>
-
-	<div class="d-flex justify-content-between pb-1">
+		
 		<!-- 검색 영역 -->
-		<div id="searchArea">
-		  <select class="form-select" id="searchType" required>
+		<div id="searchArea" class="px-2">
+		  <select class="form-select form-select-sm" id="searchType" required>
 		  	<option value="all">모든 카테고리</option>
 			<c:forEach items="${category }" var="i" begin="0" end="${category.size()}" varStatus="status">
 				 <option>${i }</option>
@@ -75,7 +69,7 @@
 		
 		<!-- 답변 미답변 -->
 		<div>
-		 <select class="form-select" id="isreply" required>
+		 <select class="form-select form-select-sm" id="isreply" required>
 		  	<option value="all">전체보기</option>
 			 <option>미답변</option>
 			 <option>답변</option>
@@ -335,8 +329,8 @@ function ajax(type, url, data, pnum) {
   				pnum = anotherPnum;
   			}
   			
-  			console.log(pnum)
-  			console.log(amount);
+  			// console.log(pnum)
+  			// console.log(amount);
   			
  			makePageNate(len, pnum, amount);
   			 

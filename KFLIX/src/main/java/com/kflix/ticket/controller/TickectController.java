@@ -1,21 +1,31 @@
 package com.kflix.ticket.controller;
 
+import java.util.Map;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.kflix.kakaoPay.service.KakaoPay;
 import com.kflix.member.domain.Member;
 import com.kflix.member.service.MemberService;
 import com.kflix.ticket.service.TicketService;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log4j
 @RequestMapping(value = "/ticket")
 public class TickectController {
 	
@@ -24,20 +34,38 @@ public class TickectController {
 	
 	@Inject
 	private MemberService memberService;
+	
+	@Inject
+	private KakaoPay kakaoPayService;
 
-	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public String TicketPage(Model model, HttpSession session, @RequestParam(value = "sendChk", required = false) String sendChk) {
+	@RequestMapping(value = "/info", method = {RequestMethod.GET,RequestMethod.POST})
+	public String TicketPage( HttpServletRequest request, Model model, HttpSession session, @RequestParam(value = "sendChk", required = false) String sendChk) {
 		
-		String email = ((Member) session.getAttribute("login")).getEmail();
+		//리다이렉트로 addFlashAttribute에 담겨진 데이터를 꺼낼 때 사용.
+		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
 		
-		//회원정보빼오기
-		Member member = memberService.getMemberByEmail(email);
+		System.out.println("[TicketController] sendChk 있나 확인 > " + sendChk);
+
+		if(session.getAttribute("login") != null){
+			String email = ((Member) session.getAttribute("login")).getEmail(); // 세션으로 이메일 가져와서하게되면 브라우저가 달라졌을 때 못가져옴			
+			model.addAttribute("member", memberService.getMemberByEmail(email));
+			System.out.println("[TicketController] session 있을 때 > " + email);
+		}
+		if(redirectMap != null) {
+			model.addAttribute("member", redirectMap.get("member"));
+			
+			//브라우저 변경돼서 login이름의 member객체가 없을 때를 대비해서 생성해주자.
+			session.setAttribute("login", redirectMap.get("member"));
+			
+			System.out.println("[TicketController] member 객체 있을 때 > " + redirectMap.get("member"));
+		}
 		
-		model.addAttribute("member", member);
+		System.out.println("[TicketController] 접근..");
+		
 		model.addAttribute("sendChk", sendChk);
 		return "/ticket/infoPage";	
 	}
-	
+
 	@RequestMapping(value = "/sendEmail", method = RequestMethod.GET)
 	public String sendEmail(HttpSession session, Model model) {
 		
@@ -52,5 +80,48 @@ public class TickectController {
 		return "/ticket/emailAuthFail";
 
 	}
+	
+	//본인인증 여부 확인
+	@RequestMapping(value = "/cert", method = RequestMethod.POST)
+	@ResponseBody
+	public String TicketPage(String email) {
+		String result ="";
+		System.out.println("[TicketController] > " + email);
+		//회원정보빼오기
+		Member member = memberService.getMemberByEmail(email);
+		
+		result = member.getCert();
+		System.out.println("[TicketController] 본인인증여부 확인하러 옴 > " + result);
+		return result;	
+	}
 
+	//티켓구매 폼 페이지
+	@RequestMapping(value = "/buyForm", method = RequestMethod.GET)
+	public String TicketBuyForm(HttpSession session, Model model) {
+		
+		String email = ((Member) session.getAttribute("login")).getEmail();
+		
+		//회원정보빼오기
+		Member member = memberService.getMemberByEmail(email);
+		
+		model.addAttribute("member", member);
+		
+		return "/ticket/buyForm";
+	}
+	
+	//카카오페이 요청 성공 페이지
+	@RequestMapping(value = "/kakaoSuccess", method = RequestMethod.GET)
+	public void kakaoSuccess(@RequestParam("pg_token") String pg_token, Model model) {
+		log.info("kakaoPaySuccess get...............");
+		log.info("kakaoPaySuccess pg_tocken : " + pg_token);
+		
+		model.addAttribute("kakaoPayInfo", kakaoPayService.kakaoPayInfo(pg_token));
+	}
+	
+	//카카오페이 버튼 클릭시 이동페이지
+	@RequestMapping(value = "/kakaoPay", method = RequestMethod.POST)
+	public String kakaoPayPost(HttpSession session, Model model, String item_name, int total_amount) {
+
+		return "redirect:" + kakaoPayService.kakaoPayReady(item_name, total_amount);
+	}
 }

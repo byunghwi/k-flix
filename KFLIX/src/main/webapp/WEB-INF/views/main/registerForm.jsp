@@ -73,11 +73,11 @@
 	<script type="text/javascript">
 		var age;
 		
- 		if('${naver.birth }' != "" || '${naver.birth }' != null){
+ 		if('${naver.birth }' != ""){
  			age = calcAge('${naver.birth }');
  			document.getElementById('member_age').value = age;
 		}
-		if('${kakao.birth }' != "" || '${kakao.birth }' != null){
+		if('${kakao.birth }' != ""){
 			age = calcAge('${kakao.birth }');
 			document.getElementById('member_age').value = age;
 		}

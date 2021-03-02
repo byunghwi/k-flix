@@ -11,6 +11,18 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
+<style>
+	#helplist{
+		width: 1200px;
+		max-width: 1200px;
+		min-width: 1200px;
+	
+	}
+	#helpMain {
+		overflow: auto;
+		height: 620px;
+	}
+</style>
 <meta charset="UTF-8">
 <title>FAQ</title>
 </head>
@@ -18,43 +30,57 @@
 
 <%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
 
+<section id="helplist">
 <!-- 본체 영역 -->
 <div class="container">
-
-	<input id="helpData" type="hidden" value="${total }"/>
-		<input id="helpPage" type="hidden" value="${page }"/>
-		<select id="helpAmount" onchange="amountChange();">
-			<option value="5">5개 씩 보기</option>
-			<option value="${amount }" selected>${amount }개 씩 보기</option>
-			<option value="20">20개 씩 보기</option>
-		</select>
-		
-	<!-- 추가 버튼 영역 -->
-	<div id="addArea">
-		<button id="addBtn" class="btn btn-outline-success" data-bs-toggle="modal" 
-				data-bs-target="#processModal" data-bs-whatever="add">+ 추가</button>
+	<div class="d-flex justify-content-center">
+		<h1>FAQ 관리</h1>
 	</div>
 	
-	<!-- 검색 영역 -->
-	<div id="searchArea">
-		<select name="searching_word" id="searchType" onchange="searchChange();">
-			<option value="all" selected>모든 카테고리</option>
-				<option>이용안내</option>
-				<option>결제</option>
-				<option>환불</option>
-				<option>이용권</option>
-				<option>계정</option>
-				<option>컨텐츠</option>
-				<option>재생</option>
-				<option>서비스</option>
-		</select>	
+	<div class="d-flex justify-content-between">
+		<!-- 추가 버튼 영역 -->
+		<div id="addArea" class="ps-2 pb-2">
+			<button id="addBtn" class="btn btn-outline-success" data-bs-toggle="modal" 
+					data-bs-target="#processModal" data-bs-whatever="add">+ 추가</button>
+		</div>
+	
+		<div class="d-flex justify-content-end">
+			<div class="px-2">
+				<input id="helpData" type="hidden" value="${total }"/>
+					<input id="helpPage" type="hidden" value="${page }"/>
+					<select id="helpAmount" class="form-select form-select-sm" onchange="amountChange();">
+						<option value="5">5개 씩 보기</option>
+						<option value="${amount }" selected>${amount }개 씩 보기</option>
+						<option value="20">20개 씩 보기</option>
+					</select>
+			</div>	
+				
+			<!-- 검색 영역 -->
+			<div id="searchArea" class="pe-2">
+				<select name="searching_word" class="form-select form-select-sm" id="searchType" onchange="searchChange();">
+					<option value="all" selected>모든 카테고리</option>
+						<option>이용안내</option>
+						<option>결제</option>
+						<option>환불</option>
+						<option>이용권</option>
+						<option>계정</option>
+						<option>컨텐츠</option>
+						<option>재생</option>
+						<option>서비스</option>
+				</select>	
+			</div>
+			
+			<div class="ps-2">
+				<button class="btn btn-outline-secondary btn-sm" onclick="allView(1);">ALL</button>
+			</div>
+		</div>
 	</div>
-
+	
 	<!-- 테이블 영역 -->
 	<div id="helpMain">
 		
-		<table id="helpTable" class="table talbe table-striped text-center align-middle">
-		<thead>
+		<table id="helpTable" class="table talbe table-striped text-center align-middle border-dark">
+		<thead class="bg-dark text-light">
 			<tr>
 				<th>#</th>
 				<th>카테고리</th>
@@ -83,7 +109,7 @@
 		</tbody>	
 		</table>
 	</div>
-	
+	<br />
 	<!-- 페이지 네이트 영역 -->
 	<div id="pagenate">
 		<ul  class="pagination justify-content-center">	
@@ -91,7 +117,7 @@
 	</div>
 	
 </div>
-
+</section>
 
 <!-- 정보모달 -->
 <div class="modal" tabindex="-1" id="infoconfrim">
@@ -191,6 +217,33 @@ $(document).ready(function() {
 	var amount = $('#helpAmount').val();
 	makePageNate(len, pnum, amount);
 });
+
+function allView(pnum) {
+	$('#helpAmount').val(10)
+	$('#searchType').val('all')
+	
+	$.ajax({
+		type: "POST",
+		url: "/kflix/FQARest/index",
+		data: JSON.stringify({
+			searching_word: 'all'
+		}),
+		contentType: 'application/json',
+		
+ 		success: function(data){
+  			var len = data.length;
+  		  	var amount = 10;
+  			
+ 			makePageNate(len, pnum, amount);
+  			 
+  			makeTable(data, pnum, amount);
+ 
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		}
+	}) 
+}
 
 //페이지보기
 function amountChange() {

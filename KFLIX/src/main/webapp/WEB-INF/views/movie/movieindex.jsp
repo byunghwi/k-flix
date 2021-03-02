@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=2" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=6" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <title>영화 관리</title>
 </head>
@@ -25,7 +26,7 @@
 <section id="movielist">
 	<div class="container pt-2" id="board">
 		<div class="d-flex justify-content-end">
-			<a href="./deletedMovie" class="btn btn-secondary btn-sm">삭제된 항목</a>
+			<a href="./deletedMovie" class="btn btn-outline-secondary btn-sm">삭제된 항목</a>
 		</div>
 		
 		<div class="d-flex justify-content-center text-dark">
@@ -35,16 +36,46 @@
 		<div class="d-flex justify-content-between">
 			<div class="d-flex justify-content-start">
 				<span>
-					<a href="./addpage" class="btn btn-success">+ 추가</a>
-				</span>
-			
+					<a href="./addpage" class="btn btn-outline-success btn-sm">+ 추가</a>
+				</span>	
 			</div>
+			
+	
+	<div class="d-flex justify-content-end pb-2">
+	<!-- 컨텐츠 개수 -->
+	<div class="amount pe-3">
+		<select class="form-select form-select-sm" id="helpAmount">
+			<option value="5" selected>5개 씩 보기</option>
+			<option value="10">10개 씩 보기</option>
+			<option value="20">20개 씩 보기</option>
+		</select>
 	</div>
 	
-	<%@include file ="/resources/include/movie/searching.jsp" %>
+	<div class="input-group input-group-sm mb-1 justify-content-end search_label"> 
+	<div class="search_select">
+		<select class="form-select form-select-sm" id="search_cols" name="searching_index">
+			<option value="" selected>선택</option>
+		    <option value="movie_title">제목</option>
+		    <option value="director_name">감독</option>
+		    <option value="genre_name">장르</option>
+		    <option value="reg_date">등록일</option>
+		  </select>
+	</div>
+		<input type="text" name="searching_word" id="search_val" class="form-control form-control-sm" aria-describedby="search">
+  		<button class="btn btn-outline-secondary btn-sm" onclick="searching(1);"><i class="fas fa-search"></i></button>
+	</div>
+
+	<div class="ps-2">
+		<button class="btn btn-outline-secondary btn-sm" onclick="allView(1);">ALL</button>
+	</div>
+	
+	</div>
+	</div>
+	
 	
 	</div> 
 
+	<div id="movieMain">
 	<table class="table table-striped text-center align-middle border-dark" id="movietable">
 	    <thead class="bg-dark text-light">
 		    <tr>
@@ -70,20 +101,21 @@
 					<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
 					<td><a href="./updatepage/${movie.movie_id }" class="btn btn-primary">수정</a>
 						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-movieid="${movie.movie_id }" data-bs-target="#deletemodal">삭제</button>
-						<%-- <a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a> --%>
 					</td>
 				</tr>
 			</c:forEach>
 	  </tbody>
 	</table>
-	
+	</div>
+	<br />
+	<div>
 	<%@include file ="/resources/include/movie/pagecode.jsp" %>
+	</div>
 	
 </section>
 
 
-
-<%@include file ="/resources/include/movie/enModal.jsp" %>
+<%@ include file="/resources/include/movie/alertModal.jsp" %>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
@@ -92,6 +124,7 @@
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/movierest.js?ver=8"></script>
+<script src="/kflix/resources/js/movie/movierest.js?ver=18"></script>
+
 </body>
 </html>

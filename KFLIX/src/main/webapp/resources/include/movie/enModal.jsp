@@ -48,7 +48,7 @@
       </div>
       
       <div class="modal-body">
-	     <span id="confirmMsg"></span>
+	     <span id="alertMsg"></span>
 	  </div>     
 	   
       <div class="modal-footer">

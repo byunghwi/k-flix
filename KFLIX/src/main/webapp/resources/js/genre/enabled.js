@@ -32,6 +32,11 @@ function deleteBtn(pnum) {
 	$('#deletemodal').modal("hide");
 }
 
+// 개수보기 
+$('#helpAmount').change(function(){
+	ajaxCon(1);
+})
+
 function ajaxCon(pnum){
 	
 	$.ajax({
@@ -44,10 +49,19 @@ function ajaxCon(pnum){
 		
  		success: function(data){
   			var len = data.length;
-  			var amount = 10;
-  	
- 			makePageNate(len, pnum, amount);
-  
+  			var amount =  parseInt($('#helpAmount').val())
+	
+  			var anotherPnum = Math.ceil(len / amount);
+  			if ($('.active').text() == '' 
+  					|| $('.active').text() == 0){
+  				pnum = 1;
+  				
+  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+  				pnum = anotherPnum;
+  			}
+  			
+  			makePageNate(len, pnum, amount);
+  			
   			// 데이터, page - 클릭페이지, amount - 보여줄 수 
   			makeTable(data, pnum, amount);
    		},
@@ -72,9 +86,16 @@ function ajaxModalCon(pnum, id, path, name, modal){
 		
  		success: function(data){
   			var len = data.length;
-  			var amount = 10;
-  	
-  			pnum = Math.ceil(len / amount);
+  			var amount =  parseInt($('#helpAmount').val())
+	
+  			var anotherPnum = Math.ceil(len / amount);
+  			if ($('.active').text() == '' 
+  					|| $('.active').text() == 0){
+  				pnum = 1;
+  				
+  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+  				pnum = anotherPnum;
+  			}
   			
  			makePageNate(len, pnum, amount);
   

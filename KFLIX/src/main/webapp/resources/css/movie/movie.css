@@ -36,7 +36,12 @@ img {
 	background-color: white;
 }
 
-body, html {
+#movieMain {
+	overflow: auto;
+	height: 620px;
+}
+
+/* body, html {
     background: #141414;
     color: #fff;
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -48,12 +53,8 @@ body, html {
     -ms-user-select: none;
     user-select: none;
     cursor: default;
-}
+} */
 
 h1{
 	color: black;
-}
-* {
-	border: 1px dotted red;
-	
 }

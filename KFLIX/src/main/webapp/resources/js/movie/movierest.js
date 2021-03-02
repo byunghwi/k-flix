@@ -1,14 +1,13 @@
 /**
  * 
  */
- 
-var infomodal = function() {$('#infoconfrim').modal("show")}
+ var infomodal = function() {$('#infoconfrim').modal("show")}
 
 function infoMsg(msg){
-	$('#confirmMsg').html(msg);
+	$('#alertMsg').html(msg);
 	infomodal();
 }
-
+ 
 function allView(pnum) {
 	searchReset();
 	ajaxCon(pnum);
@@ -19,23 +18,29 @@ function pageClick(pnum) {
 	ajaxCon(pnum);	
 }
 
+$('#helpAmount').change(function(){
+
+	ajaxCon(1);
+})
+
 function searching(pnum) {
 	
 	var select_word = $('#search_val').val();
 	var select_index = $('#search_cols').val();
 	var regexp = /^[0-9]{2}[\/](0[1-9]|1[0-2])$/; 
 	
-	if (select_word == '' || select_word == null){
-		infoMsg("검색할 단어를 입력해주세요");
+	if (select_index == '' || select_index == null){
+		infoMsg('검색색할 목록을 선택해 주세요');
 		
-	} else if (select_index == '' || select_index == null){
-		infoMsg("검색할 목록을 선택해 주세요");
+	} else if (select_word == '' || select_word == null) {
+		infoMsg("검색할 단어를 입력해주세요");
 		
 	} else if (select_index == 'reg_date' && regexp.test(select_word)){
 		ajaxCon(pnum);	
 		
 	} else if (select_index == 'reg_date' && !regexp.test(select_word)) {
-		infoMsg('날짜 형식이 맞지 않습니다. (' + select_word + ') \n예시) 21/02');	
+		infoMsg('날짜 형식이 맞지 않습니다. (' + select_word + ') \n예시) 21/02');
+			
 	} else {
 		ajaxCon(pnum);
 	}
@@ -54,7 +59,16 @@ function ajaxCon(pnum){
 		
  		success: function(data){
   			var len = data.length;
-  			var amount = 5;
+  			var amount = parseInt($('#helpAmount').val())
+	
+  			var anotherPnum = Math.ceil(len / amount);
+  			if ($('.active').text() == '' 
+  					|| $('.active').text() == 0){
+  				pnum = 1;
+  				
+  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+  				pnum = anotherPnum;
+  			}
   	
  			makePageNate(len, pnum, amount);
   
@@ -205,9 +219,16 @@ function deleteBtn(pnum) {
 			$('#deletemodal').modal("hide");
 			
   			var len = data.length;
-  			var amount = 5;
-  			
-  			pnum = Math.ceil(len / 5);
+  			var amount =  parseInt($('#helpAmount').val())
+	
+  			var anotherPnum = Math.ceil(len / amount);
+  			if ($('.active').text() == '' 
+  					|| $('.active').text() == 0){
+  				pnum = 1;
+  				
+  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+  				pnum = anotherPnum;
+  			}
   			
  			makePageNate(len, pnum, amount);
   

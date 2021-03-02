@@ -9,7 +9,8 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=3" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <title>삭제된 목록</title>
 
@@ -17,24 +18,48 @@
 <body>
 
 
+<section style="padding-top: 20px;" id="movielist">
 <div class="container pt-5">
 	<div class="d-flex justify-content-end">
-		<a href="./movieindex" class="btn btn-secondary btn-sm">관리 페이지</a>
+		<a href="./movieindex" class="btn btn-outline-secondary btn-sm">관리 페이지</a>
 	</div>
 	
 	<div class="d-flex justify-content-center">
 		<h1>삭제 목록</h1>
 	</div>
 	
-<div class="d-flex justify-content-end">
-
-<%@include file ="/resources/include/movie/searching.jsp" %>
-
-</div>
-
-<section style="padding-top: 20px;" id="movielist">
-	<table class="table table-striped table-danger text-center align-middle" id="movietable">
-		<thead>
+	
+	<div class="d-flex justify-content-end pb-2">
+	<!-- 컨텐츠 개수 -->
+	<div class="amount pe-3">
+		<select class="form-select form-select-sm" id="helpAmount">
+			<option value="5" selected>5개 씩 보기</option>
+			<option value="10">10개 씩 보기</option>
+			<option value="20">20개 씩 보기</option>
+		</select>
+	</div>
+	
+	<div class="input-group input-group-sm mb-1 justify-content-end search_label"> 
+	<div class="search_select">
+		<select class="form-select form-select-sm" id="search_cols" name="searching_index">
+			<option value="" selected>선택</option>
+		    <option value="movie_title">제목</option>
+		    <option value="director_name">감독</option>
+		    <option value="genre_name">장르</option>
+		    <option value="reg_date">등록일</option>
+		  </select>
+	</div>
+		<input type="text" name="searching_word" id="search_val" class="form-control form-control-sm" aria-describedby="search">
+  		<button class="btn btn-outline-secondary btn-sm" onclick="searching(1);"><i class="fas fa-search"></i></button>
+	</div>
+		<div class="ps-2">
+		<button class="btn btn-outline-secondary btn-sm" onclick="allView(1);">ALL</button>
+	</div>
+	
+	</div>
+	<div id="movieMain">
+	<table class="table table-striped text-center align-middle border-danger" id="movietable">
+		<thead class="bg-danger text-light">
 		<tr>
 			<th>ID</th>
 			<th>포스터</th>
@@ -59,19 +84,22 @@
 				<td>
 				<button type="button" class="btn btn-warning" data-bs-toggle="modal" 
 							data-movieid="${movie.movie_id }" data-bs-target="#recoverymodal">복구</button>
-					<%-- <a href="./detail/${movie.movie_id }" class="btn btn-info text-light">상세보기</a> --%>
 				</td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
-</section>
-
+	</div>
+	
+</div>
+<br />
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
 
-</div>
+</section>
 
-<%@include file ="/resources/include/movie/disModal.jsp" %>
+
+
+<%@ include file="/resources/include/movie/alertModal.jsp" %>
 
   
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
@@ -81,7 +109,7 @@
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/deletedrest.js?ver=6"></script>
+<script src="/kflix/resources/js/movie/deletedrest.js?ver=8"></script>
 
 </body>
 </html>
