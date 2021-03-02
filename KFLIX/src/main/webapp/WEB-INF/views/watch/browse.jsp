@@ -61,7 +61,10 @@
 			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
 		</ul>
 		<div class="profile">
-			<i class="fas fa-search color_white nav-icon"></i> <i
+		
+		<input id="search" type="checkbox">
+		<label for="search"><i class="fas fa-search color_white nav-icon"></i></label>
+			 <i
 				class="fas fa-gift color_white nav-icon"></i> <i
 				class="fas fa-bell color_white nav-icon"></i> <i
 				style="background-color: white; width: 40px"

@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kflix.actor.service.ActorService;
@@ -159,6 +161,7 @@ public class WatchController {
 		model.addAttribute("email", member.getEmail());
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
 		model.addAttribute("getwish", watchservice.getSelectWishUser(member.getEmail(), movie_id));
+		model.addAttribute("getlike", watchservice.getSelectLikeUser(member.getEmail(), movie_id));
 		return "/watch/movieInfo";
 	}
 
@@ -176,21 +179,6 @@ public class WatchController {
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
 		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		return "/watch/video";
-	}
-
-	@PostMapping(value = "/wish", consumes = "application/json", produces = "text/html; charset=UTF-8")
-	public String setwish(@RequestBody WishVO wish) {
-		System.out.println("wish왔나");
-		if (wish.getResult().equals("create")
-				&& watchservice.getSelectWishUser(wish.getEmail(), wish.getMovie_id()) == null) {
-			int result1 = watchservice.createWish(wish);
-			System.out.println("wish생성");
-		} else if (wish.getResult().equals("delete")
-				&& watchservice.getSelectWishUser(wish.getEmail(), wish.getMovie_id()) != null) {
-			int result1 = watchservice.deleteWish(wish);
-			System.out.println("wish삭제");
-		}
-		return "";
 	}
 
 	@GetMapping(value = "/bttest")
