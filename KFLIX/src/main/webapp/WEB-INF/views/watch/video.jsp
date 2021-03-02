@@ -39,11 +39,12 @@
 		</i>
 		</a>
 
-		<video id="video" class="viewer" muted autoplay
-			controlslist="nodownload" poster="${movie.poster_path }">
-			<source src="${movie.video_path }" type="video/mp4">
-		</video>
-
+		<div id="newvideo">
+			<video id="video" class="viewer" muted autoplay
+				controlslist="nodownload" poster="${movie.poster_path }">
+				<source src="${movie.video_path }" type="video/mp4">
+			</video>
+		</div>
 
 		<div class="player" onclick="vidplay()">
 
@@ -54,12 +55,11 @@
 				</div>
 
 				<div id="btns">
-					<i id="restart" onclick="restart()" class=" fas fa-stop color-w"></i>
-					<div style="display: inline-block;" onclick="vidplay()"
+					<i id="restart" class=" fas fa-stop color-w"></i>
+					<div style="display: inline-block;"
 						id="playnpause" class="toggle"></div>
-
-					<i id="rew" onclick="skip(-10)" class="fas fa-undo-alt color-w">10</i>
-					<i id="fastFwd" onclick="skip(10)" class="fas fa-redo-alt color-w">10</i>
+					<i id="rew" class="fas fa-undo-alt color-w">10</i>
+					<i id="fastFwd" class="fas fa-redo-alt color-w">10</i>
 
 					<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
 					<div style="display: inline-block; width: 1px;"></div>
@@ -132,11 +132,24 @@
 
 	<script>
 	
+	history.pushState({page:"first"}, document.title, location.pathname + '#first'); 
+
+	window.addEventListener('popstate', function(event) {
+
+		history.pushState({page:"historyChanged"}, document.title, location.pathname + '#changed'); 
 	
+	});
+
+	
+	var newvideo = document.getElementById("newvideo");
 			console.log("${movie.movie_id}");
 			console.log("${watching.watch_type}");
+			
+		
 			if (window.performance.navigation.type == 1) {
-				//새로고침
+				video.currentTime = "${watching.view_point}";
+				savecurrentTime();
+				location.href = "/kflix/browse";
 			}else if (window.performance.navigation.type == 2) {
 				location.href = "/kflix/browse";
 			}else{
@@ -154,12 +167,13 @@
 				</c:choose>
 				</c:if>
 			}
+			
 			sound();
+			
 			var video = document.getElementById('video');
 			const player = document.querySelector('.player'); 
 			const progress = player.querySelector('.progress'); 
 			const progressBar = player.querySelector('.progress__filled');
-			const skipButtons = player.querySelectorAll('[data-skip]'); 
 			const ranges = player.querySelectorAll('.player__slider');
 
 			
@@ -182,10 +196,17 @@
 					function scrub(e) {
 						const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
 						video.currentTime = scrubTime; 
-						} 
+						e.stopPropagation();
+						}
 					
 					let mousedown = false;
-					progress.addEventListener('click', scrub); 
+					
+					progress.addEventListener('click', function scrub(e) {
+						const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+						video.currentTime = scrubTime; 
+						e.stopPropagation();
+						},false );
+					
 					progress.addEventListener('mousemove', (e) => mousedown && scrub(e)
 							);
 					progress.addEventListener('mousedown', () => mousedown = true); 
@@ -238,7 +259,6 @@
 				xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
 				xhttp.setRequestHeader('content-type', 'application/json');
 				xhttp.send(JSON.stringify(data));
-
 			}
 
 			//미디어 재생이 종료되었을때 발생하는 이벤트 처리
@@ -247,6 +267,7 @@
 			function event(e) {
 				recommend.style.display = 'block';
 				alert('미디어 재생이 완료되었습니다.');
+				playnpause.innerHTML = `<i id="play" class="fas fa-play color-w"></i>`;
 				var data = {
 					watch_type : "WATCHED",
 					movie_id : "${movie.movie_id}",
