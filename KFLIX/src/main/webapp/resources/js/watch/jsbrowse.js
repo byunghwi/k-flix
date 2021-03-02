@@ -15,10 +15,10 @@ function framshow(movieId) {
 }
 
 function frameclose() {
+	document.location.reload(true);
 	infoframe.src = "";
 	infoframe.style.display = 'none';
 	body.style.overflow = 'auto';
-	location.href = "/kflix/browse";
 }
 
 function videoshow(movieId) {

@@ -101,9 +101,8 @@
 
 
 	<div id="list" class="container">
-		<div
+		<div id="slides"
 			style="position: relative; top: -476px; padding: 100px 0; overflow: hidden;">
-
 
 			<div class="list container">
 				<c:if test="${not empty test.watching }">
@@ -124,7 +123,8 @@
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="dis img1" alt="...">
 
-														<div class="progress" style="flex-basis: ((${watch.view_point} / ${Allmovie.play_time}) * 100)%;"></div>
+														<div class="progress"
+															style="flex-basis: ((${watch.view_point} / ${Allmovie.play_time}) * 100)%;"></div>
 
 														<div class="videohover">
 															<img style="margin: 0;" src="${Allmovie.poster_path }"
@@ -628,7 +628,7 @@
 			</div>
 
 		</div>
-
+		
 	</div>
 	<iframe id="infoframe" name="browse" src="" width="400px"
 		height="300px" allowTransparency="true"
@@ -638,163 +638,168 @@
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
+
 	<script type="text/javascript">
 		console.log(${i});
-
-		<c:forEach var="j" begin="1" end="${i}">
-			console.log(${j});
-			
-			
-		var 
-				slides${j} = document.querySelector('.slides${j}'), 
-				
-				slide_wrapper${j} = document.querySelector('.slide_wrapper${j}'), 
-				
-				slide${j} = document.querySelectorAll('.slides${j} .slideli${j}'),
-				
-				currentIdx${j} = 0, 
-				
-				slideCount${j} = slide${j}.length, 
-				
-				prevBtn${j} = document.querySelector('.prev${j}'), 
-				
-				backopprev${j} = document.querySelector('.backopprev${j}'),
-				
-				backopnext${j} = document.querySelector('.backopnext${j}'),
-				
-				slideWidth${j} = 300, 
-				slideMargin${j} = 10, 
-				slideShow${j} = 5, 
-				allpagenum${j} = Math.ceil(slideCount${j} / slideShow${j}), 
-				
-				nextBtn${j} = document.querySelector('.next${j}'), 
-				
-				currentPagenum${j} = 1,
-				
-				sliderow${j} = document.querySelector('.sliderow${j}'), 
-				
-				pagenumdiv${j} = document.querySelector('.pagenum${j}');
-
-				console.log(slideCount${j});
-				
-		slides${j}.style.width = (slideWidth${j} + slideMargin${j}) * slideCount${j}
-				- slideMargin${j} + 'px';
-		slide_wrapper${j}.style.width = (slideWidth${j} + slideMargin${j}) * slideShow${j}
-				- slideMargin${j} + 'px';
-
+		re();
 		
-		//슬라이드 페이지 view 시 버튼 나타내기
-		for (i = 1; i <= allpagenum${j}; i++) {
-			if (i == 1) {
-				pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
-			} else {
-				pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
-			}
-		}
-
-		//슬라이드 마우스오버 시 버튼 나타내기
-		sliderow${j}.addEventListener("mouseover", function() {
-			pagenumdiv${j}.style.visibility = 'visible';
-
-			if (slideCount${j} > slideShow${j}) {
-				prevBtn${j}.style.visibility = 'visible';
-				nextBtn${j}.style.visibility = 'visible';
-			}
-
-			if (currentPagenum${j} == 1) {
-				prevBtn${j}.style.visibility = 'hidden';
-			}
-
-		});
+function re() {
+	
+	
+	<c:forEach var="j" begin="1" end="${i}">
+	console.log(${j});
+	
+var 
+		slides${j} = document.querySelector('.slides${j}'), 
 		
-		//슬라이드 마우스아웃 시 버튼 숨기기
-		sliderow${j}.addEventListener("mouseout", function() {
-			prevBtn${j}.style.visibility = 'hidden';
-			nextBtn${j}.style.visibility = 'hidden';
-			pagenumdiv${j}.style.visibility = 'hidden';
-		});
+		slide_wrapper${j} = document.querySelector('.slide_wrapper${j}'), 
+		
+		slide${j} = document.querySelectorAll('.slides${j} .slideli${j}'),
+		
+		currentIdx${j} = 0, 
+		
+		slideCount${j} = slide${j}.length, 
+		
+		prevBtn${j} = document.querySelector('.prev${j}'), 
+		
+		backopprev${j} = document.querySelector('.backopprev${j}'),
+		
+		backopnext${j} = document.querySelector('.backopnext${j}'),
+		
+		slideWidth${j} = 300, 
+		slideMargin${j} = 10, 
+		slideShow${j} = 5, 
+		allpagenum${j} = Math.ceil(slideCount${j} / slideShow${j}), 
+		
+		nextBtn${j} = document.querySelector('.next${j}'), 
+		
+		currentPagenum${j} = 1,
+		
+		sliderow${j} = document.querySelector('.sliderow${j}'), 
+		
+		pagenumdiv${j} = document.querySelector('.pagenum${j}');
 
-		function moveSlide${j}(num) {
-			slides${j}.style.left = -num * (slideWidth${j} + slideMargin${j}) + 'px';
-			currentIdx${j} = num;
-			currentPagenum${j} = currentIdx${j} == 0 ? 1 : Math.floor(currentIdx${j}
-					/ slideShow${j}) + 1;
-		}
+		console.log(slideCount${j});
+		
+slides${j}.style.width = (slideWidth${j} + slideMargin${j}) * slideCount${j}
+		- slideMargin${j} + 'px';
+slide_wrapper${j}.style.width = (slideWidth${j} + slideMargin${j}) * slideShow${j}
+		- slideMargin${j} + 'px';
 
-		nextBtn${j}.addEventListener(
-						'click',
-						function() {
-							if (currentPagenum${j} > 0) {
-								moveSlide${j}(currentIdx${j} + slideShow${j});
-								pagenumdiv${j}.innerHTML = ``;
-								for (i = 1; i <= allpagenum${j}; i++) {
-									if (i == currentPagenum${j}) {
-										pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
-									} else {
-										pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
-									}
-								}
-								prevBtn${j}.style.visibility = 'visible';
-								backopprev${j}.style.visibility = 'visible';
-								if (currentPagenum${j} > allpagenum${j}) {
-									moveSlide${j}(0);
-									prevBtn${j}.style.visibility = 'hidden';
-									backopprev${j}.style.visibility = 'hidden';
-									pagenumdiv${j}.innerHTML = ``;
-									for (i = 1; i <= allpagenum${j}; i++) {
-										if (i == currentPagenum${j}) {
-											pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
-										} else {
-											pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
-										}
-									}
-								}
+
+//슬라이드 페이지 view 시 버튼 나타내기
+for (i = 1; i <= allpagenum${j}; i++) {
+	if (i == 1) {
+		pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+	} else {
+		pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
+	}
+}
+
+//슬라이드 마우스오버 시 버튼 나타내기
+sliderow${j}.addEventListener("mouseover", function() {
+	pagenumdiv${j}.style.visibility = 'visible';
+
+	if (slideCount${j} > slideShow${j}) {
+		prevBtn${j}.style.visibility = 'visible';
+		nextBtn${j}.style.visibility = 'visible';
+	}
+
+	if (currentPagenum${j} == 1) {
+		prevBtn${j}.style.visibility = 'hidden';
+	}
+});
+
+//슬라이드 마우스아웃 시 버튼 숨기기
+sliderow${j}.addEventListener("mouseout", function() {
+	prevBtn${j}.style.visibility = 'hidden';
+	nextBtn${j}.style.visibility = 'hidden';
+	pagenumdiv${j}.style.visibility = 'hidden';
+});
+
+function moveSlide${j}(num) {
+	slides${j}.style.left = -num * (slideWidth${j} + slideMargin${j}) + 'px';
+	currentIdx${j} = num;
+	currentPagenum${j} = currentIdx${j} == 0 ? 1 : Math.floor(currentIdx${j}
+			/ slideShow${j}) + 1;
+}
+
+nextBtn${j}.addEventListener(
+				'click',
+				function() {
+					if (currentPagenum${j} > 0) {
+						moveSlide${j}(currentIdx${j} + slideShow${j});
+						pagenumdiv${j}.innerHTML = ``;
+						for (i = 1; i <= allpagenum${j}; i++) {
+							if (i == currentPagenum${j}) {
+								pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
 							} else {
-								/*moveSlide(0); 첫페이지*/
-								nextBtn${j}.style.visibility = 'hidden';
-								backopnext${j}.style.visibility = 'hidden';
+								pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
 							}
-						});
-
-		if (currentPagenum${j} == 1) {
-			if (slideCount${j} <= slideShow${j}) {
-				nextBtn${j}.style.visibility = 'hidden';
-				backopnext${j}.style.visibility = 'hidden';
-			}else{
-			backopnext${j}.style.visibility = 'visible';
-				
-			}
-
-			prevBtn${j}.style.visibility = 'hidden';
-			backopprev${j}.style.visibility = 'hidden';
-		}
-
-		prevBtn${j}.addEventListener(
-						'click',
-						function() {
-							if (currentPagenum${j} <= allpagenum${j}) {
-								moveSlide${j}(currentIdx${j} - slideShow${j});
-								pagenumdiv${j}.innerHTML = ``;
-								for (i = 1; i <= allpagenum${j}; i++) {
-									if (i == currentPagenum${j}) {
-										pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
-									} else {
-										pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
-									}
+						}
+						prevBtn${j}.style.visibility = 'visible';
+						backopprev${j}.style.visibility = 'visible';
+						if (currentPagenum${j} > allpagenum${j}) {
+							moveSlide${j}(0);
+							prevBtn${j}.style.visibility = 'hidden';
+							backopprev${j}.style.visibility = 'hidden';
+							pagenumdiv${j}.innerHTML = ``;
+							for (i = 1; i <= allpagenum${j}; i++) {
+								if (i == currentPagenum${j}) {
+									pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
+								} else {
+									pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
 								}
-								nextBtn${j}.style.visibility = 'visible';
-								backopnext${j}.style.visibility = 'visible';
-								if (currentPagenum${j} == 1) {
-									prevBtn${j}.style.visibility = 'hidden';
-									backopprev${j}.style.visibility = 'hidden';
-								}
+							}
+						}
+					} else {
+						/*moveSlide(0); 첫페이지*/
+						nextBtn${j}.style.visibility = 'hidden';
+						backopnext${j}.style.visibility = 'hidden';
+					}
+				});
+
+if (currentPagenum${j} == 1) {
+	if (slideCount${j} <= slideShow${j}) {
+		nextBtn${j}.style.visibility = 'hidden';
+		backopnext${j}.style.visibility = 'hidden';
+	}else{
+	backopnext${j}.style.visibility = 'visible';
+		
+	}
+
+	prevBtn${j}.style.visibility = 'hidden';
+	backopprev${j}.style.visibility = 'hidden';
+}
+
+prevBtn${j}.addEventListener(
+				'click',
+				function() {
+					if (currentPagenum${j} <= allpagenum${j}) {
+						moveSlide${j}(currentIdx${j} - slideShow${j});
+						pagenumdiv${j}.innerHTML = ``;
+						for (i = 1; i <= allpagenum${j}; i++) {
+							if (i == currentPagenum${j}) {
+								pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveron"></i>`;
 							} else {
-								/*moveSlide(slideCount - slideShow);*/
-								prevBtn${j}.style.visibility = 'hidden';
-								prevBtn${j}.style.visibility = 'hidden';
+								pagenumdiv${j}.innerHTML += `<i class="far fa-window-minimize pagehoveroff"></i>`;
 							}
-						});
-		</c:forEach>
+						}
+						nextBtn${j}.style.visibility = 'visible';
+						backopnext${j}.style.visibility = 'visible';
+						if (currentPagenum${j} == 1) {
+							prevBtn${j}.style.visibility = 'hidden';
+							backopprev${j}.style.visibility = 'hidden';
+						}
+					} else {
+						/*moveSlide(slideCount - slideShow);*/
+						prevBtn${j}.style.visibility = 'hidden';
+						prevBtn${j}.style.visibility = 'hidden';
+					}
+				});
+</c:forEach>
+}
+	
 		
 	</script>
 </body>
