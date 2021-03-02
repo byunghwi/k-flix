@@ -12,17 +12,35 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=6" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=4" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
+<style>
+	#sidebar{
+		width: 300px;
+		height: 100%;
+		background-color: black;
+		position: fixed;
+		/* float: left; */
+		padding: 0;
+		margin: 0;
+	}
+</style>
 <title>영화 관리</title>
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/movie/indexnav.jsp" %>
+<div id="sidebar">
+<ul>
+	<li>dq</li>
+	<li>dq</li>
+	<li>dqd</li>
+	<li>dq</li>
+</ul>
+</div>
+
+
 <!-- 게시판 -->
-
-
 <section id="movielist">
 	<div class="container pt-2" id="board">
 		<div class="d-flex justify-content-end">
@@ -113,7 +131,6 @@
 	</div>
 	
 </section>
-
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
 

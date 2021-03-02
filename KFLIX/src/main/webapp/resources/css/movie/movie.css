@@ -31,9 +31,10 @@ img {
 }
 
 #movielist{
-	width: 1300px;
+	width: 1200px;
 	height: 900px;
 	background-color: white;
+	margin-left: 350px;
 }
 
 #movieMain {
