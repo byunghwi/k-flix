@@ -22,7 +22,7 @@
 	<div id="frame">
 		<div id="postiondiv" class="container postiondiv">
 
-			<a href="<%=application.getContextPath()%>/browse"><i
+			<a ><i
 				class="fas fa-arrow-left back"></i></a>
 			<div id="boxsha">
 
@@ -333,9 +333,14 @@
 		
 		if (wish_check.checked) {
 			console.log("wish체크됨");
+			check1 = "체크";
+			check2 = "체크";
 		} else {
 			console.log("wish체크안됨");
+			check1 = "미체크";
+			check2 = "미체크";
 		}
+		
 		
 		<c:choose>
 		<c:when test="${not empty getlike }">
@@ -352,8 +357,12 @@
 
 		if (like_check.checked) {
 			console.log("like체크됨");
+			check3 = "체크";
+			check4 = "체크";
 		} else {
 			console.log("like체크안됨");
+			check3 = "미체크";
+			check4 = "미체크";
 		}
 		
 		function setwish(wishresult) {

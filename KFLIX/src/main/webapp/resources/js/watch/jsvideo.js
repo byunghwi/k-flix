@@ -10,12 +10,53 @@ var videobar = document.getElementById('videobar');
 var movieinfo = document.getElementById('movieinfo');
 var recommend = document.getElementById('recommend');
 
+
+var restart = document.getElementById('restart');
+var rew = document.getElementById('rew');
+var fastFwd = document.getElementById('fastFwd');
+
 if (video.paused) {
 	playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
 } else {
 	playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-play color-w"></i>`;
 }
+
 video.volume = '0.5';
+
+videobar.addEventListener("click", (e) => {
+	e.stopPropagation();
+}, false)
+
+restart.addEventListener("click", function(e) {
+	if (video.paused) {
+		video.play();
+		playnpause.innerHTML = `<i id="play" class="fas fa-pause color-w"></i>`;
+	}
+	video.currentTime = 0;
+	e.stopPropagation();
+}, false)
+
+playnpause.addEventListener("click", function(e) {
+	vidplay();
+	e.stopPropagation();
+}, false)
+
+
+rew.addEventListener("click",
+	function skip(e) {
+		video.currentTime -= 10;
+		e.stopPropagation();
+	}, false)
+
+
+fastFwd.addEventListener("click",
+	function skip(e) {
+		video.currentTime += 10;
+		e.stopPropagation();
+	}, false)
+
+
+
 
 recommend.addEventListener("click", (e) => {
 	recommend.style.display = 'none';
@@ -36,7 +77,7 @@ videocon.addEventListener("mousemove", function(e) {
 				movieinfo.style.opacity = '1';
 			}
 		}
-	}, 5000);
+	}, 2000);
 
 });
 
@@ -45,9 +86,10 @@ videocon.addEventListener("mouseout", function() {
 	videobar.style.display = 'none';
 });
 
-volrange.addEventListener("change", (e) => {
+volrange.addEventListener("click", function(e) {
 	video.volume = volrange.value;
-});
+	e.stopPropagation();
+}, false)
 
 function sound() {
 	video.muted = false;
@@ -58,7 +100,7 @@ function vidplay() {
 	if (video.paused) {
 		video.play();
 		movieinfo.style.opacity = '0';
-		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
+		playnpause.innerHTML = `<i id="play" class="fas fa-pause color-w"></i>`;
 	} else {
 		video.pause();
 		setTimeout(function() {
@@ -69,27 +111,18 @@ function vidplay() {
 			} else {
 				movieinfo.style.opacity = '0';
 			}
-		}, 5000);
-		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-play color-w"></i>`;
+		}, 2000);
+		playnpause.innerHTML = `<i id="play" class="fas fa-play color-w"></i>`;
 	}
 	recommend.style.display = 'none';
 }
 
-function restart() {
-	if (video.paused) {
-		video.play();
-		playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
-	}
-	video.currentTime = 0;
-}
+
 
 function volshow() {
-	volume.innerHTML += `<input type="range" onclick="vidplay()" class="form-range" id="customRange1">`;
+	volume.innerHTML += `<input type="range" class="form-range" id="customRange1">`;
 }
 
-function skip(value) {
-	video.currentTime += value;
-}
 
 function openFullscreen() {
 	if (video.requestFullscreen) {

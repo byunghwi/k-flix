@@ -46,7 +46,7 @@
 <body>
 	<div id="modalbackground"></div>
 	<div class="container flex-row nav-bar ">
-<%@include file="/WEB-INF/views/main/header.jsp" %>
+		<%@include file="/WEB-INF/views/main/header.jsp"%>
 		<img class="logo" alt="로고"
 			src="/kflix/resources/imgs/watch/kflixlogo.png">
 
@@ -628,7 +628,7 @@
 			</div>
 
 		</div>
-		
+
 	</div>
 	<iframe id="infoframe" name="browse" src="" width="400px"
 		height="300px" allowTransparency="true"
@@ -641,11 +641,7 @@
 
 	<script type="text/javascript">
 		console.log(${i});
-		re();
 		
-function re() {
-	
-	
 	<c:forEach var="j" begin="1" end="${i}">
 	console.log(${j});
 	
@@ -798,8 +794,7 @@ prevBtn${j}.addEventListener(
 					}
 				});
 </c:forEach>
-}
-	
+
 		
 	</script>
 </body>

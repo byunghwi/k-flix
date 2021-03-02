@@ -132,6 +132,15 @@
 
 	<script>
 	
+	history.pushState({page:"first"}, document.title, location.pathname + '#first'); 
+
+	window.addEventListener('popstate', function(event) {
+
+		history.pushState({page:"historyChanged"}, document.title, location.pathname + '#changed'); 
+	
+	});
+
+	
 	var newvideo = document.getElementById("newvideo");
 			console.log("${movie.movie_id}");
 			console.log("${watching.watch_type}");
