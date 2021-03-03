@@ -61,5 +61,6 @@
 	<context:component-scan base-package="com.kflix.servicecenter" />
 	<context:component-scan base-package="com.kflix.kakaoPay" />
 	<context:component-scan base-package="com.kflix.chart" />
+	<context:component-scan base-package="com.kflix.manage" />
 	
 </beans:beans>
