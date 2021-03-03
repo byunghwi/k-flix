@@ -42,10 +42,11 @@
 	height: 20px;
 }
 </style>
+
 </head>
 <body>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 	<div id="modalbackground"></div>
-		<%@include file="/WEB-INF/views/main/header.jsp"%>
 
 	<div id="shadow1"></div>
 	<div id="carouselExampleInterval" class="carousel slide"
@@ -83,6 +84,7 @@
 			style="position: relative; top: -476px; padding: 100px 0; overflow: hidden;">
 
 			<div class="list container">
+			<hr>
 				<c:if test="${not empty test.watching }">
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
@@ -218,6 +220,7 @@
 				</c:if>
 
 				<c:if test="${not empty test.wish}">
+				<hr>
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
 						<!--  style="top: 38px" -->
@@ -346,8 +349,8 @@
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />
+				<hr id="top10">
 				<div class="sliderow${i} }">
-					<!--  style="top: 76px" -->
 					<h2 class="rowHeader${i}">KFLIX의 TOP 10 콘텐츠</h2>
 					<div class="slide_wrapper${i}">
 						<ul class="slides${i}">

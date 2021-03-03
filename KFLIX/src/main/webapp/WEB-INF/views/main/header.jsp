@@ -8,6 +8,8 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/kflix/resources/css/main/cssheader.css">
+	<style type="text/css">
+</style>
 </head>
 <body>
 	<%-- <h1>TEST 확인용 -> ${login}</h1>
@@ -20,9 +22,8 @@
 		<ul class="nav" style="margin: 0 300px 0 0;">
 			<li class="nav-item"><a class="nav-link active"
 				aria-current="page" href="/kflix/browse">홈</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">TV프로그램</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-			<li class="nav-item"><a class="nav-link" href="#" tabindex="-1">NEW!요즘
+			<li class="nav-item"><a class="nav-link" href="/kflix/browse#top10">영화</a></li>
+			<li class="nav-item"><a class="nav-link" href="#top10" tabindex="-1">NEW!요즘
 					대세 콘텐츠</a></li>
 
 			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
