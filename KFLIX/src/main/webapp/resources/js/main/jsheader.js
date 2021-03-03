@@ -1,7 +1,21 @@
 
 infoframe = document.getElementById('infoframe');
-
+search = document.getElementById('search');
+searchinput = document.getElementById('searchinput');
 body = document.querySelector('body');
+
+search.addEventListener("click", function(){
+	if(search.checked){
+		searchinput.style.display = 'inline-block';
+	}else {
+		if(searchinput.value != ""){
+			console.log("서치 합니다")
+			document.getElementById(searchinput.getAttribute('form')).submit();
+			searchinput.value = "";
+		}
+		searchinput.style.display = 'none';
+	}
+});
 
 function mianreload() {
 	document.location.reload(true);

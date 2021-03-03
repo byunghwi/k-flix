@@ -35,6 +35,7 @@ import com.kflix.genre.domain.Genre;
 import com.kflix.genre.service.GenreService;
 import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.MovieVO;
+import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
 import com.kflix.watch.domain.Basket;
@@ -60,7 +61,7 @@ public class WatchController {
 
 	@GetMapping("/browse")
 	public String getbrowse(Model model, HttpSession session) {
-		
+
 		Member member = (Member) session.getAttribute("login");
 		Basket basket = new Basket();
 		List<MovieVO> movies = watchservice.getAllmovie();
@@ -69,21 +70,21 @@ public class WatchController {
 			arr.add(movie.getGenre_id1());
 			arr.add(movie.getGenre_id2());
 		}
-		HashSet<Integer> arr2 = new HashSet<Integer>(arr); //중복제거
+		HashSet<Integer> arr2 = new HashSet<Integer>(arr); // 등록된 영화 장르 중복제거
 		ArrayList<Integer> movie_genre = new ArrayList<>(arr2); // 배열로 다시 넣기
-		
+
 		model.addAttribute("Ranking", watchservice.getmovieRanking());
-		
+
 		basket.setMovie(watchservice.getAllmovie());
 		basket.setWatch(watchservice.getSelectWatch(member.getEmail()));
 		basket.setWatching(watchservice.getSelectWatching(member.getEmail()));
 		basket.setWish(watchservice.getSelectWish(member.getEmail()));
 		basket.setGenre(watchservice.getAllGenre());
+		model.addAttribute("test", basket);
 
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("test", basket);
 		model.addAttribute("movie_genre", movie_genre);
 		model.addAttribute("email", member.getEmail());
 		return "/watch/browse";
@@ -92,38 +93,9 @@ public class WatchController {
 	@GetMapping("/btest")
 	public String btest(Model model, HttpSession session) {
 
-		Member member = (Member) session.getAttribute("login");
-		Basket basket = new Basket();
-		List<MovieVO> movies = watchservice.getAllmovie();
-		ArrayList<Integer> arr = new ArrayList<>();
-		for (MovieVO movie : movies) {
-			arr.add(movie.getGenre_id1());
-			arr.add(movie.getGenre_id2());
-		}
-		HashSet<Integer> arr2 = new HashSet<Integer>(arr);
-		ArrayList<Integer> movie_genre = new ArrayList<>(arr2);
-		
-		/* WatchController 에서 컬렉션sort로 중복 제거한 영화의 장르를 model에 담아서 */
-		basket.setMovie(watchservice.getAllmovie());
-		basket.setWatch(watchservice.getSelectWatch(member.getEmail()));
-		basket.setWish(watchservice.getSelectWish(member.getEmail()));
-		basket.setGenre(watchservice.getAllGenre());
-		basket.setGenre(watchservice.getAllGenre());
-		model.addAttribute("movie_genre", movie_genre);
-		model.addAttribute("test", basket);
-		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
-		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
-		model.addAttribute("email", member.getEmail());
-
-		System.out.println("[WatchController] basket 객체 > " + basket);
-		System.out.println("===============================================================");
-		System.out.println("[WatchController] AllActor 객체 > " + basket);
-		System.out.println("===============================================================");
-		System.out.println("[WatchController] AllDirector 객체 > " + basket);
-		System.out.println("===============================================================");
-
-		return (member.getEmail().equals("wmffff@naver.com")) ? "/watch/NewFile_kbh" : "/watch/NewFile";
-		//return "/watch/NewFile";
+		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		return "/watch/NewFile";
+		// return "/watch/NewFile";
 	}
 
 	/*
@@ -181,10 +153,15 @@ public class WatchController {
 		return "/watch/video";
 	}
 
-	@GetMapping(value = "/bttest")
-	public String testdsf() {
-		return "/watch/NewFile1";
-		
+	@GetMapping(value = "/browse/search")
+	public String search(Model model, String searchValue) {
+		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		model.addAttribute("searchValue", searchValue);
+		model.addAttribute("Searchlist", watchservice.getSearch(searchValue));
+		for (MovieVO vo : watchservice.getSearch(searchValue)) {
+			System.out.println(vo.getMovie_id());
+		}
+
+		return "/watch/search";
 	}
-	
 }
