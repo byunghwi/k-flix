@@ -15,12 +15,11 @@
 	<a href="" id="ticket">티켓구매</a>
 	<a href="/kflix/service">고객센터</a> --%>
 	<div class="container flex-row nav-bar ">
-		<img class="logo" alt="로고"
-			src="/kflix/resources/imgs/watch/kflixlogo.png">
-
+		<a href="/kflix/browse"><img id="logo" alt="로고"
+			src="/kflix/resources/imgs/watch/kflixlogo.png"> </a>
 		<ul class="nav" style="margin: 0 300px 0 0;">
 			<li class="nav-item"><a class="nav-link active"
-				aria-current="page" href="#">홈</a></li>
+				aria-current="page" href="/kflix/browse">홈</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">TV프로그램</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
 			<li class="nav-item"><a class="nav-link" href="#" tabindex="-1">NEW!요즘

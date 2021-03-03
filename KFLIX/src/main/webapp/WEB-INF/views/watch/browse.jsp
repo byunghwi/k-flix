@@ -772,7 +772,6 @@ prevBtn${j}.addEventListener(
 					}
 				});
 </c:forEach>
-
 		
 	</script>
 </body>

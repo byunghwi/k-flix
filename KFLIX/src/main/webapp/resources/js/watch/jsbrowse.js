@@ -1,6 +1,5 @@
 
 infoframe = document.getElementById('infoframe');
-
 body = document.querySelector('body');
 
 function mianreload() {

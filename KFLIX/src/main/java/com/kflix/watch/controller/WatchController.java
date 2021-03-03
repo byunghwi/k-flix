@@ -156,6 +156,9 @@ public class WatchController {
 	@GetMapping(value = "/browse/search")
 	public String search(Model model, String searchValue) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
+		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("searchValue", searchValue);
 		model.addAttribute("Searchlist", watchservice.getSearch(searchValue));
 		for (MovieVO vo : watchservice.getSearch(searchValue)) {

@@ -56,10 +56,9 @@
 
 				<div id="btns">
 					<i id="restart" class=" fas fa-stop color-w"></i>
-					<div style="display: inline-block;"
-						id="playnpause" class="toggle"></div>
-					<i id="rew" class="fas fa-undo-alt color-w">10</i>
-					<i id="fastFwd" class="fas fa-redo-alt color-w">10</i>
+					<div style="display: inline-block;" id="playnpause" class="toggle"></div>
+					<i id="rew" class="fas fa-undo-alt color-w">10</i> <i id="fastFwd"
+						class="fas fa-redo-alt color-w">10</i>
 
 					<div style="display: inline-block;" id="movie_id" class="color-w">${movie.movie_title }</div>
 					<div style="display: inline-block; width: 1px;"></div>
@@ -131,16 +130,9 @@
 	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
 
 	<script>
-	
-	history.pushState({page:"first"}, document.title, location.pathname + '#first'); 
 
-	window.addEventListener('popstate', function(event) {
+	console.log(document.referrer);
 
-		history.pushState({page:"historyChanged"}, document.title, location.pathname + '#changed'); 
-	
-	});
-
-	
 	var newvideo = document.getElementById("newvideo");
 			console.log("${movie.movie_id}");
 			console.log("${watching.watch_type}");
