@@ -59,7 +59,7 @@ public interface WatchService {
 	public LikeVO getSelectLikeUser(String email, int movie_id);
 
 	// 검색 서비스
-	public List<SearchVO> getSearch(String searchValue);
+	public List<MovieVO> getSearch(String searchValue);
 	
 	// 장르 관련 쿼리 서비스
 	public List<Genre> getAllGenre();

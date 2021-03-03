@@ -65,6 +65,6 @@ public interface WatchMapper {
 	public List<Genre> getAllGenre();
 	
 	// 검색
-	public List<SearchVO> getSearch(String searchValue);
+	public List<MovieVO> getSearch(String searchValue);
 
 }

@@ -45,33 +45,7 @@
 </head>
 <body>
 	<div id="modalbackground"></div>
-	<div class="container flex-row nav-bar ">
 		<%@include file="/WEB-INF/views/main/header.jsp"%>
-		<img class="logo" alt="로고"
-			src="/kflix/resources/imgs/watch/kflixlogo.png">
-
-		<ul class="nav" style="margin: 0 300px 0 0;">
-			<li class="nav-item"><a class="nav-link active"
-				aria-current="page" href="#">홈</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">TV프로그램</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-			<li class="nav-item"><a class="nav-link" href="#" tabindex="-1">NEW!요즘
-					대세 콘텐츠</a></li>
-
-			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
-		</ul>
-		<div class="profile">
-		<form id="searchform" action="/kflix/browse/search"></form>
-		<input id="search" type="checkbox" style="display: none;">
-		<input id="searchinput" form="searchform" name="searchValue" type="text" style="display: none;">
-		<label for="search"><i class="fas fa-search color_white nav-icon"></i></label>
-			 <i
-				class="fas fa-gift color_white nav-icon"></i> <i
-				class="fas fa-bell color_white nav-icon"></i> <i
-				style="background-color: white; width: 40px"
-				class="fas fa-child nav-icon"></i>
-		</div>
-	</div>
 
 	<div id="shadow1"></div>
 	<div id="carouselExampleInterval" class="carousel slide"

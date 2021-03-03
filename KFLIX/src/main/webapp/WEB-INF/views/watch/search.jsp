@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,125 +18,138 @@
 	crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/6421ed9b05.js"
 	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+	href="/kflix/resources/css/watch/csssearch.css">
 <style type="text/css">
-.flex-row {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	position: fixed;
-	z-index: 100;
-	top: 0;
-}
-
-.flex-row>* {
-	margin: 8px;
-}
-
-.nav-bar {
-	background-color: rgba(0, 0, 0, 0.2);
-	max-width: 100%;
-	padding: 8px 50px;
-	align-items: center;
-	position: relative;
-	margin: 0;
-}
-
-.nav-link {
-	color: white;
-	font-size: 13px;
-}
-
-.logo {
-	height: 30px;
-	padding: 0 20px
-}
-
-#shadow1 {
-	position: relative;
-	background-color: #141414;
-	padding: 0.1px 0;
-	/* 	box-shadow: 0px 2px 10px #141414; */
-}
-
-.profile {
-	position: absolute;
-	right: 4%;
-}
-
-.color_white {
-	color: white;
-}
-
-.nav-icon {
-	font-size: 20px;
-	padding: 8px;
-}
 </style>
 </head>
-<body style="background-color: #141414">
+<body>
 
-	<div class="container flex-row nav-bar ">
-		<%@include file="/WEB-INF/views/main/header.jsp"%>
-		<img class="logo" alt="로고"
-			src="/kflix/resources/imgs/watch/kflixlogo.png">
+	<%@include file="/WEB-INF/views/main/header.jsp"%>
 
-		<ul class="nav" style="margin: 0 300px 0 0;">
-			<li class="nav-item"><a class="nav-link active"
-				aria-current="page" href="#">홈</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">TV프로그램</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-			<li class="nav-item"><a class="nav-link" href="#" tabindex="-1">NEW!요즘
-					대세 콘텐츠</a></li>
+	<div id="searchresult">
+		<h3 style="margin: 30px 10px;">"${searchValue }"로 검색한 결과 입니다.</h3>
+		<c:if test="${not empty Searchlist}">
+			<c:forEach items="${Searchlist }" var="Searchlist" varStatus="status">
+				<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
+					<c:if test="${Searchlist.movie_id eq Allmovie.movie_id}">
+						<div class=" searchdiv">
 
-			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
-		</ul>
-		<div class="profile">
+							<div class=""container"">
+								<a onclick="framshow(${Allmovie.movie_id})" class="atag">
+									<div class="atagdiv">
+										<img src="${Allmovie.poster_path }" class="dis img1" alt="...">
+										<div class="videohover">
+											<img style="margin: 0;" src="${Allmovie.poster_path }"
+												class="modalimg" alt="...">
+											<div class="hovervideo">
+												<video class="video" muted autoplay loop
+													poster="${Allmovie.poster_path}">
+													<source src="${Allmovie.teaser_path}" type="video/mp4">
+												</video>
+											</div>
+											<div class="comment">
+												<div style="font-size: 18px;">
+													<c:choose>
+														<c:when test="${Allmovie.rating eq 'all' }">
+															<p class="ratingsty"
+																style="background-color: green; font-size: 20px;">ALL</p>
+														</c:when>
+														<c:when test="${Allmovie.rating eq '12' }">
+															<p class="ratingsty"
+																style="background-color: #dfb039; color: black;">${Allmovie.rating }</p>
+														</c:when>
+														<c:when test="${Allmovie.rating eq '15' }">
+															<p class="ratingsty" style="background-color: #cd6d34">${Allmovie.rating }</p>
+														</c:when>
+														<c:when test="${Allmovie.rating eq '19' }">
+															<p class="ratingsty" style="background-color: #c52e37">${Allmovie.rating }</p>
+														</c:when>
+														<c:otherwise>
+															<p class="ratingsty" style="background-color: #c52e37">${Allmovie.rating }</p>
+														</c:otherwise>
+													</c:choose>
+													${Allmovie.movie_title }
+												</div>
+												<div style="position: absolute; top: 21px; right: 30px;">
+													<span
+														style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
+														<fmt:formatDate value="${Allmovie.reg_date }"
+															pattern="yyyy.MM" />
+													</span> • ${Allmovie.play_time }분
+												</div>
+												<div class="infotable1">
+													<table>
+														<tr align="left">
+															<td colspan="1"><span class="c-gay">감독: </span> <c:forEach
+																	items="${AllDirector }" var="AllDirector"
+																	varStatus="status">
+																	<c:if
+																		test="${Allmovie.director_id eq AllDirector.director_id }">
+									${AllDirector.director_name }
+								</c:if>
+																</c:forEach></td>
+														</tr>
+														<tr align="left">
+															<td><span class="c-gay">출연: </span> <c:forEach
+																	items="${AllActor }" var="AllActor" varStatus="status">
+																	<c:if
+																		test="${Allmovie.actor_id1 eq AllActor.actor_id }">
+									${AllActor.actor_name }<c:if
+																			test="${Allmovie.actor_id2 eq AllActor.actor_id }">, 
+									</c:if>
+																	</c:if>
+																	<c:if
+																		test="${Allmovie.actor_id2 eq AllActor.actor_id  }">
+									${AllActor.actor_name }<c:if
+																			test="${Allmovie.actor_id3 eq AllActor.actor_id }">, 
+									</c:if>
+																	</c:if>
 
-			<input id="search" type="checkbox" style="display: none;"> <input
-				id="searchinput" type="text" style="display: none;"> <label
-				for="search"><i class="fas fa-search color_white nav-icon"></i></label>
-			<i class="fas fa-gift color_white nav-icon"></i> <i
-				class="fas fa-bell color_white nav-icon"></i> <i
-				style="background-color: white; width: 40px"
-				class="fas fa-child nav-icon"></i>
-		</div>
+																	<c:if
+																		test="${Allmovie.actor_id3 eq AllActor.actor_id }">
+									${AllActor.actor_name }
+									</c:if>
+																</c:forEach></td>
+														</tr>
+														<tr align="left">
+															<td><span class="c-gay">개요: </span>${Allmovie.country }영화
+																• <c:forEach items="${AllGenre }" var="AllGenre"
+																	varStatus="status">
+																	<c:if
+																		test="${Allmovie.genre_id1 eq AllGenre.genre_id }">
+																			${AllGenre.genre_name}</c:if>
+																	<c:if
+																		test="${Allmovie.genre_id2 eq AllGenre.genre_id }">
+																				${AllGenre.genre_name } </c:if>
+																</c:forEach></td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</a>
+							</div>
+
+							<h6>${Allmovie.movie_title }</h6>
+						</div>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+		</c:if>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

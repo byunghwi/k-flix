@@ -134,21 +134,29 @@
 
 	<!-- 검색 -->
 	<select id="getSearch"
-		resultType="com.kflix.watch.domain.SearchVO">
-		SELECT MOVIE_ID FROM (SELECT MOVIE_ID, ROW_NUMBER() OVER(PARTITION BY
-		MOVIE_TITLE ORDER BY REG_DATE DESC )as title, MOVIE_TITLE,
-		DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME, COUNTRY, RATING, SUMMARY,
-		REG_DATE FROM
-		(SELECT MOVIE_ID, MOVIE_TITLE, DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME,
-		COUNTRY, RATING, SUMMARY, REG_DATE
-		FROM movie m, director d, actor a, genre g
-		WHERE m.director_id = d.director_id and
-		(a.actor_id = m.actor_id1 or a.actor_id = m.actor_id1 or a.actor_id =
-		m.actor_id1) and
-		(g.genre_id = m.genre_id1 or g.genre_id = m.genre_id2))
-		WHERE (MOVIE_TITLE || DIRECTOR_NAME || ACTOR_NAME || GENRE_NAME || COUNTRY
-		|| RATING || SUMMARY || REG_DATE) like '%신%')
-		WHERE title = 1
+		resultType="com.kflix.watch.domain.MovieVO">
+		SELECT 
+			movie_id 
+		FROM 
+			(SELECT 
+				movie_id, ROW_NUMBER() OVER(PARTITION BY MOVIE_TITLE ORDER BY REG_DATE DESC )as title, MOVIE_TITLE,
+				DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME, COUNTRY, RATING, SUMMARY, REG_DATE 
+			FROM 
+				(SELECT 
+					movie_id, MOVIE_TITLE, DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME,
+					COUNTRY, RATING, SUMMARY, REG_DATE
+				FROM 
+					movie m, director d, actor a, genre g
+				WHERE 
+					m.director_id = d.director_id and
+					(a.actor_id = m.actor_id1 or a.actor_id = m.actor_id1 or a.actor_id =
+					m.actor_id1) and
+					(g.genre_id = m.genre_id1 or g.genre_id = m.genre_id2))
+			WHERE 
+				(MOVIE_TITLE || DIRECTOR_NAME || ACTOR_NAME || GENRE_NAME || COUNTRY
+				|| RATING || SUMMARY || REG_DATE) like '%' ||  #{searchValue} || '%') 
+		WHERE 
+			title = 1
 	</select>
 
 	<!-- 장르 -->

@@ -122,7 +122,7 @@ public class WatchServiceImpl implements WatchService {
 
 	// 검색
 	@Override
-	public List<SearchVO> getSearch(String searchValue) {
+	public List<MovieVO> getSearch(String searchValue) {
 		return mapper.getSearch(searchValue);
 	}
 
