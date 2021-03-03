@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Component
 public class Ticket {
-	String ticket_id;
+	int ticket_id;
 	String ticket_name;
 	int ticket_period;
 	int ticket_price;

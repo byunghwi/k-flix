@@ -9,4 +9,5 @@ public interface TicketService {
 	String getAuthCode();
 	boolean sendAuthMail(String email);
 	List<Ticket> getAllTickets();
+	Ticket getTicket(int ticket_id);
 }

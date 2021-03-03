@@ -22,4 +22,9 @@ public class TicketDaoImpl implements TicketDao {
 		return sqlSession.selectList(NAMESPACE + ".ticketAll");
 	}
 
+	@Override
+	public Ticket getTicket(int ticket_id) {
+		return sqlSession.selectOne(NAMESPACE + ".getTicket", ticket_id);
+	}
+
 }

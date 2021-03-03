@@ -8,6 +8,7 @@ import com.kflix.genre.domain.Genre;
 import com.kflix.mapper.WatchMapper;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
+import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
 
@@ -119,11 +120,17 @@ public class WatchServiceImpl implements WatchService {
 		return mapper.getSelectLikeUser(email, movie_id);
 	}
 
-	// 장르
+	// 검색
+	@Override
+	public List<MovieVO> getSearch(String searchValue) {
+		return mapper.getSearch(searchValue);
+	}
 
+	// 장르
 	@Override
 	public List<Genre> getAllGenre() {
 		return mapper.getAllGenre();
 	}
+
 
 }
