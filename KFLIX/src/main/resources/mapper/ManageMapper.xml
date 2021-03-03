@@ -8,4 +8,7 @@
 		select * from ticket_board
 	</select>
 		
+	<select id="getMemberCnt" resultType="integer">
+		select count(*) from member
+	</select>
 </mapper>

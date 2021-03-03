@@ -7,4 +7,6 @@ import com.kflix.manage.domain.TicketBoard;
 public interface ManageService {
 
 	public List<TicketBoard> getTicketBoard();
+	
+	public int getMemberCnt();
 }

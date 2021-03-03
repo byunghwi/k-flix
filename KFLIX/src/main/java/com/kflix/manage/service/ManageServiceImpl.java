@@ -20,4 +20,9 @@ public class ManageServiceImpl implements ManageService {
 		return mg_mapper.getAllTicketBoard();
 	}
 
+	@Override
+	public int getMemberCnt() {
+		return mg_mapper.getMemberCnt();
+	}
+
 }
