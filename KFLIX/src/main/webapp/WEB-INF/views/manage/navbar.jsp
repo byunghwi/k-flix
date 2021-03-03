@@ -164,5 +164,8 @@
            <li>
               <a class="nav-link" id="inq" href="/kflix/inquiry/index"><i class="far fa-envelope"></i> 1:1문의</a>
            </li>
+           <li>
+              <a class="nav-link" id="chart" href="/kflix/chart"><i class="fas fa-chart-area"></i> 분석</a>
+           </li>        
      </div>
 </div>
