@@ -149,8 +149,8 @@
 					movie m, director d, actor a, genre g
 				WHERE 
 					m.director_id = d.director_id and
-					(a.actor_id = m.actor_id1 or a.actor_id = m.actor_id1 or a.actor_id =
-					m.actor_id1) and
+					(a.actor_id = m.actor_id1 or a.actor_id = m.actor_id2 or a.actor_id =
+					m.actor_id3) and
 					(g.genre_id = m.genre_id1 or g.genre_id = m.genre_id2))
 			WHERE 
 				(MOVIE_TITLE || DIRECTOR_NAME || ACTOR_NAME || GENRE_NAME || COUNTRY
