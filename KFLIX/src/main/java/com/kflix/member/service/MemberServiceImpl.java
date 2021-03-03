@@ -1,6 +1,7 @@
 package com.kflix.member.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -62,6 +63,12 @@ public class MemberServiceImpl implements MemberService {
 	public int removePayMember(String email) {
 		
 		return memberDao.removePayMember(email);
+	}
+
+	@Override
+	public List<Member> schedulePayMemList() {
+		
+		return memberDao.schedulePayMemList();
 	}
 
 }

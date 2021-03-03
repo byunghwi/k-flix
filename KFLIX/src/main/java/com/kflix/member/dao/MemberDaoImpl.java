@@ -2,6 +2,7 @@ package com.kflix.member.dao;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -72,6 +73,11 @@ public class MemberDaoImpl implements MemberDao {
 	public int removePayMember(String email) {
 		
 		return sqlSession.update(NAMESPACE + ".removePayMember", email);
+	}
+
+	@Override
+	public List<Member> schedulePayMemList() {
+		return sqlSession.selectList(NAMESPACE + ".schedulePayMemList");
 	}
 
 }

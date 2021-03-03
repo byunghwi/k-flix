@@ -132,8 +132,12 @@ public class TickectController {
 			
 			member.setPay_sid(kakaoPayApprovalVO.getSid());
 			
+			Ticket ticket = (Ticket) session.getAttribute("ticket");
+			member.setTicket_id(ticket.getTicket_id());
+			
 			if(memberService.updatePayMember(member) == 1) {
 				System.out.println("[TicketController] pay관련 member 업데이트 성공...");
+				session.removeAttribute("ticket");
 			}else {
 				System.out.println("[TicketController] pay관련 member 업데이트 실패...");
 			}
@@ -153,9 +157,12 @@ public class TickectController {
 		System.out.println("[TicketController] /kakaoPay 경로 , member > " + member);
 		
 		//테스트용
-		ticket.setTicket_id("10");
+		ticket.setTicket_id(10);
 		ticket.setTicket_name("베이식");
 		ticket.setTicket_price(7500);
+		
+		//결제요청 성공시 회원정보에 ticket_id 업데이트하기 위해 넣어두기
+		session.setAttribute("ticket", ticket);
 		
 		return "redirect:" + kakaoPayService.kakaoPayReady(ticket, member);
 	}

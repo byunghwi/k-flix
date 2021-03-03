@@ -84,8 +84,7 @@ public class KakaoPayServiceImpl implements KakaoPay {
 			if(kakaoPayVO.getNext_redirect_pc_url() != null) {
 				return kakaoPayVO.getNext_redirect_pc_url(); //https://mockup-pg-web.kakao.com/v1/c08a198fa1d81ba818cf2973e29d47c3f02ee42f53206bf245652c743813b8df/info
 			}
-            
-            
+
 		} catch (RestClientException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

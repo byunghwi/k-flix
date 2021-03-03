@@ -1,6 +1,7 @@
 package com.kflix.member.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.kflix.member.domain.Member;
@@ -28,4 +29,6 @@ public interface MemberService {
 	int updatePayMember(Member member);
 	
 	int removePayMember(String email);
+	
+	List<Member> schedulePayMemList();
 }
