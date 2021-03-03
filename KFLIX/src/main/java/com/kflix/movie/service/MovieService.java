@@ -51,4 +51,6 @@ public interface MovieService {
 	
 	public List<Movie> findMovieByDirectName(String director_name, char status);
 	
+	// 나중에 바꿔야함
+	public List<Movie> getTop5Movie();
 }

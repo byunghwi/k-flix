@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +13,96 @@
 <meta charset="UTF-8">
 <style>
 	#dashboard{
-		width: 1400px;
+		width: 1500px;
 		height: 1000px;
 		margin-left: 330px;
 	}
-	section, section div{
+/* 	section, section div{
 		border: 1px dotted red;
+	} */
+	#movie_total{
+		width: 300px;
+		height: 150px;
+		position: relative;
+		z-index: 1;
+	}
+	
+	#inq_total{
+		width: 300px;
+		height: 150px;
+		position: relative;
+		z-index: 1;
+	}
+	
+	#movie_total::after {
+	  width: 100%;
+	  height: 100%;
+	  content: "";
+	  background-color: teal;
+	  border-radius: 15px;
+	  position: absolute;
+	  opacity: 0.5;
+	  top: 0;
+	  left: 0;
+	  z-index: -1;
+	}
+	
+	#inq_total::after {
+	  width: 100%;
+	  height: 100%;
+	  content: "";
+	  background-color: green;
+	  border-radius: 15px;
+	  position: absolute;
+	  opacity: 0.5;
+	  top: 0;
+	  left: 0;
+	  z-index: -1;
+	}
+	.total_title{
+		text-align: right;
+		margin-right: 15px;
+	}
+/* 	.ranking{
+	 	width: 200px;
+  		height: 200px;
+  		opacity: 0.8;
+  		background-size: cover;
+	} */
+	.rankingnum{
+		width: 50px;
+		height: 100%;
+		color: red;
+	}
+	.rankingOne{
+		width: 150px;
+		height: 100px;
+	}
+	
+	.rankingAnother{
+		width: 120px;
+		height: 80px;
+	}
+	
+	.rankingtitle{
+		width: 250px;
+	}
+	
+	#first{
+		left: 0;
+		padding: 0;
+		margin: 0;
+		width: 1500px;
+	}
+	.total_content{
+		height: 80%;
+	}
+	.moreBtn{
+		text-decoration: none;
+		color: gray;
+	}
+	.totalArea{
+		padding-right: 20px;
 	}
 </style>
 <title>Insert title here</title>
@@ -27,17 +112,120 @@
 <%@include file="../manage/navbar.jsp"%>
 <section id="dashboard">
 
-<div id="section_title">
+<div id="section_title pt-5">
 	<h1><i class="fas fa-chess-board"></i> 대시보드</h1>
 </div>
 
-<div>현재 top5 영화</div>
-<div>영화 총 편수</div> 
-<div>총 문의 수</div>
-<div>현재 메인 화면</div>
-<div>이용권 결제 현황</div>
-</section>
+<div class="container-lg w-100" id="first">
+<hr />
+<div class="d-flex pb-5">
+  <div class="totalArea">
+      	<div id="movie_total">
+			<div class="total_content">
+				<h3 class="total_title">영화</h3>
+				<h4 class="total_title">${movieTotal } 편</h4>
+			</div>
+			<div class="d-flex justify-content-center p-0 m-0">
+				<a href="#" class="moreBtn"> more >> </a>
+			</div>
+		</div> 
+	</div>
+	
+  <div class="totalArea">
+      	<div id="inq_total">
+			<div class="total_content">
+				<h3 class="total_title">문의</h3>
+				<h4 class="total_title">${inqTotal } 건</h4>
+			</div>	
+			<div class="d-flex justify-content-center">
+				<a href="#" class="moreBtn"> more >> </a>
+			</div>
+		</div>
+  </div>
+  
+  <div class="totalArea">
+      	<div id="movie_total">
+			<div class="total_content">
+				<h3 class="total_title">회원 수</h3>
+				<h4 class="total_title">${movieTotal } 편</h4>
+			</div>
+			<div class="d-flex justify-content-center">
+				<a href="#" class="moreBtn"> more >> </a>
+			</div>
+		</div> 
+  </div>
+  
+  <div class="totalArea">
+      	<div id="inq_total">
+			<div class="total_content">
+				<h3 class="total_title">매출 </h3>
+				<h4 class="total_title">${inqTotal } 건</h4>
+			</div>	
+			<div class="d-flex justify-content-center">
+				<a href="#" class="moreBtn"> more >> </a>
+			</div>
+		</div>
+  </div>
+  
+ </div>
+</div>
 
+<div class="d-flex">
+
+	<div class="pe-5">
+		<h3>현재 Top5</h3>
+		<hr />
+		<c:forEach items="${movie }" var="i" varStatus="status">
+			<c:choose>
+			<c:when test="${status.index == 0 }">
+				<div class="d-flex pb-2">
+					<div class="rankingnum">
+						<h1>${status.index + 1}</h1>
+					</div>
+					<div class="rankingtitle">
+						<h1>${i.movie_title }</h1>
+					</div>
+					<div class="rankingOne">
+						<img src="${i.poster_path }" class="rankingOne" alt="" />
+					</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="d-flex pb-2 ps-3">
+					<div class="rankingnum">
+						<h3>${status.index + 1}</h3>
+					</div>
+					<div class="rankingtitle">
+						<h3>${i.movie_title }</h3>
+					</div>
+					<div class="rankingAnother">					
+						<img src="${i.poster_path }" class="rankingAnother" alt="" />
+					</div>
+				</div>
+			</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</div>
+	
+	<div class="ps-5">
+		<h3>이용권 결제 현황</h3>
+		<hr />
+		<div class="d-flex">
+			<div>이용권 이름</div>
+			<div>현황</div>
+		</div>
+		<c:forEach items="${ticket }" var="i" varStatus="status">
+		<div class="d-flex">
+			<div>${i.ticket_name }</div>
+			<div>${i.ticket_using }</div>
+		</div>
+		</c:forEach>
+	</div>
+	
+</div>
+
+
+</section>
 
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
