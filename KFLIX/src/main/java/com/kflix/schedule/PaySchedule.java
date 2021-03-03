@@ -46,8 +46,10 @@ public class PaySchedule {
 			System.out.println("[PaySchedule] member > " + payUpdateMemList.get(i));
 			member = payUpdateMemList.get(i);
 			ticket = ticketService.getTicket((payUpdateMemList.get(i)).getTicket_id());
-			
+			 
 			kakaoPayService.kakaoPayReady(ticket, member);
+			
+			memberService.updatePayMember(member);
 		}
 		
 	}
