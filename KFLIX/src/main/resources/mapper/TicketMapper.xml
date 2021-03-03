@@ -7,5 +7,9 @@
 	<select id="ticketAll" resultType="com.kflix.ticket.domain.Ticket">
 		SELECT * FROM ticket WHERE ticket_status = 'Y'
 	</select>
+	
+	<select id="getTicket" resultType="com.kflix.ticket.domain.Ticket">
+		SELECT * FROM ticket WHERE ticket_status = 'Y' AND ticket_id = #{ticket_id}
+	</select>
 
 </mapper>

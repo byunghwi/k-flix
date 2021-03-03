@@ -77,4 +77,10 @@ public class TicketServiceImpl implements TicketService {
 		
 		return ticketDao.getAllTickets();
 	}
+
+	@Override
+	public Ticket getTicket(int ticket_id) {
+
+		return ticketDao.getTicket(ticket_id);
+	}
 }

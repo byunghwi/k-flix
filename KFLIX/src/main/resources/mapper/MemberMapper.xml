@@ -94,10 +94,22 @@
 			member 
 		SET 
 			pay_sid = null, 
-			pay_exp_date = null,
 			pay_remove_dt = sysdate
 		WHERE
 			email = #{email}
 	</update>
+	
+	<select id="schedulePayMemList" resultType="com.kflix.member.domain.Member">
+		SELECT 
+				* 
+		FROM 
+			member 
+		WHERE 
+			pay_sid IS NOT NULL
+		AND 
+			ticket_id IS NOT NULL
+		AND
+			to_char(pay_exp_date, 'yyyyMMdd') = to_char(sysdate, 'yyyyMMdd')
+	</select>
 
 </mapper>
