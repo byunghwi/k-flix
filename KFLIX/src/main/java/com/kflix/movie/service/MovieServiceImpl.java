@@ -186,6 +186,11 @@ public class MovieServiceImpl implements MovieService {
 		return mv_mapper.findMovieByDirectName(director_name, status);
 	}
 
+	@Override
+	public List<Movie> getTop5Movie() {
+		return mv_mapper.getDashboardMovie();
+	}
+
 
 
 

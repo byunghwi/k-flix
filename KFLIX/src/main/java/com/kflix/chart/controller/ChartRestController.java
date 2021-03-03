@@ -32,9 +32,8 @@ public class ChartRestController {
 	public Map<String, Object> chartRest(){
 		Map<String, Object> list = new HashMap<>();
 		list.put("movie", mv_service.selectAllMovieVeiw('Y'));
-		list.put("genre", ge_service.selectAllGenreList('Y'));
-		
-		
+		list.put("genre", ge_service.selectAllGenreListNotStatus());
+
 		return list;
 	}
 }

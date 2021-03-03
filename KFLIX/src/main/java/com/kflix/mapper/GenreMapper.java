@@ -8,6 +8,9 @@ import com.kflix.genre.domain.Genre;
 
 public interface GenreMapper {
 
+	
+	List<Genre> getGenreList();
+	
 	// 전체 리스트
 	List<Genre> getAllGenreList(char status);
 	

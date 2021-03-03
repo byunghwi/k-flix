@@ -8,6 +8,8 @@ import com.kflix.genre.domain.Genre;
 import com.kflix.util.pagenation.domain.PageNation;
 
 public interface GenreService {
+	
+	public List<Genre> selectAllGenreListNotStatus();
 
 	public List<Genre> selectAllGenreList(char status);
 	
