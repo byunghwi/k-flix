@@ -1,6 +1,7 @@
 package com.kflix.ticket.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
+import com.kflix.ticket.dao.TicketDao;
 import com.kflix.ticket.domain.MailUtils;
+import com.kflix.ticket.domain.Ticket;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -19,6 +22,9 @@ public class TicketServiceImpl implements TicketService {
 
 	@Inject
 	private JavaMailSenderImpl mailSender;
+	
+	@Inject
+	private TicketDao ticketDao;
 
 	@Override
 	public String getKey(int size) {
@@ -64,5 +70,11 @@ public class TicketServiceImpl implements TicketService {
 		
 		return true;
 
+	}
+
+	@Override
+	public List<Ticket> getAllTickets() {
+		
+		return ticketDao.getAllTickets();
 	}
 }

@@ -24,4 +24,8 @@ public interface MemberService {
 	void keepLogin(String email, String session_id, Date next);
 	
 	Member checkLoginBefore(String value);
+	
+	int updatePayMember(Member member);
+	
+	int removePayMember(String email);
 }

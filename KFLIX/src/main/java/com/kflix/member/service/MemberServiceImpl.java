@@ -53,4 +53,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getMemberByEmail(email);
 	}
 
+	@Override
+	public int updatePayMember(Member member) {
+		return memberDao.updatePayMember(member);
+	}
+
+	@Override
+	public int removePayMember(String email) {
+		
+		return memberDao.removePayMember(email);
+	}
+
 }
