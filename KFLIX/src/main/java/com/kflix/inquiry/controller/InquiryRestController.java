@@ -29,8 +29,10 @@ public class InquiryRestController {
 		log.info("======================= findOrAllInq =================");
 		String type = inquiry.getInquiry_type();
 		String date = inquiry.getReply_status();
+		log.info("type : " + type);
+		log.info("date : " + date);
+		log.info(in_service.getFindInq(type, date).size());
 		return in_service.getFindInq(type, date);
-
 	}
 	
 	@PatchMapping(value="inquiry/reply",

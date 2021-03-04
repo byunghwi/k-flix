@@ -12,8 +12,9 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=23" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=24" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=5" />
 <meta charset="UTF-8">
 
 <title>영화 관리</title>
@@ -22,7 +23,7 @@
 <body>
 
 <%@include file="../manage/navbar.jsp"%>
-<section id="movielist">
+<section id="table_list">
 <!-- 게시판 -->
 	<div class="container" id="board">
 		<div class="d-flex justify-content-start">
@@ -74,7 +75,7 @@
 	</div>
 	</div> 
 
-	<div id="movieMain">
+	<div id="table_main">
 	<table class="table text-center align-middle border-light" id="movietable">
 	    <thead class="bg-dark">
 		    <tr>

@@ -82,7 +82,7 @@
 	</table>
 	</div>
 </div>
-
+<br />
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
 
 </section>

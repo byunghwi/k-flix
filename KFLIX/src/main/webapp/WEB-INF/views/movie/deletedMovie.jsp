@@ -9,8 +9,9 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=4" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=5" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=4" />
 <meta charset="UTF-8">
 <title>비활성 영화</title>
 
@@ -19,7 +20,7 @@
 <body>
 
 <%@include file="../manage/navbar.jsp"%>
-<section id="movielist">
+<section id="table_list">
 <div class="container" id="board">
 	
 	<div class="d-flex justify-content-start">
@@ -61,7 +62,7 @@
 	</div>
 	</div>
 	
-	<div id="movieMain">
+	<div id="table_main">
 	<table class="table text-center align-middle border-danger text-light" id="movietable">
 		<thead class="bg-danger">
 		<tr>

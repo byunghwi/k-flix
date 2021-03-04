@@ -405,10 +405,15 @@ function modalBtn() {
 	  			var len = data.length;
 	  			var amount =  parseInt($('#helpAmount').val())
 	  			var pnum = 0;
-	  			if ($('.active').text() == ''){
+	  			
+	  			var anotherPnum = Math.ceil(len / amount);
+	  			if ($('.active').text() == '' 
+	  					|| $('.active').text() == 0
+	  					|| $('.active').text() != 'number'){
 	  				pnum = 1;
-	  			} else {
-	  				pnum = parseInt($('.active').text());
+	  				
+	  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+	  				pnum = anotherPnum;
 	  			}
 	  			
 	 			makePageNate(len, pnum, amount);
@@ -440,10 +445,14 @@ function deleteModalBtn() {
   			var len = data.length;
   			var amount =  parseInt($('#helpAmount').val())
   			var pnum = 0;
-  			if ($('.active').text() == ''){
+  			var anotherPnum = Math.ceil(len / amount);
+  			if ($('.active').text() == '' 
+  					|| $('.active').text() == 0
+  					|| $('.active').text() != 'number'){
   				pnum = 1;
-  			} else {
-  				pnum = parseInt($('.active').text());
+  				
+  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+  				pnum = anotherPnum;
   			}
   			
   			amount = parseInt(amount);
@@ -473,11 +482,14 @@ function ajaxCon(pnum, amount){
 		
  		success: function(data){
   			var len = data.length;
-  			var pnum = 0;
-  			if ($('.active').text() == ''){
+  			var anotherPnum = Math.ceil(len / amount);
+  			if ($('.active').text() == '' 
+  					|| $('.active').text() == 0
+  					|| $('.active').text() != 'number'){
   				pnum = 1;
-  			} else {
-  				pnum = parseInt($('.active').text());
+  				
+  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+  				pnum = anotherPnum;
   			}
   			
   			amount = parseInt(amount);

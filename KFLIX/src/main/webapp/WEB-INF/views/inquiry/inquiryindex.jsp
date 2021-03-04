@@ -11,28 +11,12 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
 <meta charset="UTF-8">
 <style>
 	#contentTip{
 		color: gray;
 		font-size: 12px;
-	}
-
-	#inquirydiv{
-		width: 1200px;
-		height: 1000px;
-		max-width: 1200px;
-		min-width: 1200px;
-		margin-left: 350px;
-	}
-	#board{
-		padding-top:75px;
-		color: white;
-	}
-
-	#inqMain {
-		overflow: auto;
-		height: 620px;
 	}
 	.amount {
 		width: 150px;
@@ -47,9 +31,9 @@
 
 <input id="helpData" type="hidden" value="${total }"/>
 <input id="helpPage" type="hidden" value="${page }"/>
-<section id="inquirydiv">
+<section id="table_list">
 	
-	<div class="d-flex justify-content-start" id="board">
+	<div class="d-flex justify-content-start pb-5" id="board">
 		<h1><i class="far fa-envelope"></i> 1:1 문의</h1>
 	</div>
 
@@ -84,7 +68,7 @@
 	</div>
 
 	<!-- 테이블 영역 -->
-	<div id="inqMain">
+	<div id="table_main">
 		
 		<table id="inqTable" class="table talbe text-light text-center align-middle border-dark">
 		<thead class="bg-dark">
@@ -272,6 +256,7 @@ $('#replyBtn').click(function(){
 
 // 답변 미답변
 $('#isreply').change(function(){
+	console.log("답변미답변")
 	var type = "POST";
 	var url = "/kflix/inquiry/index";
 	var data = JSON.stringify({
@@ -284,6 +269,7 @@ $('#isreply').change(function(){
 
 // 검색
 $('#searchType').change(function(){
+	console.log("카테고리 검색")
 	var type = "POST";
 	var url = "/kflix/inquiry/index";
 	var data = JSON.stringify({
@@ -308,13 +294,32 @@ $('#helpAmount').change(function(){
 
 // 페이지
 function pageClick(pnum) {
-	var type = "POST";
-	var url = "/kflix/inquiry/index";
-	var data = JSON.stringify({
-		inquiry_type: $('#searchType').val(),
-		reply_status: $('#isreply').val()
-	});
-	ajax(type, url, data, pnum);
+	console.log("페이지누르기")
+	$.ajax({
+		type: "POST",
+		url: "/kflix/inquiry/index",
+		data: JSON.stringify({
+			inquiry_type: $('#searchType').val(),
+			reply_status: $('#isreply').val()
+		}),
+		contentType: 'application/json',
+		
+ 		success: function(data){
+  			var len = data.length;
+  			var amount =  parseInt($('#helpAmount').val())
+  			
+  			amount = parseInt(amount);
+  			
+  			
+ 			makePageNate(len, pnum, amount);
+  			 
+  			makeTable(data, pnum, amount);
+ 
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		}
+	}) 
 }
 
 function ajax(type, url, data, pnum) {
@@ -329,15 +334,18 @@ function ajax(type, url, data, pnum) {
 	
   			var anotherPnum = Math.ceil(len / amount);
   			if ($('.active').text() == '' 
-  					|| $('.active').text() == 0){
+  					|| $('.active').text() == 0
+  					|| $('.active').text() != 'number'){
   				pnum = 1;
   				
   			} else if (anotherPnum > 0 && anotherPnum < pnum){
   				pnum = anotherPnum;
   			}
   			
-  			// console.log(pnum)
-  			// console.log(amount);
+/*  			console.log($('.active').text())
+  			console.log(pnum)
+  			console.log(amount);
+  			console.log(data) */
   			
  			makePageNate(len, pnum, amount);
   			 
