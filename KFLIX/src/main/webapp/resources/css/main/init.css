@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+/* init */
+html,
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(10,10,10);
+    font-size: 16px;
+}
+html{
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+*,
+*:after,
+*:before{
+    box-sizing: inherit;
+}
+li, ul{
+    margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;
+}
+ul{
+    list-style: none;
+}
