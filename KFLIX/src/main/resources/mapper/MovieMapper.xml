@@ -135,7 +135,8 @@
 		SELECT count(*) FROM movie_view WHERE movie_status = #{status} AND movie_title LIKE #{word} ORDER BY movie_id DESC
 	</select>
 	
-	<select id="getDashboardMovie" resultType="com.kflix.movie.domain.Movie">
-		SELECT movie_title, rating, poster_path FROM movie where rownum &lt;= 5 AND movie_status = 'Y' order by movie_id desc
+	<select id="getDashboardMovie" resultType="com.kflix.movie.domain.TopFiveMovie">
+		SELECT * FROM top_five_movie
 	</select>
+
 </mapper>

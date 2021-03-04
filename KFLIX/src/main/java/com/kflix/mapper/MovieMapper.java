@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.kflix.movie.domain.Movie;
+import com.kflix.movie.domain.TopFiveMovie;
 
 public interface MovieMapper {
 
@@ -46,7 +47,7 @@ public interface MovieMapper {
 	
 	int getCntByFindMovieTitle(@Param("word") String word, @Param("status") char status);
 	
-	List<Movie> getDashboardMovie();
+	List<TopFiveMovie> getDashboardMovie();
 	
 	/*
 	 * 레스트

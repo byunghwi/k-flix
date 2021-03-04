@@ -31,7 +31,7 @@
 	<div class="d-flex justify-content-between">
 		<!-- 추가 버튼 영역 -->
 		<div id="addArea" class="ps-2 pb-2">
-			<button id="addBtn" class="btn btn-outline-success" data-bs-toggle="modal" 
+			<button id="addBtn" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" 
 					data-bs-target="#processModal" data-bs-whatever="add">+ 추가</button>
 		</div>
 	

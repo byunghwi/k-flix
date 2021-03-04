@@ -13,32 +13,3 @@ img {
 	height: 100px;
 	
 }
-
-#navlist a{
-	color: white;
-	letter-spacing: 1em;
-}
-
-#header{
-	color: red;
-	letter-spacing: 0.5em;
-	padding-left: 40px;
-}
-
-tbody, thead{
-	color: white;
-}
-
-/* body, html {
-    background: #141414;
-    color: #fff;
-    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-    line-height: 1.2;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
-} */
