@@ -29,10 +29,14 @@
 
 	#updateform{
 		width: 1200px;
-		background-color: white;
+		background-color: rgba(0, 0, 0, 0);
 		min-width: 1200px;
+		padding-top:75px;
 	}
 
+	h1{
+		color:white;
+	}
 	#form01{
 		width: 35%;
 	}
@@ -41,7 +45,11 @@
 		width: 65%;
 	}
 </style>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
+
 <body>
+
+<%@include file="../manage/navbar.jsp"%>
 <form action="../update" method="post" enctype="multipart/form-data">
 
 <div class="container" id="updateform">
@@ -50,10 +58,10 @@
 		
 		<div class="d-flex justify-content-end pt-2">
 			<div>
-				<input type="submit" class="btn btn-primary" value="수정" />
+				<input type="submit" class="btn btn-outline-primary" value="수정" />
 			</div>	
 			<div class="pe-3 ps-3">
-				<a href="/kflix/movie/movieindex" class="btn btn-danger">취소</a>
+				<a href="/kflix/movie/movieindex" class="btn btn-outline-danger">취소</a>
 			</div>
 		</div>
 	</div>
@@ -271,5 +279,10 @@
 		crossorigin="anonymous"></script>	
 <script src="/kflix/resources/js/movie/update.js?ver=48"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=30"></script>
+<script>
+$(document).ready(function() { 
+	$('#closeMenu').removeAttr('checked');
+});
+</script>
 </body>
 </html>

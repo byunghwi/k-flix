@@ -12,24 +12,26 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=17" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=24" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=5" />
 <meta charset="UTF-8">
 
 <title>영화 관리</title>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 
 <%@include file="../manage/navbar.jsp"%>
-<section id="movielist">
+<section id="table_list">
 <!-- 게시판 -->
-	<div class="container pt-5" id="board">
-		<div class="d-flex justify-content-start text-dark">
-			<h1>영화 관리</h1>
+	<div class="container" id="board">
+		<div class="d-flex justify-content-start">
+			<h1><i class="fas fa-video"></i> 영화</h1>
 		</div>
 		
 		<div class="d-flex justify-content-end pb-3">
-			<a href="./deletedMovie" class="btn btn-outline-secondary btn-sm">삭제된 항목</a>
+			<a href="./deletedMovie" class="btn btn-outline-secondary btn-sm">비활성 목록</a>
 		</div>
 		
 			
@@ -71,13 +73,11 @@
 	
 	</div>
 	</div>
-	
-	
 	</div> 
 
-	<div id="movieMain">
-	<table class="table table-striped text-center align-middle border-dark" id="movietable">
-	    <thead class="bg-dark text-light">
+	<div id="table_main">
+	<table class="table text-center align-middle border-light" id="movietable">
+	    <thead class="bg-dark">
 		    <tr>
 			   	<th>#</th>
 				<th>포스터</th>
@@ -89,7 +89,7 @@
 				<th>관리</th>
 		    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody class="text-light">
 	  	   <c:forEach items="${movie }" var="movie" varStatus="status">
 				<tr>
 					<td>${movie.movie_id }</td>
@@ -99,8 +99,8 @@
 					<td>${movie.genre_name1 } / ${movie.genre_name2 }</td>
 					<td>${movie.play_time }분</td>
 					<td><fmt:formatDate value="${movie.reg_date }" pattern="yy/MM/dd"/></td>
-					<td><a href="./updatepage/${movie.movie_id }" class="btn btn-primary">수정</a>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-movieid="${movie.movie_id }" data-bs-target="#deletemodal">삭제</button>
+					<td><a href="./updatepage/${movie.movie_id }" class="btn btn-outline-primary">수정</a>
+						<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-movieid="${movie.movie_id }" data-bs-target="#deletemodal">비활성화</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -114,7 +114,7 @@
 	
 </section>
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
-
+<%@ include file="/resources/include/movie/enModal.jsp" %>
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
@@ -122,7 +122,7 @@
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/movierest.js?ver=18"></script>
+<script src="/kflix/resources/js/movie/movierest.js?ver=22"></script>
 <script>
 $(document).ready(function() { 
 	$('#movie').prepend('<span class="nav-clicked"></span>');

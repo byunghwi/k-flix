@@ -81,11 +81,6 @@
 		margin-left: 20px;
 		color: white;
 	}
-	
-	.tackicon{
-		transform: rotate(320deg);
-		color: rgb(206,236,24);
-	}
 
 	.rankingnum{
 		width: 50px;
@@ -111,6 +106,7 @@
 		padding: 0;
 		margin: 0;
 		width: 1500px;
+		padding-top: 67px;
 	}
 	.total_content{
 		height: 80%;
@@ -120,24 +116,29 @@
 		padding-right: 20px;
 	}
 	.contentArea{
-		background-color: rgb(255,255,240);
+		background-color: rgba(85,85,85, 0);
 		border-radius: 10px;
+		padding-top: 5px;
+		color:white;
 	}
+	#goTicket{
+		text-decoration: none;
+		font-weight: bolder;
+		color:white;
+	}
+
 </style>
 <title>Insert title here</title>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 
 <%@include file="../manage/navbar.jsp"%>
-<section id="dashboard">
-
-<div id="section_title pt-5">
-	<h1><i class="fas fa-chess-board"></i> 대시보드</h1>
-</div>
+<section id="dashboard" class="pt-2">
 
 <div class="container-lg w-100 ps-3 contentArea" id="first">
 
-	<h3><i class="fas fa-thumbtack tackicon"></i> 정보</h3>
+	<h3> 보드</h3>
 	<hr />
 	<div class="d-flex pb-5">
 	  <div class="totalArea">
@@ -152,7 +153,7 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center morediv">
-					<a href="#" class="moreBtn" id="movieMore"> more >> </a>
+					<a href="/kflix/movie/movieindex" class="moreBtn" id="movieMore"> more >> </a>
 				</div>
 			</div> 
 		</div>
@@ -171,7 +172,7 @@
 					</div>
 				</div>	
 				<div class="d-flex justify-content-center morediv">
-					<a href="#" class="moreBtn" id="inqMore"> more >> </a>
+					<a href="/kflix/inquiry/index" class="moreBtn" id="inqMore"> more >> </a>
 				</div>
 			</div>
 	  </div>
@@ -220,7 +221,7 @@
 <div class="d-flex pt-3">
 
 	<div class="pe-5 ps-3 contentArea">
-		<h3><i class="fas fa-thumbtack tackicon"></i> 현재 Top5</h3>
+		<h3> TOP 5</h3> 
 		<hr />
 		<c:forEach items="${movie }" var="i" varStatus="status">
 			<c:choose>
@@ -256,10 +257,17 @@
 	
 	<div class="px-3">
 	<div class="px-3 contentArea">
-		<h3><i class="fas fa-thumbtack tackicon"></i> 이용권 결제 현황</h3>
+		<div class="d-flex justify-content-between">
+			<div>
+				<h3> 이용권 현황</h3> 
+			</div>
+			<div class="mt-2">
+				<a href="#" id="goTicket">more >></a>
+			</div>
+		</div>	
 		<hr />
 		<div>
-			<canvas id="ticketChart" height="300px" width="400px"></canvas>
+			<canvas id="ticketChart" height="300px" width="500px"></canvas>
 		</div>
 	</div>
 	</div>
@@ -278,9 +286,9 @@
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
-<script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
 $(document).ready(function() { 
 	$('#manage').prepend('<span class="nav-clicked"></span>');
@@ -311,19 +319,39 @@ $(document).ready(function() {
 			        }]
 			    },
 			    options: { 
-			    	maintainAspectRatio : false,
 		            responsive: false,
+		            legend: {
+		            	labels: {fontColor: 'rgb(255,255,255)', fontSize:14}
+		            },
 		            scales: {
 						xAxes: [{
 							ticks: {
 								stepSize : 100,
-								fontSize : 14
+								fontSize : 14,
+								fontColor : 'rgb(255,255,255)'
+							},
+							gridLines:{
+								color: 'rgb(255,255,255)',
+								lineWidth:1
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								fontSize : 14,
+								fontColor : 'rgb(255,255,255)'
+							},
+							gridLines:{
+								color: 'rgb(255,255,255)',
+								lineWidth:1
 							}
 						}]
 					},
-					plugin: {
-						render: 'value'
-					}
+					plugin: [{
+						labels: {
+							render: 'value', 
+							fontColor: 'rgb(255,255,255)'
+						}
+					}]
 
 			    }
 			});

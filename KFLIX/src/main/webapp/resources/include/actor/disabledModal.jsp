@@ -5,15 +5,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-warning">
-        <h5 class="modal-title text-light">복구</h5>
+        <h5 class="modal-title text-light">활성화</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 	       <div class="modal-body">
-	        <p>복구 하시겠습니까?</p>
+	        <p>활성화 하시겠습니까?</p>
 	      </div>
           <div class="modal-footer">
 	          	<input type="hidden" id="recoveryid" name="actor_id"/>
-		        <button onclick="recoveryBtn(1);" class="btn btn-warning" >복구</button>
+		        <button onclick="recoveryBtn(1);" class="btn btn-warning" >활성화</button>
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 	     </div>
       </div>
@@ -24,12 +24,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-warning">
-        <h5 class="modal-title text-light">복구</h5>
+        <h5 class="modal-title text-light">활성화</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
       <div class="modal-body">
-	      복구되었습니다.
+	      활성화되었습니다.
 	  </div>     
 	   
       <div class="modal-footer">

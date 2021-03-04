@@ -134,7 +134,7 @@ function makeTable(data, pnum, amount) {
 		var section = $('#genrelist');
 		var table = $('#genretable>tbody');
 			
-		$('table>tbody>*').remove();
+		$('#genretable>tbody>*').remove();
 	
 		var first_li = (pnum - 1) * amount;
 		var last_li = first_li + amount;
@@ -144,10 +144,10 @@ function makeTable(data, pnum, amount) {
 				table.append('<tr>'
 						+'<td>' + data[i].genre_id + '</td>'
 						+'<td>' + data[i].genre_name + '</td>'
-						+'<td><button type="button" class="btn btn-primary" data-bs-toggle="modal"'
+						+'<td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"'
 						+'data-genreid="' + data[i].genre_id + '" data-bs-target="#updatemodal">수정</button> '
-						+'<button type="button" class="btn btn-danger" data-bs-toggle="modal"'
-						+'data-genreid="' + data[i].genre_id + '" data-bs-target="#deletemodal">삭제</button></td>'
+						+'<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"'
+						+'data-genreid="' + data[i].genre_id + '" data-bs-target="#deletemodal">비활성화</button></td>'
 						+'</tr>'
 				);
 			}

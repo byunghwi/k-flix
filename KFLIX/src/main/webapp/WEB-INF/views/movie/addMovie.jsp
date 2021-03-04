@@ -34,29 +34,33 @@
 	}
 	#addform{
 		width: 1200px;
-		background-color: white;
+		background-color: rgba(0, 0, 0, 0);
 		min-width: 1200px;
+		padding-top:75px;
 	}
 	h1{
-		color: black;
+		color: white;
 	}
 </style>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
+
 <body>
 
+<%@include file="../manage/navbar.jsp"%>
 	<form action="./add" method="post" enctype="multipart/form-data">
 <div class="container" id="addform">	
 	<div class="container pt-2">	
 		<div class="d-flex justify-content-between">
 			<div>
-				<h1>영화 등록 페이지</h1>
+				<h1>영화 등록</h1>
 			</div>
 			
 			<div class="d-flex justify-content-end">
 				<div>
-					<input type="submit" class="btn btn-primary" value="등록" />
+					<input type="submit" class="btn btn-outline-primary" value="등록" />
 				</div>
 				<div class="ps-2">
-					<a href="./movieindex" class="btn btn-danger">취소</a>
+					<a href="./movieindex" class="btn btn-outline-danger">취소</a>
 				</div>
 			</div>
 		</div>
@@ -183,6 +187,10 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>		
 <script src="/kflix/resources/js/movie/inputfile.js?ver=22"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=30"></script>
-
+<script>
+$(document).ready(function() { 
+	$('#closeMenu').removeAttr('checked');
+});
+</script>
 </body>
 </html>

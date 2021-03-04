@@ -102,10 +102,9 @@ function makeTable(data, pnum, amount) {
 						+'<td>' + data[i].genre_name1 + " / " + data[i].genre_name2 + '</td>'
 						+'<td>' + data[i].play_time + '분</td>'
 						+'<td>' + moment(data[i].reg_date).format("YY/MM/DD") + '</td>'
-						+'<td><a href="./updatepage/'+data[i].movie_id+'" class="btn btn-primary">수정</a> '
-						+'<button type="button" class="btn btn-danger" data-bs-toggle="modal"'
-						+'data-movieid="'+data[i].movie_id+'" data-bs-target="#deletemodal">삭제</button> '
-						//+'<a href="./detail/'+data[i].movie_id+'" class="btn btn-info text-light">상세보기</a></td>'
+						+'<td><a href="./updatepage/'+data[i].movie_id+'" class="btn btn-outline-primary">수정</a> '
+						+'<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"'
+						+'data-movieid="'+data[i].movie_id+'" data-bs-target="#deletemodal">비활성화</button></td>'
 						+'</tr>'
 				);
 			}
@@ -139,7 +138,7 @@ function makePageNate(len, pnum, amount)	{
 		} else {
 			pagebtn = '<li class="page-item disabled">';
 		}
-		pagebtn += '<button class="page-link" id="pre" tabindex="-1" aria-disabled="true">«</button>';
+		pagebtn += '<button class="page-link bg-dark text-light" id="pre" tabindex="-1" aria-disabled="true">«</button>';
 		pagebtn += '</li>';
 		
 		// 페이지 버튼
@@ -150,7 +149,7 @@ function makePageNate(len, pnum, amount)	{
 				pagebtn += '<li class="page-item" aria-current="page">';
 			}
 			
-			pagebtn += '<button class="page-link" id="pnum'+ (i) +'" onclick="pageClick('+ (i) +');">'+ (i) +'</button>'
+			pagebtn += '<button class="page-link bg-dark text-light" id="pnum'+ (i) +'" onclick="pageClick('+ (i) +');">'+ (i) +'</button>'
 			pagebtn += '</li>'
 		}
 		
@@ -161,7 +160,7 @@ function makePageNate(len, pnum, amount)	{
 			pagebtn += '<li class="page-item">';			
 		}
 		
-		pagebtn += '<button class="page-link" id="next" tabindex="-1" aria-disabled="true">»</button>';
+		pagebtn += '<button class="page-link bg-dark text-light" id="next" tabindex="-1" aria-disabled="true">»</button>';
 		pagebtn += '</li>';
 		
 		pagenate.html(pagebtn);

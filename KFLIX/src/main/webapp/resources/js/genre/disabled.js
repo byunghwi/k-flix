@@ -116,8 +116,8 @@ function makeTable(data, pnum, amount) {
 				table.append('<tr>'
 						+'<td>' + data[i].genre_id + '</td>'
 						+'<td>' + data[i].genre_name + '</td>'
-						+'<td><button type="button" class="btn btn-warning text-light" data-bs-toggle="modal"'
-						+'data-genreid="' + data[i].genre_id + '" data-bs-target="#recoverymodal">복구</button></td>'
+						+'<td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"'
+						+'data-genreid="' + data[i].genre_id + '" data-bs-target="#recoverymodal">활성화</button></td>'
 						+'</tr>'
 				);
 			}

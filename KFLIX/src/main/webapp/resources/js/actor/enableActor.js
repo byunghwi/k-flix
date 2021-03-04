@@ -147,10 +147,10 @@ function makeTable(data, pnum, amount) {
 				table.append('<tr>'
 						+'<td>' + data[i].actor_id + '</td>'
 						+'<td>' + data[i].actor_name + '</td>'
-						+'<td><button type="button" class="btn btn-primary" data-bs-toggle="modal"'
+						+'<td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"'
 						+'data-actorid="' + data[i].actor_id + '" data-bs-target="#updatemodal">수정</button> '
-						+'<button type="button" class="btn btn-danger" data-bs-toggle="modal"'
-						+'data-actorid="' + data[i].actor_id + '" data-bs-target="#deletemodal">삭제</button></td>'
+						+'<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"'
+						+'data-actorid="' + data[i].actor_id + '" data-bs-target="#deletemodal">비활성화</button></td>'
 						+'</tr>'
 				);
 			}
