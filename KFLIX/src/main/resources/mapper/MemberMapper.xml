@@ -84,7 +84,7 @@
 		SET 
 			ticket_id = #{ticket_id},
 			pay_sid = #{pay_sid}, 
-			pay_exp_date = to_char(add_months(sysdate,+1),'yyyy-mm-dd'),
+			pay_exp_date = to_date(sysdate) + (SELECT ticket_period FROM ticket WHERE ticket_id = #{ticket_id}),
 			pay_remove_dt = null
 		WHERE
 			email = #{email}

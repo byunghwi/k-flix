@@ -21,12 +21,12 @@
 
 <link href="/kflix/resources/css/ticket/ticket.css" rel="stylesheet">
 
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
 	type="text/css" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> -->
 <style>
 body, html {
 	background: #141414;
@@ -42,11 +42,13 @@ body, html {
 	cursor: default;
 }
 
+
 </style>
 </head>
 <body>
-	<h1>${member}</h1>
-	<h1>=========================</h1>
+<div><%@include file="/WEB-INF/views/main/header.jsp"%></div>
+
+<div>
 	<c:choose>
 		<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
 			<h3>이메일을 전송했습니다.</h3>
@@ -63,7 +65,7 @@ body, html {
 		</c:when>
 
 	</c:choose>
-
+</div>
 	<!-- 회원가입 모달 -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
