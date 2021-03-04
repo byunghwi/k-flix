@@ -31,8 +31,7 @@
 	<i style="display: hidden;" id="back" class="fas fa-arrow-left color-w relative"> <span style="font-size: 15px;"> 뒤로가기 </span> </i>
 	</button> -->
 
-		<a onclick="savecurrentTime()"
-			href="<%=application.getContextPath()%>/browse"> <i
+		<a onclick="savecurrentTime()"> <i
 			style="display: hidden;" id="back"
 			class="fas fa-arrow-left color-w relative"> <span
 				style="font-size: 18px; vertical-align: middle;"> 뒤로가기 </span>
@@ -130,9 +129,9 @@
 	<script src="/kflix/resources/js/watch/jsvideo.js"></script>
 
 	<script>
-
 	console.log(document.referrer);
-
+	
+	
 	var newvideo = document.getElementById("newvideo");
 			console.log("${movie.movie_id}");
 			console.log("${watching.watch_type}");
@@ -208,6 +207,7 @@
 			video.addEventListener('click', togglePlay);
 			
 			function savecurrentTime() {
+				
 				<c:choose>
 				<c:when test="${empty watching }">
 				console.log("없음");
@@ -251,6 +251,9 @@
 				xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
 				xhttp.setRequestHeader('content-type', 'application/json');
 				xhttp.send(JSON.stringify(data));
+					string = document.referrer;
+				
+				location.href = string;
 			}
 
 			//미디어 재생이 종료되었을때 발생하는 이벤트 처리

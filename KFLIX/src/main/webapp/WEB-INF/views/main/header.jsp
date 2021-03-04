@@ -8,36 +8,57 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/kflix/resources/css/main/cssheader.css">
-	<style type="text/css">
+<style type="text/css">
 </style>
 </head>
 <body>
-	<%-- <h1>TEST 확인용 -> ${login}</h1>
-	<a href="logout">로그아웃</a>
-	<a href="" id="ticket">티켓구매</a>
-	<a href="/kflix/service">고객센터</a> --%>
+	<%-- <h1>TEST 확인용 -> ${login}</h1> --%>
 	<div class="container flex-row nav-bar ">
 		<a href="/kflix/browse"><img id="logo" alt="로고"
 			src="/kflix/resources/imgs/watch/kflixlogo.png"> </a>
 		<ul class="nav" style="margin: 0 300px 0 0;">
 			<li class="nav-item"><a class="nav-link active"
-				aria-current="page" href="/kflix/browse">홈</a></li>
-			<li class="nav-item"><a class="nav-link" href="/kflix/browse#top10">영화</a></li>
-			<li class="nav-item"><a class="nav-link" href="#top10" tabindex="-1">NEW!요즘
-					대세 콘텐츠</a></li>
-
-			<li class="nav-item"><a class="nav-link" href="#">내가 찜한 콘텐츠</a></li>
+				aria-current="page" href="/kflix/browse#abody">홈</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/kflix/browse#amovie">영화</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/kflix/browse#atop" tabindex="-1">요즘 대세 콘텐츠!</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="/kflix/browse#awish">내가 찜한 콘텐츠</a></li>
 		</ul>
 		<div class="profile">
 			<form id="searchform" action="/kflix/browse/search"></form>
 			<input id="search" type="checkbox" style="display: none;"> <input
 				id="searchinput" form="searchform" name="searchValue" type="text"
-				style="display: none;"> <label for="search"><i
+				style="display: none;border-radius: 0.4rem;"> <label for="search"><i
 				class="fas fa-search color_white nav-icon"></i></label> <i
 				class="fas fa-gift color_white nav-icon"></i> <i
-				class="fas fa-bell color_white nav-icon"></i> <i
-				style="background-color: white; width: 40px"
-				class="fas fa-child nav-icon"></i>
+				class="fas fa-bell color_white nav-icon"></i>
+
+
+
+
+			<div
+				style="text-align: right; font-size: 22px; display: inline-block;">
+				<div class="btn-group" role="group">
+					<button id="btnGroupDrop1" type="button" class="btn"
+						data-bs-toggle="dropdown" aria-expanded="false"
+						style="box-shadow: 0 0 0 0;">
+						<i style="background-color: white; width: 40px"
+							class="fas fa-child nav-icon"></i>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
+						<li><div class="dropdown-item">
+								<a href="" id="ticket">티켓구매</a>
+							</div></li>
+						<li><div class="dropdown-item">
+								<a href="/kflix/service">고객센터</a>
+							</div></li>
+					</ul>
+				</div>
+			</div>
+
 		</div>
 	</div>
 

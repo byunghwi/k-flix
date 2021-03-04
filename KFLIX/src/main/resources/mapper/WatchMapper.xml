@@ -164,5 +164,18 @@
 		resultType="com.kflix.genre.domain.Genre">
 		SELECT genre_id, genre_name FROM genre
 	</select>
+	
+	<!-- 티켓 확인 -->
+	
+	<select id="checkTicket" resultType="com.kflix.member.domain.Member">
+		SELECT 
+				email, ticket_id
+		FROM 
+			member 
+		WHERE
+			email = #{email}
+	</select>
+	
+	
 
 </mapper>

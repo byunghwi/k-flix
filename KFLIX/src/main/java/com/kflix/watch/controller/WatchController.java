@@ -34,6 +34,7 @@ import com.kflix.director.service.DirectorService;
 import com.kflix.genre.domain.Genre;
 import com.kflix.genre.service.GenreService;
 import com.kflix.member.domain.Member;
+import com.kflix.member.service.MemberService;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
@@ -56,6 +57,7 @@ public class WatchController {
 	DirectorService directorservice;
 	@Autowired
 	GenreService genreservice;
+	
 
 	LocalDate max_day = LocalDate.now();
 
@@ -81,12 +83,12 @@ public class WatchController {
 		basket.setWish(watchservice.getSelectWish(member.getEmail()));
 		basket.setGenre(watchservice.getAllGenre());
 		model.addAttribute("test", basket);
-
+		
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("movie_genre", movie_genre);
-		model.addAttribute("email", member.getEmail());
+		model.addAttribute("member", watchservice.checkTicket(member.getEmail()));
 		return "/watch/browse";
 	}
 

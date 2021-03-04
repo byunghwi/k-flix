@@ -45,8 +45,19 @@
 
 </head>
 <body>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
-	<div id="modalbackground"></div>
+	<%@include file="/WEB-INF/views/main/header.jsp"%>
+	<span class="anchor" id="abody"></span>
+	<div id="modalbackground">
+		<div id="confirm">
+			<i style="color: #aa2929; font-size: 50px"
+				class="far fa-times-circle"></i>
+			<p style="color: white; font-weight: bold; font-size: 22px;">이용권
+				구매 요청</p>
+			<p style="color: #dcdcdc; font-size: 16px; font-weight: 300;">구매
+				후 무제한 감상을 시작해 보세요.</p>
+			<div id="confirmbtn">이용권 구매하기</div>
+		</div>
+	</div>
 
 	<div id="shadow1"></div>
 	<div id="carouselExampleInterval" class="carousel slide"
@@ -77,15 +88,13 @@
 		</div>
 	</div>
 
-
-
 	<div id="list" class="container">
 		<div id="slides"
 			style="position: relative; top: -476px; padding: 100px 0; overflow: hidden;">
 
 			<div class="list container">
-			<hr>
 				<c:if test="${not empty test.watching }">
+					<span class="anchor" id="awatching"></span>
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
 						<!--  style="top: 0px" -->
@@ -220,7 +229,7 @@
 				</c:if>
 
 				<c:if test="${not empty test.wish}">
-				<hr>
+					<span class="anchor" id="awish"></span>
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
 						<!--  style="top: 38px" -->
@@ -349,8 +358,8 @@
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />
-				<hr id="top10">
-				<div class="sliderow${i} }">
+				<span class="anchor" id="atop"></span>
+				<div id="top10" class="sliderow${i} }">
 					<h2 class="rowHeader${i}">KFLIX의 TOP 10 콘텐츠</h2>
 					<div class="slide_wrapper${i}">
 						<ul class="slides${i}">
@@ -468,6 +477,7 @@
 				</div>
 
 				<c:if test="${not empty movie_genre}">
+					<span class="anchor" id="amovie"></span>
 					<c:forEach items="${movie_genre }" var="movie_genre"
 						varStatus="status">
 						<c:set var="i" value="${i+1}" />
@@ -621,8 +631,16 @@
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
 	<script type="text/javascript">
-		console.log(${i});
-		
+	modalbackground = document.getElementById('modalbackground');
+
+	console.log(${member.ticket_id}+"dlek");
+	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
+	modalbackground.style.display = 'block';
+	body.style.overflow = 'hidden';
+	</c:if>
+	
+	
+	console.log(${i});
 	<c:forEach var="j" begin="1" end="${i}">
 	console.log(${j});
 	
