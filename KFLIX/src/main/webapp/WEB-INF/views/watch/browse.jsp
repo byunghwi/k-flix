@@ -49,6 +49,7 @@
 	<span class="anchor" id="abody"></span>
 	<div id="modalbackground">
 		<div id="confirm">
+		<i class="fas fa-power-off logout"></i>
 			<i style="color: #aa2929; font-size: 50px"
 				class="far fa-times-circle"></i>
 			<p style="color: white; font-weight: bold; font-size: 22px;">이용권
@@ -655,8 +656,6 @@
 	<iframe id="infoframe" name="browse" src="" width="400px"
 		height="300px" allowTransparency="true"
 		style="filter: chroma(color = #999999)"></iframe>
-
-
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>

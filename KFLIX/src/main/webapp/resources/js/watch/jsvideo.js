@@ -76,7 +76,7 @@ videocon.addEventListener("mousemove", function(e) {
 	ybefore = e.clientY;
 	xbefore = e.clientX;
 	setTimeout(function() {
-		if (xbefore == e.clientX && ybefore == e.clientY) {
+		if (xbefore == e.clientX && ybefore == e.clientY && e.clientY < 816) {
 			back.style.display = 'none';
 			videobar.style.display = 'none';
 			if (video.paused && movieinfo.style.opacity == '0' && recommend.style.display != 'block') {
@@ -142,10 +142,65 @@ function openFullscreen() {
 
 // timeupdate : 재생중에 지속적으로 발생
 video.addEventListener("timeupdate", PlayTime, false);
+current = document.getElementById("current");
+duration = document.getElementById("duration");
 
 function PlayTime(e) {
-	document.getElementById("current").innerHTML = Math.floor(video.currentTime);
-	document.getElementById("duration").innerHTML = Math.floor(video.duration);
+	remain = Math.floor(video.duration-video.currentTime);
+
+	if (remain < 60) { // 초단위
+		if (remain < 10) { // 10초전
+			duration.innerHTML = "00:0" + remain;
+		} else {
+			duration.innerHTML = "00:" + remain;
+		}
+	} else if (remain < 3600) { // 분단위
+		if (Math.floor(remain / 60) < 10) { // 10분전 
+			if (Math.floor(remain - Math.floor(remain / 60) * 60) < 10) { // 10초전
+				duration.innerHTML = "0" + Math.floor(remain / 60) + ":0" + Math.floor(remain - Math.floor(remain / 60) * 60);
+			} else {
+				duration.innerHTML = "0" + Math.floor(remain / 60) + ":" + Math.floor(remain - Math.floor(remain / 60) * 60);
+			}
+		} else {
+			if (Math.floor(remain - Math.floor(remain / 60) * 60) < 10) { // 10초전
+				duration.innerHTML = Math.floor(remain / 60) + ":0" + Math.floor(remain - Math.floor(remain / 60) * 60);
+			} else {
+				duration.innerHTML = Math.floor(remain / 60) + ":" + Math.floor(remain - Math.floor(remain / 60) * 60);
+			}
+
+		}
+	} else if (remain < 86400) { // 시간단위
+		if (Math.floor(remain / 3600) < 10) { // 10시전
+			if (Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) < 10) { // 10분전
+				if (Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60) < 10) { // 10초전
+					duration.innerHTML = "0" + Math.floor(remain / 3600) + ":0" + Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) + ":0" + Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60);
+				} else {
+					duration.innerHTML = "0" + Math.floor(remain / 3600) + ":0" + Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) + ":" + Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60);
+				}
+			} else {
+				if (Math.floor(remain - (remain / 60) * 60) < 10) { // 10초전
+					duration.innerHTML = "0" + Math.floor(remain / 3600) + ":" + Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) + ":0" + Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60);
+				} else {
+					duration.innerHTML = "0" + Math.floor(remain / 3600) + ":" + Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) + ":" + Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60);
+				}
+			}
+		} else {
+			if (remain < 600) { // 10분전
+				if (Math.floor(remain - (remain / 60) * 60) < 10) { // 10초전
+					duration.innerHTML = Math.floor(remain / 3600) + ":0" + Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) + ":0" + Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60);
+				} else {
+					duration.innerHTML = Math.floor(remain / 3600) + ":0" + Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) + ":" + Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60);
+				}
+			} else {
+				if (Math.floor(remain - (remain / 60) * 60) < 10) { // 10초전
+					duration.innerHTML = Math.floor(remain / 3600) + ":" + Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) + ":0" + Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60);
+				} else {
+					duration.innerHTML = Math.floor(remain / 3600) + ":" + Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) + ":" + Math.floor(Math.floor((Math.floor(remain / 3600) * 3600)/60) - Math.floor((remain - Math.floor(remain / 3600) * 3600)/60) * 60);
+				}
+			}
+		}
+	}
+
 }
 
 console.log("${movie.movie_id}");

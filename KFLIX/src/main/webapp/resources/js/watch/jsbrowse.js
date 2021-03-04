@@ -2,7 +2,11 @@
 infoframe = document.getElementById('infoframe');
 body = document.querySelector('body');
 confirmbtn = document.getElementById('confirmbtn');
+logout = document.querySelector('.logout');
 
+logout.addEventListener("click", function(){
+	location.href = "logout";
+});
 
 confirmbtn.addEventListener("click", function(){
 	location.href = "/kflix/ticket/info";

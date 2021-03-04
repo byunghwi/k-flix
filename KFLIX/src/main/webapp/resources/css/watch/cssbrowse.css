@@ -12,6 +12,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	user-select: none;
 }
 .probar {
    width: 229px;
@@ -21,6 +22,15 @@
     border-radius: .25rem;
     bottom: -15px;
     left: 40px;
+}
+
+.logout {
+    position: absolute;
+    top: 6px;
+    left: 12px;
+    color: black;
+    font-size: 25px;
+    cursor: pointer;
 }
 
 progress::-webkit-progress-value {
@@ -135,10 +145,7 @@ ul {
 	width: 300px;
 	height: 180px;
 }
-/* 
 
-body { width:100%; position: fixed; }
- */
 .atagdiv {
 	display: inline-block;
 	position: relative;
@@ -410,10 +417,6 @@ a:active {
 [class^="next"] {
 	top: 0;
 	right: 0;
-}
-
-body {
-	background-color: black;
 }
 
 .list {
