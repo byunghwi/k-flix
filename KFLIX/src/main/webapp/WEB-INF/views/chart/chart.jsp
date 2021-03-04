@@ -46,7 +46,14 @@ body {
 			    	<h5><i class="fas fa-chart-pie"></i> 장르별 영화 분포</h5>
 			    </div>
 		    	<hr />
-				<canvas class="ps-5" id="myChart" width="450" height="350"></canvas>
+		    	<div class="d-flex ps-0 ms-0">
+			    	<div>
+						<canvas class="ps-5" id="myChart" width="450" height="350"></canvas>
+					</div>
+					<div>
+						
+					</div>				
+				</div>
 			</div>
 		</div>
 	

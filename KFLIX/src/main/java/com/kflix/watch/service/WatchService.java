@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.kflix.genre.domain.Genre;
+import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.SearchVO;
@@ -63,4 +64,7 @@ public interface WatchService {
 	
 	// 장르 관련 쿼리 서비스
 	public List<Genre> getAllGenre();
+
+	// 메인화면 티켓확인
+	Member checkTicket(String email);
 }

@@ -13,6 +13,7 @@ import com.kflix.director.service.DirectorService;
 import com.kflix.genre.service.GenreService;
 import com.kflix.mapper.MovieMapper;
 import com.kflix.movie.domain.Movie;
+import com.kflix.movie.domain.TopFiveMovie;
 import com.kflix.util.pagenation.domain.PageNation;
 
 import lombok.extern.log4j.Log4j;
@@ -187,7 +188,7 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public List<Movie> getTop5Movie() {
+	public List<TopFiveMovie> getTop5Movie() {
 		return mv_mapper.getDashboardMovie();
 	}
 

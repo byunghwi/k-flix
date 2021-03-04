@@ -45,8 +45,20 @@
 
 </head>
 <body>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
-	<div id="modalbackground"></div>
+	<%@include file="/WEB-INF/views/main/header.jsp"%>
+	<span class="anchor" id="abody"></span>
+	<div id="modalbackground">
+		<div id="confirm">
+		<i class="fas fa-power-off logout"></i>
+			<i style="color: #aa2929; font-size: 50px"
+				class="far fa-times-circle"></i>
+			<p style="color: white; font-weight: bold; font-size: 22px;">이용권
+				구매 요청</p>
+			<p style="color: #dcdcdc; font-size: 16px; font-weight: 300;">구매
+				후 무제한 감상을 시작해 보세요.</p>
+			<div id="confirmbtn">이용권 구매하기</div>
+		</div>
+	</div>
 
 	<div id="shadow1"></div>
 	<div id="carouselExampleInterval" class="carousel slide"
@@ -77,15 +89,13 @@
 		</div>
 	</div>
 
-
-
 	<div id="list" class="container">
 		<div id="slides"
 			style="position: relative; top: -476px; padding: 100px 0; overflow: hidden;">
 
 			<div class="list container">
-			<hr>
 				<c:if test="${not empty test.watching }">
+					<span class="anchor" id="awatching"></span>
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
 						<!--  style="top: 0px" -->
@@ -102,10 +112,8 @@
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="dis img1" alt="...">
-
-														<div class="progress"
-															style="flex-basis: ((${watch.view_point} / ${Allmovie.play_time}) * 100)%;"></div>
-
+														<progress class="probar" value="${watch.view_point }"
+															max="${Allmovie.play_time * 60 }"> </progress>
 														<div class="videohover">
 															<img style="margin: 0;" src="${Allmovie.poster_path }"
 																class="modalimg" alt="...">
@@ -147,6 +155,14 @@
 																		<fmt:formatDate value="${Allmovie.reg_date }"
 																			pattern="yyyy.MM" />
 																	</span> • ${Allmovie.play_time }분
+																</div>
+																<div style="position: absolute; top: 53px; right: 30px;">
+																	<span
+																		style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+																		<i class="fas fa-thumbs-up"></i>
+																	</span> <span
+																		style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+																		${Allmovie.movie_rank }</span>
 																</div>
 																<div class="infotable1">
 																	<table>
@@ -220,7 +236,7 @@
 				</c:if>
 
 				<c:if test="${not empty test.wish}">
-				<hr>
+					<span class="anchor" id="awish"></span>
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
 						<!--  style="top: 38px" -->
@@ -277,6 +293,14 @@
 																		<fmt:formatDate value="${Allmovie.reg_date }"
 																			pattern="yyyy.MM" />
 																	</span> • ${Allmovie.play_time }분
+																</div>
+																<div style="position: absolute; top: 53px; right: 30px;">
+																	<span
+																		style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+																		<i class="fas fa-thumbs-up "></i>
+																	</span> <span
+																		style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+																		${Allmovie.movie_rank }</span>
 																</div>
 																<div class="infotable1">
 																	<table>
@@ -349,8 +373,8 @@
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />
-				<hr id="top10">
-				<div class="sliderow${i} }">
+				<span class="anchor" id="atop"></span>
+				<div id="top10" class="sliderow${i} }">
 					<h2 class="rowHeader${i}">KFLIX의 TOP 10 콘텐츠</h2>
 					<div class="slide_wrapper${i}">
 						<ul class="slides${i}">
@@ -398,6 +422,14 @@
 															<fmt:formatDate value="${Ranking.reg_date }"
 																pattern="yyyy.MM" />
 														</span> • ${Ranking.play_time }분
+													</div>
+													<div style="position: absolute; top: 53px; right: 30px;">
+														<span
+															style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+															<i class="fas fa-thumbs-up "></i>
+														</span> <span
+															style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+															${Ranking.movie_rank }</span>
 													</div>
 													<div class="infotable1">
 														<table>
@@ -468,6 +500,7 @@
 				</div>
 
 				<c:if test="${not empty movie_genre}">
+					<span class="anchor" id="amovie"></span>
 					<c:forEach items="${movie_genre }" var="movie_genre"
 						varStatus="status">
 						<c:set var="i" value="${i+1}" />
@@ -531,6 +564,15 @@
 																				<fmt:formatDate value="${Allmovie.reg_date }"
 																					pattern="yyyy.MM" />
 																			</span> • ${Allmovie.play_time }분
+																		</div>
+																		<div
+																			style="position: absolute; top: 53px; right: 30px;">
+																			<span
+																				style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+																				<i class="fas fa-thumbs-up "></i>
+																			</span> <span
+																				style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+																				${Allmovie.movie_rank }</span>
 																		</div>
 																		<div class="infotable1">
 																			<table>
@@ -614,15 +656,21 @@
 	<iframe id="infoframe" name="browse" src="" width="400px"
 		height="300px" allowTransparency="true"
 		style="filter: chroma(color = #999999)"></iframe>
-
-
 	<!-- 전체 틀이 계속 반복되야 하고 안에 알맹이가 바껴야 된다.. -->
 
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
 	<script type="text/javascript">
-		console.log(${i});
-		
+	modalbackground = document.getElementById('modalbackground');
+
+	console.log(${member.ticket_id}+"dlek");
+	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
+	modalbackground.style.display = 'block';
+	body.style.overflow = 'hidden';
+	</c:if>
+	
+	
+	console.log(${i});
 	<c:forEach var="j" begin="1" end="${i}">
 	console.log(${j});
 	

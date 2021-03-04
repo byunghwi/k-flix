@@ -37,26 +37,31 @@ body {
 	background-color: rgba(0, 0, 0, 0.4);
 	padding: 14px 15px;
 	border-radius: 1.2rem;
+	cursor: pointer;
 }
 
 a:link {
 	color: black;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 a:visited {
 	color: black;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 a:hover {
 	color: black;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 a:active {
 	color: black;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 #videobar {
@@ -79,6 +84,7 @@ a:active {
 .progress__filled {
 	background: rgba(237, 42, 40, 1);
 	transition: right 0.5s ease-out;
+	cursor: pointer;
 }
 
 #current {
@@ -134,6 +140,7 @@ a:active {
 #volrange {
 	position: relative;
 	top: 4px;
+	cursor: pointer;
 }
 
 #movieinfo {
@@ -190,6 +197,7 @@ input[type=range]::-webkit-slider-thumb {
 	padding: 12px 14px;
 	border-radius: 50%;
 	margin: 3px;
+	cursor: pointer;
 }
 
 .ru:hover {
@@ -199,6 +207,7 @@ input[type=range]::-webkit-slider-thumb {
 	padding: 12px 14px;
 	border-radius: 50%;
 	margin: 3px;
+	cursor: pointer;
 }
 
 .imghover .hoverru {
@@ -215,6 +224,7 @@ input[type=range]::-webkit-slider-thumb {
 #atag:hover .imghover .hoverru {
 	opacity: 1;
 	visibility: visible;
+	cursor: pointer;
 }
 
 /* 비디오바 가로 맞춤 */
@@ -289,7 +299,7 @@ input[type=range]::-webkit-slider-thumb {
 @media only screen and (min-width:1380px) {
 	#btns>*:not(:last-child) {
 		font-size: 27px;
-		padding:0 54px;
+		padding: 0 54px;
 	}
 	.fa-pause, .fa-pause {
 		font-size: 27px;

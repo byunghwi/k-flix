@@ -71,15 +71,7 @@
       z-index: 2;
       left: 300px;
    }
-   
-   #logoImg{
-      width: 220px;
-      height: 80px;
-      padding-left: 80px;
-      padding-top: 30px;
-      margin-bottom: 20px;
-   }
-   
+
    #navlist a{
       color: white;
       letter-spacing: 0.5rem;
@@ -88,22 +80,14 @@
       font-size: 20px;
       font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
    }
-
-   .dropdown-menu-kflix{
-      background-color: rgb(20,20,20);
-      margin-left: 20px;
-      font-size: 15px;
-      letter-spacing: 0.5rem;
-      font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-   }
    
-   .nav-link {
+   .navLink {
       display: inline-table;
       position: relative;
       overflow: hidden;
    }
 
-   .nav-link::after{
+   .navLink::after{
       content: '';
       display: block;
       width: 100%;
@@ -117,7 +101,7 @@
       z-index:1;
    }
    
-   .nav-link:hover::after{
+   .navLink:hover::after{
       left: 0;
    }
    
@@ -133,7 +117,11 @@
       transform: translateY(50%);
    }
    .wrapCustom{
-   		padding-top: 80px;
+   	  	padding-top: 80px;
+   }
+   
+   .navCatalog{
+		padding-bottom: 10px;
    }
 </style>
 <input type="checkbox" id="closeMenu" checked/>
@@ -142,31 +130,31 @@
     <span></span>
  </label>
 <div id="sidebar">
-   <div class="wrapper wrapCustom">
+   <div class="wrapCustom">
       <ul id="navlist" type="none">
-         <li class="nav-item">
-          <a class="nav-link" id="manage" aria-current="page" href="/kflix/management"><i class="fas fa-chess-board"></i> 대시보드</a>
+         <li class="navCatalog">
+          <a class="navLink" id="manage" aria-current="page" href="/kflix/management"><i class="fas fa-chess-board"></i> 대시보드</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="movie" aria-current="page" href="/kflix/movie/movieindex"><i class="fas fa-video"></i> 영화</a>
+        <li class="navCatalog">
+          <a class="navLink" id="movie" aria-current="page" href="/kflix/movie/movieindex"><i class="fas fa-video"></i> 영화</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="genre" href="/kflix/genre/genreindex"><i class="far fa-list-alt"></i> 장르</a>
+        <li class="navCatalog">
+          <a class="navLink" id="genre" href="/kflix/genre/genreindex"><i class="far fa-list-alt"></i> 장르</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="director" href="/kflix/director/directorindex"><i class="fas fa-bullhorn"></i> 감독</a>
+        <li class="navCatalog">
+          <a class="navLink" id="director" href="/kflix/director/directorindex"><i class="fas fa-bullhorn"></i> 감독</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="actor" href="/kflix/actor/actorindex"><i class="fab fa-redhat"></i> 배우</a>
+        <li class="navCatalog">
+          <a class="navLink" id="actor" href="/kflix/actor/actorindex"><i class="fab fa-redhat"></i> 배우</a>
         </li>
-           <li>
-              <a class="nav-link" id="FAQ" href="/kflix/FAQ/index"><i class="far fa-question-circle"></i> FAQ</a>
-           </li>
-           <li>
-              <a class="nav-link" id="inq" href="/kflix/inquiry/index"><i class="far fa-envelope"></i> 1:1문의</a>
-           </li>
-           <li>
-              <a class="nav-link" id="chart" href="/kflix/chart"><i class="fas fa-chart-area"></i> 분석</a>
-           </li>        
+        <li class="navCatalog">
+           <a class="navLink" id="FAQ" href="/kflix/FAQ/index"><i class="far fa-question-circle"></i> FAQ</a>
+        </li>
+        <li class="navCatalog">
+           <a class="navLink" id="inq" href="/kflix/inquiry/index"><i class="far fa-envelope"></i> 1:1문의</a>
+        </li>
+        <li class="navCatalog">
+           <a class="navLink" id="chart" href="/kflix/chart"><i class="fas fa-chart-area"></i> 분석</a>
+        </li>        
      </div>
 </div>

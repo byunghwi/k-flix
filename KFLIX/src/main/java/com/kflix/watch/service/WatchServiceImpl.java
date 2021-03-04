@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kflix.genre.domain.Genre;
 import com.kflix.mapper.WatchMapper;
+import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.SearchVO;
@@ -130,6 +131,11 @@ public class WatchServiceImpl implements WatchService {
 	@Override
 	public List<Genre> getAllGenre() {
 		return mapper.getAllGenre();
+	}
+
+	@Override
+	public Member checkTicket(String email) {
+		return mapper.checkTicket(email);
 	}
 
 
