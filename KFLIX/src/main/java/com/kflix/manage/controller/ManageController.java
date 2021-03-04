@@ -35,6 +35,7 @@ public class ManageController {
 		model.addAttribute("inqTotal", iq_service.getAllInqCnt());
 		model.addAttribute("ticket", mg_service.getTicketBoard());
 		model.addAttribute("memTotal", mg_service.getMemberCnt());
+		
 		return "manage/managemain";
 	}
 	
@@ -45,4 +46,5 @@ public class ManageController {
 		System.out.println("chartTicket");
 		return mg_service.getTicketBoard();
 	}
+
 }

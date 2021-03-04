@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.kflix.movie.domain.Movie;
+import com.kflix.movie.domain.TopFiveMovie;
 import com.kflix.util.pagenation.domain.PageNation;
 
 public interface MovieService {
@@ -50,7 +51,6 @@ public interface MovieService {
 	public List<Movie> findMovieByGenreName(String genre_name, char status);
 	
 	public List<Movie> findMovieByDirectName(String director_name, char status);
-	
-	// 나중에 바꿔야함
-	public List<Movie> getTop5Movie();
+
+	public List<TopFiveMovie> getTop5Movie();
 }
