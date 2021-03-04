@@ -20,13 +20,16 @@
 
 	#inquirydiv{
 		width: 1200px;
+		height: 1000px;
 		max-width: 1200px;
 		min-width: 1200px;
-		margin-left: 25%;
+		margin-left: 350px;
 	}
-	h1 {
-		text-align: center;
+	#board{
+		padding-top:75px;
+		color: white;
 	}
+
 	#inqMain {
 		overflow: auto;
 		height: 620px;
@@ -36,6 +39,7 @@
 	}
 </style>
 <title>Insert title here</title>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 
@@ -45,8 +49,8 @@
 <input id="helpPage" type="hidden" value="${page }"/>
 <section id="inquirydiv">
 	
-	<div class="d-flex justify-content-start pt-5">
-		<h1>문의 관리</h1>
+	<div class="d-flex justify-content-start" id="board">
+		<h1><i class="far fa-envelope"></i> 1:1 문의</h1>
 	</div>
 
 	<div class="d-flex justify-content-end pb-2">
@@ -82,8 +86,8 @@
 	<!-- 테이블 영역 -->
 	<div id="inqMain">
 		
-		<table id="inqTable" class="table talbe table-striped text-center align-middle border-dark">
-		<thead class="bg-dark text-light">
+		<table id="inqTable" class="table talbe text-light text-center align-middle border-dark">
+		<thead class="bg-dark">
 			<tr>
 				<th>#</th>
 				<th>카테고리</th>
@@ -104,12 +108,12 @@
 				<td>
 					<c:choose>
 						<c:when test="${empty inq.reply_date}">
-							<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replyModal"
+							<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#replyModal"
 								data-replyid="${inq.inquiry_id }" data-replycont="${inq.inquiry_content }"
 								data-memail="${inq.email }">답변하기</button>
 						</c:when>
 						<c:otherwise>
-							<button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#detailModal"
+							<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal"
 								data-type="${inq.inquiry_type }" data-rcont="${inq.reply_content }" data-rtitle="${inq.reply_title }">
 								<fmt:formatDate value="${inq.reply_date }" pattern="yyyy-MM-dd"/>
 							</button>
@@ -364,12 +368,12 @@ function makeTable(data, pnum, amount) {
 		for	(var i = first_li; i < last_li; i++) {
 			var make = '';
 			if (data[i].reply_date == null) {
-				make = '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#replyModal"'
+				make = '<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#replyModal"'
 						+'data-replyid="' + data[i].inquiry_id + '" data-replycont="' + data[i].inquiry_content + '"'
 						+'data-memail="' + data[i].email + '">답변하기</button>'
 	
 			} else {
-				make = '<button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#detailModal"'
+				make = '<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal"'
 						+'data-type="' + data[i].inquiry_type + '" data-rcont="' + data[i].reply_content + '" data-rtitle="' + data[i].reply_title + '">'
 						+moment(data[i].reply_date).format("YYYY-MM-DD") + '</button>'
 			}

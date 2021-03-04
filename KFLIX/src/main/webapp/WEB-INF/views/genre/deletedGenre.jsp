@@ -8,33 +8,26 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/genre/genre.css" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<style>
-	#genrelist{
-		width: 1200px;
-		max-width: 1200px;
-		min-width: 1200px;
-	}
-	#geMain {
-		overflow: auto;
-		height: 620px;
-	}
-</style>
 <meta charset="UTF-8">
 <title>삭제된 항목</title>
+
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 
-<section id="genrelist">
-<div class="container pt-5">
+<%@include file="../manage/navbar.jsp"%>
+
+<section id="table_list">
+<div class="container" id="board">
 <div>
-	<div class="d-flex justify-content-end">
-		<a href="./genreindex" type="button" class="btn btn-outline-secondary btn-sm">관리페이지</a>
+	<div class="d-flex justify-content-start">
+		<h1><i class="far fa-list-alt text-danger"></i> 비활성 장르</h1>
 	</div>
 	
-	<div class="d-flex justify-content-center">
-		<h1>삭제된 항목</h1>
+	<div class="d-flex justify-content-end pb-3">
+		<a href="./genreindex" type="button" class="btn btn-outline-secondary btn-sm">활성 목록</a>
 	</div>
 </div>
 <div class="d-flex justify-content-end">
@@ -55,9 +48,9 @@
 		</div>
 	</div>
 	
-	<div id="geMain">
-	<table class="table table-striped border-danger text-center align-middle" id="genretable">
-		 <thead class="bg-danger text-light">
+	<div id="table_main">
+	<table class="table border-danger text-center align-middle text-light" id="genretable">
+		 <thead class="bg-danger">
 			<tr>
 				<th>#</th>
 				<th>이름</th>
@@ -70,8 +63,8 @@
 					<td>${genre.genre_id }</td>
 					<td>${genre.genre_name }</td>
 					<td>
-						<button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" 
-								data-genreid="${genre.genre_id }" data-bs-target="#recoverymodal">복구</button>
+						<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" 
+								data-genreid="${genre.genre_id }" data-bs-target="#recoverymodal">활성화</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -93,8 +86,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
-<script src="/kflix/resources/js/movie/pagenate.js"></script>
+<script src="/kflix/resources/js/movie/pagenate.js?ver=2"></script>
 <script src="/kflix/resources/js/genre/genre.js?ver=1"></script>
-<script src="/kflix/resources/js/genre/disabled.js?ver=3"></script>	
+<script src="/kflix/resources/js/genre/disabled.js?ver=5"></script>
+<script>
+$(document).ready(function() { 
+	$('#genre').prepend('<span class="nav-clicked"></span>');
+});
+
+</script>	
 </body>
 </html>

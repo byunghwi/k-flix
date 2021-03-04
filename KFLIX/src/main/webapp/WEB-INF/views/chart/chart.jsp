@@ -16,24 +16,27 @@
 #contents{
 	width: 1400px;
 	height: 1000px;
-	margin-left: 20%;
+	margin-left: 350px;
+	padding-top: 65px;
 }
 body {
 	background-color: lightgray;
 }
 .chartArea{
-	background-color: white;
+	color:white;
+	background-color: rgba(85,85,85, 0);
 	border-radius: 5px;
-	box-shadow: 5px 5px 5px 5px gray;
 }
 </style>
+
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 <body>
 
 <%@include file="../manage/navbar.jsp"%>
 
 <div id="contents" class="container-xl">
 	<div class="pt-5 pb-3">
-		<h1>차트</h1>
+		<h1 class="text-light">차트</h1>
 	</div>
 
 	<div class="row h-50">
@@ -43,11 +46,11 @@ body {
 			    	<h5><i class="fas fa-chart-pie"></i> 장르별 영화 분포</h5>
 			    </div>
 		    	<hr />
-				<canvas class="ps-5" id="myChart" width="500" height="400"></canvas>
+				<canvas class="ps-5" id="myChart" width="450" height="350"></canvas>
 			</div>
 		</div>
 	
-		<div class="col-lg-6">
+		<div class="col-lg-6 chartArea">
 		   	<div>
 		    	<h5><i class="fas fa-chart-bar"></i>그래프1</h5>
 		   	</div>
@@ -55,19 +58,19 @@ body {
 	</div>
 	  
 	<div class="row">
-	  <div class="col-lg">
+	  <div class="col-lg chartArea">
 	  	<div>
 	  		<h5><i class="fas fa-chart-line"></i>그래프2</h5>
 	  	</div>
 	  </div>
 	  
-	  <div class="col-lg">
+	  <div class="col-lg chartArea">
 	  	<div>
 	  		<h5><i class="fas fa-chart-line"></i>그래프2</h5>
 	  	</div>
 	  </div>
 	  
-	  <div class="col-lg">
+	  <div class="col-lg chartArea">
 	  	<div>
 	  		<h5><i class="fas fa-chart-bar"></i>그래프2</h5>
 	  	</div>
@@ -118,7 +121,9 @@ $( document ).ready(function() {
 				        labels: label_list,
 				        datasets: [{           
 				            backgroundColor: bc_list,
-				            data: data_list
+				            data: data_list,
+				            borderWidth:1,
+				            borderColor: 'black'
 				        }]
 				    },
 				    options: { 
@@ -130,15 +135,17 @@ $( document ).ready(function() {
 				    	plugins: {
 					    	  	labels: [
 				    	  			{   render: 'label',
-				    		      		position: 'outside',
-				    		      	    fontSize: 15,
-				    		      	    fontStyle: 'bold'
+				    		      	    fontSize: 10,
+				    		      	    fontStyle: 'bold',
+				    		      	    fontColor: 'white',
+				    		      	    precision: 2
 				    		    	}, 
 				    		    	{
 					    		      	render: 'percentage',
-					    		      	fontSize: 12,
+				    		      		position: 'outside',
+					    		      	fontSize: 10,
 				    		      	    fontStyle: 'bold',
-				    		      	    fontColor: 'black',
+				    		      	    fontColor: 'white',
 				    		      	    precision: 2
 					    		    }
 				    			]

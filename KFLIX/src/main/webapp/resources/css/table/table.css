@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.input_text{
+	width: 15em;
+}
+
+#table_list{
+	width: 700px;
+	max-width: 700px;
+	min-width: 700px;
+	margin-left: 600px;
+}
+#table_main {
+	overflow: auto;
+	height: 620px;
+}
+#board{
+	padding-top:75px;
+}
+h1{
+	color:white;
+}

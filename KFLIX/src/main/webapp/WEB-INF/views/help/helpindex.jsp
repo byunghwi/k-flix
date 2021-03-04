@@ -10,32 +10,22 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<style>
-	#helplist{
-		width: 1200px;
-		max-width: 1200px;
-		min-width: 1200px;
-		margin-left: 25%;
-	
-	}
-	#helpMain {
-		overflow: auto;
-		height: 620px;
-	}
-</style>
 <meta charset="UTF-8">
 <title>FAQ</title>
+
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 
 <%@include file="../manage/navbar.jsp"%>
 
-<section id="helplist">
+<section id="table_list">
 <!-- 본체 영역 -->
-<div class="container pt-5">
+<div class="container" id="board">
 	<div class="d-flex justify-content-start pb-5">
-		<h1>FAQ 관리</h1>
+		<h1><i class="far fa-question-circle"></i> FAQ</h1>
 	</div>
 	
 	<div class="d-flex justify-content-between">
@@ -78,10 +68,10 @@
 	</div>
 	
 	<!-- 테이블 영역 -->
-	<div id="helpMain">
+	<div id="table_main">
 		
-		<table id="helpTable" class="table talbe table-striped text-center align-middle border-dark">
-		<thead class="bg-dark text-light">
+		<table id="helpTable" class="table talbe text-light text-center align-middle border-dark">
+		<thead class="bg-dark">
 			<tr>
 				<th>#</th>
 				<th>카테고리</th>
@@ -98,11 +88,11 @@
 				<td>${help.help_title }</td>
 				<td><fmt:formatDate value="${help.help_date }" pattern="yyyy-MM-dd"/></td>
 				<td>
-					<button id="" class="btn btn-primary" data-bs-toggle="modal" 
+					<button id="" class="btn btn-outline-primary" data-bs-toggle="modal" 
 						data-bs-target="#processModal" data-bs-whatever="update"
 						data-id="${help.help_id }" data-type="${help.help_type }" 
 						data-title="${help.help_title }" data-content="${help.help_content }">수정</button>
-					<button id="" class="btn btn-danger" data-bs-toggle="modal" 
+					<button id="" class="btn btn-outline-danger" data-bs-toggle="modal" 
 						data-helpid="${help.help_id }" data-bs-target="#deleteModal">삭제</button>
 				</td>
 			</tr>
@@ -523,10 +513,10 @@ function makeTable(data, pnum, amount) {
 					+'<td>' + data[i].help_title + '</td>'
 					+'<td>' + moment(data[i].help_date).format("YY/MM/DD") + '</td>'
 					+'<td>'
-					+'<button id="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#processModal" data-bs-whatever="update"'
+					+'<button id="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#processModal" data-bs-whatever="update"'
 					+'data-id="' + data[i].help_id + '" data-type="' + data[i].help_type + '" '
 					+'data-title="' + data[i].help_title + '" data-content="' + data[i].help_content + '">수정</button> '
-					+'<button id="" class="btn btn-danger" data-bs-toggle="modal" data-helpid="' + data[i].help_id + '" data-bs-target="#deleteModal">삭제</button>'
+					+'<button id="" class="btn btn-outline-danger" data-bs-toggle="modal" data-helpid="' + data[i].help_id + '" data-bs-target="#deleteModal">삭제</button>'
 					+'</td>'
 					+'</tr>'
 			);

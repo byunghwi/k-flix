@@ -8,37 +8,24 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/genre/genre.css" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<style>
-	#directorlist{
-		width: 1200px;
-		max-width: 1200px;
-		min-width: 1200px;
-		margin-left: 25%;
-	
-	}
-	#direMain{
-		overflow: auto;
-		height: 620px;
-	}
-	
-</style>
 <meta charset="UTF-8">
 <title>감독</title>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 
 <%@include file="../manage/navbar.jsp"%>
 
-<section id="directorlist">
-<div class="container pt-5">
+<section id="table_list">
+<div class="container" id="board">
 	<div class="d-flex justify-content-start">
-		<h1>감독관리</h1>
+		<h1 class="text-light"><i class="fas fa-bullhorn"></i> 감독</h1>
 	</div>
 	
 	<div class="d-flex justify-content-end pb-3">
-		<a href="./deletedDirector" type="button" class="btn btn-outline-secondary btn-sm">삭제된 항목</a>
+		<a href="./deletedDirector" type="button" class="btn btn-outline-secondary btn-sm">비활성 목록</a>
 	</div>
 	
 
@@ -69,9 +56,9 @@
 		</div>
 	</div>
 </div>
-	<div id="direMain">
-	<table class="table table-striped text-center align-middle border-dark" id="directortable">
-		 <thead class="bg-dark text-light">
+	<div id="table_main">
+	<table class="table text-light text-center align-middle border-dark" id="directortable">
+		 <thead class="bg-dark">
 			<tr>
 				<th>#</th>
 				<th>이름</th>
@@ -84,10 +71,10 @@
 					<td>${director.director_id }</td>
 					<td>${director.director_name }</td>
 					<td>
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+						<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" 
 								data-directorid="${director.director_id }" data-bs-target="#updatemodal">수정</button>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" 
-								data-directorid="${director.director_id }" data-bs-target="#deletemodal">삭제</button>
+						<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" 
+								data-directorid="${director.director_id }" data-bs-target="#deletemodal">비활성화</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -101,6 +88,7 @@
 </section>
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
+<%@ include file="/resources/include/director/enabledModal.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
@@ -111,7 +99,7 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/director/enableDirector.js?ver=7"></script>
+<script src="/kflix/resources/js/director/enableDirector.js?ver=8"></script>
 <script>
 $(document).ready(function() { 
 	$('#director').prepend('<span class="nav-clicked"></span>');

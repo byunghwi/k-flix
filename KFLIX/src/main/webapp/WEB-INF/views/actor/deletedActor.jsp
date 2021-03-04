@@ -8,37 +8,28 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/genre/genre.css" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<style>
-	#actorlist{
-		width: 1200px;
-		max-width: 1200px;
-		min-width: 1200px;
-	
-	}
-	#actorMain {
-		overflow: auto;
-		height: 620px;
-	}
-	
-</style>
 <meta charset="UTF-8">
 <title>삭제된 항목</title>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 
-<section id="actorlist">
-<div class="container pt-5">
+<%@include file="../manage/navbar.jsp"%>
+
+<section id="table_list">
+<div class="container" id="board">
 
 	<div>
-		<div class="d-flex justify-content-end">
+		<div class="d-flex justify-content-start">
+			<h1><i class="fab fa-redhat text-danger"></i> 비활성 배우</h1>
+		</div>
+		
+		<div class="d-flex justify-content-end pb-3">
 			<a href="./actorindex" type="button" class="btn btn-outline-secondary btn-sm">관리페이지</a>
 		</div>
 		
-		<div class="d-flex justify-content-center">
-			<h1>삭제된 항목</h1>
-		</div>
 	</div>
 
 	<div class="d-flex justify-content-end">
@@ -58,9 +49,9 @@
 			<button class="btn btn-outline-secondary btn-sm" onclick="allView(1);">ALL</button>
 		</div>
 	</div>
-	<div id="actorMain">
-	<table class="table table-striped text-center align-middle border-danger" id="actortable">
-		 <thead class="bg-danger text-light">
+	<div id="table_main">
+	<table class="table text-light text-center align-middle border-danger" id="actortable">
+		 <thead class="bg-danger">
 			<tr>
 				<th>#</th>
 				<th>이름</th>
@@ -73,8 +64,8 @@
 					<td>${actor.actor_id }</td>
 					<td>${actor.actor_name }</td>
 					<td>
-						<button type="button" class="btn btn-warning text-light" data-bs-toggle="modal" 
-								data-actorid="${actor.actor_id }" data-bs-target="#recoverymodal">복구</button>
+						<button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" 
+								data-actorid="${actor.actor_id }" data-bs-target="#recoverymodal">활성화</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -88,6 +79,7 @@
 </section>
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
+<%@ include file="/resources/include/actor/disabledModal.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
@@ -98,6 +90,6 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js?ver=1"></script>
-<script src="/kflix/resources/js/actor/disableActor.js?ver=3"></script>
+<script src="/kflix/resources/js/actor/disableActor.js?ver=5"></script>
 </body>
 </html>
