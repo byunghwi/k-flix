@@ -22,8 +22,7 @@
 	<div id="frame">
 		<div id="postiondiv" class="container postiondiv">
 
-			<a ><i
-				class="fas fa-arrow-left back"></i></a>
+			<a><i class="fas fa-arrow-left back"></i></a>
 			<div id="boxsha">
 
 				<video id="video" muted autoplay loop poster="${movie.poster_path}">
@@ -41,16 +40,13 @@
 				</div>
 				<div class="container" style="display: inline-block; width: auto">
 					<input id="wish_check" class="disnone" type="checkbox"> <label
-						for="wish_check" id="wish" class="ru disin"> <label
-						id="wish_lab" for="wish_check"><i
-							class="fas fa-plus color-w"></i></label>
-					</label>
+						id="wish_lab" for="wish_check" id="wish" class="ru disin"><i
+						class="fas fa-plus color-w"></i> </label>
 				</div>
 				<div class="container" style="display: inline-block; width: auto">
 					<input id="like_check" class="disnone" type="checkbox"> <label
-						for="like_check" id="like" class="ru disin"> <label
-						id="like_lab" for="like_check"> <i
-							class="far fa-thumbs-up color-w"></i></label>
+						id="like_lab" for="like_check" id="like" class="ru disin">
+						<i class="far fa-thumbs-up color-w"></i>
 					</label>
 				</div>
 			</div>
@@ -60,10 +56,6 @@
 				<div id="previewModal-info">
 					<div id="movieinfo">
 						<h1 style="display: inline-block;">${movie.movie_title }</h1>
-						<span
-							style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
-							<fmt:formatDate value="${movie.reg_date }" pattern="yyyy.MM" />
-						</span>
 						<c:choose>
 							<c:when test="${movie.rating eq 'all' }">
 								<p class="ratingsty"
@@ -83,10 +75,25 @@
 								<p class="ratingsty" style="background-color: #c52e37">${movie.rating }</p>
 							</c:otherwise>
 						</c:choose>
+
+						<div id="mar-r">
+						<div style="display: inline-block;">
+							<span
+								style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 15px;">
+								<i class="fas fa-thumbs-up"></i>
+							</span> <span
+								style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 18px; color: black;">
+								${movie.movie_rank }</span></div> 
+								
+								<span
+								style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px; font-size: 18px;">
+								<fmt:formatDate value="${movie.reg_date }" pattern="yyyy.MM" /> • ${movie.play_time }분
+							</span>
+						</div>
 						<div>
 							<div style="float: left;">
 								<div style="width: 500px;">
-									<h6 style="line-height: 145%; width: 460px;">${movie.summary}</h6>
+									<h6 style="line-height: 160%; width: 460px;">${movie.summary}</h6>
 								</div>
 							</div>
 							<table id="infotable1" style="font-size: 16px;">

@@ -221,7 +221,11 @@ a:active {
 }
 
 #movieinfo>* {
-	margin: 10px 0;
+	margin: 10px 3px;
+}
+
+#mar-r > * {
+	margin-right: 10px;
 }
 
 #boxshamin {

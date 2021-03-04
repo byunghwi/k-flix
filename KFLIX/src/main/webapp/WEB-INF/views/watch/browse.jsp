@@ -111,10 +111,8 @@
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="dis img1" alt="...">
-
-														<div class="progress"
-															style="flex-basis: ((${watch.view_point} / ${Allmovie.play_time}) * 100)%;"></div>
-
+														<progress class="probar" value="${watch.view_point }"
+															max="${Allmovie.play_time * 60 }"> </progress>
 														<div class="videohover">
 															<img style="margin: 0;" src="${Allmovie.poster_path }"
 																class="modalimg" alt="...">
@@ -156,6 +154,14 @@
 																		<fmt:formatDate value="${Allmovie.reg_date }"
 																			pattern="yyyy.MM" />
 																	</span> • ${Allmovie.play_time }분
+																</div>
+																<div style="position: absolute; top: 53px; right: 30px;">
+																	<span
+																		style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+																		<i class="fas fa-thumbs-up"></i>
+																	</span> <span
+																		style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+																		${Allmovie.movie_rank }</span>
 																</div>
 																<div class="infotable1">
 																	<table>
@@ -287,6 +293,14 @@
 																			pattern="yyyy.MM" />
 																	</span> • ${Allmovie.play_time }분
 																</div>
+																<div style="position: absolute; top: 53px; right: 30px;">
+																	<span
+																		style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+																		<i class="fas fa-thumbs-up "></i>
+																	</span> <span
+																		style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+																		${Allmovie.movie_rank }</span>
+																</div>
 																<div class="infotable1">
 																	<table>
 																		<tr align="left">
@@ -407,6 +421,14 @@
 															<fmt:formatDate value="${Ranking.reg_date }"
 																pattern="yyyy.MM" />
 														</span> • ${Ranking.play_time }분
+													</div>
+													<div style="position: absolute; top: 53px; right: 30px;">
+														<span
+															style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+															<i class="fas fa-thumbs-up "></i>
+														</span> <span
+															style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+															${Ranking.movie_rank }</span>
 													</div>
 													<div class="infotable1">
 														<table>
@@ -541,6 +563,15 @@
 																				<fmt:formatDate value="${Allmovie.reg_date }"
 																					pattern="yyyy.MM" />
 																			</span> • ${Allmovie.play_time }분
+																		</div>
+																		<div
+																			style="position: absolute; top: 53px; right: 30px;">
+																			<span
+																				style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+																				<i class="fas fa-thumbs-up "></i>
+																			</span> <span
+																				style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+																				${Allmovie.movie_rank }</span>
 																		</div>
 																		<div class="infotable1">
 																			<table>

@@ -45,7 +45,7 @@
 						data-bs-toggle="dropdown" aria-expanded="false"
 						style="box-shadow: 0 0 0 0;">
 						<i style="background-color: white; width: 40px"
-							class="fas fa-child nav-icon"></i>
+							class="fas fa-user nav-icon"></i>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
