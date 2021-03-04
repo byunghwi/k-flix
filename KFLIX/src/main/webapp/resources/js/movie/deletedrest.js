@@ -99,9 +99,8 @@ function makeTable(data, pnum, amount) {
 						+'<td>' + data[i].genre_name1 + " / " + data[i].genre_name2 + '</td>'
 						+'<td>' + data[i].play_time + '분</td>'
 						+'<td>' + moment(data[i].reg_date).format("YY/MM/DD") + '</td>'
-						+'<td><button type="button" class="btn btn-warning" data-bs-toggle="modal"'
-						+'data-movieid="'+data[i].movie_id+'" data-bs-target="#recoverymodal">복구</button> '
-						//+'<a href="./detail/'+data[i].movie_id+'" class="btn btn-info text-light">상세보기</a></td>'
+						+'<td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"'
+						+'data-movieid="'+data[i].movie_id+'" data-bs-target="#recoverymodal">활성화</button></td>'
 						+'</tr>'
 				);
 			}

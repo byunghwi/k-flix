@@ -24,7 +24,7 @@ function makePageNate(len, pnum, amount)	{
 		} else {
 			pagebtn = '<li class="page-item disabled">';
 		}
-		pagebtn += '<button class="page-link" id="pre" tabindex="-1" aria-disabled="true">«</button>';
+		pagebtn += '<button class="page-link bg-dark text-light" id="pre" tabindex="-1" aria-disabled="true">«</button>';
 		pagebtn += '</li>';
 		
 		// 페이지 버튼
@@ -35,7 +35,7 @@ function makePageNate(len, pnum, amount)	{
 				pagebtn += '<li id="pageli" class="page-item" aria-current="page">';
 			}
 			
-			pagebtn += '<button class="page-link" id="pnum'+ (i) +'" onclick="pageClick('+ (i) +');">'+ (i) +'</button>'
+			pagebtn += '<button class="page-link bg-dark text-light" id="pnum'+ (i) +'" onclick="pageClick('+ (i) +');">'+ (i) +'</button>'
 			pagebtn += '</li>'
 		}
 		
@@ -46,7 +46,7 @@ function makePageNate(len, pnum, amount)	{
 			pagebtn += '<li class="page-item">';			
 		}
 		
-		pagebtn += '<button class="page-link" id="next" tabindex="-1" aria-disabled="true">»</button>';
+		pagebtn += '<button class="page-link bg-dark text-light" id="next" tabindex="-1" aria-disabled="true">»</button>';
 		pagebtn += '</li>';
 		
 		pagenate.html(pagebtn);

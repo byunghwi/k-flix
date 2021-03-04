@@ -8,7 +8,7 @@
    #sidebar{
       width: 300px;
       height: 100%;
-      background-color: rgb(20,20,20);
+      background-color: rgba(0, 0, 0, 0.2);
       position: fixed;
       left: -290px;
       z-index: 1;
@@ -22,7 +22,7 @@
    }
    
    #closeMenu+label{
-      background-color: rgb(20,20,20);
+      background-color: rgba(0, 0, 0, 0.2);
       display: block;
       width: 10px;
       height: 60px;
@@ -132,7 +132,9 @@
       bottom:0;
       transform: translateY(50%);
    }
-   
+   .wrapCustom{
+   		padding-top: 80px;
+   }
 </style>
 <input type="checkbox" id="closeMenu" checked/>
  <label for="closeMenu">
@@ -140,11 +142,7 @@
     <span></span>
  </label>
 <div id="sidebar">
-   <div id="logo">
-      <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="logoImg" alt="" />
-   </div>
-   <hr style="color: gray;"/>
-   <div class="wrapper">
+   <div class="wrapper wrapCustom">
       <ul id="navlist" type="none">
          <li class="nav-item">
           <a class="nav-link" id="manage" aria-current="page" href="/kflix/management"><i class="fas fa-chess-board"></i> 대시보드</a>
