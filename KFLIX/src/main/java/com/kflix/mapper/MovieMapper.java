@@ -46,6 +46,7 @@ public interface MovieMapper {
 	
 	int getCntByFindMovieTitle(@Param("word") String word, @Param("status") char status);
 	
+	List<Movie> getDashboardMovie();
 	
 	/*
 	 * 레스트

@@ -146,6 +146,9 @@
    <hr style="color: gray;"/>
    <div class="wrapper">
       <ul id="navlist" type="none">
+         <li class="nav-item">
+          <a class="nav-link" id="manage" aria-current="page" href="/kflix/management"><i class="fas fa-chess-board"></i> 대시보드</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" id="movie" aria-current="page" href="/kflix/movie/movieindex"><i class="fas fa-video"></i> 영화</a>
         </li>

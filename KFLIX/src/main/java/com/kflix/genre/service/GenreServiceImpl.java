@@ -61,4 +61,9 @@ public class GenreServiceImpl implements GenreService {
 		return gr_mapper.getFindGenreList(genre_name, status);
 	}
 
+	@Override
+	public List<Genre> selectAllGenreListNotStatus() {
+		return gr_mapper.getGenreList();
+	}
+
 }
