@@ -85,6 +85,7 @@
       display: inline-table;
       position: relative;
       overflow: hidden;
+      text-decoration: none;
    }
 
    .navLink::after{
