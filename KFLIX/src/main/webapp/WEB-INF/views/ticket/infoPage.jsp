@@ -28,9 +28,9 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> -->
 <style>
- body, html {
+body, html {
 	background: #141414;
-	color: #fff;
+	background-color: rgb(100,100,100);
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	line-height: 1.2;
 	-webkit-font-smoothing: antialiased;
@@ -40,8 +40,6 @@
 	-ms-user-select: none;
 	user-select: none;
 	cursor: default;
-} 
-html, body {
 	width: 100%; 
 	height: 100%;
 	margin: 0;
@@ -60,6 +58,7 @@ div.total_wrap {
 
 .total_wrap header {
 	height: 7%;
+	background-color: aqua;
 }
 
 .total_wrap nav, section {
@@ -82,17 +81,20 @@ div.total_wrap {
 	clear: both;
 	height: 8%;
 }
-
+*{
+box-sizing: border-box;
+}
 
 </style>
 </head>
 <body>
 
-<div class = "total_wrap">
-	<header>
-		<%@include file="/WEB-INF/views/main/header_test.jsp"%>
-	</header>
+
+
+
+<div class = "total_wrap">	
 	
+	<header><%@include file="/WEB-INF/views/main/header_test.jsp"%></header>
 	<nav>
 		네비게이션
 	</nav>
@@ -101,7 +103,7 @@ div.total_wrap {
 		<div class="contents">
 			<c:choose>
 				<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
-					<h3>이메일을 전송했습니다.</h3>
+					<div>이메일을 전송했습니다.</div>
 				</c:when>
 		
 				<c:when test="${member.cert eq 'N'}">
@@ -109,7 +111,7 @@ div.total_wrap {
 				</c:when>
 		
 				<c:when test="${member.cert eq 'Y'}">
-					<h3>이메일인증이 완료된 회원입니다.</h3>
+					<div>이메일인증이 완료된 회원입니다.</div>
 					<button type="button" data-toggle="modal"
 						data-target="#registerModal">이용권 구매</button>
 				</c:when>
