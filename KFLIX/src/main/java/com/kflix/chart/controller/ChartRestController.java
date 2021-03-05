@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kflix.genre.service.GenreService;
+import com.kflix.manage.service.ManageService;
 import com.kflix.member.service.MemberService;
 import com.kflix.movie.service.MovieService;
 
@@ -26,6 +27,9 @@ public class ChartRestController {
 	@Inject
 	MemberService mem_service;
 	
+	@Inject
+	ManageService manage;
+	
 	@GetMapping(value = "/chartRest",
 					consumes = "application/json",
 					produces = "application/json; charset=UTF-8")
@@ -33,7 +37,8 @@ public class ChartRestController {
 		Map<String, Object> list = new HashMap<>();
 		list.put("movie", mv_service.selectAllMovieVeiw('Y'));
 		list.put("genre", ge_service.selectAllGenreListNotStatus());
-
+		list.put("gender", manage.getMemberGender());
+		
 		return list;
 	}
 }

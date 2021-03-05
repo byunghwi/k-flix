@@ -27,6 +27,17 @@ body {
 	background-color: rgba(85,85,85, 0);
 	border-radius: 5px;
 }
+#myChartLabel{
+	font-size: 12px;
+}
+.gender{
+	width: 350px;
+	height: 250px;
+}
+.genre{
+	width: 640px;
+	height: 460px;
+}
 </style>
 
 <%@include file="/WEB-INF/views/main/header.jsp"%>
@@ -41,25 +52,34 @@ body {
 
 	<div class="row h-50">
 	    <div class="col-lg-6">	
-		    <div class="chartArea pb-3">
+		    <div class="chartArea pb-3 genre">
 			    <div class="ps-2 pt-2">
 			    	<h5><i class="fas fa-chart-pie"></i> 장르별 영화 분포</h5>
 			    </div>
 		    	<hr />
 		    	<div class="d-flex ps-0 ms-0">
 			    	<div>
-						<canvas class="ps-5" id="myChart" width="450" height="350"></canvas>
+						<canvas id="myChart" width="400" height="350"></canvas>
 					</div>
-					<div>
-						
+					<div id="myChartLabel" class="d-flex">
 					</div>				
 				</div>
 			</div>
 		</div>
 	
-		<div class="col-lg-6 chartArea">
+		<div class="col-lg-6 chartArea gender">
 		   	<div>
-		    	<h5><i class="fas fa-chart-bar"></i>그래프1</h5>
+		   	<div class="ps-2 pt-2">
+		    	<h5><i class="fas fa-chart-pie"></i> 회원 성별 분포</h5>
+		    </div>
+		    <hr />
+	    	<div class="d-flex ps-0 ms-0">
+		    	<div>
+					<canvas id="genderChart" width="200" height="150"></canvas>
+				</div>	
+				<div id="genderChartLabel" class="d-flex">
+				</div>	
+			</div>
 		   	</div>
 		</div>
 	</div>
@@ -67,19 +87,19 @@ body {
 	<div class="row">
 	  <div class="col-lg chartArea">
 	  	<div>
-	  		<h5><i class="fas fa-chart-line"></i>그래프2</h5>
+	  		<h5><i class="fas fa-chart-line"></i> 그래프2</h5>
 	  	</div>
 	  </div>
 	  
 	  <div class="col-lg chartArea">
 	  	<div>
-	  		<h5><i class="fas fa-chart-line"></i>그래프2</h5>
+	  		<h5><i class="fas fa-chart-line"></i> 그래프2</h5>
 	  	</div>
 	  </div>
 	  
 	  <div class="col-lg chartArea">
 	  	<div>
-	  		<h5><i class="fas fa-chart-bar"></i>그래프2</h5>
+	  		<h5><i class="fas fa-chart-bar"></i> 그래프2</h5>
 	  	</div>
 	  </div>
 	</div>
@@ -98,11 +118,6 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 <script>
-var label_list = new Array();
-var data_list = new Array();
-var bc_list = new Array();
-var color = ['#0091ff', '#209fff', '#51b4ff', '#86cbfe', '#bae1ff', '#d7baff', '#bf91fd'];
-var ctx = document.getElementById('myChart').getContext('2d');
 
 $( document ).ready(function() {
 	$('#chart').prepend('<span class="nav-clicked"></span>');
@@ -111,65 +126,182 @@ $( document ).ready(function() {
 		url: "/kflix/chartRest",
 		contentType: 'application/json',
 			success: function(data){
+				// 장르별 영화분포 piechart
+				var genre_ctx = document.getElementById('myChart').getContext('2d');
+				var genre_label_list = new Array();
+				var genre_data_list = new Array();
+				var genre_bc_list = new Array();
+				var color = ['#0091ff', '#209fff', '#51b4ff', '#86cbfe', '#bae1ff', '#d7baff', '#bf91fd'];
 				for (var i = 0; i < data.genre.length; i++) {
-					bc_list[i] = color[Math.round(Math.random() * (color.length - 1))];
-					data_list[i] = 0;
-					label_list[i] = data.genre[i].genre_name;	
+					genre_bc_list[i] = color[Math.round(Math.random() * (color.length - 1))];
+					genre_data_list[i] = 0;
+					genre_label_list[i] = data.genre[i].genre_name;	
 				} 
-				
 				for (var j = 0; j < data.movie.length; j++){
-					data_list[label_list.indexOf(data.movie[j].genre_name1)] += 1;
-					data_list[label_list.indexOf(data.movie[j].genre_name2)] += 1;
-				}
+					genre_data_list[genre_label_list.indexOf(data.movie[j].genre_name1)] += 1;
+					genre_data_list[genre_label_list.indexOf(data.movie[j].genre_name2)] += 1;
+				}			    
+				pieChart(genre_ctx, genre_label_list, genre_bc_list, genre_data_list);
+				makeLabels(genre_label_list, genre_bc_list, genre_data_list, 'myChartLabel');
 				
-				var chart = new Chart(ctx, {
-				    type: 'pie',
-				    data: {
-				        labels: label_list,
-				        datasets: [{           
-				            backgroundColor: bc_list,
-				            data: data_list,
-				            borderWidth:1,
-				            borderColor: 'black'
-				        }]
-				    },
-				    options: { 
-				    	maintainAspectRatio : false,
-			            responsive: false,
-			            legend: {
-			                display: false
-			            },
-				    	plugins: {
-					    	  	labels: [
-				    	  			{   render: 'label',
-				    		      	    fontSize: 10,
-				    		      	    fontStyle: 'bold',
-				    		      	    fontColor: 'white',
-				    		      	    precision: 2
-				    		    	}, 
-				    		    	{
-					    		      	render: 'percentage',
-				    		      		position: 'outside',
-					    		      	fontSize: 10,
-				    		      	    fontStyle: 'bold',
-				    		      	    fontColor: 'white',
-				    		      	    precision: 2
-					    		    }
-				    			]
-				    	}
-
-				    }
-				});
-
+			    // 남녀 비율
+			    var gender_ctx = document.getElementById('genderChart').getContext('2d');
+			    var gender_label = new Array();
+			    var gender_color = new Array();
+			    var gender_data = new Array();
+			    for (var i =0; i < data.gender.length; i++){
+			    	var name = data.gender[i].gender;
+			    	if (name == 'M'){
+			    		gender_label[i] = '남자';
+			    		gender_color[i] = 'rgb(95,159,255)';
+			    	} else if (name == 'F'){
+			    		gender_label[i] = '여자';
+			    		gender_color[i] = 'rgb(255,95,95)';
+			    	} else {
+			    		gender_label[i] = '알수 없음';
+			    		gender_color[i] = 'rgb(112,255,95)';
+			    	}
+			    	gender_data[i] = data.gender[i].gender_cnt;
+			    }
+			    pieChart(gender_ctx, gender_label, gender_color, gender_data);
+			    makeLabels(gender_label, gender_color, gender_data, 'genderChartLabel');
 				
 			},
 			error: function(){},
 			complete: function(){}
-	}) 
+	 
+	})
+	
+
 });
 
 
+let barChart = function (ctx, input_label, input_color, input_data){
+	new Chart(ctx,{
+		type:'bar',
+		data: {
+			labels: input_label,
+			datasetx: [{
+				backgroundColor: input_color,
+				data: input_data,
+				borderColor: 'rgb(250,89,89)',
+				barThickness: 40
+			}]
+		},
+		options: { 
+            responsive: false,
+            legend: {
+            	labels: {fontColor: 'rgb(255,255,255)', fontSize:14}
+            },
+            scales: {
+				yAxes: [{
+					ticks: {
+						stepSize : 100,
+						fontSize : 14,
+						fontColor : 'rgb(255,255,255)'
+					},
+					gridLines:{
+						color: 'rgb(255,255,255)',
+						lineWidth:1
+					}
+				}],
+				xAxes: [{
+					ticks: {
+						fontSize : 14,
+						fontColor : 'rgb(255,255,255)'
+					},
+					gridLines:{
+						color: 'rgb(255,255,255)',
+						lineWidth:1
+					}
+				}]
+			},
+			plugin: [{
+				labels: {
+					render: 'value', 
+					fontColor: 'rgb(255,255,255)'
+				}
+			}]
 
+	    }
+	})
+}
+
+let pieChart = function (ctx, input_label, input_color, input_data) {
+	/* 				var sort_data = new Array();
+	for (var i = 0; i <content_len; i++){
+		var obj = new Object();
+		obj.label = data.genre[i].genre_name;
+		obj.cnt = 0;
+		obj.color = color[Math.round(Math.random() * (color.length - 1))];
+		
+		sort_data.push(obj)
+	}
+
+	sort_data.sort(function(a,b){
+		 return b['cnt'] - a['cnt'];
+	})
+	
+	console.log(sort_data); */    
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+		        labels: input_label,
+		        datasets: [{           
+		            backgroundColor: input_color,
+		            data: input_data,
+		            borderWidth:1,
+		            borderColor: 'white'
+		        }]	
+	    },
+        options: { 
+		    	maintainAspectRatio : false,
+	            responsive: false,
+	            legend: {
+	                display: false
+	            },
+		    	plugins: {
+			    	  	labels: [
+		    		    	{
+			    		      	render: 'percentage',
+			    		      	fontSize: 10,
+		    		      	    fontStyle: 'bold',
+		    		      	    fontColor: 'black',
+		    		      	    precision: 2,
+								fontSize: 10
+			    		    }
+		    			]
+		    	}
+			}
+    });
+    
+
+		
+};
+
+
+function makeLabels (input_label, input_color, input_data, div_id) {	
+	var content_len = input_label.length;
+	var oneUlLine = 20;
+	var laben_cnt = parseInt(content_len / oneUlLine) + 1;
+	
+	
+	for (var i = 0; i < laben_cnt; i++){
+		$('#'+div_id).append('<ul id="'+div_id+'labels'+ i +'" type="none"></ul>');
+		for (var j = 0; j < oneUlLine; j++){
+			var label_index = i * oneUlLine + j;
+			if(label_index == content_len){
+				break;
+			}
+			
+			if(input_data[label_index] == 0){
+				$('#'+div_id+'labels'+i).append('<li style="color:red;"><span style="background-color: ' + input_color[label_index] + '; display: inline-block; width: 15px; height: 12px;"></span> <del>' + input_label[label_index] + '</del></li>');
+			} else{
+				$('#'+div_id+'labels'+i).append('<li><span style="background-color: ' +  input_color[label_index] + '; display: inline-block; width: 15px; height: 12px;"></span> ' + input_label[label_index] + '</li>');
+			}
+		}
+	}
+}
 </script>
 </body>
 </html>

@@ -349,7 +349,8 @@ $(document).ready(function() {
 					plugin: [{
 						labels: {
 							render: 'value', 
-							fontColor: 'rgb(255,255,255)'
+							fontColor: 'rgb(255,255,255)',
+							fontSize: 15
 						}
 					}]
 

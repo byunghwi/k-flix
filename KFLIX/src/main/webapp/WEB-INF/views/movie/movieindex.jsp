@@ -18,7 +18,7 @@
 <meta charset="UTF-8">
 
 <title>영화 관리</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 </head>
 <body>
 
