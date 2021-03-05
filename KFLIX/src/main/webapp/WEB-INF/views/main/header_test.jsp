@@ -34,25 +34,58 @@
 				</button>
 			</div>
 			<ul class="main_nav">
-				<li class="main_nav_tab">홈</li>
-				<li class="main_nav_tab">TV 프로그램</li>
-				<li class="main_nav_tab">영화</li>
-				<li class="main_nav_tab">최신 콘텐츠</li>
-				<li class="main_nav_tab">내가 찜한 콘텐츠</li>
+				<li class="main_nav_tab"><a class="nav-link hometag"
+					aria-current="page" href="/kflix/browse">홈</a></li>
+				<li class="main_nav_tab "><a class="nav-link movietag"
+					href="/kflix/browse#amovie">영화</a></li>
+				<li class="main_nav_tab"><a class="nav-link top10tag"
+					href="/kflix/browse#atop" tabindex="-1">요즘 대세 콘텐츠!</a></li>
+				<li class="main_nav_tab"><a class="nav-link wishtag"
+					href="/kflix/browse#awish">내가 찜한 콘텐츠</a></li>
+				<li id="testdsf" class="main_nav_tab"></li>
 			</ul>
 			<ul class="sub_nav">
-				<li class="sub_nav_tab"><i class="fas fa-search"></i></li>
-				<li class="sub_nav_tab"><i class="fas fa-gift"></i></li>
-				<li class="sub_nav_tab"><i class="fas fa-bell"></i></li>
-				<li class="sub_nav_tab"><i class="fas fa-user"></i></li>
+				<li class="sub_nav_tab">
+					<form id="searchform" action="/kflix/browse/search"></form> <input
+					id="search" type="checkbox" style="display: none;"> <input
+					id="searchinput" form="searchform" name="searchValue" type="text"
+					style="display: none; border: none; width: 120px; margin: 0px 9px; padding: 3px 15px; border-radius: 0.3rem;"
+					autocomplete="off"> <label for="search"><i
+						class="fas fa-search color_white nav-icon"></i></label>
+				</li>
+				<li class="sub_nav_tab"><i class="fas color_white fa-gift"></i></li>
+				<li class="sub_nav_tab"><i class="fas color_white fa-bell"></i></li>
+
+
+
+				<li class="sub_nav_tab"><button id="btnGroupDrop1"
+						type="button" class="btn" data-bs-toggle="dropdown"
+						aria-expanded="false" style="padding: 0; border: 0;">
+
+						<i class="fas color_white fa-user"></i>
+					</button>
+
+					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
+						<li><a href="" id="ticket" class="dropdown-item"> 티켓구매</a></li>
+						<li><a href="/kflix/service" class="dropdown-item">고객센터</a></li>
+					</ul></li>
 			</ul>
 		</div>
 	</header>
 
+
+
+
+
+
 	<!-- scripts -->
 	<script src="/kflix/resources/js/main/header.js"></script>
 	<script type="text/javascript">
+	
+
 		search = document.getElementById('search');
+
 		searchinput = document.getElementById('searchinput');
 
 		search.addEventListener("click", function() {
@@ -69,32 +102,42 @@
 			}
 		});
 
-		$(document).ready(function() {
-			$('#ticket').click(
-					function() {
-							var email = '${login.email}';
-							$.ajax({
-								type : 'POST',
-								url : "${pageContext.request.contextPath}/ticket/cert",
-								dataType : "text",
-								data : "email="+ email,
-								success : function(result) 
-								{
-									if (result == "Y") 
-										{
-											alert('인증처리된 회원입니다.\r\n이용권 구매페이지로 이동합니다.');
-											document.location.href = '${pageContext.request.contextPath}/ticket/info';
-										} else if (result == "N" || result == "" || result == null) {
-											if (confirm('이용권을 구매하시려면 본인 인증을 먼저 해주세요. \r\n 본인 인증페이지로 이동할까요?')) {
-												document.location.href = '${pageContext.request.contextPath}/ticket/info';
-											}
-										}
-								},error : function(error) {
-									alert('[ 에러발생 ]'+ error);
-								}});
-			})
+		$(document)
+				.ready(
+						function() {
+							$('#ticket')
+									.click(
+											function() {
+												var email = '${login.email}';
+												$
+														.ajax({
+															type : 'POST',
+															url : "${pageContext.request.contextPath}/ticket/cert",
+															dataType : "text",
+															data : "email="
+																	+ email,
+															success : function(
+																	result) {
+																if (result == "Y") {
+																	alert('인증처리된 회원입니다.\r\n이용권 구매페이지로 이동합니다.');
+																	document.location.href = '${pageContext.request.contextPath}/ticket/info';
+																} else if (result == "N"
+																		|| result == ""
+																		|| result == null) {
+																	if (confirm('이용권을 구매하시려면 본인 인증을 먼저 해주세요. \r\n 본인 인증페이지로 이동할까요?')) {
+																		document.location.href = '${pageContext.request.contextPath}/ticket/info';
+																	}
+																}
+															},
+															error : function(
+																	error) {
+																alert('[ 에러발생 ]'
+																		+ error);
+															}
+														});
+											})
 
-		});
+						});
 	</script>
 
 </body>

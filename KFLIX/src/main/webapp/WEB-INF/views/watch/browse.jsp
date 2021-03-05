@@ -49,9 +49,8 @@
 	<span class="anchor" id="abody"></span>
 	<div id="modalbackground">
 		<div id="confirm">
-		<i class="fas fa-power-off logout"></i>
-			<i style="color: #aa2929; font-size: 50px"
-				class="far fa-times-circle"></i>
+			<i class="fas fa-power-off logout"></i> <i
+				style="color: #aa2929; font-size: 50px" class="far fa-times-circle"></i>
 			<p style="color: white; font-weight: bold; font-size: 22px;">이용권
 				구매 요청</p>
 			<p style="color: #dcdcdc; font-size: 16px; font-weight: 300;">구매
@@ -661,6 +660,53 @@
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
 	<script type="text/javascript">
+	test = document.getElementById('testdsf');
+	hometag = document.querySelector('.hometag')
+	movietag = document.querySelector('.movietag') 
+	top10tag = document.querySelector('.top10tag') 
+	wishtag = document.querySelector('.wishtag')
+	
+	if(window.location.pathname == "/kflix/browse"){
+		hometag.style.fontWeight = '700';
+		hometag.style.color = '#fff';
+	}
+	
+	movietag.addEventListener('click',function tagstyle(){
+		movietag.style.fontWeight = '700';
+		movietag.style.color = '#fff';
+		
+		hometag.style.fontWeight = '100';
+		hometag.style.color = '#e5e5e5';
+		top10tag.style.fontWeight = '100';
+		top10tag.style.color = '#e5e5e5';
+		wishtag.style.fontWeight = '100';
+		wishtag.style.color = '#e5e5e5';
+	});
+	
+	top10tag.addEventListener('click', function tagstyle(){
+		top10tag.style.fontWeight = '700';
+		top10tag.style.color = '#fff';
+		
+		hometag.style.fontWeight = '100';
+		hometag.style.color = '#e5e5e5';
+		movietag.style.fontWeight = '100';
+		movietag.style.color = '#e5e5e5';
+		wishtag.style.fontWeight = '100';
+		wishtag.style.color = '#e5e5e5';
+	});
+	
+	wishtag.addEventListener('click', function tagstyle(){
+		wishtag.style.fontWeight = '700';
+		wishtag.style.color = '#fff';
+		
+		hometag.style.fontWeight = '100';
+		hometag.style.color = '#e5e5e5';
+		movietag.style.fontWeight = '100';
+		movietag.style.color = '#e5e5e5';
+		top10tag.style.fontWeight = '100';
+		top10tag.style.color = '#e5e5e5';
+	});
+	
 	modalbackground = document.getElementById('modalbackground');
 
 	console.log(${member.ticket_id}+"dlek");

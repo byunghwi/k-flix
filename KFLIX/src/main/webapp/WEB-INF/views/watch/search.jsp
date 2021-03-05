@@ -37,7 +37,7 @@
 </head>
 <body>
 
-	<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
 	<div id="searchresult">
 
