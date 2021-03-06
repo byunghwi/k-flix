@@ -47,7 +47,7 @@
 <body>
 	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 	<span class="anchor" id="abody"></span>
-	<div id="modalbackground">
+<!-- 	<div id="modalbackground">
 		<div id="confirm">
 		<i class="fas fa-power-off logout"></i>
 			<i style="color: #aa2929; font-size: 50px"
@@ -58,7 +58,7 @@
 				후 무제한 감상을 시작해 보세요.</p>
 			<div id="confirmbtn">이용권 구매하기</div>
 		</div>
-	</div>
+	</div> -->
 
 	<div id="shadow1"></div>
 	<div id="carouselExampleInterval" class="carousel slide"
@@ -661,13 +661,13 @@
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
 	<script type="text/javascript">
-	modalbackground = document.getElementById('modalbackground');
+/* 	modalbackground = document.getElementById('modalbackground');
 
 	console.log(${member.ticket_id}+"dlek");
 	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
 	modalbackground.style.display = 'block';
 	body.style.overflow = 'hidden';
-	</c:if>
+	</c:if> */
 	
 	
 	console.log(${i});

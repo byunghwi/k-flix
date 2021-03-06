@@ -38,7 +38,7 @@ header{
     padding-left: 1rem;
     text-decoration: none;
     text-align: center;
-    line-height: 3rem;
+   	line-height: 3rem;
     font-size: 3rem;
 }
 .logo a img{
@@ -56,7 +56,22 @@ header{
 
 
 
-
+.header_ticket{
+    width: 100%;
+    /* fixed nav-bar */
+    position: fixed;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    top: 0;
+    left: 0;
+    background: #bb1717;
+    color: #ffffff;
+    font-size: 0.9rem;
+    clear : both;
+    z-index: 150;
+    line-height: 45px;
+    text-align: left;
+    padding-left: 55px;
+}
 
 .dropdown-menu {
 	background-color: #060606d9;
@@ -71,4 +86,22 @@ header{
 	color: #fff;
 	text-decoration: none;
 	background-color: #aa2929;
+}
+
+#ticket {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: white;
+    position: relative;
+    left: 1%;
+    padding: 5px 9px 4px 9px;
+    border-radius: 7px;
+    transition: all 0.1s;
+    text-shadow: 0px -2px rgb(0 0 0 / 44%);
+    background-color: #2e343c;
+    border-bottom: 5px solid #6b6363;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+#ticket:active {
+    transform: translateY(10px);
 }

@@ -1,6 +1,7 @@
 package com.kflix.ticket.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,15 +92,24 @@ public class TickectController {
 	//본인인증 여부 확인
 	@RequestMapping(value = "/cert", method = RequestMethod.POST)
 	@ResponseBody
-	public String TicketPage(String email) {
+	public Map<String, Object> TicketPage(String email) {
 		String result ="";
 		System.out.println("[TicketController] > " + email);
 		//회원정보빼오기
 		Member member = memberService.getMemberByEmail(email);
 		
 		result = member.getCert();
-		System.out.println("[TicketController] 본인인증여부 확인하러 옴 > " + result);
-		return result;	
+		
+		List<Ticket> tickets = ticketService.getAllTickets();
+		System.out.println("[TicketController] /info시 ticket들 다 뽑기 > " + tickets.toString());
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put("cert", result);
+		resultMap.put("tickets", tickets);
+		
+		System.out.println("[TicketController] 본인인증여부 확인하러 옴 > " + resultMap);
+		return resultMap;	
 	}
 
 	//티켓구매 폼 페이지
@@ -137,6 +147,9 @@ public class TickectController {
 			
 			if(memberService.updatePayMember(member) == 1) {
 				System.out.println("[TicketController] pay관련 member 업데이트 성공...");
+				
+				session.setAttribute("login", member);
+				
 				session.removeAttribute("ticket");
 			}else {
 				System.out.println("[TicketController] pay관련 member 업데이트 실패...");
