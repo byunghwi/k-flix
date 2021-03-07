@@ -291,6 +291,7 @@
 		//모달부분 이외 클릭시 모달 꺼지기
 		$(document).mouseup(function (e){
 			var modal_area = $('#ticket_modal');
+			
 			  if(modal_area.has(e.target).length === 0){
 					bg.remove();
 					modal_area.css("display", "none");
