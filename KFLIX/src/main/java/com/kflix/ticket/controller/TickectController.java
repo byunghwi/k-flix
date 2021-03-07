@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.kflix.kakaoPay.domain.KakaoPayApprovalVO;
@@ -128,7 +129,7 @@ public class TickectController {
 	
 	//카카오페이 요청 성공 페이지
 	@RequestMapping(value = "/kakaoSuccess", method = RequestMethod.GET)
-	public void kakaoSuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session) {
+	public String kakaoSuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session , RedirectAttributes redirectAttr) {
 		log.info("kakaoPaySuccess get...............");
 		log.info("kakaoPaySuccess pg_tocken : " + pg_token);
 		
@@ -148,31 +149,34 @@ public class TickectController {
 			if(memberService.updatePayMember(member) == 1) {
 				System.out.println("[TicketController] pay관련 member 업데이트 성공...");
 				
-				session.setAttribute("login", member);
-				
+				session.setAttribute("login", member);			
 				session.removeAttribute("ticket");
 			}else {
 				System.out.println("[TicketController] pay관련 member 업데이트 실패...");
+				session.removeAttribute("ticket");
 			}
 
 			model.addAttribute("kakaoPayInfo", kakaoPayApprovalVO);
+			redirectAttr.addFlashAttribute("payMsg", "success"); // 1회성 성공메시지 보내기
+			
+			return "redirect:/browse";
 		}
+		
+		return "redirect:/";
 	}
 	
 	//카카오페이 버튼 클릭시 이동페이지
 	@RequestMapping(value = "/kakaoPay", method = RequestMethod.POST)
-	public String kakaoPayPost(HttpSession session, Model model, Ticket ticket) {
+	public String kakaoPayPost(HttpSession session, Model model, @RequestParam(value = "ticket_id") int ticket_id) {
 		String email = ((Member) session.getAttribute("login")).getEmail();
 		//회원정보빼오기
 		Member member = memberService.getMemberByEmail(email);
 		
-		System.out.println("[TicketController] /kakaoPay 경로 , ticket > " + ticket);
-		System.out.println("[TicketController] /kakaoPay 경로 , member > " + member);
+		//티켓정보빼오기
+		Ticket ticket = (Ticket)ticketService.getTicket(ticket_id);
 		
-		//테스트용
-		ticket.setTicket_id(10);
-		ticket.setTicket_name("베이식");
-		ticket.setTicket_price(7500);
+		System.out.println("[TicketController] /kakaoPay 경로 , member > " + member);
+		System.out.println("[TicketController] /kakaoPay 경로 , ticket > " + ticket);
 		
 		//결제요청 성공시 회원정보에 ticket_id 업데이트하기 위해 넣어두기
 		session.setAttribute("ticket", ticket);

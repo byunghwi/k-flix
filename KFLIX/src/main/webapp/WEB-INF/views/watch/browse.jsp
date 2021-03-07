@@ -8,6 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -668,6 +669,11 @@
 	modalbackground.style.display = 'block';
 	body.style.overflow = 'hidden';
 	</c:if> */
+
+	var payMsg = '${payMsg}';
+	if(payMsg === 'success'){
+		alert('이용권이 정상적으로 구매되었습니다. \r\n이제 KFLIX를 마음껏 즐겨보세요.');
+	}
 	
 	
 	console.log(${i});
