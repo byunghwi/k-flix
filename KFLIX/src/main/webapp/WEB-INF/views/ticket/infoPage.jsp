@@ -7,32 +7,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+ 
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
 	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
 	crossorigin="anonymous"></script>
+ 
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+	rel="stylesheet" id="bootstrap-css"> 
+ -->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
 	rel="stylesheet">
-
+	
 <link href="/kflix/resources/css/ticket/ticket.css" rel="stylesheet">
+	
 
-<!-- <link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
-	type="text/css" />
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> -->
 <style>
-body, html {
+ body, html {
 	background: #141414;
-	background-color: rgb(100,100,100);
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	line-height: 1.2;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-user-select: none;
@@ -44,24 +40,40 @@ body, html {
 	height: 100%;
 	margin: 0;
 	padding : 0;
+
 }
 
+body {
+    margin: 0;
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #212529;
+   /*  background-color: #fff; */
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/*  
 div.total_wrap {
 	width: 100%;
 	height: 100%;
 
 }
 
-.total_wrap header, footer, nav, section {
-	/* border : 1px solid #999; */
+/* .total_wrap header, footer, nav, section {
+	//border : 1px solid #999;  
 }
 
 .total_wrap header {
 	height: 7%;
 	background-color: aqua;
+	background-color: rgba( 0, 0, 0, 1 );
 }
 
-.total_wrap nav, section {
+ 
+ .total_wrap nav, section {
 	float: left;
 	height: 85%;
 }
@@ -72,7 +84,7 @@ div.total_wrap {
 }
 
 .total_wrap section {
-/* 	background-color: green; */
+ 	background-color: green; 
 	width: 90%;
 }
 
@@ -81,20 +93,17 @@ div.total_wrap {
 	clear: both;
 	height: 8%;
 }
-*{
-box-sizing: border-box;
-}
 
+*/
 </style>
+
 </head>
 <body>
 
-
-
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
 <div class = "total_wrap">	
-	
-	<header><%@include file="/WEB-INF/views/main/header_test.jsp"%></header>
+
 	<nav>
 		네비게이션
 	</nav>
@@ -113,7 +122,7 @@ box-sizing: border-box;
 				<c:when test="${member.cert eq 'Y'}">
 					<div>이메일인증이 완료된 회원입니다.</div>
 					<button type="button" data-toggle="modal"
-						data-target="#registerModal">이용권 구매</button>
+						data-target="#registerModal2">이용권 구매</button>
 				</c:when>
 		
 			</c:choose>

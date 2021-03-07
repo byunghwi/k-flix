@@ -1,5 +1,7 @@
 package com.kflix.member.interceptoer;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.kflix.member.domain.Member;
+import com.kflix.ticket.domain.Ticket;
 
 import lombok.extern.log4j.Log4j;
 
@@ -24,6 +27,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		ModelMap modelMap = modelAndView.getModelMap();
 		Member memberVO = (Member) modelMap.get("memberVO"); // MainController에서 채운 member객체가 있음
+		List<Ticket> ticketList = (List<Ticket>) modelMap.get("tickets");
 
 		System.out.println("[LoginInterceptor] posthandle member객체 > " + memberVO);
 
@@ -32,6 +36,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (memberVO != null) {
 			log.info("[LoginInterceptor] ===========================new login success=============================");
 			session.setAttribute(LOGIN, memberVO);
+			session.setAttribute("tickets", ticketList);
 
 			if (request.getParameter("userCookie") != null) {
 

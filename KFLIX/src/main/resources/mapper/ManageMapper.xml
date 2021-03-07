@@ -11,4 +11,8 @@
 	<select id="getMemberCnt" resultType="integer">
 		select count(*) from member
 	</select>
+	
+	<select id="getMemberGender" resultType="com.kflix.manage.domain.MemberGender">
+		select * from gender_ratio
+	</select>
 </mapper>

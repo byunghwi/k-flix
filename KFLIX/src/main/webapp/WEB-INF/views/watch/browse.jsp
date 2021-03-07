@@ -707,13 +707,18 @@
 		top10tag.style.color = '#e5e5e5';
 	});
 	
-	modalbackground = document.getElementById('modalbackground');
+	/* 	modalbackground = document.getElementById('modalbackground');
 
 	console.log(${member.ticket_id}+"dlek");
 	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
 	modalbackground.style.display = 'block';
 	body.style.overflow = 'hidden';
-	</c:if>
+	</c:if> */
+
+	var payMsg = '${payMsg}';
+	if(payMsg === 'success'){
+		alert('이용권이 정상적으로 구매되었습니다. \r\n이제 KFLIX를 마음껏 즐겨보세요.');
+	}
 	
 	
 	console.log(${i});
