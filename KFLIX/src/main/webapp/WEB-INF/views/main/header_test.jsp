@@ -196,7 +196,7 @@
 
 		<div class="header_container" id="header_container">
 			<div class="logo">
-				<a href=""> <img src="/kflix/resources/imgs/watch/kflixlogo.png"
+				<a href="/kflix/browse"> <img src="/kflix/resources/imgs/watch/kflixlogo.png"
 					alt="NETFLIX">
 				</a>
 				<button class="header_toggleBtn">
@@ -205,7 +205,7 @@
 			</div>
 			<ul class="main_nav">
 				<li class="main_nav_tab"><a class="nav-link hometag"
-					aria-current="page" href="/kflix/browse">홈</a></li>
+					aria-current="page" href="/kflix/browse#abody">홈</a></li>
 				<li class="main_nav_tab "><a class="nav-link movietag"
 					href="/kflix/browse#amovie">영화</a></li>
 				<li class="main_nav_tab"><a class="nav-link top10tag"
@@ -237,28 +237,26 @@
 
 					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
-						<li><a href="" id="ticket" class="dropdown-item"> 티켓구매</a></li>
+						<li><a href="" class="dropdown-item"> 티켓구매</a></li>
 						<li><a href="/kflix/service" class="dropdown-item">고객센터</a></li>
 					</ul></li>
 			</ul>
 		</div>
-
-
 	</header>
+
+
+
+
+
 
 	<!-- scripts -->
 	<script src="/kflix/resources/js/main/header.js"></script>
 	<script type="text/javascript">
+	
 
 		search = document.getElementById('search');
+
 		searchinput = document.getElementById('searchinput');
-	
-	 if(${login.ticket_id} == null || ${login.ticket_id} == 0){
-			$(".header_container").css("top", "45px");
-			$(".header_ticket").css("display", "block");
-	 }else{
-	 		$(".header_ticket").css("display", "none");
-	 }
 
 		search.addEventListener("click", function() {
 			if (search.checked) {
@@ -273,43 +271,15 @@
 				searchinput.style.display = 'none';
 			}
 		});
-/* 		
 
-		$(document)
-				.ready(
-						function() {
-							$('#ticket')
-									.click(
-											function() {
-												var email = '${login.email}';
-												$
-														.ajax({
-															type : 'POST',
-															url : "${pageContext.request.contextPath}/ticket/cert",
-															dataType : "text",
-															data : "email="
-																	+ email,
-															success : function(
-																	result) {
-																if (result == "Y") {
-																	alert('인증처리된 회원입니다.\r\n이용권 구매페이지로 이동합니다.');
-																	document.location.href = '${pageContext.request.contextPath}/ticket/info';
-																} else if (result == "N"
-																		|| result == ""
-																		|| result == null) {
-																	if (confirm('이용권을 구매하시려면 본인 인증을 먼저 해주세요. \r\n 본인 인증페이지로 이동할까요?')) {
-																		document.location.href = '${pageContext.request.contextPath}/ticket/info';
-																	}
-																}
-															},
-															error : function(
-																	error) {
-																alert('[ 에러발생 ]'
-																		+ error);
-															}
-														});
-											})
- */
+	
+	 if(${login.ticket_id} == null || ${login.ticket_id} == 0){
+			$(".header_container").css("top", "45px");
+			$(".header_ticket").css("display", "block");
+	 }else{
+	 		$(".header_ticket").css("display", "none");
+	 }
+	 
 		$(document).ready(function() {
 			$('#ticket').click(
 					function() {
@@ -339,7 +309,6 @@
 								}});
 			})
 
-						});
 		});
 
  	//모달 띄우기
@@ -448,6 +417,7 @@
 		
 		form.submit();
 	}
+
 	</script>
 
 </body>

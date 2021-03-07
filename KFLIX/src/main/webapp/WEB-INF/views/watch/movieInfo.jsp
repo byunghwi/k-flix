@@ -81,7 +81,7 @@
 							<span
 								style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 15px;">
 								<i class="fas fa-thumbs-up"></i>
-							</span> <span
+							</span> <span id="rankchange"
 								style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 18px; color: black;">
 								${movie.movie_rank }</span></div> 
 								
@@ -317,6 +317,8 @@
 
 	<script src="/kflix/resources/js/watch/jsinfo.js"></script>
 	<script type="text/javascript">
+
+
 		const postiondiv = document.getElementById('postiondiv');
 
 		/* window.onload = function() {
@@ -371,6 +373,42 @@
 			check3 = "미체크";
 			check4 = "미체크";
 		}
+		
+
+		like_check.addEventListener("change", function() {
+			if (like_check.checked) {
+				console.log("체크됨");
+				like_lab.innerHTML = `<i class="fas fa-thumbs-up color-w"></i>`;
+				setlike("plus");
+				check4 = "체크";
+				console.log(check3 + ":" + check4);
+				console.log(rankchange.value);
+				
+				<c:choose>
+				<c:when test="${not empty getlike }">
+				rankchange.innerHTML = ${movie.movie_rank };
+				</c:when>
+				<c:otherwise>
+				rankchange.innerHTML = ${movie.movie_rank } + 1;
+				</c:otherwise>
+				</c:choose>
+				
+			} else {
+				console.log("체크안됨");
+				like_lab.innerHTML = `<i class="far fa-thumbs-up color-w"></i>`;
+				check4 = "미체크";
+				setlike("minus");
+				console.log(check3 + ":" + check4);
+				<c:choose>
+				<c:when test="${not empty getlike }">
+				rankchange.innerHTML = ${movie.movie_rank } - 1;
+				</c:when>
+				<c:otherwise>
+				rankchange.innerHTML = ${movie.movie_rank };
+				</c:otherwise>
+				</c:choose>
+			}
+		});
 		
 		function setwish(wishresult) {
 			console.log("wishresult 값" + wishresult);
