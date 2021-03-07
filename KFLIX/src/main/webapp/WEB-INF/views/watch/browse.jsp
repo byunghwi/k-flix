@@ -8,7 +8,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,18 +47,17 @@
 <body>
 	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 	<span class="anchor" id="abody"></span>
-<!-- 	<div id="modalbackground">
+	<div id="modalbackground">
 		<div id="confirm">
-		<i class="fas fa-power-off logout"></i>
-			<i style="color: #aa2929; font-size: 50px"
-				class="far fa-times-circle"></i>
+			<i class="fas fa-power-off logout"></i> <i
+				style="color: #aa2929; font-size: 50px" class="far fa-times-circle"></i>
 			<p style="color: white; font-weight: bold; font-size: 22px;">이용권
 				구매 요청</p>
 			<p style="color: #dcdcdc; font-size: 16px; font-weight: 300;">구매
 				후 무제한 감상을 시작해 보세요.</p>
 			<div id="confirmbtn">이용권 구매하기</div>
 		</div>
-	</div> -->
+	</div>
 
 	<div id="shadow1"></div>
 	<div id="carouselExampleInterval" class="carousel slide"
@@ -662,8 +660,75 @@
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
 	<script type="text/javascript">
-/* 	modalbackground = document.getElementById('modalbackground');
-
+	test = document.getElementById('testdsf');
+	hometag = document.querySelector('.hometag')
+	movietag = document.querySelector('.movietag') 
+	top10tag = document.querySelector('.top10tag') 
+	wishtag = document.querySelector('.wishtag')
+	
+	if(window.location.pathname == "/kflix/browse"){
+		hometag.style.fontWeight = '700';
+		hometag.style.color = '#fff';
+	}
+	hometag.addEventListener('click',function tagstyle(){
+		hometag.style.fontWeight = '700';
+		hometag.style.color = '#fff';
+		
+		movietag.style.fontWeight = '100';
+		movietag.style.color = '#e5e5e5';
+		top10tag.style.fontWeight = '100';
+		top10tag.style.color = '#e5e5e5';
+		wishtag.style.fontWeight = '100';
+		wishtag.style.color = '#e5e5e5';
+	});
+	
+	movietag.addEventListener('click',function tagstyle(){
+		movietag.style.fontWeight = '700';
+		movietag.style.color = '#fff';
+		
+		hometag.style.fontWeight = '100';
+		hometag.style.color = '#e5e5e5';
+		top10tag.style.fontWeight = '100';
+		top10tag.style.color = '#e5e5e5';
+		wishtag.style.fontWeight = '100';
+		wishtag.style.color = '#e5e5e5';
+	});
+	
+	top10tag.addEventListener('click', function tagstyle(){
+		top10tag.style.fontWeight = '700';
+		top10tag.style.color = '#fff';
+		
+		hometag.style.fontWeight = '100';
+		hometag.style.color = '#e5e5e5';
+		movietag.style.fontWeight = '100';
+		movietag.style.color = '#e5e5e5';
+		wishtag.style.fontWeight = '100';
+		wishtag.style.color = '#e5e5e5';
+	});
+	
+	wishtag.addEventListener('click', function tagstyle(){
+		wishtag.style.fontWeight = '700';
+		wishtag.style.color = '#fff';
+		
+		hometag.style.fontWeight = '100';
+		hometag.style.color = '#e5e5e5';
+		movietag.style.fontWeight = '100';
+		movietag.style.color = '#e5e5e5';
+		top10tag.style.fontWeight = '100';
+		top10tag.style.color = '#e5e5e5';
+	});
+	
+	anchor = document.querySelectorAll('.anchor')
+	
+	
+	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
+	anchor.forEach(function(anchorItem) {
+		anchorItem.style.height = "120px";
+		anchorItem.style.marginTop = "-120px"; 
+});
+	
+	</c:if>
+	/* 	modalbackground = document.getElementById('modalbackground');
 	console.log(${member.ticket_id}+"dlek");
 	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
 	modalbackground.style.display = 'block';

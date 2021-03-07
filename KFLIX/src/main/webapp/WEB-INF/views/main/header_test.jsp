@@ -44,8 +44,8 @@
 
 .ticket_detail {
 	float: left;
-    width: 30%;
-    margin-top: 30px;
+	width: 30%;
+	margin-top: 30px;
 }
 
 .text-first {
@@ -57,57 +57,59 @@
 }
 
 #buy_btn {
-    position: absolute;
-    left: 50%;
-    top: 80%;
-    border-color: white white white white;
-    background: transparent;
-    margin: 10p;
-    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    padding: 10px 30px 10px 30px;
-    color: white;
-    border-radius: 4px;
-    transition: all 0.6s;
+	position: absolute;
+	left: 50%;
+	top: 80%;
+	border-color: white white white white;
+	background: transparent;
+	margin: 10p;
+	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
+		sans-serif;
+	padding: 10px 30px 10px 30px;
+	color: white;
+	border-radius: 4px;
+	transition: all 0.6s;
 }
 
 .ticket_box {
-    border: 1px solid;
-    padding: 10px;
-    text-align: left;
+	border: 1px solid;
+	padding: 10px;
+	text-align: left;
 }
 
 .t_title {
 	font-weight: bold;
 	font-size: 20px;
 }
+
 .t_content {
-    font-size: 14px;
-    color: darkgray;
-    padding: 4px;
-    margin-left: 10px;
+	font-size: 14px;
+	color: darkgray;
+	padding: 4px;
+	margin-left: 10px;
 }
 
 .ticket_box2 {
-    border: none;
-    text-align: left;
+	border: none;
+	text-align: left;
 }
+
 .t_content2 {
-    font-size: 13px;
-    font-weight: lighter;
-    color: dimgray;
+	font-size: 13px;
+	font-weight: lighter;
+	color: dimgray;
 }
+
 .t_title2 {
-    font-size: 17px;
-    color: dimgrey;
-    padding: 5px;
-    font-weight: bold;
+	font-size: 17px;
+	color: dimgrey;
+	padding: 5px;
+	font-weight: bold;
 }
 
-.tr_class{
+.tr_class {
 	border: 1px solid;
-
 }
-
 </style>
 </head>
 <body>
@@ -115,7 +117,7 @@
 		<form id="form"
 			action="${pageContext.request.contextPath}/ticket/kakaoPay"
 			method="post">
-			<input type="hidden" name="ticket_id" id="ticket_id" >
+			<input type="hidden" name="ticket_id" id="ticket_id">
 			<div class="box-input">
 				<div class="text-first">이용권을 선택해주세요!</div>
 				<div class="text-second">원하는 멤버쉽 요금제를 선택하고 KFLIX의 모든 컨텐츠를
@@ -132,7 +134,9 @@
 							</tr>
 							<c:forEach items="${tickets }" var="ticket">
 
-								<tr class="tr_class" style="height: 50px; border: 5px; border-color: white;" onclick="focuss(this)">
+								<tr class="tr_class"
+									style="height: 50px; border: 5px; border-color: white;"
+									onclick="focuss(this)">
 									<td colspan="2">${ticket.ticket_id }</td>
 									<td colspan="2">${ticket.ticket_name }</td>
 									<td colspan="2">${ticket.ticket_price }</td>
@@ -145,19 +149,30 @@
 				</div>
 				<div class="ticket_detail">
 					<div class="ticket_box">
-						<div class="t_title"><i class="fas fa-chevron-circle-down" style="color: #ff0101ad;"></i> 지속적인 신작 업데이트</div>
-						<div class="t_content">저렴한 월 요금으로 일체의 광고 없이 원하는 시간에 원하는 만큼 즐길 수 있습니다.</div>
-						<div class="t_title"><i class="fas fa-chevron-circle-down" style="color: #ff0101ad;"></i> 무궁무진한 콘텐츠</div>
-						<div class="t_content">무궁무진한 콘텐츠가 준비되어 있으며 매주 새로운 TV 프로그램과 영화가 제공됩니다.</div>
+						<div class="t_title">
+							<i class="fas fa-chevron-circle-down" style="color: #ff0101ad;"></i>
+							지속적인 신작 업데이트
+						</div>
+						<div class="t_content">저렴한 월 요금으로 일체의 광고 없이 원하는 시간에 원하는 만큼
+							즐길 수 있습니다.</div>
+						<div class="t_title">
+							<i class="fas fa-chevron-circle-down" style="color: #ff0101ad;"></i>
+							무궁무진한 콘텐츠
+						</div>
+						<div class="t_content">무궁무진한 콘텐츠가 준비되어 있으며 매주 새로운 TV 프로그램과
+							영화가 제공됩니다.</div>
 					</div>
 					<div class="ticket_box2">
 						<div class="t_title2">KFLIX 요금에 대하여</div>
-							<div class="t_content2">- 멤버십 요금은 2,000원부터 73,000원까지 다양합니다.</div>
-							<div class="t_content2">- 무궁무진한 콘텐츠가 준비되어 있으며 매주 새로운 영화가 제공됩니다.</div>			
+						<div class="t_content2">- 멤버십 요금은 2,000원부터 73,000원까지 다양합니다.</div>
+						<div class="t_content2">- 무궁무진한 콘텐츠가 준비되어 있으며 매주 새로운 영화가
+							제공됩니다.</div>
 						<div class="t_title2">멤버십 해지에 대하여</div>
-							<div class="t_content2">- KFLIX는 부담 없이 간편합니다. 성가신 계약도, 약정도 없으니까요.</div>
-							<div class="t_content2">- 멤버십 해지도 온라인에서 클릭 두 번이면 완료할 수 있습니다.</div>
-							<div class="t_content2">- 해지 수수료도 없으니 원할 때 언제든 계정을 시작하거나 종료하세요.</div>		
+						<div class="t_content2">- KFLIX는 부담 없이 간편합니다. 성가신 계약도, 약정도
+							없으니까요.</div>
+						<div class="t_content2">- 멤버십 해지도 온라인에서 클릭 두 번이면 완료할 수 있습니다.</div>
+						<div class="t_content2">- 해지 수수료도 없으니 원할 때 언제든 계정을 시작하거나
+							종료하세요.</div>
 					</div>
 
 				</div>
@@ -181,7 +196,7 @@
 
 		<div class="header_container" id="header_container">
 			<div class="logo">
-				<a href=""> <img src="/kflix/resources/imgs/watch/kflixlogo.png"
+				<a href="/kflix/browse"> <img src="/kflix/resources/imgs/watch/kflixlogo.png"
 					alt="NETFLIX">
 				</a>
 				<button class="header_toggleBtn">
@@ -189,37 +204,58 @@
 				</button>
 			</div>
 			<ul class="main_nav">
-				<li class="main_nav_tab">홈</li>
-				<li class="main_nav_tab">TV 프로그램</li>
-				<li class="main_nav_tab">영화</li>
-				<li class="main_nav_tab">최신 콘텐츠</li>
-				<li class="main_nav_tab">내가 찜한 콘텐츠</li>
+				<li class="main_nav_tab"><a class="nav-link hometag"
+					aria-current="page" href="/kflix/browse#abody">홈</a></li>
+				<li class="main_nav_tab "><a class="nav-link movietag"
+					href="/kflix/browse#amovie">영화</a></li>
+				<li class="main_nav_tab"><a class="nav-link top10tag"
+					href="/kflix/browse#atop" tabindex="-1">요즘 대세 콘텐츠!</a></li>
+				<li class="main_nav_tab"><a class="nav-link wishtag"
+					href="/kflix/browse#awish">내가 찜한 콘텐츠</a></li>
+				<li id="testdsf" class="main_nav_tab"></li>
 			</ul>
 			<ul class="sub_nav">
-				<li class="sub_nav_tab"><i class="fas fa-search"></i></li>
-				<li class="sub_nav_tab"><i class="fas fa-gift"></i></li>
-				<li class="sub_nav_tab"><i class="fas fa-bell"></i></li>
-				<li class="sub_nav_tab"><i class="fas fa-user"></i></li>
+				<li class="sub_nav_tab">
+					<form id="searchform" action="/kflix/browse/search"></form> <input
+					id="search" type="checkbox" style="display: none;"> <input
+					id="searchinput" form="searchform" name="searchValue" type="text"
+					style="display: none; border: none; width: 120px; margin: 0px 9px; padding: 3px 15px; border-radius: 0.3rem;"
+					autocomplete="off"> <label for="search"><i
+						class="fas fa-search color_white nav-icon"></i></label>
+				</li>
+				<li class="sub_nav_tab"><i class="fas color_white fa-gift"></i></li>
+				<li class="sub_nav_tab"><i class="fas color_white fa-bell"></i></li>
+
+
+
+				<li class="sub_nav_tab"><button id="btnGroupDrop1"
+						type="button" class="btn" data-bs-toggle="dropdown"
+						aria-expanded="false" style="padding: 0; border: 0;">
+
+						<i class="fas color_white fa-user"></i>
+					</button>
+
+					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
+						<li><a href="" class="dropdown-item"> 티켓구매</a></li>
+						<li><a href="/kflix/service" class="dropdown-item">고객센터</a></li>
+					</ul></li>
 			</ul>
 		</div>
-
-
 	</header>
+
+
+
+
 
 
 	<!-- scripts -->
 	<script src="/kflix/resources/js/main/header.js"></script>
 	<script type="text/javascript">
-
 	
-	 if(${login.ticket_id} == null || ${login.ticket_id} == 0){
-			$(".header_container").css("top", "45px");
-			$(".header_ticket").css("display", "block");
-	 }else{
-	 		$(".header_ticket").css("display", "none");
-	 }
-	 	
-/* 		search = document.getElementById('search');
+
+		search = document.getElementById('search');
+
 		searchinput = document.getElementById('searchinput');
 
 		search.addEventListener("click", function() {
@@ -235,7 +271,15 @@
 				searchinput.style.display = 'none';
 			}
 		});
- */
+
+	
+	 if(${login.ticket_id} == null || ${login.ticket_id} == 0){
+			$(".header_container").css("top", "45px");
+			$(".header_ticket").css("display", "block");
+	 }else{
+	 		$(".header_ticket").css("display", "none");
+	 }
+	 
 		$(document).ready(function() {
 			$('#ticket').click(
 					function() {

@@ -176,7 +176,7 @@ ul {
 }
 
 #modalbackground {
-	position: absolute;
+	position: fixed;
 	display: none;
 	left: 0;
 	bottom: 0;
@@ -190,11 +190,11 @@ ul {
 #confirm {
 	position: fixed;
 	top: 50%;
-	width: 440px;
 	left: 50%;
+	transform: translate(-55%, -50%);
+	width: 440px;
 	height: 270px;
 	background-color: #141414;
-	transform: translate(-55%, -50%);
 	padding: 30px;
 	border-radius: 0.5rem;
 	box-shadow: 0 0 15px #000000;
@@ -343,9 +343,9 @@ a:visited {
 }
 
 a:hover {
-	color: white;
 	text-decoration: none;
 	cursor: pointer;
+	color: white;
 }
 
 a:active {

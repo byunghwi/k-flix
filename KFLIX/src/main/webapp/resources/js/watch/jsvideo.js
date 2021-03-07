@@ -140,7 +140,7 @@ function openFullscreen() {
 	}
 }
 
-// timeupdate : 재생중에 지속적으로 발생
+// timeupdate : 재생중에 지속적으로 발생	
 video.addEventListener("timeupdate", PlayTime, false);
 current = document.getElementById("current");
 duration = document.getElementById("duration");

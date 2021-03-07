@@ -33,11 +33,12 @@
 #infoframe::-webkit-scrollbar {
 	display: none;
 }
+
 </style>
 </head>
 <body>
 
-	<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
 	<div id="searchresult">
 
@@ -170,6 +171,14 @@
 	<script type="text/javascript">
 	infoframe = document.getElementById('infoframe');
 	body = document.querySelector('body');
+	
+	if(${login.ticket_id} == null || ${login.ticket_id} == 0){
+		body.style.paddingTop = "50px";
+   }else{
+         $(".header_ticket").css("display", "none");
+   }
+		
+	
 	function framshow(movieId) {
 		infoframe.src = "";
 		infoframe.style.display = 'block';

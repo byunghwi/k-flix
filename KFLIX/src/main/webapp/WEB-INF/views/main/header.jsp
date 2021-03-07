@@ -31,9 +31,9 @@
 			<form id="searchform" action="/kflix/browse/search"></form>
 			<input id="search" type="checkbox" style="display: none;"> <input
 				id="searchinput" form="searchform" name="searchValue" type="text"
-				style="display: none;border-radius: 0.4rem;"> <label for="search"><i
-				class="fas fa-search color_white nav-icon"></i></label> <i
-				class="fas fa-gift color_white nav-icon"></i> <i
+				style="display: none; border-radius: 0.4rem;"> <label
+				for="search"><i class="fas fa-search color_white nav-icon"></i></label>
+			<i class="fas fa-gift color_white nav-icon"></i> <i
 				class="fas fa-bell color_white nav-icon"></i>
 
 
@@ -45,8 +45,8 @@
 					<button id="btnGroupDrop1" type="button" class="btn"
 						data-bs-toggle="dropdown" aria-expanded="false"
 						style="box-shadow: 0 0 0 0;">
-						<i style="background-color: white; width: 40px"
-							class="fas fa-user nav-icon"></i>
+
+						<i class="fas color_white fa-user"></i>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
