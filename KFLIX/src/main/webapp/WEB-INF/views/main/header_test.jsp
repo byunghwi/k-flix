@@ -314,7 +314,7 @@ url
 						</li>
 						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
 						<li><a href="" class="dropdown-item">내 정보</a></li>
-						<li><a href="/kflix/myinquiry" class="dropdown-item">myinquiry</a></li>
+						<li><a href="/kflix/myinquiry" class="dropdown-item">1:1문의</a></li>
 						<li><a href="/kflix/service" class="dropdown-item">고객센터</a></li>
 					</ul>
 				</li>
