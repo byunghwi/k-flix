@@ -151,6 +151,12 @@
           <a class="navLink" id="actor" href="/kflix/actor/actorindex"><i class="fab fa-redhat"></i> 배우</a>
         </li>
         <li class="navCatalog">
+          <a class="navLink" id="actor" href="/kflix/memberindex"><i class="far fa-user"></i> 회원</a>
+        </li>
+		<li class="navCatalog">
+          <a class="navLink" id="actor" href="/kflix/ticketindex"><i class="fas fa-ticket-alt"></i> 이용권</a>
+        </li>
+        <li class="navCatalog">
            <a class="navLink" id="FAQ" href="/kflix/FAQ/index"><i class="far fa-question-circle"></i> FAQ</a>
         </li>
         <li class="navCatalog">

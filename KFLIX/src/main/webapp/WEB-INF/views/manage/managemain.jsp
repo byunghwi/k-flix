@@ -193,7 +193,7 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center morediv">
-					<a href="#" class="moreBtn" id="memMore"> more >> </a>
+					<a href="/kflix/memberindex" class="moreBtn" id="memMore"> more >> </a>
 				</div>
 			</div> 
 	  </div>
@@ -264,7 +264,7 @@
 				<h3> 이용권 현황</h3> 
 			</div>
 			<div class="mt-2">
-				<a href="#" id="goTicket">more >></a>
+				<a href="/kflix/ticketindex" id="goTicket">more >></a>
 			</div>
 		</div>	
 		<hr />
