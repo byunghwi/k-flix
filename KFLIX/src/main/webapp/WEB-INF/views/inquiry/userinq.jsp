@@ -23,7 +23,7 @@
 		color:white;
 	}
 	#myinq{
-		padding-top: 80px;
+		padding-top: 100px;
 		width: 1200px;
 		margin-left: calc(50% - 600px);
 	}
@@ -35,8 +35,8 @@
 <body>
 
 <section id="myinq">
-	<div class="pb-4 justify-content-center" id="myinq_title">
-		<h1>내 문의</h1>
+	<div class="pb-4 text-center" id="myinq_title">
+		<h1 class="text-center">내 문의</h1>
 	</div>
 	
 	
@@ -198,6 +198,15 @@
 <script src="/kflix/resources/js/movie/pagenate.js?ver=12"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
+$('document').ready(function(){
+	var check = '${inqCheck}';
+	if (check != null && check != ''){
+		infoMsg(check);
+		$('#infoconfrim').on('hidden.bs.modal', function(){
+			location.reload();		
+		})
+	}
+})
 $(document).ready(function() { 
 	makePageNate(${total}, 1, 10);
 });

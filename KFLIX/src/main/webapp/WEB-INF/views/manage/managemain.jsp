@@ -106,7 +106,7 @@
 		padding: 0;
 		margin: 0;
 		width: 1500px;
-		padding-top: 67px;
+		padding-top: 130px;
 	}
 	.total_content{
 		height: 80%;
@@ -126,10 +126,12 @@
 		font-weight: bolder;
 		color:white;
 	}
-
+	body{
+		background-color: #141414;
+	}
 </style>
 <title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 </head>
 <body>
 

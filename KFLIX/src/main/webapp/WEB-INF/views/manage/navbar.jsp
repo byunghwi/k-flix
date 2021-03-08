@@ -118,11 +118,13 @@
       transform: translateY(50%);
    }
    .wrapCustom{
-   	  	padding-top: 80px;
+   	  	padding-top: 180px;
    }
    
    .navCatalog{
-		padding-bottom: 10px;
+		padding-bottom: 20px;
+		padding-left: 30px;
+		
    }
 </style>
 <input type="checkbox" id="closeMenu" checked/>

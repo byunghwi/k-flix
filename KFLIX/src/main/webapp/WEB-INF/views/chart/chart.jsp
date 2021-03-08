@@ -17,10 +17,10 @@
 	width: 1400px;
 	height: 1000px;
 	margin-left: 350px;
-	padding-top: 65px;
+	padding-top: 130px;
 }
 body {
-	background-color: lightgray;
+	background-color: #141414;
 }
 .chartArea{
 	color:white;
@@ -40,7 +40,7 @@ body {
 }
 </style>
 
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 <body>
 
 <%@include file="../manage/navbar.jsp"%>

@@ -11,7 +11,7 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
 <meta charset="UTF-8">
 <style>
 	#contentTip{
@@ -21,9 +21,24 @@
 	.amount {
 		width: 150px;
 	}
+	thead>tr> th:nth-child(1){
+	width: 50px;
+	}
+	thead>tr> th:nth-child(2){
+		width: 150px;
+	}
+	thead>tr> th:nth-child(3){
+		width: 250px;
+	}
+	thead>tr> th:nth-child(4){
+		width: 450px;
+	}
+	thead>tr> th:nth-child(5){
+		width: 100px;
+	}
 </style>
 <title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 </head>
 <body>
 
@@ -210,7 +225,7 @@ $(document).ready(function() {
 	var pnum = $('#helpPage').val();
 	var amount = $('#helpAmount').val();
 	$('#inq').prepend('<span class="nav-clicked"></span>');
-	makePageNate(${}, pnum, amount);
+	makePageNate(len, pnum, amount);
 });
 
 // alert
@@ -280,12 +295,7 @@ $('#replyBtn').click(function(){
   			} else if (anotherPnum > 0 && anotherPnum < pnum){
   				pnum = anotherPnum;
   			}
-  			
-/*  			console.log($('.active').text())
-  			console.log(pnum)
-  			console.log(amount);
-  			console.log(data) */
-  			
+  			  			
  			makePageNate(len, pnum, amount);
   			 
  			makeTable(data, pnum, amount);
@@ -390,11 +400,7 @@ function ajax(type, url, data, pnum) {
   			} else if (anotherPnum > 0 && anotherPnum < pnum){
   				pnum = anotherPnum;
   			}
-  			
-/*  			console.log($('.active').text())
-  			console.log(pnum)
-  			console.log(amount);
-  			console.log(data) */
+
   			
  			makePageNate(len, pnum, amount);
   			 

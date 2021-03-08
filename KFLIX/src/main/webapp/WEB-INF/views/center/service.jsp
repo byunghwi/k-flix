@@ -184,16 +184,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
-$('document').ready(function(){
-	var check = '${inqCheck}';
-	if (check != null && check != ''){
-		infoMsg(check);
-		$('#infoconfrim').on('hidden.bs.modal', function(){
-			location.reload();		
-		})
-	}
-})
-
 var myCollapsible = document.getElementById('playaccordion')
 myCollapsible.addEventListener('show.bs.collapse', function () {
 	console.log('아코디언열림')
