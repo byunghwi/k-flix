@@ -223,7 +223,6 @@
 					autocomplete="off"> <label for="search"><i
 						class="fas fa-search color_white nav-icon"></i></label>
 				</li>
-				<li class="sub_nav_tab"><i class="fas color_white fa-gift"></i></li>
 				<li class="sub_nav_tab"><i class="fas color_white fa-bell"></i></li>
 
 
