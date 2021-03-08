@@ -51,7 +51,7 @@ public class InquiryController {
 		
 		rttr.addFlashAttribute("inqCheck", msg);
 	
-		return "redirect:/service";
+		return "redirect:/myinquiry";
 	}
 	
 	
@@ -66,5 +66,19 @@ public class InquiryController {
 		model.addAttribute("inq", in_service.getPageInq(PAGENATION));
 		model.addAttribute("category", in_service.getInquiryCosntraint());
 		return "inquiry/inquiryindex";
+	}
+	
+	@RequestMapping(value="/myinquiry", method = RequestMethod.GET)
+	public String sendInquiry(Model model, HttpSession session) {
+		// 세션, 문의테이블(이메일로 select)
+		Member member = (Member) session.getAttribute("login");
+		String email =  member.getEmail();
+		Inquiry inq = new Inquiry();
+		inq.setEmail(email);
+		inq.setInquiry_type("all");
+		model.addAttribute("inq", in_service.getInqByEmail(PAGENATION, inq, "all"));
+		model.addAttribute("total", in_service.selectUserInqCnt(email, inq.getInquiry_type(), "all"));
+		model.addAttribute("category", in_service.getInquiryCosntraint());
+		return "inquiry/userinq";
 	}
 }

@@ -1,7 +1,9 @@
 package com.kflix.inquiry.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kflix.inquiry.domain.Inquiry;
 import com.kflix.inquiry.service.InquiryService;
+import com.kflix.util.pagenation.domain.PageNation;
 
 import lombok.extern.log4j.Log4j;
 
@@ -42,6 +45,8 @@ public class InquiryRestController {
 		
 		// inq 객체 보내서 메일보내기
 		boolean send = in_service.sendReplyMail(inquiry);
+		inquiry.setReply_content(inquiry.getReply_content().substring(inquiry.getReply_content().lastIndexOf("re>>") + 6));
+		
 		// inq 객체 보내서 db업데이트
 		int result = in_service.updateReplyInq(inquiry);
 		
@@ -55,5 +60,32 @@ public class InquiryRestController {
 		return in_service.getAllInq();
 	}
 	
+	
+	@PostMapping(value="inquiry/user",
+			consumes = "application/json",
+			produces = "application/json; charset=UTF-8")
+	public Map<String, Object> userView(@RequestBody Map<String, String> vo) {
+		log.info("유저 뷰------------------------");
+		log.info(vo);
+		Map<String, Object> list = new HashMap<>();
+		
+		PageNation page = new PageNation();
+		int pnum = Integer.parseInt(vo.get("page"));
+		if (vo.get("page") == null) {
+			pnum = 1;
+		}
+		page.setPage(pnum);
+		page.setAmount(Integer.parseInt(vo.get("amount")));
+		Inquiry inq = new Inquiry();
+		
+		inq.setEmail((String)vo.get("email"));
+		inq.setInquiry_type((String)vo.get("inquiry_type"));
+		inq.setReply_status((String)vo.get("reply_status"));
+		
+		log.info(inq.getEmail());
+		list.put("inq", in_service.getInqByEmail(page, inq, (String)vo.get("reply_status")));
+		list.put("len", in_service.selectUserInqCnt((String)vo.get("email"), (String)vo.get("inquiry_type"), (String)vo.get("reply_status")));
+		return list;
+	}
 
 }

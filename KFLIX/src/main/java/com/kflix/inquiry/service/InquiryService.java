@@ -25,4 +25,8 @@ public interface InquiryService {
 	public List<Inquiry> getFindInq(String type, String reply_status);
 	
 	public boolean formRegExp(Inquiry inquiry);
+	
+	public List<Inquiry> getInqByEmail(PageNation pagenation, Inquiry inquiry, String status);
+	
+	public int selectUserInqCnt(String email, String type, String status);
 }
