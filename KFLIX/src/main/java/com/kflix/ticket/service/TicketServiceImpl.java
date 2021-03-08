@@ -55,8 +55,12 @@ public class TicketServiceImpl implements TicketService {
 		try {
 			MailUtils sendMail = new MailUtils(mailSender);
 			sendMail.setSubject("[KFLIX] 본인인증");
-			sendMail.setText(new StringBuffer().append("<h1>[본인 인증]</h1>").append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-					.append("<a href='http://localhost:8081/kflix/member/signUpConfirm?email=").append(email).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+			sendMail.setText(new StringBuffer().append("<h1>[본인 인증]</h1>").append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p><br><br>")
+					.append("<a href='http://localhost:8081/kflix/member/signUpConfirm?email=")
+					.append(email)
+					.append("' style='text-align: center; background-color: rgb(46, 52, 60); border: none; text-decoration: none; padding: 30px 10px 30px 10px; margin-bottom: 40px; color: white; border-radius: 7px;' target='_blenk'>KFLIX로 이동</a><br><br><br><br>")
+					.append("본 메일은 발신 전용이므로 메일로 문의 시 확인이 불가능합니다.<br />").toString());
+
 			sendMail.setFrom("KFLIX", "KFLIX");
 			sendMail.setTo(email);
 			sendMail.send();
@@ -80,7 +84,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Ticket getTicket(int ticket_id) {
-
+		System.out.println("ticketService 들어옴");
 		return ticketDao.getTicket(ticket_id);
 	}
 }

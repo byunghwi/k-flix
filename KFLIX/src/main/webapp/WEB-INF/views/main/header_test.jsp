@@ -24,7 +24,7 @@
 <style>
 #ticket_modal {
 	display: none;
-	width: 65%;
+	width: 55%;
 	height: 65%;
 	padding: 20px 60px;
 	background-color: #0c0c0c;
@@ -110,6 +110,24 @@
 .tr_class {
 	border: 1px solid;
 }
+
+.tr_class:hover {
+	color: red;
+}
+
+/* 이용권번호 안보이게처리 */
+.tr_class>td:nth-of-type(1) {
+	display: none;
+}
+
+#ticket_table {
+	border: 1px solid;
+	width: 95%;
+	height: 300px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	align: "center";
+}
 </style>
 </head>
 <body>
@@ -124,22 +142,18 @@
 					즐겨보세요</div>
 				<div id="ticket_info">
 					<c:if test="${not empty tickets }">
-						<table border="1" id="ticket_table"
-							style="width: 95%; margin-top: 30px; margin-bottom: 30px;"
-							align="center">
+						<table id="ticket_table">
 							<tr style="height: 50px; border: 5px; border-color: white;">
-								<td colspan="2">이용권번호</td>
-								<td colspan="2">이용권명</td>
-								<td colspan="2">가격</td>
+								<td>이용권명</td>
+								<td>가격</td>
 							</tr>
 							<c:forEach items="${tickets }" var="ticket">
 
 								<tr class="tr_class"
-									style="height: 50px; border: 5px; border-color: white;"
-									onclick="focuss(this)">
-									<td colspan="2">${ticket.ticket_id }</td>
-									<td colspan="2">${ticket.ticket_name }</td>
-									<td colspan="2">${ticket.ticket_price }</td>
+									style="height: 50px; border: 1px solid; border-color: white;">
+									<td>${ticket.ticket_id }</td>
+									<td>${ticket.ticket_name }</td>
+									<td>${ticket.ticket_price }</td>
 								</tr>
 							</c:forEach>
 
@@ -196,8 +210,8 @@
 
 		<div class="header_container" id="header_container">
 			<div class="logo">
-				<a href="/kflix/browse"> <img src="/kflix/resources/imgs/watch/kflixlogo.png"
-					alt="NETFLIX">
+				<a href="/kflix/browse"> <img
+					src="/kflix/resources/imgs/watch/kflixlogo.png" alt="NETFLIX">
 				</a>
 				<button class="header_toggleBtn">
 					<i class="fa fa-bars"></i>
@@ -332,11 +346,12 @@
 
 		document.body.append(bg);
 
+
 		//모달부분 이외 클릭시 모달 꺼지기
 		$(document).mouseup(function (e){
 			var modal_area = $('#ticket_modal');
 			
-			  if(modal_area.has(e.target).length === 0){
+			  if(!$(e.target).hasClass("#ticket_modal")){
 					bg.remove();
 					modal_area.css("display", "none");
 			  }
@@ -367,24 +382,26 @@
 	};
 
 
-	//요금표 tr 마우스 오버시 색 변경하기
+/* 	//요금표 tr 마우스 오버시 색 변경하기
 	$("#ticket_table .tr_class").hover(function() {
 		$(this).css("color","red");
 	}, function(){
 		$(this).css("color","white");
-	});
+	}); */
 
 	//요금표 클릭 이벤트
     $("#ticket_table .tr_class").click(function(){     
 
-    	$(this).css("color","red").css("font-weight", "bold");
-    	
-        var str = ""
         var tdArr = new Array();    // 배열 선언
             
         // 현재 클릭된 Row(<tr>)
         var tr = $(this);
         var td = tr.children();
+
+        var tr_length = $("#ticket_table .tr_class").length;
+
+        tr.siblings().css({"color":"white"});
+        tr.css({"color":"red"});
 
         // tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
         console.log("클릭한 Row의 모든 데이터 : "+tr.text());
@@ -418,6 +435,12 @@
 		
 		form.submit();
 	}
+
+	$("#ticket").hover(function(){
+		$(this).css({"backgroundColor":"black", "border":"1px solid white"});
+	}, function(){
+		$(this).css({"backgroundColor":"#2e343c", "border":"none"});
+	});
 
 	</script>
 

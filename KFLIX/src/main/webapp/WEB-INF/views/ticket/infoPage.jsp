@@ -1,3 +1,7 @@
+<%@page import="javax.inject.Inject"%>
+<%@page import="com.kflix.ticket.service.TicketServiceImpl"%>
+<%@page import="com.kflix.ticket.domain.Ticket"%>
+<%@page import="com.kflix.ticket.service.TicketService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -8,25 +12,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-	crossorigin="anonymous"></script>
- 
 <script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css"> 
- -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-	rel="stylesheet">
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/c7adb7b803.js"
+	crossorigin="anonymous"></script>
 	
-<link href="/kflix/resources/css/ticket/ticket.css" rel="stylesheet">
-	
+ <link href="/kflix/resources/css/ticket/ticket.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+	crossorigin="anonymous"></script>
 
 <style>
- body, html {
+body, html {
 	background: #141414;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -50,51 +53,85 @@ body {
     font-weight: 700;
     line-height: 1.5;
     color: #212529;
-   /*  background-color: #fff; */
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 }
 
-/*  
-div.total_wrap {
-	width: 100%;
-	height: 100%;
-
+section {
+    position: absolute;
+    left: 5%;
+    top: 13%;
+    width: 90%;
+    height: auto;
+    border: 3px solid white;
 }
 
-/* .total_wrap header, footer, nav, section {
-	//border : 1px solid #999;  
+.hr-title{
+    margin: 1rem 0;
+    color: inherit;
+    background-color: currentColor;
+    border: 1px solid white;
+    opacity: .25;
+    width: 10%;
+    margin-left: 10px;
 }
 
-.total_wrap header {
-	height: 7%;
-	background-color: aqua;
-	background-color: rgba( 0, 0, 0, 1 );
+.hr-divide{
+	margin: 1rem 0;
+    color: inherit;
+    background-color: currentColor;
+    border: 1px solid white;
+    opacity: .25;
+    width: 99%;
+    margin-left: 10px;
 }
 
- 
- .total_wrap nav, section {
-	float: left;
-	height: 85%;
+h3 {
+     font-size: 1.6rem;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+    color: white;
 }
 
-.total_wrap nav {
-	background-color: goldenrod;
-	width: 10%;
+.cert_msg {
+	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: lightgrey;
 }
 
-.total_wrap section {
- 	background-color: green; 
-	width: 90%;
+/* 이메일보내기 버튼 */
+#sendEmail {
+    border-color: white white white white;
+    background: transparent;
+    margin: 10p;
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding: 10px 30px 10px 30px;
+    color: white;
+    border-radius: 4px;
+    transition: all 0.6s;
 }
 
-.total_wrap footer{
-	background-color: blue;
-	clear: both;
-	height: 8%;
+/* 이메일 보내기 마우스 오버 */
+#sendEmail:hover {
+	background-color : red;
+	border-color: transparent;
 }
 
-*/
+.table-email td {
+	text-align: center;
+	color:white;
+	padding-left : 25px;
+	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.table-ticket td {
+	text-align: center;
+	color:white;
+	padding-left : 25px;
+	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 </style>
 
 </head>
@@ -104,70 +141,57 @@ div.total_wrap {
 
 <div class = "total_wrap">	
 
-	<nav>
-		네비게이션
-	</nav>
-	
 	<section>
-		<div class="contents">
-			<c:choose>
-				<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
-					<div>이메일을 전송했습니다.</div>
-				</c:when>
-		
-				<c:when test="${member.cert eq 'N'}">
-					<button id="sendEmail" onclick="sendEmail();">이메일 인증 보내기</button>
-				</c:when>
-		
-				<c:when test="${member.cert eq 'Y'}">
-					<div>이메일인증이 완료된 회원입니다.</div>
-					<button type="button" data-toggle="modal"
-						data-target="#registerModal2">이용권 구매</button>
-				</c:when>
-		
-			</c:choose>
+		<div class="contents_cert">
+		<h3>본인인증</h3>
+		<hr class="hr-title">
+			<table class="table-email">
+				<tr>
+					<td>본인인증 상태</td>
+					<c:choose>
+						<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
+							<td>미인증</td><td>이메일을 전송했습니다.</td>
+						</c:when>
+				
+						<c:when test="${member.cert eq 'N'}">
+							<td>미인증<td/><td><button type="button" id="sendEmail" onclick="sendEmail();">이메일 인증 보내기</button></td>
+						</c:when>
+				
+						<c:when test="${member.cert eq 'Y'}">
+							<td>인증완료</td>
+						</c:when>
+				
+					</c:choose>
+				</tr>
+			</table>
 		</div>
-			<!-- 회원가입 모달 -->
-			<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="login-form-wrap">
-					<div class="logform-content">
-						<div id="vertical-flip" class="card">
-							<div class="flip">
-								<div class="front">
-									<form id="form"
-										action="${pageContext.request.contextPath}/ticket/kakaoPay"
-										method="post">
-										<div class="box-input">
-											<div class="text-first">이용권을 선택해주세요.</div>
 		
-											<div class="text-second">원하는 멤버쉽 요금제를 선택하고 KFLIX의 모든 컨텐츠를
-												즐겨보세요</div>
-											<div>
+		<hr class="hr-divide">
 		
-											<c:if test="${not empty tickets }">
-												<table border="1" style="width: 80%; margin-top: 30px; margin-bottom: 30px;" align="center" >
-												<c:forEach items="${tickets }" var = "ticket">
-													<tr style="height: 50px; border: 5px; border-color: white;">
-														<td colspan="2">${ticket.ticket_name }</td>
-														<td colspan="2">${ticket.ticket_price }</td>
-													</tr>						
-												</c:forEach>
+		<div class="contents_ticket">
+		<h3>이용권</h3>
+		<hr class="hr-title">
+			<table class="table-ticket">
+				<tr>
+					<c:choose>
+						<c:when test="${member.ticket_id eq null || member.ticket_id eq 0}">
+							<td>이용권 없음</td>
+						</c:when>
+				
+						<c:when test="${member.ticket_id ne null && member.ticket_id ne 0 && not empty member.ticket_id}">
+							<td>${ticket.ticket_name }</td><td>${ticket.ticket_price }</td><td><fmt:formatDate value ="${member.pay_exp_date }" pattern="yyyy년 MM월 dd일"></fmt:formatDate></td><td><button id="sendEmail" onclick="removePay();">이용권 해지</button></td>
+						</c:when>		
+					</c:choose>
+				</tr>
+			</table>
+		</div>
 		
-												</table>			
-											</c:if>
-												
-											</div>
-											<button type="button" onclick="kakaopay();">구매</button>
-											<button type="button" onclick="removePay();">정기결제해제</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<hr class="hr-divide">
+		
+		<div class="contents_mem">
+			<h3>내 정보</h3>
+			<hr>
+		</div>
 		</section>
 		
 		<footer>

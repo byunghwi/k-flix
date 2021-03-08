@@ -179,7 +179,7 @@ input {
 	margin: 0 auto;
 }
 
-input, button {
+/* input, button {
 	padding: 10px 3%;
 	background: transparent;
 	font-size: 15px;
@@ -217,3 +217,4 @@ button:hover {
 	border: none;
 	transition: all 1.0s ease;
 }
+ */

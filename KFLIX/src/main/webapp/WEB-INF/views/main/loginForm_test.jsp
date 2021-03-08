@@ -32,6 +32,7 @@
 									<input type="email" name="email" placeholder="&#xf007;" required /> 
 									<input type="password" name="pwd" placeholder="&#xf11c;" required />
 									<button type="submit">Login</button>
+									<hr style="border:1px color= silver; margin-top:3px; margin-bottom: 17px;" width="50%">
 									<div>
 										<a href="${naver_url}"><img width= "250px;" height="45px;" style="margin-bottom: 10px;"
 											src="resources/imgs/login/네이버 아이디로 로그인_완성형_Green.PNG" /></a>
