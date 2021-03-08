@@ -2,6 +2,7 @@
 const wish_lab = document.getElementById('wish_lab');
 const wish_check = document.getElementById('wish_check');
 
+
 var check1, check2, check3, check4;
 
 
@@ -23,23 +24,7 @@ wish_check.addEventListener("change", function() {
 
 const like_lab = document.getElementById('like_lab');
 const like_check = document.getElementById('like_check');
-
-like_check.addEventListener("change", function() {
-	if (like_check.checked) {
-		console.log("체크됨");
-		like_lab.innerHTML = `<i class="fas fa-thumbs-up color-w"></i>`;
-		setlike("plus");
-		check4 = "체크";
-		console.log(check3 + ":" + check4);
-	} else {
-		console.log("체크안됨");
-		like_lab.innerHTML = `<i class="far fa-thumbs-up color-w"></i>`;
-		check4 = "미체크";
-		setlike("minus");
-		console.log(check3 + ":" + check4);
-
-	}
-});
+const rankchange = document.getElementById('rankchange');
 
 /*// iframe이 실행 될 때 부모 body오버플로우
 window.onload = function() {
@@ -64,9 +49,9 @@ document.querySelector("body").addEventListener("click", function() {
 // 클릭시 뒤에 클릭 안되게 false
 document.getElementById("frame").addEventListener("click", function parentiframeclose(e) {
 	console.log(parent);
-	if(check1 == check2 && check3 == check4){
+	if (check1 == check2 && check3 == check4) {
 		console.log("똑같음");
-	}else {
+	} else {
 		parent.mianreload();
 	}
 	parent.frameclose();
@@ -80,12 +65,14 @@ document.getElementById("postiondiv").addEventListener("click", function parenti
 
 document.querySelector(".back").addEventListener("click", function parentiframeclose(e) {
 	console.log(parent);
-	if(check1 == check2 && check3 == check4){
+	if (check1 == check2 && check3 == check4) {
 		console.log("똑같음");
-	}else {
+	} else {
 		parent.mianreload();
 	}
 	parent.frameclose();
+
+
 	e.stopPropagation();
 }, false);
 

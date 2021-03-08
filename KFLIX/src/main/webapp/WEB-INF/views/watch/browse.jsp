@@ -670,6 +670,17 @@
 		hometag.style.fontWeight = '700';
 		hometag.style.color = '#fff';
 	}
+	hometag.addEventListener('click',function tagstyle(){
+		hometag.style.fontWeight = '700';
+		hometag.style.color = '#fff';
+		
+		movietag.style.fontWeight = '100';
+		movietag.style.color = '#e5e5e5';
+		top10tag.style.fontWeight = '100';
+		top10tag.style.color = '#e5e5e5';
+		wishtag.style.fontWeight = '100';
+		wishtag.style.color = '#e5e5e5';
+	});
 	
 	movietag.addEventListener('click',function tagstyle(){
 		movietag.style.fontWeight = '700';
@@ -707,13 +718,27 @@
 		top10tag.style.color = '#e5e5e5';
 	});
 	
-	modalbackground = document.getElementById('modalbackground');
-
+	anchor = document.querySelectorAll('.anchor')
+	
+	
+	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
+	anchor.forEach(function(anchorItem) {
+		anchorItem.style.height = "120px";
+		anchorItem.style.marginTop = "-120px"; 
+});
+	
+	</c:if>
+	/* 	modalbackground = document.getElementById('modalbackground');
 	console.log(${member.ticket_id}+"dlek");
 	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
 	modalbackground.style.display = 'block';
 	body.style.overflow = 'hidden';
-	</c:if>
+	</c:if> */
+
+	var payMsg = '${payMsg}';
+	if(payMsg === 'success'){
+		alert('이용권이 정상적으로 구매되었습니다. \r\n이제 KFLIX를 마음껏 즐겨보세요.');
+	}
 	
 	
 	console.log(${i});

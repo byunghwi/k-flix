@@ -3,6 +3,7 @@ package com.kflix.main.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -29,6 +30,8 @@ import com.kflix.login.KakaoLoginVO;
 import com.kflix.login.NaverLoginVO;
 import com.kflix.member.domain.Member;
 import com.kflix.member.service.MemberService;
+import com.kflix.ticket.domain.Ticket;
+import com.kflix.ticket.service.TicketService;
 
 import jdk.internal.org.jline.utils.Log;
 import lombok.extern.log4j.Log4j;
@@ -52,6 +55,9 @@ public class MainController {
 	private void setNaverLoginVO(NaverLoginVO naverLoginVO) {
 		this.naverLoginVO = naverLoginVO;
 	}
+	
+	@Inject
+	TicketService ticketService;
 
 
 	@Inject
@@ -243,8 +249,10 @@ public class MainController {
 				memberService.keepLogin(member.getEmail(), session.getId(), sesionLimit);
 			}
 		}
-
+		
+		List<Ticket> tickets = ticketService.getAllTickets();
 		model.addAttribute("memberVO", memberVO);// 멤버객체를 가지고 loginInterceptor로 이동
+		model.addAttribute("tickets", tickets); //티켓객체를 가지고 loginInterceptor로 이동
 
 		System.out.println("[MainController] 어디부터 실행되는가 / 멤버컨트롤러");
 	}
