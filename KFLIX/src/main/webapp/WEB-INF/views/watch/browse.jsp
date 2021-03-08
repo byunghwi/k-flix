@@ -1,3 +1,4 @@
+<%@page import="oracle.net.aso.r"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%-- <%@ page import="java.net.URLEncoder"%>
@@ -5,7 +6,7 @@
 <%@ page import="java.net.HttpURLConnection"%>
 <%@ page import="java.io.BufferedReader"%>
 <%@ page import="java.io.InputStreamReader"%> --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -45,6 +46,7 @@
 
 </head>
 <body>
+
 	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 	<span class="anchor" id="abody"></span>
 	<div id="modalbackground">
@@ -98,7 +100,13 @@
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
 						<!--  style="top: 0px" -->
-						<h2 class="rowHeader${i}">"${login.email }"님이 시청 중인 콘텐츠</h2>
+						<h2 class="rowHeader${i}">
+							<c:set var="email_sub"
+								value="${fn:substringBefore(login.email, '@') }" />
+							"${email_sub }"님이 시청 중인 콘텐츠
+
+						</h2>
+						<!-- "resldhjskkjfi2@naver.com"님이 시청 중인 콘텐츠</h2> -->
 						<div class="slide_wrapper${i}">
 							<ul class="slides${i}">
 								<c:forEach items="${test.watch }" var="watch" varStatus="status">
@@ -660,6 +668,7 @@
 	<script src="/kflix/resources/js/watch/jsbrowse.js"></script>
 
 	<script type="text/javascript">
+	
 	test = document.getElementById('testdsf');
 	hometag = document.querySelector('.hometag')
 	movietag = document.querySelector('.movietag') 

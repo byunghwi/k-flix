@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,6 +110,47 @@
 .tr_class {
 	border: 1px solid;
 }
+<
+c
+
+
+
+
+
+
+:import
+
+
+
+ 
+
+
+
+url
+
+
+
+
+
+
+="/
+mapping한
+
+
+
+ 
+
+
+
+url
+
+
+
+
+
+
+"/
+>
 </style>
 </head>
 <body>
@@ -196,8 +237,8 @@
 
 		<div class="header_container" id="header_container">
 			<div class="logo">
-				<a href="/kflix/browse"> <img src="/kflix/resources/imgs/watch/kflixlogo.png"
-					alt="NETFLIX">
+				<a href="/kflix/browse"> <img
+					src="/kflix/resources/imgs/watch/kflixlogo.png" alt="NETFLIX">
 				</a>
 				<button class="header_toggleBtn">
 					<i class="fa fa-bars"></i>
@@ -219,27 +260,64 @@
 					<form id="searchform" action="/kflix/browse/search"></form> <input
 					id="search" type="checkbox" style="display: none;"> <input
 					id="searchinput" form="searchform" name="searchValue" type="text"
-					style="display: none; border: none; width: 120px; margin: 0px 9px; padding: 3px 15px; border-radius: 0.3rem;"
+					style="display: none; border: none; width: 135px; margin: 0px 1.5rem; padding: 3px 15px; border-radius: 0.3rem;"
 					autocomplete="off"> <label for="search"><i
 						class="fas fa-search color_white nav-icon"></i></label>
 				</li>
-				<li class="sub_nav_tab"><i class="fas color_white fa-gift"></i></li>
-				<li class="sub_nav_tab"><i class="fas color_white fa-bell"></i></li>
-
-
-
-				<li class="sub_nav_tab"><button id="btnGroupDrop1"
+				<li class="sub_nav_tab"><button id="btnGroupDrop_bell"
 						type="button" class="btn" data-bs-toggle="dropdown"
 						aria-expanded="false" style="padding: 0; border: 0;">
+
+						<i class="fas color_white fa-bell"></i>
+						<c:if test="${alarm.alarm_count != 0}">
+							<span
+								style="font-size: 11px; background-color: #ed2927; padding: 0 4px; border-radius: 50rem; position: relative; top: -8px; right: 12px; color: white;">${alarm.alarm_count }<!-- 신규 카운트 -->
+							</span>
+						</c:if>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop_bell">
+						<li style="font-size: 14px"><a id="newmovie_update"
+							href="/kflix/browse/newmovie" class="dropdown-item">신규 콘텐츠 <c:if
+									test="${alarm.alarm_count != 0}">
+									<span class="arum"
+										style="float: right; background-color: #ed2927; padding: 0 11px; border-radius: 50rem;">
+										${alarm.alarm_count } <!-- 신규 카운트 -->
+									</span>
+								</c:if>
+						</a></li>
+					</ul></li>
+
+
+
+				<li class="sub_nav_tab">
+					<button id="btnGroupDrop_login" type="button" class="btn"
+						data-bs-toggle="dropdown" aria-expanded="false"
+						style="padding: 0; border: 0;">
 
 						<i class="fas color_white fa-user"></i>
 					</button>
 
-					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop_login">
+						<li style="padding: 2px 1rem; font-size: 14.5px;">${login.email}</li>
+						<li style="padding: 2px 1rem; height: 1rem; font-size: 14.5px;"><c:if
+								test="${not empty login.ticket_id }">
+								<c:forEach items="${tickets }" var="ticket">
+									<c:if test="${login.ticket_id eq ticket.ticket_id}">
+							${ticket.ticket_name }
+							</c:if>
+								</c:forEach>
+							</c:if> <c:if test="${empty login.ticket_id or login.ticket_id eq 0}">
+						이용권 없음
+						</c:if></li>
+						<li style="height: 0.5rem;">
+							<hr>
+						</li>
 						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
-						<li><a href="" class="dropdown-item"> 티켓구매</a></li>
+						<li><a href="" class="dropdown-item">내 정보</a></li>
+						<li><a href="/kflix/myinquiry" class="dropdown-item">1:1문의</a></li>
 						<li><a href="/kflix/service" class="dropdown-item">고객센터</a></li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</header>
@@ -418,6 +496,22 @@
 		
 		form.submit();
 	}
+   	
+    var newmovie_update = document.getElementById('newmovie_update');
+   	
+    newmovie_update.addEventListener("click", function(e) {
+		var data = {
+			email : "${login.email}",
+			alarm_date : "${today}",
+			alarm_count : 0
+		}
+
+		var xhttp = new XMLHttpRequest();
+
+		xhttp.open('Post', '/kflix/rest/newmovie', true);
+		xhttp.setRequestHeader('content-type', 'application/json');
+		xhttp.send(JSON.stringify(data));
+	});
 
 	</script>
 

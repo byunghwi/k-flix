@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="selectAllHelp" resultType="com.kflix.help.domain.Help">
-		SELECT * FROM help WHERE help_status = #{status} ORDER BY help_type
+		SELECT * FROM help WHERE help_status = #{status}  ORDER BY help_id DESC
 	</select>
 
 	<select id="selectAllHelpByType" resultType="com.kflix.help.domain.Help">
@@ -55,7 +55,7 @@
 	</update>
 
 	<select id="getAllHelpType" resultType="string">
-		SELECT help_type FROM help 
+		SELECT help_type FROM help
 	</select>
 
 	<select id="getHelpWithRownum" resultType="com.kflix.help.domain.Help">

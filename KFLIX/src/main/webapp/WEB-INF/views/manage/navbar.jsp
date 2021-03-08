@@ -118,11 +118,13 @@
       transform: translateY(50%);
    }
    .wrapCustom{
-   	  	padding-top: 80px;
+   	  	padding-top: 180px;
    }
    
    .navCatalog{
-		padding-bottom: 10px;
+		padding-bottom: 20px;
+		padding-left: 30px;
+		
    }
 </style>
 <input type="checkbox" id="closeMenu" checked/>
@@ -147,6 +149,12 @@
         </li>
         <li class="navCatalog">
           <a class="navLink" id="actor" href="/kflix/actor/actorindex"><i class="fab fa-redhat"></i> 배우</a>
+        </li>
+        <li class="navCatalog">
+          <a class="navLink" id="actor" href="/kflix/memberindex"><i class="far fa-user"></i> 회원</a>
+        </li>
+		<li class="navCatalog">
+          <a class="navLink" id="actor" href="/kflix/ticketindex"><i class="fas fa-ticket-alt"></i> 이용권</a>
         </li>
         <li class="navCatalog">
            <a class="navLink" id="FAQ" href="/kflix/FAQ/index"><i class="far fa-question-circle"></i> FAQ</a>

@@ -81,10 +81,6 @@ public class InquiryServiceTest {
 	
 	@Test
 	public void testDateNull() {
-		list = in_service.getFindInq("이용권문의", "all");
-		
-		for(Inquiry p : list) {
-			log.info(p);
-		}
+	
 	}
 }

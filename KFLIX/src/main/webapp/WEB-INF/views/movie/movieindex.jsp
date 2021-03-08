@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=5" />
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=26" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=7" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=3" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 
@@ -128,6 +128,24 @@ $(document).ready(function() {
 	$('#movie').prepend('<span class="nav-clicked"></span>');
 });
 
+$('document').ready(function(){
+	var check = '${udpateCheck}';
+	if (check != null && check != ''){
+		infoMsg(check);
+		$('#infoconfrim').on('hidden.bs.modal', function(){
+			location.reload();		
+		})
+	}
+	
+	var addcheck = '${addcheck}';
+	if (addcheck != null && addcheck != ''){
+		infoMsg(addcheck);
+		$('#infoconfrim').on('hidden.bs.modal', function(){
+			location.reload();		
+		})
+	}
+	
+})
 </script>
 </body>
 </html>

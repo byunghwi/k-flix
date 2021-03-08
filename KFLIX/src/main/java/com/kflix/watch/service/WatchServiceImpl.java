@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.kflix.genre.domain.Genre;
 import com.kflix.mapper.WatchMapper;
 import com.kflix.member.domain.Member;
+import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.SearchVO;
@@ -35,6 +36,11 @@ public class WatchServiceImpl implements WatchService {
 	@Override
 	public MovieVO getmovie(int movie_id) {
 		return mapper.getmovie(movie_id);
+	}
+	
+	@Override
+	public List<MovieVO> getNewmovie() {
+		return mapper.getNewmovie();
 	}
 
 	@Override
@@ -136,6 +142,37 @@ public class WatchServiceImpl implements WatchService {
 	@Override
 	public Member checkTicket(String email) {
 		return mapper.checkTicket(email);
+	}
+
+	// 알림
+	@Override
+	public List<AlarmVO> getSelectAlarm() {
+		return mapper.getSelectAlarm();
+	}
+	
+	@Override
+	public AlarmVO getSelectAlarmUser(String email) {
+		return mapper.getSelectAlarmUser(email);
+	}
+
+	@Override
+	public int createAlarm(AlarmVO alarm) {
+		return mapper.createAlarm(alarm);
+	}
+
+	@Override
+	public int updateAlarm(AlarmVO alarm) {
+		return mapper.updateAlarm(alarm);
+	}
+	
+	@Override
+	public int cleanAlarm(AlarmVO alarm) {
+		return mapper.cleanAlarm(alarm);
+	}
+
+	@Override
+	public int deleteAlarm(AlarmVO alarm) {
+		return mapper.deleteAlarm(alarm);
 	}
 
 

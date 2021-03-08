@@ -11,14 +11,17 @@
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 <style>
 	body {
-		background-color: black;
+		background-color: rgb(20,20,20);
 	}
 	
 	#inquirtForm{
-		width: 50%;
-		background-color: white;
+		width: 700px;
+		color:white;
+		margin-left: calc(50% - 350px);
+		padding-top: 85px;
 	}
 	
 	#byteInfo{
@@ -44,14 +47,14 @@
 		<h1>1:1문의하기</h1>
 	</div>
 	
-	<div>
+	<div class="pb-2">
 		<h5 class="px-2">보내시는 분</h5>
 		<div class="px-4">
 			<input type="text" class="form-control" name="email" id="email" value="${loginEmail }" required readonly aria-label="Username" aria-describedby="form_eamil">
 		</div>			
 	</div>
 	
-	<div>
+	<div class="pb-2">
 		<h5 class="px-2">카테고리</h5>
 		<div class="px-4">
 		  	<select class="form-select" id="inquiry_type" name="inquiry_type" required>
@@ -87,7 +90,7 @@
 	<div class="d-flex justify-content-end px-4 py-3">
 		<div>
 			<input type="submit" value="보내기" class="btn btn-secondary"/>
-			<button onclick="cancleBtn();" class="btn btn-danger">취소</button>
+			<a onclick="cancleBtn();" class="btn btn-danger">취소</a>
 		</div>
 	</div>
 	</form>

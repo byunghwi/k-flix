@@ -39,6 +39,7 @@ import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
+import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.Basket;
 import com.kflix.watch.service.WatchService;
 
@@ -83,11 +84,12 @@ public class WatchController {
 		basket.setWish(watchservice.getSelectWish(member.getEmail()));
 		basket.setGenre(watchservice.getAllGenre());
 		model.addAttribute("test", basket);
-		
+		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("movie_genre", movie_genre);
+		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		model.addAttribute("member", watchservice.checkTicket(member.getEmail()));
 		return "/watch/browse";
 	}
@@ -136,6 +138,7 @@ public class WatchController {
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
 		model.addAttribute("getwish", watchservice.getSelectWishUser(member.getEmail(), movie_id));
 		model.addAttribute("getlike", watchservice.getSelectLikeUser(member.getEmail(), movie_id));
+		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		return "/watch/movieInfo";
 	}
 
@@ -152,21 +155,40 @@ public class WatchController {
 		model.addAttribute("email", member.getEmail());
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
 		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		return "/watch/video";
 	}
 
 	@GetMapping(value = "/browse/search")
-	public String search(Model model, String searchValue) {
+	public String search(Model model, String searchValue, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("searchValue", searchValue);
 		model.addAttribute("Searchlist", watchservice.getSearch(searchValue));
+		Member member = (Member) session.getAttribute("login");
+		model.addAttribute("email", member.getEmail());
+		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		for (MovieVO vo : watchservice.getSearch(searchValue)) {
 			System.out.println(vo.getMovie_id());
 		}
 
 		return "/watch/search";
+	}
+	
+	@GetMapping(value = "/browse/newmovie")
+	public String newmovie(Model model, HttpSession session) {
+		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
+		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
+		model.addAttribute("AllGenre", watchservice.getAllGenre());
+		model.addAttribute("newmovie", watchservice.getNewmovie());
+		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		Member member = (Member) session.getAttribute("login");
+		model.addAttribute("email", member.getEmail());
+		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
+		
+		return "/watch/newmovie";
 	}
 }

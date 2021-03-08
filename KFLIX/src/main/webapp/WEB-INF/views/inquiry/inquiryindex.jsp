@@ -11,7 +11,7 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
 <meta charset="UTF-8">
 <style>
 	#contentTip{
@@ -21,9 +21,24 @@
 	.amount {
 		width: 150px;
 	}
+	thead>tr> th:nth-child(1){
+	width: 50px;
+	}
+	thead>tr> th:nth-child(2){
+		width: 150px;
+	}
+	thead>tr> th:nth-child(3){
+		width: 250px;
+	}
+	thead>tr> th:nth-child(4){
+		width: 450px;
+	}
+	thead>tr> th:nth-child(5){
+		width: 100px;
+	}
 </style>
 <title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 </head>
 <body>
 
@@ -148,7 +163,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="replyBtn">답변</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancleBtn">취소</button>
       </div>
     </div>
   </div>
@@ -194,7 +209,16 @@
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="/kflix/resources/js/movie/pagenate.js?ver=12"></script>
+<script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
+$(document).ajaxStart(function(){
+	$('#replyModal').modal("hide");
+	infoMsg('<div class="fa-5x"><i class="fas fa-spinner fa-spin"></i></div><span>메일 보내는 중...</span>');
+})
+
+$(document).ajaxStop(function(){
+	$('#infoconfrim').modal("hide");
+})
 //로딩시 페이징
 $(document).ready(function() { 
 	var len = $('#helpData').val();
@@ -232,11 +256,14 @@ replyModal.addEventListener('show.bs.modal', function (event) {
 	replyid = $(event.relatedTarget).data('replyid');
 	memail = $(event.relatedTarget).data('memail');
 	replycont = $(event.relatedTarget).data('replycont');
+
+	$('#reply_content').val('');
 	
 	content = replycont + '/\n======================================/\nre>>/\n'
 	
-	$('#reply_content').html(content);
+	$('#reply_content').val(content)
 })
+
 
 // 답변 모달 버튼
 $('#replyBtn').click(function(){
@@ -250,7 +277,37 @@ $('#replyBtn').click(function(){
 		reply_content: $('#reply_content').val()
 	});
 	
-	ajax(type, url, data, parseInt($('.active').text()));
+	$.ajax({
+		type: type,
+		url: url,
+		data: data,
+		contentType: 'application/json',
+ 		success: function(data){
+  			var len = data.length;
+  			var amount =  parseInt($('#helpAmount').val())
+	
+  			var anotherPnum = Math.ceil(len / amount);
+  			if ($('.active').text() == '' 
+  					|| $('.active').text() == 0
+  					|| $('.active').text() != 'number'){
+  				pnum = 1;
+  				
+  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+  				pnum = anotherPnum;
+  			}
+  			  			
+ 			makePageNate(len, pnum, amount);
+  			 
+ 			makeTable(data, pnum, amount);
+ 			
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		},
+   		complete: function(){
+   			$('#replyModal').modal('hide');
+   		}
+	}) 
 })
 
 
@@ -303,7 +360,7 @@ function pageClick(pnum) {
 			reply_status: $('#isreply').val()
 		}),
 		contentType: 'application/json',
-		
+		global: false,
  		success: function(data){
   			var len = data.length;
   			var amount =  parseInt($('#helpAmount').val())
@@ -327,6 +384,7 @@ function ajax(type, url, data, pnum) {
 		type: type,
 		url: url,
 		data: data,
+		global: false,
 		contentType: 'application/json',
  		success: function(data){
   			var len = data.length;
@@ -335,22 +393,19 @@ function ajax(type, url, data, pnum) {
   			var anotherPnum = Math.ceil(len / amount);
   			if ($('.active').text() == '' 
   					|| $('.active').text() == 0
-  					|| $('.active').text() != 'number'){
+  					|| $('.active').text() != 'number'
+  					|| $('.active').text() == null){
   				pnum = 1;
   				
   			} else if (anotherPnum > 0 && anotherPnum < pnum){
   				pnum = anotherPnum;
   			}
-  			
-/*  			console.log($('.active').text())
-  			console.log(pnum)
-  			console.log(amount);
-  			console.log(data) */
+
   			
  			makePageNate(len, pnum, amount);
   			 
  			makeTable(data, pnum, amount);
- 
+ 			
    		},
    		error: function(){
    			infoMsg('불러오는데 실패하였습니다.');

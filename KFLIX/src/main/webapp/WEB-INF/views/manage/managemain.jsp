@@ -106,7 +106,7 @@
 		padding: 0;
 		margin: 0;
 		width: 1500px;
-		padding-top: 67px;
+		padding-top: 130px;
 	}
 	.total_content{
 		height: 80%;
@@ -126,10 +126,12 @@
 		font-weight: bolder;
 		color:white;
 	}
-
+	body{
+		background-color: #141414;
+	}
 </style>
 <title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 </head>
 <body>
 
@@ -191,7 +193,7 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center morediv">
-					<a href="#" class="moreBtn" id="memMore"> more >> </a>
+					<a href="/kflix/memberindex" class="moreBtn" id="memMore"> more >> </a>
 				</div>
 			</div> 
 	  </div>
@@ -262,7 +264,7 @@
 				<h3> 이용권 현황</h3> 
 			</div>
 			<div class="mt-2">
-				<a href="#" id="goTicket">more >></a>
+				<a href="/kflix/ticketindex" id="goTicket">more >></a>
 			</div>
 		</div>	
 		<hr />
