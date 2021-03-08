@@ -23,14 +23,7 @@ public class ServiecCenterRestController {
 	
 	static final char ENABLED = 'Y';
 	static final char DISABLED = 'N';
-	
-	@GetMapping(value="FAQ/user",
-			consumes = "application/json",
-			produces = "application/json; charset=UTF-8")
-	public List<Help> userFAQView(){
-		return hp_service.getAllHelpList(ENABLED);
-	}
-	
+
 	@PostMapping(value="FAQ/user",
 			consumes = "application/json",
 			produces = "application/json; charset=UTF-8")
