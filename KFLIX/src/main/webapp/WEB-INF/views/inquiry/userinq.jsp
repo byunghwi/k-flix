@@ -31,6 +31,15 @@
 		overflow: auto;
 		height: 620px;
 	}
+	thead>tr> th:nth-child(1){
+		width: 150px;
+	}
+	thead>tr> th:nth-child(2){
+		width: 500px;
+	}
+	thead>tr> th:nth-child(3){
+		width: 200px;
+	}
 </style>
 <body>
 

@@ -34,13 +34,6 @@
 	#userFAQView{
 		color: white;
 	}
-	#inqBtn, #titleArea{
-		background-color: lightgray;
-	}
-
-	b{
-		font-size: 20px;
-	}
 	
 	#faqArea{
 		width: 1200px;
@@ -66,6 +59,11 @@
 		overflow: auto;
 		height: 650px;
 	}
+	b{
+		width:150px;
+		text-align: center;
+		font-size: 20px;
+	}
 </style>
 </head>
 <body>
@@ -76,7 +74,7 @@
 
 
 <div id="headArea">
-	<h1 class="pt-5 titlefont">FAQ</h1>
+	<h1 class="pt-5 titlefont">F.A.Q</h1>
 </div>
 
 <div id="userFAQView">

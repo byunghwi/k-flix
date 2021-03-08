@@ -41,6 +41,8 @@ public class HelpServiceImpl implements HelpService {
 
 	@Override
 	public int addHelp(Help help) {
+		help.setHelp_title("Q." + help.getHelp_title());
+		help.setHelp_content("A." + help.getHelp_content());
 		return hMapper.insertHelp(help);
 	}
 
