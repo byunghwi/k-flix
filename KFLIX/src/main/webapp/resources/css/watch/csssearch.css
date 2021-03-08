@@ -5,6 +5,9 @@ body {
 	color: white;
 }
 
+*{
+	color: white;
+}
 .color_white {
 	color: white;
 }
@@ -49,6 +52,7 @@ body {
 .videohover {
 	opacity: 0;
 	visibility: hidden;
+	display: none;
 	transition: all 0.5s;
 	position: absolute;
 	background-color: #141414;
@@ -62,6 +66,13 @@ body {
 	box-shadow: 0 0 11px black;
 	cursor: pointer;
 	left: -30px;
+}
+
+.atag:hover .videohover {
+	display: block;
+	opacity: 1;
+	visibility: visible;
+	cursor: pointer;
 }
 
 .modalimg {
@@ -131,12 +142,6 @@ th, td {
 	margin-right: 2.5px;
 }
 
-.atag:hover .videohover {
-	opacity: 1;
-	visibility: visible;
-	cursor: pointer;
-}
-
 a:link {
 	color: white;
 	text-decoration: none;
@@ -160,10 +165,11 @@ a:active {
 
 .searchdiv {
 	width: 300px;
-    display: inline-block;
-    margin: 10px;
+	display: inline-block;
+	margin: 10px;
 }
 
 #searchresult {
-	padding: 50px;
+	padding: 0 50px;
+	padding-top: 85px;
 }

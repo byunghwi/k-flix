@@ -31,9 +31,8 @@
 	<i style="display: hidden;" id="back" class="fas fa-arrow-left color-w relative"> <span style="font-size: 15px;"> 뒤로가기 </span> </i>
 	</button> -->
 
-		<a onclick="savecurrentTime()"> <i
-			style="display: hidden;" id="back"
-			class="fas fa-arrow-left color-w relative"> <span
+		<a onclick="savecurrentTime()"> <i style="display: hidden;"
+			id="back" class="fas fa-arrow-left color-w relative"> <span
 				style="font-size: 18px; vertical-align: middle;"> 뒤로가기 </span>
 		</i>
 		</a>
@@ -251,7 +250,7 @@
 				xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
 				xhttp.setRequestHeader('content-type', 'application/json');
 				xhttp.send(JSON.stringify(data));
-					string = document.referrer;
+				string = document.referrer;
 				
 				location.href = string;
 			}

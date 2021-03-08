@@ -20,6 +20,11 @@
 		SELECT * FROM movie WHERE movie_id = #{movie_id }
 	</select>
 
+	<select id="getNewmovie"
+		resultType="com.kflix.watch.domain.MovieVO">
+		<![CDATA[SELECT * FROM movie
+		WHERE REG_DATE >= TO_DATE(sysdate-7,'YY-MM-DD')]]>
+	</select>
 
 	<!-- 좋아요 -->
 	<update id="likePlus">
@@ -135,28 +140,37 @@
 	<!-- 검색 -->
 	<select id="getSearch"
 		resultType="com.kflix.watch.domain.MovieVO">
-		SELECT 
-			movie_id 
-		FROM 
-			(SELECT 
-				movie_id, ROW_NUMBER() OVER(PARTITION BY MOVIE_TITLE ORDER BY REG_DATE DESC )as title, MOVIE_TITLE,
-				DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME, COUNTRY, RATING, SUMMARY, REG_DATE 
-			FROM 
-				(SELECT 
-					movie_id, MOVIE_TITLE, DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME,
-					COUNTRY, RATING, SUMMARY, REG_DATE
-				FROM 
-					movie m, director d, actor a, genre g
-				WHERE 
-					m.director_id = d.director_id and
-					(a.actor_id = m.actor_id1 or a.actor_id = m.actor_id2 or a.actor_id =
-					m.actor_id3) and
-					(g.genre_id = m.genre_id1 or g.genre_id = m.genre_id2))
-			WHERE 
-				(MOVIE_TITLE || DIRECTOR_NAME || ACTOR_NAME || GENRE_NAME || COUNTRY
-				|| RATING || SUMMARY || REG_DATE) like '%' ||  #{searchValue} || '%') 
-		WHERE 
-			title = 1
+		SELECT
+		movie_id
+		FROM
+		(SELECT
+		movie_id, ROW_NUMBER()
+		OVER(PARTITION BY MOVIE_TITLE ORDER BY REG_DATE DESC )as
+		title,
+		MOVIE_TITLE,
+		DIRECTOR_NAME, ACTOR_NAME, GENRE_NAME, COUNTRY, RATING,
+		SUMMARY, REG_DATE
+		FROM
+		(SELECT
+		movie_id, MOVIE_TITLE, DIRECTOR_NAME,
+		ACTOR_NAME, GENRE_NAME,
+		COUNTRY, RATING, SUMMARY, REG_DATE
+		FROM
+		movie m,
+		director d, actor a, genre g
+		WHERE
+		m.director_id = d.director_id and
+		(a.actor_id = m.actor_id1 or a.actor_id = m.actor_id2 or a.actor_id =
+		m.actor_id3) and
+		(g.genre_id = m.genre_id1 or g.genre_id =
+		m.genre_id2))
+		WHERE
+		(MOVIE_TITLE || DIRECTOR_NAME || ACTOR_NAME ||
+		GENRE_NAME || COUNTRY
+		|| RATING || SUMMARY || REG_DATE) like '%' ||
+		#{searchValue} || '%')
+		WHERE
+		title = 1
 	</select>
 
 	<!-- 장르 -->
@@ -164,18 +178,60 @@
 		resultType="com.kflix.genre.domain.Genre">
 		SELECT genre_id, genre_name FROM genre
 	</select>
-	
-	<!-- 티켓 확인 -->
-	
-	<select id="checkTicket" resultType="com.kflix.member.domain.Member">
-		SELECT 
-				email, ticket_id
-		FROM 
-			member 
-		WHERE
-			email = #{email}
-	</select>
-	
-	
 
+	<!-- 티켓 확인 -->
+
+	<select id="checkTicket"
+		resultType="com.kflix.member.domain.Member">
+		SELECT
+		email, ticket_id
+		FROM
+		member
+		WHERE
+		email = #{email}
+	</select>
+
+	<!-- 알림 -->
+	<select id="getSelectAlarm"
+		resultType="com.kflix.watch.domain.AlarmVO">
+		SELECT email FROM alarm
+	</select>
+
+	<select id="getSelectAlarmUser"
+		resultType="com.kflix.watch.domain.AlarmVO">
+		SELECT alarm_count FROM alarm WHERE email = #{email}
+	</select>
+
+	<insert id="createAlarm">
+		INSERT INTO alarm VALUES (
+		alarmid_seq.nextval,
+		'movie',
+		#{email},
+		#{alarm_date},
+		#{alarm_count}
+		)
+	</insert>
+
+	<update id="updateAlarm">
+		UPDATE alarm
+		SET
+		alarm_type = 'movie',
+		alarm_count = alarm_count + #{alarm_count},
+		alarm_date = TO_DATE(sysdate,'YY-MM-DD')
+		WHERE email = #{email}
+	</update>
+	
+	<update id="cleanAlarm">
+		UPDATE alarm
+		SET
+		alarm_type = 'movie',
+		alarm_count = #{alarm_count},
+		alarm_date = TO_DATE(sysdate,'YY-MM-DD')
+		WHERE email = #{email}
+	</update>
+
+	<delete id="deleteAlarm">
+		DELETE FROM alarm
+		WHERE email = #{email}
+	</delete>
 </mapper>

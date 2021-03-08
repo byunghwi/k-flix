@@ -33,12 +33,11 @@
 #infoframe::-webkit-scrollbar {
 	display: none;
 }
-
 </style>
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
 	<div id="searchresult">
 
@@ -54,7 +53,7 @@
 						<c:if test="${Searchlist.movie_id eq Allmovie.movie_id}">
 							<div class=" searchdiv">
 
-								<div class=""container"">
+								<div class="">
 									<a onclick="framshow(${Allmovie.movie_id})" class="atag">
 										<div class="atagdiv">
 											<img src="${Allmovie.poster_path }" class="dis img1"
@@ -203,6 +202,6 @@
 	function mianreload() {
 	}
 	</script>
-	
+
 </body>
 </html>
