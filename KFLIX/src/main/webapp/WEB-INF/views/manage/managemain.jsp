@@ -129,6 +129,11 @@
 	body{
 		background-color: #141414;
 	}
+	#boardArea{
+		width: 950px;
+		margin-left: 100px;
+	}
+	#second{padding-left:100px;}
 </style>
 <title>Insert title here</title>
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
@@ -140,7 +145,8 @@
 
 <div class="container-lg w-100 ps-3 contentArea" id="first">
 
-	<h3> 보드</h3>
+	<div id="boardArea">
+	<h3>대시 보드</h3>
 	<hr />
 	<div class="d-flex pb-5">
 	  <div class="totalArea">
@@ -197,50 +203,17 @@
 				</div>
 			</div> 
 	  </div>
-	  
-<%-- 	  <div class="totalArea">
-	      	<div id="pay_total">
-				<div class="total_content">
-					<div class="d-flex justify-content-between">
-				      	<div class="boardicon">
-				      		<i class="fas fa-money-check"></i>
-				      	</div>
-						<div class="total_content">
-							<h3 class="total_title">매출</h3>
-							<h4 class="total_title"><fmt:formatNumber value="${inqTotal }" type="currency"/></h4>
-						</div>
-					</div>
-				</div>	
-				<div class="d-flex justify-content-center morediv">
-					<a href="#" class="moreBtn" id="payMore"> more >> </a>
-				</div>
-			</div>
-	  </div> --%>
-  
+ </div>
  </div>
 </div>
 
-<div class="d-flex pt-3">
+<div class="d-flex pt-3" id="second">
 
 	<div class="pe-5 ps-3 contentArea">
 		<h3> TOP 5</h3> 
 		<hr />
 		<c:forEach items="${movie }" var="i" varStatus="status">
-			<c:choose>
-			<c:when test="${status.index == 0 }">
-				<div class="d-flex pb-2">
-					<div class="rankingnum">
-						<h1>${status.index + 1}</h1>
-					</div>
-					<div class="rankingtitle">
-						<h1>${i.movie_title }</h1>
-					</div>
-					<div class="rankingOne">
-						<img src="${i.poster_path }" class="rankingOne" alt="" />
-					</div>
-				</div>
-			</c:when>
-			<c:otherwise>
+
 				<div class="d-flex pb-2 ps-3">
 					<div class="rankingnum">
 						<h3>${status.index + 1}</h3>
@@ -252,8 +225,7 @@
 						<img src="${i.poster_path }" class="rankingAnother" alt="" />
 					</div>
 				</div>
-			</c:otherwise>
-			</c:choose>
+	
 		</c:forEach>
 	</div>
 	
