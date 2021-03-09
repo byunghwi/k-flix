@@ -20,6 +20,11 @@
 	href="/kflix/resources/css/watch/cssvideo.css">
 <script src="https://kit.fontawesome.com/6421ed9b05.js"
 	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="/kflix/resources/css/common/netflix-fonts.css" />
+<link rel="stylesheet"
+	href="/kflix/resources/css/common/netflix-pulsate.css" />
+
 
 <style type="text/css">
 </style>

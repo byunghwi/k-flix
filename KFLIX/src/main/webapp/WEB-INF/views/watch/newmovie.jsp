@@ -20,6 +20,11 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
 	href="/kflix/resources/css/watch/csssearch.css">
+<link rel="stylesheet"
+	href="/kflix/resources/css/common/netflix-fonts.css" />
+<link rel="stylesheet"
+	href="/kflix/resources/css/common/netflix-pulsate.css" />
+
 <style type="text/css">
 #infoframe {
 	width: 100%;
@@ -53,6 +58,15 @@
 							<a onclick="framshow(${newmovie.movie_id})" class="atag">
 								<div class="atagdiv">
 									<img src="${newmovie.poster_path }" class="dis img1" alt="...">
+									<c:forEach items="${Ranking }" var="Ranking" varStatus="status">
+										<c:if test="${newmovie.movie_id eq Ranking.movie_id}">
+											<div class="topMark">
+												TOP<br> <b style="font-size: 18px">10</b>
+											</div>
+
+										</c:if>
+									</c:forEach>
+									<div class="newMark">N</div>
 									<div class="videohover">
 										<img style="margin: 0;" src="${newmovie.poster_path }"
 											class="modalimg" alt="...">

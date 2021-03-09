@@ -374,6 +374,10 @@ a:active {
 	box-shadow: 0px 0px 2px #f9ff00;
 }
 
+.topMark > * {
+	color: #ed2927;
+}
+
 .newMark {
 	position: absolute;
 	left: 0;

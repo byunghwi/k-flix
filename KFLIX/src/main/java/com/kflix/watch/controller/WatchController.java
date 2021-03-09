@@ -76,7 +76,6 @@ public class WatchController {
 		HashSet<Integer> arr2 = new HashSet<Integer>(arr); // 등록된 영화 장르 중복제거
 		ArrayList<Integer> movie_genre = new ArrayList<>(arr2); // 배열로 다시 넣기
 
-		model.addAttribute("Ranking", watchservice.getmovieRanking());
 
 		basket.setMovie(watchservice.getAllmovie());
 		basket.setWatch(watchservice.getSelectWatch(member.getEmail()));
@@ -90,6 +89,7 @@ public class WatchController {
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("movie_genre", movie_genre);
 		model.addAttribute("member", watchservice.checkTicket(member.getEmail()));
+		model.addAttribute("Ranking", watchservice.getmovieRanking());
 		model.addAttribute("newmovie", watchservice.getNewmovie());
 		return "/watch/browse";
 	}
@@ -139,6 +139,8 @@ public class WatchController {
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
 		model.addAttribute("getwish", watchservice.getSelectWishUser(member.getEmail(), movie_id));
 		model.addAttribute("getlike", watchservice.getSelectLikeUser(member.getEmail(), movie_id));
+		model.addAttribute("Ranking", watchservice.getmovieRanking());
+		model.addAttribute("newmovie", watchservice.getNewmovie());
 		return "/watch/movieInfo";
 	}
 
@@ -154,6 +156,8 @@ public class WatchController {
 		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
 		model.addAttribute("email", member.getEmail());
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
+		model.addAttribute("Ranking", watchservice.getmovieRanking());
+		model.addAttribute("newmovie", watchservice.getNewmovie());
 		return "/watch/video";
 	}
 
@@ -164,6 +168,8 @@ public class WatchController {
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("searchValue", searchValue);
+		model.addAttribute("Ranking", watchservice.getmovieRanking());
+		model.addAttribute("newmovie", watchservice.getNewmovie());
 		model.addAttribute("Searchlist", watchservice.getSearch(searchValue));
 		for (MovieVO vo : watchservice.getSearch(searchValue)) {
 			System.out.println(vo.getMovie_id());
@@ -184,7 +190,7 @@ public class WatchController {
 		System.out.println("alarm왔나");
 		System.out.println(member.getEmail());
 		watchservice.cleanAlarm(member.getEmail());
-		
+		model.addAttribute("Ranking", watchservice.getmovieRanking());
 		session.setAttribute("login", memberservice.getMemberByEmail(member.getEmail()));
 		
 		return "/watch/newmovie";
