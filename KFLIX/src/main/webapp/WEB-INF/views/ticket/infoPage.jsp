@@ -35,39 +35,12 @@ body {
 	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 		sans-serif;
 }
-/* body, html {
-	background: #141414;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	cursor: default;
-	width: 100%; 
-	height: 100%;
-	margin: 0;
-	padding : 0;
-
-}
-
-body {
-    margin: 0;
-    font-family: var(--bs-font-sans-serif);
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.5;
-    color: #212529;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-} */
 section {
 	position: absolute;
 	left: 5%;
 	top: 13%;
 	width: 90%;
-	height: 55%;
+	height: 52%;
 	border: 3px solid white;
 }
 
@@ -167,7 +140,6 @@ h3 {
 
 * td {
 	text-align: center;
-	color: white;
 	padding-left: 25px;
 	/* font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
 }
