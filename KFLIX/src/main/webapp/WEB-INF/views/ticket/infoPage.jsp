@@ -383,7 +383,6 @@ input {
 							+ request.responseText + " error = " + error); // 실패 시 처리
 				}
 			});
-
 		}
 	</script>
 </body>
