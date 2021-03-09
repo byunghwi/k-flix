@@ -109,7 +109,8 @@
 						<!-- "resldhjskkjfi2@naver.com"님이 시청 중인 콘텐츠</h2> -->
 						<div class="slide_wrapper${i}">
 							<ul class="slides${i}">
-								<c:forEach items="${basket.watch }" var="watch" varStatus="status">
+								<c:forEach items="${basket.watch }" var="watch"
+									varStatus="status">
 									<c:forEach items="${basket.movie }" var="Allmovie"
 										varStatus="status">
 										<c:if
@@ -380,9 +381,11 @@
 				</c:if>
 
 				<c:set var="i" value="${i+1}" />
-				<span class="anchor" id="atop"></span>
+				<span class="anchor" id="anew"></span>
 				<div id="top10" class="sliderow${i} }">
-					<h2 class="rowHeader${i}">이번 주 공개 콘텐츠</h2>
+					<h2 class="rowHeader${i}">
+						이번 주 <b>NEW </b> 콘텐츠
+					</h2>
 					<div class="slide_wrapper${i}">
 						<ul class="slides${i}">
 							<c:forEach items="${newmovie }" var="newmovie" varStatus="status">
@@ -505,11 +508,13 @@
 						<span class="next${i}"><i class="fas fa-chevron-right"></i></span>
 					</p>
 				</div>
-				
+
 				<c:set var="i" value="${i+1}" />
 				<span class="anchor" id="atop"></span>
 				<div id="top10" class="sliderow${i} }">
-					<h2 class="rowHeader${i}">KFLIX의 TOP 10 콘텐츠</h2>
+					<h2 class="rowHeader${i}">
+						<b>KFLIX</b>의 <b>TOP 10</b> 콘텐츠
+					</h2>
 					<div class="slide_wrapper${i}">
 						<ul class="slides${i}">
 							<c:forEach items="${Ranking }" var="Ranking" varStatus="status">
@@ -798,60 +803,31 @@
 	
 	hometag = document.querySelector('.hometag')
 	movietag = document.querySelector('.movietag') 
+	newtag = document.querySelector('.newtag') 
 	top10tag = document.querySelector('.top10tag') 
 	wishtag = document.querySelector('.wishtag')
 	
-	if(window.location.pathname == "/kflix/browse"){
-		hometag.style.fontWeight = '700';
+	nav_link = document.querySelectorAll('.nav-link')
+	
+		hometag.style.fontWeight = 'bolder';
+		hometag.style.fontSize = '17px';
 		hometag.style.color = '#fff';
-	}
-	hometag.addEventListener('click',function tagstyle(){
-		hometag.style.fontWeight = '700';
-		hometag.style.color = '#fff';
-		
-		movietag.style.fontWeight = '100';
-		movietag.style.color = '#e5e5e5';
-		top10tag.style.fontWeight = '100';
-		top10tag.style.color = '#e5e5e5';
-		wishtag.style.fontWeight = '100';
-		wishtag.style.color = '#e5e5e5';
-	});
+		hometag.style.paddingBottom = '4px';
 	
-	movietag.addEventListener('click',function tagstyle(){
-		movietag.style.fontWeight = '700';
-		movietag.style.color = '#fff';
-		
-		hometag.style.fontWeight = '100';
-		hometag.style.color = '#e5e5e5';
-		top10tag.style.fontWeight = '100';
-		top10tag.style.color = '#e5e5e5';
-		wishtag.style.fontWeight = '100';
-		wishtag.style.color = '#e5e5e5';
-	});
-	
-	top10tag.addEventListener('click', function tagstyle(){
-		top10tag.style.fontWeight = '700';
-		top10tag.style.color = '#fff';
-		
-		hometag.style.fontWeight = '100';
-		hometag.style.color = '#e5e5e5';
-		movietag.style.fontWeight = '100';
-		movietag.style.color = '#e5e5e5';
-		wishtag.style.fontWeight = '100';
-		wishtag.style.color = '#e5e5e5';
-	});
-	
-	wishtag.addEventListener('click', function tagstyle(){
-		wishtag.style.fontWeight = '700';
-		wishtag.style.color = '#fff';
-		
-		hometag.style.fontWeight = '100';
-		hometag.style.color = '#e5e5e5';
-		movietag.style.fontWeight = '100';
-		movietag.style.color = '#e5e5e5';
-		top10tag.style.fontWeight = '100';
-		top10tag.style.color = '#e5e5e5';
-	});
+	nav_link.forEach(function(navclicklistener) {
+		navclicklistener.addEventListener('click',function tagstyle(){
+			nav_link.forEach(function(nav_linkItem) {
+				nav_linkItem.style.fontWeight = '100';
+				nav_linkItem.style.color = '#e5e5e5'; 
+				nav_linkItem.style.fontSize = '15px';
+				nav_linkItem.style.paddingBottom = '0';
+			})
+			this.style.fontWeight = 'bolder';
+			this.style.fontSize = '17px';
+			this.style.color = '#fff';
+			this.style.paddingBottom = '4px';
+		})
+	})
 	
 	anchor = document.querySelectorAll('.anchor')
 	
@@ -863,6 +839,7 @@
 });
 	
 	</c:if>
+	
 	/* 	modalbackground = document.getElementById('modalbackground');
 	console.log(${member.ticket_id}+"dlek");
 	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">

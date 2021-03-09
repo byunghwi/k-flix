@@ -164,7 +164,6 @@
 			const player = document.querySelector('.player'); 
 			const progress = player.querySelector('.progress'); 
 			const progressBar = player.querySelector('.progress__filled');
-			const ranges = player.querySelectorAll('.player__slider');
 
 			
 			function togglePlay() { 

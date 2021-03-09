@@ -23,6 +23,12 @@ header {
 	padding-top: 9px;
 }
 
+#btnGroupDrop_Menu {
+	display: none;
+	padding: 9px 0 0 0;
+	border: 0;
+}
+
 .sub_nav {
 	display: flex;
 	align-items: center;
@@ -42,7 +48,7 @@ header {
 	font-size: 0.9rem;
 	z-index: 100;
 	padding-bottom: 10px;
-    padding-top: 3px;
+	padding-top: 3px;
 }
 
 .logo {
@@ -70,10 +76,6 @@ header {
 	padding-right: 1.5rem;
 }
 
-.nav-link {
-	padding: 0;
-}
-
 .color_white {
 	color: white;
 	cursor: pointer;
@@ -88,7 +90,6 @@ header {
 	border-radius: 0.45rem;
 }
 
-
 .dropdown-menu li {
 	color: #cccccc;
 }
@@ -102,28 +103,6 @@ header {
 	color: #fff;
 	text-decoration: none;
 	background-color: #aa2929;
-}
-
-
-a:link {
-	color: white;
-	text-decoration: none;
-}
-
-a:visited {
-	color: white;
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: none;
-	cursor: pointer;
-	color: white;
-}
-
-a:active {
-	color: white;
-	text-decoration: none;
 }
 
 .header_ticket {
@@ -156,4 +135,32 @@ a:active {
 	background-color: #2e343c;
 	/* border-bottom: 5px solid #6b6363; */
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.nav-link {
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+.nav-link:hover, newtag:hover {
+	color: gray;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+@media only screen and (max-width:1100px) {
+	.main_nav {
+		display: none;
+	}
+	#btnGroupDrop_Menu {
+		display: inline-block;
+	}
+}
+
+@media only screen and (min-width:1100px) {
+	.dropdown-menu.show.Drop_Menu {
+		display: none;
+	}
 }

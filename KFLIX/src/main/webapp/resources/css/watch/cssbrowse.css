@@ -456,3 +456,10 @@ a:active {
 		top: 12em;
 	}
 }
+
+.nav-link {
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+	padding: 0;
+}

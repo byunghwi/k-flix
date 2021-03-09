@@ -20,16 +20,19 @@
 	href="/kflix/resources/css/main/header.css">
 <link rel="stylesheet" type="text/css"
 	href="/kflix/resources/css/main/main.css">
-	
 
-<link rel="stylesheet" href="/kflix/resources/css/common/netflix-fonts.css" />
-<link rel="stylesheet" href="/kflix/resources/css/common/netflix-pulsate.css" />
+
+<link rel="stylesheet"
+	href="/kflix/resources/css/common/netflix-fonts.css" />
+<link rel="stylesheet"
+	href="/kflix/resources/css/common/netflix-pulsate.css" />
 
 <style>
 * {
-font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
+	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 		sans-serif;
 }
+
 #ticket_modal {
 	display: none;
 	width: 55%;
@@ -136,7 +139,6 @@ font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 	margin-bottom: 30px;
 	align: "center";
 }
-
 </style>
 </head>
 <body>
@@ -231,12 +233,35 @@ font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 					aria-current="page" href="/kflix/browse#abody">홈</a></li>
 				<li class="main_nav_tab "><a class="nav-link movietag"
 					href="/kflix/browse#amovie">영화</a></li>
+				<li class="main_nav_tab"><a class="nav-link newtag"
+					href="/kflix/browse#anew"><b>NEW</b> 콘텐츠</a></li>
 				<li class="main_nav_tab"><a class="nav-link top10tag"
-					href="/kflix/browse#atop" tabindex="-1">요즘 대세 콘텐츠!</a></li>
+					href="/kflix/browse#atop"><b>인기</b> 콘텐츠</a></li>
 				<li class="main_nav_tab"><a class="nav-link wishtag"
-					href="/kflix/browse#awish">내가 찜한 콘텐츠</a></li>
-				<li id="testdsf" class="main_nav_tab"></li>
+					href="/kflix/browse#awish"><b>찜한</b> 콘텐츠</a></li>
 			</ul>
+
+
+			<button id="btnGroupDrop_Menu" type="button" class="btn"
+				data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="fas fa-bars color_white" style="font-size: 25px"></i><i
+					class="fas fa-caret-down color_white"
+					style="font-size: 15px; vertical-align: text-top; padding-left: 5px;"></i>
+			</button>
+
+			<ul class="dropdown-menu Drop_Menu" aria-labelledby="btnGroupDrop_Menu">
+				<li class="main_nav_tab"><a class="dropdown-item"
+					href="/kflix/browse#abody">홈</a></li>
+				<li class="main_nav_tab "><a class="dropdown-item"
+					href="/kflix/browse#amovie">영화</a></li>
+				<li class="main_nav_tab"><a class="dropdown-item"
+					href="/kflix/browse#anew"><b>NEW</b> 콘텐츠</a></li>
+				<li class="main_nav_tab"><a class="dropdown-item"
+					href="/kflix/browse#atop"><b>인기</b> 콘텐츠</a></li>
+				<li class="main_nav_tab"><a class="dropdown-item"
+					href="/kflix/browse#awish"><b>찜한</b> 콘텐츠</a></li>
+			</ul>
+
 			<ul class="sub_nav">
 				<li class="sub_nav_tab">
 					<form id="searchform" action="/kflix/browse/search"></form> <input
@@ -250,7 +275,8 @@ font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 						type="button" class="btn" data-bs-toggle="dropdown"
 						aria-expanded="false" style="padding: 0; border: 0;">
 						<i class="fas color_white fa-bell"></i>
-						<c:if test="${not empty login.alarm_count and login.alarm_count != 0 }">
+						<c:if
+							test="${not empty login.alarm_count and login.alarm_count != 0 }">
 							<span id="arumnum1"
 								style="font-size: 11px; background-color: #ed2927; padding: 0 4px; border-radius: 50rem; position: relative; top: -8px; right: 12px; color: white;">${login.alarm_count }<!-- 신규 카운트 -->
 							</span>
@@ -258,7 +284,8 @@ font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop_bell">
 						<li style="font-size: 14px"><a id="newmovie_update"
-							href="/kflix/browse/newmovie" class="dropdown-item">신규 콘텐츠 <c:if test="${not empty login.alarm_count and login.alarm_count != 0 }">
+							href="/kflix/browse/newmovie" class="dropdown-item">신규 콘텐츠 <c:if
+									test="${not empty login.alarm_count and login.alarm_count != 0 }">
 									<span id="arumnum2"
 										style="float: right; background-color: #ed2927; padding: 0 11px; border-radius: 50rem;">
 										${login.alarm_count } <!-- 신규 카운트 -->
@@ -293,7 +320,8 @@ font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 							<hr>
 						</li>
 						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
-						<li><a href="/kflix/ticket/info" class="dropdown-item">내 정보</a></li>
+						<li><a href="/kflix/ticket/info" class="dropdown-item">내
+								정보</a></li>
 						<li><a href="/kflix/myinquiry" class="dropdown-item">1:1문의</a></li>
 						<li><a href="/kflix/service" class="dropdown-item">고객센터</a></li>
 					</ul>
