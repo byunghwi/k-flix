@@ -1,6 +1,7 @@
 package com.kflix.watch.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,6 @@ import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
-import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
 
@@ -174,6 +174,5 @@ public class WatchServiceImpl implements WatchService {
 	public int deleteAlarm(AlarmVO alarm) {
 		return mapper.deleteAlarm(alarm);
 	}
-
 
 }

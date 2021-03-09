@@ -1,6 +1,8 @@
 package com.kflix.watch.domain;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -11,7 +13,13 @@ import lombok.Data;
 @Data
 @Component
 public class MovieVO {
-
+	
+	List<String> headNames = Arrays.asList(
+			"movie_id", "movie_title", "rating", "play_time", "director_id",
+			"actor_id1", "actor_id2", "actor_id3", "genre_id1", "genre_id2",
+			"country", "movie_release", "summary", "reg_date", "poster_path",
+			"teaser_path", "video_path", "view_cnt", "movie_rank");
+	
 	private int movie_id;
 	private String movie_title;
 	private String rating;

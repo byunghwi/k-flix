@@ -16,6 +16,9 @@
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
 <title>Insert title here</title>
 <style>
+	*{
+		font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	}
 	body{
 		background-color: rgb(20,20,20);
 		
@@ -26,8 +29,8 @@
     	box-shadow: 0 0 0 0;
 	}
 	#headArea{
-		height: 200px;
-		background-size: 100% 200px;
+		font-size: 40px;
+		letter-spacing: 0.2rem;	
 		text-align: center;
 
 	}
@@ -43,7 +46,7 @@
 	}
 	
 	#backhelp{
-		color: red;
+		color: white;
 		text-decoration: none;
 	}
 	
@@ -52,17 +55,21 @@
 	}
 	
 	.accordion-button::after {
-		background-image: url(/kflix/resources/imgs/service/down-arrow.png)!important;
+		background-image: url(/kflix/resources/imgs/service/down-arrow-white.png)!important;
 	}
 	
 	#help_accordion{
 		overflow: auto;
-		height: 650px;
+		height: 630px;
 	}
 	b{
 		width:150px;
 		text-align: center;
 		font-size: 20px;
+	}
+	.helpcontent{
+		padding-left: 17%;
+		color: gray;
 	}
 </style>
 </head>
@@ -73,15 +80,13 @@
 <section id="faqArea" class="netflix-sans-font-loaded">
 
 
-<div id="headArea">
-	<h1 class="pt-5 titlefont">F.A.Q</h1>
-</div>
-
-<div id="userFAQView">
-
-<div>
-	<a href="/kflix/service" id="backhelp" class="contentfont">&lt;&lt; 고객센터 홈으로 돌아가기</a>
-</div>
+	<div id="headArea">
+		<h1 class="pt-5 titlefont">F.A.Q</h1>
+	</div>
+	
+	<div>
+		<a href="/kflix/service" id="backhelp" class="contentfont">&lt;&lt; 고객센터 홈으로 돌아가기</a>
+	</div>
 	<div class="d-flex justify-content-between py-4">
 		<div class="px-2">
 				<input type="radio" class="btn-check" name="help_type" id="all" autocomplete="off" value="all" onclick=" typeClick(this);" checked>
@@ -102,28 +107,29 @@
 		</div>
 	</div>
 	
+<div id="userFAQView" class="">
 
-	
 	<!-- 아코디언 -->
 	<div class="accordion accordion-flush" id="help_accordion">
 	  <c:forEach items="${help }" var="i" begin="0" end="${help.size()}" varStatus="status">
 	  <div class="accordion-item ps-3">
-		    <h6 class="accordion-header contentfont" id="play-head${status.index}">
-		      <button class="accordion-button collapsed text-light bg-kflix" type="button" data-bs-toggle="collapse" 
+		    <h6 class="accordion-header contentfont" id="play-head-${status.index}">
+		      <button class="accordion-button text-light bg-kflix collapsed" type="button" data-bs-toggle="collapse" 
 		      		data-bs-target="#playcoll-${status.index}" aria-expanded="false" aria-controls="playcoll-${status.index}">
 		        <b> ${i.help_type }</b>&nbsp;&nbsp;&nbsp; ${i.help_title }
 		      </button>
 		    </h6>
 		    <div id="playcoll-${status.index}" class="accordion-collapse collapse" 
-		    	aria-labelledby="play-head${status.index}" data-bs-parent="#playaccordion">
+		    	aria-labelledby="play-head-${status.index}" data-bs-parent="#help_accordion">
 		      <div class="accordion-body">
-		      	<div class="ps-4">${i.help_content }</div>
+			      	<div class="helpcontent">${i.help_content }</div>
 		      </div>
 		    </div>
 	  </div>
 	  </c:forEach>
 	</div>
 	
+</div>
 	<!-- 페이지 네이트 -->
 	<div id="pagenate" class="pb-4">
 		<ul  class="pagination justify-content-center">	
@@ -134,9 +140,6 @@
 		<h3 class="titlefont">더 자세한 내용은 1:1로 문의하기가 가능합니다. &nbsp;&nbsp;&nbsp;</h3>
 		<a href="/kflix/inquiry" class="btn btn-secondary contentfont">1:1 문의하기</a>
 	</div>
-	
-</div>
-
 </section>
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
@@ -151,6 +154,11 @@
 <script src="/kflix/resources/js/movie/pagenate.js?ver=12"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
+var myCollapsible = document.getElementById('help_accordion')
+myCollapsible.addEventListener('show.bs.collapse', function () {
+	console.log('아코디언열림')
+})
+
 $(document).ready(function() { 
 	var len = $('#helpData').val();
 	var pnum = $('#helpPage').val();

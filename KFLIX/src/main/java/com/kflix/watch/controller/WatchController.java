@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -58,7 +59,6 @@ public class WatchController {
 	DirectorService directorservice;
 	@Autowired
 	GenreService genreservice;
-	
 
 	@GetMapping("/browse")
 	public String getbrowse(Model model, HttpSession session) {
@@ -94,7 +94,8 @@ public class WatchController {
 	@GetMapping("/btest")
 	public String btest(Model model, HttpSession session) {
 
-		model.addAttribute("Allmovie", watchservice.getAllmovie());
+		
+		
 		return "/watch/NewFile";
 		// return "/watch/NewFile";
 	}
@@ -169,7 +170,7 @@ public class WatchController {
 
 		return "/watch/search";
 	}
-	
+
 	@GetMapping(value = "/browse/newmovie")
 	public String newmovie(Model model, HttpSession session) {
 		model.addAttribute("Allmovie", watchservice.getAllmovie());
@@ -179,7 +180,7 @@ public class WatchController {
 		model.addAttribute("newmovie", watchservice.getNewmovie());
 		Member member = (Member) session.getAttribute("login");
 		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
-		
+
 		return "/watch/newmovie";
 	}
 }

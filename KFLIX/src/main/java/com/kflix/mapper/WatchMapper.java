@@ -1,7 +1,6 @@
 package com.kflix.mapper;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 import com.kflix.genre.domain.Genre;
@@ -9,7 +8,6 @@ import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
-import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
 
