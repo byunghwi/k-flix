@@ -109,6 +109,25 @@
 			pay_sid IS NOT NULL
 		AND 
 			ticket_id IS NOT NULL
+		AND 
+			ticket_id != 0
+		AND
+			to_char(pay_exp_date, 'yyyyMMdd') = to_char(sysdate, 'yyyyMMdd')
+	</select>
+
+	<select id = "scheduleDelPayMemList" resultType="com.kflix.member.domain.Member">
+		SELECT 
+				* 
+		FROM 
+			member 
+		WHERE 
+			pay_sid IS NULL
+		AND 
+			ticket_id IS NOT NULL
+		AND 
+			ticket_id != 0
+		AND
+			pay_remove_dt IS NOT NULL
 		AND
 			to_char(pay_exp_date, 'yyyyMMdd') = to_char(sysdate, 'yyyyMMdd')
 	</select>

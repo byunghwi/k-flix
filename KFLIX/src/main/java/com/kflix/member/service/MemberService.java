@@ -26,9 +26,15 @@ public interface MemberService {
 	
 	Member checkLoginBefore(String value);
 	
+	//결제 후 회원 업데이트
 	int updatePayMember(Member member);
 	
+	//정기결제 해지
 	int removePayMember(String email);
 	
+	//스케줄러 - 정기결제 회원 목록 추출
 	List<Member> schedulePayMemList();
+	
+	//스케줄러 - 해지 회원 중 만료일 도달 회원목록
+	List<Member> scheduleDelPayMemList();
 }

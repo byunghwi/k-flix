@@ -20,8 +20,16 @@
 	href="/kflix/resources/css/main/header.css">
 <link rel="stylesheet" type="text/css"
 	href="/kflix/resources/css/main/main.css">
+	
+
+<link rel="stylesheet" href="/kflix/resources/css/common/netflix-fonts.css" />
+<link rel="stylesheet" href="/kflix/resources/css/common/netflix-pulsate.css" />
 
 <style>
+* {
+font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
+		sans-serif;
+}
 #ticket_modal {
 	display: none;
 	width: 55%;
@@ -286,7 +294,7 @@
 							<hr>
 						</li>
 						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
-						<li><a href="" class="dropdown-item">내 정보</a></li>
+						<li><a href="/kflix/ticket/info" class="dropdown-item">내 정보</a></li>
 						<li><a href="/kflix/myinquiry" class="dropdown-item">1:1문의</a></li>
 						<li><a href="/kflix/service" class="dropdown-item">고객센터</a></li>
 					</ul>

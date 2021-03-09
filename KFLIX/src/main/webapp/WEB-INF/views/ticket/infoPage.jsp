@@ -17,7 +17,7 @@
 <script src="https://kit.fontawesome.com/c7adb7b803.js"
 	crossorigin="anonymous"></script>
 	
- <link href="/kflix/resources/css/ticket/ticket.css" rel="stylesheet">
+<!--  <link href="/kflix/resources/css/ticket/ticket.css" rel="stylesheet"> -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -139,61 +139,71 @@ h3 {
 
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
-<div class = "total_wrap">	
+<script>
+var removeMsg = '${removeMsg}';
+if(removeMsg === 'OK'){
+	alert('이용권 해지가 완료되었습니다.\r\n만료일까지 정상적으로 시청 가능합니다.');
+}
+</script>
 
-	<section>
-		<div class="contents_cert">
-		<h3>본인인증</h3>
-		<hr class="hr-title">
-			<table class="table-email">
-				<tr>
-					<td>본인인증 상태</td>
-					<c:choose>
-						<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
-							<td>미인증</td><td>이메일을 전송했습니다.</td>
-						</c:when>
-				
-						<c:when test="${member.cert eq 'N'}">
-							<td>미인증<td/><td><button type="button" id="sendEmail" onclick="sendEmail();">이메일 인증 보내기</button></td>
-						</c:when>
-				
-						<c:when test="${member.cert eq 'Y'}">
-							<td>인증완료</td>
-						</c:when>
-				
-					</c:choose>
-				</tr>
-			</table>
-		</div>
-		
-		<hr class="hr-divide">
-		
-		<div class="contents_ticket">
-		<h3>이용권</h3>
-		<hr class="hr-title">
-			<table class="table-ticket">
-				<tr>
-					<c:choose>
-						<c:when test="${member.ticket_id eq null || member.ticket_id eq 0}">
-							<td>이용권 없음</td>
-						</c:when>
-				
-						<c:when test="${member.ticket_id ne null && member.ticket_id ne 0 && not empty member.ticket_id}">
-							<td>${ticket.ticket_name }</td><td>${ticket.ticket_price }</td><td><fmt:formatDate value ="${member.pay_exp_date }" pattern="yyyy년 MM월 dd일"></fmt:formatDate></td><td><button id="sendEmail" onclick="removePay();">이용권 해지</button></td>
-						</c:when>		
-					</c:choose>
-				</tr>
-			</table>
-		</div>
-		
-		<hr class="hr-divide">
-		
-		<div class="contents_mem">
-			<h3>내 정보</h3>
-			<hr>
-		</div>
-		</section>
-		
+<div class = "total_wrap">	
+	<form id="del_t_form" method="POST">
+		<section>
+			<div class="contents_cert">
+			<h3>본인인증</h3>
+			<hr class="hr-title">
+				<table class="table-email">
+					<tr>
+						<td>본인인증 상태</td>
+						<c:choose>
+							<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
+								<td>미인증</td><td>이메일을 전송했습니다.</td>
+							</c:when>
+					
+							<c:when test="${member.cert eq 'N'}">
+								<td>미인증<td/><td><button type="button" id="sendEmail" onclick="sendEmail();">이메일 인증 보내기</button></td>
+							</c:when>
+					
+							<c:when test="${member.cert eq 'Y'}">
+								<td>인증완료</td>
+							</c:when>
+					
+						</c:choose>
+					</tr>
+				</table>
+			</div>
+			
+			<hr class="hr-divide">
+			
+			<div class="contents_ticket">
+			<h3>이용권</h3>
+			<hr class="hr-title">
+				<table class="table-ticket">
+					<tr>
+						<c:choose>
+							<c:when test="${member.ticket_id eq null || member.ticket_id eq 0}">
+								<td>이용권 없음</td>
+							</c:when>
+					
+							<c:when test="${member.ticket_id ne null && member.ticket_id ne 0 && not empty member.ticket_id}">
+							<input type="hidden" name="ticket" id="ticket" value="${ticket }">
+								<td>${ticket.ticket_name }</td>
+								<td>만료일 : <fmt:formatDate value ="${member.pay_exp_date }" pattern="yyyy년 MM월 dd일"></fmt:formatDate></td>
+								<td id="remove"><c:if test="${member.pay_remove_dt eq null}"><button id="sendEmail" onclick="removePay();">이용권 해지</button></c:if></td>
+							</c:when>		
+						</c:choose>
+					</tr>
+				</table>
+			</div>
+			
+			<hr class="hr-divide">
+			
+			<div class="contents_mem">
+				<h3>내 정보</h3>
+				<hr>
+			</div>
+			</section>
+		</form>
 		<footer>
 			footer
 		</footer>
@@ -217,9 +227,30 @@ h3 {
 		}
 
 		function removePay(){
-			var form = document.getElementById('form');
+ 			var form = document.getElementById('del_t_form');
 			form.action = "${pageContext.request.contextPath}/ticket/removeKakaoPay"
 			form.submit();
+
+			console.log(ticket); //티켓 잘 찍힘 
+
+/* 			$.ajax({
+				type : 'POST',
+				url : "${pageContext.request.contextPath}/ticket/removeKakaoPay",
+				dataType : "text",
+				contentType: "application/x-www-form-urlencoded; charset=utf-8",
+				data : { "A" : "A" },
+				success : function(result) {
+					if (result == "SUCCESS") {			
+						alert('이용권 해지가 완료되었습니다. 만료일까지 정상적으로 시청 가능합니다.');
+						$('#remove').remove();
+					}else {
+						alert('회원 업데이트 오류');
+					}
+				},
+				error:function(request,status,error){
+			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			    }
+			}); */
 		}
 	</script>
 </body>
