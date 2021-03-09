@@ -120,6 +120,21 @@
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="dis img1" alt="...">
+														<c:forEach items="${Ranking }" var="Ranking"
+															varStatus="status">
+															<c:if test="${Allmovie.movie_id eq Ranking.movie_id}">
+																<div class="topMark">
+																	TOP<br> <b style="font-size: 18px">10</b>
+																</div>
+
+															</c:if>
+														</c:forEach>
+														<c:forEach items="${newmovie }" var="newmovie"
+															varStatus="status">
+															<c:if test="${Allmovie.movie_id eq newmovie.movie_id}">
+																<div class="newMark">N</div>
+															</c:if>
+														</c:forEach>
 														<progress class="probar" value="${watch.view_point }"
 															max="${Allmovie.play_time * 60 }"> </progress>
 														<div class="videohover">
@@ -260,6 +275,21 @@
 													<div class="atagdiv">
 														<img style="margin: 0;" src="${Allmovie.poster_path }"
 															class="d-block dis img1" alt="...">
+														<c:forEach items="${Ranking }" var="Ranking"
+															varStatus="status">
+															<c:if test="${Allmovie.movie_id eq Ranking.movie_id}">
+																<div class="topMark">
+																	TOP<br> <b style="font-size: 18px">10</b>
+																</div>
+
+															</c:if>
+														</c:forEach>
+														<c:forEach items="${newmovie }" var="newmovie"
+															varStatus="status">
+															<c:if test="${Allmovie.movie_id eq newmovie.movie_id}">
+																<div class="newMark">N</div>
+															</c:if>
+														</c:forEach>
 														<div class="videohover">
 															<img style="margin: 0;" src="${Allmovie.poster_path }"
 																class="modalimg" alt="...">
@@ -394,6 +424,16 @@
 										<div class="atagdiv">
 											<img style="margin: 0;" src="${newmovie.poster_path }"
 												class="d-block dis img1" alt="...">
+											<c:forEach items="${Ranking }" var="Ranking"
+												varStatus="status">
+												<c:if test="${newmovie.movie_id eq Ranking.movie_id}">
+													<div class="topMark">
+														TOP<br> <b style="font-size: 18px">10</b>
+													</div>
+
+												</c:if>
+											</c:forEach>
+											<div class="newMark">N</div>
 											<div class="videohover">
 												<img style="margin: 0;" src="${newmovie.poster_path }"
 													class="modalimg" alt="...">
@@ -523,6 +563,16 @@
 										<div class="atagdiv">
 											<img style="margin: 0;" src="${Ranking.poster_path }"
 												class="d-block dis img1" alt="...">
+											<div class="topMark">
+												TOP<br> <b style="font-size: 18px">10</b>
+											</div>
+
+											<c:forEach items="${newmovie }" var="newmovie"
+												varStatus="status">
+												<c:if test="${Ranking.movie_id eq newmovie.movie_id}">
+													<div class="newMark">N</div>
+												</c:if>
+											</c:forEach>
 											<div class="videohover">
 												<img style="margin: 0;" src="${Ranking.poster_path }"
 													class="modalimg" alt="...">
@@ -660,6 +710,21 @@
 															<div class="atagdiv">
 																<img src="${Allmovie.poster_path }" class="dis img1"
 																	alt="...">
+																<c:forEach items="${Ranking }" var="Ranking"
+																	varStatus="status">
+																	<c:if test="${Allmovie.movie_id eq Ranking.movie_id}">
+																		<div class="topMark">
+																			TOP<br> <b style="font-size: 18px">10</b>
+																		</div>
+
+																	</c:if>
+																</c:forEach>
+																<c:forEach items="${newmovie }" var="newmovie"
+																	varStatus="status">
+																	<c:if test="${Allmovie.movie_id eq newmovie.movie_id}">
+																		<div class="newMark">N</div>
+																	</c:if>
+																</c:forEach>
 																<div class="videohover">
 																	<img style="margin: 0;" src="${Allmovie.poster_path }"
 																		class="modalimg" alt="...">

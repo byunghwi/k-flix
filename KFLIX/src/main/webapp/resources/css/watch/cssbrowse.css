@@ -14,23 +14,24 @@
 	padding: 0;
 	user-select: none;
 }
+
 .probar {
-   width: 229px;
-    height: 2px;
-    background-color: #e9ecef;
-    position: absolute;
-    border-radius: .25rem;
-    bottom: -15px;
-    left: 40px;
+	width: 229px;
+	height: 2px;
+	background-color: #e9ecef;
+	position: absolute;
+	border-radius: .25rem;
+	bottom: -15px;
+	left: 40px;
 }
 
 .logout {
-    position: absolute;
-    top: 6px;
-    left: 12px;
-    color: black;
-    font-size: 25px;
-    cursor: pointer;
+	position: absolute;
+	top: 6px;
+	left: 12px;
+	color: black;
+	font-size: 25px;
+	cursor: pointer;
 }
 
 progress::-webkit-progress-value {
@@ -79,7 +80,7 @@ body {
 	left: 0;
 	box-shadow: 0px 55px 42px 250px #141414;
 	max-width: 100%;
-	 height: inherit;
+	height: inherit;
 }
 
 .flexnowr {
@@ -221,7 +222,7 @@ ul {
 .videohover {
 	opacity: 0;
 	visibility: hidden;
-	display:none;
+	display: none;
 	transition: all 0.5s;
 	position: absolute;
 	background-color: #141414;
@@ -282,8 +283,6 @@ ul {
 	color: gray;
 }
 
-
-
 th, td {
 	padding: 2px 0;
 }
@@ -336,6 +335,7 @@ th, td {
 	float: left;
 	margin-right: 10px;
 }
+
 a:link {
 	color: white;
 	text-decoration: none;
@@ -355,6 +355,40 @@ a:hover {
 a:active {
 	color: white;
 	text-decoration: none;
+}
+
+.topMark {
+	position: absolute;
+	right: 0px;
+	top: 0;
+	background-color: white;
+	color: #ed2927;
+	width: 12%;
+	line-height: 1;
+	text-align: center;
+	font-size: 11px;
+	padding: 2% 0;
+	height: 22%;
+	border-top-right-radius: 0.5rem;
+	border-bottom-left-radius: 0.2rem;
+	box-shadow: 0px 0px 2px #f9ff00;
+}
+
+.newMark {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: white;
+	color: #ed2927;
+	width: 12%;
+	text-align: center;
+	font-size: 24px;
+	padding: 1% 0;
+	height: 22%;
+	border-top-left-radius: 0.5rem;
+	border-bottom-right-radius: 0.2rem;
+	font-weight: 900;
+	box-shadow: 0px 0px 2px white;
 }
 
 [class^="pagenum"] {
