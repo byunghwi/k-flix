@@ -150,12 +150,8 @@
 						</div>
 					</div>
 
-
-
-
 					<div id="contents">
-						<p
-							style="display: inline-block; font-weight: bold; font-size: 25px">비슷한
+						<p style="display: inline-block; font-weight: bold; font-size: 25px">비슷한
 							콘텐츠</p>
 						<div class="min_contents container">
 							<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">

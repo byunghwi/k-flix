@@ -207,7 +207,13 @@ a:active {
 .searchdiv {
 	width: 300px;
 	display: inline-block;
-	margin: 10px;
+	margin: 12px 20px;
+}
+
+h6{
+	font-size: 1.05rem;
+    padding: 5px;
+    text-shadow: 10px 0px 20px #ed292759;
 }
 
 #searchresult {

@@ -110,6 +110,21 @@
 											style="width: 100%; height: 150px; border-radius: 2% 2% 0 0;"
 											src="${Allmovie.poster_path }" class="d-block dis hoverimg"
 											alt="...">
+											<c:forEach items="${Ranking }" var="Ranking"
+												varStatus="status">
+												<c:if test="${Allmovie.movie_id eq Ranking.movie_id}">
+													<div class="topMark">
+														TOP<br> <b style="font-size: 18px">10</b>
+													</div>
+
+												</c:if>
+											</c:forEach>
+											<c:forEach items="${newmovie }" var="newmovie"
+												varStatus="status">
+												<c:if test="${Allmovie.movie_id eq newmovie.movie_id}">
+													<div class="newMark">N</div>
+												</c:if>
+											</c:forEach>
 										<div class="imghover"
 											style="position: resize; width: 100%; top: 0; left: 0; bottom: 0; z-index: 10; background-color: rgba(255, 255, 255, 0);">
 											<div

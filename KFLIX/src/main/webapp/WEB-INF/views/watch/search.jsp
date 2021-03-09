@@ -48,7 +48,7 @@
 	<div id="searchresult">
 
 		<c:if test="${empty Searchlist}">
-			<h3 style="margin: 30px 10px;">"${searchValue }"에 대한 검색결과가 없습니다.</h3>
+			<h3 style="margin: 30px 10px; ">"${searchValue }"에 대한 검색결과가 없습니다.</h3>
 		</c:if>
 		<c:if test="${not empty Searchlist}">
 			<h3 style="margin: 30px 10px;">"${searchValue }"로 검색한 결과 입니다.</h3>
