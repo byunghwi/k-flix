@@ -243,7 +243,7 @@
 						aria-expanded="false" style="padding: 0; border: 0;">
 
 						<i class="fas color_white fa-bell"></i>
-						<c:if test="${alarm.alarm_count != 0}">
+						<c:if test="${not empty alarm.alarm_count and alarm.alarm_count != 0 }">
 							<span
 								style="font-size: 11px; background-color: #ed2927; padding: 0 4px; border-radius: 50rem; position: relative; top: -8px; right: 12px; color: white;">${alarm.alarm_count }<!-- 신규 카운트 -->
 							</span>
@@ -251,8 +251,7 @@
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop_bell">
 						<li style="font-size: 14px"><a id="newmovie_update"
-							href="/kflix/browse/newmovie" class="dropdown-item">신규 콘텐츠 <c:if
-									test="${alarm.alarm_count != 0}">
+							href="/kflix/browse/newmovie" class="dropdown-item">신규 콘텐츠 <c:if test="${not empty alarm.alarm_count and alarm.alarm_count != 0 }">
 									<span class="arum"
 										style="float: right; background-color: #ed2927; padding: 0 11px; border-radius: 50rem;">
 										${alarm.alarm_count } <!-- 신규 카운트 -->
@@ -479,7 +478,6 @@
     newmovie_update.addEventListener("click", function(e) {
 		var data = {
 			email : "${login.email}",
-			alarm_date : "${today}",
 			alarm_count : 0
 		}
 

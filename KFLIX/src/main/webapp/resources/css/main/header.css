@@ -113,23 +113,23 @@ header {
 }
 
 a:link {
-	color: #e5e5e5;
+	color: white;
 	text-decoration: none;
 }
 
 a:visited {
-	color: #e5e5e5;
+	color: white;
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: none;
 	cursor: pointer;
-	color: #b3b3b3;
+	color: white;
 }
 
 a:active {
-	color: #e5e5e5;
+	color: white;
 	text-decoration: none;
 }
 

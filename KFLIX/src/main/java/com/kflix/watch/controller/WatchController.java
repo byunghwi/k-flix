@@ -60,8 +60,6 @@ public class WatchController {
 	GenreService genreservice;
 	
 
-	LocalDate max_day = LocalDate.now();
-
 	@GetMapping("/browse")
 	public String getbrowse(Model model, HttpSession session) {
 
@@ -89,7 +87,6 @@ public class WatchController {
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("movie_genre", movie_genre);
-		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		model.addAttribute("member", watchservice.checkTicket(member.getEmail()));
 		return "/watch/browse";
 	}
@@ -138,7 +135,6 @@ public class WatchController {
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
 		model.addAttribute("getwish", watchservice.getSelectWishUser(member.getEmail(), movie_id));
 		model.addAttribute("getlike", watchservice.getSelectLikeUser(member.getEmail(), movie_id));
-		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		return "/watch/movieInfo";
 	}
 
@@ -154,8 +150,6 @@ public class WatchController {
 		model.addAttribute("watch", watchservice.getSelectWatch(member.getEmail()));
 		model.addAttribute("email", member.getEmail());
 		model.addAttribute("watching", watchservice.getSelectWatchUser(member.getEmail(), movie_id));
-		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		return "/watch/video";
 	}
 
@@ -168,7 +162,6 @@ public class WatchController {
 		model.addAttribute("searchValue", searchValue);
 		model.addAttribute("Searchlist", watchservice.getSearch(searchValue));
 		Member member = (Member) session.getAttribute("login");
-		model.addAttribute("email", member.getEmail());
 		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		for (MovieVO vo : watchservice.getSearch(searchValue)) {
 			System.out.println(vo.getMovie_id());
@@ -184,9 +177,7 @@ public class WatchController {
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("newmovie", watchservice.getNewmovie());
-		model.addAttribute("today", max_day.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		Member member = (Member) session.getAttribute("login");
-		model.addAttribute("email", member.getEmail());
 		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		
 		return "/watch/newmovie";
