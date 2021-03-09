@@ -20,4 +20,12 @@ public interface ManageService {
 	public List<MemberView> getPageMemView(int page, int amount);
 	
 	public int changeRecommend(Ticket ticket);
+	
+	public int changeStatus(Ticket ticket);
+	
+	public int changeTicket(Ticket ticket);
+	
+	public int addTicket(Ticket ticket);
+	
+	public List<Ticket> ticketViewAll();
 }

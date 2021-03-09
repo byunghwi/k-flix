@@ -21,6 +21,9 @@
 	.amount {
 		width: 150px;
 	}
+	tbody>tr {
+		height: 55px;
+	}
 	thead>tr> th:nth-child(1){
 		width: 150px;
 	}
@@ -34,10 +37,30 @@
 	thead>tr> th:nth-child(5){
 		width: 150px;
 	}
+	
+	#tk_table>tbody>tr>td:nth-child(4){
+		color: white;
+		font-weight: bolder;
+	}
+	
+	#tk_table>tbody>tr>td:nth-child(4)>span{
+		border: 2px solid;
+		border-radius: 5px;
+		padding: 10px;
+		border-color: #2929fa;
+		background-color: #2929fa;
+	}
+	
+	#tk_table>tbody>tr>td:nth-child(4)>span:hover{
+		cursor:pointer;
+	}
+	
 	#tk_table>tbody>tr>td:nth-child(1){
 		color: #7575ff;
 		font-weight: bolder;
 	}
+	
+	
 	#tk_table>tbody>tr>td:nth-child(1)>span{
 		border: 1px #7575ff solid;
 		border-radius: 5px;
@@ -46,9 +69,6 @@
 	
 	#tk_table>tbody>tr>td:nth-child(1)>span:hover{
 		cursor: pointer;
-		border: 1px #7575ff solid;
-		border-radius: 5px;
-		padding: 10px;
 		background-color: #7575ff;
 		color: white;
 	}
@@ -96,10 +116,10 @@
 		<tbody>
 			<c:forEach items="${ticket }" begin="0" end="${ticket.size() }" var="i" varStatus="status">
 			<tr>
-				<td><span onclick="getTicketId(${i.ticket});">${i.ticket_id }</span></td>
+				<td><span onclick="getTicketId(${i.ticket_id }, '${i.ticket_name}', ${i.ticket_period }, ${i.ticket_price });">${i.ticket_id }</span></td>
 				<td>${i.ticket_name }</td>
 				<td>${i.ticket_price }</td>
-				<td>${i.ticket_status }</td>
+				<td><span onclick="stat(this, ${i.ticket_id})">${i.ticket_status }</span></td>
 				<c:choose>
 					<c:when test="${empty i.ticket_recommend  || i.ticket_recommend eq 'N'}">
 						<td onclick="recommend(this, ${i.ticket_id});"><button class="btn btn-outline-danger" ><i class="far fa-thumbs-down"></i></button></td>
@@ -153,7 +173,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="ticketAdd();">추가</button>
+        <button type="button" class="btn btn-primary" onclick="ticketUpdate();">수정</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
       </div>
     </div>
@@ -206,11 +226,74 @@
 <script src="/kflix/resources/js/movie/pagenate.js?ver=12"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
-function getTicketId(obj) {
-	alert(obj)
-/* 	var updateId = parseInt($(obj).html());
-	$('#update_ticket_id').val(updateId);
-	$('#ticket_update').modal('show'); */
+function stat(st, id){
+	var status = $(st);
+	console.log(status.html())
+	console.log(id)
+	if (status.html() == 'Y'){
+		status.html('N');
+		status.css('border-color', 'red')
+		status.css('background-color', 'red')
+
+	} else if (status.html() == 'N'){
+		status.html('Y');
+		status.css('border-color', '#2929fa')
+		status.css('background-color', '#2929fa')
+	}
+	
+	var delete_data = {
+			ticket_id: id,
+			ticket_status: status.html()
+	}
+	
+	$.ajax({
+		type: "PATCH",
+		url: "/kflix/changeTicketStatus",
+		data: JSON.stringify(delete_data),
+		contentType: 'application/json',
+		success: function(data){console.log(data)},
+		error: function(){infoMsg('불러오기 실패!')},
+		complete: function(){$('#ticket_update').modal('hide');}
+	})
+	
+}
+
+function getTicketId(id, name, period, price) {
+	$('#update_ticket_id').val(id)
+	$('#update_ticket_name').val(name)
+	$('#update_ticket_period').val(period)
+	$('#update_ticket_price').val(price)
+
+	$('#ticket_update').modal('show');
+
+}
+
+function ticketUpdate() {
+	var ticket_data = {
+			ticket_id: $('#update_ticket_id').val(),
+			ticket_name: $('#update_ticket_name').val(),
+			ticket_period: $('#update_ticket_period').val(),
+			ticket_price: $('#update_ticket_price').val()
+	}
+
+	
+	$.ajax({
+		type: "PATCH",
+		url: "/kflix/updateTicket",
+		data: JSON.stringify(ticket_data),
+		contentType: 'application/json',
+		success: function(data){
+ 			var len = data.len
+ 			var pnum = 1
+ 			var amount = parseInt($('#helpAmount').val())
+  			
+ 			makePageNate(len, pnum, amount);
+  			location.reload();
+		},
+		error: function(){infoMsg('불러오기 실패!')},
+		complete: function(){$('#ticket_update').modal('hide');}
+	})
+	
 }
 
 
@@ -222,13 +305,38 @@ function ticketAdd() {
 			ticket_price: $('#add_ticket_price').val()
 	}
 	
-	console.log(JSON.stringify(ticket_data))
+	$.ajax({
+		type: "PATCH",
+		url: "/kflix/addTicket",
+		data: JSON.stringify(ticket_data),
+		contentType: 'application/json',
+		success: function(data){
+ 			var len = data.len
+ 			var pnum = 1
+ 			var amount = parseInt($('#helpAmount').val())
+
+   			var table = $('#tk_table>tbody');
+ 			data.tk.ticket_recommend = '<td onclick="norecommend(this, ' + data.tk.ticket_id + ');"><button class="btn btn-danger"><i class="fas fa-thumbs-up"></i></button></td>'
+		
+			table.prepend('<tr>'
+					+'<td><span onclick="getTicketId(' + data.tk.ticket_id + ', \'' + data.tk.ticket_name + '\', ' + data.tk.ticket_period + ', ' + data.tk.ticket_price + ');">' + data.tk.ticket_id + '</span></td>'
+					+'<td>' + data.tk.ticket_name + '</td>'
+					+'<td>' + data.tk.ticket_price + '</td>'
+					+'<td><span onclick="stat(this, ' + data.tk.ticket_id + ')">' + data.tk.ticket_status + '</span></td>'
+					+ data.tk.ticket_recommend +
+					+'</tr>');
+ 	
+ 			makePageNate(len, pnum, amount);
+		},
+		error: function(){infoMsg('불러오기 실패!')},
+		complete: function(){$('#ticket_add').modal('hide');}
+	})
 }
 
 
 
 $('#addBtn').click(function(){
-	var lastId = parseInt($('#tk_table>tbody>tr:last-child>td>span').html()) + 1;
+	var lastId = parseInt($('#tk_table>tbody>tr:first-child>td>span').html()) + 1;
 	$('#add_ticket_id').val(lastId);
 })
 
@@ -279,6 +387,17 @@ function recommendChange(input_data) {
 $(document).ready(function() {
 	$('#ticket_').prepend('<span class="nav-clicked"></span>');
 	makePageNate(${total}, ${page}, ${amount});
+	
+	for(var i = 0; i < ${total}; i++){
+		var status = $('#tk_table>tbody>tr:nth-child('+(i+1)+')>td:nth-child(4)>span');
+		if (status.html() == 'N'){
+			// status.attr('style', 'background-color: red; border-color: red;')
+			status.css('background-color', 'red');
+			status.css('border-color', 'red');
+		} else if (status.html() == 'Y'){
+			status.attr('style', 'border-color: #2929fa; background-color: #2929fa;')
+		}
+	}
 });
 
 // alert
@@ -300,7 +419,6 @@ $('#helpAmount').change(function(){
 			amount: parseInt($('#helpAmount').val())
 		}),
 		contentType: 'application/json',
-		global: false,
  		success: function(data){
  			var len = data.len
  			var pnum = data.pagenation.page
@@ -328,7 +446,6 @@ function pageClick(pnum) {
 			amount: parseInt($('#helpAmount').val())
 		}),
 		contentType: 'application/json',
-		global: false,
  		success: function(data){
  			var len = data.len
  			var pnum = data.pagenation.page
@@ -355,12 +472,26 @@ function makeTable(data, amount) {
 	
 	try{
 		for	(var i = 0; i < amount; i++) {
+			
+			if (data[i].ticket_recommend == null || data[i].ticket_recommend == 'N'){
+				data[i].ticket_recommend = '<td onclick="recommend(this, ' + data[i].ticket_id + ');"><button class="btn btn-outline-danger" ><i class="far fa-thumbs-down"></i></button></td>'			
+			} else {
+				data[i].ticket_recommend = '<td onclick="norecommend(this, ' + data[i].ticket_id + ');"><button class="btn btn-danger"><i class="fas fa-thumbs-up"></i></button></td>'
+			}
+			
+			if(data[i].ticket_status == null || data[i].ticket_status == 'N') {
+				data[i].ticket_status = '<td><span onclick="stat(this, ' + data[i].ticket_id + ')" style="background-color: red; border-color: red;">' + data[i].ticket_status + '</span></td>'
+			} else {
+				data[i].ticket_status = '<td><span onclick="stat(this, ' + data[i].ticket_id + ')" style="background-color: #2929fa; border-color: #2929fa;">' + data[i].ticket_status + '</span></td>'
+			}
+			
+			
 			table.append('<tr>'
-					+'<td>' + data[i].ticket_id + '</td>'
+					+'<td><span onclick="getTicketId(' + data[i].ticket_id + ', \'' + data[i].ticket_name + '\', ' + data[i].ticket_period + ', ' + data[i].ticket_price + ');">' + data[i].ticket_id + '</span></td>'
 					+'<td>' + data[i].ticket_name + '</td>'
 					+'<td>' + data[i].ticket_price + '</td>'
-					+'<td>' + data[i].ticket_status + '</td>'
-					+'<td>' + data[i].ticket_recommend + '</td>'
+					+ data[i].ticket_status 
+					+ data[i].ticket_recommend 
 					+'</tr>');
 			
 		}

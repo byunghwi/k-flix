@@ -317,7 +317,7 @@ $(document).ready(function() {
 			            data: dataList,
 			            backgroundColor: 'rgb(250,89,89)',
 			            borderColor: 'rgb(250,89,89)',
-			            barThickness: 40
+			            barThickness: 25
 			        }]
 			    },
 			    options: { 

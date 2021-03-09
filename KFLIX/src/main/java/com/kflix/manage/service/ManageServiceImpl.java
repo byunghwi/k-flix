@@ -48,4 +48,24 @@ public class ManageServiceImpl implements ManageService {
 		return mg_mapper.updateTicketRecommend(ticket);
 	}
 
+	@Override
+	public int changeStatus(Ticket ticket) {
+		return mg_mapper.updateTicketStatus(ticket);
+	}
+	
+	@Override
+	public int changeTicket(Ticket ticket) {
+		return mg_mapper.updateTicket(ticket);
+	}
+
+	@Override
+	public int addTicket(Ticket ticket) {
+		return mg_mapper.insertTicket(ticket);
+	}
+	
+	@Override
+	public List<Ticket> ticketViewAll() {
+		return mg_mapper.ticketViewAll();
+	}
+
 }

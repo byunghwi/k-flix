@@ -21,4 +21,12 @@ public interface ManageMapper {
 	List<MemberView> selectPageMemView(@Param("page") int page, @Param("amount") int amount);	
 
 	int updateTicketRecommend(Ticket ticket);
+	
+	int updateTicketStatus(Ticket ticket);
+	
+	int insertTicket(Ticket ticket);
+	
+	int updateTicket(Ticket ticket);
+	
+	List<Ticket> ticketViewAll();
 }

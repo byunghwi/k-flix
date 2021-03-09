@@ -38,4 +38,20 @@
 	<update id="updateTicketRecommend">
 		UPDATE ticket SET ticket_recommend = #{ticket_recommend} WHERE ticket_id = #{ticket_id}
 	</update>
+	
+	<update id="updateTicketStatus">
+		UPDATE ticket SET ticket_status = #{ticket_status} WHERE ticket_id = #{ticket_id}
+	</update>
+	
+	<insert id="insertTicket">
+		insert into ticket values(#{ticket_id}, #{ticket_name}, #{ticket_period}, #{ticket_price}, 'Y', 'Y')
+	</insert>
+	
+	<update id="updateTicket">
+		UPDATE ticket SET ticket_name = #{ticket_name}, ticket_period = #{ticket_period}, ticket_price = #{ticket_price} WHERE ticket_id = #{ticket_id} 
+	</update>
+	
+	<select id="ticketViewAll" resultType="com.kflix.ticket.domain.Ticket">
+		SELECT * FROM ticket ORDER BY ticket_id DESC
+	</select>
 </mapper>
