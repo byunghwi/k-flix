@@ -1,5 +1,6 @@
 package com.kflix.manage.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import com.kflix.manage.domain.MemberView;
 import com.kflix.manage.domain.TicketBoard;
 import com.kflix.manage.service.ManageService;
 import com.kflix.movie.service.MovieService;
+import com.kflix.ticket.domain.Ticket;
 import com.kflix.ticket.service.TicketService;
 import com.kflix.util.pagenation.domain.PageNation;
 
@@ -110,4 +112,15 @@ public class ManageController {
 		return list;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/changeTicketReco", method=RequestMethod.PATCH, consumes = "application/json", produces = "application/json; charset=UTF-8")
+	public List<String> ticketChangeRecommend(@RequestBody Ticket ticket){
+		System.out.println("================== ticketChangeRecommend");
+		String msg = "성공";
+		List<String> list = new ArrayList<>();
+		list.add(msg);
+		System.out.println("티켓 아이디 : "+ticket.getTicket_id());
+		System.out.println("추천 여부 : "+ticket.getTicket_recommend());
+		return list;
+	}
 }

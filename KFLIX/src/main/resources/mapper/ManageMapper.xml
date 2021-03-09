@@ -22,11 +22,11 @@
 	
 	<select id="selectPageMemView" resultType="com.kflix.manage.domain.MemberView">
 		SELECT 
-			 email, nick, gender, member_age, cert, ticket_name, join_date, ban, save_status
+			 email, nick, gender, member_age, cert, ticket_name, join_date, ban, pay_sid, save_status
 		FROM 
-		(SELECT SEQ, email, nick, gender, member_age, cert, ticket_name, join_date, ban, save_status
+		(SELECT SEQ, email, nick, gender, member_age, cert, ticket_name, join_date, ban, pay_sid, save_status
 		    FROM
-		    	(SELECT ROWNUM AS SEQ, email, nick, gender, member_age, cert, ticket_name, join_date, ban, save_status
+		    	(SELECT ROWNUM AS SEQ, email, nick, gender, member_age, cert, ticket_name, join_date, ban, pay_sid, save_status
 		    	FROM
 		        	(select * from member_view)
 		    	)

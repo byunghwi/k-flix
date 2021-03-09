@@ -78,7 +78,14 @@
 				<td>${i.ticket_name }</td>
 				<td>${i.ticket_price }</td>
 				<td>${i.ticket_status }</td>
-				<td>${i.ticket_recommend }</td>
+				<c:choose>
+					<c:when test="${empty i.ticket_recommend  || i.ticket_recommend eq 'N'}">
+						<td onclick="recommend(this, ${i.ticket_id});"><button class="btn btn-outline-danger" ><i class="far fa-thumbs-down"></i></button></td>
+					</c:when>
+					<c:otherwise>
+						<td onclick="norecommend(this, ${i.ticket_id});"><button class="btn btn-danger"><i class="fas fa-thumbs-up"></i></button></td>
+					</c:otherwise>
+				</c:choose>
 			</tr>
 			</c:forEach>
 		</tbody>	
@@ -106,6 +113,47 @@
 <script src="/kflix/resources/js/movie/pagenate.js?ver=12"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
+var recomend = ''; 
+function recommend(obj, ticketId) {
+	var id = ticketId;
+	recomend = $(obj);
+	recomend.html('<button class="btn btn-danger"><i class="fas fa-thumbs-up"></i></button>')
+	recomend.removeAttr("onclick")
+	recomend.attr("onclick", "norecommend(this, "+id+");");
+	
+	var input_data = {
+		ticket_id: ticketId,
+		ticket_recommend: "Y"
+	}
+	recommendChange(input_data)
+}
+
+function norecommend(obj, ticketId) {
+	var id = ticketId;
+	recomend = $(obj);
+	recomend.html('<button class="btn btn-outline-danger"><i class="far fa-thumbs-down"></i></button>')
+	recomend.removeAttr("onclick")
+	recomend.attr("onclick", "recommend(this, "+id+");");
+	
+	var input_data = {
+			ticket_id: ticketId,
+			ticket_recommend: "N"
+	}
+	recommendChange(input_data)
+}
+
+
+function recommendChange(input_data) {
+	$.ajax({
+		type: "PATCH",
+		url: "/kflix/changeTicketReco",
+		data: JSON.stringify(input_data),
+		contentType: 'application/json',
+		success: function(result){console.log(result + ' DB, 게시판 새로고침 확인')},
+		error: function(request){console.log('실패 : ' + request.status)}
+	})
+}
+
 //로딩시 페이징
 $(document).ready(function() {
 	makePageNate(${total}, ${page}, ${amount});
