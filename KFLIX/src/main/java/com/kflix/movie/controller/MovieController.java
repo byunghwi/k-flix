@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kflix.actor.service.ActorService;
 import com.kflix.director.service.DirectorService;
@@ -99,10 +100,10 @@ public class MovieController {
 	// 등록 입력 값 넘기기 , 등록 성공 / 실패 체크 추가하기	
 	@PostMapping("add")
 	public String addMovie(Model model, Movie movie, 
-				MultipartFile poster, MultipartFile teaser, MultipartFile video) {
+				MultipartFile poster, MultipartFile teaser, MultipartFile video, RedirectAttributes rttr) {
 		
 		log.info("======== add Controller ========");
-		String msg = "파일 업로드에 실패하였습니다. 다시 한번 확인해주세요";
+		String addmsg = "파일 업로드에 실패하였습니다. 다시 한번 확인해주세요";
 		//날짜 체크 , 파일 유효성 체크
 		if(mv_service.checkDate(movie) 
 				&& upload_service.checkExtAll(poster, teaser, video)
@@ -117,7 +118,7 @@ public class MovieController {
 			int db_result = mv_service.insertNewMovie(movie);
 
 			if (db_result > 0 && upload_result) {
-				msg = "등록하였습니다!";
+				addmsg = "등록하였습니다!";
 				
 			} else {
 				upload_service.fileDelete(poster, teaser, video, movie);
@@ -125,8 +126,8 @@ public class MovieController {
 			}
 		}
 		
-		model.addAttribute("msg", msg);
-		return "movie/result";
+		rttr.addFlashAttribute("addcheck", addmsg);
+		return "redirect:/movie/movieindex";
 	}
 
 	
@@ -163,10 +164,10 @@ public class MovieController {
 	
 	@PostMapping("update")
 	public String update(Model model, Movie movie,
-						MultipartFile poster, MultipartFile teaser, MultipartFile video) {
+						MultipartFile poster, MultipartFile teaser, MultipartFile video, RedirectAttributes rttr) {
 	
 		log.info("======== update Controller ========");
-		String msg = "수정에 실패하였습니다. 다시 한번 확인해주세요";
+		String updateMsg = "수정에 실패하였습니다. 다시 한번 확인해주세요";
 		// 날짜 체크
 		if (mv_service.checkDate(movie)
 				&& upload_service.checkOverLaps(poster, teaser, video, movie)) {
@@ -183,14 +184,14 @@ public class MovieController {
 			
 			if (db_result > 0 && upload_result) {
 				
-				msg = "수정 되었습니다.";				
+				updateMsg = "수정 되었습니다.";				
 			} else {
 
 			}
 		}
-		model.addAttribute("msg", msg);
+		rttr.addFlashAttribute("udpateCheck", updateMsg);
 
-		return "movie/result";
+		return "redirect:/movie/movieindex";
 	}
 
 }

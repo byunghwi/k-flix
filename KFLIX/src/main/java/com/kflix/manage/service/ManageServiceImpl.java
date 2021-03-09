@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kflix.manage.domain.MemberGender;
+import com.kflix.manage.domain.MemberView;
 import com.kflix.manage.domain.TicketBoard;
 import com.kflix.mapper.ManageMapper;
 
@@ -29,6 +30,16 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public List<MemberGender> getMemberGender() {
 		return mg_mapper.getMemberGender();
+	}
+
+	@Override
+	public List<MemberView> getMemberView() {
+		return mg_mapper.selectMemberView();
+	}
+
+	@Override
+	public List<MemberView> getPageMemView(int page, int amount) {
+		return mg_mapper.selectPageMemView(page, amount);
 	}
 
 }

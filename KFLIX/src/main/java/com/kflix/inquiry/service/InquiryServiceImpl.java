@@ -158,6 +158,16 @@ public class InquiryServiceImpl implements InquiryService {
 		return strLength;
 
 	}
+
+	@Override
+	public List<Inquiry> getInqByEmail(PageNation pagenation, Inquiry inquiry, String status) {
+		return in_mapper.selectInqByEmail(pagenation.getPage(), pagenation.getAmount(), inquiry.getEmail(), inquiry.getInquiry_type(), status);
+	}
+
+	@Override
+	public int selectUserInqCnt(String email, String type, String status) {
+		return in_mapper.selectUserInqCnt(email, type, status);
+	}
 	
 }
 

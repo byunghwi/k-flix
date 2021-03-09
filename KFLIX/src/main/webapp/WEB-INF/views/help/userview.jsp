@@ -9,46 +9,60 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/kflix/resources/css/movie/netflix-fonts.css" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/netflix-pulsate.css" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 <title>Insert title here</title>
 <style>
-	.accordion-body{
-		background-color: rgb(231,241,255);
+	body{
+		background-color: rgb(20,20,20);
+		
 	}
-	.contentfont{
-		font-family: 'Jua', sans-serif;
+	.accordion-button:focus {
+    	outline: none;
+    	border: none;
+    	box-shadow: 0 0 0 0;
 	}
 	#headArea{
-		background-image: url('/kflix/resources/imgs/service/servicehead.jpg');
 		height: 200px;
 		background-size: 100% 200px;
 		text-align: center;
 
 	}
 	#userFAQView{
-		background-color: rgb(234,234,234);
-	}
-	#inqBtn, #titleArea{
-		background-color: lightgray;
-	}
-	.titlefont {	
-		font-family: 'Black Han Sans', sans-serif;
-	}
-	b{
-		font-size: 20px;
+		color: white;
 	}
 	
 	#faqArea{
 		width: 1200px;
-		background-color: rgb(234,234,234);
+		margin-left: calc(50% - 600px);
+		margin-top: 75px;
+		color: white;
 	}
 	
 	#backhelp{
 		color: red;
 		text-decoration: none;
+	}
+	
+	.bg-kflix{
+		background-color: rgb(20,20,20)!important; 
+	}
+	
+	.accordion-button::after {
+		background-image: url(/kflix/resources/imgs/service/down-arrow.png)!important;
+	}
+	
+	#help_accordion{
+		overflow: auto;
+		height: 650px;
+	}
+	b{
+		width:150px;
+		text-align: center;
+		font-size: 20px;
 	}
 </style>
 </head>
@@ -56,16 +70,16 @@
 <input id="helpData" type="hidden" value="${total }"/>
 <input id="helpPage" type="hidden" value="${page }"/>
 
-<section id="faqArea">
+<section id="faqArea" class="netflix-sans-font-loaded">
 
 
 <div id="headArea">
-	<h1 class="pt-5 titlefont">FAQ</h1>
+	<h1 class="pt-5 titlefont">F.A.Q</h1>
 </div>
 
 <div id="userFAQView">
 
-<div class="pt-3">
+<div>
 	<a href="/kflix/service" id="backhelp" class="contentfont">&lt;&lt; 고객센터 홈으로 돌아가기</a>
 </div>
 	<div class="d-flex justify-content-between py-4">
@@ -92,10 +106,26 @@
 	
 	<!-- 아코디언 -->
 	<div class="accordion accordion-flush" id="help_accordion">
+	  <c:forEach items="${help }" var="i" begin="0" end="${help.size()}" varStatus="status">
+	  <div class="accordion-item ps-3">
+		    <h6 class="accordion-header contentfont" id="play-head${status.index}">
+		      <button class="accordion-button collapsed text-light bg-kflix" type="button" data-bs-toggle="collapse" 
+		      		data-bs-target="#playcoll-${status.index}" aria-expanded="false" aria-controls="playcoll-${status.index}">
+		        <b> ${i.help_type }</b>&nbsp;&nbsp;&nbsp; ${i.help_title }
+		      </button>
+		    </h6>
+		    <div id="playcoll-${status.index}" class="accordion-collapse collapse" 
+		    	aria-labelledby="play-head${status.index}" data-bs-parent="#playaccordion">
+		      <div class="accordion-body">
+		      	<div class="ps-4">${i.help_content }</div>
+		      </div>
+		    </div>
+	  </div>
+	  </c:forEach>
 	</div>
 	
 	<!-- 페이지 네이트 -->
-	<div id="pagenate">
+	<div id="pagenate" class="pb-4">
 		<ul  class="pagination justify-content-center">	
 		</ul>
 	</div>
@@ -125,10 +155,7 @@ $(document).ready(function() {
 	var len = $('#helpData').val();
 	var pnum = $('#helpPage').val();
 	var amount = $('#helpAmount').val();
-	var type = 'GET';
-	var url = '/kflix/FAQ/user';
-	var data = '';
-	ajax(type, url, data, pnum)
+	makePageNate(len, pnum, amount);
 });
 
 
@@ -159,7 +186,7 @@ $('#helpAmount').change(function(){
 	var type = "POST";
 	var url = "/kflix/FAQ/user";
 	var data = JSON.stringify({
-		help_type: $('input[name="help_type"]').val()
+		help_type: $('input[name="help_type"]:checked').val()
 	});
 	
 	ajax(type, url, data, pnum);
@@ -215,7 +242,7 @@ function makeTable(data, pnum, amount) {
 			table.append(
 					'<div class="accordion-item ps-3">'
 					+'<h6 class="accordion-header contentfont" id="help-head' + i + '">'
-					+'<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"' 
+					+'<button class="accordion-button text-light bg-kflix collapsed" type="button" data-bs-toggle="collapse"' 
 					+'data-bs-target="#playcoll-' + i + '" aria-expanded="false" aria-controls="playcoll-' + i + '">' 
 					+'<b>' + data[i].help_type + '</b>&nbsp;&nbsp;&nbsp; '  + data[i].help_title + '</button></h6>'
 					+'<div id="playcoll-' + i + '" class="accordion-collapse collapse"'

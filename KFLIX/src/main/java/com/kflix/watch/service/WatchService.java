@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.kflix.genre.domain.Genre;
 import com.kflix.member.domain.Member;
+import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.SearchVO;
@@ -22,6 +23,8 @@ public interface WatchService {
 	public List<MovieVO> getmovieRanking();
 
 	public MovieVO getmovie(int movie_id);
+	
+	public List<MovieVO> getNewmovie();
 
 	// 좋아요 관련 쿼리 서비스
 	public int likePlus(LikeVO like);
@@ -67,4 +70,17 @@ public interface WatchService {
 
 	// 메인화면 티켓확인
 	Member checkTicket(String email);
+	
+	// 알림
+	public List<AlarmVO> getSelectAlarm();
+
+	public AlarmVO getSelectAlarmUser(String email);
+	
+	public int createAlarm(AlarmVO alarm);
+
+	public int updateAlarm(AlarmVO alarm);
+	
+	public int cleanAlarm(AlarmVO alarm);
+
+	public int deleteAlarm(AlarmVO alarm);
 }

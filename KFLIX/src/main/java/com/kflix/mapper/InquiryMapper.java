@@ -11,6 +11,8 @@ public interface InquiryMapper {
 
 	int insertInquiry(Inquiry inquiry);
 	
+	int selectUserInqCnt(@Param("email") String email, @Param("type") String type, @Param("reply_status") String reply_status);
+	
 	// 총 개수 status
 	int selectAllInqCnt();
 	
@@ -23,4 +25,8 @@ public interface InquiryMapper {
 	
 	List<Inquiry> selectAllInqByTypeAndDate(
 			@Param("type") String type, @Param("reply_status") String reply_status);
+	
+	List<Inquiry> selectInqByEmail(@Param("page") int page, @Param("amount") int amount,
+			@Param("email") String email, @Param("type") String type, @Param("reply_status") String reply_status);
+	
 }

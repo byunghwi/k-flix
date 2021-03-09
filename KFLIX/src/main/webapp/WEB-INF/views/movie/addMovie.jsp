@@ -36,13 +36,13 @@
 		width: 1200px;
 		background-color: rgba(0, 0, 0, 0);
 		min-width: 1200px;
-		padding-top:75px;
+		padding-top:130px;
 	}
 	h1{
 		color: white;
 	}
 </style>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
 <body>
 

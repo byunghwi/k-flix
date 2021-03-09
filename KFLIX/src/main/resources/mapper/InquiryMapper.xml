@@ -4,6 +4,70 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kflix.mapper.InquiryMapper">
 
+	<select id="selectInqByEmail" resultType="com.kflix.inquiry.domain.Inquiry">
+		SELECT 
+			 inquiry_id, email, manager_email, inquiry_type, inquiry_title, inquiry_content, inquiry_date, reply_title, reply_content, reply_date
+		FROM 
+		(SELECT SEQ,  inquiry_id, email, manager_email, inquiry_type, inquiry_title, inquiry_content, inquiry_date, reply_title, reply_content, reply_date
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, inquiry_id, email, manager_email, inquiry_type, inquiry_title, inquiry_content, inquiry_date, reply_title, reply_content, reply_date
+		    	FROM
+		        	(SELECT * FROM inquiry WHERE email = #{email}  
+			 		<choose> 
+					<when test='type == "all"'>
+						<if test='reply_status == "답변"'>
+							 AND reply_date IS NOT NULL
+						</if>
+						<if test='reply_status == "미답변"'>
+							 AND reply_date IS NULL
+						</if>
+					</when>
+					<otherwise>
+						<if test='reply_status == "답변"'>
+							 AND inquiry_type = #{type} AND reply_date IS NOT NULL
+						</if>
+						<if test='reply_status == "미답변"'>
+							 AND inquiry_type = #{type} AND reply_date IS NULL
+						</if>
+						<if test='reply_status == "all"'>
+							 AND inquiry_type = #{type}
+						</if>
+					</otherwise>
+					</choose>
+					ORDER BY inquiry_id DESC)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}	
+
+
+	</select>
+	
+	<select id="selectUserInqCnt" resultType="integer">
+		SELECT COUNT(*) FROM inquiry WHERE email = #{email} 
+		<choose> 
+		<when test='type == "all"'>
+			<if test='reply_status == "답변"'>
+				AND reply_date IS NOT NULL
+			</if>
+			<if test='reply_status == "미답변"'>
+				AND reply_date IS NULL
+			</if>
+		</when>
+		<otherwise>
+			<if test='reply_status == "답변"'>
+				AND inquiry_type = #{type} AND reply_date IS NOT NULL
+			</if>
+			<if test='reply_status == "미답변"'>
+				AND inquiry_type = #{type} AND reply_date IS NULL
+			</if>
+			<if test='reply_status == "all"'>
+				AND inquiry_type = #{type}
+			</if>
+		</otherwise>
+		</choose>
+	</select>
+	
 	<insert id="insertInquiry">
 		INSERT INTO 
 			inquiry (inquiry_id, email, inquiry_type, inquiry_title, inquiry_content, inquiry_date)

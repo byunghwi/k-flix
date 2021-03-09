@@ -73,7 +73,7 @@ public class ServiecCenterController {
 		model.addAttribute("page", PAGENATION.getPage());
 		model.addAttribute("amount", PAGENATION.getAmount());
 		model.addAttribute("total", help_service.getCntHelpList(ENABLED));
-		model.addAttribute("inq", help_service.getPageHelp(PAGENATION, ENABLED));
+		model.addAttribute("help", help_service.getPageHelp(PAGENATION, ENABLED));
 		model.addAttribute("category", help_service.getAllHelpType());
 		return "help/userview";
 	}

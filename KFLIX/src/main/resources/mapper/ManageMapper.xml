@@ -15,4 +15,23 @@
 	<select id="getMemberGender" resultType="com.kflix.manage.domain.MemberGender">
 		select * from gender_ratio
 	</select>
+	
+	<select id="selectMemberView" resultType="com.kflix.manage.domain.MemberView">
+		select * from member_view
+	</select>
+	
+	<select id="selectPageMemView" resultType="com.kflix.manage.domain.MemberView">
+		SELECT 
+			 email, nick, gender, member_age, cert, ticket_name, join_date, ban, save_status
+		FROM 
+		(SELECT SEQ, email, nick, gender, member_age, cert, ticket_name, join_date, ban, save_status
+		    FROM
+		    	(SELECT ROWNUM AS SEQ, email, nick, gender, member_age, cert, ticket_name, join_date, ban, save_status
+		    	FROM
+		        	(select * from member_view)
+		    	)
+		    WHERE SEQ &gt; (#{page} - 1) * #{amount}
+		)
+		WHERE ROWNUM &lt;= #{amount}
+	</select>
 </mapper>
