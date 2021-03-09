@@ -80,4 +80,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList(NAMESPACE + ".schedulePayMemList");
 	}
 
+	@Override
+	public List<Member> scheduleDelPayMemList() {
+		return sqlSession.selectList(NAMESPACE + ".scheduleDelPayMemList");
+	}
+
 }

@@ -30,4 +30,6 @@ public interface MemberDao {
 	int removePayMember(String email);
 	
 	List<Member> schedulePayMemList();
+	
+	List<Member> scheduleDelPayMemList();
 }

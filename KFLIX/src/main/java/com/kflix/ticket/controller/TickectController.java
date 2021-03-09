@@ -48,7 +48,10 @@ public class TickectController {
 	KakaoPayApprovalVO kakaoPayApprovalVO;
 
 	@RequestMapping(value = "/info", method = {RequestMethod.GET,RequestMethod.POST})
-	public String TicketPage( HttpServletRequest request, Model model, HttpSession session, @RequestParam(value = "sendChk", required = false) String sendChk) {
+	public String TicketPage( HttpServletRequest request, Model model, HttpSession session
+			, @RequestParam(value = "sendChk", required = false) String sendChk
+			, RedirectAttributes rttr
+			, @RequestParam(value = "msg", required = false) String msg) {
 		
 		//리다이렉트로 addFlashAttribute에 담겨진 데이터를 꺼낼 때 사용.
 		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
@@ -81,12 +84,14 @@ public class TickectController {
 			
 			model.addAttribute("ticket", ticket);
 		}
-		
-		List<Ticket> tickets = ticketService.getAllTickets();
-		System.out.println("[TicketController] /info시 ticket들 다 뽑기 > " + tickets.toString());
-		
+
 		model.addAttribute("sendChk", sendChk);
-		//model.addAttribute("tickets", tickets);
+		
+		if(msg != null) {
+			System.out.println("msg 값 있다 야호 ! > " + msg);
+			model.addAttribute("removeMsg", "OK");
+		}
+		
 		
 		return "/ticket/infoPage";	
 	}
@@ -202,7 +207,7 @@ public class TickectController {
 	
 	//카카오페이 정기결제 해제 
 	@RequestMapping(value = "/removeKakaoPay", method = RequestMethod.POST)
-	public void removekakaoPay(HttpSession session, Model model, Ticket ticket) {
+	public String removekakaoPay(HttpSession session, Model model) {
 		String email = ((Member) session.getAttribute("login")).getEmail();
 		//회원정보빼오기
 		Member member = memberService.getMemberByEmail(email);
@@ -211,6 +216,17 @@ public class TickectController {
 		
 		kakaoPayService.removeKakaoPay(member);
 
-		memberService.removePayMember(email);
-	}
+		int result = memberService.removePayMember(email);
+		
+		
+		if(result == 1) {
+			System.out.println("[TicketController] 카카오페이 결제 해지-회원 업데이트 성공 ");
+			
+			//결제 해지 후 회원 업데이트 성공시 
+			return "redirect:/ticket/info?msg=OK";
+		}
+		
+		return null;
+	
+	} 
 }
