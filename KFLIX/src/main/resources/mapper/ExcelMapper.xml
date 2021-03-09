@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kflix.mapper.ExcelMapper">
+
+	<select id="getAllmoviemap" resultType="hashMap">
+		SELECT * FROM movie
+	</select>
+	
+	<select id="getAllmember" resultType="hashMap">
+		SELECT email, nick, birth, member_age, gender, join_date, ticket_id, kakao, pay_sid, pay_exp_date, pay_remove_dt FROM member
+	</select>
+	
+</mapper>
