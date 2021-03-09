@@ -20,8 +20,16 @@
 	href="/kflix/resources/css/main/header.css">
 <link rel="stylesheet" type="text/css"
 	href="/kflix/resources/css/main/main.css">
+	
+
+<link rel="stylesheet" href="/kflix/resources/css/common/netflix-fonts.css" />
+<link rel="stylesheet" href="/kflix/resources/css/common/netflix-pulsate.css" />
 
 <style>
+* {
+font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
+		sans-serif;
+}
 #ticket_modal {
 	display: none;
 	width: 55%;
