@@ -64,7 +64,7 @@ public class ServiecCenterController {
 	
 	@RequestMapping(value="/FAQ", method = RequestMethod.GET)
 	public String inqureUserView(Model model, HttpSession session) {
-		log.info("============= inqureUserView ==========");
+		log.info("============= faqUserView ==========");
 		
 		Member member = (Member) session.getAttribute("login");
 		

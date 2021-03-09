@@ -59,7 +59,7 @@
 	</select>
 
 	<select id="getHelpWithRownum" resultType="com.kflix.help.domain.Help">
-		SELECT help_title, help_content FROM help WHERE help_type = #{type} AND ROWNUM &lt;= 3 AND help_status ='Y' ORDER BY help_id DESC
+		SELECT help_title, help_content FROM help WHERE help_type = #{type} AND ROWNUM &lt;= 2 AND help_status ='Y' ORDER BY help_id DESC
 	</select>
 
 </mapper>
