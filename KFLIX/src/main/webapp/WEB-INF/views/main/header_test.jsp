@@ -385,14 +385,14 @@
 
 
 		//모달부분 이외 클릭시 모달 꺼지기
-		$(document).mouseup(function (e){
-			var modal_area = $('#ticket_modal');
+		$(document).click(function (e){
+			var $modal_area = $('#ticket_modal');
 			
-			  if(!$(e.target).hasClass("#ticket_modal")){
+			  if(!$('#ticket_modal').has(e.target).length){
 					bg.remove();
-					modal_area.css("display", "none");
+					$modal_area.css("display", "none");
 			  }
-			});
+		});
 
 		//실제 모달 내용있는 부분
 		modal.setStyle({
@@ -455,7 +455,7 @@
 
     });
 
-	//구매 버튼 마우스오버시 효과주기
+	//이용권 모달 구매 버튼 마우스오버시 효과주기
     $("#buy_btn").hover(function() {
 		$(this).css("backgroundColor","red").css("border-color","red");
 	}, function(){
@@ -488,6 +488,7 @@
 		xhttp.send(JSON.stringify(data));
 	});
 
+    //이용권 구매버튼 마우스 오버
 	$("#ticket").hover(function(){
 		$(this).css({"backgroundColor":"black", "border":"1px solid white"});
 	}, function(){
