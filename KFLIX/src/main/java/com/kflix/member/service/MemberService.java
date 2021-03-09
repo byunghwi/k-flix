@@ -37,4 +37,6 @@ public interface MemberService {
 	
 	//스케줄러 - 해지 회원 중 만료일 도달 회원목록
 	List<Member> scheduleDelPayMemList();
+	
+	int modifyMem(Member member);
 }

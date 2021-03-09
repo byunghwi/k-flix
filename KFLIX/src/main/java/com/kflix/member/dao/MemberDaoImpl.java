@@ -9,6 +9,10 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.kflix.member.domain.Member;
 
 @Repository
@@ -83,6 +87,11 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public List<Member> scheduleDelPayMemList() {
 		return sqlSession.selectList(NAMESPACE + ".scheduleDelPayMemList");
+	}
+
+	@Override
+	public int modifyMem(Member member) {
+		return sqlSession.update(NAMESPACE + ".modifyMem", member);
 	}
 
 }

@@ -132,4 +132,7 @@
 			to_char(pay_exp_date, 'yyyyMMdd') = to_char(sysdate, 'yyyyMMdd')
 	</select>
 
+	<update id="modifyMem" parameterType="com.kflix.member.domain.Member">
+		UPDATE member SET nick = #{nick} WHERE email = #{email}
+	</update>
 </mapper>

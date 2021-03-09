@@ -76,4 +76,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.scheduleDelPayMemList();
 	}
 
+	@Override
+	public int modifyMem(Member member) {
+		return memberDao.modifyMem(member);
+	}
+
 }

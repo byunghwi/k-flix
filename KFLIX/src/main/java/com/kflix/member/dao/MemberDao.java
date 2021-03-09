@@ -23,6 +23,7 @@ public interface MemberDao {
 	Member getMemberByEmail(String email);
 	
 	void keepLogin(String email, String session_id, Date next);
+	
 	Member checkMemWithSessionKey(String value);
 	
 	int updatePayMember(Member member);
@@ -32,4 +33,6 @@ public interface MemberDao {
 	List<Member> schedulePayMemList();
 	
 	List<Member> scheduleDelPayMemList();
+	
+	int modifyMem(Member member);
 }

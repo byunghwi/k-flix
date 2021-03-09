@@ -89,4 +89,16 @@ public class MemberController {
 		System.out.println("[memberController] 이메일 인증 실패  db cert 업데이트 실패 ");
 		return "/ticket/emailAuthFail";
 	}
+	
+	
+	// 닉네임변경
+	@RequestMapping(value = "modifyMem", method = RequestMethod.POST)
+	@ResponseBody
+	public int modifyMem(Member member, RedirectAttributes redirectAttributes) throws Exception {
+		
+		System.out.println("[MemberController] modifyMem ajax Member > " + member);
+		int result = memberService.modifyMem(member);
+
+		return result;
+	}
 }
