@@ -1,8 +1,6 @@
 package com.kflix.mapper;
 
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 
 import com.kflix.genre.domain.Genre;
@@ -10,7 +8,6 @@ import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
-import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
 
@@ -18,9 +15,6 @@ public interface WatchMapper {
 
 	// 영화 전체 들고오기
 	public List<MovieVO> getAllmovie();
-	
-	// 영화 전체맵 들고오기
-	public List<Map<String, Object>> getAllmoviemap();
 
 	// 영화 top10 들고오기
 	public List<MovieVO> getmovieRanking();

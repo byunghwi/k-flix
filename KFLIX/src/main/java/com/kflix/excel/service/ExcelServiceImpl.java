@@ -22,6 +22,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kflix.excel.style.Excelcellstyle;
+import com.kflix.mapper.ExcelMapper;
+import com.kflix.mapper.WatchMapper;
+import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.service.WatchService;
 
 import lombok.extern.log4j.Log4j;
@@ -31,14 +35,22 @@ import lombok.extern.log4j.Log4j;
 public class ExcelServiceImpl implements ExcelService {
 
 	@Autowired
-	WatchService watchService;
-	
+	ExcelMapper mapper;
+
+	// DB
+	@Override
+	public List<Map<String, Object>> getAllmoviemap() {
+		return mapper.getAllmoviemap();
+	}
+
+	@Override
+	public List<Map<String, Object>> getAllmember() {
+		return mapper.getAllmember();
+	}
+
+	// ExcelDown
 	@Override
 	public void getExcelDown(HttpServletResponse response, String target) {
-
-		// 엑셀에 작성할 리스트를 가져온다.
-		List<Map<String, Object>> excelList = watchService.getAllmoviemap();
-		
 
 		try {
 			// Excel Down 시작
@@ -53,51 +65,27 @@ public class ExcelServiceImpl implements ExcelService {
 			int rowCount = 0;
 			int cellCount = 0;
 
-			/*
-			 * // 배경색은 흰색입니다.
-			 * headStyle.setFillForegroundColor(HSSFColorPredefined.WHITE.getIndex());
-			 * headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			 */
+			// 테이블 헤더용/바디용 스타일
+			CellStyle headStyle = Excelcellstyle.headstyle(workbook);
+			CellStyle bodyStyle = Excelcellstyle.bodystyle(workbook);
 
-			// 테이블 헤더용 스타일
-			CellStyle headStyle = workbook.createCellStyle();
+			List<Map<String, Object>> excelList = null;
+			List<String> headNames = null;
 
-			// 헤더 폰트 스타일
-			Font headFont = workbook.createFont();
-			headFont.setFontHeightInPoints((short) 12);
-			headFont.setBold(true);
-			headFont.setFontName("맑은 고딕");
+			if (target.toUpperCase().equals("MOVIE")) {
+				// 엑셀에 작성할 리스트를 가져온다.
+				excelList = getAllmoviemap();
+				headNames = new MovieVO().getHeadNames();
 
-			headStyle.setFont(headFont);
-			headStyle.setBorderTop(BorderStyle.THIN);
-			headStyle.setBorderBottom(BorderStyle.THIN);
-			headStyle.setBorderLeft(BorderStyle.THIN);
-			headStyle.setBorderRight(BorderStyle.THIN);
-			// 데이터는 가운데 정렬합니다.
-			headStyle.setAlignment(HorizontalAlignment.CENTER);
+			} else if (target.toUpperCase().equals("MEMBER")) {
+				// 엑셀에 작성할 리스트를 가져온다.
+				excelList = getAllmember();
+				headNames = Arrays.asList("email", "nick", "birth", "member_age", "gender", "join_date", "ticket_id",
+						"kakao", "pay_sid", "pay_exp_date", "pay_remove_dt");
+			} else {
 
-			// 테이블 데이터용 스타일
-			CellStyle bodyStyle = workbook.createCellStyle();
+			}
 
-			// 테이터 폰트 스타일
-			Font bodyFont = workbook.createFont();
-			bodyFont.setFontHeightInPoints((short) 12);
-			bodyFont.setFontName("맑은 고딕");
-
-			bodyStyle.setFont(bodyFont);
-			bodyStyle.setBorderTop(BorderStyle.THIN);
-			bodyStyle.setBorderBottom(BorderStyle.THIN);
-			bodyStyle.setBorderLeft(BorderStyle.THIN);
-			bodyStyle.setBorderRight(BorderStyle.THIN);
-			// 데이터는 가운데 정렬합니다.
-			bodyStyle.setAlignment(HorizontalAlignment.CENTER);
-
-			List<String> headNames = Arrays.asList(
-					"movie_id", "movie_title", "rating", "play_time", "director_id",
-					"actor_id1", "actor_id2", "actor_id3", "genre_id1", "genre_id2",
-					"country", "movie_release", "summary", "reg_date", "poster_path",
-					"teaser_path", "video_path", "view_cnt", "movie_rank");
-			
 			// 헤더 생성
 			row = sheet.createRow(rowCount++);
 			for (String headname : headNames) {
@@ -105,12 +93,11 @@ public class ExcelServiceImpl implements ExcelService {
 				cell.setCellStyle(headStyle);
 				cell.setCellValue(headname);
 			}
-			System.out.println(excelList);
+
 			// 데이터 부분 생성
 			for (Map<String, Object> map : excelList) {
 
 				System.out.println("DB DATA : " + map.toString());
-
 				row = sheet.createRow(rowCount++);
 				cellCount = 0;
 				for (String headname : headNames) {
@@ -118,6 +105,12 @@ public class ExcelServiceImpl implements ExcelService {
 					cell.setCellStyle(bodyStyle);
 					cell.setCellValue("" + map.get(headname.toUpperCase()));
 				}
+			}
+
+			// 가로 자동 맞춤
+			for (int i = 0; i < cellCount; i++) // autuSizeColumn after setColumnWidth setting!!
+			{
+				sheet.autoSizeColumn(i);
 			}
 
 			// 파일 명이 겹치지 않게 파일 이름에 날짜 추가

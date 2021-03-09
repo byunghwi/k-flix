@@ -17,8 +17,6 @@ public interface WatchService {
 
 	// 뮤비 관련 쿼리 서비스
 	public List<MovieVO> getAllmovie();
-	
-	public List<Map<String, Object>> getAllmoviemap();
 
 	public List<MovieVO> getmovieRanking();
 

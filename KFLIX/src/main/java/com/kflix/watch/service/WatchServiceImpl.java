@@ -29,11 +29,6 @@ public class WatchServiceImpl implements WatchService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getAllmoviemap() {
-		return mapper.getAllmoviemap();
-	}
-
-	@Override
 	public List<MovieVO> getmovieRanking() {
 		return mapper.getmovieRanking();
 	}
@@ -179,6 +174,5 @@ public class WatchServiceImpl implements WatchService {
 	public int deleteAlarm(AlarmVO alarm) {
 		return mapper.deleteAlarm(alarm);
 	}
-
 
 }

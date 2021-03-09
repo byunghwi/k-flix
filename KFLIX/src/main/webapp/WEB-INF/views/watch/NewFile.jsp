@@ -29,7 +29,7 @@
 	
 	<form name="excelForm" id="excelForm" method="POST"
 		action="/kflix/excelDownload">
-		<input type="text" name="target" value="test"> <input
+		<input type="text" name="target" placeholder="파일명 (영어로만 가능)"> <input
 			type="submit" id="excelDown" value="EXCEL 다운" />
 	</form>
 

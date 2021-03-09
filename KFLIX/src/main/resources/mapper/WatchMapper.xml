@@ -9,10 +9,6 @@
 		resultType="com.kflix.watch.domain.MovieVO">
 		SELECT * FROM movie
 	</select>
-	
-	<select id="getAllmoviemap" resultType="hashMap">
-		SELECT * FROM movie
-	</select>
 
 	<select id="getmovieRanking"
 		resultType="com.kflix.watch.domain.MovieVO">
