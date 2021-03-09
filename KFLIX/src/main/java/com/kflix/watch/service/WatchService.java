@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.kflix.genre.domain.Genre;
 import com.kflix.member.domain.Member;
-import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
@@ -70,15 +69,11 @@ public interface WatchService {
 	Member checkTicket(String email);
 	
 	// 알림
-	public List<AlarmVO> getSelectAlarm();
+	public List<Member> getSelectAlarm();
 
-	public AlarmVO getSelectAlarmUser(String email);
+	public Member getSelectAlarmUser(String email);
+
+	public int updateAlarm(Member alarm);
 	
-	public int createAlarm(AlarmVO alarm);
-
-	public int updateAlarm(AlarmVO alarm);
-	
-	public int cleanAlarm(AlarmVO alarm);
-
-	public int deleteAlarm(AlarmVO alarm);
+	public int cleanAlarm(String email);
 }

@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.kflix.genre.domain.Genre;
 import com.kflix.member.domain.Member;
-import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WatchVO;
@@ -83,19 +82,13 @@ public interface WatchMapper {
 	Member checkTicket(String email);
 
 	// 알림
-	public List<AlarmVO> getSelectAlarm();
+	public List<Member> getSelectAlarm();
 	
-	public AlarmVO getSelectAlarmUser(String email);
-
-	// 회원가입 시 알림 생성
-	public int createAlarm(AlarmVO alarm);
+	public Member getSelectAlarmUser(String email);
 
 	// 신규 콘텐츠 등록 알림 업데이트
-	public int updateAlarm(AlarmVO alarm);
+	public int updateAlarm(Member alarm);
 	
 	// 신규 콘텐츠 유저 확인 후 업데이트
-	public int cleanAlarm(AlarmVO alarm);
-
-	// 탈퇴 시 알림 삭제
-	public int deleteAlarm(AlarmVO alarm);
+	public int cleanAlarm(String email);
 }

@@ -26,11 +26,13 @@
 </style>
 </head>
 <body>
-	
+
 	<form name="excelForm" id="excelForm" method="POST"
 		action="/kflix/excelDownload">
-		<input type="text" name="target" placeholder="파일명 (영어로만 가능)"> <input
-			type="submit" id="excelDown" value="EXCEL 다운" />
+		<select class="form-select" aria-label="Default select example" style="width: 200px; display: inline-block; height: 40px;">
+			<option value="Movie">Movie</option>
+			<option value="Member">Member</option>
+		<input type="submit" id="excelDown" value="EXCEL 다운" style="height: 40px;"/>
 	</form>
 
 </body>

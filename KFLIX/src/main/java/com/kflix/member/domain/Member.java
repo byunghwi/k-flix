@@ -25,4 +25,5 @@ public class Member {
 	String pay_sid;//정기결제 고유키
 	Date pay_exp_date;//정기결제 만료일
 	Date pay_remove_dt;//정기결제 해지일
+	int alarm_count;
 }

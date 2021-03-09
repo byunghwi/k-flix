@@ -193,45 +193,26 @@
 
 	<!-- 알림 -->
 	<select id="getSelectAlarm"
-		resultType="com.kflix.watch.domain.AlarmVO">
-		SELECT email FROM alarm
+		resultType="com.kflix.member.domain.Member">
+		SELECT email FROM member
 	</select>
 
 	<select id="getSelectAlarmUser"
-		resultType="com.kflix.watch.domain.AlarmVO">
-		SELECT alarm_count FROM alarm WHERE email = #{email}
+		resultType="com.kflix.member.domain.Member">
+		SELECT alarm_count FROM member WHERE email = #{email}
 	</select>
-
-	<insert id="createAlarm">
-		INSERT INTO alarm VALUES (
-		alarmid_seq.nextval,
-		'movie',
-		#{email},
-		TO_DATE(sysdate,'YY-MM-DD'),
-		#{alarm_count}
-		)
-	</insert>
-
+	
 	<update id="updateAlarm">
-		UPDATE alarm
+		UPDATE member
 		SET
-		alarm_type = 'movie',
-		alarm_count = alarm_count + #{alarm_count},
-		alarm_date = TO_DATE(sysdate,'YY-MM-DD')
+		alarm_count = alarm_count + #{alarm_count}
 		WHERE email = #{email}
 	</update>
 	
 	<update id="cleanAlarm">
-		UPDATE alarm
+		UPDATE member
 		SET
-		alarm_type = 'movie',
-		alarm_count = #{alarm_count},
-		alarm_date = TO_DATE(sysdate,'YY-MM-DD')
+		alarm_count = 0
 		WHERE email = #{email}
 	</update>
-
-	<delete id="deleteAlarm">
-		DELETE FROM alarm
-		WHERE email = #{email}
-	</delete>
 </mapper>

@@ -40,7 +40,6 @@ import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.SearchVO;
 import com.kflix.watch.domain.WatchVO;
 import com.kflix.watch.domain.WishVO;
-import com.kflix.watch.domain.AlarmVO;
 import com.kflix.watch.domain.Basket;
 import com.kflix.watch.service.WatchService;
 
@@ -59,11 +58,14 @@ public class WatchController {
 	DirectorService directorservice;
 	@Autowired
 	GenreService genreservice;
+	@Autowired
+	MemberService memberservice;
 
 	@GetMapping("/browse")
 	public String getbrowse(Model model, HttpSession session) {
 
 		Member member = (Member) session.getAttribute("login");
+		session.setAttribute("login", memberservice.getMemberByEmail(member.getEmail()));
 		Basket basket = new Basket();
 		List<MovieVO> movies = watchservice.getAllmovie();
 		ArrayList<Integer> arr = new ArrayList<>();
@@ -81,13 +83,14 @@ public class WatchController {
 		basket.setWatching(watchservice.getSelectWatching(member.getEmail()));
 		basket.setWish(watchservice.getSelectWish(member.getEmail()));
 		basket.setGenre(watchservice.getAllGenre());
-		model.addAttribute("test", basket);
-		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
+
+		model.addAttribute("basket", basket);
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("AllActor", actorservice.selectAllActorList('Y'));
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("movie_genre", movie_genre);
 		model.addAttribute("member", watchservice.checkTicket(member.getEmail()));
+		model.addAttribute("newmovie", watchservice.getNewmovie());
 		return "/watch/browse";
 	}
 
@@ -162,8 +165,6 @@ public class WatchController {
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("searchValue", searchValue);
 		model.addAttribute("Searchlist", watchservice.getSearch(searchValue));
-		Member member = (Member) session.getAttribute("login");
-		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 		for (MovieVO vo : watchservice.getSearch(searchValue)) {
 			System.out.println(vo.getMovie_id());
 		}
@@ -178,9 +179,14 @@ public class WatchController {
 		model.addAttribute("AllDirector", directorservice.selectAllDirectorList('Y'));
 		model.addAttribute("AllGenre", watchservice.getAllGenre());
 		model.addAttribute("newmovie", watchservice.getNewmovie());
-		Member member = (Member) session.getAttribute("login");
-		model.addAttribute("alarm", watchservice.getSelectAlarmUser(member.getEmail()));
 
+		Member member = (Member) session.getAttribute("login");
+		System.out.println("alarm왔나");
+		System.out.println(member.getEmail());
+		watchservice.cleanAlarm(member.getEmail());
+		
+		session.setAttribute("login", memberservice.getMemberByEmail(member.getEmail()));
+		
 		return "/watch/newmovie";
 	}
 }

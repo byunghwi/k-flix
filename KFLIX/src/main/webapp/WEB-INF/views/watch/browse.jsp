@@ -95,7 +95,7 @@
 			style="position: relative; top: -476px; padding: 100px 0; overflow: hidden;">
 
 			<div class="list container">
-				<c:if test="${not empty test.watching }">
+				<c:if test="${not empty basket.watching }">
 					<span class="anchor" id="awatching"></span>
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
@@ -109,8 +109,8 @@
 						<!-- "resldhjskkjfi2@naver.com"님이 시청 중인 콘텐츠</h2> -->
 						<div class="slide_wrapper${i}">
 							<ul class="slides${i}">
-								<c:forEach items="${test.watch }" var="watch" varStatus="status">
-									<c:forEach items="${test.movie }" var="Allmovie"
+								<c:forEach items="${basket.watch }" var="watch" varStatus="status">
+									<c:forEach items="${basket.movie }" var="Allmovie"
 										varStatus="status">
 										<c:if
 											test="${watch.movie_id eq Allmovie.movie_id and watch.watch_type eq 'WATCHING'}">
@@ -242,7 +242,7 @@
 					</div>
 				</c:if>
 
-				<c:if test="${not empty test.wish}">
+				<c:if test="${not empty basket.wish}">
 					<span class="anchor" id="awish"></span>
 					<c:set var="i" value="${i+1}" />
 					<div class="sliderow${i} }">
@@ -250,8 +250,8 @@
 						<h2 class="rowHeader${i}">내가 찜한 콘텐츠</h2>
 						<div class="slide_wrapper${i}">
 							<ul class="slides${i}">
-								<c:forEach items="${test.wish }" var="wish" varStatus="status">
-									<c:forEach items="${test.movie }" var="Allmovie"
+								<c:forEach items="${basket.wish }" var="wish" varStatus="status">
+									<c:forEach items="${basket.movie }" var="Allmovie"
 										varStatus="status">
 										<c:if test="${wish.movie_id eq Allmovie.movie_id }">
 											<li class="slideli${i}"><a
@@ -379,6 +379,133 @@
 					</div>
 				</c:if>
 
+				<c:set var="i" value="${i+1}" />
+				<span class="anchor" id="atop"></span>
+				<div id="top10" class="sliderow${i} }">
+					<h2 class="rowHeader${i}">이번 주 공개 콘텐츠</h2>
+					<div class="slide_wrapper${i}">
+						<ul class="slides${i}">
+							<c:forEach items="${newmovie }" var="newmovie" varStatus="status">
+								<li class="slideli${i}"><a
+									onclick="framshow(${newmovie.movie_id})" class="atag">
+										<div class="atagdiv">
+											<img style="margin: 0;" src="${newmovie.poster_path }"
+												class="d-block dis img1" alt="...">
+											<div class="videohover">
+												<img style="margin: 0;" src="${newmovie.poster_path }"
+													class="modalimg" alt="...">
+												<div class="hovervideo">
+													<video class="video" muted autoplay loop
+														poster="${newmovie.poster_path}">
+														<source src="${newmovie.teaser_path}" type="video/mp4">
+													</video>
+												</div>
+												<div class="comment">
+													<div style="font-size: 18px;">
+														<c:choose>
+															<c:when test="${newmovie.rating eq 'all' }">
+																<p class="ratingsty"
+																	style="background-color: green; font-size: 20px;">ALL</p>
+															</c:when>
+															<c:when test="${newmovie.rating eq '12' }">
+																<p class="ratingsty"
+																	style="background-color: #dfb039; color: black;">${newmovie.rating }</p>
+															</c:when>
+															<c:when test="${newmovie.rating eq '15' }">
+																<p class="ratingsty" style="background-color: #cd6d34">${newmovie.rating }</p>
+															</c:when>
+															<c:when test="${newmovie.rating eq '19' }">
+																<p class="ratingsty" style="background-color: #c52e37">${newmovie.rating }</p>
+															</c:when>
+															<c:otherwise>
+																<p class="ratingsty" style="background-color: #c52e37">${newmovie.rating }</p>
+															</c:otherwise>
+														</c:choose>
+														${newmovie.movie_title }
+													</div>
+													<div style="position: absolute; top: 21px; right: 30px;">
+														<span
+															style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
+															<fmt:formatDate value="${newmovie.reg_date }"
+																pattern="yyyy.MM" />
+														</span> • ${newmovie.play_time }분
+													</div>
+													<div style="position: absolute; top: 53px; right: 30px;">
+														<span
+															style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+															<i class="fas fa-thumbs-up "></i>
+														</span> <span
+															style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+															${newmovie.movie_rank }</span>
+													</div>
+													<div class="infotable1">
+														<table>
+															<tr align="left">
+																<td colspan="1"><span class="c-gay">감독: </span> <c:forEach
+																		items="${AllDirector }" var="AllDirector"
+																		varStatus="status">
+																		<c:if
+																			test="${newmovie.director_id eq AllDirector.director_id }">
+									${AllDirector.director_name }
+								</c:if>
+																	</c:forEach></td>
+															</tr>
+															<tr align="left">
+																<td><span class="c-gay">출연: </span> <c:forEach
+																		items="${AllActor }" var="AllActor" varStatus="status">
+																		<c:if
+																			test="${newmovie.actor_id1 eq AllActor.actor_id }">
+									${AllActor.actor_name }<c:if
+																				test="${newmovie.actor_id2 eq AllActor.actor_id }">, 
+									</c:if>
+																		</c:if>
+																		<c:if
+																			test="${newmovie.actor_id2 eq AllActor.actor_id }">
+									${AllActor.actor_name }<c:if
+																				test="${newmovie.actor_id3 eq AllActor.actor_id }">, 
+									</c:if>
+																		</c:if>
+
+																		<c:if
+																			test="${newmovie.actor_id3 eq AllActor.actor_id }">
+									${AllActor.actor_name }
+									</c:if>
+																	</c:forEach></td>
+															</tr>
+															<tr align="left">
+																<td><span class="c-gay">개요: </span>${newmovie.country }영화,
+																	<c:forEach items="${AllGenre }" var="AllGenre"
+																		varStatus="status">
+																		<c:if
+																			test="${newmovie.genre_id1 eq AllGenre.genre_id }">
+																			${AllGenre.genre_name}
+																			<c:if
+																				test="${newmovie.genre_id2 eq AllGenre.genre_id }"></c:if>
+																		</c:if>
+																		<c:if
+																			test="${newmovie.genre_id2 eq AllGenre.genre_id }">
+																				${AllGenre.genre_name } </c:if>
+																	</c:forEach></td>
+															</tr>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+								</a></li>
+							</c:forEach>
+						</ul>
+					</div>
+					<div class="pagenum${i}"></div>
+					<p class="controls${i}">
+						<span class="backopprev${i}"></span> <span class="backopnext${i}"></span>
+					</p>
+					<p class="controls${i}">
+						<span class="prev${i}"><i class="fas fa-chevron-left"></i></span>
+						<span class="next${i}"><i class="fas fa-chevron-right"></i></span>
+					</p>
+				</div>
+				
 				<c:set var="i" value="${i+1}" />
 				<span class="anchor" id="atop"></span>
 				<div id="top10" class="sliderow${i} }">
@@ -511,7 +638,7 @@
 					<c:forEach items="${movie_genre }" var="movie_genre"
 						varStatus="status">
 						<c:set var="i" value="${i+1}" />
-						<c:forEach items="${test.genre }" var="genre" varStatus="status">
+						<c:forEach items="${basket.genre }" var="genre" varStatus="status">
 							<c:if test="${movie_genre eq genre.genre_id}">
 								<!--  <c:set var="sum" value="${sum+1}" /> -->
 								<div class="sliderow${i}">
@@ -519,7 +646,7 @@
 									<h2 class="rowHeader${i}">${genre.genre_name }</h2>
 									<div class="slide_wrapper${i}">
 										<ul class="slides${i}">
-											<c:forEach items="${test.movie }" var="Allmovie"
+											<c:forEach items="${basket.movie }" var="Allmovie"
 												varStatus="status">
 												<c:if
 													test="${Allmovie.genre_id1 eq genre.genre_id or Allmovie.genre_id2 eq genre.genre_id }">
@@ -669,7 +796,6 @@
 
 	<script type="text/javascript">
 	
-	test = document.getElementById('testdsf');
 	hometag = document.querySelector('.hometag')
 	movietag = document.querySelector('.movietag') 
 	top10tag = document.querySelector('.top10tag') 

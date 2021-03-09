@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kflix.watch.domain.AlarmVO;
+import com.kflix.member.domain.Member;
 import com.kflix.watch.domain.LikeVO;
 import com.kflix.watch.domain.MovieVO;
 import com.kflix.watch.domain.WishVO;
@@ -53,12 +53,5 @@ public class WatchRestController {
 			  watchservice.deleteLike(like);
 			  System.out.println("likeMinus"); 
 			}
-	}
-	
-	@PostMapping(value = "/newmovie", consumes = "application/json", produces = "text/html; charset=UTF-8")
-	public void senewmovie(@RequestBody AlarmVO alarm) {
-		System.out.println("alarm왔나");
-		System.out.println(alarm);
-		watchservice.cleanAlarm(alarm);
 	}
 }

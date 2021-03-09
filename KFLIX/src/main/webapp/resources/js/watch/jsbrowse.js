@@ -41,8 +41,10 @@ string = document.referrer;
 video_movieid = string.substring(41);
 
 if (window.performance.navigation.type == 1) {
-		console.log("새로고침");
 		href="javascript:window.scrollTo( 0, 1650 );"
+	} else if (window.performance.navigation.type == 2) {
+		location.href = "/kflix/browse";
+		console.log(string);
 	}
 	
 if (string.includes("http://localhost:8081/kflix/browse/watch/")) {
