@@ -1,5 +1,6 @@
 package com.kflix.manage.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import com.kflix.manage.domain.MemberView;
 import com.kflix.manage.domain.TicketBoard;
 import com.kflix.manage.service.ManageService;
 import com.kflix.movie.service.MovieService;
+import com.kflix.ticket.domain.Ticket;
 import com.kflix.ticket.service.TicketService;
 import com.kflix.util.pagenation.domain.PageNation;
 
@@ -34,7 +36,7 @@ public class ManageController {
 	ManageService mg_service;
 	
 	@Inject
-	TicketService ticket;
+	TicketService tk_service;
 	
 	static final PageNation PAGENATION;
 	static {
@@ -90,8 +92,8 @@ public class ManageController {
 	@RequestMapping(value="/ticketindex", method=RequestMethod.GET)
 	public String ticketView(Model model) {
 		System.out.println("============= 티켓뷰");
-		model.addAttribute("ticket", ticket.getAllTickets());
-		model.addAttribute("total", ticket.getAllTickets().size());
+		model.addAttribute("ticket", mg_service.ticketViewAll());
+		model.addAttribute("total", mg_service.ticketViewAll().size());
 		model.addAttribute("page", PAGENATION.getPage());
 		model.addAttribute("amount", PAGENATION.getAmount());
 		
@@ -103,11 +105,73 @@ public class ManageController {
 	public Map<String, Object> ticketView(@RequestBody PageNation pagen){
 		System.out.println("memberView");
 		Map<String, Object> list = new HashMap<>();
-		list.put("len", ticket.getAllTickets().size());
+		list.put("len", mg_service.ticketViewAll().size());
 		list.put("pagenation", pagen);
-		list.put("tk", ticket.getAllTickets());
+		list.put("tk", mg_service.ticketViewAll());
 		
 		return list;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/changeTicketReco", method=RequestMethod.PATCH, consumes = "application/json", produces = "application/json; charset=UTF-8")
+	public List<String> ticketChangeRecommend(@RequestBody Ticket ticket){
+		System.out.println("================== ticketChangeRecommend");
+
+		String msg = "성공";
+		
+		int result = mg_service.changeRecommend(ticket);
+		if (result < 0) {
+			msg = "실패";
+		}
+		
+		List<String> list = new ArrayList<>();
+		list.add(msg);
+		
+		return list;
+	}
+		
+	@ResponseBody
+	@RequestMapping(value="/changeTicketStatus", method=RequestMethod.PATCH, consumes = "application/json", produces = "application/json; charset=UTF-8")
+	public List<String> ticketChangeStatus(@RequestBody Ticket ticket){
+		System.out.println("================== ticketChangeRecommend");
+
+		String msg = "성공";
+		
+		int result = mg_service.changeStatus(ticket);
+		if (result < 0) {
+			msg = "실패";
+		}
+		
+		List<String> list = new ArrayList<>();
+		list.add(msg);
+		
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addTicket", method=RequestMethod.PATCH, consumes = "application/json", produces = "application/json; charset=UTF-8")
+	public  Map<String, Object> addTicket(@RequestBody Ticket ticket){
+		System.out.println("================== addTicket");
+		
+		Map<String, Object> list = new HashMap<>();
+		
+		mg_service.addTicket(ticket);
+		
+		list.put("len", mg_service.ticketViewAll().size());
+		list.put("tk", tk_service.getTicket(ticket.getTicket_id()));
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateTicket", method=RequestMethod.PATCH, consumes = "application/json", produces = "application/json; charset=UTF-8")
+	public  Map<String, Object> updateTicket(@RequestBody Ticket ticket){
+		System.out.println("================== updateTicket");
+		Map<String, Object> list = new HashMap<>();
+		
+		mg_service.changeTicket(ticket);
+		
+		list.put("len", mg_service.ticketViewAll().size());
+		list.put("tk", mg_service.ticketViewAll());
+		return list;
+	}
 }

@@ -22,7 +22,7 @@
 		width: 150px;
 	}
 	thead>tr> th:nth-child(1){
-		width: 350px;
+		width: 300px;
 	}
 	thead>tr> th:nth-child(2){
 		width: 100px;
@@ -40,6 +40,9 @@
 		width: 250px;
 	}
 	thead>tr> th:nth-child(7){
+		width: 150px;
+	}	
+	thead>tr> th:nth-child(8){
 		width: 100px;
 	}
 </style>
@@ -68,7 +71,6 @@
 	
 	<!-- 테이블 영역 -->
 	<div id="table_main">
-		
 		<table id="mem_table" class="table talbe text-light text-center align-middle border-dark">
 		<thead class="bg-dark">
 			<tr>
@@ -78,6 +80,7 @@
 				<th>성별</th>
 				<th>인증여부</th>
 				<th>이용권</th>
+				<th>정기결제여부</th>
 				<th>가입일</th>
 				<th>정지</th>
 			</tr>
@@ -91,6 +94,14 @@
 				<td>${i.gender }</td>
 				<td>${i.cert }</td>
 				<td>${i.ticket_name }</td>
+				<c:choose>
+					<c:when test="${empty i.pay_sid || i.pay_sid eq null}">
+						<td>N</td>
+					</c:when>
+					<c:otherwise>
+						<td>Y</td>
+					</c:otherwise>
+				</c:choose>
 				<td><fmt:formatDate value="${i.join_date }" pattern="yyyy-MM-dd"/></td>
 				<td>${i.ban }</td>
 			</tr>
@@ -106,7 +117,6 @@
 	</div>
 	
 </section>
-
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
 
 
@@ -122,6 +132,7 @@
 <script>
 //로딩시 페이징
 $(document).ready(function() {
+	$('#member_').prepend('<span class="nav-clicked"></span>');
 	makePageNate(${memTotal}, ${page}, ${amount});
 });
 
@@ -209,6 +220,12 @@ function makeTable(data, amount) {
 			if(data[i].ticket_name == null)
 				data[i].ticket_name = '';
 			
+			if(data[i].pay_sid == null){
+				data[i].pay_sid = 'N';
+			} else {
+				data[i].pay_sid = 'Y';
+			}
+			
 			table.append('<tr>'
 					+'<td>' + data[i].email + '</td>'
 					+'<td>' + data[i].nick + '</td>'
@@ -216,6 +233,7 @@ function makeTable(data, amount) {
 					+'<td>' + data[i].gender + '</td>'
 					+'<td>' + data[i].cert + '</td>'
 					+'<td>' + data[i].ticket_name + '</td>'
+					+'<td>' + data[i].pay_sid + '</td>'
 					+'<td>' + moment(data[i].join_date).format("YYYY-MM-DD") + '</td>'
 					+'<td>' + data[i].ban + '</td>'
 					+'</tr>');

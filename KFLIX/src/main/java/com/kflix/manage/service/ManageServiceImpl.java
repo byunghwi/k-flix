@@ -10,6 +10,7 @@ import com.kflix.manage.domain.MemberGender;
 import com.kflix.manage.domain.MemberView;
 import com.kflix.manage.domain.TicketBoard;
 import com.kflix.mapper.ManageMapper;
+import com.kflix.ticket.domain.Ticket;
 
 @Service
 public class ManageServiceImpl implements ManageService {
@@ -40,6 +41,31 @@ public class ManageServiceImpl implements ManageService {
 	@Override
 	public List<MemberView> getPageMemView(int page, int amount) {
 		return mg_mapper.selectPageMemView(page, amount);
+	}
+
+	@Override
+	public int changeRecommend(Ticket ticket) {
+		return mg_mapper.updateTicketRecommend(ticket);
+	}
+
+	@Override
+	public int changeStatus(Ticket ticket) {
+		return mg_mapper.updateTicketStatus(ticket);
+	}
+	
+	@Override
+	public int changeTicket(Ticket ticket) {
+		return mg_mapper.updateTicket(ticket);
+	}
+
+	@Override
+	public int addTicket(Ticket ticket) {
+		return mg_mapper.insertTicket(ticket);
+	}
+	
+	@Override
+	public List<Ticket> ticketViewAll() {
+		return mg_mapper.ticketViewAll();
 	}
 
 }

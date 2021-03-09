@@ -19,6 +19,7 @@ public class MemberView {
 	private String ticket_name;
 	private String ban;
 	private String save_status;
+	private String pay_sid;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date join_date;
