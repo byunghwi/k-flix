@@ -1,6 +1,7 @@
 package com.kflix.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -17,6 +18,9 @@ public interface WatchMapper {
 
 	// 영화 전체 들고오기
 	public List<MovieVO> getAllmovie();
+	
+	// 영화 전체맵 들고오기
+	public List<Map<String, Object>> getAllmoviemap();
 
 	// 영화 top10 들고오기
 	public List<MovieVO> getmovieRanking();
