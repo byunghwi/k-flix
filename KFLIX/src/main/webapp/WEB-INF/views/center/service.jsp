@@ -21,7 +21,7 @@
 </head>
 <style>
 	.accordion-body{
-		color: white;
+		color: gray;
 	}
 	
 	.accordion-button:focus {
@@ -29,15 +29,8 @@
     	border: none;
     	box-shadow: 0 0 0 0;
 	}
-	#headArea{
-		height: 200px;
-		background-size: 100% 200px;
-		text-align: center;
-		font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
-	}
-	#headArea>h1{
-		font-size: 60px;
+	#titleArea>h1{
+		font-size: 40px;
 		letter-spacing: 0.2rem;	
 	}
 	
@@ -53,7 +46,7 @@
 		padding-top: 20px;
 	}
 	#allhelp{
-		color: #ed2927;
+		color: white;
 		text-decoration: none;
 	}
 	
@@ -67,7 +60,10 @@
 	}
 	
 	.accordion-button::after {
-		background-image: url(/kflix/resources/imgs/service/down-arrow.png)!important;
+		background-image: url(/kflix/resources/imgs/service/down-arrow-white.png)!important;
+	}
+	*{
+		font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	}
 </style>
 
@@ -77,17 +73,14 @@
 
 
 
-<div class="py-4 ps-5" id="titleArea">
-<div id="headArea" class="">
-	<h1 class="pt-5">고객 센터</h1>
-</div>
-	<h3>${login.email }님, &nbsp;안녕하세요!</h3>
-	<br />
-	<h5 class="ps-2 contentfont">빠르고 정확하게 해결해 드리겠습니다.</h5>	
+<div class="pt-4 pb-3 ps-5 text-center" id="titleArea">
+	<h1 class="pb-3">고객 센터</h1>
+	<h3 class="pb-2 text-start">${login.email }님, &nbsp;안녕하세요!</h3>
+	<h5 class="ps-2 text-start">빠르고 정확하게 해결해 드리겠습니다.</h5>
 </div>
 
 <!-- FAQ -->
-<div class="d-flex justify-content-start py-4 border-top border-2 border-light ps-4">
+<div class="d-flex justify-content-start border-top border-1 border-light ps-4 pb-2 pt-4">
 	<h2 class="">자주하는 질문</h2>
 </div>
 
@@ -96,7 +89,7 @@
 	<div id="playA">
 	  <h5 class="contentfont text-light">재생 관련</h5>
 	  <c:forEach items="${help_play }" var="i" begin="0" end="${help_play.size()}" varStatus="status">
-	  <div class="accordion-item ps-3">
+	  <div class="accordion-item accordion-item-sm ps-3">
 		    <h6 class="accordion-header contentfont" id="play-head${status.index}">
 		      <button class="accordion-button collapsed text-light bg-kflix" type="button" data-bs-toggle="collapse" 
 		      		data-bs-target="#playcoll-${status.index}" aria-expanded="false" aria-controls="playcoll-${status.index}">
@@ -156,8 +149,8 @@
 </div>
 </div>
 	
-<div class="d-flex justify-content-end pb-5 pe-5 pt-3">
-	<a href="./FAQ" id="allhelp"  class="contentfont">전체보기&gt;&gt;</a>
+<div class="d-flex justify-content-end pb-3 pe-5 pt-3">
+	<a href="./FAQ" id="allhelp">전체보기&gt;&gt;</a>
 </div>
 	
 <!-- 1:1문의하기  -->
@@ -187,7 +180,6 @@
 var myCollapsible = document.getElementById('playaccordion')
 myCollapsible.addEventListener('show.bs.collapse', function () {
 	console.log('아코디언열림')
-	$('#accordion-button').css('color', '#141414');
 })
 </script>
 </body>
