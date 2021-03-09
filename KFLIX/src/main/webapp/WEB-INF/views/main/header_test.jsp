@@ -478,7 +478,6 @@
     newmovie_update.addEventListener("click", function(e) {
 		var data = {
 			email : "${login.email}",
-			alarm_date : "${today}",
 			alarm_count : 0
 		}
 
