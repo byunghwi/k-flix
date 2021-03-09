@@ -198,7 +198,7 @@
 			</div> 
 	  </div>
 	  
-	  <div class="totalArea">
+<%-- 	  <div class="totalArea">
 	      	<div id="pay_total">
 				<div class="total_content">
 					<div class="d-flex justify-content-between">
@@ -215,7 +215,7 @@
 					<a href="#" class="moreBtn" id="payMore"> more >> </a>
 				</div>
 			</div>
-	  </div>
+	  </div> --%>
   
  </div>
 </div>

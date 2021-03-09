@@ -12,8 +12,6 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/movie/netflix-fonts.css" />
-<link rel="stylesheet" href="/kflix/resources/css/movie/netflix-pulsate.css" />
 <meta charset="UTF-8">
 
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
@@ -37,7 +35,7 @@
 	#faqArea{
 		width: 1200px;
 		margin-left: calc(50% - 600px);
-		margin-top: 75px;
+		padding-top: 100px;
 		color: white;
 	}
 
@@ -61,9 +59,6 @@
 	
 	.accordion-button::after {
 		background-image: url(/kflix/resources/imgs/service/down-arrow-white.png)!important;
-	}
-	*{
-		font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	}
 </style>
 

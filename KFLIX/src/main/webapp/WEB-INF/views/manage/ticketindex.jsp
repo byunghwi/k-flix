@@ -34,6 +34,24 @@
 	thead>tr> th:nth-child(5){
 		width: 150px;
 	}
+	#tk_table>tbody>tr>td:nth-child(1){
+		color: #7575ff;
+		font-weight: bolder;
+	}
+	#tk_table>tbody>tr>td:nth-child(1)>span{
+		border: 1px #7575ff solid;
+		border-radius: 5px;
+		padding: 10px;
+	}
+	
+	#tk_table>tbody>tr>td:nth-child(1)>span:hover{
+		cursor: pointer;
+		border: 1px #7575ff solid;
+		border-radius: 5px;
+		padding: 10px;
+		background-color: #7575ff;
+		color: white;
+	}
 </style>
 <title>Insert title here</title>
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
@@ -47,7 +65,11 @@
 		<h1><i class="fas fa-ticket-alt"></i> 이용권</h1>
 	</div>
 
-	<div class="d-flex justify-content-end pb-2">
+	<div class="d-flex justify-content-between pb-2">
+		<div>
+			<button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#ticket_add" id="addBtn">+ 추가</button>
+		</div>
+			
 		<!-- 컨텐츠 개수 -->
 		<div class="amount">
 			<select class="form-select form-select-sm" id="helpAmount">
@@ -72,9 +94,9 @@
 			</tr>
 		</thead>	
 		<tbody>
-			<c:forEach items="${ticket }" var="i" varStatus="status">
+			<c:forEach items="${ticket }" begin="0" end="${ticket.size() }" var="i" varStatus="status">
 			<tr>
-				<td>${i.ticket_id }</td>
+				<td><span onclick="getTicketId(${i.ticket});">${i.ticket_id }</span></td>
 				<td>${i.ticket_name }</td>
 				<td>${i.ticket_price }</td>
 				<td>${i.ticket_status }</td>
@@ -102,6 +124,77 @@
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
 
+<div class="modal" tabindex="-1" id='ticket_update'>
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light">
+        <div>
+	        <span>이용권 번호</span>
+	        <input type="number" id="update_ticket_id" value=""/>
+        </div>
+        
+        <div>
+	        <span>이용권 이름</span>
+	        <input type="text" id="update_ticket_name" />
+        </div>
+        
+        <div>
+	        <span>이용권 기간</span>
+	        <input type="text" id="update_ticket_period" />
+        </div>
+        
+        <div>
+	        <span>이용권 가격</span>
+	        <input type="text" id="update_ticket_price" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="ticketAdd();">추가</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" id='ticket_add'>
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light">
+        <div>
+	        <span>이용권 번호</span>
+	        <input type="number" name="ticket_id" id="add_ticket_id" readonly/>
+        </div>
+        
+        <div>
+	        <span>이용권 이름</span>
+	        <input type="text" name="ticket_name" id="add_ticket_name" />
+        </div>
+        
+        <div>
+	        <span>이용권 기간</span>
+	        <input type="text" name="ticket_period" id="add_ticket_period" />
+        </div>
+        
+        <div>
+	        <span>이용권 가격</span>
+	        <input type="text" name="ticket_price" id="add_ticket_price" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="ticketAdd();">추가</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
@@ -113,6 +206,32 @@
 <script src="/kflix/resources/js/movie/pagenate.js?ver=12"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
+function getTicketId(obj) {
+	alert(obj)
+/* 	var updateId = parseInt($(obj).html());
+	$('#update_ticket_id').val(updateId);
+	$('#ticket_update').modal('show'); */
+}
+
+
+function ticketAdd() {
+	var ticket_data = {
+			ticket_id: $('#add_ticket_id').val(),
+			ticket_name: $('#add_ticket_name').val(),
+			ticket_period: $('#add_ticket_period').val(),
+			ticket_price: $('#add_ticket_price').val()
+	}
+	
+	console.log(JSON.stringify(ticket_data))
+}
+
+
+
+$('#addBtn').click(function(){
+	var lastId = parseInt($('#tk_table>tbody>tr:last-child>td>span').html()) + 1;
+	$('#add_ticket_id').val(lastId);
+})
+
 var recomend = ''; 
 function recommend(obj, ticketId) {
 	var id = ticketId;
@@ -150,12 +269,15 @@ function recommendChange(input_data) {
 		data: JSON.stringify(input_data),
 		contentType: 'application/json',
 		success: function(result){console.log(result + ' DB, 게시판 새로고침 확인')},
-		error: function(request){console.log('실패 : ' + request.status)}
+		error: function(request){
+			infoMsg(request)	
+		}
 	})
 }
 
 //로딩시 페이징
 $(document).ready(function() {
+	$('#ticket_').prepend('<span class="nav-clicked"></span>');
 	makePageNate(${total}, ${page}, ${amount});
 });
 

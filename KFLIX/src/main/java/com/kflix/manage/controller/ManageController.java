@@ -36,7 +36,7 @@ public class ManageController {
 	ManageService mg_service;
 	
 	@Inject
-	TicketService ticket;
+	TicketService ticket_service;
 	
 	static final PageNation PAGENATION;
 	static {
@@ -92,8 +92,8 @@ public class ManageController {
 	@RequestMapping(value="/ticketindex", method=RequestMethod.GET)
 	public String ticketView(Model model) {
 		System.out.println("============= 티켓뷰");
-		model.addAttribute("ticket", ticket.getAllTickets());
-		model.addAttribute("total", ticket.getAllTickets().size());
+		model.addAttribute("ticket", ticket_service.getAllTickets());
+		model.addAttribute("total", ticket_service.getAllTickets().size());
 		model.addAttribute("page", PAGENATION.getPage());
 		model.addAttribute("amount", PAGENATION.getAmount());
 		
@@ -105,9 +105,9 @@ public class ManageController {
 	public Map<String, Object> ticketView(@RequestBody PageNation pagen){
 		System.out.println("memberView");
 		Map<String, Object> list = new HashMap<>();
-		list.put("len", ticket.getAllTickets().size());
+		list.put("len", ticket_service.getAllTickets().size());
 		list.put("pagenation", pagen);
-		list.put("tk", ticket.getAllTickets());
+		list.put("tk", ticket_service.getAllTickets());
 		
 		return list;
 	}
@@ -116,11 +116,19 @@ public class ManageController {
 	@RequestMapping(value="/changeTicketReco", method=RequestMethod.PATCH, consumes = "application/json", produces = "application/json; charset=UTF-8")
 	public List<String> ticketChangeRecommend(@RequestBody Ticket ticket){
 		System.out.println("================== ticketChangeRecommend");
-		String msg = "성공";
-		List<String> list = new ArrayList<>();
-		list.add(msg);
 		System.out.println("티켓 아이디 : "+ticket.getTicket_id());
 		System.out.println("추천 여부 : "+ticket.getTicket_recommend());
+
+		String msg = "성공";
+		
+		int result = mg_service.changeRecommend(ticket);
+		if (result < 0) {
+			msg = "실패";
+		}
+		
+		List<String> list = new ArrayList<>();
+		list.add(msg);
+		
 		return list;
 	}
 }

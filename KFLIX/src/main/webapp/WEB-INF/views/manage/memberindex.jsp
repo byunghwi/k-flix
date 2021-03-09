@@ -132,6 +132,7 @@
 <script>
 //로딩시 페이징
 $(document).ready(function() {
+	$('#member_').prepend('<span class="nav-clicked"></span>');
 	makePageNate(${memTotal}, ${page}, ${amount});
 });
 

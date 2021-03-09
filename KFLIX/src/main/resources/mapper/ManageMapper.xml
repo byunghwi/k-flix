@@ -34,4 +34,8 @@
 		)
 		WHERE ROWNUM &lt;= #{amount}
 	</select>
+	
+	<update id="updateTicketRecommend">
+		UPDATE ticket SET ticket_recommend = #{ticket_recommend} WHERE ticket_id = #{ticket_id}
+	</update>
 </mapper>
