@@ -67,7 +67,7 @@
 		'WATCHING',
 		#{movie_id},
 		#{email},
-		#{watch_date},
+		TO_DATE(sysdate,'YY-MM-DD'),
 		#{view_point}
 		)
 	</insert>
@@ -207,7 +207,7 @@
 		alarmid_seq.nextval,
 		'movie',
 		#{email},
-		#{alarm_date},
+		TO_DATE(sysdate,'YY-MM-DD'),
 		#{alarm_count}
 		)
 	</insert>
