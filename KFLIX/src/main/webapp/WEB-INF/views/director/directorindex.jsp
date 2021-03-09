@@ -8,11 +8,11 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <title>감독</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 </head>
 <body>
 
@@ -60,8 +60,8 @@
 	<table class="table text-light text-center align-middle border-dark" id="directortable">
 		 <thead class="bg-dark">
 			<tr>
-				<th>#</th>
-				<th>이름</th>
+				<th style="width: 150px;">#</th>
+				<th style="width: 450px;">이름</th>
 				<th>관리</th>
 			</tr>
 		 </thead>

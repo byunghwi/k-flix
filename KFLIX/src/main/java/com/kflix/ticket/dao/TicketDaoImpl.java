@@ -24,6 +24,7 @@ public class TicketDaoImpl implements TicketDao {
 
 	@Override
 	public Ticket getTicket(int ticket_id) {
+		System.out.println("ticketDao 들엉모");
 		return sqlSession.selectOne(NAMESPACE + ".getTicket", ticket_id);
 	}
 

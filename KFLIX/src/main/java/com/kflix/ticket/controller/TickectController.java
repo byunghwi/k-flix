@@ -52,26 +52,42 @@ public class TickectController {
 		
 		//리다이렉트로 addFlashAttribute에 담겨진 데이터를 꺼낼 때 사용.
 		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
+		Member member = null;
+		Ticket ticket = null;
 
 		if(session.getAttribute("login") != null){
-			String email = ((Member) session.getAttribute("login")).getEmail(); // 세션으로 이메일 가져와서하게되면 브라우저가 달라졌을 때 못가져옴			
-			model.addAttribute("member", memberService.getMemberByEmail(email));
+			String email = ((Member) session.getAttribute("login")).getEmail(); // 세션으로 이메일 가져와서하게되면 브라우저가 달라졌을 때 못가져옴	
+			
+			member = memberService.getMemberByEmail(email);
+
+			model.addAttribute("member", member);
 			System.out.println("[TicketController] session 있을 때 > " + email);
 		}
 		if(redirectMap != null) {
-			model.addAttribute("member", redirectMap.get("member"));
+			
+			member = (Member)redirectMap.get("member");
+			
+			model.addAttribute("member", member);
 			
 			//브라우저 변경돼서 login이름의 member객체가 없을 때를 대비해서 생성해주자.
-			session.setAttribute("login", redirectMap.get("member"));
+			session.setAttribute("login", member);
 			
-			System.out.println("[TicketController] member 객체 있을 때 > " + redirectMap.get("member"));
+			System.out.println("[TicketController] member 객체 있을 때 > " + member);
+		}
+		
+		//이용권 있을 때만 이용권 세팅해서 보내주자.
+		if(member.getTicket_id() != 0) {
+			ticket = ticketService.getTicket(member.getTicket_id());
+			
+			model.addAttribute("ticket", ticket);
 		}
 		
 		List<Ticket> tickets = ticketService.getAllTickets();
 		System.out.println("[TicketController] /info시 ticket들 다 뽑기 > " + tickets.toString());
 		
 		model.addAttribute("sendChk", sendChk);
-		model.addAttribute("tickets", tickets);
+		//model.addAttribute("tickets", tickets);
+		
 		return "/ticket/infoPage";	
 	}
 

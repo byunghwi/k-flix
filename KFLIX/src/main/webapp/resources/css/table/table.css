@@ -16,8 +16,11 @@
 	height: 650px;
 }
 #board{
-	padding-top:75px;
+	padding-top:130px;
 }
 h1{
 	color:white;
+}
+body{
+	background-color: #141414;
 }

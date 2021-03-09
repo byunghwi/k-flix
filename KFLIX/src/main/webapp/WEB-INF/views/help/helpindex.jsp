@@ -10,12 +10,29 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=2" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
+<style>
+thead>tr> th:nth-child(1){
+	width: 50px;
+}
+thead>tr> th:nth-child(2){
+	width: 150px;
+}
+thead>tr> th:nth-child(3){
+	width: 400px;
+}
+thead>tr> th:nth-child(4){
+	width: 100px;
+}
+#infoconfrim{
+	z-index: 9999;
+}
+</style>
 <meta charset="UTF-8">
 <title>FAQ</title>
 
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 </head>
 <body>
 
@@ -111,7 +128,7 @@
 </section>
 
 <!-- 정보모달 -->
-<div class="modal" tabindex="-1" id="infoconfrim">
+<div class="modal" tabindex="100" id="infoconfrim">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -132,7 +149,7 @@
 
 <!-- 기능 모달 -->
 <div class="modal fade" id="processModal" tabindex="-1" aria-labelledby="processModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-dark">
         <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
@@ -156,11 +173,11 @@
          </div>
           <div class="mb-3">
             <label for="htitle" class="col-form-label">제목</label>
-            <input type="text" class="form-control" name="help_title" id="htitle" placeholder="Q.XXX" required>
+            <input type="text" class="form-control" name="help_title" id="htitle" required>
           </div>
           <div class="mb-3">
             <label for="hcontent" class="col-form-label">내용</label>
-            <textarea class="form-control" name="help_content" id="hcontent" rows="10"  placeholder="A.XXX" style="resize: none;" required></textarea>
+            <textarea class="form-control" name="help_content" id="hcontent" rows="10"  style="resize: none;" required></textarea>
           </div>
         </form>
       </div>
@@ -359,30 +376,17 @@ function modalBtn() {
 		} 
 			
 		if(data.help_type == null){			
-			$('#processModal').modal("hide");
 			infoMsg("카테고리를 설정 해주세요");
 			return;
 			
 		} else if(data.help_title == ''){
-			$('#processModal').modal("hide");
 			infoMsg("제목을 채워주세요");
 			return;
 			
-		} else if (data.help_title.substring(0, 2) != 'Q.') {
-			$('#processModal').modal("hide");
-			infoMsg("제목의 양식을 지켜주세요. <br> ex) Q.XXX XXX");
-			return;
-			
 		} else if (data.help_content == ''){
-			$('#processModal').modal("hide");
 			infoMsg("내용을 채워주세요");
-			return;
-			
-		} else if(data.help_content.substring(0, 2) != 'A.'){
-			$('#processModal').modal("hide");
-			infoMsg("내용의 양식을 지켜주세요. <br> ex) A.XXXXXXX");
-			return;
-		}
+			return;		
+		} 
 		
 		if (btnVal == '추가'){
 			type = "POST"
@@ -394,7 +398,7 @@ function modalBtn() {
 			url = "/kflix/FQARest/update"
 			processMsg = $('#hid').val() + " 번이 수정 되었습니다."
 		}
-	
+
  		$.ajax({
 			type: type,
 			url: url,
@@ -419,7 +423,7 @@ function modalBtn() {
 	 			makePageNate(len, pnum, amount);
 	  			 
 	  			makeTable(data, pnum, amount);
-	  			
+	  			console.log(data)
 	  			$('#processModal').modal("hide");
 	  			infoMsg(processMsg);
 	   		},
