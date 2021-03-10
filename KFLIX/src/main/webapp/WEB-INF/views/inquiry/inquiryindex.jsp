@@ -30,11 +30,11 @@
 	thead>tr> th:nth-child(3){
 		width: 250px;
 	}
-	thead>tr> th:nth-child(4){
-		width: 450px;
+	thead>tr> th:nth-child(6){
+		width: 150px;
 	}
 	thead>tr> th:nth-child(5){
-		width: 100px;
+		width: 130px;
 	}
 </style>
 <title>Insert title here</title>

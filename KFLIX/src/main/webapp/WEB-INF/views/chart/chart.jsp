@@ -84,7 +84,7 @@ body {
 		</div>
 	</div>
 	  
-	<div class="row">
+<!-- 	<div class="row">
 	  <div class="col-lg chartArea">
 	  	<div>
 	  		<h5><i class="fas fa-chart-line"></i> 그래프2</h5>
@@ -102,7 +102,7 @@ body {
 	  		<h5><i class="fas fa-chart-bar"></i> 그래프2</h5>
 	  	</div>
 	  </div>
-	</div>
+	</div> -->
 	
 </div>
 

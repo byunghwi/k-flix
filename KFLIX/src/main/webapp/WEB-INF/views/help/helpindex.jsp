@@ -19,11 +19,11 @@ thead>tr> th:nth-child(1){
 thead>tr> th:nth-child(2){
 	width: 150px;
 }
-thead>tr> th:nth-child(3){
-	width: 400px;
+thead>tr> th:nth-child(5){
+	width: 200px;
 }
 thead>tr> th:nth-child(4){
-	width: 100px;
+	width: 150px;
 }
 #infoconfrim{
 	z-index: 9999;
