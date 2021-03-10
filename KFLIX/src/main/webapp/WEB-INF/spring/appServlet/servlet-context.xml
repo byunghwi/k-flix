@@ -42,6 +42,11 @@
 		class="com.kflix.member.interceptoer.LoginInterceptor">
 	</beans:bean>
 
+	<!-- 매니저 인터셉터 -->
+	<beans:bean id="ManagerInterceptor"
+		class="com.kflix.manage.interceptor.ManagerInterceptor">
+	</beans:bean>
+	
 	<interceptors>
 		<interceptor>
 			<mapping path="/loginPost" />
@@ -50,8 +55,12 @@
 
 		<interceptor>
 			<mapping path="/browse" />
-			<mapping path="/movie/movieindex" />
 			<beans:ref bean="authInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/movie/**" />
+			<beans:ref bean="ManagerInterceptor" />
 		</interceptor>
 	</interceptors>
 

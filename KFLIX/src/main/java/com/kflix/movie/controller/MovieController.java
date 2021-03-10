@@ -130,18 +130,6 @@ public class MovieController {
 		return "redirect:/movie/movieindex";
 	}
 
-	
-	
-	/*
-	 * 상세보기 페이지
-	 */
-	@GetMapping("detail/{id}")
-	public String detail(Model model, @PathVariable("id") int movie_id) {
-		model.addAttribute("movie", mv_service.selectMovieViewById(movie_id)); 
-		
-		return "movie/detail";
-	}
-	
 	/*
 	 * 수정 페이지
 	 */
