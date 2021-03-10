@@ -55,11 +55,16 @@ public class TicketServiceImpl implements TicketService {
 		try {
 			MailUtils sendMail = new MailUtils(mailSender);
 			sendMail.setSubject("[KFLIX] 본인인증");
-			sendMail.setText(new StringBuffer().append("<h1>[본인 인증]</h1>").append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p><br><br>")
+			sendMail.setText(new StringBuffer()
+					.append("<h1>[본인 인증]</h1><br><br>")
+					.append("<p><b> \""+ email + "\" <b>님 안녕하세요.</p><br>")
+					.append("<p>KFLIX 본인확인을 위한 E-MAIL인증 절차입니다.</p><br>")
+					.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p><br><br><br>")
 					.append("<a href='http://localhost:8081/kflix/member/signUpConfirm?email=")
 					.append(email)
 					.append("' style='text-align: center; background-color: rgb(46, 52, 60); border: none; text-decoration: none; padding: 30px 10px 30px 10px; margin-bottom: 40px; color: white; border-radius: 7px;' target='_blenk'>KFLIX로 이동</a><br><br><br><br>")
-					.append("본 메일은 발신 전용이므로 메일로 문의 시 확인이 불가능합니다.<br />").toString());
+					.append("<p>감사합니다.<br>KFLIX 드림. </p><br>")
+					.append("본 메일은 발신 전용이므로 메일로 문의 시 확인이 불가능합니다.<br/>KFLIX Copyright ⓒ 2021 by KFLIX, Inc. All rights reserved.").toString());
 
 			sendMail.setFrom("KFLIX", "KFLIX");
 			sendMail.setTo(email);
@@ -84,7 +89,6 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Ticket getTicket(int ticket_id) {
-		System.out.println("ticketService 들어옴");
 		return ticketDao.getTicket(ticket_id);
 	}
 }
