@@ -14,6 +14,8 @@
 <head>
 <meta charset="UTF-8">
 <title>KFLIX</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -51,13 +53,13 @@
 	<span class="anchor" id="abody"></span>
 	<div id="modalbackground">
 		<div id="confirm">
-			<i class="fas fa-power-off logout"></i> <i
-				style="color: #aa2929; font-size: 50px" class="far fa-times-circle"></i>
-			<p style="color: white; font-weight: bold; font-size: 22px;">이용권
-				구매 요청</p>
-			<p style="color: #dcdcdc; font-size: 16px; font-weight: 300;">구매
-				후 무제한 감상을 시작해 보세요.</p>
-			<div id="confirmbtn">이용권 구매하기</div>
+		<i style="color: #ec2927; font-size: 65px;" class="far fa-times-circle"></i>
+			<p style="color: white; font-weight: bold; font-size: 22px;">
+				이용권 구매 요청<br> <span
+					style="color: #dcdcdc; font-size: 16px; font-weight: 300;">구매
+					후 무제한 감상을 시작해 보세요.</span>
+			</p>
+			<div id="confirmbtn">확인</div>
 		</div>
 	</div>
 
@@ -896,21 +898,45 @@
 	
 	anchor = document.querySelectorAll('.anchor')
 	
-	
 	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
 	anchor.forEach(function(anchorItem) {
 		anchorItem.style.height = "120px";
 		anchorItem.style.marginTop = "-120px"; 
-});
-	
+	});
 	</c:if>
+
+	modalbackground = document.getElementById('modalbackground');
 	
-	/* 	modalbackground = document.getElementById('modalbackground');
-	console.log(${member.ticket_id}+"dlek");
-	<c:if test="${member.ticket_id == 0 || empty member.ticket_id}">
-	modalbackground.style.display = 'block';
-	body.style.overflow = 'hidden';
-	</c:if> */
+	modalbackground.addEventListener("click", function(e){
+		modalbackground.style.display = 'none';
+		
+	});
+	
+	confirm = document.getElementById('confirm');
+	confirm.addEventListener("click", function(e){
+		e.stopPropagation();
+	});
+	
+	confirmbtn = document.getElementById('confirmbtn');
+	confirmbtn.addEventListener("click", function(e){
+		document.querySelector('#ticket').click();
+		modalbackground.style.display = 'none';
+	});
+	
+	
+	function framshow(movieId) {
+		<c:choose>
+			<c:when test="${member.ticket_id == 0 || empty member.ticket_id}">
+				modalbackground.style.display = 'block';
+			</c:when>
+			<c:otherwise>
+				infoframe.src = "";
+				infoframe.style.display = 'block';
+				infoframe.src = "/kflix/browse/" + movieId;
+				body.style.overflow = 'hidden';
+			</c:otherwise>
+		</c:choose>
+	}
 
 	var payMsg = '${payMsg}';
 	if(payMsg === 'success'){

@@ -7,6 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>${movie.movie_title }</title>
+<link rel="icon"
+    href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon"
+    href="/kflix/resources/imgs/main/Favicon.png">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"

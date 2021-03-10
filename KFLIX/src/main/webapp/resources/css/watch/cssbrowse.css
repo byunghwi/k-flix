@@ -35,7 +35,7 @@
 }
 
 progress::-webkit-progress-value {
-	background: #ec2927;
+	background: #ed2927;
 }
 
 progress::-moz-progress-bar {
@@ -186,7 +186,7 @@ ul {
 	z-index: 100;
 	height: 100%;
 	top: 0;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0);
 }
 
 #confirm {
@@ -194,29 +194,32 @@ ul {
 	top: 50%;
 	left: 50%;
 	transform: translate(-55%, -50%);
-	width: 440px;
-	height: 270px;
+	width: 392px;
+	height: 258px;
 	background-color: #141414;
-	padding: 30px;
+	padding: 12px;
+	z-index: 101;
 	border-radius: 0.5rem;
-	box-shadow: 0 0 15px #000000;
+	box-shadow: 0 0 10px #000000;
 	text-align: -webkit-center;
 }
 
 #confirm>* {
-	padding: 7px 0px;
+	padding: 9px 0px;
 	margin: 0;
 }
 
 #confirmbtn {
 	cursor: pointer;
-	width: 230px;
-	height: 45px;
+	display: inline-block;
+	width: 120px;
 	background-color: #2f2f2f;
 	color: #dcdcdc;
-	padding: 9px;
-	margin: 15px;
+	padding: 11px;
+	font-size: 15px;
+	margin: 9px 9px;
 	font-weight: bold;
+	border-radius: 0.3rem;
 }
 
 .videohover {
@@ -374,7 +377,7 @@ a:active {
 	box-shadow: 0px 0px 2px #f9ff00;
 }
 
-.topMark > * {
+.topMark>* {
 	color: #ed2927;
 }
 

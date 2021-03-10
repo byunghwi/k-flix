@@ -8,6 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>${movie.movie_title}</title>
+<link rel="icon"
+    href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon"
+    href="/kflix/resources/imgs/main/Favicon.png">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -22,7 +26,6 @@
 	href="/kflix/resources/css/watch/cssinfo.css">
 <script src="https://kit.fontawesome.com/6421ed9b05.js"
 	crossorigin="anonymous"></script>
-
 </head>
 <body>
 	<div id="frame">
