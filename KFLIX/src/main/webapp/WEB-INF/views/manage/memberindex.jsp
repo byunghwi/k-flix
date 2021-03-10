@@ -45,6 +45,16 @@
 	thead>tr> th:nth-child(8){
 		width: 100px;
 	}
+	thead>tr> th:nth-child(9){
+		width: 130px;
+	}
+	#sus_span{background-color: red; border-radius: 5px; padding: 5px;}
+	#sus_span:hover{cursor:pointer;}
+	
+	
+	#re_span{background-color: blue; border-radius: 5px; padding: 5px;}
+	#re_span:hover{cursor:pointer;}
+	
 </style>
 <title>Insert title here</title>
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
@@ -103,7 +113,14 @@
 					</c:otherwise>
 				</c:choose>
 				<td><fmt:formatDate value="${i.join_date }" pattern="yyyy-MM-dd"/></td>
-				<td>${i.ban }</td>
+				<c:choose>
+					<c:when test="${empty i.ban || i.ban eq 'N'}">
+						<td><span id="sus_span" onclick="suspension(this, '${i.email}');">정지 시키기</span></td>
+					</c:when>
+					<c:otherwise>
+						<td><span id="re_span" onclick="suspension(this, '${i.email}');">복구 시키기</span></td>
+					</c:otherwise>
+				</c:choose>
 			</tr>
 			</c:forEach>
 		</tbody>	
@@ -130,6 +147,29 @@
 <script src="/kflix/resources/js/movie/pagenate.js?ver=12"></script>
 <script src="/kflix/resources/js/movie/alertCustom.js?ver=10"></script>
 <script>
+function suspension(content, email){
+	if ($(content).html() == '정지 시키기'){
+		$(content).html('복구 시키기')
+		$(content).attr('id', 're_span')
+		
+		console.log($(content).attr('id'))
+		console.log($(content).html())
+		
+	} else if ($(content).html() == '복구 시키기'){
+		$(content).html('정지 시키기')
+		$(content).attr('id', 'sus_span')
+		
+		console.log($(content).attr('id'))
+		console.log($(content).html())
+		
+	} else {
+		infoMsg('잘못된 입력 감지');
+	}
+
+	console.log(email)
+	
+}
+
 //로딩시 페이징
 $(document).ready(function() {
 	$('#member_').prepend('<span class="nav-clicked"></span>');
