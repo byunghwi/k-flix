@@ -44,11 +44,18 @@
 	width: 100%;
 	height: 20px;
 }
+.wrapper {
+
+	position:relative;
+
+    min-height:100%;
+
+}
 </style>
 
 </head>
 <body>
-
+<div class="wrapper">
 	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 	<span class="anchor" id="abody"></span>
 	<div id="modalbackground">
@@ -859,6 +866,8 @@
 		</div>
 
 	</div>
+	<%@include file="/WEB-INF/views/main/footer.jsp"%>
+	</div>
 	<iframe id="infoframe" name="browse" src="" width="400px"
 		height="300px" allowTransparency="true"
 		style="filter: chroma(color = #999999)"></iframe>
@@ -1099,6 +1108,6 @@ prevBtn${j}.addEventListener(
 </c:forEach>
 		
 	</script>
+	
 </body>
 </html>
-<%@include file="/WEB-INF/views/main/footer.jsp"%>

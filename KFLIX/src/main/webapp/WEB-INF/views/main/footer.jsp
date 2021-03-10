@@ -10,11 +10,13 @@
 	
 <style>
 footer {
-	position: fixed;
-    z-index: 30;
+	position: absolute;
+    left: 0;
+    bottom: 0;
     width: 100%;
-    background-color: #191818;
-    background-color: transparent;
+    padding: 15px 0;
+    color: white;
+    z-index: 50000;
 }
 
 .logo_footer {
@@ -63,10 +65,10 @@ footer {
 	</div>
 </footer>
 <script>
-$(function(){
+/* $(function(){
 	stickyFooter();
 
-	$(window).scroll(stickyFooter).resize(stickyFooter);
+	//$(window).scroll(stickyFooter).resize(stickyFooter);
 });
 
 
@@ -78,15 +80,12 @@ function stickyFooter(){
 
 	//alert("문서전체높이:" + document_height + " , 스크롤위치:" + document_scrollTop + ", 창 높이:" + window_height + ", footer_height:" + footer_height);
 
-	gap = document_height - footer_height - window_height; 
-	bottom = document_scrollTop - gap ; 
+	bottom = document_height - footer_height - window_height; 
 
-	if(document_scrollTop > gap){
-		$("footer").css("bottom", bottom+"px");
-	}else{ 
-		$("footer").css("bottom","0");
-	}
-} 
+
+	$("footer").css("bottom", bottom+"px");
+
+}  */
 
 </script>
 </body>

@@ -166,11 +166,20 @@ section input {
 section .contents_mem {
 	padding-bottom: 20px;
 }
+
+.wrapper {
+
+	position:relative;
+
+    min-height:100%;
+
+}
 </style>
 
 </head>
 <body>
 
+<div class="wrapper">
 	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
 	<script>
@@ -180,107 +189,109 @@ section .contents_mem {
 		}
 	</script>
 
-	<div class="total_wrap">
-		<section>
-			<div class="contents_cert">
-				<h3>본인인증</h3>
-				<hr class="hr-title">
-				<table class="table-email">
-					<tr>
-						<td>본인인증 상태</td>
-						<c:choose>
-							<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
-								<td>미인증</td>
-								<td>이메일을 전송했습니다.</td>
-							</c:when>
-
-							<c:when test="${member.cert eq 'N'}">
-								<td>미인증
-								<td />
-								<td><button type="button" id="sendEmail"
-										onclick="sendEmail();">이메일 인증 보내기</button></td>
-							</c:when>
-
-							<c:when test="${member.cert eq 'Y'}">
-								<td>인증완료</td>
-							</c:when>
-
-						</c:choose>
-					</tr>
-				</table>
-			</div>
-
-			<hr class="hr-divide">
-
-			<form id="del_t_form" method="POST">
-				<div class="contents_ticket">
-					<h3>이용권</h3>
+		<div class="total_wrap">
+			<section>
+				<div class="contents_cert">
+					<h3>본인인증</h3>
 					<hr class="hr-title">
-					<table class="table-ticket">
+					<table class="table-email">
 						<tr>
+							<td>본인인증 상태</td>
 							<c:choose>
-								<c:when
-									test="${member.ticket_id eq null || member.ticket_id eq 0}">
-									<td>이용권 없음</td>
+								<c:when test="${member.cert eq 'N' && sendChk eq 'OK'}">
+									<td>미인증</td>
+									<td>이메일을 전송했습니다.</td>
 								</c:when>
 
-								<c:when
-									test="${member.ticket_id ne null && member.ticket_id ne 0 && not empty member.ticket_id}">
-									<input type="hidden" name="ticket" id="ticket"
-										value="${ticket }">
-									<td>${ticket.ticket_name }</td>
-									<td>만료일 : <fmt:formatDate value="${member.pay_exp_date }"
-											pattern="yyyy년 MM월 dd일"></fmt:formatDate></td>
-									<td id="remove"><c:if
-											test="${member.pay_remove_dt eq null}">
-											<button id="sendEmail" onclick="removePay();">이용권 해지</button>
-										</c:if></td>
+								<c:when test="${member.cert eq 'N'}">
+									<td>미인증
+									<td />
+									<td><button type="button" id="sendEmail"
+											onclick="sendEmail();">이메일 인증 보내기</button></td>
 								</c:when>
+
+								<c:when test="${member.cert eq 'Y'}">
+									<td>인증완료</td>
+								</c:when>
+
 							</c:choose>
 						</tr>
 					</table>
 				</div>
-			</form>
 
-			<hr class="hr-divide">
+				<hr class="hr-divide">
 
-			<form id="modify_form" method="POST">
-				<div class="contents_mem">
-					<input type="hidden" name="email" value="${member.email }">
+				<form id="del_t_form" method="POST">
+					<div class="contents_ticket">
+						<h3>이용권</h3>
+						<hr class="hr-title">
+						<table class="table-ticket">
+							<tr>
+								<c:choose>
+									<c:when
+										test="${member.ticket_id eq null || member.ticket_id eq 0}">
+										<td>이용권 없음</td>
+									</c:when>
 
-					<h3>내 정보</h3>
-					<hr class="hr-title">
-					<table class="table-myinfo">
-						<tr>
-							<td>E-MAIL</td>
-							<td>${member.email }</td>
-						</tr>
-						<tr>
-							<td>닉네임</td>
-							<td>${member.nick }</td>
-						</tr>
-					</table>
-					<button id="modifyInfoBtn" onclick="modify();">정보수정</button>
+									<c:when
+										test="${member.ticket_id ne null && member.ticket_id ne 0 && not empty member.ticket_id}">
+										<input type="hidden" name="ticket" id="ticket"
+											value="${ticket }">
+										<td>${ticket.ticket_name }</td>
+										<td>만료일 : <fmt:formatDate value="${member.pay_exp_date }"
+												pattern="yyyy년 MM월 dd일"></fmt:formatDate></td>
+										<td id="remove"><c:if
+												test="${member.pay_remove_dt eq null}">
+												<button id="sendEmail" onclick="removePay();">이용권
+													해지</button>
+											</c:if></td>
+									</c:when>
+								</c:choose>
+							</tr>
+						</table>
+					</div>
+				</form>
+
+				<hr class="hr-divide">
+
+				<form id="modify_form" method="POST">
+					<div class="contents_mem">
+						<input type="hidden" name="email" value="${member.email }">
+
+						<h3>내 정보</h3>
+						<hr class="hr-title">
+						<table class="table-myinfo">
+							<tr>
+								<td>E-MAIL</td>
+								<td>${member.email }</td>
+							</tr>
+							<tr>
+								<td>닉네임</td>
+								<td>${member.nick }</td>
+							</tr>
+						</table>
+						<button id="modifyInfoBtn" onclick="modify();">정보수정</button>
 
 
-					<table class="table-myinfo-modify">
+						<table class="table-myinfo-modify">
 
-						<tr>
-							<td><input type="text" name="nick"
-								placeholder="변경할 닉네임을 입력하세요." required></td>
-						</tr>
-						<tr>
-							<td><button id="modifyConfirmBtn"
-									onclick="modify_confirm();">확인</button></td>
-						</tr>
+							<tr>
+								<td><input type="text" name="nick"
+									placeholder="변경할 닉네임을 입력하세요." required></td>
+							</tr>
+							<tr>
+								<td><button id="modifyConfirmBtn"
+										onclick="modify_confirm();">확인</button></td>
+							</tr>
 
-					</table>
-				</div>
-			</form>
+						</table>
+					</div>
+				</form>
 
-		</section>
+			</section>
 
-		<footer> </footer>
+		</div>
+		<%@include file="/WEB-INF/views/main/footer.jsp"%>
 	</div>
 	<script type="text/javascript">
 		function sendEmail() {
@@ -369,4 +380,3 @@ section .contents_mem {
 	</script>
 </body>
 </html>
-<%@include file="/WEB-INF/views/main/footer.jsp"%>
