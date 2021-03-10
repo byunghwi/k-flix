@@ -1075,3 +1075,4 @@ prevBtn${j}.addEventListener(
 	</script>
 </body>
 </html>
+<%@include file="/WEB-INF/views/main/footer.jsp"%>

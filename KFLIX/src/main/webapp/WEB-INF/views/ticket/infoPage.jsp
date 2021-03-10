@@ -359,3 +359,4 @@ input {
 	</script>
 </body>
 </html>
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
