@@ -122,7 +122,7 @@ a:active {
 }
 
 .progress__filled {
-	background: rgba(237, 42, 40, 1);
+	background: #ed2927;
 	transition: right 0.5s ease-out;
 	cursor: pointer;
 }
@@ -206,7 +206,7 @@ a:active {
 }
 
 input[type=range]::-webkit-slider-thumb {
-	background: rgba(237, 42, 40, 1);
+	background: #ed2927;
 	width: 18px;
 	height: 15px;
 }

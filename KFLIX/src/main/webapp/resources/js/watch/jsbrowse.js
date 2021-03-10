@@ -12,15 +12,11 @@ body = document.querySelector('body');
 //	location.href = "/kflix/ticket/info";
 //});
 
+
+
+
 function mianreload() {
 	document.location.reload(true);
-}
-
-function framshow(movieId) {
-	infoframe.src = "";
-	infoframe.style.display = 'block';
-	infoframe.src = "/kflix/browse/" + movieId;
-	body.style.overflow = 'hidden';
 }
 
 function frameclose() {
