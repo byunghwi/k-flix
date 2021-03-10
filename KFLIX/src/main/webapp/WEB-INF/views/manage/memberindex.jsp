@@ -11,7 +11,7 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=6" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=8" />
 <meta charset="UTF-8">
 <style>
 	#contentTip{
@@ -43,16 +43,16 @@
 		width: 150px;
 	}	
 	thead>tr> th:nth-child(8){
-		width: 100px;
+		width: 130px;
 	}
 	thead>tr> th:nth-child(9){
 		width: 130px;
 	}
-	#sus_span{background-color: red; border-radius: 5px; padding: 5px;}
+	#sus_span{background-color: red; border-radius: 5px; padding: 5px; font-weight: bolder;}
 	#sus_span:hover{cursor:pointer;}
 	
 	
-	#re_span{background-color: blue; border-radius: 5px; padding: 5px;}
+	#re_span{background-color: blue; border-radius: 5px; padding: 5px; font-weight: bolder;}
 	#re_span:hover{cursor:pointer;}
 	
 </style>
@@ -64,11 +64,16 @@
 <%@include file="../manage/navbar.jsp"%>
 
 <section id="table_list">
-	<div class="d-flex justify-content-start pb-5" id="board">
+	<div class="d-flex justify-content-start pb-2" id="board">
 		<h1><i class="far fa-user"></i> 회원</h1>
 	</div>
 
-	<div class="d-flex justify-content-end pb-2">
+	<div class="d-flex justify-content-between pb-2">
+		<div class="d-flex justify-content-start">
+			<span>
+				<button class="btn btn-secondary btn-sm ps-2">EXEL</button>
+			</span>	
+		</div>
 		<!-- 컨텐츠 개수 -->
 		<div class="amount">
 			<select class="form-select form-select-sm" id="helpAmount">
@@ -126,7 +131,7 @@
 		</tbody>	
 		</table>
 	</div>
-	<br />
+
 	<!-- 페이지 네이트 영역 -->
 	<div id="pagenate">
 		<ul  class="pagination justify-content-center">	

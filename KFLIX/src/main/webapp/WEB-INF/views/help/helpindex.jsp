@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
-<link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=4" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/alert.css?ver=1" />
 <style>
 thead>tr> th:nth-child(1){
 	width: 50px;
@@ -41,14 +41,14 @@ thead>tr> th:nth-child(4){
 <section id="table_list">
 <!-- 본체 영역 -->
 <div class="container" id="board">
-	<div class="d-flex justify-content-start pb-5">
+	<div class="d-flex justify-content-start pb-2">
 		<h1><i class="far fa-question-circle"></i> FAQ</h1>
 	</div>
 	
 	<div class="d-flex justify-content-between">
 		<!-- 추가 버튼 영역 -->
 		<div id="addArea" class="ps-2 pb-2">
-			<button id="addBtn" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" 
+			<button id="addBtn" class="btn btn-success btn-sm" data-bs-toggle="modal" 
 					data-bs-target="#processModal" data-bs-whatever="add">+ 추가</button>
 		</div>
 	
@@ -117,7 +117,7 @@ thead>tr> th:nth-child(4){
 		</tbody>	
 		</table>
 	</div>
-	<br />
+
 	<!-- 페이지 네이트 영역 -->
 	<div id="pagenate">
 		<ul  class="pagination justify-content-center">	

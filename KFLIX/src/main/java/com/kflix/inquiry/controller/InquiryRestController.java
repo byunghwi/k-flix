@@ -45,14 +45,13 @@ public class InquiryRestController {
 		
 		// inq 객체 보내서 메일보내기
 		boolean send = in_service.sendReplyMail(inquiry);
-		inquiry.setReply_content(inquiry.getReply_content().substring(inquiry.getReply_content().lastIndexOf("re>>") + 6));
-		
-		// inq 객체 보내서 db업데이트
-		int result = in_service.updateReplyInq(inquiry);
-		
-		if(send && result == 1) {
+
+		if(send) {
+			// inq 객체 보내서 db업데이트
+			in_service.updateReplyInq(inquiry);
 			log.info("메일 저장 둘다 성공");
-		} else if(result < 0) {
+			
+		} else {
 			log.info("DB 저장실패");
 		}
 		

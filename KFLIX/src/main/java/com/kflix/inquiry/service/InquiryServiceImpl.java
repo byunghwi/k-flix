@@ -56,7 +56,8 @@ public class InquiryServiceImpl implements InquiryService {
 
 	@Override
 	public boolean sendReplyMail(Inquiry inquiry) {
-		log.info("============== 답변 메일 ================");
+		log.info("============== 메일로 보낼 ================");
+		log.info("문의 내용: "+inquiry.getInquiry_content());
 		log.info("답변 제목: "+inquiry.getReply_title());
 		log.info("답변 내용: "+inquiry.getReply_content());
 		log.info("매니저이메일: "+inquiry.getManager_email());
@@ -66,9 +67,13 @@ public class InquiryServiceImpl implements InquiryService {
 			MailUtils sendMail = new MailUtils(mailSender);
 			sendMail.setSubject(inquiry.getReply_title());// 제목
 			// 내용
-			sendMail.setText(new StringBuffer().append(inquiry.getReply_content()).toString().replaceAll("/", "<br>"));
+			sendMail.setText(new StringBuffer().append(inquiry.getInquiry_content())
+												.append("<br>============================<br>")
+												.append("re>><br>")
+												.append(inquiry.getReply_content()).toString());
 			sendMail.setFrom(inquiry.getManager_email(), "KFLIX"); // 이메일 이름
 			sendMail.setTo(inquiry.getEmail()); // 받는사람
+	
 			sendMail.send();
 			
 		} catch (MessagingException e) {

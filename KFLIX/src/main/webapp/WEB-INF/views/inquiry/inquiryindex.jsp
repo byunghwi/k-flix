@@ -11,7 +11,7 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=4" />
 <meta charset="UTF-8">
 <style>
 	#contentTip{
@@ -48,7 +48,7 @@
 <input id="helpPage" type="hidden" value="${page }"/>
 <section id="table_list">
 	
-	<div class="d-flex justify-content-start pb-5" id="board">
+	<div class="d-flex justify-content-start pb-2" id="board">
 		<h1><i class="far fa-envelope"></i> 1:1 문의</h1>
 	</div>
 
@@ -108,12 +108,12 @@
 					<c:choose>
 						<c:when test="${empty inq.reply_date}">
 							<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#replyModal"
-								data-replyid="${inq.inquiry_id }" data-replycont="${inq.inquiry_content }"
+								data-replyid="${inq.inquiry_id }" data-inqcont="${inq.inquiry_content }" data-replycont="${inq.reply_content }"
 								data-memail="${inq.email }">답변하기</button>
 						</c:when>
 						<c:otherwise>
 							<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal"
-								data-type="${inq.inquiry_type }" data-rcont="${inq.reply_content }" data-rtitle="${inq.reply_title }">
+								data-type="${inq.inquiry_type }" data-rcont="${inq.reply_content }" data-rtitle="${inq.inquiry_title }" data-icont="${inq.inquiry_content }">
 								<fmt:formatDate value="${inq.reply_date }" pattern="yyyy-MM-dd"/>
 							</button>
 						</c:otherwise>
@@ -124,7 +124,7 @@
 		</tbody>	
 		</table>
 	</div>
-	<br />
+
 	<!-- 페이지 네이트 영역 -->
 	<div id="pagenate">
 		<ul  class="pagination justify-content-center">	
@@ -149,7 +149,12 @@
 		  <h6>관리자 이메일</h6>
 		  <input type="text" class="form-control" id="manager_email" value="belfort91919@gmail.com" required readonly>
 		</div>
-		
+
+		<div class="mb-3">
+		  <h6>문의 내용</h6>
+		  <textarea class="form-control" id="reply_inq_content" rows="7" style="resize: none;" required readonly></textarea>
+		</div>
+				
 		<div class="mb-3">
 		  <h6>제목</h6>
 		  <input type="text" class="form-control" id="reply_title" value="[KFLIX] 문의 주신 내용에 대한 답변입니다." required>
@@ -157,7 +162,7 @@
 		
 		<div class="mb-3">
 		  <h6>답변 &nbsp;&nbsp;<span id="contentTip">"/" 로 개행</span></h6>
-		  <textarea class="form-control" id="reply_content" rows="15" style="resize: none;" required></textarea>
+		  <textarea class="form-control" id="reply_content" rows="7" style="resize: none;" required></textarea>
 		</div>
 		
       </div>
@@ -189,8 +194,13 @@
 		</div>
 		
 		<div class="mb-3">
+		  <h6>문의주신내용</h6>
+		  <textarea class="form-control" id="detail_inq_content" rows="7" style="resize: none;" required readonly></textarea>
+		</div>
+		
+		<div class="mb-3">
 		  <h6>답변</h6>
-		  <textarea class="form-control" id="detail_content" rows="15" style="resize: none;" required readonly></textarea>
+		  <textarea class="form-control" id="detail_content" rows="7" style="resize: none;" required readonly></textarea>
 		</div>
 		
       </div>
@@ -242,9 +252,11 @@ detailModal.addEventListener('show.bs.modal', function (event) {
 	type = $(event.relatedTarget).data('type');
 	rtitle = $(event.relatedTarget).data('rtitle');
 	rcont = $(event.relatedTarget).data('rcont');
-
+	icont = $(event.relatedTarget).data('icont');
+	
 	$('#detail_type').val(type);
 	$('#detail_title').val(rtitle);
+	$('#detail_inq_content').val(icont);
 	$('#detail_content').html(rcont.replaceAll('/', ''));
 })
 
@@ -256,12 +268,10 @@ replyModal.addEventListener('show.bs.modal', function (event) {
 	replyid = $(event.relatedTarget).data('replyid');
 	memail = $(event.relatedTarget).data('memail');
 	replycont = $(event.relatedTarget).data('replycont');
-
-	$('#reply_content').val('');
+	inqcont = $(event.relatedTarget).data('inqcont');
 	
-	content = replycont + '/\n======================================/\nre>>/\n'
-	
-	$('#reply_content').val(content)
+	$('#reply_inq_content').val(inqcont);
+	$('#reply_content').val(replycont)
 })
 
 
@@ -273,6 +283,7 @@ $('#replyBtn').click(function(){
 		inquiry_id: replyid,
 		email: memail,
 		manager_email: $('#manager_email').val(),
+		inquiry_content: $('#reply_inq_content').val(),
 		reply_title: $('#reply_title').val(),
 		reply_content: $('#reply_content').val()
 	});
@@ -427,17 +438,18 @@ function makeTable(data, pnum, amount) {
 
 	
 	try{
-		
+
 		for	(var i = first_li; i < last_li; i++) {
 			var make = '';
 			if (data[i].reply_date == null) {
 				make = '<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#replyModal"'
-						+'data-replyid="' + data[i].inquiry_id + '" data-replycont="' + data[i].inquiry_content + '"'
+						+'data-replyid="' + data[i].inquiry_id + '" data-inqcont="' + data[i].inquiry_content + '"' + 'data-replycont="' + data[i].reply_content + '"'
 						+'data-memail="' + data[i].email + '">답변하기</button>'
 	
 			} else {
 				make = '<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal"'
-						+'data-type="' + data[i].inquiry_type + '" data-rcont="' + data[i].reply_content + '" data-rtitle="' + data[i].reply_title + '">'
+						+'data-type="' + data[i].inquiry_type + '" data-rcont="' + data[i].reply_content + '" data-rtitle="' + data[i].inquiry_title + '" '
+						+'data-icont="' + data[i].inquiry_content + '">'
 						+moment(data[i].reply_date).format("YYYY-MM-DD") + '</button>'
 			}
 			

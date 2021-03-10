@@ -35,7 +35,7 @@
 	#faqArea{
 		width: 1200px;
 		margin-left: calc(50% - 600px);
-		padding-top: 100px;
+		padding-top: 75px;
 		color: white;
 	}
 
@@ -60,6 +60,10 @@
 	.accordion-button::after {
 		background-image: url(/kflix/resources/imgs/service/down-arrow-white.png)!important;
 	}
+	#ac_div{
+		overflow: auto;
+		height: 455px;
+	}
 </style>
 
 <body>
@@ -79,6 +83,7 @@
 	<h2 class="">자주하는 질문</h2>
 </div>
 
+<div id="ac_div">
 <div class="accordion accordion-flush" id="playaccordion">
 <div class="px-5">
 	<div id="playA">
@@ -143,7 +148,8 @@
 	
 </div>
 </div>
-	
+</div>
+
 <div class="d-flex justify-content-end pb-3 pe-5 pt-3">
 	<a href="./FAQ" id="allhelp">전체보기&gt;&gt;</a>
 </div>

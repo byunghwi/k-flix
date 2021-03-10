@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=7" />
-<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=3" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=10" />
+<link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=4" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 
@@ -26,19 +26,21 @@
 <section id="table_list">
 <!-- 게시판 -->
 	<div class="container" id="board">
-		<div class="d-flex justify-content-start">
+	<div class="d-flex justify-content-between pb-2">
+		<div>
 			<h1><i class="fas fa-video"></i> 영화</h1>
 		</div>
 		
-		<div class="d-flex justify-content-end pb-3">
+		<div class="mt-3">
 			<a href="./deletedMovie" class="btn btn-outline-secondary btn-sm">비활성 목록</a>
 		</div>
-		
+	</div>
 			
 		<div class="d-flex justify-content-between">
 			<div class="d-flex justify-content-start">
 				<span>
-					<a href="./addpage" class="btn btn-outline-success btn-sm">+ 추가</a>
+					<a href="./addpage" class="btn btn-success btn-sm">+ 추가</a>
+					<button class="btn btn-secondary btn-sm ps-2">EXEL</button>
 				</span>	
 			</div>
 			
@@ -107,7 +109,6 @@
 	  </tbody>
 	</table>
 	</div>
-	<br />
 	<div>
 	<%@include file ="/resources/include/movie/pagecode.jsp" %>
 	</div>
