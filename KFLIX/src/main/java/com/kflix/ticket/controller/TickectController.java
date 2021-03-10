@@ -49,9 +49,7 @@ public class TickectController {
 
 	@RequestMapping(value = "/info", method = {RequestMethod.GET,RequestMethod.POST})
 	public String TicketPage( HttpServletRequest request, Model model, HttpSession session
-			, @RequestParam(value = "sendChk", required = false) String sendChk
-			, RedirectAttributes rttr
-			, @RequestParam(value = "msg", required = false) String msg) {
+			, @RequestParam(value = "sendChk", required = false) String sendChk, RedirectAttributes rttr) {
 		
 		//리다이렉트로 addFlashAttribute에 담겨진 데이터를 꺼낼 때 사용.
 		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);
@@ -62,7 +60,9 @@ public class TickectController {
 			String email = ((Member) session.getAttribute("login")).getEmail(); // 세션으로 이메일 가져와서하게되면 브라우저가 달라졌을 때 못가져옴	
 			
 			member = memberService.getMemberByEmail(email);
-
+			//세션 최신화
+			session.setAttribute("login", member);
+			
 			model.addAttribute("member", member);
 			System.out.println("[TicketController] session 있을 때 > " + email);
 		}
@@ -85,11 +85,11 @@ public class TickectController {
 			model.addAttribute("ticket", ticket);
 		}
 
-		model.addAttribute("sendChk", sendChk);
+		model.addAttribute("sendChk", sendChk);	
 		
-		if(msg != null) {
-			System.out.println("msg 값 있다 야호 ! > " + msg);
-			model.addAttribute("removeMsg", "OK");
+		if(session.getAttribute("removeMsg")!=null) {
+			model.addAttribute("msg", session.getAttribute("removeMsg"));
+			session.removeAttribute("removeMsg");
 		}
 		
 		
@@ -207,7 +207,7 @@ public class TickectController {
 	
 	//카카오페이 정기결제 해제 
 	@RequestMapping(value = "/removeKakaoPay", method = RequestMethod.POST)
-	public String removekakaoPay(HttpSession session, Model model) {
+	public String removekakaoPay(HttpSession session, Model model, RedirectAttributes rttr) {
 		String email = ((Member) session.getAttribute("login")).getEmail();
 		//회원정보빼오기
 		Member member = memberService.getMemberByEmail(email);
@@ -221,11 +221,12 @@ public class TickectController {
 		
 		if(result == 1) {
 			System.out.println("[TicketController] 카카오페이 결제 해지-회원 업데이트 성공 ");
-			
+			session.setAttribute("removeMsg", "OK");
 			//결제 해지 후 회원 업데이트 성공시 
-			return "redirect:/ticket/info?msg=OK";
+			return "redirect:/ticket/info";
 		}
 		
+		System.out.println("[TicketController] 카카오페이 결제 해지-회원 업데이트 실패");
 		return null;
 	
 	} 

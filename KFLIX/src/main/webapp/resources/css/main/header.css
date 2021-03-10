@@ -122,6 +122,10 @@ header {
 	padding-left: 55px;
 }
 
+.header_ticket .header_ticket_text {
+	display: inline;
+}
+
 #ticket {
 	text-decoration: none;
 	font-size: 0.9rem;
@@ -157,6 +161,15 @@ header {
 	#btnGroupDrop_Menu {
 		display: inline-block;
 	}
+	.header_ticket .header_ticket_text {
+		display: none;
+	}
+	#ticket {
+	position: relative;
+		left: 78%;
+	}
+	
+	
 }
 
 @media only screen and (min-width:1100px) {

@@ -33,10 +33,22 @@
 		sans-serif;
 }
 
+element.style {
+    position: fixed;
+    display: block;
+    box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px, rgb(0 0 0 / 19%) 0px 6px 20px 0px;
+    z-index: 10000;
+    top: 50%;
+    height: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease 0s;
+}
+
 #ticket_modal {
 	display: none;
 	width: 55%;
-	height: 65%;
+	height: auto;
 	padding: 20px 60px;
 	background-color: #0c0c0c;
 	color: white;
@@ -48,18 +60,18 @@
 	transition: all 0.6s;
 }
 
-#ticket_info {
+#ticket_modal #ticket_info {
 	float: left;
 	width: 70%;
 }
 
-.ticket_detail {
+#ticket_modal .ticket_detail {
 	float: left;
 	width: 30%;
 	margin-top: 30px;
 }
 
-.text-first {
+#ticket_modal .text-first {
 	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 		sans-serif;
 	color: white;
@@ -67,10 +79,9 @@
 	font-weight: bold;
 }
 
-#buy_btn {
-	position: absolute;
+#ticket_modal #buy_btn {
 	left: 50%;
-	top: 80%;
+	top: 90%;
 	border-color: white white white white;
 	background: transparent;
 	margin: 10p;
@@ -82,52 +93,52 @@
 	transition: all 0.6s;
 }
 
-.ticket_box {
+#ticket_modal .ticket_box {
 	border: 1px solid;
 	padding: 10px;
 	text-align: left;
 }
 
-.t_title {
+#ticket_modal .t_title {
 	font-weight: bold;
 	font-size: 20px;
 }
 
-.t_content {
+#ticket_modal .t_content {
 	font-size: 14px;
 	color: darkgray;
 	padding: 4px;
 	margin-left: 10px;
 }
 
-.ticket_box2 {
+#ticket_modal .ticket_box2 {
 	border: none;
 	text-align: left;
 }
 
-.t_content2 {
+#ticket_modal .t_content2 {
 	font-size: 13px;
 	font-weight: lighter;
 	color: dimgray;
 }
 
-.t_title2 {
+#ticket_modal .t_title2 {
 	font-size: 17px;
 	color: dimgrey;
 	padding: 5px;
 	font-weight: bold;
 }
 
-.tr_class {
+#ticket_modal .tr_class {
 	border: 1px solid;
 }
 
-.tr_class:hover {
+#ticket_modal .tr_class:hover {
 	color: red;
 }
 
 /* 이용권번호 안보이게처리 */
-.tr_class>td:nth-of-type(1) {
+#ticket_modal .tr_class>td:nth-of-type(1) {
 	display: none;
 }
 
@@ -214,7 +225,7 @@
 	<header>
 
 		<div class="header_ticket" style="display: none;">
-			지금 이용권을 구매하고 KFLIX의 모든 영상을 시청해보세요! 단 한 번의 클릭으로 언제든 해지할 수 있습니다. <a
+			<div class="header_ticket_text">지금 이용권을 구매하고 KFLIX의 모든 영상을 시청해보세요! 단 한 번의 클릭으로 언제든 해지할 수 있습니다.</div> <a
 				href="#registerModal2" id="ticket" style="text-align: right;"
 				data-toggle="modal" data-target="#registerModal2">이용권구매</a>
 		</div>

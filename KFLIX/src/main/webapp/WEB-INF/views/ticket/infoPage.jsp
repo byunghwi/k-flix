@@ -35,16 +35,17 @@ body {
 	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 		sans-serif;
 }
+
 section {
 	position: absolute;
 	left: 5%;
 	top: 13%;
 	width: 90%;
-	height: 52%;
+	height: auto;
 	border: 3px solid white;
 }
 
-.hr-title {
+section .hr-title {
 	margin: 1rem 0;
 	color: inherit;
 	background-color: currentColor;
@@ -54,7 +55,7 @@ section {
 	margin-left: 10px;
 }
 
-.hr-divide {
+section .hr-divide {
 	margin: 1rem 0;
 	color: inherit;
 	background-color: currentColor;
@@ -65,7 +66,7 @@ section {
 	margin-bottom: 50px;
 }
 
-h3 {
+section h3 {
 	font-size: 1.6rem;
 	text-align: left;
 	margin-top: 20px;
@@ -74,14 +75,14 @@ h3 {
 	color: white;
 }
 
-.cert_msg {
+section .cert_msg {
 	font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial,
 		sans-serif;
 	color: lightgrey;
 }
 
 /* 이메일보내기 버튼 */
-#sendEmail {
+section #sendEmail {
 	border-color: white white white white;
 	background: transparent;
 	margin: 10p;
@@ -93,7 +94,7 @@ h3 {
 	transition: all 0.6s;
 }
 
-#modifyInfoBtn {
+section #modifyInfoBtn {
 	position: absolute;
 	border-color: white white white white;
 	margin-left: 4%;
@@ -104,7 +105,7 @@ h3 {
 	transition: all 0.6s;
 }
 
-#modifyConfirmBtn {
+section #modifyConfirmBtn {
 	border-color: white white white white;
 	background: transparent;
 	padding: 3px 8px 3px 8px;
@@ -114,37 +115,37 @@ h3 {
 }
 
 /* 이메일 보내기 마우스 오버 */
-#sendEmail:hover {
+section #sendEmail:hover {
 	background-color: red;
 	border-color: transparent;
 }
 
 /* 정보수정 마우스 오버 */
-#modifyInfoBtn:hover {
+section #modifyInfoBtn:hover {
 	background-color: red;
 	border-color: transparent;
 }
 
-#modifyConfirmBtn:hover {
+section #modifyConfirmBtn:hover {
 	background-color: red;
 	border-color: transparent;
 }
 
-.table-myinfo {
+section .table-myinfo {
 	display: inline;
 }
 
-.table-myinfo-modify {
+section .table-myinfo-modify {
 	display: none;
 }
 
-* td {
+section td {
 	text-align: center;
 	padding-left: 25px;
 	/* font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; */
 }
 
-input {
+section input {
 	outline: 0 !important;
 	border-width: 0 0 1px 0 !important;
 	border-color: #eee !important;
@@ -161,6 +162,10 @@ input {
 	margin-bottom: 15px;
 	border-radius: 3px;
 }
+
+section .contents_mem {
+	padding-bottom: 20px;
+}
 </style>
 
 </head>
@@ -169,8 +174,8 @@ input {
 	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
 	<script>
-		var removeMsg = '${removeMsg}';
-		if (removeMsg === 'OK') {
+		var msg = '${msg}';
+		if (msg === 'OK') {
 			alert('이용권 해지가 완료되었습니다.\r\n만료일까지 정상적으로 시청 가능합니다.');
 		}
 	</script>
@@ -279,7 +284,7 @@ input {
 	</div>
 	<script type="text/javascript">
 		function sendEmail() {
-
+			document.getElementById('sendEmail').style.display = "none";
 			document.getElementById('sendEmail').disabled = true;
 			window.location.href = "/kflix/ticket/sendEmail";
 		}
@@ -302,28 +307,33 @@ input {
 				var form = document.getElementById('del_t_form');
 				form.action = "${pageContext.request.contextPath}/ticket/removeKakaoPay"
 				form.submit();
+				
+				/* var formsubmit = $("#del_t_form").serialize();
+				$.ajax({
+						type : 'POST',
+						url : "${pageContext.request.contextPath}/ticket/removeKakaoPay",
+						dataType : "json",
+						data : formsubmit,
+						success : function(result) {
+							if (result == 1) {
+								
+								$('#remove').remove();
+
+								alert('이용권 해지가 완료되었습니다. 만료일까지 정상적으로 시청 가능합니다.');
+							} else {
+								alert('회원 업데이트 오류');
+							}
+						},
+						error : function(request, status, error) {
+							alert("code = " + request.status
+									+ " message = " + request.responseText
+									+ " error = " + error); // 실패 시 처리
+						}
+				}); */
 			} else {
 				return;
 			}
 
-			/* 			$.ajax({
-			 type : 'POST',
-			 url : "${pageContext.request.contextPath}/ticket/removeKakaoPay",
-			 dataType : "text",
-			 contentType: "application/x-www-form-urlencoded; charset=utf-8",
-			 data : { "A" : "A" },
-			 success : function(result) {
-			 if (result == "SUCCESS") {			
-			 alert('이용권 해지가 완료되었습니다. 만료일까지 정상적으로 시청 가능합니다.');
-			 $('#remove').remove();
-			 }else {
-			 alert('회원 업데이트 오류');
-			 }
-			 },
-			 error:function(request,status,error){
-			 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-			 }
-			 }); */
 		}
 
 		function modify() {
