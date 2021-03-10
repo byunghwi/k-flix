@@ -8,7 +8,7 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=4" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <title>삭제된 항목</title>
@@ -20,12 +20,12 @@
 
 <section id="table_list">
 	<div class="container" id="board">
-	<div>
-		<div class="d-flex justify-content-start">
+	<div class="d-flex justify-content-between pb-2">
+		<div>
 			<h1 class="text-light"><i class="fas fa-bullhorn text-danger"></i> 비활성 감독</h1>
 		</div>
 		
-		<div class="d-flex justify-content-end pb-3">
+		<div class="mt-3">
 			<a href="./directorindex" type="button" class="btn btn-outline-secondary btn-sm">관리페이지</a>
 		</div>
 	</div>
@@ -72,7 +72,7 @@
 	</table>
 </div>
 </div>
-<br />
+
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
 
 </section>

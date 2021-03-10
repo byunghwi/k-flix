@@ -24,6 +24,7 @@
 	tbody>tr {
 		height: 55px;
 	}
+	
 	thead>tr> th:nth-child(1){
 		width: 150px;
 	}
@@ -55,19 +56,19 @@
 		cursor:pointer;
 	}
 	
-	#tk_table>tbody>tr>td:nth-child(1){
+	#tk_table>tbody>tr>td:nth-child(2){
 		color: #7575ff;
 		font-weight: bolder;
 	}
 	
 	
-	#tk_table>tbody>tr>td:nth-child(1)>span{
+	#tk_table>tbody>tr>td:nth-child(2)>span{
 		border: 1px #7575ff solid;
 		border-radius: 5px;
 		padding: 10px;
 	}
 	
-	#tk_table>tbody>tr>td:nth-child(1)>span:hover{
+	#tk_table>tbody>tr>td:nth-child(2)>span:hover{
 		cursor: pointer;
 		background-color: #7575ff;
 		color: white;
@@ -86,13 +87,13 @@
 <%@include file="../manage/navbar.jsp"%>
 
 <section id="table_list">
-	<div class="d-flex justify-content-start pb-5" id="board">
+	<div class="d-flex justify-content-start pb-2" id="board">
 		<h1><i class="fas fa-ticket-alt"></i> 이용권</h1>
 	</div>
 
 	<div class="d-flex justify-content-between pb-2">
 		<div>
-			<button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#ticket_add" id="addBtn">+ 추가</button>
+			<button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#ticket_add" id="addBtn">+ 추가</button>
 		</div>
 			
 		<!-- 컨텐츠 개수 -->
@@ -121,8 +122,8 @@
 		<tbody>
 			<c:forEach items="${ticket }" begin="0" end="${ticket.size() }" var="i" varStatus="status">
 			<tr>
-				<td><span onclick="getTicketId(${i.ticket_id }, '${i.ticket_name}', ${i.ticket_period }, ${i.ticket_price });">${i.ticket_id }</span></td>
-				<td>${i.ticket_name }</td>
+				<td>${i.ticket_id }</td>
+				<td><span onclick="getTicketId(${i.ticket_id }, '${i.ticket_name}', ${i.ticket_period }, ${i.ticket_price });">${i.ticket_name }</span></td>
 				<td>${i.ticket_price }</td>
 				<td><span onclick="stat(this, ${i.ticket_id})">${i.ticket_status }</span></td>
 				<c:choose>
@@ -138,7 +139,6 @@
 		</tbody>	
 		</table>
 	</div>
-	<br />
 	<!-- 페이지 네이트 영역 -->
 	<div id="pagenate">
 		<ul  class="pagination justify-content-center">	
@@ -324,8 +324,8 @@ function ticketAdd() {
  			data.tk.ticket_recommend = '<td onclick="norecommend(this, ' + data.tk.ticket_id + ');"><button class="btn btn-danger"><i class="fas fa-thumbs-up"></i></button></td>'
 		
 			table.prepend('<tr>'
-					+'<td><span onclick="getTicketId(' + data.tk.ticket_id + ', \'' + data.tk.ticket_name + '\', ' + data.tk.ticket_period + ', ' + data.tk.ticket_price + ');">' + data.tk.ticket_id + '</span></td>'
-					+'<td>' + data.tk.ticket_name + '</td>'
+					+'<td>' + data.tk.ticket_id + '</td>'
+					+'<td><span onclick="getTicketId(' + data.tk.ticket_id + ', \'' + data.tk.ticket_name + '\', ' + data.tk.ticket_period + ', ' + data.tk.ticket_price + ');">' + data.tk.ticket_name + '</span></td>'
 					+'<td>' + data.tk.ticket_price + '</td>'
 					+'<td><span onclick="stat(this, ' + data.tk.ticket_id + ')">' + data.tk.ticket_status + '</span></td>'
 					+ data.tk.ticket_recommend +
@@ -492,8 +492,8 @@ function makeTable(data, amount) {
 			
 			
 			table.append('<tr>'
-					+'<td><span onclick="getTicketId(' + data[i].ticket_id + ', \'' + data[i].ticket_name + '\', ' + data[i].ticket_period + ', ' + data[i].ticket_price + ');">' + data[i].ticket_id + '</span></td>'
-					+'<td>' + data[i].ticket_name + '</td>'
+					+'<td>' + data[i].ticket_id + '</td>'
+					+'<td><span onclick="getTicketId(' + data[i].ticket_id + ', \'' + data[i].ticket_name + '\', ' + data[i].ticket_period + ', ' + data[i].ticket_price + ');">' + data[i].ticket_name + '</span></td>'
 					+'<td>' + data[i].ticket_price + '</td>'
 					+ data[i].ticket_status 
 					+ data[i].ticket_recommend 

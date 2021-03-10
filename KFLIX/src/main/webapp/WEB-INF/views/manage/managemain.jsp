@@ -15,7 +15,7 @@
 <style>
 	#dashboard{
 		width: 1500px;
-		height: 1000px;
+		height: 100%;
 		margin-left: 330px;
 	}
 /* 	section, section div{
@@ -130,10 +130,13 @@
 		background-color: #141414;
 	}
 	#boardArea{
-		width: 950px;
+		width: 1005px;
 		margin-left: 100px;
 	}
 	#second{padding-left:100px;}
+	#ticket_sta{
+		margin-bottom: -8px;
+	}
 </style>
 <title>Insert title here</title>
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
@@ -229,13 +232,13 @@
 		</c:forEach>
 	</div>
 	
-	<div class="px-3">
+	<div>
 	<div class="px-3 contentArea">
-		<div class="d-flex justify-content-between">
+		<div id="ticket_sta" class="d-flex justify-content-between">
 			<div>
 				<h3> 이용권 현황</h3> 
 			</div>
-			<div class="mt-2">
+			<div class="mt-3 me-2">
 				<a href="/kflix/ticketindex" id="goTicket">more >></a>
 			</div>
 		</div>	

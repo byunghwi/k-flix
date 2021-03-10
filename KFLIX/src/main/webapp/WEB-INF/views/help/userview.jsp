@@ -9,8 +9,6 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/movie/netflix-fonts.css" />
-<link rel="stylesheet" href="/kflix/resources/css/movie/netflix-pulsate.css" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
@@ -41,7 +39,7 @@
 	#faqArea{
 		width: 1200px;
 		margin-left: calc(50% - 600px);
-		margin-top: 75px;
+		padding-top: 55px;
 		color: white;
 	}
 	
@@ -60,9 +58,10 @@
 	
 	#help_accordion{
 		overflow: auto;
-		height: 630px;
+		height: 570px;
 	}
-	b{
+	
+	#faqArea b{
 		width:150px;
 		text-align: center;
 		font-size: 20px;
@@ -87,7 +86,7 @@
 	<div>
 		<a href="/kflix/service" id="backhelp" class="contentfont">&lt;&lt; 고객센터 홈으로 돌아가기</a>
 	</div>
-	<div class="d-flex justify-content-between py-4">
+	<div class="d-flex justify-content-between py-2">
 		<div class="px-2">
 				<input type="radio" class="btn-check" name="help_type" id="all" autocomplete="off" value="all" onclick=" typeClick(this);" checked>
 				<label class="btn btn-outline-secondary btn-sm contentfont" for="all">전체 보기</label>
@@ -179,7 +178,17 @@ function pageClick(pnum) {
 
 // 타입 검색
 function typeClick(clickData){
-	var pnum = parseInt($('.active').text());
+	var pnum = 0;
+	
+	if ($('.active').text() == '' 
+			|| $('.active').text() == 0
+			|| $('.active').text() != 'number'
+			|| $('.active').text() == null){
+		pnum = 1;
+		
+	} else {
+		pnum = parseInt($('.active').text());
+	}
 	var type = "POST";
 	var url = "/kflix/FAQ/user";
 	var data = JSON.stringify({
@@ -190,7 +199,17 @@ function typeClick(clickData){
 
 // 개수 보기
 $('#helpAmount').change(function(){
-	var pnum = parseInt($('.active').text());
+	var pnum = 0;
+	
+	if ($('.active').text() == '' 
+			|| $('.active').text() == 0
+			|| $('.active').text() != 'number'
+			|| $('.active').text() == null){
+		pnum = 1;
+		
+	} else {
+		pnum = parseInt($('.active').text());
+	}
 	var type = "POST";
 	var url = "/kflix/FAQ/user";
 	var data = JSON.stringify({
@@ -249,16 +268,16 @@ function makeTable(data, pnum, amount) {
 
 			table.append(
 					'<div class="accordion-item ps-3">'
-					+'<h6 class="accordion-header contentfont" id="help-head' + i + '">'
+					+'<h6 class="accordion-header contentfont" id="help-head-' + i + '">'
 					+'<button class="accordion-button text-light bg-kflix collapsed" type="button" data-bs-toggle="collapse"' 
 					+'data-bs-target="#playcoll-' + i + '" aria-expanded="false" aria-controls="playcoll-' + i + '">' 
 					+'<b>' + data[i].help_type + '</b>&nbsp;&nbsp;&nbsp; '  + data[i].help_title + '</button></h6>'
 					+'<div id="playcoll-' + i + '" class="accordion-collapse collapse"'
-					+'aria-labelledby="play-head' + i + '" data-bs-parent="#help_accordion">'
-					+'<div class="accordion-body"><div class="ps-4">'+ data[i].help_content + '</div></div>'
+					+'aria-labelledby="play-head-' + i + '" data-bs-parent="#help_accordion">'
+					+'<div class="accordion-body"><div class="helpcontent">'+ data[i].help_content + '</div></div>'
 					+'</div></div>');		
 		}
-		
+
 	} catch(err){}
 };
 </script>

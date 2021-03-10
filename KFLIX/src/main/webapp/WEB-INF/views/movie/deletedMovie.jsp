@@ -11,7 +11,7 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=3" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=4" />
 <meta charset="UTF-8">
 <title>비활성 영화</title>
 
@@ -23,14 +23,15 @@
 <section id="table_list">
 <div class="container" id="board">
 	
-	<div class="d-flex justify-content-start">
+	<div class="d-flex justify-content-between pb-2">
+	<div>
 		<h1 class="text-light"><i class="fas fa-video text-danger"></i> 비활성 영화</h1>
 	</div>
 	
-	<div class="d-flex justify-content-end pb-3">
+	<div class="mt-3">
 		<a href="./movieindex" class="btn btn-outline-secondary btn-sm">활성 목록</a>
 	</div>
-
+	</div>
 	
 	
 	<div class="d-flex justify-content-end pb-2">
@@ -95,7 +96,6 @@
 		</tbody>
 	</table>
 	</div>
-	<br />
 	<div>
 	<%@include file ="/resources/include/movie/pagecode.jsp" %>
 	</div>

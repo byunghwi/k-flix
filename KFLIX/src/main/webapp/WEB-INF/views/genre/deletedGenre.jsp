@@ -21,12 +21,12 @@
 
 <section id="table_list">
 <div class="container" id="board">
-<div>
-	<div class="d-flex justify-content-start">
+<div class="d-flex justify-content-between">
+	<div class="">
 		<h1><i class="far fa-list-alt text-danger"></i> 비활성 장르</h1>
 	</div>
 	
-	<div class="d-flex justify-content-end pb-3">
+	<div class="mt-3">
 		<a href="./genreindex" type="button" class="btn btn-outline-secondary btn-sm">활성 목록</a>
 	</div>
 </div>

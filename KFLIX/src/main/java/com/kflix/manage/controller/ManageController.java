@@ -43,6 +43,10 @@ public class ManageController {
 		PAGENATION = new PageNation(1, 20);
 	}
 
+	@RequestMapping(value="/accessError")
+	public String accessError() {
+		return "manage/forbidden";
+	}
 	
 	@RequestMapping(value="/management", method=RequestMethod.GET)
 	public String manageMain(Model model) {

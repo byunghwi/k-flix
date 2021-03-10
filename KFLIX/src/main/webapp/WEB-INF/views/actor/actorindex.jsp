@@ -8,7 +8,7 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=3" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=4" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <title>배우</title>
@@ -20,26 +20,27 @@
 
 <section id="table_list">
 <div class="container" id="board">
-	<div class="d-flex justify-content-start">
+<div class="d-flex justify-content-between pb-2">
+	<div>
 		<h1><i class="fab fa-redhat"></i> 배우</h1>
 	</div>
 
-	<div class="d-flex justify-content-end pb-3">
-		<a href="./deletedActor" type="button" class="btn btn-outline-secondary btn-sm">삭제된 항목</a>
+	<div class="mt-3">
+		<a href="./deletedActor" type="button" class="btn btn-outline-secondary btn-sm">비활성 목록</a>
 	</div>
-	
+</div>
 
 <div class="d-flex justify-content-between">
 <div class="d-flex justify-content-start">
 		<span>
-			<button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#addmodal">
+			<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addmodal">
 			  + 추가
 			</button>
 		</span>
 </div>	
 <div class="d-flex justify-content-end">
 	<!-- 컨텐츠 개수 -->
-	<div class="amount pe-3">
+	<div class="amount pe-2">
 		<select class="form-select form-select-sm" id="helpAmount">
 			<option value="5">5개 씩 보기</option>
 			<option value="10" selected>10개 씩 보기</option>
@@ -81,7 +82,7 @@
 	</table>
 </div>
 </div>
-<br />
+
 <%@include file ="/resources/include/movie/pagecode.jsp" %>
 
 </section>

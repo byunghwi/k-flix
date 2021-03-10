@@ -11,8 +11,6 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/movie/netflix-fonts.css" />
-<link rel="stylesheet" href="/kflix/resources/css/movie/netflix-pulsate.css" />
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -25,6 +23,7 @@
 	#myinq{
 		padding-top: 100px;
 		width: 1200px;
+		height: 900px;
 		margin-left: calc(50% - 600px);
 	}
 	#tablediv{
@@ -44,7 +43,7 @@
 <body>
 
 <section id="myinq">
-	<div class="pb-4 text-center" id="myinq_title">
+	<div class="pb-2 text-center" id="myinq_title">
 		<h1 class="text-center">내 문의</h1>
 	</div>
 	
@@ -56,7 +55,7 @@
 			<a href="/kflix/inquiry" class="btn btn-secondary contentfont">1:1 문의하기</a>
 		</div>
 		
-		<div class="d-flex justify-content-end pb-3">
+		<div class="d-flex justify-content-end pb-1">
 			<!-- 검색 영역 -->
 			<div id="searchArea" class="pe-2">
 			  <select class="form-select form-select-sm" id="searchType" required>
@@ -108,7 +107,7 @@
 					<c:choose>
 						<c:when test="${empty i.reply_date}">
 							<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#noReplyModal"
-								data-type="${i.inquiry_type }" data-inqcont="${i.inquiry_content }" data-inqtitle="${i.inquiry_title }">아직 답변 중입니다.</button>
+								data-type="${i.inquiry_type }" data-inqcont="${i.inquiry_content }" data-inqtitle="${i.inquiry_title }">미답변</button>
 						</c:when>
 						<c:otherwise>
 							<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ReplyModal"
@@ -125,7 +124,6 @@
 		</table>
 		</div>
 	</div>
-	<br />
 	<!-- 페이지 네이트 영역 -->
 	<div id="pagenate" class="pb-3">
 		<ul  class="pagination justify-content-center">	
@@ -185,10 +183,15 @@
 		</div>
 		
 		<div class="mb-3">
-		  <h6 class="text-dark">문의하신 내용 // 답변 내용</h6>
-		  <textarea class="form-control" id="re_content" rows="15" style="resize: none;" required readonly></textarea>
+		  <h6 class="text-dark">문의하신 내용</h6>
+		  <textarea class="form-control" id="re_inq_content" rows="7" style="resize: none;" required readonly></textarea>
 		</div>
 
+		<div class="mb-3">
+		  <h6 class="text-dark">답변 내용</h6>
+		  <textarea class="form-control" id="re_content" rows="7" style="resize: none;" required readonly></textarea>
+		</div>
+		
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
@@ -222,32 +225,56 @@ $(document).ready(function() {
 
 //답변 미답변
 $('#isreply').change(function(){
+	var pnum = 0;
+	
+	if ($('.active').text() == '' 
+			|| $('.active').text() == 0
+			|| $('.active').text() != 'number'
+			|| $('.active').text() == null){
+		pnum = 1;
+		
+	} else {
+		pnum = parseInt($('.active').text());
+	}
+	
 	var type = "POST";
 	var url = "/kflix/inquiry/user";
 	var data = JSON.stringify({
-		page: parseInt($('.active').text()),
+		page: pnum,
 		amount: parseInt($('#helpAmount').val()),
 		inquiry_type: $('#searchType').val(),
 		reply_status: $('#isreply').val(),
 		email: '${login.email}'
 	});
 	
-	ajax(type, url, data, parseInt($('.active').text()));
+	ajax(type, url, data, pnum);
 })
 
 // 검색
 $('#searchType').change(function(){
+	var pnum = 0;
+	
+	if ($('.active').text() == '' 
+			|| $('.active').text() == 0
+			|| $('.active').text() != 'number'
+			|| $('.active').text() == null){
+		pnum = 1;
+		
+	} else {
+		pnum = parseInt($('.active').text());
+	}
+	
 	var type = "POST";
 	var url = "/kflix/inquiry/user";
 	var data = JSON.stringify({
-		page: parseInt($('.active').text()),
+		page: pnum,
 		amount: parseInt($('#helpAmount').val()),
 		inquiry_type: $('#searchType').val(),
 		reply_status: $('#isreply').val(),
 		email: '${login.email}'
 	});
 	
-	ajax(type, url, data, parseInt($('.active').text()));
+	ajax(type, url, data, pnum);
 })
 
 // 개수보기 
@@ -287,11 +314,6 @@ function ajax(type, url, data, pnum) {
   			} else if (anotherPnum > 0 && anotherPnum < pnum){
   				pnum = anotherPnum;
   			}
-  			
-/*  			console.log($('.active').text())
-  			console.log(pnum)
-  			console.log(amount);
-  			console.log(data) */
   			
  			makePageNate(len, pnum, amount);
   			 
@@ -349,7 +371,7 @@ function makeTable(data, amount){
 			var make = '';
 			if (data[i].reply_date == null) {
 				make = '<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#noReplyModal"'
-						+'data-type="' + data[i].inquiry_type + '" data-inqcont="' + data[i].inquiry_content + '" data-inqtitle="' + data[i].inquiry_title + '">아직 답변 중입니다.</button>'
+						+'data-type="' + data[i].inquiry_type + '" data-inqcont="' + data[i].inquiry_content + '" data-inqtitle="' + data[i].inquiry_title + '">미답변</button>'
 	
 			} else {
 				make = '<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ReplyModal"'
@@ -393,7 +415,7 @@ reModal.addEventListener('show.bs.modal', function (event) {
 	$('#inq_type').val(type);
 	$('#re_inq_title').val(ititle);
 	$('#re_inq_content').html(icont);
-	$('#re_content').html(icont + '\n==========\nre>>\n' + rcont);
+	$('#re_content').html(rcont);
 })
 </script>
 </body>
