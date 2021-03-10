@@ -38,13 +38,15 @@
 			
 		<div class="d-flex justify-content-between">
 			<div class="d-flex justify-content-start">
-				<span>
+				<div class="pe-2">
 					<a href="./addpage" class="btn btn-success btn-sm">+ 추가</a>
-					<button class="btn btn-secondary btn-sm ps-2">EXEL</button>
-				</span>	
+				</div>	
+				<form name="excelForm" id="excelForm" method="POST" action="/kflix/excelDownload">
+					<input type="hidden" name="target" value="MOVIE"/>
+					<input type="submit" id="excelDown" class="btn btn-secondary btn-sm ps-2" value="EXEL">
+				</form>
 			</div>
 			
-	
 	<div class="d-flex justify-content-end pb-2">
 	<!-- 컨텐츠 개수 -->
 	<div class="amount pe-3">

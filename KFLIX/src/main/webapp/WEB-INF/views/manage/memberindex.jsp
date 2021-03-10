@@ -70,9 +70,10 @@
 
 	<div class="d-flex justify-content-between pb-2">
 		<div class="d-flex justify-content-start">
-			<span>
-				<button class="btn btn-secondary btn-sm ps-2">EXEL</button>
-			</span>	
+			<form name="excelForm" id="excelForm" method="POST" action="/kflix/excelDownload">
+				<input type="hidden" name="target" value="MEMBER"/>
+				<input type="submit" id="excelDown" class="btn btn-secondary btn-sm ps-2" value="EXEL">
+			</form>
 		</div>
 		<!-- 컨텐츠 개수 -->
 		<div class="amount">
