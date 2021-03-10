@@ -348,11 +348,11 @@ function makeTable(data, amount){
 		for	(var i = 0; i < amount; i++) {
 			var make = '';
 			if (data[i].reply_date == null) {
-				make = '<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#ReplyModal"'
-						+'data-type="' + data[i].inquiry_type + '" data-inqcont="' + data[i].reply_content + '" data-inqtitle="' + data[i].inquiry_title + '">아직 답변 중입니다.</button>'
+				make = '<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#noReplyModal"'
+						+'data-type="' + data[i].inquiry_type + '" data-inqcont="' + data[i].inquiry_content + '" data-inqtitle="' + data[i].inquiry_title + '">아직 답변 중입니다.</button>'
 	
 			} else {
-				make = '<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal"'
+				make = '<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ReplyModal"'
 						+'data-type="' + data[i].inquiry_type + '" data-inqcont="' + data[i].inquiry_content + '" data-inqtitle="' + data[i].inquiry_title + '"'
 						+'data-rcont="' + data[i].reply_content + '" data-rtitle="' + data[i].reply_title + '">'
 						+moment(data[i].reply_date).format("YYYY-MM-DD") + '</button>'
@@ -370,19 +370,19 @@ function makeTable(data, amount){
 	} catch(err){}
 }
 
-var detailModal = document.getElementById('noReplyModal')
-detailModal.addEventListener('show.bs.modal', function (event) {
+var noReModal = document.getElementById('noReplyModal')
+noReModal.addEventListener('show.bs.modal', function (event) {
 	type = $(event.relatedTarget).data('type');
 	rtitle = $(event.relatedTarget).data('inqtitle');
 	rcont = $(event.relatedTarget).data('inqcont');
 	
 	$('#n_inq_type').val(type);
 	$('#inq_title').val(rtitle);
-	$('#inq_content').html(rcont.replaceAll('/', ''));
+	$('#inq_content').html(rcont);
 })
 
-var detailModal = document.getElementById('ReplyModal')
-detailModal.addEventListener('show.bs.modal', function (event) {
+var reModal = document.getElementById('ReplyModal')
+reModal.addEventListener('show.bs.modal', function (event) {
 	type = $(event.relatedTarget).data('type');
 	icont = $(event.relatedTarget).data('inqcont');
 	ititle = $(event.relatedTarget).data('inqtitle');
@@ -392,7 +392,7 @@ detailModal.addEventListener('show.bs.modal', function (event) {
 		
 	$('#inq_type').val(type);
 	$('#re_inq_title').val(ititle);
-	$('#re_inq_content').html(icont.replaceAll('/', ''));
+	$('#re_inq_content').html(icont);
 	$('#re_content').html(icont + '\n==========\nre>>\n' + rcont);
 })
 </script>

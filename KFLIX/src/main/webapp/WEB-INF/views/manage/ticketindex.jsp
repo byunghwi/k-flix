@@ -72,6 +72,11 @@
 		background-color: #7575ff;
 		color: white;
 	}
+	.modal_content{
+		padding-left: 50px;
+		padding-bottom: 10px;
+		user-select:none;
+	}
 </style>
 <title>Insert title here</title>
 <%@include file="/WEB-INF/views/main/header_test.jsp"%>
@@ -152,24 +157,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-light">
-        <div>
-	        <span>이용권 번호</span>
-	        <input type="number" id="update_ticket_id" value=""/>
+        <div class="modal_content">
+	        <span>이용권 번호&nbsp;:&nbsp; </span>
+	        <input type="number" id="update_ticket_id" value="" required/>
         </div>
         
-        <div>
-	        <span>이용권 이름</span>
-	        <input type="text" id="update_ticket_name" />
+        <div class="modal_content">
+	        <span>이용권 이름&nbsp;:&nbsp; </span>
+	        <input type="text" id="update_ticket_name" required/>
         </div>
         
-        <div>
-	        <span>이용권 기간</span>
-	        <input type="text" id="update_ticket_period" />
+        <div class="modal_content">
+	        <span>이용권 기간&nbsp;:&nbsp; </span>
+	        <input type="text" id="update_ticket_period" required/>
         </div>
         
-        <div>
-	        <span>이용권 가격</span>
-	        <input type="text" id="update_ticket_price" />
+        <div class="modal_content">
+	        <span>이용권 가격&nbsp;:&nbsp; </span>
+	        <input type="text" id="update_ticket_price" required/>
         </div>
       </div>
       <div class="modal-footer">
@@ -188,24 +193,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-light">
-        <div>
-	        <span>이용권 번호</span>
-	        <input type="number" name="ticket_id" id="add_ticket_id" readonly/>
+        <div class="modal_content">
+	        <span>이용권 번호&nbsp;:&nbsp; </span>
+	        <input type="number" name="ticket_id" id="add_ticket_id" readonly required/>
         </div>
         
-        <div>
-	        <span>이용권 이름</span>
-	        <input type="text" name="ticket_name" id="add_ticket_name" />
+        <div class="modal_content">
+	        <span>이용권 이름&nbsp;:&nbsp; </span>
+	        <input type="text" name="ticket_name" id="add_ticket_name" required/>
         </div>
         
-        <div>
-	        <span>이용권 기간</span>
-	        <input type="text" name="ticket_period" id="add_ticket_period" />
+        <div class="modal_content">
+	        <span>이용권 기간&nbsp;:&nbsp; </span>
+	        <input type="text" name="ticket_period" id="add_ticket_period" required/>
         </div>
         
-        <div>
-	        <span>이용권 가격</span>
-	        <input type="text" name="ticket_price" id="add_ticket_price" />
+        <div class="modal_content">
+	        <span>이용권 가격&nbsp;:&nbsp; </span>
+	        <input type="text" name="ticket_price" id="add_ticket_price" required/>
         </div>
       </div>
       <div class="modal-footer">
