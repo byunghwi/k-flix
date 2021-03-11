@@ -7,7 +7,7 @@
 <style>
    #sidebar{
       width: 300px;
-      height: 100%;
+      height: 80%;
       background-color: rgba(0, 0, 0, 0.2);
       position: fixed;
       left: -290px;
@@ -15,6 +15,7 @@
       transition: all .35s;
       padding: 0;
       margin: 0;
+      margin-top: 90px;
    }
 
    #closeMenu{
@@ -31,7 +32,7 @@
       border-bottom-right-radius: 10px;
       border-top-right-radius: 10px;
       left: 10px;
-      top: 50%;
+      top: 40%;
       transition: all .35s;
    }
    #closeMenu+label span{
@@ -118,7 +119,7 @@
       transform: translateY(50%);
    }
    .wrapCustom{
-   	  	padding-top: 180px;
+   	  	padding-top: 20px;
    }
    
    .navCatalog{

@@ -14,11 +14,18 @@
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 
-<%@include file="/WEB-INF/views/main/header.jsp"%>
-
 <title>고객센터</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 </head>
 <style>
+	.wrapper {
+
+	position:relative;
+
+    min-height:100%;
+
+	}
 	#ac_div .accordion-body{
 		color: gray;
 	}
@@ -37,6 +44,7 @@
 		width: 1200px;
 		margin-left: calc(50% - 600px);
 		padding-top: 75px;
+		padding-bottom: 100px;
 		color: white;
 	}
 
@@ -61,22 +69,16 @@
 	.accordion-button::after {
 		background-image: url(/kflix/resources/imgs/service/down-arrow-white.png)!important;
 	}
-	.wrapper {
 
-	position:relative;
-
-    min-height:100%;
-
-	}
 </style>
 
 <body>
 <div class="wrapper">
 
+<%@include file="/WEB-INF/views/main/header.jsp"%>
+
+<div>
 <section id="faqArea" class="netflix-sans-font-loaded">
-
-
-
 <div class="pt-4 pb-3 ps-5 text-center" id="titleArea">
 	<h1 class="pb-3">고객 센터</h1>
 	<h3 class="pb-2 text-start">${login.email }님, &nbsp;안녕하세요!</h3>
@@ -173,6 +175,7 @@
 <!-- 풋터 -->
 <%@include file="/WEB-INF/views/main/footer.jsp"%>
 
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 

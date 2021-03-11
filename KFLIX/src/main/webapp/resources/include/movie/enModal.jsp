@@ -1,20 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<style>
+	#deletemodal, #deleteconfirm{width:380px; left:calc(50% - 190px); top:250px;}
+</style>
+
 <div class="modal" tabindex="-1" id="deletemodal">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger">
-        <h5 class="modal-title text-light">비활성화</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header border-secondary">
+        <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+        <button type="button" id="alertClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-	       <div class="modal-body">
+	       <div class="modal-body fs-5 text-center">
 	        <p>정말 비활성화 하시겠습니까?</p>
 	      </div>
-          <div class="modal-footer">
+          <div class="modal-footer border-top-0">
           	<input type="hidden" id="deleteid" name="movie_id"/>
-	        <button onclick="deleteBtn(1);" class="btn btn-danger">비활성화</button>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button onclick="deleteBtn(1);" class="btn btn-danger btn-sm">비활성화</button>
+	        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">취소</button>
 	     </div>
       </div>
     </div>
@@ -22,17 +27,17 @@
   
   <div class="modal" tabindex="-1" id="deleteconfirm">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger">
-        <h5 class="modal-title text-light">비활성</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header border-secondary">
+        <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+        <button type="button" id="alertClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-	       <div class="modal-body">
+	       <div class="modal-body fs-5 text-center">
 	        <span id="deleteMsg"></span>
 	      </div>
-          <div class="modal-footer">
+          <div class="modal-footer border-top-0">
           	<input type="hidden" id="recoveryid" name="movie_id"/>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+	        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">확인</button>
 	     </div>
       </div>
     </div>

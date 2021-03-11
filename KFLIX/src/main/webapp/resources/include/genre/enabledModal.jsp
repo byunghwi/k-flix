@@ -4,12 +4,16 @@
 <!-- 
 	추가 모달 
 -->
+<style>
+	#addmodal, #addconfirm{width: 300px; left: 430px; top:80px;}
+</style>
+
 <div class="modal" tabindex="-1" id="addmodal">
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-success">
-        <h5 class="modal-title text-light">추가</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header border-secondary">
+        <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+        <button type="button" id="alertClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
       <div class="modal-body">
@@ -21,9 +25,9 @@
 	  </div>
 	  </div>     
 	   
-	      <div class="modal-footer">
-        	<button onclick="addBtn(1);" class="btn btn-success">등록</button>
-        	<button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
+	      <div class="modal-footer border-top-0">
+        	<button onclick="addBtn(1);" class="btn btn-danger btn-sm">등록</button>
+        	<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">취소</button>
           </div>    
       </div>
     </div>
