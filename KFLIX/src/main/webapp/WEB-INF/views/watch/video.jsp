@@ -224,7 +224,7 @@
 					progress.addEventListener('mouseup', () => mousedown = false);
 
 			
-			video.addEventListener('click', togglePlay);
+			//video.addEventListener('click', togglePlay);
 			
 			function savecurrentTime() {
 				

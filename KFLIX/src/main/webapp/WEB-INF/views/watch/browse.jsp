@@ -956,6 +956,18 @@
 			</c:otherwise>
 		</c:choose>
 	}
+	
+	if (string.includes("http://localhost:8081/kflix/browse/watch/")) {
+		console.log("있음");
+		if (window.performance.navigation.type == 1) {
+		} else if (window.performance.navigation.type == 2) {
+			framshow(video_movieid);
+		} else {
+			framshow(video_movieid);
+		}
+	} else {
+		body.style.overflow = 'auto';
+	}
 
 	var payMsg = '${payMsg}';
 	if(payMsg === 'success'){
