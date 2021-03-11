@@ -67,10 +67,16 @@ public class InquiryServiceImpl implements InquiryService {
 			MailUtils sendMail = new MailUtils(mailSender);
 			sendMail.setSubject(inquiry.getReply_title());// 제목
 			// 내용
-			sendMail.setText(new StringBuffer().append(inquiry.getInquiry_content())
-												.append("<br>============================<br>")
-												.append("re>><br>")
-												.append(inquiry.getReply_content()).toString());
+			sendMail.setText(new StringBuffer()
+												.append("<b>\""  + inquiry.getEmail() + "\" 님 안녕하세요.</b><br><br>")
+												.append("문의하신 내용에 대한 답변입니다.<br><br>")
+												.append("<b>[문의내용]</b><br>")
+												.append(inquiry.getInquiry_content())
+												.append("<br><br>============================<br><br>")
+												.append("<b>[답변내용]</b><br>")							
+												.append(inquiry.getReply_content().replaceAll("/", "<br>"))
+												.append("<br><br><br<p>감사합니다.<br>KFLIX 드림. </p><br>")
+												.append("본 메일은 발신 전용이므로 메일로 문의 시 확인이 불가능합니다.<br/>KFLIX Copyright ⓒ 2021 by KFLIX, Inc. All rights reserved.").toString());
 			sendMail.setFrom(inquiry.getManager_email(), "KFLIX"); // 이메일 이름
 			sendMail.setTo(inquiry.getEmail()); // 받는사람
 			sendMail.send();

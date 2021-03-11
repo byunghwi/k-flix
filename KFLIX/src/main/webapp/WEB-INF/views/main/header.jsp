@@ -140,6 +140,7 @@ element.style {
 
 #ticket_modal .tr_class:hover {
 	color: red;
+	cursor: pointer;
 }
 
 /* 이용권번호 안보이게처리 */
@@ -163,6 +164,9 @@ element.style {
 			action="${pageContext.request.contextPath}/ticket/kakaoPay"
 			method="post">
 			<input type="hidden" name="ticket_id" id="ticket_id">
+			<input type="hidden" name="ticket_name" id="ticket_name">
+			<input type="hidden" name="ticket_price" id="ticket_price">
+			
 			<div class="box-input">
 				<div class="text-first">이용권을 선택해주세요!</div>
 				<div class="text-second">원하는 멤버쉽 요금제를 선택하고 KFLIX의 모든 컨텐츠를

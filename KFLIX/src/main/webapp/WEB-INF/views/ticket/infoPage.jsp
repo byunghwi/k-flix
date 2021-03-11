@@ -276,7 +276,7 @@ section .contents_mem {
 						<table class="table-myinfo-modify">
 
 							<tr>
-								<td><input type="text" name="nick"
+								<td><input type="text" name="nick" id="nick"
 									placeholder="변경할 닉네임을 입력하세요." required></td>
 							</tr>
 							<tr>
@@ -356,6 +356,7 @@ section .contents_mem {
 		function modify_confirm() {
 
 			var formsubmit = $("#modify_form").serialize();
+			var nick = $("#nick").val();
 			//alert('보내기 전 데이터' + formsubmit);
 
 			$.ajax({
@@ -367,6 +368,7 @@ section .contents_mem {
 					if (result == 1) {
 						$('#modifyInfoBtn').css("display", "inline");
 						$('.table-myinfo-modify').css("display", "none");
+						$("#nick").val(nick);
 					} else {
 						alert('회원 업데이트 오류');
 					}
