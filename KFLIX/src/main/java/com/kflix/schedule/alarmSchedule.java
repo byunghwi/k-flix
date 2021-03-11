@@ -29,21 +29,20 @@ public class alarmSchedule {
 	  cron = "0 0 0 ? * MON" */
 	@Scheduled(cron = "0 0 0 ? * MON" )
 	public void alarmScheduling() {
-		System.out.println("[alarmScheduling] 진입");
+		System.out.println("[alarmNewUpdate] 진입");
 		
-		// 회원 리스트 새로운 알림 업데이트 - 매주 월요일 00:00 테이블에 있는 전체 회원
 		List<Member> AlarmMember = alarmService.getSelectAlarm();
-		List<MovieVO> newMovie = alarmService.getNewmovie();
+		List<MovieVO> newMovie = alarmService.getNewUpdatemovie();
 		
 		System.out.println("신규콘텐츠 갯수 : " + newMovie.size());
 		
-		for (Member alarmVO : AlarmMember) {
-			alarmVO.setAlarm_count(newMovie.size());
-			int result = alarmService.updateAlarm(alarmVO);
-			System.out.println(alarmVO);
+		// 모든 회원 뽑아서 
+		for (Member alarm : AlarmMember) {
+			alarm.setAlarm_count(newMovie.size());
+			int result = alarmService.updateAlarm(alarm);
+			System.out.println(alarm);
 			System.out.println("성공? : " + result);
 		}
- 
 	}
 
 }

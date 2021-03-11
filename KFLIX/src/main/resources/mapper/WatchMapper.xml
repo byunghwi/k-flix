@@ -25,6 +25,12 @@
 		<![CDATA[SELECT * FROM movie
 		WHERE REG_DATE >= TO_DATE(sysdate-7,'YY-MM-DD')]]>
 	</select>
+	
+	<select id="getNewUpdatemovie"
+		resultType="com.kflix.watch.domain.MovieVO">
+		<![CDATA[SELECT * FROM movie
+		WHERE REG_DATE >= TO_DATE(sysdate,'YY-MM-DD')]]>
+	</select>
 
 	<!-- 좋아요 -->
 	<update id="likePlus">

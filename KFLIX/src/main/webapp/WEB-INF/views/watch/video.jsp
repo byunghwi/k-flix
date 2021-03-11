@@ -92,7 +92,6 @@
 		<div id="movieinfo" onclick="vidplay()">
 			<h5 style="color: white;">시청 중인 콘텐츠</h5>
 			<h3 style="color: white;">${movie.movie_title }</h3>
-			<br>
 			<h5 style="color: white;">${movie.summary }</h5>
 		</div>
 
@@ -173,7 +172,6 @@
 				video.currentTime = "${watching.view_point}";
 				</c:when>
 				<c:otherwise>
-				alert('시청이 완료되어, 처음부터 실행됩니다.');
 				video.currentTime = 0.00001;
 				video.muted = false;
 				video.play();
@@ -283,7 +281,6 @@
 
 			function event(e) {
 				recommend.style.display = 'block';
-				alert('미디어 재생이 완료되었습니다.');
 				playnpause.innerHTML = `<i id="play" class="fas fa-play color-w"></i>`;
 				var data = {
 					watch_type : "WATCHED",
