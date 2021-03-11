@@ -520,9 +520,14 @@ element.style {
     function kakaopay() {
 		var form = document.getElementById('form');
 
-		/* alert($("#ticket_id").val());
-		alert($("#ticket_name").val());
-		alert($("#ticket_price").val()); */
+		var ticket_id = $("#ticket_id").val();
+		var ticket_name = $("#ticket_name").val();
+		var ticket_price = $("#ticket_price").val();
+
+		if(ticket_id == null || ticket_name == null || ticket_price == null){
+			alert('본인에게 가장 어울리는 요금을 선택해보세요!');
+			return;
+		}
 		
 		form.submit();
 	}
