@@ -57,7 +57,7 @@
 			</c:if>
 			<c:if test="${not empty newmovie}">
 				<h3 style="margin: 30px 10px;">이번주 공개된 NEW! 콘텐츠</h3>
-				<div class="">
+				<div style="padding-bottom: 110px;" class="">
 					<c:forEach items="${newmovie }" var="newmovie" varStatus="status">
 						<div class=" searchdiv">
 							<div class="">

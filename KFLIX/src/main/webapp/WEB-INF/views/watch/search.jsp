@@ -60,7 +60,7 @@
 			</c:if>
 			<c:if test="${not empty Searchlist}">
 				<h3 style="margin: 30px 10px;">"${searchValue }"로 검색한 결과 입니다.</h3>
-				<div class="">
+				<div style="padding-bottom: 110px;" class="">
 					<c:forEach items="${Searchlist }" var="Searchlist"
 						varStatus="status">
 						<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
