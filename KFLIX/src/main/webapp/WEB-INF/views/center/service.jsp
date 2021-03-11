@@ -18,7 +18,7 @@
 <title>고객센터</title>
 </head>
 <style>
-	.accordion-body{
+	#ac_div .accordion-body{
 		color: gray;
 	}
 	
@@ -64,14 +64,13 @@
 		overflow: auto;
 		height: 455px;
 	}
-	
 	.wrapper {
 
 	position:relative;
 
     min-height:100%;
 
-}
+	}
 </style>
 
 <body>
@@ -168,15 +167,14 @@
 </div>
 
 </section>
-
+</div>
 
 <!-- 커스텀 alert -->
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
 
-
 <!-- 풋터 -->
 <%@include file="/WEB-INF/views/main/footer.jsp"%>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
