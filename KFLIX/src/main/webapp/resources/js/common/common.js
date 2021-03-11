@@ -16,7 +16,7 @@ function calcAge(birth) {
 	return age;
 }
 
-//널 체크
+// 널 체크
 var isEmpty = function(value) {
 	if (value == ""
 			|| value == null
@@ -34,13 +34,18 @@ function checkSamePwd() {
 	var password = document.getElementById("password").value;
 	var passwordCheck = document.getElementById("password2").value;
 
-	if (password == passwordCheck) {
-		$("#password-check").text('비밀번호가 일치합니다.').css("color", "aqua").css(
-				"font-family", "Montserrat").css("font-size", "13px");
-	} else {
-		$("#password-check").text('비밀번호가 불일치합니다.').css('color', 'red').css(
-				"font-family", "Montserrat").css("font-size", "13px");
-		;
+	if (password != null && passwordCheck != null && password != "" && passwordCheck != "") {
+	
+		if (password == passwordCheck) {
+			$("#password-check").text('비밀번호가 일치합니다.').css("color", "aqua").css(
+					"font-family", "Montserrat").css("font-size", "13px");
+		} else {
+			$("#password-check").text('비밀번호가 불일치합니다.').css('color', 'red').css(
+					"font-family", "Montserrat").css("font-size", "13px");
+		}
+
+	}else {
+		$("#password-check").text('');
 	}
 
 }
