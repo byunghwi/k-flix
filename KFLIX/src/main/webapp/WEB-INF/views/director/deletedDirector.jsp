@@ -8,14 +8,19 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=4" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=5" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <title>삭제된 항목</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 </head>
+<style>
+	.wrapper {position:relative; min-height:100%;}
+</style>
 <body>
-
+<div class="wrapper">
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
 
 <section id="table_list">
@@ -26,7 +31,7 @@
 		</div>
 		
 		<div class="mt-3">
-			<a href="./directorindex" type="button" class="btn btn-outline-secondary btn-sm">관리페이지</a>
+			<a href="./directorindex" type="button" class="btn btn-outline-secondary btn-sm">활성 목록</a>
 		</div>
 	</div>
 	
@@ -78,7 +83,8 @@
 </section>
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
 <%@include file ="/resources/include/director/disabledModal.jsp" %>
-
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>

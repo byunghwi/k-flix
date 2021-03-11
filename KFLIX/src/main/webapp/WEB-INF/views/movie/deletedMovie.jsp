@@ -11,7 +11,7 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=3" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=5" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=6" />
 <meta charset="UTF-8">
 <title>비활성 영화</title>
 <link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
@@ -24,7 +24,7 @@
 
 <div class="wrapper">
 
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
 <section id="table_list">
 <div class="container" id="board">

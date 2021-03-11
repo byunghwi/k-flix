@@ -53,7 +53,7 @@
 <body>
 
 <div class="wrapper">
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
 <form action="../update" method="post" enctype="multipart/form-data">
 

@@ -4,10 +4,18 @@
 <!-- 
 	추가 모달 
 -->
+<style>
+	#addmodal{width: 300px; left: 430px; top:80px;}
+	#updatemodal,#deletemodal,#addconfirm,#updateconfrim,#deleteconfrim{width: 300px; left:calc(50% - 190px); top:200px;}
+	.modal-content{background-color: #212529; color:white;};
+	.modal-body{text-align: center; font-size:1.25rem}
+	.modal-footer{border-top: 0;}
+</style>
+
 <div class="modal" tabindex="-1" id="addmodal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-success">
+      <div class="modal-header border-secondary">
         <h5 class="modal-title text-light">추가</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -22,8 +30,8 @@
 	  </div>     
 	   
 	      <div class="modal-footer">
-        	<button onclick="addBtn(1);" class="btn btn-success">등록</button>
-        	<button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
+        	<button onclick="addBtn(1);" class="btn btn-danger btn-sm">추가</button>
+        	<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">취소</button>
           </div>    
       </div>
     </div>
@@ -33,8 +41,8 @@
 <div class="modal" tabindex="-1" id="addconfrim">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-success">
-        <h5 class="modal-title text-light">추가</h5>
+      <div class="modal-header border-secondary">
+ <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
@@ -43,7 +51,7 @@
 	  </div>     
 	   
       <div class="modal-footer">
-       	<button type="button" class="btn btn-success" data-bs-dismiss="modal">확인</button>
+       	<button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">확인</button>
        </div>    
     </div>
   </div>
@@ -56,7 +64,7 @@
 <div class="modal" tabindex="-1" id="updatemodal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-primary">
+      <div class="modal-header border-secondary">
         <h5 class="modal-title text-light">수정</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -70,8 +78,8 @@
 	      </div>
         </div>	
    		<div class="modal-footer">
-   			<button onclick="updateBtn(1);" class="btn btn-primary" >수정</button>
-        	<button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>    
+   			<button onclick="updateBtn(1);" class="btn btn-danger btn-sm" >수정</button>
+        	<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">취소</button>    
         </div>
       </div>
     </div>
@@ -81,8 +89,8 @@
 <div class="modal" tabindex="-1" id="updateconfrim">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h5 class="modal-title text-light">수정</h5>
+      <div class="modal-header border-secondaryy">
+      <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
@@ -91,7 +99,7 @@
 	  </div>     
 	   
       <div class="modal-footer">
-       	<button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+       	<button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">확인</button>
        </div>    
     </div>
   </div>
@@ -105,7 +113,7 @@
 <div class="modal" tabindex="-1" id="deletemodal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-danger">
+      <div class="modal-header border-secondary">
         <h5 class="modal-title text-light">비활성화</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -115,7 +123,7 @@
           <div class="modal-footer">
 	          	<input type="hidden" id="deleteid" name="actor_id" value=""/>
 		        <button onclick="deleteBtn(1);" class="btn btn-danger" >비활성화</button>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">취소</button>
 	     </div>
       </div>
     </div>
@@ -124,8 +132,8 @@
 <div class="modal" tabindex="-1" id="deleteconfrim">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header bg-danger">
-        <h5 class="modal-title text-light">비활성화</h5>
+      <div class="modal-header border-secondaryy">
+ <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
@@ -134,7 +142,7 @@
 	  </div>     
 	   
       <div class="modal-footer">
-       	<button type="button" class="btn btn-danger" data-bs-dismiss="modal">확인</button>
+       	<button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">확인</button>
        </div>    
     </div>
   </div>

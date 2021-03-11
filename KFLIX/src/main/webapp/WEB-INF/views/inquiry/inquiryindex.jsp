@@ -11,7 +11,7 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=4" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=5" />
 <meta charset="UTF-8">
 <style>
 	#contentTip{
@@ -37,12 +37,18 @@
 		width: 130px;
 	}
 </style>
-<title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<title>문의 관리</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 </head>
+<style>
+	.wrapper {position:relative; min-height:100%;}
+</style>
 <body>
-
+<div class="wrapper">
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
+
 
 <input id="helpData" type="hidden" value="${total }"/>
 <input id="helpPage" type="hidden" value="${page }"/>
@@ -134,7 +140,8 @@
 </section>
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
-
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 <div class="modal" tabindex="-1" id="replyModal">
   <div class="modal-dialog">
     <div class="modal-content">

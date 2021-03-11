@@ -42,7 +42,8 @@ public class InquiryRestController {
 				consumes = "application/json",
 				produces = "application/json; charset=UTF-8")
 	public List<Inquiry> replyAndSave(@RequestBody Inquiry inquiry) {
-		
+
+		log.info("매니저이메일: "+inquiry.getManager_email());
 		// inq 객체 보내서 메일보내기
 		boolean send = in_service.sendReplyMail(inquiry);
 

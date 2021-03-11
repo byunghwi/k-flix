@@ -7,7 +7,7 @@
 <style>
    #sidebar{
       width: 300px;
-      height: 80%;
+      height: 83%;
       background-color: rgba(0, 0, 0, 0.2);
       position: fixed;
       left: -290px;
@@ -15,7 +15,7 @@
       transition: all .35s;
       padding: 0;
       margin: 0;
-      margin-top: 90px;
+      margin-top: 60px;
    }
 
    #closeMenu{

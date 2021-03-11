@@ -30,13 +30,20 @@ thead>tr> th:nth-child(4){
 }
 </style>
 <meta charset="UTF-8">
-<title>FAQ</title>
-
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<title>FAQ 관리</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
+</head>
+<style>
+	.wrapper {position:relative; min-height:100%;}
+</style>
 </head>
 <body>
 
+<div class="wrapper">
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
+
 
 <section id="table_list">
 <!-- 본체 영역 -->
@@ -126,7 +133,8 @@ thead>tr> th:nth-child(4){
 	
 </div>
 </section>
-
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 <!-- 정보모달 -->
 <div class="modal" tabindex="100" id="infoconfrim">
   <div class="modal-dialog">

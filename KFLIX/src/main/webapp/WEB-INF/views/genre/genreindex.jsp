@@ -8,7 +8,7 @@
 		integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=6" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=7" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 <title>장르</title>
@@ -21,7 +21,7 @@
 <body>
 
 <div class="wrapper">
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
 
 <section id="table_list">
@@ -108,7 +108,7 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js?ver=2"></script>
 <script src="/kflix/resources/js/genre/genre.js?ver=1"></script>
-<script src="/kflix/resources/js/genre/enabled.js?ver=13"></script>
+<script src="/kflix/resources/js/genre/enabled.js?ver=15"></script>
 <script>
 $(document).ready(function() { 
 	$('#genre').prepend('<span class="nav-clicked"></span>');

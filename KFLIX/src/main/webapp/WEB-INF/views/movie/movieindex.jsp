@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" 
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=12" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=13" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/movie.css?ver=4" />
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
@@ -27,9 +27,9 @@
 <body>
 
 <div class="wrapper">
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
-<section id="table_list">
+<section id="table_list" style="height: 780px;">
 <!-- 게시판 -->
 	<div class="container" id="board">
 	<div class="d-flex justify-content-between pb-2">
@@ -136,7 +136,7 @@
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/kflix/resources/js/movie/movierest.js?ver=24"></script>
+<script src="/kflix/resources/js/movie/movierest.js?ver=25"></script>
 <script>
 $(document).ready(function() { 
 	$('#movie').prepend('<span class="nav-clicked"></span>');

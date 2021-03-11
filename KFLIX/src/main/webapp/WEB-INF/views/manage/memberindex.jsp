@@ -11,7 +11,7 @@
 		integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
-<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=8" />
+<link rel="stylesheet" href="/kflix/resources/css/table/table.css?ver=9" />
 <meta charset="UTF-8">
 <style>
 	#contentTip{
@@ -54,12 +54,19 @@
 	#re_span:hover{cursor:pointer;}
 	
 </style>
-<title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<title>회원관리</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
+</head>
+<style>
+	.wrapper {position:relative; min-height:100%;}
+</style>
 </head>
 <body>
-
+<div class="wrapper">
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
+
 
 <section id="table_list">
 	<div class="d-flex justify-content-start pb-2" id="board">
@@ -130,7 +137,8 @@
 	
 </section>
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
-
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 

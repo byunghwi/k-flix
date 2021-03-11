@@ -95,41 +95,9 @@ element.style {
 	</header>
 
 
-
-
-
-
 	<!-- scripts -->
 	<script src="/kflix/resources/js/main/header.js"></script>
-	<script type="text/javascript">
-	
 
-		search = document.getElementById('search');
-		arumnum1 = document.getElementById('arumnum1');
-		arumnum2 = document.getElementById('arumnum2');
-
-		searchinput = document.getElementById('searchinput');
-
-		search.addEventListener("click", function() {
-			if (search.checked) {
-				searchinput.style.display = 'inline-block';
-			} else {
-				if (searchinput.value != "") {
-					console.log("서치 합니다")
-					document.getElementById(searchinput.getAttribute('form'))
-							.submit();
-					searchinput.value = "";
-				}
-				searchinput.style.display = 'none';
-			}
-		});
-
-	
-
-	 	$(".header_ticket").css("display", "none");
-
-
-	</script>
 
 </body>
 

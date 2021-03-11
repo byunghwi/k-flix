@@ -106,7 +106,7 @@
 		padding: 0;
 		margin: 0;
 		width: 1500px;
-		padding-top: 130px;
+		padding-top: 65px;
 	}
 	.total_content{
 		height: 80%;

@@ -234,7 +234,7 @@ function deleteBtn(pnum) {
   			// 데이터, page - 클릭페이지, amount - 보여줄 수 
   			makeTable(data, pnum, amount);
  			
- 			$('#deleteMsg').html(movieId +'번이 삭제 되었습니다!');
+ 			$('#deleteMsg').html(movieId +'번이 비활성화 되었습니다!');
 			$('#deleteconfirm').modal("show");
    		},
    		error: function(){

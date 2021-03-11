@@ -73,9 +73,8 @@ public class InquiryServiceImpl implements InquiryService {
 												.append(inquiry.getReply_content()).toString());
 			sendMail.setFrom(inquiry.getManager_email(), "KFLIX"); // 이메일 이름
 			sendMail.setTo(inquiry.getEmail()); // 받는사람
-	
 			sendMail.send();
-			
+			return true;
 		} catch (MessagingException e) {
 			e.printStackTrace();
 			return false;
@@ -83,7 +82,6 @@ public class InquiryServiceImpl implements InquiryService {
 			e.printStackTrace();
 			return false;
 		}
-		return false;
 	}
 
 	@Override

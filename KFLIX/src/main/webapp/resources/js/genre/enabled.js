@@ -9,7 +9,6 @@ function addBtn(pnum) {
 	var modal = addmodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#addmodal').modal("hide");
-	$('#addGenre').val('');
 
 }
 
@@ -20,7 +19,6 @@ function updateBtn(pnum) {
 	var modal = updatemodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#updatemodal').modal("hide");
-	$('#updateGenre').val('');
 }
 
 function deleteBtn(pnum) {
@@ -116,11 +114,18 @@ var genreid="";
 $(document).ready(function() { 
 	$('#updatemodal').on('show.bs.modal', function(event){
 		genreid = $(event.relatedTarget).data('genreid');
-
+		
+		$('#updateGenre').val('');
 		$('#update_id').val(genreid);
 	});
 })
 
+$(document).ready(function() { 
+	$('#addmodal').on('show.bs.modal', function(event){		
+		
+	$('#addGenre').val('');
+	});
+})
 $(document).ready(function() { 
 	$('#deletemodal').on('show.bs.modal', function(event){
 		genreid = $(event.relatedTarget).data('genreid');

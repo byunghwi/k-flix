@@ -11,13 +11,17 @@
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css?ver=1" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 </head>
+
 <style>
+.wrapper {position:relative; min-height:100%;}
 #contents{
 	width: 1400px;
 	height: 1000px;
 	margin-left: 350px;
-	padding-top: 130px;
+	padding-top: 20px;
 }
 body {
 	background-color: #141414;
@@ -40,10 +44,12 @@ body {
 }
 </style>
 
-<%@include file="/WEB-INF/views/main/header.jsp"%>
 <body>
 
+<div class="wrapper">
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
+
 
 <div id="contents" class="container-xl">
 	<div class="pt-5 pb-3">
@@ -105,7 +111,8 @@ body {
 	</div> -->
 	
 </div>
-
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 

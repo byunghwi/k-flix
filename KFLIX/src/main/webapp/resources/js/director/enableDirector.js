@@ -13,7 +13,6 @@ function addBtn(pnum) {
 	var modal = addmodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#addmodal').modal("hide");
-	$('#addDirector').val('');
 	
 }
 
@@ -28,7 +27,6 @@ function updateBtn(pnum) {
 	var modal = updatemodal;
 	ajaxModalCon(pnum, id, path, name, modal);
 	$('#updatemodal').modal("hide");
-	$('#updateDirector').val('');
 }
 
 function deleteBtn(pnum) {
@@ -120,10 +118,17 @@ $(document).ready(function() {
 	$('#updatemodal').on('show.bs.modal', function(event){
 		directorid = $(event.relatedTarget).data('directorid');
 
+		$('#updateDirector').val('');
 		$('#update_id').val(directorid);
 	});
 })
 
+$(document).ready(function() { 
+	$('#addmodal').on('show.bs.modal', function(event){
+
+		$('#addDirector').val('');
+	});
+})
 $(document).ready(function() { 
 	$('#deletemodal').on('show.bs.modal', function(event){
 		directorid = $(event.relatedTarget).data('directorid');
