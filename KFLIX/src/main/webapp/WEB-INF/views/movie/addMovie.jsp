@@ -90,7 +90,6 @@
 			<div class="input-group mb-3">
 				<label class="input-group-text" for="dateform">개봉일</label>
 				<input type="date" class="form-control" name="movie_release" max="${today }" id="dateform" required/> <br />
-				<input type="hidden" name="reg_date" value="${today }" required/>
 			</div>
 		
 			<div class="input-group mb-3">
