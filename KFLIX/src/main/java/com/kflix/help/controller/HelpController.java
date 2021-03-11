@@ -44,7 +44,17 @@ public class HelpController {
 		return "help/helpindex";
 	}
 	
-	// 사용자가 볼 전체 페이지
+	// 관리자가 볼 페이지
+	@RequestMapping(value = "/FAQ/deletedindex",  method = RequestMethod.GET)
+	public String faqDeletedIndex(Model model, Help help) {
+		log.info("============ faqIndexCon ============");
+
+		model.addAttribute("page", PAGENATION.getPage());
+		model.addAttribute("amount", PAGENATION.getAmount());
+		model.addAttribute("total", h_service.getCntHelpList(DISABLED));
+		model.addAttribute("help", h_service.getPageHelp(PAGENATION, DISABLED));
+		return "help/deletedhelpindex";
+	}
 	
 	
 }

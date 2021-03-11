@@ -45,6 +45,24 @@ public class HelpRestController {
 		
 	}
 	
+	@PostMapping(value = "dindex",
+			consumes = "application/json",
+			produces = "application/json; charset=UTF-8")
+	public List<Help> indexDeletedHelp(@RequestBody Help help) {
+		log.info("============ indexHelp ============");
+		String word = help.getSearching_word();
+		
+		if(word.equals("all")) {
+			log.info(word);
+			return h_service.getAllHelpList(DISABLED);
+			
+		} else {
+			log.info(word);
+			return h_service.getAllHelpListByType(word, DISABLED);
+		}
+		
+	}
+	
 	@PostMapping(value = "add",
 			consumes = "application/json",
 			produces = "application/json; charset=UTF-8")
@@ -102,6 +120,26 @@ public class HelpRestController {
 		} else {
 			log.info(word);
 			return h_service.getAllHelpListByType(word, ENABLED);
+		}
+	}
+	
+	@PatchMapping(value = "reco",
+			consumes = "application/json",
+			produces = "application/json; charset=UTF-8")
+	public List<Help> recoHelp(@RequestBody Help help){
+		log.info("========== delete =========");
+		
+		h_service.delOrReHelp(help.getHelp_id(), ENABLED);
+		
+		String word = help.getSearching_word();
+		
+		if(word.equals("all")) {
+			log.info(word);
+			return h_service.getAllHelpList(DISABLED);
+			
+		} else {
+			log.info(word);
+			return h_service.getAllHelpListByType(word, DISABLED);
 		}
 	}
 	

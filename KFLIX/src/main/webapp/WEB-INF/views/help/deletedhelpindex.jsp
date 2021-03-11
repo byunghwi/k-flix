@@ -50,21 +50,16 @@ thead>tr> th:nth-child(4){
 <div class="container" id="board">
 	<div class="d-flex justify-content-between pb-2">
 		<div>
-			<h1><i class="far fa-question-circle"></i> FAQ</h1>
+			<h1><i class="far fa-question-circle text-danger"></i> FAQ</h1>
 		</div>
 		
 		<div class="mt-3">
-			<a href="./deletedindex" type="button" class="btn btn-outline-secondary btn-sm">비활성 목록</a>
+			<a href="./index" type="button" class="btn btn-outline-secondary btn-sm">활성 목록</a>
 		</div>
 	</div>
 	
-	<div class="d-flex justify-content-between">
-		<!-- 추가 버튼 영역 -->
-		<div id="addArea" class="ps-2 pb-2">
-			<button id="addBtn" class="btn btn-success btn-sm" data-bs-toggle="modal" 
-					data-bs-target="#processModal" data-bs-whatever="add">+ 추가</button>
-		</div>
-	
+	<div class="d-flex justify-content-end pb-2">
+
 		<div class="d-flex justify-content-end">
 			<div class="px-2">
 				<input id="helpData" type="hidden" value="${total }"/>
@@ -101,7 +96,7 @@ thead>tr> th:nth-child(4){
 	<div id="table_main">
 		
 		<table id="helpTable" class="table talbe text-light text-center align-middle border-dark">
-		<thead class="bg-dark">
+		<thead class="bg-danger">
 			<tr>
 				<th>#</th>
 				<th>카테고리</th>
@@ -118,12 +113,8 @@ thead>tr> th:nth-child(4){
 				<td>${help.help_title }</td>
 				<td><fmt:formatDate value="${help.help_date }" pattern="yyyy-MM-dd"/></td>
 				<td>
-					<button id="" class="btn btn-outline-primary" data-bs-toggle="modal" 
-						data-bs-target="#processModal" data-bs-whatever="update"
-						data-id="${help.help_id }" data-type="${help.help_type }" 
-						data-title="${help.help_title }" data-content="${help.help_content }">수정</button>
-					<button id="" class="btn btn-outline-danger" data-bs-toggle="modal" 
-						data-helpid="${help.help_id }" data-bs-target="#deleteModal">비활성화</button>
+					<button id="" class="btn btn-outline-warning" data-bs-toggle="modal" 
+						data-helpid="${help.help_id }" data-bs-target="#recoveryModal">복구</button>
 				</td>
 			</tr>
 			</c:forEach>
@@ -161,50 +152,8 @@ thead>tr> th:nth-child(4){
   </div>
 </div>
 
-<!-- 기능 모달 -->
-<div class="modal fade" id="processModal" tabindex="-1" aria-labelledby="processModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-dark">
-        <img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
-        <button type="button" id="alertClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="process-body">
-        <form>
-        	<input type="hidden" id="hid" />
-          <div class="mb-3">
-          	<label for="htype" class="col-form-label">카테고리</label>
-	        <select class="form-select" name="help_type" id="htype" required>
-				<option>이용안내</option>
-				<option>결제</option>
-				<option>환불</option>
-				<option>이용권</option>
-				<option>계정</option>
-				<option>컨텐츠</option>
-				<option>재생</option>
-				<option>서비스</option>
-			</select>	
-         </div>
-          <div class="mb-3">
-            <label for="htitle" class="col-form-label">제목</label>
-            <input type="text" class="form-control" name="help_title" id="htitle" required>
-          </div>
-          <div class="mb-3">
-            <label for="hcontent" class="col-form-label">내용</label>
-            <textarea class="form-control" name="help_content" id="hcontent" rows="10"  style="resize: none;" required></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-dark" id="processBtn" onclick="modalBtn();"></button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- 삭제모달 -->
-<div class="modal" tabindex="-1" id="deleteModal">
+<div class="modal" tabindex="-1" id="recoveryModal">
   <div class="modal-dialog">
     <div class="modal-content bg-dark">
       <div class="modal-header border-seconadry">
@@ -212,11 +161,11 @@ thead>tr> th:nth-child(4){
         <button type="button" id="alertClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
-      <div class="modal-body text-center fs-5 text-light" id="deleteBody">
+      <div class="modal-body text-center fs-5 text-light" id="recoveryBody">
 	  </div>     
 	   
       <div class="modal-footer border-top-0">
-       	<button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="deleteModalBtn();">확인</button>
+       	<button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="recoveryModalBtn();">확인</button>
        	<button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
        </div>    
     </div>
@@ -247,7 +196,7 @@ function allView(pnum) {
 	
 	$.ajax({
 		type: "POST",
-		url: "/kflix/FQARest/index",
+		url: "/kflix/FQARest/dindex",
 		data: JSON.stringify({
 			searching_word: 'all'
 		}),
@@ -272,7 +221,7 @@ function allView(pnum) {
 function amountChange() {
 	$.ajax({
 		type: "POST",
-		url: "/kflix/FQARest/index",
+		url: "/kflix/FQARest/dindex",
 		data: JSON.stringify({
 			searching_word: $('#searchType').val()
 		}),
@@ -305,7 +254,7 @@ function pageClick(pnum) {
 	
 	$.ajax({
 		type: "POST",
-		url: "/kflix/FQARest/index",
+		url: "/kflix/FQARest/dindex",
 		data: JSON.stringify({
 			searching_word: $('#searchType').val()
 		}),
@@ -337,123 +286,20 @@ function infoMsg(msg){
 }
 
 //삭제모달
-var deleteModal = document.getElementById('deleteModal')
-deleteModal.addEventListener('show.bs.modal', function (event) {
+var recoveryModal = document.getElementById('recoveryModal')
+recoveryModal.addEventListener('show.bs.modal', function (event) {
 	helpid = $(event.relatedTarget).data('helpid');
 	
-	$('#deleteBody').html('');
-	$('#deleteBody').append("<h3>" + helpid + "번을 비활성화합니다.</h3>")
+	$('#recoveryBody').html('');
+	$('#recoveryBody').append("<h3>" + helpid + "번을 복구합니다.</h3>")
 	
 })
 
-// 기능 모달
-var processModal = document.getElementById('processModal')
-processModal.addEventListener('show.bs.modal', function (event) {
-  var button = event.relatedTarget
-  var recipient = button.getAttribute('data-bs-whatever')  
-  var data = '';
-
-  if(recipient == 'add') {
-	  $('#htype').val('');
-	  $('#htitle').val('');
-	  $('#hcontent').val('');
-	  $('#hid').val('');
-	  $('#processBtn').html('추가');
-	  
-  } else if(recipient == 'update'){
-	  var id = $(event.relatedTarget).data('id')
-	  var title = $(event.relatedTarget).data('title')
-	  var type =  $(event.relatedTarget).data('type')
-	  var content = $(event.relatedTarget).data('content')
-	  	  
-	  $('#htype').val(type);
-	  $('#htitle').val(title);
-	  $('#hcontent').val(content);
-	  $('#hid').val(id);
-	  $('#processBtn').html('수정');  
-  }
-  
-})
-
-// 추가,수정 ajax
-function modalBtn() {
-		var btnVal = $('#processBtn').html();
-		var url = '';
-		var type = '';
-		var processMsg = '';
-		var data = {
-				  help_id:  $('#hid').val(),
-				  help_title:  $('#htitle').val(),
-				  help_type:  $('#htype').val(),
-				  help_content:  $('#hcontent').val(),
-				  searching_word: $('#searchType').val()
-		} 
-			
-		if(data.help_type == null){			
-			infoMsg("카테고리를 설정 해주세요");
-			return;
-			
-		} else if(data.help_title == ''){
-			infoMsg("제목을 채워주세요");
-			return;
-			
-		} else if (data.help_content == ''){
-			infoMsg("내용을 채워주세요");
-			return;		
-		} 
-		
-		if (btnVal == '추가'){
-			type = "POST"
-			url = "/kflix/FQARest/add"
-			processMsg = $('#htitle').val() + " (이)가 추가 되었습니다."
-			
-		} else if (btnVal == '수정') {
-			type = "PATCH"
-			url = "/kflix/FQARest/update"
-			processMsg = $('#hid').val() + " 번이 수정 되었습니다."
-		}
-
- 		$.ajax({
-			type: type,
-			url: url,
-			data: JSON.stringify(data),
-			contentType: 'application/json',
-			
-	 		success: function(data){
-	  			var len = data.length;
-	  			var amount =  parseInt($('#helpAmount').val())
-	  			var pnum = 0;
-	  			
-	  			var anotherPnum = Math.ceil(len / amount);
-	  			if ($('.active').text() == '' 
-	  					|| $('.active').text() == 0
-	  					|| $('.active').text() != 'number'
-	  					|| $('.active').text() == null){
-	  				pnum = 1;
-	  				
-	  			} else if (anotherPnum > 0 && anotherPnum < pnum){
-	  				pnum = anotherPnum;
-	  			}
-	  			
-	 			makePageNate(len, pnum, amount);
-	  			 
-	  			makeTable(data, pnum, amount);
-	  			console.log(data)
-	  			$('#processModal').modal("hide");
-	  			infoMsg(processMsg);
-	   		},
-	   		error: function(){
-	   			infoMsg('불러오는데 실패하였습니다.');
-	   		}
-		}) 
-
-}
-
 // 삭제 ajax 
-function deleteModalBtn() {
+function recoveryModalBtn() {
 	$.ajax({
 		type: "PATCH",
-		url: "/kflix/FQARest/delete",
+		url: "/kflix/FQARest/reco",
 		data: JSON.stringify({
 			help_id: helpid,
 			searching_word: $('#searchType').val()
@@ -494,7 +340,7 @@ function ajaxCon(pnum, amount){
 	
 	$.ajax({
 		type: "POST",
-		url: "/kflix/FQARest/index",
+		url: "/kflix/FQARest/dindex",
 		data: JSON.stringify({
 			searching_word: $('#searchType').val()
 		}),
@@ -546,10 +392,7 @@ function makeTable(data, pnum, amount) {
 					+'<td>' + data[i].help_title + '</td>'
 					+'<td>' + moment(data[i].help_date).format("YYYY-MM-DD") + '</td>'
 					+'<td>'
-					+'<button id="" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#processModal" data-bs-whatever="update"'
-					+'data-id="' + data[i].help_id + '" data-type="' + data[i].help_type + '" '
-					+'data-title="' + data[i].help_title + '" data-content="' + data[i].help_content + '">수정</button> '
-					+'<button id="" class="btn btn-outline-danger" data-bs-toggle="modal" data-helpid="' + data[i].help_id + '" data-bs-target="#deleteModal">비활성화</button>'
+					+'<button id="" class="btn btn-outline-warning" data-bs-toggle="modal" data-helpid="' + data[i].help_id + '" data-bs-target="#recoveryModal">복구</button>'
 					+'</td>'
 					+'</tr>'
 			);
