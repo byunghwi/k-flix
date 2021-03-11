@@ -183,7 +183,8 @@ public class MainController {
 		return "redirect:/loginPost";
 
 	}
-
+	
+/////////////////////////////////////////////사용자용 로그인 관련 시작 ////////////////////////////////////////////////////////////////////////////
 	// 로그인 폼 보여주기
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET(Model model, HttpSession session) {
@@ -263,5 +264,56 @@ public class MainController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+/////////////////////////////////////////////사용자용 로그인 관련 끝 ////////////////////////////////////////////////////////////////////////////
+	
+
+/////////////////////////////////////////////관리자용 로그인 관련 시작 ////////////////////////////////////////////////////////////////////////////
+	// 관리자용 로그인 폼 보여주기
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String adminloginForm(Model model, HttpSession session) {
+	
+		return "/main/loginForm_Admin";
+	}
+	
+	// 관리자용 로그인
+	@RequestMapping(value = "/adminLoginPost", method = { RequestMethod.POST, RequestMethod.GET })
+	public void adminLoginPost(Member member, HttpSession session, Model model,
+			@RequestParam(value = "userCookie", required = false) String userCookie, HttpServletRequest request) {
+
+			Member memberVO = null;
+
+			System.out.println("[MainController] adminLoginPost member > " + member);
+
+
+			memberVO = memberService.login(member);
+			
+			System.out.println("[MainController] 일반 로그인시 admin 객체 > " + memberVO);
+			if (memberVO == null) {
+				log.info("[MainController] Admin login failed....");
+				return;
+			}
+			if (userCookie != null) {
+
+				int amount = 60 * 60 * 24; // 쿠키 유지 1일
+				Date sesionLimit = new Date(System.currentTimeMillis() + (1000 * amount));
+
+				// loginCookie 값이 유지되는 시간 정보 DB저장.
+				memberService.keepLogin(member.getEmail(), session.getId(), sesionLimit);
+			}
+		
+		List<Ticket> tickets = ticketService.getAllTickets();
+		model.addAttribute("memberVO", memberVO);// 멤버객체를 가지고 adminloginInterceptor로 이동
+		model.addAttribute("tickets", tickets); //티켓객체를 가지고 adminloginInterceptor로 이동
+
+	}
+	
+	// 관리자용 로그아웃
+	@RequestMapping(value = "/logoutAdmin", method = { RequestMethod.GET, RequestMethod.POST })
+	public String logoutAdmin(HttpSession session) throws IOException {
+		session.invalidate();
+		return "redirect:/admin";
+	}
+/////////////////////////////////////////////관리자용 로그인 관련 끝 ////////////////////////////////////////////////////////////////////////////
 
 }

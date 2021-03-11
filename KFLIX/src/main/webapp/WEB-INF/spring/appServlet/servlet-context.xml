@@ -38,6 +38,11 @@
 	</beans:bean>
 
 	<!-- 로그인 인터셉터 -->
+	<beans:bean id="adminLoginInterceptor"
+		class="com.kflix.member.interceptoer.AdminLoginInterceptor">
+	</beans:bean>
+	
+	<!-- 관리자용 로그인 인터셉터 -->
 	<beans:bean id="loginInterceptor"
 		class="com.kflix.member.interceptoer.LoginInterceptor">
 	</beans:bean>
@@ -51,6 +56,11 @@
 		<interceptor>
 			<mapping path="/loginPost" />
 			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/adminLoginPost" />
+			<beans:ref bean="adminLoginInterceptor" />
 		</interceptor>
 
 		<interceptor>

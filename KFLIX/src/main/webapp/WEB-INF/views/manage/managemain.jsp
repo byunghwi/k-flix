@@ -139,7 +139,7 @@
 	}
 </style>
 <title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 </head>
 <body>
 

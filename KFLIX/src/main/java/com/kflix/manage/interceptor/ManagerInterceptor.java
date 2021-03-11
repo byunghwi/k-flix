@@ -20,7 +20,7 @@ public class ManagerInterceptor extends HandlerInterceptorAdapter {
 		if (session.getAttribute("login") == null) {
 			System.out.println("로그인 안되있음");
 			
-			response.sendRedirect("/kflix");
+			response.sendRedirect("/kflix/admin");
 			
 			return false;
 			
@@ -30,7 +30,7 @@ public class ManagerInterceptor extends HandlerInterceptorAdapter {
 		
 		
 		
-		if(check_id.equals("rladudghgh2@naver.com")) {
+		if(check_id.equals("admin")) {
 			System.out.println(check_id + "로 로그인 (매니저 아이디로 가정)");
 			
 		} else {
