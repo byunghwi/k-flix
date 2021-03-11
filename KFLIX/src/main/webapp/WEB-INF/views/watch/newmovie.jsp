@@ -40,7 +40,6 @@
 #infoframe::-webkit-scrollbar {
 	display: none;
 }
-
 .wrapper {
 	position: relative;
 	min-height: 100%;

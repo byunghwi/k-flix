@@ -15,14 +15,6 @@ var restart = document.getElementById('restart');
 var rew = document.getElementById('rew');
 var fastFwd = document.getElementById('fastFwd');
 
-
-history.pushState({ page: "first" }, document.title, location.pathname + '#first');
-
-window.addEventListener('popstate', function(e) {
-	history.pushState({ page: "historyChanged" }, document.title, location.pathname + '#changed');
-
-});
-
 if (video.paused) {
 	playnpause.innerHTML = `<i id="play" onclick="vidplay()" class="fas fa-pause color-w"></i>`;
 } else {

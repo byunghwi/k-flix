@@ -46,7 +46,7 @@
 			<h1>접근 권한이 없습니다.</h1>
 			<a type="button"
 				class="btn btn-aqua nmhp-cta nmhp-cta-extra-large btn-none btn-lg"
-				style="background-color: teal; text-decoration: none; color:white; font-weight: bolder;" href="/kflix/browse">홈으로</a>
+				style="background-color: teal; text-decoration: none; color:white; font-weight: bolder;" href="/kflix/admin">홈으로</a>
 		</div>
 	</div>
 </body>

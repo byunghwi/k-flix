@@ -29,7 +29,7 @@
 <div class="wrapper">
 <%@include file="/WEB-INF/views/main/header_admin.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
-<section id="table_list" style="height: 780px;">
+<section id="table_list">
 <!-- 게시판 -->
 	<div class="container" id="board">
 	<div class="d-flex justify-content-between pb-2">
