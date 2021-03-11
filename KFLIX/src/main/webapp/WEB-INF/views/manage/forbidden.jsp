@@ -30,12 +30,19 @@
 	text-align: center;
 }
 
+.img-error {
+	height: 230px;
+	width: 200px;
+}
 </style>
 </head>
 
 <body>
 	<div class="img">
 		<div class="content">
+			<h6>
+				<img class="img-error" src="/kflix/resources/imgs/error/smile.png">
+			</h6>
 			<h1>접근 권한이 없습니다.</h1>
 			<a type="button"
 				class="btn btn-aqua nmhp-cta nmhp-cta-extra-large btn-none btn-lg"
