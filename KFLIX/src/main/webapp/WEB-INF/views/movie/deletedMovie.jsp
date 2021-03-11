@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <title>비활성 영화</title>
 
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 

@@ -54,7 +54,7 @@
 </head>
 <body>
 	<div class="wrapper">
-		<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+		<%@include file="/WEB-INF/views/main/header.jsp"%>
 		<span class="anchor" id="abody"></span>
 		<div id="modalbackground">
 			<div id="confirm_ticket">

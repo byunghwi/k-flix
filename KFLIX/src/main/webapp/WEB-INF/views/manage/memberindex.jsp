@@ -57,7 +57,7 @@
 	
 </style>
 <title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 

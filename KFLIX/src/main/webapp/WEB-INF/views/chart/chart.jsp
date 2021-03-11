@@ -40,7 +40,7 @@ body {
 }
 </style>
 
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 <body>
 
 <%@include file="../manage/navbar.jsp"%>

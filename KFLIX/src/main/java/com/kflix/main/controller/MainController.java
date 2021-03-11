@@ -175,7 +175,7 @@ public class MainController {
 		if (memberService.login(memberVO) == null) {
 			System.out.println("[MainController] 카카오 로그인 시 가입된 kakao 필드 없으므로 회원가입창으로 바로 이동");
 					model.addAttribute("kakao", memberVO);
-					return "/main/registerForm"; // 테스트
+					return "/main/registerForm";
 		}
 		
 		rttr.addFlashAttribute("kakaoMem", memberVO);
@@ -202,7 +202,7 @@ public class MainController {
 		model.addAttribute("naver_url", naverAuthUrl);
 		model.addAttribute("kakao_url", kakaoUrl);
 		
-		return "/main/loginForm_test";
+		return "/main/loginForm";
 	}
 
 	// 로그인

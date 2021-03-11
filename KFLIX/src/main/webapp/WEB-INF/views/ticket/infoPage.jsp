@@ -180,7 +180,7 @@ section .contents_mem {
 <body>
 
 <div class="wrapper">
-	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+	<%@include file="/WEB-INF/views/main/header.jsp"%>
 
 	<script>
 		var msg = '${msg}';

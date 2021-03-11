@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>삭제된 항목</title>
 
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 

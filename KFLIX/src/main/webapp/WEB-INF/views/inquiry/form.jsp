@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 <style>
 	body {
 		background-color: rgb(20,20,20);

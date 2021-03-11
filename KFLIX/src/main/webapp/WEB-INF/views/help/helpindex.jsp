@@ -32,7 +32,7 @@ thead>tr> th:nth-child(4){
 <meta charset="UTF-8">
 <title>FAQ</title>
 
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 </head>
 <body>
 

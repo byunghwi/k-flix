@@ -51,7 +51,7 @@
 </head>
 <body>
 <div class="wrapper">
-	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+	<%@include file="/WEB-INF/views/main/header.jsp"%>
 
 	<div id="searchresult">
 

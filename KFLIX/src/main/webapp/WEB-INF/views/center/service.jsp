@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
 
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 <title>고객센터</title>
 </head>
 <style>

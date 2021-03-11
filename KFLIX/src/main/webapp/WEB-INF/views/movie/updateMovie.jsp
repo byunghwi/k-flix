@@ -45,7 +45,7 @@
 		width: 65%;
 	}
 </style>
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 
 <body>
 
