@@ -111,6 +111,20 @@
 <%@include file="/WEB-INF/views/main/footer.jsp"%>
 </div>
 
+<div class="modal" tabindex="-1" id="loading_modal">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header border-secondary">
+      	<img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+      </div>
+      
+      <div class="modal-body text-light fs-5" id="alertBody">
+	     <div class="fa-5x"><i class="fas fa-spinner fa-spin"></i></div><span>접수 중...</span>
+	  </div>       
+    </div>
+  </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
 		crossorigin="anonymous"></script>	
@@ -146,7 +160,8 @@ $('#sendForm').submit(function(){
 		infoMsg("내용을 입력 해주세요");
 		return false;
 	} else {
-		infoMsg('<div class="fa-5x"><i class="fas fa-spinner fa-spin"></i></div><span>접수 중...</span>');
+		$('#loading_modal').modal({backdrop: 'static', keyboard: false});
+		$('#loading_modal').modal("show");
 	}
 
 })

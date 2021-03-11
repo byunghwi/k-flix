@@ -349,7 +349,8 @@ function ticketAdd() {
 
 
 $('#addBtn').click(function(){
-	var lastId = parseInt($('#tk_table>tbody>tr:first-child>td>span').html()) + 1;
+	var lastId = parseInt($('#tk_table>tbody>tr:first-child>td').html()) + 1;
+	console.log(lastId)
 	$('#add_ticket_id').val(lastId);
 })
 

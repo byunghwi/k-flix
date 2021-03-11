@@ -181,6 +181,19 @@
   </div>
 </div>
 
+<div class="modal" tabindex="-1" id="loading_modal">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header border-secondary">
+      	<img src="<%=request.getContextPath() %>/resources/imgs/watch/kflixlogo.png" id="alertImg" alt="" />
+      </div>
+      
+      <div class="modal-body text-light fs-5" id="alertBody">
+	     <div class="fa-5x"><i class="fas fa-spinner fa-spin"></i></div><span>메일 보내는 중...</span>
+	  </div>       
+    </div>
+  </div>
+</div>
 
 <div class="modal" tabindex="-1" id="detailModal">
   <div class="modal-dialog">
@@ -230,11 +243,12 @@
 <script>
 $(document).ajaxStart(function(){
 	$('#replyModal').modal("hide");
-	infoMsg('<div class="fa-5x"><i class="fas fa-spinner fa-spin"></i></div><span>메일 보내는 중...</span>');
+	$('#loading_modal').modal({backdrop: 'static', keyboard: false});
+	$('#loading_modal').modal("show");
 })
 
 $(document).ajaxStop(function(){
-	$('#infoconfrim').modal("hide");
+	$('#loading_modal').modal("hide");
 })
 //로딩시 페이징
 $(document).ready(function() { 
