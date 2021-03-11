@@ -16,7 +16,7 @@ footer {
     width: 100%;
     padding: 15px 0;
     color: white;
-    z-index: 50000;
+    z-index: 0;
 }
 
 .logo_footer {

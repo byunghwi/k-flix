@@ -22,9 +22,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 	// jsp 요청
 	private static final String[] PREFIX_URI = {
-			"/kflix/resources/imgs/movie/poster/",
-			"/kflix/resources/videos/teaser/",
-			"/kflix/resources/videos/full/"
+			"/filepath/img_kflix/",
+			"/filepath/teaser_kflix/",
+			"/filepath/movie_kflix/"
 	};
 
 
@@ -34,13 +34,13 @@ public class FileUploadServiceImpl implements FileUploadService {
 
 	Tika tika = new Tika();
 
-	private static final String LOCAL_PATH = "C:/Users/Ahos/Desktop/local_workSpace/";
+	//private static final String LOCAL_PATH = "C:\\Users\\gpdld\\git\\";
 
 	// 저장할 주소
 	private static final String[] SAVE_PATH = {
-			LOCAL_PATH + "k-flix/KFLIX/src/main/webapp/resources/imgs/movie/poster/",
-			LOCAL_PATH + "k-flix/KFLIX/src/main/webapp/resources/videos/teaser/",
-			LOCAL_PATH + "k-flix/KFLIX/src/main/webapp/resources/videos/full/"
+			"C:\\Users\\gpdld\\Desktop\\img_kflix\\",
+			"C:\\Users\\gpdld\\Desktop\\teaser_kflix\\",
+			"C:\\Users\\gpdld\\Desktop\\movie_kflix\\"
 	};
 
 

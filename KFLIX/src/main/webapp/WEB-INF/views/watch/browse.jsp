@@ -59,7 +59,7 @@
 	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 	<span class="anchor" id="abody"></span>
 	<div id="modalbackground">
-		<div id="confirm">
+		<div id="confirm_ticket">
 		<i style="color: #ec2927; font-size: 65px;" class="far fa-times-circle"></i>
 			<p style="color: white; font-weight: bold; font-size: 22px;">
 				이용권 구매 요청<br> <span
@@ -921,8 +921,8 @@
 		
 	});
 	
-	confirm = document.getElementById('confirm');
-	confirm.addEventListener("click", function(e){
+	confirm_ticket = document.getElementById('confirm_ticket');
+	confirm_ticket.addEventListener("click", function(e){
 		e.stopPropagation();
 	});
 	

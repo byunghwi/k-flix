@@ -10,11 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KFLIX</title>
 
-<link rel="icon"
-    href="/kflix/resources/imgs/main/Favicon.png">
-<link rel="shortcut icon"
-    href="/kflix/resources/imgs/main/Favicon.png">
-    
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/c7adb7b803.js"
@@ -40,15 +38,16 @@
 }
 
 element.style {
-    position: fixed;
-    display: block;
-    box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px, rgb(0 0 0 / 19%) 0px 6px 20px 0px;
-    z-index: 10000;
-    top: 50%;
-    height: auto;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.6s ease 0s;
+	position: fixed;
+	display: block;
+	box-shadow: rgb(0 0 0/ 20%) 0px 4px 8px 0px, rgb(0 0 0/ 19%) 0px 6px
+		20px 0px;
+	z-index: 10000;
+	top: 50%;
+	height: auto;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 0.6s ease 0s;
 }
 
 #ticket_modal {
@@ -231,8 +230,9 @@ element.style {
 	<header>
 
 		<div class="header_ticket" style="display: none;">
-			<div class="header_ticket_text">지금 이용권을 구매하고 KFLIX의 모든 영상을 시청해보세요! 단 한 번의 클릭으로 언제든 해지할 수 있습니다.</div> <a
-				href="#registerModal2" id="ticket" style="text-align: right;"
+			<div class="header_ticket_text">지금 이용권을 구매하고 KFLIX의 모든 영상을
+				시청해보세요! 단 한 번의 클릭으로 언제든 해지할 수 있습니다.</div>
+			<a href="#registerModal2" id="ticket" style="text-align: right;"
 				data-toggle="modal" data-target="#registerModal2">이용권구매</a>
 		</div>
 
@@ -266,7 +266,8 @@ element.style {
 					style="font-size: 15px; vertical-align: text-top; padding-left: 5px;"></i>
 			</button>
 
-			<ul class="dropdown-menu Drop_Menu" aria-labelledby="btnGroupDrop_Menu">
+			<ul class="dropdown-menu Drop_Menu"
+				aria-labelledby="btnGroupDrop_Menu">
 				<li class="main_nav_tab"><a class="dropdown-item"
 					href="/kflix/browse#abody">홈</a></li>
 				<li class="main_nav_tab "><a class="dropdown-item"
@@ -396,19 +397,18 @@ element.style {
 								data : "email="+ email,
 								success : function(result) 
 								{
-									if (result.cert == "Y") 
-										{
+									if (result.cert == "Y"){
 											alert('인증처리된 회원입니다.\r\n지금 바로 이용권을 구매해보세요!');
 
 											//바로 모달창 띄우기
 						                    modal('ticket_modal');
 						                    
 											//document.location.href = '${pageContext.request.contextPath}/ticket/info';
-										} else if (result.cert == "N" || result.cert == "" || result.cert == null) {
-											if (confirm('이용권을 구매하시려면 본인 인증을 먼저 해주세요. \r\n 본인 인증페이지로 이동할까요?')) {
+									} else if (result.cert == "N" || result.cert == "" || result.cert == null) {
+											if (confirm('이용권을 구매하시려면 본인 인증을 먼저 해주세요. \r\n 본인 인증페이지로 이동할까요?') === true) {
 												document.location.href = '${pageContext.request.contextPath}/ticket/info';
 											}
-										} 
+									} 
 								},error : function(error) {
 									alert('[ 에러발생 ]'+ error);
 								}});

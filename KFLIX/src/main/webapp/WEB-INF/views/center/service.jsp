@@ -64,10 +64,18 @@
 		overflow: auto;
 		height: 455px;
 	}
+	
+	.wrapper {
+
+	position:relative;
+
+    min-height:100%;
+
+}
 </style>
 
 <body>
-
+<div class="wrapper">
 <section id="faqArea" class="netflix-sans-font-loaded">
 
 
@@ -162,12 +170,13 @@
 </section>
 
 
-
 <!-- 커스텀 alert -->
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
 
-<!-- 풋터 -->
 
+<!-- 풋터 -->
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 

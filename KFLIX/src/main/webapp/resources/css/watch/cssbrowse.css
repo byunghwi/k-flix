@@ -189,7 +189,7 @@ ul {
 	background-color: rgba(0, 0, 0, 0);
 }
 
-#confirm {
+#confirm_ticket {
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -204,7 +204,7 @@ ul {
 	text-align: -webkit-center;
 }
 
-#confirm>* {
+#confirm_ticket>* {
 	padding: 9px 0px;
 	margin: 0;
 }
