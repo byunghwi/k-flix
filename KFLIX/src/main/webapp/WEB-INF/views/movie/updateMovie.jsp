@@ -13,8 +13,12 @@
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css?ver=1" />
 <meta charset="UTF-8">
 <title>영화 수정</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 </head>
-<style>
+<style>	
+	.wrapper {position:relative; min-height:100%;}
+	#posterRe, #videoRe, #teaserRe{color:white;}
 	#imgdiv{
 		width: 100%; 
 		height: 410px;
@@ -45,10 +49,11 @@
 		width: 65%;
 	}
 </style>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
 
 <body>
 
+<div class="wrapper">
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
 <form action="../update" method="post" enctype="multipart/form-data">
 
@@ -231,7 +236,7 @@
 				<button class="btn" type="button" id="videoRe" onclick="videoRes();"><i class="fas fa-redo"></i></button>
 			</div>	
 		</div>
-		<div id="standardVideo" class="input-group">
+		<div id="standardVideo" class="input-group mb-3">
 	    	<input type="text" class="form-control" id="vName" value="${movie.video_path }" 
 		    			readonly aria-label="Example text with two button addons">
 		</div>
@@ -239,7 +244,7 @@
 			
 		<div class="input-group input-group-sm mb-3">
 		  <span class="input-group-text" id="iG01_03">상영시간</span>
-		  <input type="number" name="play_time" min="15" max="300" value="${movie.play_time }"
+		  <input type="number" name="play_time" value="${movie.play_time }"
 		  		class="form-control" aria-label="Sizing example input" aria-describedby="iG01_03" required>
 		</div>
 	</div>
@@ -270,7 +275,8 @@
 
 
 <%@include file="/resources/include/movie/alertModal.jsp"%>
-
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>

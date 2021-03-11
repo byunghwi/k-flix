@@ -137,12 +137,23 @@
 	#ticket_sta{
 		margin-bottom: -8px;
 	}
+	.wrapper {
+	
+		position:relative;
+	
+	    min-height:100%;
+
+	}
 </style>
-<title>Insert title here</title>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
+<title>대시보드</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
+
 </head>
 <body>
 
+<div class="wrapper">
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
 <section id="dashboard" class="pt-2">
 
@@ -255,6 +266,8 @@
 
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 

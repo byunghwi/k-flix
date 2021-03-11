@@ -6,17 +6,14 @@
 
 #table_list{
 	width: 1200px;
-	height: 900px;
 	max-width: 1200px;
 	min-width: 1200px;
 	margin-left: 350px;
+	padding-bottom:100px;
 }
-#table_main {
-	overflow: auto;
-	height: 650px;
-}
+
 #board{
-	padding-top:130px;
+	padding-top:100px;
 }
 h1{
 	color:white;

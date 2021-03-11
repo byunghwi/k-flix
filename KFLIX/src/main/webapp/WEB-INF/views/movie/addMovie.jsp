@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css?ver=1" />
 <meta charset="UTF-8">
 <title>영화 등록</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 </head>
 <style>
 	#imgdiv{
@@ -41,11 +43,12 @@
 	h1{
 		color: white;
 	}
+	.wrapper {position:relative; min-height:100%;}
 </style>
-<%@include file="/WEB-INF/views/main/header.jsp"%>
 
 <body>
-
+<div class="wrapper">
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 <%@include file="../manage/navbar.jsp"%>
 	<form action="./add" method="post" enctype="multipart/form-data">
 <div class="container" id="addform">	
@@ -142,7 +145,7 @@
 						accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="teaserCheck();" required/>
 			</div>
 			
-			<div id="video_div" class="input-group">
+			<div id="video_div" class="input-group mb-3">
 				<label class="input-group-text" for="video_text">영화</label>
 				<input type="file" name="video"  class="form-control" id="video_text" 
 						accept="video/x-msvideo,  video/mp4,  video/quicktime, video/x-matroska" onchange="videoCheck();" required/>
@@ -177,7 +180,8 @@
 </form>
 
 <%@include file="/resources/include/movie/alertModal.jsp"%>
-
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
 		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" 
 		crossorigin="anonymous"></script>

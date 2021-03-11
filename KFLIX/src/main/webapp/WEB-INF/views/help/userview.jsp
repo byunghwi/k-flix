@@ -11,8 +11,9 @@
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
-<%@include file="/WEB-INF/views/main/header.jsp"%>
-<title>Insert title here</title>
+<title>FAQ</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 <style>
 	*{
 		font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -40,6 +41,7 @@
 		width: 1200px;
 		margin-left: calc(50% - 600px);
 		padding-top: 55px;
+		padding-bottom: 100px;
 		color: white;
 	}
 	
@@ -55,12 +57,7 @@
 	.accordion-button::after {
 		background-image: url(/kflix/resources/imgs/service/down-arrow-white.png)!important;
 	}
-	
-	#help_accordion{
-		overflow: auto;
-		height: 570px;
-	}
-	
+
 	#faqArea b{
 		width:150px;
 		text-align: center;
@@ -70,14 +67,25 @@
 		padding-left: 17%;
 		color: gray;
 	}
+	.wrapper {
+
+	position:relative;
+
+    min-height:100%;
+
+	}
 </style>
 </head>
 <body>
+
+<div class="wrapper">
+
+<%@include file="/WEB-INF/views/main/header.jsp"%>
+
 <input id="helpData" type="hidden" value="${total }"/>
 <input id="helpPage" type="hidden" value="${page }"/>
 
 <section id="faqArea" class="netflix-sans-font-loaded">
-
 
 	<div id="headArea">
 		<h1 class="pt-5 titlefont">F.A.Q</h1>
@@ -142,6 +150,11 @@
 </section>
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
+
+<!-- 풋터 -->
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 

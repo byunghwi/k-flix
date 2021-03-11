@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
-<%@include file="/WEB-INF/views/main/header.jsp"%>
 <style>
 	body {
 		background-color: rgb(20,20,20);
@@ -35,11 +34,23 @@
 	h5 class="px-2" {
 		
 	}
+	.wrapper {
+	
+		position:relative;
+	
+	    min-height:100%;
+
+	}
 </style>
 <title>문의하기</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
 </head>
 <body>
 
+<div class="wrapper">
+
+<%@include file="/WEB-INF/views/main/header.jsp"%>
 <!-- 문의하기 폼  -->
 <div id="inquirtForm">
 	<form action="./inquiry" method="post" id="sendForm">
@@ -97,6 +108,8 @@
 </div>
 
 <%@ include file="/resources/include/movie/alertModal.jsp" %>
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" 
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
