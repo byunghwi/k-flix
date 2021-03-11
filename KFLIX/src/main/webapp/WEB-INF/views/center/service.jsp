@@ -13,8 +13,6 @@
 <link rel="stylesheet" type="text/css" href=//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css>
 <link rel="stylesheet" href="/kflix/resources/css/movie/alert.css" />
 <meta charset="UTF-8">
-
-<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 <title>고객센터</title>
 </head>
 <style>
@@ -60,10 +58,6 @@
 	.accordion-button::after {
 		background-image: url(/kflix/resources/imgs/service/down-arrow-white.png)!important;
 	}
-	#ac_div{
-		overflow: auto;
-		height: 455px;
-	}
 	.wrapper {
 
 	position:relative;
@@ -75,6 +69,8 @@
 
 <body>
 <div class="wrapper">
+
+<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 <section id="faqArea" class="netflix-sans-font-loaded">
 
 
