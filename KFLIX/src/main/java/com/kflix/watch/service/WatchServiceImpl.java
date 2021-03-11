@@ -41,11 +41,6 @@ public class WatchServiceImpl implements WatchService {
 	public List<MovieVO> getNewmovie() {
 		return mapper.getNewmovie();
 	}
-	
-	@Override
-	public List<MovieVO> getNewUpdatemovie() {
-		return mapper.getNewmovie();
-	}
 
 	@Override
 	public int likePlus(LikeVO like) {

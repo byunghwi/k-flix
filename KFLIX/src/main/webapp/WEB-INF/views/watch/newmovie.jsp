@@ -42,10 +42,15 @@
 #infoframe::-webkit-scrollbar {
 	display: none;
 }
+
+.wrapper {
+	position: relative;
+	min-height: 100%;
+}
 </style>
 </head>
 <body>
-
+<div class="wrapper">
 	<%@include file="/WEB-INF/views/main/header_test.jsp"%>
 
 	<div id="searchresult">
@@ -168,7 +173,8 @@
 			</div>
 		</c:if>
 	</div>
-
+<%@include file="/WEB-INF/views/main/footer.jsp"%>
+	</div>
 
 	<iframe id="infoframe" name="search" src="" width="400px"
 		height="300px" allowTransparency="true"

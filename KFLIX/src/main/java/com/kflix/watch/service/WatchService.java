@@ -22,8 +22,6 @@ public interface WatchService {
 	public MovieVO getmovie(int movie_id);
 	
 	public List<MovieVO> getNewmovie();
-	
-	public List<MovieVO> getNewUpdatemovie();
 
 	// 좋아요 관련 쿼리 서비스
 	public int likePlus(LikeVO like);

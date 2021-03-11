@@ -23,9 +23,6 @@ public interface WatchMapper {
 
 	// 신규 콘텐츠 들고오기 (일주일)
 	public List<MovieVO> getNewmovie();
-	
-	// 신규 콘텐츠 들고오기 (당일 알림 갯수 채우기용)
-	public List<MovieVO> getNewUpdatemovie();
 
 	// 영화 좋아요 누름
 	public int likePlus(LikeVO like);
