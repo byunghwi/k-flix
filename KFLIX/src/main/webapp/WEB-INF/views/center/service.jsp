@@ -15,6 +15,7 @@
 <meta charset="UTF-8">
 
 <%@include file="/WEB-INF/views/main/header.jsp"%>
+
 <title>고객센터</title>
 </head>
 <style>
@@ -60,10 +61,6 @@
 	.accordion-button::after {
 		background-image: url(/kflix/resources/imgs/service/down-arrow-white.png)!important;
 	}
-	#ac_div{
-		overflow: auto;
-		height: 455px;
-	}
 	.wrapper {
 
 	position:relative;
@@ -75,6 +72,7 @@
 
 <body>
 <div class="wrapper">
+
 <section id="faqArea" class="netflix-sans-font-loaded">
 
 

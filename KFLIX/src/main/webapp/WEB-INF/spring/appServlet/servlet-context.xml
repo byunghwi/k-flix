@@ -59,7 +59,16 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/movie/**" />
+			<mapping path="/management" />
+			<mapping path="/movie/**" />			
+			<mapping path="/actor/**" />
+			<mapping path="/director/**" />
+			<mapping path="/genre/**" />
+			<mapping path="/memberindex" />
+			<mapping path="/ticketindex" />
+			<mapping path="/FAQ/index" />
+			<mapping path="/inquiry/index" />
+			<mapping path="/chart" />
 			<beans:ref bean="ManagerInterceptor" />
 		</interceptor>
 	</interceptors>

@@ -25,6 +25,7 @@ import com.kflix.movie.domain.Movie;
 import com.kflix.movie.service.MovieService;
 import com.kflix.util.fileupload.FileUploadService;
 import com.kflix.util.pagenation.domain.PageNation;
+import com.kflix.watch.service.AlarmService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -47,6 +48,9 @@ public class MovieController {
 	
 	@Inject
 	FileUploadService upload_service;
+	
+	@Inject
+	AlarmService alarm_service;
 	
 	@Inject
 	Movie movie;
@@ -118,7 +122,8 @@ public class MovieController {
 			int db_result = mv_service.insertNewMovie(movie);
 
 			if (db_result > 0 && upload_result) {
-				addmsg = "등록하였습니다!";
+				alarm_service.alarmScheduling();
+				addmsg = "등록되었습니다";
 				
 			} else {
 				upload_service.fileDelete(poster, teaser, video, movie);
