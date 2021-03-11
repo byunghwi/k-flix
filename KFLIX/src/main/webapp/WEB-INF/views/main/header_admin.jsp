@@ -87,7 +87,7 @@ element.style {
 
 					<ul class="dropdown-menu" aria-labelledby="btnGroupDrop_login">
 						<li style="padding: 2px 1rem; font-size: 14.5px;">${login.email}</li>
-						<li><a href="logoutAdmin" class="dropdown-item">로그아웃</a></li>
+						<li><a href="/kflix/logoutAdmin" class="dropdown-item">로그아웃</a></li>
 					</ul>
 				</li>
 			</ul>

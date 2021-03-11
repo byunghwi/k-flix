@@ -337,7 +337,7 @@ element.style {
 						<li style="height: 0.5rem;">
 							<hr>
 						</li>
-						<li><a href="logout" class="dropdown-item">로그아웃</a></li>
+						<li><a href="/kflix/logout" class="dropdown-item">로그아웃</a></li>
 						<li><a href="/kflix/ticket/info" class="dropdown-item">내
 								정보</a></li>
 						<li><a href="/kflix/myinquiry" class="dropdown-item">1:1문의</a></li>
