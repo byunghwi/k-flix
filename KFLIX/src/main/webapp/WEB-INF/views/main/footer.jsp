@@ -52,6 +52,7 @@ footer {
 <body>
 
 <footer>
+<div>
 	<div class="logo_footer">
 		<a href="/kflix/browse"><img
 			src="/kflix/resources/imgs/watch/kflixlogo.png" alt="NETFLIX">
@@ -63,7 +64,9 @@ footer {
 		<br>
 		KFLIX Copyright ⓒ 2021 by KFLIX, Inc. All rights reserved.
 	</div>
+</div>
 </footer>
+
 <script>
 /* $(function(){
 	stickyFooter();

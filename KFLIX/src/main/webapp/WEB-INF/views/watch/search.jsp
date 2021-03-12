@@ -60,7 +60,7 @@
 			</c:if>
 			<c:if test="${not empty Searchlist}">
 				<h3 style="margin: 30px 10px;">"${searchValue }"로 검색한 결과 입니다.</h3>
-				<div class="">
+				<div style="padding-bottom: 110px;" class="">
 					<c:forEach items="${Searchlist }" var="Searchlist"
 						varStatus="status">
 						<c:forEach items="${Allmovie }" var="Allmovie" varStatus="status">
@@ -97,7 +97,7 @@
 														</video>
 													</div>
 													<div class="comment">
-														<div style="font-size: 18px;">
+														<div style="font-size: 1rem;">
 															<c:choose>
 																<c:when test="${Allmovie.rating eq 'all' }">
 																	<p class="ratingsty"
@@ -119,12 +119,20 @@
 															</c:choose>
 															${Allmovie.movie_title }
 														</div>
-														<div style="position: absolute; top: 21px; right: 30px;">
+														<div style="position: absolute; top: 62px; right: 30px;">
 															<span
 																style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
 																<fmt:formatDate value="${Allmovie.reg_date }"
 																	pattern="yyyy.MM" />
 															</span> • ${Allmovie.play_time }분
+														</div>
+														<div style="position: absolute; top: 92px; right: 30px;">
+															<span
+																style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
+																<i class="fas fa-thumbs-up "></i>
+															</span> <span
+																style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid white; background-color: white; padding: 3px 10px; color: black;">
+																${Allmovie.movie_rank }</span>
 														</div>
 														<div class="infotable1">
 															<table>

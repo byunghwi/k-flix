@@ -155,7 +155,7 @@
 																	</video>
 																</div>
 																<div class="comment">
-																	<div style="font-size: 18px;">
+																	<div style="font-size: 1rem;">
 																		<c:choose>
 																			<c:when test="${Allmovie.rating eq 'all' }">
 																				<p class="ratingsty"
@@ -181,7 +181,7 @@
 																		${Allmovie.movie_title }
 																	</div>
 																	<div
-																		style="position: absolute; top: 21px; right: 30px;">
+																		style="position: absolute; top: 62px; right: 30px;">
 																		<span
 																			style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
 																			<fmt:formatDate value="${Allmovie.reg_date }"
@@ -189,7 +189,7 @@
 																		</span> • ${Allmovie.play_time }분
 																	</div>
 																	<div
-																		style="position: absolute; top: 53px; right: 30px;">
+																		style="position: absolute; top: 92px; right: 30px;">
 																		<span
 																			style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
 																			<i class="fas fa-thumbs-up"></i>
@@ -312,7 +312,7 @@
 																	</video>
 																</div>
 																<div class="comment">
-																	<div style="font-size: 18px;">
+																	<div style="font-size: 1rem;">
 																		<c:choose>
 																			<c:when test="${Allmovie.rating eq 'all' }">
 																				<p class="ratingsty"
@@ -338,7 +338,7 @@
 																		${Allmovie.movie_title }
 																	</div>
 																	<div
-																		style="position: absolute; top: 21px; right: 30px;">
+																		style="position: absolute; top: 62px; right: 30px;">
 																		<span
 																			style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
 																			<fmt:formatDate value="${Allmovie.reg_date }"
@@ -346,7 +346,7 @@
 																		</span> • ${Allmovie.play_time }분
 																	</div>
 																	<div
-																		style="position: absolute; top: 53px; right: 30px;">
+																		style="position: absolute; top: 92px; right: 30px;">
 																		<span
 																			style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
 																			<i class="fas fa-thumbs-up "></i>
@@ -460,7 +460,7 @@
 														</video>
 													</div>
 													<div class="comment">
-														<div style="font-size: 18px;">
+														<div style="font-size: 1rem;">
 															<c:choose>
 																<c:when test="${newmovie.rating eq 'all' }">
 																	<p class="ratingsty"
@@ -482,14 +482,14 @@
 															</c:choose>
 															${newmovie.movie_title }
 														</div>
-														<div style="position: absolute; top: 21px; right: 30px;">
+														<div style="position: absolute; top: 62px; right: 30px;">
 															<span
 																style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
 																<fmt:formatDate value="${newmovie.reg_date }"
 																	pattern="yyyy.MM" />
 															</span> • ${newmovie.play_time }분
 														</div>
-														<div style="position: absolute; top: 53px; right: 30px;">
+														<div style="position: absolute; top: 92px; right: 30px;">
 															<span
 																style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
 																<i class="fas fa-thumbs-up "></i>
@@ -600,7 +600,7 @@
 														</video>
 													</div>
 													<div class="comment">
-														<div style="font-size: 18px;">
+														<div style="font-size: 1rem;">
 															<c:choose>
 																<c:when test="${Ranking.rating eq 'all' }">
 																	<p class="ratingsty"
@@ -622,14 +622,14 @@
 															</c:choose>
 															${Ranking.movie_title }
 														</div>
-														<div style="position: absolute; top: 21px; right: 30px;">
+														<div style="position: absolute; top: 62px; right: 30px;">
 															<span
 																style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
 																<fmt:formatDate value="${Ranking.reg_date }"
 																	pattern="yyyy.MM" />
 															</span> • ${Ranking.play_time }분
 														</div>
-														<div style="position: absolute; top: 53px; right: 30px;">
+														<div style="position: absolute; top: 92px; right: 30px;">
 															<span
 																style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
 																<i class="fas fa-thumbs-up "></i>
@@ -755,7 +755,7 @@
 																			</video>
 																		</div>
 																		<div class="comment">
-																			<div style="font-size: 18px;">
+																			<div style="font-size: 1rem;">
 																				<c:choose>
 																					<c:when test="${Allmovie.rating eq 'all' }">
 																						<p class="ratingsty"
@@ -781,7 +781,7 @@
 																				${Allmovie.movie_title }
 																			</div>
 																			<div
-																				style="position: absolute; top: 21px; right: 30px;">
+																				style="position: absolute; top: 62px; right: 30px;">
 																				<span
 																					style="font-family: 'Acme', ' Oswald ', sans-serif; margin-right: 5px">
 																					<fmt:formatDate value="${Allmovie.reg_date }"
@@ -789,7 +789,7 @@
 																				</span> • ${Allmovie.play_time }분
 																			</div>
 																			<div
-																				style="position: absolute; top: 53px; right: 30px;">
+																				style="position: absolute; top: 92px; right: 30px;">
 																				<span
 																					style="font-family: 'Acme', ' Oswald ', sans-serif; border: 1px solid; padding: 3px 7px;">
 																					<i class="fas fa-thumbs-up "></i>
@@ -955,6 +955,18 @@
 				body.style.overflow = 'hidden';
 			</c:otherwise>
 		</c:choose>
+	}
+	
+	if (string.includes("http://localhost:8081/kflix/browse/watch/")) {
+		console.log("있음");
+		if (window.performance.navigation.type == 1) {
+		} else if (window.performance.navigation.type == 2) {
+			framshow(video_movieid);
+		} else {
+			framshow(video_movieid);
+		}
+	} else {
+		body.style.overflow = 'auto';
 	}
 
 	var payMsg = '${payMsg}';

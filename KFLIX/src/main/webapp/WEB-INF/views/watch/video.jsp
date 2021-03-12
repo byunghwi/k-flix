@@ -188,12 +188,12 @@
 			const progressBar = player.querySelector('.progress__filled');
 
 			
-			function togglePlay() { 
+			/* function togglePlay() { 
 				const method = video.paused ? 'play' : 'pause';
 				video[method](); 
-			} 
+			} */ 
 			
-			video.addEventListener('click', togglePlay);
+			//video.addEventListener('click', togglePlay);
 
 			
 					function handleProgress() {
@@ -224,7 +224,7 @@
 					progress.addEventListener('mouseup', () => mousedown = false);
 
 			
-			video.addEventListener('click', togglePlay);
+			//video.addEventListener('click', togglePlay);
 			
 			function savecurrentTime() {
 				

@@ -11,6 +11,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Watch in KFLIX</title>
+<link rel="icon" href="/kflix/resources/imgs/main/Favicon.png">
+<link rel="shortcut icon" href="/kflix/resources/imgs/main/Favicon.png">
+
 <script src="/kflix/resources/js/common/common.js"></script>
 <script
   src="https://code.jquery.com/jquery-2.2.4.min.js"

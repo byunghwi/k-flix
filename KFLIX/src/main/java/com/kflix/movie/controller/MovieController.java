@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -106,8 +107,12 @@ public class MovieController {
 	public String addMovie(Model model, Movie movie, 
 				MultipartFile poster, MultipartFile teaser, MultipartFile video, RedirectAttributes rttr) {
 		
+		//영화등록일 시간
+		movie.setReg_date(new Date());
+	
 		log.info("======== add Controller ========");
 		String addmsg = "파일 업로드에 실패하였습니다. 다시 한번 확인해주세요";
+		
 		//날짜 체크 , 파일 유효성 체크
 		if(mv_service.checkDate(movie) 
 				&& upload_service.checkExtAll(poster, teaser, video)
@@ -118,19 +123,20 @@ public class MovieController {
 			// 파일 업로드
 			boolean upload_result = upload_service.upload(poster, teaser, video, movie);
 
-			// DB 처리
-			int db_result = mv_service.insertNewMovie(movie);
-
-			if (db_result > 0 && upload_result) {
-				alarm_service.alarmScheduling();
-				addmsg = "등록되었습니다";
+			if (upload_result) {
+				// DB 처리
+				int db_result = mv_service.insertNewMovie(movie);
+				
+				if(db_result == 1) {					
+					alarm_service.alarmScheduling();
+					addmsg = "등록되었습니다";
+				}
 				
 			} else {
 				upload_service.fileDelete(poster, teaser, video, movie);
-				
 			}
 		}
-		
+	
 		rttr.addFlashAttribute("addcheck", addmsg);
 		return "redirect:/movie/movieindex";
 	}

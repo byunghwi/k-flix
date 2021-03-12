@@ -12,7 +12,7 @@
 
 	<select id="getmovieRanking"
 		resultType="com.kflix.watch.domain.MovieVO">
-		<![CDATA[SELECT * FROM movie WHERE ROWNUM <= 10 ORDER BY MOVIE_RANK DESC]]>
+		<![CDATA[SELECT * FROM (SELECT * FROM movie ORDER BY MOVIE_RANK DESC)  WHERE ROWNUM <= 10]]>
 	</select>
 
 	<select id="getmovie"
