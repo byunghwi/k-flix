@@ -227,54 +227,58 @@
 			//video.addEventListener('click', togglePlay);
 			
 			function savecurrentTime() {
-				
-				<c:choose>
-				<c:when test="${empty watching }">
-				console.log("없음");
-				var data = {
-					watch_type : "WATCHING",
-					movie_id : "${movie.movie_id}",
-					email : "${email}",
-					watch_date : "${today }",
-					view_point : video.currentTime,
-					result : 'create'
-				}
-				</c:when>
-				<c:otherwise>
-				console.log("있음");
-				if (video.currentTime == video.duration) {
-					console.log("종료가 맞음");
-					var data = {
-						watch_type : "WATCHED",
-						movie_id : "${movie.movie_id}",
-						email : "${email}",
-						watch_date : "${today }",
-						view_point : video.currentTime,
-						result : 'update'
-					}
-				} else {
-					var data = {
-						watch_type : "WATCHING",
-						movie_id : "${movie.movie_id}",
-						email : "${email}",
-						watch_date : "${today }",
-						view_point : video.currentTime,
-						result : 'update'
-					}
-					
-				}
-				</c:otherwise>
-				</c:choose>
+	            
+	            <c:choose>
+	            <c:when test="${empty watching }">
+	            console.log("없음");
+	            var data = {
+	               watch_type : "WATCHING",
+	               movie_id : "${movie.movie_id}",
+	               email : "${email}",
+	               watch_date : "${today }",
+	               view_point : video.currentTime,
+	               result : 'create'
+	            }
+	            </c:when>
+	            <c:otherwise>
+	            console.log("있음");
+	            if (video.currentTime == video.duration) {
+	               console.log("종료가 맞음");
+	               var data = {
+	                  watch_type : "WATCHED",
+	                  movie_id : "${movie.movie_id}",
+	                  email : "${email}",
+	                  watch_date : "${today }",
+	                  view_point : video.currentTime,
+	                  result : 'update'
+	               }
+	            } else {
+	               var data = {
+	                  watch_type : "WATCHING",
+	                  movie_id : "${movie.movie_id}",
+	                  email : "${email}",
+	                  watch_date : "${today }",
+	                  view_point : video.currentTime,
+	                  result : 'update'
+	               }
+	               
+	            }
+	            </c:otherwise>
+	            </c:choose>
 
-				var xhttp = new XMLHttpRequest();
+	            var xhttp = new XMLHttpRequest();
 
-				xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
-				xhttp.setRequestHeader('content-type', 'application/json');
-				xhttp.send(JSON.stringify(data));
-				string = document.referrer;
-				
-				location.href = string;
-			}
+	            xhttp.open('Post', '/kflix/browse/${movie.movie_id}', true);
+	            xhttp.setRequestHeader('content-type', 'application/json');
+	            xhttp.send(JSON.stringify(data));
+	            
+	            string = document.referrer;
+	            if (string.includes("http://localhost:8081/kflix/browse/watch/")) {
+	               location.href = "/kflix/browse";
+	            }else {
+	               location.href = string;
+	            }
+	         }
 
 			//미디어 재생이 종료되었을때 발생하는 이벤트 처리
 			video.addEventListener("ended", event, false);
