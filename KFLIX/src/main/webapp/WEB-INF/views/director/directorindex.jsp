@@ -107,7 +107,7 @@
 		
 <script src="/kflix/resources/js/movie/pagenate.js"></script>
 <script src="/kflix/resources/js/genre/genre.js"></script>
-<script src="/kflix/resources/js/director/enableDirector.js?ver=9"></script>
+<script src="/kflix/resources/js/director/enableDirector.js?ver=10"></script>
 <script>
 $(document).ready(function() { 
 	$('#director').prepend('<span class="nav-clicked"></span>');

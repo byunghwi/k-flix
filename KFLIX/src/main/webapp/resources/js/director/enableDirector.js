@@ -11,7 +11,33 @@ function addBtn(pnum) {
 	var path = "/kflix/director/add";
 	var name = $('#addDirector').val();
 	var modal = addmodal;
-	ajaxModalCon(pnum, id, path, name, modal);
+		
+	$.ajax({
+		type: "PATCH",
+		url: path,
+		data: JSON.stringify({
+   			director_id: id,
+   			director_name: name,
+   			searching_word: $('#search_val').val()
+		}),
+		contentType: 'application/json',
+		
+ 		success: function(data){
+  			var len = data.length;
+  			var amount =  parseInt($('#helpAmount').val())
+  			
+ 			makePageNate(len, 1, amount);
+  
+  			// 데이터, page - 클릭페이지, amount - 보여줄 수 
+  			makeTable(data, 1, amount);
+  			
+  			modal();
+
+   		},
+   		error: function(){
+   			infoMsg('불러오는데 실패하였습니다.');
+   		}
+	}) 
 	$('#addmodal').modal("hide");
 	
 }
@@ -88,15 +114,27 @@ function ajaxModalCon(pnum, id, path, name, modal){
  		success: function(data){
   			var len = data.length;
   			var amount =  parseInt($('#helpAmount').val())
-	
-  			var anotherPnum = Math.ceil(len / amount);
-  			if ($('.active').text() == '' 
-  					|| $('.active').text() == 0){
-  				pnum = 1;
-  				
-  			} else if (anotherPnum > 0 && anotherPnum < pnum){
-  				pnum = anotherPnum;
-  			}
+	  			var pnum = $('.active').text();
+	  			
+	  			var anotherPnum = Math.ceil(len / amount);
+	  			if ($('.active').text() == '' 
+	  					|| $('.active').text() == 0
+	  					|| $('.active').text() == null){
+	  				pnum = 1;
+	  				
+	  			} else if (anotherPnum > 0 && anotherPnum < pnum){
+	  				pnum = anotherPnum;
+	  			}
+	  			
+	  			try{
+	  				pnum = parseInt(pnum)
+	  				console.log('try임')
+	  				
+	  			} catch(err) {
+	  				console.log('에러임')
+	  				pnum = 1;
+	  			}
+  			
   			
  			makePageNate(len, pnum, amount);
   

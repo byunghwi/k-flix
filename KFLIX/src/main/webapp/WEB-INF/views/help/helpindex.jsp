@@ -422,12 +422,11 @@ function modalBtn() {
 	 		success: function(data){
 	  			var len = data.length;
 	  			var amount =  parseInt($('#helpAmount').val())
-	  			var pnum = 0;
+	  			var pnum = $('.active').text();
 	  			
 	  			var anotherPnum = Math.ceil(len / amount);
 	  			if ($('.active').text() == '' 
 	  					|| $('.active').text() == 0
-	  					|| $('.active').text() != 'number'
 	  					|| $('.active').text() == null){
 	  				pnum = 1;
 	  				
@@ -435,10 +434,18 @@ function modalBtn() {
 	  				pnum = anotherPnum;
 	  			}
 	  			
+	  			try{
+	  				pnum = parseInt(pnum)
+	  				console.log('try임')
+	  			}catch {
+	  				console.log('에러임')
+	  				pnum = 1;
+	  			}
+	  			
 	 			makePageNate(len, pnum, amount);
 	  			 
 	  			makeTable(data, pnum, amount);
-	  			console.log(data)
+	  			
 	  			$('#processModal').modal("hide");
 	  			infoMsg(processMsg);
 	   		},
@@ -463,11 +470,11 @@ function deleteModalBtn() {
  		success: function(data){
   			var len = data.length;
   			var amount =  parseInt($('#helpAmount').val())
-  			var pnum = 0;
+  			var pnum = $('.active').text();
+  			
   			var anotherPnum = Math.ceil(len / amount);
   			if ($('.active').text() == '' 
   					|| $('.active').text() == 0
-  					|| $('.active').text() != 'number'
   					|| $('.active').text() == null){
   				pnum = 1;
   				
@@ -475,6 +482,13 @@ function deleteModalBtn() {
   				pnum = anotherPnum;
   			}
   			
+  			try{
+  				pnum = parseInt(pnum)
+  				console.log('try임')
+  			}catch {
+  				console.log('에러임')
+  				pnum = 1;
+  			}
   			amount = parseInt(amount);
   			
  			makePageNate(len, pnum, amount);
@@ -503,14 +517,24 @@ function ajaxCon(pnum, amount){
  		success: function(data){
   			var len = data.length;
   			var anotherPnum = Math.ceil(len / amount);
+  			var pnum = $('.active').text();
+  			
+  			var anotherPnum = Math.ceil(len / amount);
   			if ($('.active').text() == '' 
   					|| $('.active').text() == 0
-  					|| $('.active').text() != 'number'
   					|| $('.active').text() == null){
   				pnum = 1;
   				
   			} else if (anotherPnum > 0 && anotherPnum < pnum){
   				pnum = anotherPnum;
+  			}
+  			
+  			try{
+  				pnum = parseInt(pnum)
+  				console.log('try임')
+  			}catch {
+  				console.log('에러임')
+  				pnum = 1;
   			}
   			
   			amount = parseInt(amount);
